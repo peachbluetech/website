@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Peachblue — The Marketing Performance Platform</title>
+  <meta name="description" content="Peachblue is the marketing performance platform built for modern teams." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: linear-gradient(135deg, #f0f7ff 0%, #ffffff 50%, #eef2ff 100%);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Background blobs — exact match to login page */
+    .blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(64px);
+      pointer-events: none;
+    }
+    .blob-sky {
+      width: 288px;
+      height: 288px;
+      background: rgba(186, 230, 253, 0.70); /* sky-200/70 */
+      top: -80px;
+      left: 160px;
+    }
+    .blob-rose {
+      width: 320px;
+      height: 320px;
+      background: rgba(254, 205, 211, 0.60); /* rose-200/60 */
+      bottom: 0;
+      right: 64px;
+    }
+    .blob-white {
+      width: 384px;
+      height: 448px;
+      background: rgba(255, 255, 255, 0.45);
+      top: 33%;
+      left: 50%;
+      transform: translateX(-50%) rotate(12deg);
+      border-radius: 999px;
+    }
+
+    /* Card — exact match to login page */
+    .card {
+      position: relative;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-radius: 32px;
+      border: 1px solid rgba(255, 255, 255, 0.40);
+      padding: 36px 32px;
+      width: 100%;
+      max-width: 448px;
+      box-shadow: 0 35px 80px rgba(15, 23, 42, 0.20);
+      outline: 1px solid rgba(255, 255, 255, 0.40);
+      text-align: center;
+    }
+
+    /* Wordmark */
+    .wordmark {
+      font-size: 30px;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+
+    /* Tagline */
+    .tagline {
+      font-size: 14px;
+      color: #64748b;
+      margin-bottom: 32px;
+    }
+
+    /* Alpha badge */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #D3E8FF 0%, #E8E9F4 55%, #FFE8E2 100%);
+      border: 1px solid rgba(255, 255, 255, 0.60);
+      font-size: 12px;
+      font-weight: 600;
+      color: #1e293b;
+      letter-spacing: 0.02em;
+    }
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #f0a080;
+    }
+
+    /* Footer */
+    .footer { margin-top: 24px; font-size: 12px; color: #94a3b8; }
+
+  </style>
+</head>
+<body>
+
+  <div class="blob blob-sky"></div>
+  <div class="blob blob-rose"></div>
+  <div class="blob blob-white"></div>
+
+  <div class="card">
+
+    <!-- Orb — exact SVG from login page -->
+    <div style="display:flex;justify-content:center;margin-bottom:16px;">
+      <svg width="70" height="70" viewBox="0 0 70 70" aria-hidden="true">
+        <defs>
+          <radialGradient id="orbGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"   stop-color="#FFE0D1" />
+            <stop offset="65%"  stop-color="#FFD1BD" />
+            <stop offset="100%" stop-color="#CFE4FB" />
+          </radialGradient>
+          <filter id="orbSoft">
+            <feGaussianBlur stdDeviation="2.5" />
+          </filter>
+        </defs>
+        <g filter="url(#orbSoft)">
+          <circle cx="35" cy="35" r="13" fill="url(#orbGrad)" opacity="0.92">
+            <animate attributeName="r" values="12;13;12" dur="1.8s" repeatCount="indefinite" />
+          </circle>
+        </g>
+        <circle cx="35" cy="35" r="21" fill="none" stroke="url(#orbGrad)" stroke-width="2" opacity="0.38">
+          <animate attributeName="r"       values="21;33"    dur="1.8s" repeatCount="indefinite" />
+          <animate attributeName="opacity" values="0.38;0"   dur="1.8s" repeatCount="indefinite" />
+        </circle>
+      </svg>
+    </div>
+
+    <div class="wordmark">peachblue</div>
+    <p class="tagline">The marketing performance platform.</p>
+
+    <div>
+      <span class="badge">
+        <span class="badge-dot"></span>
+        Currently in closed alpha
+      </span>
+    </div>
+
+    <p class="footer">© 2026 Peachblue</p>
+  </div>
+
+
+</body>
+</html>
