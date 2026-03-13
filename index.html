@@ -753,7 +753,7 @@ function handleSubmit(e) {
   fetch('https://script.google.com/macros/s/AKfycbwNVcEsbTMRS4Ht68CETfSiz9OytuxumG2z8o4efAFqR-Uy_aDd6Plm0M4jN0A-RA0_/exec', {
     method: 'POST',
     body: JSON.stringify({ email: email }),
-    headers: { 'Content-Type': 'text/plain' }
+    redirect: 'follow'
   }).then(function () {
     btn.textContent = '\u2713 You\'re on the list!';
     btn.style.background = '#16a34a';
