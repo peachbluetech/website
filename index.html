@@ -92,7 +92,8 @@
     .btn-outline { background: #fff; border: 1px solid var(--border) !important; color: var(--text); box-shadow: var(--shadow-sm); }
     .btn-outline:hover { border-color: #c0d0e4 !important; transform: translateY(-1px); box-shadow: var(--shadow); }
     .btn-lg { padding: 13px 26px; font-size: 15px; }
-    .menu-btn { background: none; border: 0; cursor: pointer; justify-self: end; position: relative; z-index: 1; padding: 4px; color: var(--text); font-size: 20px; line-height: 1; }
+    .menu-btn { background: none; border: 0; cursor: pointer; justify-self: end; position: relative; z-index: 1; padding: 4px; color: var(--text); font-size: 20px; line-height: 1; grid-column: -1; }
+    @media (max-width: 879px) { .nav-pill { grid-template-columns: 1fr auto; } }
     @media (min-width: 880px) { .nav-links { display: flex; } .nav-cta { display: flex; } .menu-btn { display: none; } }
 
     /* Mobile drawer */
