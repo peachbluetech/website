@@ -41,3 +41,11 @@ body {
 }
 
 .tnum { font-variant-numeric: tabular-nums; }
+
+.prose-pb h2 { font-size: 18px; font-weight: 700; margin-top: 40px; margin-bottom: 12px; letter-spacing: -0.3px; color: var(--color-pb-fg); }
+.prose-pb h3 { font-size: 15px; font-weight: 600; margin-top: 24px; margin-bottom: 8px; color: var(--color-pb-fg); }
+.prose-pb p, .prose-pb li { font-size: 14.5px; color: var(--color-pb-fg-muted); line-height: 1.75; margin-bottom: 12px; }
+.prose-pb ul { padding-left: 20px; margin-bottom: 12px; }
+.prose-pb li { margin-bottom: 6px; }
+.prose-pb strong { color: var(--color-pb-fg); font-weight: 600; }
+.prose-pb a { color: var(--color-pb-fg); }
