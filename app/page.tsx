@@ -250,7 +250,17 @@ export default function Home() {
               <div className="text-[15px] font-medium text-[#3AA976]">You&apos;re on the list. We&apos;ll be in touch.</div>
             </div>
           ) : (
-            <form onSubmit={(e) => { e.preventDefault(); if (email) { setSubmitted(true); setEmail(""); } }} className="flex gap-2 max-w-md mx-auto">
+            <form onSubmit={(e) => {
+              e.preventDefault();
+              if (!email) return;
+              fetch("https://script.google.com/macros/s/AKfycbwNVcEsbTMRS4Ht68CETfSiz9OytuxumG2z8o4efAFqR-Uy_aDd6Plm0M4jN0A-RA0_/exec", {
+                method: "POST",
+                mode: "no-cors",
+                body: JSON.stringify({ email }),
+              });
+              setSubmitted(true);
+              setEmail("");
+            }} className="flex gap-2 max-w-md mx-auto">
               <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@company.com" className="flex-1 h-12 rounded-full border border-pb-border bg-pb-card px-5 text-[14px] placeholder:text-pb-fg-muted focus:outline-none focus:border-pb-peach-400 focus:ring-2 focus:ring-pb-peach-100 shadow-pb-soft" />
               <button type="submit" className="inline-flex items-center gap-2 h-12 px-6 rounded-full pb-gradient-peach text-white text-[14px] font-semibold shadow-[0_4px_16px_rgba(242,119,73,0.35)] hover:brightness-105 transition shrink-0">
                 Request demo &rarr;
