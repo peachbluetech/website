@@ -30,10 +30,19 @@ export default function PrivacyPage() {
         <p>We currently support or are developing integrations with the following platforms:</p>
         <ul>
           <li><strong>Meta Ads</strong> (Facebook &amp; Instagram). Live.</li>
-          <li><strong>TikTok Ads.</strong> Live.</li>
-          <li><strong>Amazon Ads</strong> (Sponsored Ads, DSP, Connected TV). Coming soon.</li>
-          <li><strong>Google Ads</strong> (Search, Shopping, YouTube). Coming soon.</li>
+          <li><strong>TikTok Ads</strong> (In-feed, TopView, Spark Ads). Live.</li>
+          <li><strong>Amazon Ads</strong> (Sponsored Ads, DSP, Connected TV). In development.</li>
+          <li><strong>Google Ads</strong> (Search, Shopping, YouTube). In development.</li>
         </ul>
+
+        <h3>Brand Intelligence Data (Reddit)</h3>
+        <p>When you use the Brand Intel feature, peachblue collects publicly available data from Reddit for brand monitoring purposes. This includes:</p>
+        <ul>
+          <li>Public Reddit posts and comments that match keywords you choose to track</li>
+          <li>Associated metadata including subreddit names, post titles, comment text, author usernames, scores, and comment counts</li>
+          <li>Sentiment labels assigned to each mention via AI analysis</li>
+        </ul>
+        <p>This public data is processed by AI to generate sentiment analysis, trending topic identification, and competitive intelligence summaries. You choose which keywords to track, and all collected data is scoped to your organization. Reddit data can be deleted upon request alongside all other user data.</p>
 
         <h3>Usage Data</h3>
         <p>We collect standard usage information such as pages visited, features used, browser type, device type, and IP address to improve the platform experience.</p>
@@ -72,17 +81,36 @@ export default function PrivacyPage() {
           <li><strong>Incident response.</strong> We maintain a documented incident response process and will notify affected users and relevant authorities promptly in accordance with applicable law.</li>
         </ul>
 
-        <h2>5. Data Sharing</h2>
+        <h2>5. Third-Party AI Processing</h2>
+        <p>To provide creative intelligence and brand monitoring features, certain data is sent to Google&apos;s Gemini API for processing. This includes:</p>
+        <ul>
+          <li><strong>Creative assets.</strong> Images and videos from your connected ad accounts are sent for visual analysis, creative tagging (format, style, tone, hook type, CTA, etc.), and optical character recognition (OCR) of text in images and videos.</li>
+          <li><strong>Ad copy.</strong> Headline and body text from your ads are sent for copy strategy analysis and strategic recommendations.</li>
+          <li><strong>Brand mentions.</strong> Public Reddit posts and comments matching your tracked keywords are sent for sentiment analysis, trending topic identification, and competitive intelligence summarization.</li>
+        </ul>
+        <p>These third-party AI services process data under their respective data processing agreements. Peachblue does not use your ad data to train AI models. Processing is performed on-demand and data is not retained by the AI provider beyond the scope of each individual processing request.</p>
+
+        <h2>6. Data Sharing</h2>
         <p>We do not sell your personal information or advertising data. We may share limited data with:</p>
         <ul>
           <li><strong>Infrastructure providers.</strong> Cloud hosting, database, and AI processing services that help us operate the platform, bound by confidentiality agreements and used solely to provide our service.</li>
           <li><strong>Legal requirements.</strong> If required by law, regulation, or legal process.</li>
         </ul>
 
-        <h2>6. Data Retention</h2>
+        <h2>7. Data Retention &amp; Deletion</h2>
         <p>We retain your data for as long as your account is active and as needed to provide the service. If you close your account or request deletion, we will delete your data within 30 days, except where retention is required by law. Disconnecting an ad platform will stop new data syncs; previously synced data will be deleted upon request.</p>
 
-        <h2>7. Your Rights</h2>
+        <h3>Meta Data Deletion Callbacks</h3>
+        <p>When you deauthorize the Peachblue app from your Meta (Facebook) account settings, Meta sends an automated data deletion request to Peachblue. Upon receiving this request, Peachblue will:</p>
+        <ul>
+          <li>Delete all stored OAuth tokens associated with your Meta connection</li>
+          <li>Queue deletion of all synced ad performance data, creative assets, and analysis results linked to your Meta ad accounts</li>
+          <li>Complete deletion within 30 days of the request</li>
+          <li>Provide a confirmation code and status tracking URL to Meta for your records</li>
+        </ul>
+        <p>You can also request data deletion at any time by contacting <a href="mailto:nick@peachblue.io" className="underline">nick@peachblue.io</a>.</p>
+
+        <h2>8. Your Rights</h2>
         <p>Depending on your jurisdiction, you may have the right to:</p>
         <ul>
           <li><strong>Access</strong> your personal data we hold</li>
@@ -92,16 +120,16 @@ export default function PrivacyPage() {
           <li><strong>Withdraw consent</strong> for data processing</li>
           <li><strong>Object</strong> to certain types of processing</li>
         </ul>
-        <p>We comply with applicable privacy legislation, including Canada's Personal Information Protection and Electronic Documents Act (PIPEDA). For users in the European Economic Area, we comply with the General Data Protection Regulation (GDPR). For users in California, we comply with the California Consumer Privacy Act (CCPA).</p>
+        <p>We comply with applicable privacy legislation, including Canada&apos;s Personal Information Protection and Electronic Documents Act (PIPEDA). For users in the European Economic Area, we comply with the General Data Protection Regulation (GDPR). For users in California, we comply with the California Consumer Privacy Act (CCPA).</p>
         <p>To exercise any of these rights, contact us at <strong><a href="mailto:nick@peachblue.io" className="underline">nick@peachblue.io</a></strong>.</p>
 
-        <h2>8. Children's Privacy</h2>
+        <h2>9. Children&apos;s Privacy</h2>
         <p>peachblue is a business-to-business service and is not directed at children under 16. We do not knowingly collect personal information from children.</p>
 
-        <h2>9. Changes to This Policy</h2>
+        <h2>10. Changes to This Policy</h2>
         <p>We may update this Privacy Policy from time to time. We will notify you of material changes by posting the updated policy on our website and updating the effective date. Continued use of the platform after changes constitutes acceptance of the updated policy.</p>
 
-        <h2>10. Contact Us</h2>
+        <h2>11. Contact Us</h2>
         <p>If you have questions about this Privacy Policy or how we handle your data, please contact us:</p>
         <p><strong>Peachblue Technologies Inc.</strong><br /><a href="mailto:nick@peachblue.io" className="underline">nick@peachblue.io</a></p>
       </div>

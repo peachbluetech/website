@@ -22,9 +22,16 @@ export default function TermsPage() {
           <li>Syncs creative assets (images, videos, carousels) and performance data (spend, impressions, clicks, CTR, CPC, CPM, ROAS, CPA, conversions) from your ad accounts</li>
           <li>Provides AI-powered creative analysis, generating structured intelligence tags and actionable insights about your ad creatives</li>
           <li>Offers a Creative Library for filtering, sorting, and exploring creatives by performance and intelligence tags</li>
-          <li>Includes an AI assistant for natural language queries about creative performance</li>
+          <li>Includes an AI assistant (Agent Peach) for natural language queries about creative performance</li>
+          <li>Provides brand intelligence monitoring via publicly available Reddit data, with AI-generated editorial briefs and sentiment analysis</li>
         </ul>
-        <p>The Service currently integrates with Meta Ads and TikTok Ads, with Amazon Ads and Google Ads integrations coming soon.</p>
+        <p>The Service currently integrates with the following advertising platforms:</p>
+        <ul>
+          <li><strong>Meta Ads</strong> (Facebook &amp; Instagram). Live — full creative sync, performance data, and AI analysis.</li>
+          <li><strong>TikTok Ads</strong> (In-feed, TopView, Spark Ads). Live — full creative sync, performance data, and AI analysis.</li>
+          <li><strong>Amazon Ads</strong> (Sponsored Ads, DSP, Connected TV). Connected — OAuth integration active, ad sync in development.</li>
+          <li><strong>Google Ads</strong> (Search, Shopping, YouTube). In development.</li>
+        </ul>
 
         <h2>2. Account Registration</h2>
         <p>To use the Service, you must create an account and provide accurate, complete information. You are responsible for:</p>
