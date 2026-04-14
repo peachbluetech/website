@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+@theme {
+  --color-pb-peach-50: #FFF4EE;
+  --color-pb-peach-100: #FFE8DC;
+  --color-pb-peach-200: #FFD2BB;
+  --color-pb-peach-300: #FFB48C;
+  --color-pb-peach-400: #FF9466;
+  --color-pb-peach-500: #F27749;
+  --color-pb-peach-600: #D95F33;
+  --color-pb-peach-700: #A84825;
+
+  --color-pb-bg: #FBFAF7;
+  --color-pb-card: #FFFFFF;
+  --color-pb-muted: #F4F2EE;
+  --color-pb-border: #E8E4DF;
+  --color-pb-fg: #0F172A;
+  --color-pb-fg-muted: #5A6678;
+
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --shadow-pb-soft: 0 1px 3px rgba(17, 24, 39, 0.04), 0 8px 20px -8px rgba(17, 24, 39, 0.08);
+  --shadow-pb-lift: 0 2px 4px rgba(17, 24, 39, 0.06), 0 24px 48px -20px rgba(17, 24, 39, 0.18);
+}
+
+.pb-gradient-peach {
+  background: linear-gradient(135deg, #FFB48C 0%, #F27749 100%);
+}
+
+.pb-gradient-brand {
+  background: linear-gradient(100deg, #E0EBFF 0%, #F1E7FF 35%, #FFE8DC 70%, #FFD2BB 100%);
+}
+
+body {
+  background: var(--color-pb-bg);
+  color: var(--color-pb-fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.tnum { font-variant-numeric: tabular-nums; }
