@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   title: "peachblue — Creative Intelligence for Ads",
   description:
     "peachblue connects to your ad platforms, syncs creative assets and performance data, and uses AI to analyze what's working and why. Creative intelligence for modern marketing teams.",
+  icons: {
+    icon: "/icon.svg",
+  },
   openGraph: {
     title: "peachblue — Creative Intelligence for Ads",
     description:
