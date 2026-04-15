@@ -29,10 +29,10 @@ export default function PrivacyPage() {
         </ul>
         <p>We currently support or are developing integrations with the following platforms:</p>
         <ul>
-          <li><strong>Meta Ads</strong> (Facebook &amp; Instagram). Live.</li>
-          <li><strong>TikTok Ads</strong> (In-feed, TopView, Spark Ads). Live.</li>
-          <li><strong>Amazon Ads</strong> (Sponsored Ads, DSP, Connected TV). In development.</li>
-          <li><strong>Google Ads</strong> (Search, Shopping, YouTube). In development.</li>
+          <li><strong>Meta Ads.</strong> Live.</li>
+          <li><strong>TikTok Ads.</strong> Live.</li>
+          <li><strong>Amazon Ads.</strong> In development.</li>
+          <li><strong>Google Ads.</strong> In development.</li>
         </ul>
 
         <h3>Brand Intelligence Data (Reddit)</h3>
@@ -44,11 +44,8 @@ export default function PrivacyPage() {
         </ul>
         <p>This public data is processed by AI to generate sentiment analysis, trending topic identification, and competitive intelligence summaries. You choose which keywords to track, and all collected data is scoped to your organization. Reddit data can be deleted upon request alongside all other user data.</p>
 
-        <h3>Usage Data</h3>
-        <p>We collect standard usage information such as pages visited, features used, browser type, device type, and IP address to improve the platform experience.</p>
-
-        <h3>Cookies</h3>
-        <p>We use minimal cookies for session management and basic analytics. We do not use third-party advertising cookies or tracking pixels.</p>
+        <h3>Usage Data &amp; Cookies</h3>
+        <p>We use cookies solely for session management (authentication). We do not collect IP addresses, browser fingerprints, or device information for analytics purposes. We do not use third-party advertising cookies or tracking pixels.</p>
 
         <h2>2. How We Use Your Data</h2>
         <p>We use the information we collect to:</p>

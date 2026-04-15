@@ -27,10 +27,10 @@ export default function TermsPage() {
         </ul>
         <p>The Service currently integrates with the following advertising platforms:</p>
         <ul>
-          <li><strong>Meta Ads</strong> (Facebook &amp; Instagram). Live — full creative sync, performance data, and AI analysis.</li>
-          <li><strong>TikTok Ads</strong> (In-feed, TopView, Spark Ads). Live — full creative sync, performance data, and AI analysis.</li>
-          <li><strong>Amazon Ads</strong> (Sponsored Ads, DSP, Connected TV). Connected — OAuth integration active, ad sync in development.</li>
-          <li><strong>Google Ads</strong> (Search, Shopping, YouTube). In development.</li>
+          <li><strong>Meta Ads.</strong> Live.</li>
+          <li><strong>TikTok Ads.</strong> Live.</li>
+          <li><strong>Amazon Ads.</strong> In development.</li>
+          <li><strong>Google Ads.</strong> In development.</li>
         </ul>
 
         <h2>2. Account Registration</h2>
