@@ -6,7 +6,7 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: "Peachblue",
     description: "Creative intelligence for modern marketing teams.",
     start_url: "/",
-    display: "standalone",
+    display: "browser",
     background_color: "#ffffff",
     theme_color: "#F27749",
     icons: [
