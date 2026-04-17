@@ -25,18 +25,26 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-full bg-pb-bg">
 
+      {/* SEO: semantic, visually-hidden H1 anchored to the brand name.
+          The visible hero uses H2 so the brand owns the single H1. */}
+      <h1 className="sr-only">Peachblue — Creative Intelligence for Ads</h1>
+
       {/* ── NAV ──────────────────────────────────────────── */}
       <nav className="fixed top-4 left-0 w-full z-50 flex justify-center px-4">
         <div className="w-full max-w-[900px]">
           <div className="flex items-center justify-between h-14 px-5 rounded-full border border-pb-border/50 bg-pb-bg/80 backdrop-blur-xl shadow-pb-soft">
-            <div className="flex items-center gap-2.5">
+            <a
+              href="/"
+              aria-label="Peachblue home"
+              className="flex items-center gap-2.5"
+            >
               <div className="size-8 rounded-lg pb-gradient-peach flex items-center justify-center shadow-[0_4px_12px_rgba(255,182,155,0.4)]">
                 <PeachblueMark size={18} color="#ffffff" />
               </div>
               <span className="font-display text-[17px] font-semibold tracking-tight text-pb-fg">
                 peachblue
               </span>
-            </div>
+            </a>
             <div className="hidden md:flex items-center gap-7 text-[13px] font-medium text-pb-fg-muted">
               <a href="#product" className="hover:text-pb-fg transition-colors">Product</a>
               <a href="#platforms" className="hover:text-pb-fg transition-colors">Platforms</a>
@@ -65,12 +73,12 @@ export default function Home() {
                   Now in early access
                 </span>
               </motion.div>
-              <motion.h1
+              <motion.h2
                 variants={fade}
                 className="font-display text-[clamp(36px,5.5vw,58px)] leading-[1.06] font-medium tracking-[-0.02em] text-pb-fg mb-5"
               >
                 Know what&apos;s <span className="italic">working</span> and why.
-              </motion.h1>
+              </motion.h2>
               <motion.p
                 variants={fade}
                 className="text-[clamp(15px,1.8vw,18px)] leading-[1.7] text-pb-fg-muted max-w-[460px] mb-8"
@@ -189,7 +197,12 @@ export default function Home() {
               { name: "Google Ads", desc: "Search, Shopping, Display, and YouTube video ad creatives", status: "Coming soon", bg: "#EA4335", letter: "G" },
             ].map((p) => (
               <motion.div key={p.name} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-60px" }} variants={fade} className="rounded-2xl border border-pb-border bg-pb-card p-6 shadow-pb-soft flex flex-col">
-                <div className="size-11 rounded-xl flex items-center justify-center text-white font-semibold text-[15px] mb-4 shadow-pb-soft" style={{ background: p.bg }}>
+                <div
+                  role="img"
+                  aria-label={`${p.name} logo`}
+                  className="size-11 rounded-xl flex items-center justify-center text-white font-semibold text-[15px] mb-4 shadow-pb-soft"
+                  style={{ background: p.bg }}
+                >
                   {p.letter}
                 </div>
                 <h3 className="text-[15px] font-semibold mb-1 text-pb-fg">{p.name}</h3>
