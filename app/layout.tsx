@@ -15,6 +15,7 @@ const jetbrains = JetBrains_Mono({
 
 const SITE_URL = "https://peachblue.io";
 const SITE_NAME = "Peachblue";
+const FB_APP_ID = "4460340567557146";
 const SITE_DESC =
   "Peachblue connects to your ad platforms, syncs creative assets and performance data, and uses AI to analyze what's working and why. Creative intelligence for modern marketing teams.";
 const SOCIAL_DESC =
@@ -154,6 +155,7 @@ export default function RootLayout({
       className={`${inter.variable} ${fraunces.variable} ${jetbrains.variable} h-full`}
     >
       <body className="min-h-full flex flex-col font-sans">
+        <meta property="fb:app_id" content={FB_APP_ID} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
