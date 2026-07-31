@@ -135,10 +135,10 @@ const jsonLd = {
       publisher: { "@id": `${SITE_URL}/#organization` },
       offers: {
         "@type": "Offer",
-        price: "0",
+        price: "79",
         priceCurrency: "USD",
-        availability: "https://schema.org/LimitedAvailability",
-        description: "Early access pricing is tailored per customer.",
+        availability: "https://schema.org/InStock",
+        description: "Plans from $79/mo. Every plan starts with a 14-day trial.",
       },
     },
   ],
