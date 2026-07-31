@@ -717,12 +717,235 @@ function Thumb({ i = 0, className = "size-10" }: { i?: number; className?: strin
   return <div className={`rounded-lg shrink-0 ${className}`} style={{ background: THUMB_GRADIENTS[i % THUMB_GRADIENTS.length] }} aria-hidden="true" />;
 }
 
+/* ── Demo ad creatives (fictional brands) ───────────────────────── */
+/* Mock ad creatives for three invented demo brands, built from pure
+   CSS/SVG. All type scales with the container via cqw units so the
+   same ad reads correctly from a 36px thumb up to a 260px tile.
+   No photos, no real brands, no performance claims. */
+
+type DemoBrand = "fizzli" | "sagelle" | "trailform";
+type DemoAdFormat = "story" | "square";
+type DemoAdLayout = "typeTop" | "productCenter" | "split";
+
+function FizzliCan({ style }: { style?: React.CSSProperties }) {
+  return (
+    <svg viewBox="0 0 60 100" style={{ display: "block", height: "auto", ...style }} aria-hidden="true">
+      <circle cx="17" cy="13" r="3.2" fill="#E4602F" opacity="0.4" />
+      <circle cx="30" cy="6.5" r="2.4" fill="#E4602F" opacity="0.3" />
+      <circle cx="42" cy="14" r="1.9" fill="#E4602F" opacity="0.45" />
+      <rect x="15" y="26" width="30" height="66" rx="8" fill="#E4602F" />
+      <ellipse cx="30" cy="27" rx="15" ry="4.5" fill="#B94A22" />
+      <rect x="19" y="33" width="3.5" height="54" rx="1.75" fill="#ffffff" opacity="0.28" />
+      <rect x="15" y="49" width="30" height="17" fill="#FFF3EA" opacity="0.92" />
+      <text x="30" y="60.5" textAnchor="middle" fontSize="8" fontStyle="italic" fontWeight="600" fill="#B94A22" fontFamily="var(--font-display)">fizzli</text>
+    </svg>
+  );
+}
+
+function SagelleTube({ style }: { style?: React.CSSProperties }) {
+  return (
+    <svg viewBox="0 0 60 100" style={{ display: "block", height: "auto", ...style }} aria-hidden="true">
+      <rect x="24" y="9" width="12" height="12" rx="2.5" fill="#C9B9E6" />
+      <rect x="18" y="23" width="24" height="68" rx="7" fill="#FFFFFF" />
+      <text x="30" y="48" textAnchor="middle" fontSize="6" letterSpacing="1.6" fontWeight="600" fill="#8F7BBF">SGL</text>
+      <rect x="24" y="57" width="12" height="2.6" rx="1.3" fill="#D9CDEF" />
+      <rect x="26.5" y="63" width="7" height="2.6" rx="1.3" fill="#E7DFF6" />
+    </svg>
+  );
+}
+
+function TrailformDumbbell({ style }: { style?: React.CSSProperties }) {
+  return (
+    <svg viewBox="0 0 100 60" style={{ display: "block", height: "auto", ...style }} aria-hidden="true">
+      <rect x="24" y="26" width="52" height="8" rx="4" fill="#6FE0CC" />
+      <rect x="12" y="9" width="10" height="42" rx="4" fill="#EFFBF8" />
+      <rect x="22" y="15" width="8" height="30" rx="3" fill="#BCEDE1" />
+      <rect x="78" y="9" width="10" height="42" rx="4" fill="#EFFBF8" />
+      <rect x="70" y="15" width="8" height="30" rx="3" fill="#BCEDE1" />
+    </svg>
+  );
+}
+
+const DEMO_AD_BRANDS: Record<
+  DemoBrand,
+  {
+    wordmark: string;
+    wordmarkStyle: React.CSSProperties;
+    headline: [string, string];
+    headlineStyle: React.CSSProperties;
+    headlineAccent: string | null;
+    cta: string;
+    bg: string;
+    ink: string;
+    chipBg: string;
+    chipFg: string;
+    panel: string;
+    Product: (props: { style?: React.CSSProperties }) => React.ReactElement;
+    portrait: boolean;
+  }
+> = {
+  fizzli: {
+    wordmark: "fizzli",
+    wordmarkStyle: { fontFamily: "var(--font-display)", fontStyle: "italic", fontWeight: 600, letterSpacing: "0.01em" },
+    headline: ["Thirsty?", "Fix it."],
+    headlineStyle: { fontFamily: "var(--font-display)", fontWeight: 500, letterSpacing: "-0.02em" },
+    headlineAccent: null,
+    cta: "Shop now",
+    bg: "linear-gradient(168deg, #FFF3EA 0%, #FFDCC3 55%, #FFC7A1 100%)",
+    ink: "#7C3018",
+    chipBg: "#7C3018",
+    chipFg: "#FFF4EE",
+    panel: "rgba(255,255,255,0.5)",
+    Product: FizzliCan,
+    portrait: true,
+  },
+  sagelle: {
+    wordmark: "SAGELLE",
+    wordmarkStyle: { fontWeight: 600, letterSpacing: "0.24em" },
+    headline: ["Skin,", "simplified."],
+    headlineStyle: { fontFamily: "var(--font-display)", fontWeight: 400, letterSpacing: "-0.01em" },
+    headlineAccent: null,
+    cta: "Learn more",
+    bg: "linear-gradient(170deg, #F8F5FD 0%, #ECE4F8 60%, #DFD3F1 100%)",
+    ink: "#4A3D68",
+    chipBg: "#FFFFFF",
+    chipFg: "#4A3D68",
+    panel: "rgba(255,255,255,0.55)",
+    Product: SagelleTube,
+    portrait: true,
+  },
+  trailform: {
+    wordmark: "TRAILFORM",
+    wordmarkStyle: { fontWeight: 800, fontStyle: "italic", letterSpacing: "0.14em" },
+    headline: ["Last chance", "20% off"],
+    headlineStyle: { fontWeight: 800, letterSpacing: "-0.01em", textTransform: "uppercase" },
+    headlineAccent: "#6FE0CC",
+    cta: "Shop now",
+    bg: "linear-gradient(152deg, #11414F 0%, #17607A 100%)",
+    ink: "#F2FBF9",
+    chipBg: "#6FE0CC",
+    chipFg: "#0F3D4C",
+    panel: "rgba(255,255,255,0.08)",
+    Product: TrailformDumbbell,
+    portrait: false,
+  },
+};
+
+function DemoAd({
+  brand,
+  format = "story",
+  layout = "typeTop",
+  className = "",
+}: {
+  brand: DemoBrand;
+  format?: DemoAdFormat;
+  layout?: DemoAdLayout;
+  className?: string;
+}) {
+  const b = DEMO_AD_BRANDS[brand];
+  const { Product } = b;
+
+  const wordmarkEl = (
+    <div style={{ fontSize: brand === "sagelle" ? "6cqw" : "6.5cqw", color: b.ink, whiteSpace: "nowrap", ...b.wordmarkStyle }}>
+      {b.wordmark}
+    </div>
+  );
+
+  const headlineSize =
+    layout === "typeTop" ? (format === "story" ? "13cqw" : "11.5cqw") : layout === "productCenter" ? "10.5cqw" : "10cqw";
+  const headlineEl = (
+    <div style={{ fontSize: headlineSize, lineHeight: 1.1, color: b.ink, ...b.headlineStyle }}>
+      {b.headline.map((line, i) => (
+        <div key={line} style={i === 1 && b.headlineAccent ? { color: b.headlineAccent } : undefined}>
+          {line}
+        </div>
+      ))}
+    </div>
+  );
+
+  const ctaEl = (
+    <span
+      style={{
+        fontSize: "6cqw",
+        fontWeight: 600,
+        padding: "2.6cqw 5.4cqw",
+        borderRadius: "999px",
+        background: b.chipBg,
+        color: b.chipFg,
+        whiteSpace: "nowrap",
+        display: "inline-flex",
+        alignItems: "center",
+      }}
+    >
+      {b.cta}
+    </span>
+  );
+
+  let body: React.ReactNode;
+  if (layout === "split") {
+    body = (
+      <div className="absolute inset-0 flex">
+        <div className="flex items-center justify-center shrink-0" style={{ width: "42%", background: b.panel }}>
+          <Product style={{ width: b.portrait ? "24cqw" : "34cqw" }} />
+        </div>
+        <div className="flex-1 min-w-0 flex flex-col justify-center" style={{ padding: "6cqw", gap: "4.5cqw" }}>
+          {wordmarkEl}
+          {headlineEl}
+          <div>{ctaEl}</div>
+        </div>
+      </div>
+    );
+  } else if (layout === "productCenter") {
+    body = (
+      <div className="absolute inset-0 flex flex-col items-center text-center" style={{ padding: "8cqw", gap: "4cqw" }}>
+        {wordmarkEl}
+        <div className="flex-1 min-h-0 w-full flex items-center justify-center">
+          <Product style={{ width: b.portrait ? (format === "story" ? "34cqw" : "24cqw") : "52cqw", maxHeight: "100%" }} />
+        </div>
+        {headlineEl}
+        <div>{ctaEl}</div>
+      </div>
+    );
+  } else {
+    body = (
+      <div className="absolute inset-0 flex flex-col" style={{ padding: "8cqw" }}>
+        {wordmarkEl}
+        <div style={{ marginTop: "5cqw" }}>{headlineEl}</div>
+        <div className="mt-auto flex items-end justify-between" style={{ gap: "4cqw" }}>
+          {ctaEl}
+          <Product style={{ width: b.portrait ? (format === "story" ? "38cqw" : "24cqw") : (format === "story" ? "54cqw" : "42cqw") }} />
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className={`relative overflow-hidden rounded-lg shrink-0 ${format === "story" ? "aspect-[9/16]" : "aspect-square"} ${className}`}
+      style={{ containerType: "inline-size", background: b.bg }}
+      aria-hidden="true"
+    >
+      {brand === "trailform" && (
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(115deg, transparent 38%, rgba(255,255,255,0.07) 38%, rgba(255,255,255,0.07) 72%, transparent 72%)",
+          }}
+          aria-hidden="true"
+        />
+      )}
+      {body}
+    </div>
+  );
+}
+
 function ScoreDot({ tone = "good" }: { tone?: "good" | "warn" }) {
   return <span className={`size-2.5 rounded-full shrink-0 ${tone === "good" ? "bg-[#3AA976]" : "bg-pb-peach-400"}`} aria-hidden="true" />;
 }
 
-/* A ranked-creative row shape: rank, thumb, skeleton copy, metric pills */
-function RankedRow({ rank, i, delay, inView }: { rank: number; i: number; delay: number; inView: boolean }) {
+/* A ranked-creative row shape: rank, demo ad thumb, skeleton copy, metric pills */
+function RankedRow({ rank, brand, delay, inView }: { rank: number; brand: DemoBrand; delay: number; inView: boolean }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -731,7 +954,7 @@ function RankedRow({ rank, i, delay, inView }: { rank: number; i: number; delay:
       className="flex items-center gap-3.5 rounded-xl border border-pb-border bg-pb-card p-3"
     >
       <span className="font-display text-[18px] font-medium text-pb-fg-muted w-4 text-center shrink-0">{rank}</span>
-      <Thumb i={i} />
+      <DemoAd brand={brand} format="story" className="w-9" />
       <div className="flex-1 min-w-0 space-y-2">
         <Sk w="w-3/4" h="h-2.5" />
         <div className="flex gap-1.5">
@@ -785,9 +1008,9 @@ function AgentPeachHeroFrame() {
             <Sk w="w-2/3" />
           </motion.div>
           <div className="space-y-2.5">
-            <RankedRow rank={1} i={0} delay={2.2} inView={inView} />
-            <RankedRow rank={2} i={1} delay={2.45} inView={inView} />
-            <RankedRow rank={3} i={2} delay={2.7} inView={inView} />
+            <RankedRow rank={1} brand="fizzli" delay={2.2} inView={inView} />
+            <RankedRow rank={2} brand="trailform" delay={2.45} inView={inView} />
+            <RankedRow rank={3} brand="sagelle" delay={2.7} inView={inView} />
           </div>
         </div>
       </BrowserFrame>
@@ -816,7 +1039,7 @@ function AgentPeachSpotlightFrame() {
             className="rounded-xl border border-pb-border bg-pb-card p-4"
           >
             <div className="flex gap-4">
-              <Thumb i={4} className="w-20 h-24" />
+              <DemoAd brand="fizzli" format="story" className="w-20" />
               <div className="flex-1 min-w-0">
                 <div className="flex items-center justify-between mb-3">
                   <Sk w="w-1/2" h="h-2.5" />
@@ -871,21 +1094,37 @@ function CreativeIntelligenceFrame() {
     { dot: "#c084fc", label: "CTA type", value: "Shop now" },
     { dot: "#6ee7b7", label: "Visual complexity", value: "Minimal" },
   ];
+  /* Rows pair matching formats so grid row heights stay even.
+     First tile (Fizzli) keeps the selected ring — the tag values
+     shown to the right describe it. */
+  const libraryAds: { brand: DemoBrand; format: DemoAdFormat; layout?: DemoAdLayout }[] = [
+    { brand: "fizzli", format: "story" },
+    { brand: "trailform", format: "story" },
+    { brand: "sagelle", format: "square", layout: "split" },
+    { brand: "fizzli", format: "square", layout: "split" },
+    { brand: "sagelle", format: "story", layout: "productCenter" },
+    { brand: "trailform", format: "story", layout: "productCenter" },
+  ];
   return (
     <div ref={ref}>
       <BrowserFrame url="app.peachblue.io/intelligence">
         <div className="grid grid-cols-[minmax(0,11fr)_minmax(0,13fr)] gap-4 items-start">
           {/* Creative library mini-grid */}
           <div className="grid grid-cols-2 gap-2">
-            {[0, 1, 2, 3, 4, 5].map((i) => (
+            {libraryAds.map((a, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, scale: 0.94 }}
                 animate={inView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.35, delay: 0.15 + i * 0.08, ease: EASE }}
-                className={`aspect-[4/5] rounded-lg ${i === 0 ? "ring-2 ring-pb-peach-400 ring-offset-2 ring-offset-pb-bg" : ""}`}
-                style={{ background: THUMB_GRADIENTS[i] }}
-              />
+              >
+                <DemoAd
+                  brand={a.brand}
+                  format={a.format}
+                  layout={a.layout}
+                  className={`w-full ${i === 0 ? "ring-2 ring-pb-peach-400 ring-offset-2 ring-offset-pb-bg" : ""}`}
+                />
+              </motion.div>
             ))}
           </div>
           {/* Extracted tag rows */}
@@ -1188,7 +1427,7 @@ function StepAnalyzeVisual() {
   return (
     <div className="rounded-xl border border-pb-border bg-pb-bg p-3 flex items-center gap-3">
       <div className="relative overflow-hidden rounded-lg shrink-0">
-        <Thumb i={0} className="w-10 h-12" />
+        <DemoAd brand="fizzli" format="story" className="w-10" />
         <motion.div
           className="absolute left-0 right-0 h-4 pointer-events-none"
           style={{ background: "linear-gradient(180deg, transparent, rgba(76,141,255,0.35), transparent)" }}
