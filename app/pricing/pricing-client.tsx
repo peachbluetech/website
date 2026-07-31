@@ -104,15 +104,15 @@ const SALES_HREF = "mailto:nick@peachblue.io?subject=Peachblue%20Agency%20plan";
 const FAQS: { q: string; a: string }[] = [
   {
     q: "What counts as a credit?",
-    a: "One credit covers the full AI analysis of a single creative — visual breakdown, copy strategy, and intelligence tags. Credits reset every month.",
+    a: "One credit covers the full AI analysis of a single creative: visual breakdown, copy strategy, and intelligence tags. Credits reset every month.",
   },
   {
     q: "What happens after the trial?",
-    a: "Every plan starts with a 14-day trial with full access to your plan's features. Add a payment method to continue — cancel anytime before then and you won't be charged.",
+    a: "Every plan starts with a 14-day trial with full access to your plan's features. Add a payment method to continue, and cancel anytime before then if it's not for you.",
   },
   {
     q: "Can I change plans later?",
-    a: "Yes. Upgrade or downgrade at any time from Settings — changes take effect right away and billing is adjusted on your next invoice.",
+    a: "Yes. Upgrade or downgrade at any time from Settings. Changes take effect right away and billing is adjusted on your next invoice.",
   },
   {
     q: "Which platforms can I connect?",

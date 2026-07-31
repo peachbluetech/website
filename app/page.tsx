@@ -37,7 +37,7 @@ export default function Home() {
 
       {/* SEO: semantic, visually-hidden H1 anchored to the brand name.
           The visible hero uses H2 so the brand owns the single H1. */}
-      <h1 className="sr-only">Peachblue — Creative Intelligence for Ads</h1>
+      <h1 className="sr-only">Peachblue: Creative Intelligence for Ads</h1>
 
       {/* ── NAV ──────────────────────────────────────────── */}
       <nav className="fixed top-4 left-0 w-full z-50 flex justify-center px-4">
@@ -88,13 +88,13 @@ export default function Home() {
                 variants={fade}
                 className="font-display text-[clamp(36px,5.5vw,58px)] leading-[1.06] font-medium tracking-[-0.02em] text-pb-fg mb-5"
               >
-                Know what ads work <span className="italic">&mdash; and why.</span>
+                Know what ads work <span className="italic">and why.</span>
               </motion.h2>
               <motion.p
                 variants={fade}
                 className="text-[clamp(15px,1.8vw,18px)] leading-[1.7] text-pb-fg-muted max-w-[460px] mb-8"
               >
-                Peachblue syncs every ad platform you run — Meta, TikTok, Google, Amazon DSP —
+                Peachblue syncs every ad platform you run: Meta, TikTok, Google, and Amazon DSP. It
                 analyzes every creative with AI, and tells you what to make next.
               </motion.p>
               <motion.div variants={fade} className="flex gap-3 flex-wrap items-center">
@@ -206,10 +206,10 @@ export default function Home() {
         eyebrow="Agent Peach"
         title={<>Ask your ad accounts <span className="italic">anything</span>.</>}
         bullets={[
-          "One conversation across every account you run — Meta, TikTok, Google, Amazon DSP",
+          "One conversation across every account you run: Meta, TikTok, Google, Amazon DSP",
           "Answers grounded in your real performance data, not generic advice",
           "Ranked creative lists, head-to-head comparisons, and deep dives",
-          "Spots the patterns behind your winners — and says why",
+          "Spots the patterns behind your winners and says why",
           "Every answer cites the metrics it's built on",
         ]}
         ctaLabel="Start 14-day trial"
@@ -238,8 +238,8 @@ export default function Home() {
         eyebrow="Every platform, one brain"
         title={<>Meta, TikTok, Google, Amazon DSP. <span className="italic">Unified</span>.</>}
         bullets={[
-          "Meta, TikTok, Google Ads, and Amazon DSP — all live, all synced daily",
-          "Amazon DSP includes Connected TV — coverage nobody else offers",
+          "Meta, TikTok, Google Ads, and Amazon DSP. All live, all synced daily",
+          "Amazon DSP includes Connected TV, coverage nobody else offers",
           "One creative library and one scoring system across every channel",
           "Secure OAuth connections you can disconnect at any time",
         ]}
@@ -269,7 +269,7 @@ export default function Home() {
         title={<>Client-ready reports in <span className="italic">minutes</span>.</>}
         bullets={[
           "Multi-client workspaces with per-client scoping for agencies",
-          "Margin-aware reporting — bill the numbers you actually invoice",
+          "Margin-aware reporting, so you bill the numbers you actually invoice",
           "DSP flight pacing with budget, delivery, and CPM goals at a glance",
           "Export to PDF or CSV, ready to send",
         ]}
@@ -404,7 +404,7 @@ export default function Home() {
             </p>
             {submitted ? (
               <div className="rounded-2xl border border-[#3AA976]/30 bg-[#E6F4EC]/40 p-6 text-center">
-                <div className="text-[15px] font-medium text-[#3AA976]">Thanks — we&apos;ll be in touch to schedule your demo.</div>
+                <div className="text-[15px] font-medium text-[#3AA976]">Thanks. We&apos;ll be in touch to schedule your demo.</div>
               </div>
             ) : (
               <form onSubmit={(e) => {
@@ -466,7 +466,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "How does the 14-day trial work?",
-    a: "Every plan starts with a 14-day trial with full access to your plan's features. Add a payment method to continue — cancel anytime before then and you won't be charged.",
+    a: "Every plan starts with a 14-day trial with full access to your plan's features. Add a payment method to continue, and cancel anytime before then if it's not for you.",
   },
   {
     q: "Is my ad data secure?",
@@ -474,15 +474,15 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "Does Peachblue work for agencies?",
-    a: "Yes — the Agency plan adds multi-client workspaces with a client switcher, per-client scoping across the whole app, and margin-aware reports so what you show clients matches what you invoice.",
+    a: "Yes. The Agency plan adds multi-client workspaces with a client switcher, per-client scoping across the whole app, and margin-aware reports so what you show clients matches what you invoice.",
   },
   {
     q: "Can I cancel or change plans?",
-    a: "Anytime. Upgrade or downgrade from Settings and changes take effect right away — billing is adjusted on your next invoice. Cancel whenever you like.",
+    a: "Anytime. Upgrade or downgrade from Settings and changes take effect right away and billing is adjusted on your next invoice. Cancel whenever you like.",
   },
   {
     q: "Do you support Amazon DSP?",
-    a: "Yes — and we lead with it. Peachblue syncs Amazon DSP campaigns including Connected TV, with flight pacing and DSP-aware reporting built in. Very few tools in this category cover DSP at all.",
+    a: "Yes, and we lead with it. Peachblue syncs Amazon DSP campaigns including Connected TV, with flight pacing and DSP-aware reporting built in. Very few tools in this category cover DSP at all.",
   },
 ];
 
