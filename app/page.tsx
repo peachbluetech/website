@@ -88,7 +88,7 @@ export default function Home() {
                 variants={fade}
                 className="font-display text-[clamp(36px,5.5vw,58px)] leading-[1.06] font-medium tracking-[-0.02em] text-pb-fg mb-5"
               >
-                Know what&apos;s <span className="italic">working</span> and why.
+                Know which ads are working <span className="italic">&mdash; and why.</span>
               </motion.h2>
               <motion.p
                 variants={fade}
