@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, animate, useInView } from "framer-motion";
 
 /* ── Brand mark ─────────────────────────────────────────────────── */
 function PeachblueMark({ size = 24, color = "currentColor" }: { size?: number; color?: string }) {
@@ -48,7 +48,7 @@ export default function Home() {
             <div className="hidden md:flex items-center gap-7 text-[13px] font-medium text-pb-fg-muted">
               <a href="#product" className="hover:text-pb-fg transition-colors">Product</a>
               <a href="#platforms" className="hover:text-pb-fg transition-colors">Platforms</a>
-              <a href="#pricing" className="hover:text-pb-fg transition-colors">Pricing</a>
+              <a href="/pricing" className="hover:text-pb-fg transition-colors">Pricing</a>
             </div>
             <a
               href="#contact"
@@ -103,37 +103,26 @@ export default function Home() {
             </motion.div>
           </div>
 
-          {/* Right: product proof cards */}
+          {/* Right: live intelligence cards */}
           <div className="space-y-5 pb-16">
-            <HeroCard delay={0.1}>
+            <CreativeVisionCard delay={0.1} />
+
+            <HeroCard delay={0.25}>
               <Eyebrow left="A/B hook performance · 7-day window" right="Hook Test" />
               <div className="space-y-2.5 mb-3.5">
-                <WinnerRow label="Problem-first hook" value="4.2% CTR" badge="Winner · 2.1x lift" pct={84} />
-                <MetricRow label="Benefit-led hook" value="2.0% CTR" pct={40} />
+                <WinnerRow label="Problem-first hook" to={4.2} decimals={1} suffix="% CTR" badge="Winner · 2.1x lift" pct={84} />
+                <MetricRow label="Benefit-led hook" to={2.0} decimals={1} suffix="% CTR" pct={40} />
               </div>
               <Insight><strong>Why it works:</strong> Problem-first framing triggers a pattern interrupt in the first 1.5 s. Higher thumb-stop rate on Reels and TikTok.</Insight>
             </HeroCard>
 
-            <HeroCard delay={0.2}>
+            <HeroCard delay={0.4}>
               <Eyebrow left="CPA comparison · rolling 30 days" right="UGC vs Studio" />
               <div className="grid grid-cols-2 gap-2.5 mb-3.5">
-                <CompareCell type="UGC" cpa="$8.20" cpaColor="text-[#16a34a]" ctr="3.8%" roas="4.1x" winner />
-                <CompareCell type="Studio" cpa="$14.70" cpaColor="text-pb-fg-muted" ctr="1.9%" roas="2.2x" />
+                <CompareCell type="UGC" cpa={8.2} cpaColor="text-[#16a34a]" ctr="3.8%" roas="4.1x" winner />
+                <CompareCell type="Studio" cpa={14.7} cpaColor="text-pb-fg-muted" ctr="1.9%" roas="2.2x" />
               </div>
               <Insight><strong>Pattern detected:</strong> Natural lighting + hands in frame &rarr; 44% lower CPA across 3 product lines.</Insight>
-            </HeroCard>
-
-            <HeroCard delay={0.3}>
-              <Eyebrow left="Structured intelligence · per creative" right="AI Tags" />
-              <div className="divide-y divide-pb-border/60">
-                <TagRow dot="#ffb89a" label="Hook style" value="Problem-first" highlighted />
-                <TagRow dot="#93c5fd" label="Emotional tone" value="Urgency" />
-                <TagRow dot="#c084fc" label="CTA type" value="Shop now" />
-                <TagRow dot="#6ee7b7" label="Visual complexity" value="Minimal" />
-              </div>
-              <div className="mt-3.5">
-                <Insight><strong>Deep tagging:</strong> Hook, tone, palette, pacing, CTA, format, product placement, and more. All mapped to performance.</Insight>
-              </div>
             </HeroCard>
           </div>
         </div>
@@ -207,7 +196,8 @@ export default function Home() {
                 </div>
                 <h3 className="text-[15px] font-semibold mb-1 text-pb-fg">{p.name}</h3>
                 <p className="text-[12.5px] leading-relaxed text-pb-fg-muted mb-4 flex-1">{p.desc}</p>
-                <span className={`inline-flex self-start items-center h-6 rounded-full px-2.5 text-[10.5px] font-semibold uppercase tracking-[0.08em] ${p.status === "Live" ? "bg-[#E6F4EC] text-[#3AA976]" : "bg-pb-peach-50 text-pb-peach-600"}`}>
+                <span className={`inline-flex self-start items-center gap-1.5 h-6 rounded-full px-2.5 text-[10.5px] font-semibold uppercase tracking-[0.08em] ${p.status === "Live" ? "bg-[#E6F4EC] text-[#3AA976]" : "bg-pb-peach-50 text-pb-peach-600"}`}>
+                  {p.status === "Live" && <span className="size-1.5 rounded-full bg-[#3AA976] animate-pulse" />}
                   {p.status}
                 </span>
               </motion.div>
@@ -333,7 +323,40 @@ function Eyebrow({ left, right }: { left: string; right: string }) {
   );
 }
 
-function WinnerRow({ label, value, badge, pct }: { label: string; value: string; badge: string; pct: number }) {
+/* Counts a number up from 0 when scrolled into view */
+function CountUp({ to, decimals = 0, prefix = "", suffix = "", duration = 1.2, className = "" }: { to: number; decimals?: number; prefix?: string; suffix?: string; duration?: number; className?: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-40px" });
+  useEffect(() => {
+    if (!inView || !ref.current) return;
+    const controls = animate(0, to, {
+      duration,
+      ease: [0.25, 0.1, 0.25, 1],
+      onUpdate: (v) => {
+        if (ref.current) ref.current.textContent = `${prefix}${v.toFixed(decimals)}${suffix}`;
+      },
+    });
+    return () => controls.stop();
+  }, [inView, to, decimals, prefix, suffix, duration]);
+  return <span ref={ref} className={`tnum ${className}`}>{`${prefix}${(0).toFixed(decimals)}${suffix}`}</span>;
+}
+
+/* Progress bar that grows into place when scrolled into view */
+function AnimatedBar({ pct, barClass = "pb-gradient-peach" }: { pct: number; barClass?: string }) {
+  return (
+    <div className="mt-2 h-[4px] bg-pb-border/70 rounded-full overflow-hidden">
+      <motion.div
+        className={`h-full rounded-full ${barClass}`}
+        initial={{ width: 0 }}
+        whileInView={{ width: `${pct}%` }}
+        viewport={{ once: true, margin: "-40px" }}
+        transition={{ duration: 1.1, delay: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
+      />
+    </div>
+  );
+}
+
+function WinnerRow({ label, to, decimals, suffix, badge, pct }: { label: string; to: number; decimals: number; suffix: string; badge: string; pct: number }) {
   return (
     <div className="rounded-xl border border-pb-peach-200/60 bg-gradient-to-br from-pb-peach-50/40 to-[rgba(168,210,255,0.06)] p-3">
       <div className="flex items-center justify-between">
@@ -341,35 +364,31 @@ function WinnerRow({ label, value, badge, pct }: { label: string; value: string;
           <div className="text-[13px] font-semibold text-pb-fg">{label}</div>
           <span className="inline-flex items-center gap-1 mt-1 px-2 py-0.5 rounded-full pb-gradient-brand text-[10.5px] font-semibold text-pb-fg-muted">{badge}</span>
         </div>
-        <div className="text-[13px] font-bold text-pb-fg">{value}</div>
+        <div className="text-[13px] font-bold text-pb-fg"><CountUp to={to} decimals={decimals} suffix={suffix} /></div>
       </div>
-      <div className="mt-2 h-[4px] bg-pb-border/70 rounded-full overflow-hidden">
-        <div className="h-full rounded-full pb-gradient-peach" style={{ width: `${pct}%` }} />
-      </div>
+      <AnimatedBar pct={pct} />
     </div>
   );
 }
 
-function MetricRow({ label, value, pct }: { label: string; value: string; pct: number }) {
+function MetricRow({ label, to, decimals, suffix, pct }: { label: string; to: number; decimals: number; suffix: string; pct: number }) {
   return (
     <div className="rounded-xl border border-pb-border bg-pb-muted/40 p-3">
       <div className="flex items-center justify-between">
         <div className="text-[13px] font-semibold text-pb-fg">{label}</div>
-        <div className="text-[13px] font-bold text-pb-fg-muted">{value}</div>
+        <div className="text-[13px] font-bold text-pb-fg-muted"><CountUp to={to} decimals={decimals} suffix={suffix} /></div>
       </div>
-      <div className="mt-2 h-[4px] bg-pb-border/70 rounded-full overflow-hidden">
-        <div className="h-full rounded-full pb-gradient-peach opacity-30" style={{ width: `${pct}%` }} />
-      </div>
+      <AnimatedBar pct={pct} barClass="pb-gradient-peach opacity-30" />
     </div>
   );
 }
 
-function CompareCell({ type, cpa, cpaColor, ctr, roas, winner }: { type: string; cpa: string; cpaColor: string; ctr: string; roas: string; winner?: boolean }) {
+function CompareCell({ type, cpa, cpaColor, ctr, roas, winner }: { type: string; cpa: number; cpaColor: string; ctr: string; roas: string; winner?: boolean }) {
   return (
     <div className={`rounded-xl border p-3.5 ${winner ? "border-pb-peach-200/60 bg-gradient-to-br from-pb-peach-50/40 to-[rgba(168,210,255,0.04)]" : "border-pb-border bg-pb-muted/30"}`}>
       <div className="text-[10.5px] font-semibold uppercase tracking-[0.08em] text-pb-fg-muted mb-1.5">{type}</div>
       <div className="text-[10.5px] text-pb-fg-muted mb-0.5">Avg. CPA</div>
-      <div className={`text-[22px] font-bold tracking-tight tnum ${cpaColor}`}>{cpa}</div>
+      <div className={`text-[22px] font-bold tracking-tight ${cpaColor}`}><CountUp to={cpa} decimals={2} prefix="$" /></div>
       <div className="mt-2 flex gap-3 text-[10.5px] text-pb-fg-muted">
         <span>CTR <strong className="text-pb-fg">{ctr}</strong></span>
         <span>ROAS <strong className="text-pb-fg">{roas}</strong></span>
@@ -387,6 +406,150 @@ function TagRow({ dot, label, value, highlighted }: { dot: string; label: string
       </div>
       <span className={`text-[13px] ${highlighted ? "font-semibold text-pb-fg" : "text-pb-fg-muted"}`}>{value}</span>
     </div>
+  );
+}
+
+/* Bounding box the AI "draws" over a region of the mock ad */
+function VisionBox({ show, delay, className, label }: { show: boolean; delay: number; className: string; label: string }) {
+  return (
+    <motion.div
+      className={`absolute rounded-[6px] border-[1.5px] border-pb-blue-500 pointer-events-none ${className}`}
+      style={{ boxShadow: "0 0 0 1px rgba(76,141,255,0.15), inset 0 0 14px rgba(76,141,255,0.10)" }}
+      initial={{ opacity: 0, scale: 0.94 }}
+      animate={show ? { opacity: 1, scale: 1 } : {}}
+      transition={{ duration: 0.35, delay, ease: [0.25, 0.1, 0.25, 1] }}
+    >
+      <span className="absolute -top-2.5 left-1.5 px-1.5 py-[1px] rounded-[4px] bg-pb-blue-500 text-white text-[7.5px] font-semibold uppercase tracking-[0.08em] leading-[1.5]">
+        {label}
+      </span>
+    </motion.div>
+  );
+}
+
+/* Types text in character by character once started */
+function Typewriter({ text, start, delay = 0, speed = 16 }: { text: string; start: boolean; delay?: number; speed?: number }) {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    if (!start) return;
+    let interval: ReturnType<typeof setInterval> | undefined;
+    const timeout = setTimeout(() => {
+      interval = setInterval(() => {
+        setCount((c) => {
+          if (c >= text.length) {
+            if (interval) clearInterval(interval);
+            return c;
+          }
+          return c + 1;
+        });
+      }, speed);
+    }, delay);
+    return () => {
+      clearTimeout(timeout);
+      if (interval) clearInterval(interval);
+    };
+  }, [start, text, delay, speed]);
+  const doneTyping = count >= text.length;
+  return (
+    <span>
+      {text.slice(0, count)}
+      {start && !doneTyping && <span className="inline-block w-[6px] h-[11px] ml-[1px] align-[-1px] bg-pb-blue-500/70 animate-pulse" />}
+    </span>
+  );
+}
+
+/* Hero centerpiece: a mock ad creative being visually analyzed in real time */
+function CreativeVisionCard({ delay = 0 }: { delay?: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const [done, setDone] = useState(false);
+  useEffect(() => {
+    if (!inView) return;
+    const t = setTimeout(() => setDone(true), 3400);
+    return () => clearTimeout(t);
+  }, [inView]);
+
+  const tags = [
+    { dot: "#4C8DFF", label: "Hook style", value: "Problem-first", d: 1.5, highlighted: true },
+    { dot: "#ffb89a", label: "Emotional tone", value: "Urgency", d: 1.65 },
+    { dot: "#c084fc", label: "CTA type", value: "Shop now", d: 1.8 },
+    { dot: "#6ee7b7", label: "Visual complexity", value: "Minimal", d: 1.95 },
+  ];
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.55, delay, ease: [0.25, 0.1, 0.25, 1] }}
+    >
+      <div className="rounded-2xl border border-pb-border bg-pb-card p-5 shadow-pb-lift">
+        <div className="flex items-center justify-between mb-4">
+          <div className="text-[10.5px] font-semibold tracking-[0.1em] uppercase text-pb-fg-muted">AI vision · summer_sale_v3 · Meta</div>
+          <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full border text-[11px] font-semibold shadow-pb-soft transition-colors duration-500 ${done ? "border-[#3AA976]/30 bg-[#E6F4EC] text-[#3AA976]" : "border-pb-blue-200 bg-pb-blue-50 text-pb-blue-700"}`}>
+            <span className={`size-1.5 rounded-full ${done ? "bg-[#3AA976]" : "bg-pb-blue-500 animate-pulse"}`} />
+            {done ? "Analyzed" : "Analyzing"}
+          </span>
+        </div>
+        <div className="grid grid-cols-[minmax(0,11fr)_minmax(0,13fr)] gap-4 items-start">
+
+          {/* Mock ad creative under analysis */}
+          <div className="relative rounded-xl overflow-hidden border border-pb-border aspect-[4/5] select-none">
+            {/* Product photo: Point Normal via Unsplash */}
+            <img src="/ad-serum.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" />
+            <div className="absolute inset-x-0 top-0 h-2/5 bg-gradient-to-b from-black/25 to-transparent" />
+            <div className="absolute inset-0 p-3.5 flex flex-col">
+              <div className="text-[7.5px] font-semibold uppercase tracking-[0.18em] text-white/75">glow&amp;co skincare</div>
+              <div className="mt-1.5 font-display text-[15px] leading-[1.12] font-medium text-white drop-shadow-[0_1px_6px_rgba(0,0,0,0.25)]">Tired of dull, tired skin?</div>
+              <div className="flex-1" />
+              <div className="self-start px-2.5 py-1 rounded-full bg-pb-fg text-white text-[8px] font-semibold">Shop now &rarr;</div>
+            </div>
+
+            {/* Scan sweep */}
+            {inView && (
+              <motion.div
+                className="absolute left-0 right-0 h-12 pointer-events-none"
+                style={{ background: "linear-gradient(180deg, transparent, rgba(76,141,255,0.22), rgba(76,141,255,0.06), transparent)" }}
+                initial={{ top: "-18%", opacity: 0 }}
+                animate={{ top: "112%", opacity: [0, 1, 1, 0] }}
+                transition={{ duration: 1.4, ease: "easeInOut", delay: 0.2 }}
+              />
+            )}
+
+            <VisionBox show={inView} delay={0.55} className="top-[6%] left-[4%] w-[88%] h-[21%]" label="Hook" />
+            <VisionBox show={inView} delay={0.9} className="top-[34%] left-[24%] w-[50%] h-[52%]" label="Product" />
+            <VisionBox show={inView} delay={1.25} className="bottom-[4%] left-[3%] w-[46%] h-[14%]" label="CTA" />
+          </div>
+
+          {/* Extracted intelligence */}
+          <div className="min-w-0">
+            <div className="divide-y divide-pb-border/60">
+              {tags.map((t) => (
+                <motion.div
+                  key={t.label}
+                  initial={{ opacity: 0, x: 10 }}
+                  animate={inView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ duration: 0.4, delay: t.d, ease: [0.25, 0.1, 0.25, 1] }}
+                >
+                  <TagRow dot={t.dot} label={t.label} value={t.value} highlighted={t.highlighted} />
+                </motion.div>
+              ))}
+            </div>
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.4, delay: 2.1 }}
+              className="mt-3"
+            >
+              <Insight>
+                <strong>Why it works:</strong>{" "}
+                <Typewriter start={inView} delay={2300} text="Problem-first hook + minimal layout drives a 2.1x thumb-stop lift for this account." />
+              </Insight>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+    </motion.div>
   );
 }
 
