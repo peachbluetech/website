@@ -198,9 +198,10 @@ export default function Home() {
 
       <FeatureSection
         eyebrow="Agent Peach"
-        title={<>Ask your ad account <span className="italic">anything</span>.</>}
+        title={<>Ask your ad accounts <span className="italic">anything</span>.</>}
         bullets={[
-          "Natural-language answers grounded in your real performance data",
+          "One conversation across every account you run — Meta, TikTok, Google, Amazon DSP",
+          "Answers grounded in your real performance data, not generic advice",
           "Ranked creative lists, head-to-head comparisons, and deep dives",
           "Spots the patterns behind your winners — and says why",
           "Every answer cites the metrics it's built on",
@@ -799,7 +800,7 @@ function AgentPeachSpotlightFrame() {
         <div className="space-y-4">
           <div className="flex justify-end">
             <div className="max-w-[85%] rounded-2xl rounded-br-md pb-gradient-peach text-white px-4 py-2.5 text-[13px] font-medium shadow-[0_4px_14px_rgba(242,119,73,0.25)]">
-              Why is this creative winning?
+              What&rsquo;s winning across all my accounts?
             </div>
           </div>
           <motion.div
