@@ -78,6 +78,12 @@ export default function Home() {
           {/* Left: editorial copy */}
           <div>
             <motion.div initial="hidden" animate="show" variants={stagger}>
+              <motion.div
+                variants={fade}
+                className="text-[11px] font-semibold uppercase tracking-[0.18em] text-pb-peach-600 mb-4"
+              >
+                Marketing intelligence
+              </motion.div>
               <motion.h2
                 variants={fade}
                 className="font-display text-[clamp(36px,5.5vw,58px)] leading-[1.06] font-medium tracking-[-0.02em] text-pb-fg mb-5"
