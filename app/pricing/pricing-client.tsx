@@ -108,7 +108,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "What happens after the trial?",
-    a: "Every plan starts with a 14-day trial with full access to your plan's features. Add a payment method to continue, and cancel anytime before then if it's not for you.",
+    a: "Every plan starts with a 7-day trial with full access to your plan's features. Add a payment method to continue, and cancel anytime before then if it's not for you.",
   },
   {
     q: "Can I change plans later?",
@@ -201,7 +201,7 @@ export default function PricingClient() {
           </motion.h2>
           <motion.p variants={fade} className="text-[15px] text-pb-fg-muted leading-relaxed max-w-[520px] mx-auto mb-9">
             Connect your platforms, analyze every creative, and know what&apos;s working.
-            Every plan starts with a 14-day trial. Upgrade, downgrade, or cancel anytime.
+            Every plan starts with a 7-day trial. Upgrade, downgrade, or cancel anytime.
           </motion.p>
 
           {/* Billing toggle */}
@@ -276,7 +276,7 @@ export default function PricingClient() {
         </motion.div>
 
         <p className="text-center text-[12.5px] text-pb-fg-muted mt-8">
-          All plans start with a 14-day trial. Cancel anytime.
+          All plans start with a 7-day trial. Cancel anytime.
         </p>
       </section>
 
@@ -373,7 +373,7 @@ function PlanCard({ plan, billing }: { plan: Plan; billing: Billing }) {
                 : "border border-pb-border bg-pb-card text-pb-fg shadow-pb-soft hover:shadow-pb-lift hover:-translate-y-0.5"
             }`}
           >
-            Start 14-day trial
+            Start 7-day trial
           </a>
         ) : (
           <a

@@ -10,7 +10,7 @@ const TRIAL_HREF = `${APP_URL}/auth/signup?plan=pro&billing=monthly`;
 const STARTER_HREF = `${APP_URL}/auth/signup?plan=starter&billing=monthly`;
 const PRO_HREF = `${APP_URL}/auth/signup?plan=pro&billing=monthly`;
 const SALES_HREF = "mailto:nick@peachblue.io?subject=Peachblue%20Agency%20plan";
-const RISK_REVERSAL = "14-day trial · From $79/mo · Cancel anytime";
+const RISK_REVERSAL = "7-day trial · From $79/mo · Cancel anytime";
 
 /* ── Brand mark ─────────────────────────────────────────────────── */
 function PeachblueMark({ size = 24, color = "currentColor" }: { size?: number; color?: string }) {
@@ -65,7 +65,7 @@ export default function Home() {
               href={TRIAL_HREF}
               className="inline-flex items-center h-9 px-5 rounded-full pb-gradient-peach text-white text-[13px] font-semibold shadow-[0_4px_16px_rgba(242,119,73,0.35)] hover:brightness-105 transition"
             >
-              Start 14-day trial
+              Start 7-day trial
             </a>
           </div>
         </div>
@@ -102,7 +102,7 @@ export default function Home() {
                   href={TRIAL_HREF}
                   className="inline-flex items-center gap-2 h-12 px-7 rounded-full pb-gradient-peach text-white text-[15px] font-semibold shadow-[0_8px_24px_rgba(242,119,73,0.35)] hover:brightness-105 hover:-translate-y-0.5 transition-all"
                 >
-                  Start 14-day trial &rarr;
+                  Start 7-day trial &rarr;
                 </a>
                 <a
                   href="#demo"
@@ -212,7 +212,7 @@ export default function Home() {
           "Spots the patterns behind your winners and says why",
           "Every answer cites the metrics it's built on",
         ]}
-        ctaLabel="Start 14-day trial"
+        ctaLabel="Start 7-day trial"
         ctaHref={TRIAL_HREF}
         frame={<AgentPeachSpotlightFrame />}
       />
@@ -228,7 +228,7 @@ export default function Home() {
           "Filter your entire library by any tag or metric in seconds",
           "Composite scoring surfaces top performers and underperformers instantly",
         ]}
-        ctaLabel="Start 14-day trial"
+        ctaLabel="Start 7-day trial"
         ctaHref={TRIAL_HREF}
         frame={<CreativeIntelligenceFrame />}
       />
@@ -259,7 +259,7 @@ export default function Home() {
           "AI-written editorial briefs turn raw chatter into creative direction",
           "Feed real consumer language straight into your next brief",
         ]}
-        ctaLabel="Start 14-day trial"
+        ctaLabel="Start 7-day trial"
         ctaHref={TRIAL_HREF}
         frame={<BrandIntelFrame />}
       />
@@ -288,7 +288,7 @@ export default function Home() {
           "Query your creative performance from the tools you already live in",
           "The same intelligence engine, available wherever you work",
         ]}
-        ctaLabel="Start 14-day trial"
+        ctaLabel="Start 7-day trial"
         ctaHref={TRIAL_HREF}
         frame={<McpFrame />}
       />
@@ -299,7 +299,7 @@ export default function Home() {
           <SectionHeader
             eyebrow="Pricing"
             title={<>Plans that scale with your ad <span className="italic">spend</span>.</>}
-            subtitle="Every plan starts with a 14-day trial. Upgrade, downgrade, or cancel anytime."
+            subtitle="Every plan starts with a 7-day trial. Upgrade, downgrade, or cancel anytime."
           />
           <motion.div
             initial="hidden"
@@ -312,14 +312,14 @@ export default function Home() {
               name="Starter"
               price={79}
               tagline="For solo advertisers getting started."
-              ctaLabel="Start 14-day trial"
+              ctaLabel="Start 7-day trial"
               ctaHref={STARTER_HREF}
             />
             <MiniPlanCard
               name="Pro"
               price={199}
               tagline="For growing teams running multiple channels."
-              ctaLabel="Start 14-day trial"
+              ctaLabel="Start 7-day trial"
               ctaHref={PRO_HREF}
               popular
             />
@@ -389,7 +389,7 @@ export default function Home() {
               href={TRIAL_HREF}
               className="inline-flex items-center gap-2 h-12 px-7 rounded-full pb-gradient-peach text-white text-[15px] font-semibold shadow-[0_8px_24px_rgba(242,119,73,0.35)] hover:brightness-105 hover:-translate-y-0.5 transition-all"
             >
-              Start 14-day trial &rarr;
+              Start 7-day trial &rarr;
             </a>
           </div>
           <p className="text-[12.5px] text-pb-fg-muted mb-12">{RISK_REVERSAL}</p>
@@ -465,8 +465,8 @@ const FAQS: { q: string; a: string }[] = [
     a: "Meta, TikTok, Google Ads, and Amazon DSP are all live today. Connect any of them via secure OAuth and Peachblue syncs your creatives and performance data automatically, every day.",
   },
   {
-    q: "How does the 14-day trial work?",
-    a: "Every plan starts with a 14-day trial with full access to your plan's features. Add a payment method to continue, and cancel anytime before then if it's not for you.",
+    q: "How does the 7-day trial work?",
+    a: "Every plan starts with a 7-day trial with full access to your plan's features. Add a payment method to continue, and cancel anytime before then if it's not for you.",
   },
   {
     q: "Is my ad data secure?",
@@ -727,110 +727,6 @@ type DemoBrand = "fizzli" | "sagelle" | "trailform";
 type DemoAdFormat = "story" | "square";
 type DemoAdLayout = "typeTop" | "productCenter" | "split";
 
-function FizzliCan({ style }: { style?: React.CSSProperties }) {
-  return (
-    <svg viewBox="0 0 60 100" style={{ display: "block", height: "auto", ...style }} aria-hidden="true">
-      <circle cx="17" cy="13" r="3.2" fill="#E4602F" opacity="0.4" />
-      <circle cx="30" cy="6.5" r="2.4" fill="#E4602F" opacity="0.3" />
-      <circle cx="42" cy="14" r="1.9" fill="#E4602F" opacity="0.45" />
-      <rect x="15" y="26" width="30" height="66" rx="8" fill="#E4602F" />
-      <ellipse cx="30" cy="27" rx="15" ry="4.5" fill="#B94A22" />
-      <rect x="19" y="33" width="3.5" height="54" rx="1.75" fill="#ffffff" opacity="0.28" />
-      <rect x="15" y="49" width="30" height="17" fill="#FFF3EA" opacity="0.92" />
-      <text x="30" y="60.5" textAnchor="middle" fontSize="8" fontStyle="italic" fontWeight="600" fill="#B94A22" fontFamily="var(--font-display)">fizzli</text>
-    </svg>
-  );
-}
-
-function SagelleTube({ style }: { style?: React.CSSProperties }) {
-  return (
-    <svg viewBox="0 0 60 100" style={{ display: "block", height: "auto", ...style }} aria-hidden="true">
-      <rect x="24" y="9" width="12" height="12" rx="2.5" fill="#C9B9E6" />
-      <rect x="18" y="23" width="24" height="68" rx="7" fill="#FFFFFF" />
-      <text x="30" y="48" textAnchor="middle" fontSize="6" letterSpacing="1.6" fontWeight="600" fill="#8F7BBF">SGL</text>
-      <rect x="24" y="57" width="12" height="2.6" rx="1.3" fill="#D9CDEF" />
-      <rect x="26.5" y="63" width="7" height="2.6" rx="1.3" fill="#E7DFF6" />
-    </svg>
-  );
-}
-
-function TrailformDumbbell({ style }: { style?: React.CSSProperties }) {
-  return (
-    <svg viewBox="0 0 100 60" style={{ display: "block", height: "auto", ...style }} aria-hidden="true">
-      <rect x="24" y="26" width="52" height="8" rx="4" fill="#6FE0CC" />
-      <rect x="12" y="9" width="10" height="42" rx="4" fill="#EFFBF8" />
-      <rect x="22" y="15" width="8" height="30" rx="3" fill="#BCEDE1" />
-      <rect x="78" y="9" width="10" height="42" rx="4" fill="#EFFBF8" />
-      <rect x="70" y="15" width="8" height="30" rx="3" fill="#BCEDE1" />
-    </svg>
-  );
-}
-
-const DEMO_AD_BRANDS: Record<
-  DemoBrand,
-  {
-    wordmark: string;
-    wordmarkStyle: React.CSSProperties;
-    headline: [string, string];
-    headlineStyle: React.CSSProperties;
-    headlineAccent: string | null;
-    cta: string;
-    bg: string;
-    ink: string;
-    chipBg: string;
-    chipFg: string;
-    panel: string;
-    Product: (props: { style?: React.CSSProperties }) => React.ReactElement;
-    portrait: boolean;
-  }
-> = {
-  fizzli: {
-    wordmark: "fizzli",
-    wordmarkStyle: { fontFamily: "var(--font-display)", fontStyle: "italic", fontWeight: 600, letterSpacing: "0.01em" },
-    headline: ["Thirsty?", "Fix it."],
-    headlineStyle: { fontFamily: "var(--font-display)", fontWeight: 500, letterSpacing: "-0.02em" },
-    headlineAccent: null,
-    cta: "Shop now",
-    bg: "linear-gradient(168deg, #FFF3EA 0%, #FFDCC3 55%, #FFC7A1 100%)",
-    ink: "#7C3018",
-    chipBg: "#7C3018",
-    chipFg: "#FFF4EE",
-    panel: "rgba(255,255,255,0.5)",
-    Product: FizzliCan,
-    portrait: true,
-  },
-  sagelle: {
-    wordmark: "SAGELLE",
-    wordmarkStyle: { fontWeight: 600, letterSpacing: "0.24em" },
-    headline: ["Skin,", "simplified."],
-    headlineStyle: { fontFamily: "var(--font-display)", fontWeight: 400, letterSpacing: "-0.01em" },
-    headlineAccent: null,
-    cta: "Learn more",
-    bg: "linear-gradient(170deg, #F8F5FD 0%, #ECE4F8 60%, #DFD3F1 100%)",
-    ink: "#4A3D68",
-    chipBg: "#FFFFFF",
-    chipFg: "#4A3D68",
-    panel: "rgba(255,255,255,0.55)",
-    Product: SagelleTube,
-    portrait: true,
-  },
-  trailform: {
-    wordmark: "TRAILFORM",
-    wordmarkStyle: { fontWeight: 800, fontStyle: "italic", letterSpacing: "0.14em" },
-    headline: ["Last chance", "20% off"],
-    headlineStyle: { fontWeight: 800, letterSpacing: "-0.01em", textTransform: "uppercase" },
-    headlineAccent: "#6FE0CC",
-    cta: "Shop now",
-    bg: "linear-gradient(152deg, #11414F 0%, #17607A 100%)",
-    ink: "#F2FBF9",
-    chipBg: "#6FE0CC",
-    chipFg: "#0F3D4C",
-    panel: "rgba(255,255,255,0.08)",
-    Product: TrailformDumbbell,
-    portrait: false,
-  },
-};
-
 function DemoAd({
   brand,
   format = "story",
@@ -838,107 +734,41 @@ function DemoAd({
   className = "",
 }: {
   brand: DemoBrand;
-  format?: DemoAdFormat;
+  format?: "story" | "square";
   layout?: DemoAdLayout;
   className?: string;
 }) {
-  const b = DEMO_AD_BRANDS[brand];
-  const { Product } = b;
-
-  const wordmarkEl = (
-    <div style={{ fontSize: brand === "sagelle" ? "6cqw" : "6.5cqw", color: b.ink, whiteSpace: "nowrap", ...b.wordmarkStyle }}>
-      {b.wordmark}
-    </div>
-  );
-
-  const headlineSize =
-    layout === "typeTop" ? (format === "story" ? "13cqw" : "11.5cqw") : layout === "productCenter" ? "10.5cqw" : "10cqw";
-  const headlineEl = (
-    <div style={{ fontSize: headlineSize, lineHeight: 1.1, color: b.ink, ...b.headlineStyle }}>
-      {b.headline.map((line, i) => (
-        <div key={line} style={i === 1 && b.headlineAccent ? { color: b.headlineAccent } : undefined}>
-          {line}
-        </div>
-      ))}
-    </div>
-  );
-
-  const ctaEl = (
-    <span
-      style={{
-        fontSize: "6cqw",
-        fontWeight: 600,
-        padding: "2.6cqw 5.4cqw",
-        borderRadius: "999px",
-        background: b.chipBg,
-        color: b.chipFg,
-        whiteSpace: "nowrap",
-        display: "inline-flex",
-        alignItems: "center",
-      }}
-    >
-      {b.cta}
-    </span>
-  );
-
-  let body: React.ReactNode;
-  if (layout === "split") {
-    body = (
-      <div className="absolute inset-0 flex">
-        <div className="flex items-center justify-center shrink-0" style={{ width: "42%", background: b.panel }}>
-          <Product style={{ width: b.portrait ? "24cqw" : "34cqw" }} />
-        </div>
-        <div className="flex-1 min-w-0 flex flex-col justify-center" style={{ padding: "6cqw", gap: "4.5cqw" }}>
-          {wordmarkEl}
-          {headlineEl}
-          <div>{ctaEl}</div>
-        </div>
-      </div>
-    );
-  } else if (layout === "productCenter") {
-    body = (
-      <div className="absolute inset-0 flex flex-col items-center text-center" style={{ padding: "8cqw", gap: "4cqw" }}>
-        {wordmarkEl}
-        <div className="flex-1 min-h-0 w-full flex items-center justify-center">
-          <Product style={{ width: b.portrait ? (format === "story" ? "34cqw" : "24cqw") : "52cqw", maxHeight: "100%" }} />
-        </div>
-        {headlineEl}
-        <div>{ctaEl}</div>
-      </div>
-    );
-  } else {
-    body = (
-      <div className="absolute inset-0 flex flex-col" style={{ padding: "8cqw" }}>
-        {wordmarkEl}
-        <div style={{ marginTop: "5cqw" }}>{headlineEl}</div>
-        <div className="mt-auto flex items-end justify-between" style={{ gap: "4cqw" }}>
-          {ctaEl}
-          <Product style={{ width: b.portrait ? (format === "story" ? "38cqw" : "24cqw") : (format === "story" ? "54cqw" : "42cqw") }} />
-        </div>
-      </div>
-    );
-  }
-
+  /* Real generated demo-brand creatives (fictional brands, sliced from
+     assets-raw/Gemini_Generated_Image_qejricqejricqejr.png).
+     story typeTop = ad 1, story productCenter/split = ad 2,
+     square = the brand's chosen square variant. */
+  const src =
+    format === "square"
+      ? SQUARE_ADS[brand]
+      : layout === "productCenter"
+        ? `/ads/${brand}-story-2.png`
+        : `/ads/${brand}-story-1.png`;
   return (
     <div
       className={`relative overflow-hidden rounded-lg shrink-0 ${format === "story" ? "aspect-[9/16]" : "aspect-square"} ${className}`}
-      style={{ containerType: "inline-size", background: b.bg }}
       aria-hidden="true"
     >
-      {brand === "trailform" && (
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              "linear-gradient(115deg, transparent 38%, rgba(255,255,255,0.07) 38%, rgba(255,255,255,0.07) 72%, transparent 72%)",
-          }}
-          aria-hidden="true"
-        />
-      )}
-      {body}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={src}
+        alt=""
+        className="absolute inset-0 w-full h-full object-cover"
+        loading="lazy"
+      />
     </div>
   );
 }
+
+const SQUARE_ADS: Record<DemoBrand, string> = {
+  fizzli: "/ads/fizzli-square-a.png",
+  sagelle: "/ads/sagelle-square-a.png",
+  trailform: "/ads/trailform-square-b.png",
+};
 
 function ScoreDot({ tone = "good" }: { tone?: "good" | "warn" }) {
   return <span className={`size-2.5 rounded-full shrink-0 ${tone === "good" ? "bg-[#3AA976]" : "bg-pb-peach-400"}`} aria-hidden="true" />;
