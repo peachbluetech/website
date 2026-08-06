@@ -299,7 +299,7 @@ export default function Home() {
           <SectionHeader
             eyebrow="Pricing"
             title={<>Plans that scale with your ad <span className="italic">spend</span>.</>}
-            subtitle="Every plan starts with a 7-day trial. Upgrade, downgrade, or cancel anytime."
+            subtitle="Starter and Pro start with a 7-day trial. Upgrade, downgrade, or cancel anytime."
           />
           <motion.div
             initial="hidden"
@@ -325,7 +325,7 @@ export default function Home() {
             />
             <MiniPlanCard
               name="Agency"
-              price={1499}
+              price="custom"
               tagline="For agencies managing many clients."
               ctaLabel="Talk to sales"
               ctaHref={SALES_HREF}
@@ -466,7 +466,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "How does the 7-day trial work?",
-    a: "Every plan starts with a 7-day trial with full access to your plan's features. Add a payment method to continue, and cancel anytime before then if it's not for you.",
+    a: "Starter and Pro start with a 7-day trial: add your card, try everything in your plan, and cancel before day 7 if it's not for you. Scale, Power, and Agency start right away, and you can book a walkthrough anytime.",
   },
   {
     q: "Is my ad data secure?",
@@ -580,7 +580,7 @@ function MiniPlanCard({
   outlineCta = false,
 }: {
   name: string;
-  price: number;
+  price: number | "custom";
   tagline: string;
   ctaLabel: string;
   ctaHref: string;
@@ -604,8 +604,14 @@ function MiniPlanCard({
         <h3 className="text-[15px] font-semibold text-pb-fg mb-1">{name}</h3>
         <p className="text-[12.5px] leading-relaxed text-pb-fg-muted mb-5 min-h-[36px]">{tagline}</p>
         <div className="flex items-baseline gap-1 mb-6">
-          <span className="font-display text-[32px] font-medium tracking-tight text-pb-fg tnum">${price.toLocaleString("en-US")}</span>
-          <span className="text-[12.5px] text-pb-fg-muted">/mo</span>
+          {price === "custom" ? (
+            <span className="font-display text-[32px] font-medium tracking-tight text-pb-fg">Custom</span>
+          ) : (
+            <>
+              <span className="font-display text-[32px] font-medium tracking-tight text-pb-fg tnum">${price.toLocaleString("en-US")}</span>
+              <span className="text-[12.5px] text-pb-fg-muted">/mo</span>
+            </>
+          )}
         </div>
         <a
           href={ctaHref}

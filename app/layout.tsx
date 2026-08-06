@@ -138,7 +138,7 @@ const jsonLd = {
         price: "79",
         priceCurrency: "USD",
         availability: "https://schema.org/InStock",
-        description: "Plans from $79/mo. Every plan starts with a 7-day trial.",
+        description: "Plans from $79/mo. Starter and Pro include a 7-day trial.",
       },
     },
   ],

@@ -17,7 +17,7 @@ type Plan = {
   inherits?: string; // "Everything in X, plus:"
   features: string[];
   popular?: boolean;
-  cta: "trial" | "sales";
+  cta: "trial" | "buy" | "sales";
 };
 
 const PLANS: Plan[] = [
@@ -66,7 +66,7 @@ const PLANS: Plan[] = [
       "4,000 credits/mo",
       "Unlimited agent messages",
     ],
-    cta: "trial",
+    cta: "buy",
   },
   {
     id: "power",
@@ -81,7 +81,7 @@ const PLANS: Plan[] = [
       "Priority processing",
       "6,000 credits/mo",
     ],
-    cta: "trial",
+    cta: "buy",
   },
   {
     id: "agency",
@@ -108,7 +108,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "What happens after the trial?",
-    a: "Every plan starts with a 7-day trial with full access to your plan's features. Add a payment method to continue, and cancel anytime before then if it's not for you.",
+    a: "Starter and Pro start with a 7-day trial: add your card, try everything in your plan, and cancel before day 7 if it's not for you. Scale, Power, and Agency start right away with a walkthrough available whenever you want one.",
   },
   {
     q: "Can I change plans later?",
@@ -201,7 +201,7 @@ export default function PricingClient() {
           </motion.h2>
           <motion.p variants={fade} className="text-[15px] text-pb-fg-muted leading-relaxed max-w-[520px] mx-auto mb-9">
             Connect your platforms, analyze every creative, and know what&apos;s working.
-            Every plan starts with a 7-day trial. Upgrade, downgrade, or cancel anytime.
+            Starter and Pro start with a 7-day trial. Upgrade, downgrade, or cancel anytime.
           </motion.p>
 
           {/* Billing toggle */}
@@ -276,7 +276,7 @@ export default function PricingClient() {
         </motion.div>
 
         <p className="text-center text-[12.5px] text-pb-fg-muted mt-8">
-          All plans start with a 7-day trial. Cancel anytime.
+          Starter and Pro include a 7-day trial. Cancel anytime.
         </p>
       </section>
 
@@ -355,26 +355,48 @@ function PlanCard({ plan, billing }: { plan: Plan; billing: Billing }) {
         <p className="text-[12px] leading-relaxed text-pb-fg-muted mb-5 min-h-[34px]">{plan.tagline}</p>
 
         <div className="mb-5">
-          <div className="flex items-baseline gap-1">
-            <span className="font-display text-[32px] font-medium tracking-tight text-pb-fg tnum">{usd(perMonth)}</span>
-            <span className="text-[12.5px] text-pb-fg-muted">/mo</span>
-          </div>
-          <div className="text-[11.5px] text-pb-fg-muted mt-0.5 min-h-[17px]">
-            {billing === "annual" ? `Billed ${usd(annualTotal)}/yr` : "Billed monthly"}
-          </div>
+          {plan.cta === "sales" ? (
+            <>
+              <div className="flex items-baseline gap-1">
+                <span className="font-display text-[32px] font-medium tracking-tight text-pb-fg">Custom</span>
+              </div>
+              <div className="text-[11.5px] text-pb-fg-muted mt-0.5 min-h-[17px]">
+                Tailored to your client roster
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="flex items-baseline gap-1">
+                <span className="font-display text-[32px] font-medium tracking-tight text-pb-fg tnum">{usd(perMonth)}</span>
+                <span className="text-[12.5px] text-pb-fg-muted">/mo</span>
+              </div>
+              <div className="text-[11.5px] text-pb-fg-muted mt-0.5 min-h-[17px]">
+                {billing === "annual" ? `Billed ${usd(annualTotal)}/yr` : "Billed monthly"}
+              </div>
+            </>
+          )}
         </div>
 
-        {plan.cta === "trial" ? (
-          <a
-            href={signupHref(plan.id, billing)}
-            className={`inline-flex items-center justify-center w-full h-10 rounded-full text-[13px] font-semibold transition-all mb-5 ${
-              plan.popular
-                ? "pb-gradient-peach text-white shadow-[0_6px_18px_rgba(242,119,73,0.35)] hover:brightness-105"
-                : "border border-pb-border bg-pb-card text-pb-fg shadow-pb-soft hover:shadow-pb-lift hover:-translate-y-0.5"
-            }`}
-          >
-            Start 7-day trial
-          </a>
+        {plan.cta === "trial" || plan.cta === "buy" ? (
+          <>
+            <a
+              href={signupHref(plan.id, billing)}
+              className={`inline-flex items-center justify-center w-full h-10 rounded-full text-[13px] font-semibold transition-all ${plan.cta === "buy" ? "mb-2" : "mb-5"} ${
+                plan.popular
+                  ? "pb-gradient-peach text-white shadow-[0_6px_18px_rgba(242,119,73,0.35)] hover:brightness-105"
+                  : "border border-pb-border bg-pb-card text-pb-fg shadow-pb-soft hover:shadow-pb-lift hover:-translate-y-0.5"
+              }`}
+            >
+              {plan.cta === "trial" ? "Start 7-day trial" : "Get started"}
+            </a>
+            {plan.cta === "buy" && (
+              <div className="text-center mb-3">
+                <a href="/#demo" className="text-[11.5px] text-pb-fg-muted underline underline-offset-2 hover:text-pb-fg">
+                  or book a demo
+                </a>
+              </div>
+            )}
+          </>
         ) : (
           <a
             href={SALES_HREF}
