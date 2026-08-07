@@ -6,11 +6,18 @@ import { motion, animate, useInView } from "framer-motion";
 
 /* ── Config ─────────────────────────────────────────────────────── */
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://app.peachblue.io";
-const TRIAL_HREF = `${APP_URL}/auth/signup?plan=pro&billing=monthly`;
-const STARTER_HREF = `${APP_URL}/auth/signup?plan=starter&billing=monthly`;
-const PRO_HREF = `${APP_URL}/auth/signup?plan=pro&billing=monthly`;
+// Self-serve signup is dark until the app-side Stripe launch ships. Until
+// NEXT_PUBLIC_SELF_SERVE_LIVE=1 is set (Vercel env + redeploy), every trial
+// CTA routes to the demo/contact form instead of app signup.
+const SELF_SERVE = process.env.NEXT_PUBLIC_SELF_SERVE_LIVE === "1";
+const TRIAL_HREF = SELF_SERVE ? `${APP_URL}/auth/signup?plan=pro&billing=monthly` : "/#demo";
+const STARTER_HREF = SELF_SERVE ? `${APP_URL}/auth/signup?plan=starter&billing=monthly` : "/#demo";
+const PRO_HREF = SELF_SERVE ? `${APP_URL}/auth/signup?plan=pro&billing=monthly` : "/#demo";
+const TRIAL_LABEL = SELF_SERVE ? "Start 7-day trial" : "Get early access";
 const SALES_HREF = "/?intent=agency#demo";
-const RISK_REVERSAL = "7-day trial · From $79/mo · Cancel anytime";
+const RISK_REVERSAL = SELF_SERVE
+  ? "7-day trial · From $79/mo · Cancel anytime"
+  : "From $79/mo · Cancel anytime";
 
 /* ── Brand mark ─────────────────────────────────────────────────── */
 function PeachblueMark({ size = 24, color = "currentColor" }: { size?: number; color?: string }) {
@@ -79,7 +86,7 @@ export default function Home() {
               href={TRIAL_HREF}
               className="inline-flex items-center h-9 px-5 rounded-full pb-gradient-peach text-white text-[13px] font-semibold shadow-[0_4px_16px_rgba(242,119,73,0.35)] hover:brightness-105 transition"
             >
-              Start 7-day trial
+              {TRIAL_LABEL}
             </a>
           </div>
         </div>
@@ -116,7 +123,7 @@ export default function Home() {
                   href={TRIAL_HREF}
                   className="inline-flex items-center gap-2 h-12 px-7 rounded-full pb-gradient-peach text-white text-[15px] font-semibold shadow-[0_8px_24px_rgba(242,119,73,0.35)] hover:brightness-105 hover:-translate-y-0.5 transition-all"
                 >
-                  Start 7-day trial &rarr;
+                  {TRIAL_LABEL} &rarr;
                 </a>
                 <a
                   href="#demo"
@@ -226,7 +233,7 @@ export default function Home() {
           "Spots the patterns behind your winners and says why",
           "Every answer cites the metrics it's built on",
         ]}
-        ctaLabel="Start 7-day trial"
+        ctaLabel={TRIAL_LABEL}
         ctaHref={TRIAL_HREF}
         frame={<AgentPeachSpotlightFrame />}
       />
@@ -242,7 +249,7 @@ export default function Home() {
           "Filter your entire library by any tag or metric in seconds",
           "Composite scoring surfaces top performers and underperformers instantly",
         ]}
-        ctaLabel="Start 7-day trial"
+        ctaLabel={TRIAL_LABEL}
         ctaHref={TRIAL_HREF}
         frame={<CreativeIntelligenceFrame />}
       />
@@ -273,7 +280,7 @@ export default function Home() {
           "AI-written editorial briefs turn raw chatter into creative direction",
           "Feed real consumer language straight into your next brief",
         ]}
-        ctaLabel="Start 7-day trial"
+        ctaLabel={TRIAL_LABEL}
         ctaHref={TRIAL_HREF}
         frame={<BrandIntelFrame />}
       />
@@ -302,7 +309,7 @@ export default function Home() {
           "Query your creative performance from the tools you already live in",
           "The same intelligence engine, available wherever you work",
         ]}
-        ctaLabel="Start 7-day trial"
+        ctaLabel={TRIAL_LABEL}
         ctaHref={TRIAL_HREF}
         frame={<McpFrame />}
       />
@@ -326,14 +333,14 @@ export default function Home() {
               name="Starter"
               price={79}
               tagline="For solo advertisers getting started."
-              ctaLabel="Start 7-day trial"
+              ctaLabel={TRIAL_LABEL}
               ctaHref={STARTER_HREF}
             />
             <MiniPlanCard
               name="Pro"
               price={199}
               tagline="For growing teams running multiple channels."
-              ctaLabel="Start 7-day trial"
+              ctaLabel={TRIAL_LABEL}
               ctaHref={PRO_HREF}
               popular
             />
@@ -403,7 +410,7 @@ export default function Home() {
               href={TRIAL_HREF}
               className="inline-flex items-center gap-2 h-12 px-7 rounded-full pb-gradient-peach text-white text-[15px] font-semibold shadow-[0_8px_24px_rgba(242,119,73,0.35)] hover:brightness-105 hover:-translate-y-0.5 transition-all"
             >
-              Start 7-day trial &rarr;
+              {TRIAL_LABEL} &rarr;
             </a>
           </div>
           <p className="text-[12.5px] text-pb-fg-muted mb-12">{RISK_REVERSAL}</p>

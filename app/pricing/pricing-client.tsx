@@ -5,6 +5,10 @@ import { motion } from "framer-motion";
 
 /* ── Config ─────────────────────────────────────────────────────── */
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://app.peachblue.io";
+// Self-serve signup is dark until the app-side Stripe launch ships. Until
+// NEXT_PUBLIC_SELF_SERVE_LIVE=1 is set (Vercel env + redeploy), every plan
+// CTA routes to the demo/contact form instead of app signup.
+const SELF_SERVE = process.env.NEXT_PUBLIC_SELF_SERVE_LIVE === "1";
 
 type Billing = "monthly" | "annual";
 
@@ -138,6 +142,7 @@ const stagger = { show: { transition: { staggerChildren: 0.1 } } };
 const usd = (n: number) => `$${n.toLocaleString("en-US")}`;
 
 function signupHref(planId: string, billing: Billing) {
+  if (!SELF_SERVE) return "/#demo";
   return `${APP_URL}/auth/signup?plan=${planId}&billing=${billing}`;
 }
 
@@ -181,7 +186,7 @@ export default function PricingClient() {
               href={signupHref("pro", billing)}
               className="inline-flex items-center h-9 px-5 rounded-full pb-gradient-peach text-white text-[13px] font-semibold shadow-[0_4px_16px_rgba(242,119,73,0.35)] hover:brightness-105 transition"
             >
-              Start free trial
+              {SELF_SERVE ? "Start free trial" : "Get early access"}
             </a>
           </div>
         </div>
@@ -387,7 +392,7 @@ function PlanCard({ plan, billing }: { plan: Plan; billing: Billing }) {
                   : "border border-pb-border bg-pb-card text-pb-fg shadow-pb-soft hover:shadow-pb-lift hover:-translate-y-0.5"
               }`}
             >
-              {plan.cta === "trial" ? "Start 7-day trial" : "Get started"}
+              {!SELF_SERVE ? "Get early access" : plan.cta === "trial" ? "Start 7-day trial" : "Get started"}
             </a>
             {plan.cta === "buy" && (
               <div className="text-center mb-3">
