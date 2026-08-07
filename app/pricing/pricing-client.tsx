@@ -99,7 +99,7 @@ const PLANS: Plan[] = [
   },
 ];
 
-const SALES_HREF = "mailto:nick@peachblue.io?subject=Peachblue%20Agency%20plan";
+const SALES_HREF = "/?intent=agency#demo";
 
 const FAQS: { q: string; a: string }[] = [
   {
