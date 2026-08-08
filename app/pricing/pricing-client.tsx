@@ -280,7 +280,7 @@ export default function PricingClient() {
 /* ── Plan card ──────────────────────────────────────────────────── */
 function PlanCard({ plan, billing }: { plan: Plan; billing: Billing }) {
   const annualTotal = plan.monthly * 10; // exactly 10x monthly — 2 months free
-  const perMonth = billing === "monthly" ? plan.monthly : Math.round(annualTotal / 12);
+  const perMonth = billing === "monthly" ? plan.monthly : Math.floor(annualTotal / 12);
 
   return (
     <motion.div variants={fade} className="h-full">
