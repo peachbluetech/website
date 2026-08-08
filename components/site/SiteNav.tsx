@@ -58,7 +58,7 @@ export function SiteNav({ current }: { current?: "pricing" | "demo" }) {
           <div className="flex items-center gap-2">
             <a
               href={TRIAL_HREF}
-              className="inline-flex items-center h-9 px-5 rounded-full pb-gradient-peach text-white text-[13px] font-semibold shadow-[0_4px_16px_rgba(242,119,73,0.35)] hover:brightness-105 transition"
+              className="inline-flex items-center h-9 px-3.5 sm:px-5 rounded-full pb-gradient-peach text-white text-[12px] sm:text-[13px] font-semibold whitespace-nowrap shadow-[0_4px_16px_rgba(242,119,73,0.35)] hover:brightness-105 transition"
             >
               {NAV_CTA_LABEL}
             </a>
