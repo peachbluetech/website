@@ -3,31 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion, animate, useInView } from "framer-motion";
-
-/* ── Config ─────────────────────────────────────────────────────── */
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://app.peachblue.io";
-// Self-serve signup is dark until the app-side Stripe launch ships. Until
-// NEXT_PUBLIC_SELF_SERVE_LIVE=1 is set (Vercel env + redeploy), every trial
-// CTA routes to the demo/contact form instead of app signup.
-const SELF_SERVE = process.env.NEXT_PUBLIC_SELF_SERVE_LIVE === "1";
-const TRIAL_HREF = SELF_SERVE ? `${APP_URL}/auth/signup?plan=pro&billing=monthly` : "/#demo";
-const STARTER_HREF = SELF_SERVE ? `${APP_URL}/auth/signup?plan=starter&billing=monthly` : "/#demo";
-const PRO_HREF = SELF_SERVE ? `${APP_URL}/auth/signup?plan=pro&billing=monthly` : "/#demo";
-const TRIAL_LABEL = SELF_SERVE ? "Start 7-day trial" : "Get early access";
-const SALES_HREF = "/?intent=agency#demo";
-const RISK_REVERSAL = SELF_SERVE
-  ? "7-day trial · From $79/mo · Cancel anytime"
-  : "From $79/mo · Cancel anytime";
-
-/* ── Brand mark ─────────────────────────────────────────────────── */
-function PeachblueMark({ size = 24, color = "currentColor" }: { size?: number; color?: string }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 32 32" fill="none" aria-hidden="true">
-      <circle cx={18} cy={11} r={5} fill={color} />
-      <rect x={10.5} y={17} width={3} height={11} rx={1.5} fill={color} />
-    </svg>
-  );
-}
+import { SiteNav } from "@/components/site/SiteNav";
+import { SiteFooter } from "@/components/site/SiteFooter";
+import { PeachblueMark } from "@/components/site/PeachblueMark";
+import { TRIAL_HREF, STARTER_HREF, PRO_HREF, SALES_HREF, DEMO_HREF, TRIAL_LABEL, RISK_REVERSAL } from "@/lib/site";
 
 /* ── Animation ──────────────────────────────────────────────────── */
 const EASE = [0.25, 0.1, 0.25, 1] as [number, number, number, number];
@@ -36,23 +15,6 @@ const stagger = { show: { transition: { staggerChildren: 0.1 } } };
 
 /* ── Page ───────────────────────────────────────────────────────── */
 export default function Home() {
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [company, setCompany] = useState("");
-  const [spend, setSpend] = useState("");
-  const [note, setNote] = useState("");
-  const [hp, setHp] = useState("");
-  const [sending, setSending] = useState(false);
-  const [formError, setFormError] = useState<string | null>(null);
-  const [submitted, setSubmitted] = useState(false);
-  const [salesIntent, setSalesIntent] = useState(false);
-  useEffect(() => {
-    try {
-      const p = new URLSearchParams(window.location.search);
-      if (p.get("intent") === "agency") setSalesIntent(true);
-    } catch {}
-  }, []);
-
   return (
     <div className="flex flex-col min-h-full bg-pb-bg">
 
@@ -60,37 +22,7 @@ export default function Home() {
           The visible hero uses H2 so the brand owns the single H1. */}
       <h1 className="sr-only">Peachblue: Creative Intelligence for Ads</h1>
 
-      {/* ── NAV ──────────────────────────────────────────── */}
-      <nav className="fixed top-4 left-0 w-full z-50 flex justify-center px-4">
-        <div className="w-full max-w-[900px]">
-          <div className="flex items-center justify-between h-14 px-5 rounded-full border border-pb-border/50 bg-pb-bg/80 backdrop-blur-xl shadow-pb-soft">
-            <Link
-              href="/"
-              aria-label="Peachblue home"
-              className="flex items-center gap-2.5"
-            >
-              <div className="size-8 rounded-lg pb-gradient-peach flex items-center justify-center shadow-[0_4px_12px_rgba(255,182,155,0.4)]">
-                <PeachblueMark size={18} color="#ffffff" />
-              </div>
-              <span className="font-display text-[17px] font-semibold tracking-tight text-pb-fg">
-                peachblue
-              </span>
-            </Link>
-            <div className="hidden md:flex items-center gap-7 text-[13px] font-medium text-pb-fg-muted">
-              <a href="#product" className="hover:text-pb-fg transition-colors">Product</a>
-              <a href="#platforms" className="hover:text-pb-fg transition-colors">Platforms</a>
-              <Link href="/pricing" className="hover:text-pb-fg transition-colors">Pricing</Link>
-              <a href="#faq" className="hover:text-pb-fg transition-colors">FAQ</a>
-            </div>
-            <a
-              href={TRIAL_HREF}
-              className="inline-flex items-center h-9 px-5 rounded-full pb-gradient-peach text-white text-[13px] font-semibold shadow-[0_4px_16px_rgba(242,119,73,0.35)] hover:brightness-105 transition"
-            >
-              {TRIAL_LABEL}
-            </a>
-          </div>
-        </div>
-      </nav>
+      <SiteNav />
 
       {/* ── 1 · HERO ─────────────────────────────────────── */}
       <section className="pt-32 pb-16 md:pt-40 md:pb-20 px-6">
@@ -126,7 +58,7 @@ export default function Home() {
                   {TRIAL_LABEL} &rarr;
                 </a>
                 <a
-                  href="#demo"
+                  href={DEMO_HREF}
                   className="inline-flex items-center gap-2 h-12 px-7 rounded-full border border-pb-border bg-pb-card text-[15px] font-medium shadow-pb-soft hover:shadow-pb-lift hover:-translate-y-0.5 transition-all"
                 >
                   Book a demo
@@ -415,97 +347,19 @@ export default function Home() {
           </div>
           <p className="text-[12.5px] text-pb-fg-muted mb-12">{RISK_REVERSAL}</p>
 
-          {/* Book a demo form */}
-          <div className="rounded-2xl border border-pb-border bg-pb-card/80 backdrop-blur-sm p-7 shadow-pb-soft text-left">
-            <h3 className="font-display text-[20px] font-medium tracking-tight text-pb-fg mb-1.5 text-center">
-              {salesIntent ? "Talk to sales" : "Prefer a walkthrough?"}
-            </h3>
-            <p className="text-[13.5px] text-pb-fg-muted leading-relaxed mb-5 text-center">
-              {salesIntent
-                ? "Tell us about your agency and we\u2019ll tailor an Agency plan walkthrough to your client roster."
-                : "Leave your details and we\u2019ll set up a guided demo of Peachblue on your own ad data."}
-            </p>
-            {submitted ? (
-              <div className="rounded-2xl border border-[#3AA976]/30 bg-[#E6F4EC]/40 p-6 text-center">
-                <div className="text-[15px] font-medium text-[#3AA976]">
-                  Thanks. We&apos;ll be in touch{salesIntent ? " about the Agency plan" : " to schedule your demo"} shortly.
-                </div>
-              </div>
-            ) : (
-              <form
-                onSubmit={async (e) => {
-                  e.preventDefault();
-                  if (!email || sending) return;
-                  setSending(true);
-                  setFormError(null);
-                  try {
-                    const res = await fetch("/api/contact", {
-                      method: "POST",
-                      headers: { "Content-Type": "application/json" },
-                      body: JSON.stringify({
-                        name, email, company, spend, message: note,
-                        intent: salesIntent ? "agency" : "demo",
-                        website: hp,
-                      }),
-                    });
-                    const d = await res.json().catch(() => null);
-                    if (!res.ok) {
-                      setFormError(d?.error ?? "Something went wrong. Email us at nick@peachblue.io.");
-                      setSending(false);
-                      return;
-                    }
-                    setSubmitted(true);
-                  } catch {
-                    setFormError("Something went wrong. Email us at nick@peachblue.io.");
-                    setSending(false);
-                  }
-                }}
-                className="space-y-3"
-              >
-                <div className="grid sm:grid-cols-2 gap-3">
-                  <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name" className="h-12 w-full rounded-full border border-pb-border bg-pb-card px-5 text-[14px] placeholder:text-pb-fg-muted focus:outline-none focus:border-pb-peach-400 focus:ring-2 focus:ring-pb-peach-100 shadow-pb-soft" />
-                  <input type="text" value={company} onChange={(e) => setCompany(e.target.value)} placeholder="Company" className="h-12 w-full rounded-full border border-pb-border bg-pb-card px-5 text-[14px] placeholder:text-pb-fg-muted focus:outline-none focus:border-pb-peach-400 focus:ring-2 focus:ring-pb-peach-100 shadow-pb-soft" />
-                </div>
-                <div className="grid sm:grid-cols-2 gap-3">
-                  <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@company.com" className="h-12 w-full rounded-full border border-pb-border bg-pb-card px-5 text-[14px] placeholder:text-pb-fg-muted focus:outline-none focus:border-pb-peach-400 focus:ring-2 focus:ring-pb-peach-100 shadow-pb-soft" />
-                  <select value={spend} onChange={(e) => setSpend(e.target.value)} className="h-12 w-full rounded-full border border-pb-border bg-pb-card px-5 text-[14px] text-pb-fg focus:outline-none focus:border-pb-peach-400 focus:ring-2 focus:ring-pb-peach-100 shadow-pb-soft appearance-none">
-                    <option value="">Monthly ad spend</option>
-                    <option value="Under $10k">Under $10k</option>
-                    <option value="$10k to $50k">$10k to $50k</option>
-                    <option value="$50k to $250k">$50k to $250k</option>
-                    <option value="$250k plus">$250k plus</option>
-                  </select>
-                </div>
-                <textarea value={note} onChange={(e) => setNote(e.target.value)} placeholder={salesIntent ? "Tell us about your client roster" : "Anything specific you want to see? (optional)"} rows={2} className="w-full rounded-2xl border border-pb-border bg-pb-card px-5 py-3 text-[14px] placeholder:text-pb-fg-muted focus:outline-none focus:border-pb-peach-400 focus:ring-2 focus:ring-pb-peach-100 shadow-pb-soft resize-none" />
-                <input type="text" value={hp} onChange={(e) => setHp(e.target.value)} tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" name="website" />
-                {formError && <p className="text-[12.5px] text-[#D64545] text-center">{formError}</p>}
-                <button type="submit" disabled={sending} className="inline-flex w-full items-center justify-center gap-2 h-12 px-6 rounded-full pb-gradient-peach text-white text-[14px] font-semibold shadow-[0_6px_18px_rgba(242,119,73,0.35)] hover:brightness-105 transition disabled:opacity-60">
-                  {sending ? "Sending..." : salesIntent ? "Talk to sales" : "Book a demo"} &rarr;
-                </button>
-              </form>
-            )}
-          </div>
+          {/* The lead form now lives on its own /demo page (better mobile
+              experience than a deep anchor on this very long page). */}
+          <a
+            href={DEMO_HREF}
+            className="inline-flex items-center gap-2 h-12 px-7 rounded-full border border-pb-border bg-pb-card text-[15px] font-medium shadow-pb-soft hover:shadow-pb-lift hover:-translate-y-0.5 transition-all"
+          >
+            Book a demo &rarr;
+          </a>
         </div>
       </section>
 
       {/* ── 8 · FOOTER ───────────────────────────────────── */}
-      <footer className="border-t border-pb-border py-8 px-6">
-        <div className="max-w-[1100px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <div className="size-6 rounded-md pb-gradient-peach flex items-center justify-center">
-              <PeachblueMark size={14} color="#ffffff" />
-            </div>
-            <span className="font-display text-[14px] font-semibold tracking-tight">peachblue</span>
-          </div>
-          <div className="text-[12px] text-pb-fg-muted">&copy; {new Date().getFullYear()} Peachblue Technologies Inc.</div>
-          <div className="flex gap-4 text-[12px] text-pb-fg-muted">
-            <Link href="/pricing" className="hover:text-pb-fg transition-colors">Pricing</Link>
-            <Link href="/privacy" className="hover:text-pb-fg transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-pb-fg transition-colors">Terms of Service</Link>
-            <a href="mailto:nick@peachblue.io" className="hover:text-pb-fg transition-colors">Contact</a>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

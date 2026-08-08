@@ -2,13 +2,9 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-
-/* ── Config ─────────────────────────────────────────────────────── */
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://app.peachblue.io";
-// Self-serve signup is dark until the app-side Stripe launch ships. Until
-// NEXT_PUBLIC_SELF_SERVE_LIVE=1 is set (Vercel env + redeploy), every plan
-// CTA routes to the demo/contact form instead of app signup.
-const SELF_SERVE = process.env.NEXT_PUBLIC_SELF_SERVE_LIVE === "1";
+import { SiteNav } from "@/components/site/SiteNav";
+import { SiteFooter } from "@/components/site/SiteFooter";
+import { SELF_SERVE, signupHref as sharedSignupHref, SALES_HREF as SHARED_SALES_HREF, DEMO_HREF } from "@/lib/site";
 
 type Billing = "monthly" | "annual";
 
@@ -103,7 +99,7 @@ const PLANS: Plan[] = [
   },
 ];
 
-const SALES_HREF = "/?intent=agency#demo";
+const SALES_HREF = SHARED_SALES_HREF;
 
 const FAQS: { q: string; a: string }[] = [
   {
@@ -125,14 +121,6 @@ const FAQS: { q: string; a: string }[] = [
 ];
 
 /* ── Brand mark ─────────────────────────────────────────────────── */
-function PeachblueMark({ size = 24, color = "currentColor" }: { size?: number; color?: string }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 32 32" fill="none" aria-hidden="true">
-      <circle cx={18} cy={11} r={5} fill={color} />
-      <rect x={10.5} y={17} width={3} height={11} rx={1.5} fill={color} />
-    </svg>
-  );
-}
 
 /* ── Animation ──────────────────────────────────────────────────── */
 const fade = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] } } };
@@ -142,8 +130,7 @@ const stagger = { show: { transition: { staggerChildren: 0.1 } } };
 const usd = (n: number) => `$${n.toLocaleString("en-US")}`;
 
 function signupHref(planId: string, billing: Billing) {
-  if (!SELF_SERVE) return "/#demo";
-  return `${APP_URL}/auth/signup?plan=${planId}&billing=${billing}`;
+  return sharedSignupHref(planId, billing);
 }
 
 function Check() {
@@ -162,35 +149,7 @@ export default function PricingClient() {
     <div className="flex flex-col min-h-full bg-pb-bg">
 
       {/* ── NAV ──────────────────────────────────────────── */}
-      <nav className="fixed top-4 left-0 w-full z-50 flex justify-center px-4">
-        <div className="w-full max-w-[900px]">
-          <div className="flex items-center justify-between h-14 px-5 rounded-full border border-pb-border/50 bg-pb-bg/80 backdrop-blur-xl shadow-pb-soft">
-            <a
-              href="/"
-              aria-label="Peachblue home"
-              className="flex items-center gap-2.5"
-            >
-              <div className="size-8 rounded-lg pb-gradient-peach flex items-center justify-center shadow-[0_4px_12px_rgba(255,182,155,0.4)]">
-                <PeachblueMark size={18} color="#ffffff" />
-              </div>
-              <span className="font-display text-[17px] font-semibold tracking-tight text-pb-fg">
-                peachblue
-              </span>
-            </a>
-            <div className="hidden md:flex items-center gap-7 text-[13px] font-medium text-pb-fg-muted">
-              <a href="/#product" className="hover:text-pb-fg transition-colors">Product</a>
-              <a href="/#platforms" className="hover:text-pb-fg transition-colors">Platforms</a>
-              <a href="/pricing" aria-current="page" className="text-pb-fg">Pricing</a>
-            </div>
-            <a
-              href={signupHref("pro", billing)}
-              className="inline-flex items-center h-9 px-5 rounded-full pb-gradient-peach text-white text-[13px] font-semibold shadow-[0_4px_16px_rgba(242,119,73,0.35)] hover:brightness-105 transition"
-            >
-              {SELF_SERVE ? "Start free trial" : "Get early access"}
-            </a>
-          </div>
-        </div>
-      </nav>
+      <SiteNav current="pricing" />
 
       {/* ── HERO ─────────────────────────────────────────── */}
       <section className="pt-32 md:pt-40 px-6">
@@ -313,22 +272,7 @@ export default function PricingClient() {
       </section>
 
       {/* ── FOOTER ────────────────────────────────────────── */}
-      <footer className="border-t border-pb-border py-8 px-6">
-        <div className="max-w-[1100px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <div className="size-6 rounded-md pb-gradient-peach flex items-center justify-center">
-              <PeachblueMark size={14} color="#ffffff" />
-            </div>
-            <span className="font-display text-[14px] font-semibold tracking-tight">peachblue</span>
-          </div>
-          <div className="text-[12px] text-pb-fg-muted">&copy; {new Date().getFullYear()} Peachblue Technologies Inc.</div>
-          <div className="flex gap-4 text-[12px] text-pb-fg-muted">
-            <a href="/privacy" className="hover:text-pb-fg transition-colors">Privacy Policy</a>
-            <a href="/terms" className="hover:text-pb-fg transition-colors">Terms of Service</a>
-            <a href="mailto:nick@peachblue.io" className="hover:text-pb-fg transition-colors">Contact</a>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }
@@ -396,7 +340,7 @@ function PlanCard({ plan, billing }: { plan: Plan; billing: Billing }) {
             </a>
             {plan.cta === "buy" && (
               <div className="text-center mb-3">
-                <a href="/#demo" className="text-[11.5px] text-pb-fg-muted underline underline-offset-2 hover:text-pb-fg">
+                <a href={DEMO_HREF} className="text-[11.5px] text-pb-fg-muted underline underline-offset-2 hover:text-pb-fg">
                   or book a demo
                 </a>
               </div>
