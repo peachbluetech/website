@@ -152,19 +152,18 @@ export default function PricingClient() {
       <SiteNav current="pricing" />
 
       {/* ── HERO ─────────────────────────────────────────── */}
-      <section className="pt-32 md:pt-40 px-6">
+      <section className="pt-28 md:pt-32 px-6">
         <motion.div initial="hidden" animate="show" variants={stagger} className="max-w-2xl mx-auto text-center">
           <motion.div variants={fade} className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-pb-fg-muted mb-2">
             Pricing
           </motion.div>
           <motion.h2
             variants={fade}
-            className="font-display text-[clamp(30px,4.5vw,48px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-fg mb-4"
+            className="font-display text-[clamp(27px,3.6vw,38px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-fg mb-3"
           >
             Plans that scale with your ad <span className="italic">spend</span>.
           </motion.h2>
-          <motion.p variants={fade} className="text-[15px] text-pb-fg-muted leading-relaxed max-w-[520px] mx-auto mb-9">
-            Connect your platforms, analyze every creative, and know what&apos;s working.
+          <motion.p variants={fade} className="text-[15px] text-pb-fg-muted leading-relaxed max-w-[560px] mx-auto mb-6">
             Starter and Pro start with a 7-day trial. Upgrade, downgrade, or cancel anytime.
           </motion.p>
 
@@ -203,7 +202,7 @@ export default function PricingClient() {
       </section>
 
       {/* ── PLAN CARDS ───────────────────────────────────── */}
-      <section className="pt-14 pb-6 px-6">
+      <section className="pt-8 pb-6 px-6">
         <motion.div
           initial="hidden"
           animate="show"
