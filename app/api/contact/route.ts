@@ -16,8 +16,38 @@ export const runtime = "nodejs";
  */
 
 import { NextResponse } from "next/server";
+import { createHmac } from "crypto";
 
 const TO_ADDRESS = "nick@peachblue.io";
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://app.peachblue.io";
+
+/**
+ * Best-effort forward to the app's /api/leads so every submission also gets
+ * a durable database row. HMAC-signed with a key derived from the shared
+ * RESEND_API_KEY (both Vercel projects hold it — no extra secret needed).
+ * Failures are logged, never surfaced: the email is the critical path.
+ */
+async function logLead(apiKey: string, lead: Record<string, string>): Promise<void> {
+  try {
+    const key = createHmac("sha256", apiKey).update("peachblue-lead-ingest-v1").digest();
+    const body = JSON.stringify(lead);
+    const ts = Math.floor(Date.now() / 1000).toString();
+    const sig = createHmac("sha256", key).update(`${ts}.${body}`).digest("hex");
+    const res = await fetch(`${APP_URL}/api/leads`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-peachblue-signature": `t=${ts},v1=${sig}`,
+      },
+      body,
+    });
+    if (!res.ok) {
+      console.warn("[contact] lead log failed:", res.status, (await res.text()).slice(0, 200));
+    }
+  } catch (e: any) {
+    console.warn("[contact] lead log error:", e?.message ?? e);
+  }
+}
 const FROM_ADDRESS = process.env.RESEND_FROM ?? "Peachblue <onboarding@resend.dev>";
 
 // Simple in-memory rate limit: 5 submissions/hour per IP. Resets on redeploy,
@@ -119,6 +149,8 @@ export async function POST(req: Request) {
       { status: 502 }
     );
   }
+
+  await logLead(apiKey, { name, email, company, spend, message, intent });
 
   return NextResponse.json({ ok: true });
 }
