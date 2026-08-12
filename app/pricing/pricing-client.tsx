@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { motion } from "framer-motion";
 import { SiteNav } from "@/components/site/SiteNav";
 import { SiteFooter } from "@/components/site/SiteFooter";
@@ -29,7 +29,8 @@ const PLANS: Plan[] = [
     tagline: "For solo advertisers getting started.",
     features: [
       "Meta + TikTok auto-sync",
-      "AI creative analysis (400 credits/mo)",
+      "29-dimension AI creative analysis (400 credits/mo)",
+      "Creative Library + performance scoring",
       "Agent Peach chat (500 messages/mo)",
       "Daily performance digest",
     ],
@@ -62,7 +63,8 @@ const PLANS: Plan[] = [
     tagline: "For teams scaling spend across platforms.",
     inherits: "Pro",
     features: [
-      "Amazon DSP sync",
+      "Amazon DSP sync (incl. Connected TV)",
+      "10 seats for the whole team",
       "4,000 credits/mo",
       "Unlimited agent messages",
     ],
@@ -77,8 +79,8 @@ const PLANS: Plan[] = [
     inherits: "Scale",
     features: [
       "Client-ready reports + pacing",
-      "Attribution",
       "Priority processing",
+      "Priority support + onboarding",
       "6,000 credits/mo",
     ],
     cta: "buy",
@@ -92,7 +94,9 @@ const PLANS: Plan[] = [
     inherits: "Power",
     features: [
       "Multi-client workspaces (client switcher, per-client scoping)",
+      "Per-client reports, Intelligence + Brand Intel",
       "Agency margin/markup on reports",
+      "25 seats across your roster",
       "15,000 credits/mo",
     ],
     cta: "sales",
@@ -100,6 +104,63 @@ const PLANS: Plan[] = [
 ];
 
 const SALES_HREF = SHARED_SALES_HREF;
+
+/* ── Full comparison table ──────────────────────────────────────── */
+type CompareValue = boolean | string;
+type CompareGroup = {
+  title: string;
+  rows: { label: string; values: [CompareValue, CompareValue, CompareValue, CompareValue, CompareValue] }[];
+};
+
+// Column order matches PLANS: Starter / Pro / Scale / Power / Agency.
+const COMPARE: CompareGroup[] = [
+  {
+    title: "Platforms",
+    rows: [
+      { label: "Meta auto-sync", values: [true, true, true, true, true] },
+      { label: "TikTok auto-sync", values: [true, true, true, true, true] },
+      { label: "Google Ads sync", values: [false, true, true, true, true] },
+      { label: "Amazon Sponsored Ads sync", values: [false, true, true, true, true] },
+      { label: "Amazon DSP sync (incl. Connected TV)", values: [false, false, true, true, true] },
+    ],
+  },
+  {
+    title: "Creative analysis",
+    rows: [
+      { label: "AI creative analysis (29 dimensions)", values: [true, true, true, true, true] },
+      { label: "Composite scoring + performance tiers", values: [true, true, true, true, true] },
+      { label: "Creative Library (By Ad / By Creative)", values: [true, true, true, true, true] },
+      { label: "Performance history", values: ["30 days", "Full", "Full", "Full", "Full"] },
+      { label: "Creative intelligence patterns", values: [false, true, true, true, true] },
+      { label: "Brand Intel (Reddit monitoring)", values: [false, true, true, true, true] },
+    ],
+  },
+  {
+    title: "Agent + integrations",
+    rows: [
+      { label: "Agent Peach messages", values: ["500/mo", "3,000/mo", "Unlimited", "Unlimited", "Unlimited"] },
+      { label: "MCP/API access (Claude Desktop, Cursor)", values: [false, true, true, true, true] },
+      { label: "Daily performance digest", values: [true, true, true, true, true] },
+    ],
+  },
+  {
+    title: "Reporting",
+    rows: [
+      { label: "Client-ready reports + pacing", values: [false, false, false, true, true] },
+      { label: "Agency margin/markup on reports", values: [false, false, false, false, true] },
+      { label: "Multi-client workspaces", values: [false, false, false, false, true] },
+    ],
+  },
+  {
+    title: "Limits + support",
+    rows: [
+      { label: "Seats", values: ["1", "3", "10", "8", "25"] },
+      { label: "Credits per month", values: ["400", "1,500", "4,000", "6,000", "15,000"] },
+      { label: "Priority processing", values: [false, false, false, true, true] },
+      { label: "Priority support + onboarding", values: [false, false, false, true, true] },
+    ],
+  },
+];
 
 const FAQS: { q: string; a: string }[] = [
   {
@@ -241,6 +302,87 @@ export default function PricingClient() {
         <p className="text-center text-[12.5px] text-pb-fg-muted mt-8">
           Starter and Pro include a 7-day trial. Cancel anytime.
         </p>
+      </section>
+
+      {/* ── COMPARE PLANS ────────────────────────────────── */}
+      <section className="pt-16 md:pt-20 px-6" id="compare">
+        <div className="max-w-[1100px] mx-auto">
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-40px" }}
+            variants={stagger}
+            className="text-center mb-10 max-w-2xl mx-auto"
+          >
+            <motion.div variants={fade} className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-pb-fg-muted mb-2">
+              Compare
+            </motion.div>
+            <motion.h2 variants={fade} className="font-display text-[clamp(24px,3.5vw,34px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-fg">
+              Every plan, side by <span className="italic">side</span>.
+            </motion.h2>
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-40px" }}
+            variants={fade}
+            className="overflow-x-auto rounded-2xl border border-pb-border bg-pb-card shadow-pb-soft"
+          >
+            <table className="w-full min-w-[840px] border-collapse text-left">
+              <thead>
+                <tr>
+                  <th className="sticky left-0 bg-pb-card px-5 py-4 text-[12px] font-semibold uppercase tracking-[0.08em] text-pb-fg-muted border-b border-pb-border w-[280px]">
+                    Feature
+                  </th>
+                  {PLANS.map((p) => (
+                    <th key={p.id} className="px-4 py-4 text-center border-b border-pb-border">
+                      <div className="text-[13.5px] font-semibold text-pb-fg">{p.name}</div>
+                      <div className="text-[11.5px] font-medium text-pb-fg-muted tnum">
+                        {p.cta === "sales" ? "Custom" : `${usd(p.monthly)}/mo`}
+                      </div>
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {COMPARE.map((group) => (
+                  <Fragment key={group.title}>
+                    <tr>
+                      <td
+                        colSpan={PLANS.length + 1}
+                        className="sticky left-0 px-5 pt-5 pb-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-pb-peach-600 bg-pb-muted/40"
+                      >
+                        {group.title}
+                      </td>
+                    </tr>
+                    {group.rows.map((row) => (
+                      <tr key={row.label} className="border-t border-pb-border/60">
+                        <td className="sticky left-0 bg-pb-card px-5 py-3 text-[13px] text-pb-fg">{row.label}</td>
+                        {row.values.map((v, i) => (
+                          <td key={PLANS[i].id} className="px-4 py-3 text-center">
+                            {v === true ? (
+                              <span className="inline-flex justify-center"><Check /></span>
+                            ) : v === false ? (
+                              <span className="text-pb-fg-muted/50" aria-label="Not included">–</span>
+                            ) : (
+                              <span className="text-[12.5px] font-medium text-pb-fg tnum">{v}</span>
+                            )}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </Fragment>
+                ))}
+              </tbody>
+            </table>
+          </motion.div>
+
+          <p className="text-center text-[12.5px] text-pb-fg-muted mt-6">
+            Enterprise adds custom seats and limits, SSO, and a dedicated CSM.{" "}
+            <a href={SALES_HREF} className="underline underline-offset-2 hover:text-pb-fg">Talk to sales</a>
+          </p>
+        </div>
       </section>
 
       {/* ── FAQ ──────────────────────────────────────────── */}
