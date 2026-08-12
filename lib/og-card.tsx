@@ -30,7 +30,23 @@ async function fetchFrauncesTtf(italic: boolean): Promise<ArrayBuffer | null> {
   }
 }
 
-export async function renderOgCard(): Promise<ImageResponse> {
+export interface OgCardContent {
+  /** Headline lines; the last one renders italic peach. */
+  line1?: string;
+  line2?: string;
+  /** Footer left text. */
+  kicker?: string;
+  /** Smaller headline for longer post titles. */
+  compact?: boolean;
+}
+
+export async function renderOgCard(content: OgCardContent = {}): Promise<ImageResponse> {
+  const {
+    line1 = "Know what ads work",
+    line2 = "and why.",
+    kicker = "Creative intelligence for Meta · TikTok · Google · Amazon DSP",
+    compact = false,
+  } = content;
   const [regular, italic] = await Promise.all([
     fetchFrauncesTtf(false),
     fetchFrauncesTtf(true),
@@ -95,15 +111,15 @@ export async function renderOgCard(): Promise<ImageResponse> {
             display: "flex",
             flexDirection: "column",
             fontFamily: serif,
-            fontSize: 92,
+            fontSize: compact ? 68 : 92,
             fontWeight: 500,
-            lineHeight: 1.06,
+            lineHeight: 1.08,
             letterSpacing: "-0.025em",
             maxWidth: 1040,
           }}
         >
-          <span>Know what ads work</span>
-          <span style={{ fontStyle: "italic", color: "#F27749" }}>and why.</span>
+          <span>{line1}</span>
+          <span style={{ fontStyle: "italic", color: "#F27749" }}>{line2}</span>
         </div>
 
         {/* Platform line */}
@@ -116,9 +132,7 @@ export async function renderOgCard(): Promise<ImageResponse> {
             color: "#5B5648",
           }}
         >
-          <div style={{ display: "flex", whiteSpace: "nowrap" }}>
-            Creative intelligence for Meta · TikTok · Google · Amazon DSP
-          </div>
+          <div style={{ display: "flex", whiteSpace: "nowrap" }}>{kicker}</div>
           <div style={{ display: "flex", fontWeight: 600, color: "#1F2430", whiteSpace: "nowrap", marginLeft: 40 }}>
             peachblue.io
           </div>

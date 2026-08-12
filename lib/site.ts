@@ -7,6 +7,7 @@
  * CTA routes to the /demo page instead of app signup.
  */
 
+export const SITE_URL = "https://peachblue.io";
 export const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://app.peachblue.io";
 export const SELF_SERVE = process.env.NEXT_PUBLIC_SELF_SERVE_LIVE === "1";
 

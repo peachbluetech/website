@@ -48,6 +48,107 @@ body {
 
 .tnum { font-variant-numeric: tabular-nums; }
 
+/* Editorial long-form typography for /blog. Larger than .prose-pb (which is
+   sized for legal fine print). Headings use the Fraunces display face to
+   match the site's hero pattern; body stays Inter. */
+.prose-pb-lg { font-size: 16.5px; }
+.prose-pb-lg h2 {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  color: var(--color-pb-fg);
+  margin-top: 52px;
+  margin-bottom: 16px;
+  scroll-margin-top: 96px;
+}
+.prose-pb-lg h3 {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--color-pb-fg);
+  margin-top: 36px;
+  margin-bottom: 10px;
+  scroll-margin-top: 96px;
+}
+.prose-pb-lg p, .prose-pb-lg li { font-size: 16.5px; color: var(--color-pb-fg); line-height: 1.8; }
+.prose-pb-lg p { margin-bottom: 18px; }
+.prose-pb-lg ul, .prose-pb-lg ol { padding-left: 24px; margin-bottom: 18px; }
+.prose-pb-lg ul { list-style: disc; }
+.prose-pb-lg ol { list-style: decimal; }
+.prose-pb-lg li { margin-bottom: 8px; }
+.prose-pb-lg li::marker { color: var(--color-pb-peach-500); }
+.prose-pb-lg strong { color: var(--color-pb-fg); font-weight: 600; }
+.prose-pb-lg a {
+  color: var(--color-pb-peach-600);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--color-pb-peach-200);
+}
+.prose-pb-lg a:hover { text-decoration-color: var(--color-pb-peach-500); }
+.prose-pb-lg blockquote {
+  border-left: 3px solid var(--color-pb-peach-300);
+  padding-left: 18px;
+  margin: 24px 0;
+  color: var(--color-pb-fg-muted);
+  font-style: italic;
+}
+.prose-pb-lg hr { border: 0; border-top: 1px solid var(--color-pb-border); margin: 40px 0; }
+.prose-pb-lg code {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  background: var(--color-pb-muted);
+  border: 1px solid var(--color-pb-border);
+  border-radius: 6px;
+  padding: 1.5px 6px;
+}
+.prose-pb-lg pre {
+  background: var(--color-pb-muted);
+  border: 1px solid var(--color-pb-border);
+  border-radius: 12px;
+  padding: 16px 18px;
+  overflow-x: auto;
+  margin-bottom: 18px;
+}
+.prose-pb-lg pre code { background: none; border: 0; padding: 0; }
+.prose-pb-lg img { max-width: 100%; border-radius: 12px; }
+
+/* Comparison tables: real HTML tables, scrollable on narrow screens. The
+   wrapper carries the border + radius (radius on a border-collapse table
+   does not clip its rows). */
+.pb-table-scroll {
+  overflow-x: auto;
+  margin: 24px 0;
+  border: 1px solid var(--color-pb-border);
+  border-radius: 12px;
+}
+.prose-pb-lg table {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+  font-size: 14.5px;
+  line-height: 1.55;
+}
+.prose-pb-lg th {
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-pb-fg-muted);
+  background: var(--color-pb-muted);
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--color-pb-border);
+}
+.prose-pb-lg td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--color-pb-border);
+  color: var(--color-pb-fg);
+  vertical-align: top;
+}
+.prose-pb-lg tr:last-child td { border-bottom: 0; }
+
 .prose-pb h2 { font-size: 18px; font-weight: 700; margin-top: 40px; margin-bottom: 12px; letter-spacing: -0.3px; color: var(--color-pb-fg); }
 .prose-pb h3 { font-size: 15px; font-weight: 600; margin-top: 24px; margin-bottom: 8px; color: var(--color-pb-fg); }
 .prose-pb p, .prose-pb li { font-size: 14.5px; color: var(--color-pb-fg-muted); line-height: 1.75; margin-bottom: 12px; }

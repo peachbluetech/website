@@ -18,10 +18,11 @@ const LINKS = [
   { label: "Product", href: "/#product" },
   { label: "Platforms", href: "/#platforms" },
   { label: "Pricing", href: "/pricing" },
+  { label: "Blog", href: "/blog" },
   { label: "FAQ", href: "/#faq" },
 ];
 
-export function SiteNav({ current }: { current?: "pricing" | "demo" }) {
+export function SiteNav({ current }: { current?: "pricing" | "demo" | "blog" }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -43,9 +44,15 @@ export function SiteNav({ current }: { current?: "pricing" | "demo" }) {
               <Link
                 key={l.label}
                 href={l.href}
-                aria-current={current === "pricing" && l.href === "/pricing" ? "page" : undefined}
+                aria-current={
+                  (current === "pricing" && l.href === "/pricing") ||
+                  (current === "blog" && l.href === "/blog")
+                    ? "page"
+                    : undefined
+                }
                 className={
-                  current === "pricing" && l.href === "/pricing"
+                  (current === "pricing" && l.href === "/pricing") ||
+                  (current === "blog" && l.href === "/blog")
                     ? "text-pb-fg"
                     : "hover:text-pb-fg transition-colors"
                 }

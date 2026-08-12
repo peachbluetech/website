@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Fraunces, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { SITE_URL } from "@/lib/site";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const fraunces = Fraunces({
@@ -13,7 +14,6 @@ const jetbrains = JetBrains_Mono({
   variable: "--font-jetbrains",
 });
 
-const SITE_URL = "https://peachblue.io";
 const SITE_NAME = "Peachblue";
 const FB_APP_ID = "4460340567557146";
 const SITE_DESC =

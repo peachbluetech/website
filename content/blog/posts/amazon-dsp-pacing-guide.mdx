@@ -1,0 +1,80 @@
+Pacing is the discipline that separates a DSP operation that hits its numbers from one that explains itself at the end of the month. It is also, strangely, almost undocumented: Amazon's own material covers the console alerts and little else. This guide covers the full practice: the math, the diagnosis, the daily workflow, and the client report.
+
+It is written for the people newly running Amazon DSP self-service. There are a lot of you: Amazon removed the DSP self-service minimum spend at unBoxed in November 2025, practical entry budgets dropped to around $5-10k per month (Marketplace Ad Pros), and DSP has grown from under 10% to roughly 20% of global programmatic spend in about 15 months (ppc.land). Most of the tooling assumes you have either an Amazon account team or a $3-5k per month enterprise platform. This guide assumes you have neither.
+
+## What is pacing in Amazon DSP?
+
+Pacing is how an order's actual spend tracks against what it should have delivered by this point in its flight. An order pacing at 100% has spent exactly the share of budget that matches the share of flight elapsed. Below 100% is underdelivery: you risk leaving budget unspent at the flight end. Meaningfully above 100% means the budget exhausts early and the campaign goes dark before the flight ends.
+
+Both directions are failures from a client's point of view. Underdelivery means impressions they paid to plan around never ran. Overdelivery-then-dark means the last week of a product launch had no media behind it.
+
+## The flight math
+
+The standard assumption is even delivery across the flight. Three numbers define everything:
+
+```
+expected spend = (total budget / flight days) x days elapsed
+pace % = (actual spend to date / expected spend) x 100
+projected final spend = (actual spend to date / days elapsed) x flight days
+```
+
+A worked example. An order has a $30,000 budget on a 30-day flight, and it is the end of day 12:
+
+- Expected spend: ($30,000 / 30) x 12 = $12,000
+- Actual spend to date: $9,600
+- Pace: $9,600 / $12,000 = 80%
+- Projected final spend at this run rate: $24,000, leaving $6,000 undelivered
+
+The useful reading of 80% is not "we are 20% behind." It is "at this rate the flight ends $6,000 short, and every day we wait, the daily spend needed to catch up rises." On day 12 the catch-up rate is $1,133 per day against an original plan of $1,000. By day 20 it is $1,440. Pacing problems compound quietly, which is why they are caught early or not at all.
+
+Two refinements worth knowing:
+
+- **Custom delivery curves.** Some orders intentionally front-load or back-load (a launch spike, a holiday ramp). Then expected spend follows the planned curve, not a straight line. If you did not explicitly plan a curve, use even delivery.
+- **Blended CPM as the companion metric.** Spend pace alone can hide a delivery problem. If pace is 100% but blended CPM (total spend / total impressions x 1,000) has drifted well above plan, you are buying fewer impressions than the client expects at full budget. Track both.
+
+## Why is my DSP order underdelivering?
+
+Underdelivery has a short list of causes. Diagnose in this order, because the earlier items are both more common and faster to fix:
+
+1. **Bids below the winning range.** The most common cause. Your bid clears too few auctions for the inventory you are targeting. Raise the bid or loosen the supply constraint before touching anything else.
+2. **Audience too narrow.** Layered targeting (audience x geo x device x deal) multiplies down fast. Check the scale estimate against your daily budget.
+3. **Frequency caps set too tight.** A cap that made sense at planning can strangle delivery once the reachable audience is smaller than estimated.
+4. **Creative approvals and rejections.** A creative stuck in review or rejected mid-flight silently removes line items from delivery. Days lost to approval do not come back; the remaining flight has to absorb the budget.
+5. **Supply constraints on specific deals.** A PMP deal or narrow inventory type (a specific Fire TV placement, a single publisher deal) may simply not have the volume.
+
+The reverse problem, pacing far over 100%, is usually a bid well above the winning range or an audience much larger than planned, and it deserves the same-day attention underdelivery gets: budget that exhausts on day 22 of a 30-day flight is a client conversation nobody enjoys.
+
+## The daily workflow (and why it breaks at agency scale)
+
+For a single order, pacing hygiene is simple: check pace % daily, react when it drifts outside roughly 90-110%, and diagnose against the list above. Amazon has made the single-order case easier: the console now shows in-line pacing alerts with one-click fixes for underpacing orders (Amazon Ads release notes).
+
+The practice breaks at portfolio scale, and DSP reporting makes it worse in two specific ways:
+
+- **The console is per-advertiser.** An agency with 15 client seats checks 15 consoles. There is no cross-client view of every active flight, and the common agency staffing pattern, 30 to 50 accounts per strategist with roughly 30 minutes of senior attention per account per week (SellerApp), does not leave room for 15 daily console tours.
+- **Reporting is export-shaped.** DSP reporting lives in downloads and a Reports API with real constraints (14-day attribution only, roughly 60 days of retention). Most teams end up in a spreadsheet ritual: download, paste, rebuild formulas, repeat per client.
+
+The fix at scale is a portfolio pacing view: every active order across every client in one table, sorted by risk, checked once a day in minutes. That is the shape of the [Reports and Pacing product in Peachblue](/pricing): per-order budget, spend to date, pace %, blended CPM, and CPM goals across all clients, with agency margin applied where it should be. But the principle matters more than the tool: if your pacing check takes longer than your coffee, you will stop doing it daily, and daily is the whole game.
+
+## Reporting pacing to clients
+
+A pacing report answers three client questions: are we on plan, if not why, and what are you doing about it. The columns that answer them:
+
+| Column | What it answers |
+| --- | --- |
+| Order / flight dates | What is running and when it ends |
+| Budget | What was committed |
+| Spend to date | What has delivered |
+| Expected spend to date | What should have delivered by today |
+| Pace % | On plan or not, in one number |
+| Blended CPM vs plan | Whether full delivery still buys the planned impressions |
+| Status + action | Your diagnosis and fix, in one line |
+
+Copy that structure into a sheet and you have a serviceable manual pacing report; the formulas are the three lines of flight math above. Send it weekly as a table, not a dashboard link, and lead with the exceptions: clients read the two orders that are off-plan, not the twelve that are fine.
+
+Two reporting habits that build trust: report pace against the original budget even when you have applied an agency margin (margin belongs on spend and spend-derived metrics, not on delivery math), and when a flight is off-plan, state the cause from the diagnosis list rather than a generic "optimizing delivery." Clients forgive underdelivery caught on day 8 with a named cause and a fix. They do not forgive discovering it on day 28.
+
+## Where this is heading
+
+Amazon is clearly investing in single-account pacing hygiene: console alerts, one-click fixes, and a unified Campaign Manager arriving as legacy reporting retires at the end of 2026. Expect the basics to keep commoditizing. What Amazon has shown no interest in building is the agency layer: cross-client portfolio views, margin handling, and client-ready reporting. That layer is where pacing practice actually lives for anyone running more than one advertiser, and it is where we have focused [Peachblue's DSP tooling](/pricing).
+
+If you run DSP for clients and want the portfolio version of everything above, [Peachblue's Reports and Pacing](/pricing) ships it today, alongside AI creative analysis across Meta, TikTok, Google Ads, and Amazon DSP. And if you are migrating off another analytics tool entirely, start with [our guide to the post-MagicBrief landscape](/blog/magicbrief-alternatives).

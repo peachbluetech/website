@@ -1,10 +1,10 @@
 import type { MetadataRoute } from "next";
-
-const SITE_URL = "https://peachblue.io";
+import { SITE_URL } from "@/lib/site";
+import { publishedArticles } from "@/lib/blog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
-  return [
+  const staticEntries: MetadataRoute.Sitemap = [
     {
       url: `${SITE_URL}/`,
       lastModified,
@@ -15,6 +15,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${SITE_URL}/pricing`,
       lastModified,
       changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${SITE_URL}/blog`,
+      lastModified,
+      changeFrequency: "weekly",
       priority: 0.8,
     },
     {
@@ -36,4 +42,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.4,
     },
   ];
+
+  const postEntries: MetadataRoute.Sitemap = publishedArticles().map((a) => ({
+    url: `${SITE_URL}/blog/${a.slug}`,
+    lastModified: new Date(`${a.dateUpdated ?? a.datePublished}T00:00:00Z`),
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
+  return [...staticEntries, ...postEntries];
 }

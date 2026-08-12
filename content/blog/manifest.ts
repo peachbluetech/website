@@ -1,0 +1,525 @@
+/**
+ * Blog manifest — the single source of truth for every article, planned or
+ * published. Drives the blog index, sitemap, llms.txt, RSS, internal links,
+ * and the /write-post generator skill.
+ *
+ * Publishing flow: set an entry's status to "published", make sure
+ * content/blog/posts/<slug>.mdx exists, commit. A build-time check in
+ * lib/blog.ts fails the build if a published entry has no MDX file.
+ *
+ * Content strategy: ~/Documents/peachblue strategy/blog-content-strategy.md
+ */
+
+export type ArticleType =
+  | "alternatives" // ranked listicle of tools replacing a named competitor
+  | "vs" // head-to-head comparison of two tools
+  | "guide" // definitive practitioner guide (pillar or spoke)
+  | "glossary" // definition + benchmark + how-to-measure page
+  | "template" // lead-magnet page around a downloadable template
+  | "essay"; // founder opinion / war story (Nick byline, mostly hand-written)
+
+export type Pillar = "dsp" | "comparisons" | "creative" | "ai" | "reddit";
+
+export type Byline = "nick" | "peachblue";
+
+export interface FaqEntry {
+  q: string;
+  a: string; // plain text, 2-4 sentences; rendered on page + FAQPage schema
+}
+
+export interface Article {
+  slug: string;
+  /** SEO <title>. Keep under ~60 chars where possible. */
+  title: string;
+  /** On-page H1. The layout italicizes `h1Accent` if provided. */
+  h1: string;
+  h1Accent?: string;
+  /** Meta description, under ~155 chars. */
+  description: string;
+  type: ArticleType;
+  pillar: Pillar;
+  /** Primary target query first, then secondaries. */
+  keywords: string[];
+  /** Competitors the article must cover (facts from truth/competitors.md). */
+  competitors?: string[];
+  /** 1 = write first. Ordering within status, not a global rank. */
+  priority: number;
+  byline: Byline;
+  status: "planned" | "draft" | "published" | "needs-refresh";
+  /** ISO dates. Set datePublished when status flips to published. */
+  datePublished?: string;
+  dateUpdated?: string;
+  faq: FaqEntry[];
+  /**
+   * Pointers to raw material the generator must ground in: war stories,
+   * product data, screenshots, research notes. Human-readable.
+   */
+  rawMaterial?: string[];
+  /** Explicit related slugs (defaults to same-pillar siblings). */
+  related?: string[];
+}
+
+export const PILLARS: Record<Pillar, { title: string; blurb: string }> = {
+  dsp: {
+    title: "Amazon DSP reporting",
+    blurb:
+      "Pacing, reporting, and creative performance for Amazon DSP and CTV, written for the agencies and brands running it.",
+  },
+  comparisons: {
+    title: "Tools and comparisons",
+    blurb:
+      "Honest comparisons of creative analytics tools, with current verified pricing and who each tool actually fits.",
+  },
+  creative: {
+    title: "Creative intelligence",
+    blurb:
+      "How to know which ads work and why: testing frameworks, metrics, and the creative strategist craft.",
+  },
+  ai: {
+    title: "AI for media buying",
+    blurb:
+      "Using Claude, ChatGPT, and MCP on your own ad data, without the hype.",
+  },
+  reddit: {
+    title: "Brand intel",
+    blurb:
+      "Reddit monitoring for advertisers: what people say about your brand, turned into creative angles.",
+  },
+};
+
+export const ARTICLES: Article[] = [
+  {
+    slug: "magicbrief-alternatives",
+    title: "MagicBrief alternatives after the shutdown (2026)",
+    h1: "MagicBrief is gone. Here is where to go",
+    h1Accent: "next.",
+    description:
+      "MagicBrief shut down July 31, 2026. An honest comparison of the alternatives, from Canva Grow to Foreplay, Motion, Atria, and Peachblue, with verified pricing.",
+    type: "alternatives",
+    pillar: "comparisons",
+    keywords: [
+      "magicbrief alternatives",
+      "magicbrief shut down",
+      "magicbrief replacement",
+      "canva grow vs magicbrief",
+    ],
+    competitors: ["Canva Grow", "Foreplay", "Motion", "Atria", "Peachblue"],
+    priority: 1,
+    byline: "nick",
+    status: "published",
+    datePublished: "2026-08-12",
+    dateUpdated: "2026-08-12",
+    faq: [
+      {
+        q: "Why did MagicBrief shut down?",
+        a: "Canva acquired MagicBrief in mid-2025 and wound the standalone product down on July 31, 2026. The team and technology became Canva Grow, an ad creation and optimization layer inside Canva rather than a standalone creative analytics tool.",
+      },
+      {
+        q: "Is Canva Grow a direct replacement for MagicBrief?",
+        a: "Only partly. Canva Grow covers ad creation and launch for Meta, TikTok, and LinkedIn inside Canva plans, which suits SMB and generalist marketers. It does not replace MagicBrief's creative research and performance analysis workflow for media buyers and agencies.",
+      },
+      {
+        q: "What is the closest MagicBrief alternative for creative research and swipe files?",
+        a: "Foreplay. It has the strongest ad discovery library and swipe-file workflow in the category, from $49 per month billed annually, with creative analytics available through its Lens add-on tiers.",
+      },
+      {
+        q: "What should I use if I mainly need creative performance analytics?",
+        a: "That depends on budget and platforms. Motion is the incumbent at $750 per month and up for Meta-centric teams over $50k monthly spend. Peachblue starts at $79 per month and covers Meta, TikTok, Google Ads, and Amazon DSP with AI analysis of your own creatives.",
+      },
+    ],
+    rawMaterial: [
+      "truth/competitors.md MagicBrief + all comparison entries",
+      "MagicBrief shutdown notice live on magicbrief.com (confirmed Aug 2026)",
+      "Canva Grow 2.0 Cannes announcement June 25 2026",
+    ],
+  },
+  {
+    slug: "amazon-dsp-pacing-guide",
+    title: "Amazon DSP pacing: the complete guide (2026)",
+    h1: "Amazon DSP pacing, explained",
+    h1Accent: "properly.",
+    description:
+      "How DSP pacing actually works: the flight math, why orders underdeliver, how to catch it early, and how to report pacing to clients. With a free template.",
+    type: "guide",
+    pillar: "dsp",
+    keywords: [
+      "amazon dsp pacing",
+      "amazon dsp pacing report",
+      "amazon dsp underdelivery",
+      "dsp flight pacing",
+    ],
+    priority: 2,
+    byline: "peachblue",
+    status: "published",
+    datePublished: "2026-08-12",
+    dateUpdated: "2026-08-12",
+    faq: [
+      {
+        q: "What is pacing in Amazon DSP?",
+        a: "Pacing is how an order's actual spend tracks against the spend it should have delivered by this point in its flight. An order pacing at 100% has spent exactly the share of budget that has elapsed of the flight; under 100% is underdelivery, over 100% risks exhausting budget early.",
+      },
+      {
+        q: "How do I calculate the expected spend for a DSP order?",
+        a: "Divide the total order budget by the number of days in the flight, then multiply by the days elapsed so far. Pace percent is actual spend to date divided by that expected spend, times 100. Even pacing is the standard assumption unless the order uses a custom delivery curve.",
+      },
+      {
+        q: "Why is my Amazon DSP order underdelivering?",
+        a: "The usual causes are audience pools that are too narrow, bids below the winning range for the inventory, frequency caps set too tight, creative approvals or rejections eating flight days, and supply constraints on specific deals or inventory types. Diagnose in that order; bids and audience are the most common.",
+      },
+      {
+        q: "Does Amazon DSP have built-in pacing alerts?",
+        a: "Yes. The console shows in-line pacing alerts with one-click fixes for underpacing orders. They are per-advertiser, so an agency running many seats still has no portfolio view across clients, which is why agencies typically maintain their own pacing report.",
+      },
+      {
+        q: "How often should agencies check DSP pacing?",
+        a: "Daily for active flights. The common agency staffing pattern of 30 to 50 accounts per strategist makes daily manual checks unrealistic, which is why a portfolio pacing view that surfaces only at-risk orders matters more than any single-account report.",
+      },
+    ],
+    rawMaterial: [
+      "truth/proof.md DSP market + agency practice sections",
+      "Peachblue pacing product: pace % math, blended CPM, CPM goals, status chips (product truth)",
+      "Amazon pacing alerts release note",
+      "Practitioner pain: fragmented reporting, spreadsheet workflows (G2, SellerApp)",
+    ],
+  },
+  {
+    slug: "amazon-dsp-report-template",
+    title: "Amazon DSP report template for client reporting (free)",
+    h1: "The Amazon DSP report template agencies actually",
+    h1Accent: "need.",
+    description:
+      "A free client-ready Amazon DSP report template: the metrics that matter, 14-day attribution explained, supplier breakdowns, and pacing. Google Sheets format.",
+    type: "template",
+    pillar: "dsp",
+    keywords: [
+      "amazon dsp report template",
+      "dsp client report template",
+      "amazon dsp reporting template",
+    ],
+    priority: 3,
+    byline: "peachblue",
+    status: "planned",
+    faq: [],
+    rawMaterial: [
+      "Build the actual Sheets template first",
+      "truth/product.md Reports feature",
+      "DSP metric definitions: 14d attribution, NTB, viewability",
+    ],
+  },
+  {
+    slug: "motion-alternatives",
+    title: "Motion alternatives now that Starter is $750/mo (2026)",
+    h1: "Motion moved upmarket. Your alternatives,",
+    h1Accent: "honestly.",
+    description:
+      "Motion's entry price tripled to $750/mo in 2026. Honest alternatives for teams under $50k monthly spend, with verified pricing and who should stay on Motion.",
+    type: "alternatives",
+    pillar: "comparisons",
+    keywords: [
+      "motion alternatives",
+      "motion app alternatives",
+      "motion app pricing",
+      "creative analytics tools",
+    ],
+    competitors: ["Motion", "Atria", "Foreplay", "Segwise", "rule1", "Peachblue"],
+    priority: 4,
+    byline: "nick",
+    status: "planned",
+    faq: [],
+    rawMaterial: ["truth/competitors.md all entries; re-verify Motion pricing before publish"],
+  },
+  {
+    slug: "amazon-dsp-reporting-guide",
+    title: "How to read Amazon DSP reports (2026 guide)",
+    h1: "Amazon DSP reports, finally",
+    h1Accent: "readable.",
+    description:
+      "Every Amazon DSP report type explained: what the console gives you, what the Reports API adds, 14-day attribution, and how to build client reporting on top.",
+    type: "guide",
+    pillar: "dsp",
+    keywords: [
+      "amazon dsp reporting",
+      "how to read amazon dsp reports",
+      "amazon dsp report types",
+      "amazon dsp metrics",
+    ],
+    priority: 5,
+    byline: "peachblue",
+    status: "planned",
+    faq: [],
+    rawMaterial: [
+      "truth/proof.md DSP facts (31-day chunks, 60-day retention, 14d attribution)",
+      "Our Reports API integration experience",
+    ],
+  },
+  {
+    slug: "creative-strategist-workflow",
+    title: "The creative strategist workflow, mapped (2026)",
+    h1: "How creative strategists actually",
+    h1Accent: "work.",
+    description:
+      "The operating system of the creative strategist role: weekly cadence, research to brief to test to readout, and the tools at each step.",
+    type: "guide",
+    pillar: "creative",
+    keywords: [
+      "creative strategist workflow",
+      "creative strategist tools",
+      "creative strategy process",
+    ],
+    priority: 6,
+    byline: "nick",
+    status: "planned",
+    faq: [],
+    rawMaterial: ["Needs Nick's take on the weekly cadence; SERP is job listings, no real guide exists"],
+  },
+  {
+    slug: "motion-vs-atria",
+    title: "Motion vs Atria: the honest 2026 comparison",
+    h1: "Motion vs Atria, without the",
+    h1Accent: "spin.",
+    description:
+      "Motion ($750+) vs Atria ($129-$1,199): platforms, AI depth, pricing, and who each one actually fits, from someone who competes with both.",
+    type: "vs",
+    pillar: "comparisons",
+    keywords: ["motion vs atria", "atria vs motion", "motion app review", "atria review"],
+    competitors: ["Motion", "Atria"],
+    priority: 7,
+    byline: "nick",
+    status: "planned",
+    faq: [],
+    rawMaterial: ["truth/competitors.md; disclose we compete with both, concessions mandatory"],
+  },
+  {
+    slug: "claude-for-media-buyers",
+    title: "Claude for media buyers: a practical guide (2026)",
+    h1: "Put your ad data in",
+    h1Accent: "Claude.",
+    description:
+      "What Claude can and cannot do for media buying today: analysis workflows, MCP connections to ad data, and where the hype outruns reality.",
+    type: "guide",
+    pillar: "ai",
+    keywords: [
+      "claude for media buying",
+      "analyze ads with claude",
+      "chatgpt for media buying",
+      "mcp for marketing",
+    ],
+    priority: 8,
+    byline: "nick",
+    status: "planned",
+    faq: [],
+    rawMaterial: [
+      "Frame per voice.md MCP claim rule: own-performance-data angle",
+      "Meta official Ads MCP server (April 2026) as context",
+    ],
+  },
+  {
+    slug: "amazon-dsp-minimum-spend",
+    title: "Amazon DSP minimum spend in 2026: the floor is gone",
+    h1: "The DSP minimum spend is",
+    h1Accent: "gone.",
+    description:
+      "Amazon removed the DSP self-service minimum in Nov 2025. What it costs to start now, self-service vs managed, and what smaller advertisers should know.",
+    type: "guide",
+    pillar: "dsp",
+    keywords: [
+      "amazon dsp minimum spend",
+      "amazon dsp cost",
+      "amazon dsp self service",
+    ],
+    priority: 9,
+    byline: "peachblue",
+    status: "planned",
+    faq: [],
+    rawMaterial: ["truth/proof.md Nov 2025 floor removal; most ranked content is stale pre-Nov-2025"],
+  },
+  {
+    slug: "creative-testing-framework",
+    title: "A creative testing framework for $10k/mo budgets (2026)",
+    h1: "Creative testing that fits your",
+    h1Accent: "budget.",
+    description:
+      "A creative testing framework sized for $5-25k/mo accounts: how many concepts, how to read results with small samples, and when to kill a test.",
+    type: "guide",
+    pillar: "creative",
+    keywords: [
+      "creative testing framework",
+      "ad creative testing",
+      "facebook ad testing budget",
+    ],
+    priority: 10,
+    byline: "nick",
+    status: "planned",
+    faq: [],
+    rawMaterial: ["Nick's testing approach; scoring tiers from product truth as the readout layer"],
+  },
+  // Wave two (weeks 8-16). Keep priorities sequential.
+  {
+    slug: "atria-alternatives",
+    title: "Atria alternatives after the price hike (2026)",
+    h1: "Atria alternatives, priced",
+    h1Accent: "honestly.",
+    description:
+      "Atria's Plus tier jumped to $479-599/mo and the platform still covers only Meta and TikTok. The alternatives, with verified pricing.",
+    type: "alternatives",
+    pillar: "comparisons",
+    keywords: ["atria alternatives", "tryatria alternatives", "atria pricing"],
+    competitors: ["Atria", "Motion", "Foreplay", "Segwise", "rule1", "Peachblue"],
+    priority: 11,
+    byline: "nick",
+    status: "planned",
+    faq: [],
+  },
+  {
+    slug: "best-creative-analytics-tools",
+    title: "Best creative analytics tools in 2026, compared",
+    h1: "Creative analytics tools, actually",
+    h1Accent: "compared.",
+    description:
+      "Every serious creative analytics tool in 2026 with verified pricing: Motion, Atria, Foreplay, Segwise, rule1, GetCrux, Peachblue, and who each fits.",
+    type: "alternatives",
+    pillar: "comparisons",
+    keywords: [
+      "creative analytics tools",
+      "best creative analytics software",
+      "ad creative analysis tools",
+    ],
+    competitors: ["Motion", "Atria", "Foreplay", "Segwise", "rule1", "GetCrux", "Peachblue"],
+    priority: 12,
+    byline: "nick",
+    status: "planned",
+    faq: [],
+  },
+  {
+    slug: "amazon-dsp-creative-performance",
+    title: "Amazon DSP creative performance: which creatives work",
+    h1: "Your DSP creatives are not all",
+    h1Accent: "equal.",
+    description:
+      "How to measure creative-level performance in Amazon DSP: the metrics that exist, the ones that do not, and how to compare creatives across orders.",
+    type: "guide",
+    pillar: "dsp",
+    keywords: [
+      "amazon dsp creative performance",
+      "amazon dsp creative reporting",
+      "dsp creative testing",
+    ],
+    priority: 13,
+    byline: "peachblue",
+    status: "planned",
+    faq: [],
+  },
+  {
+    slug: "hook-rate-hold-rate-thumbstop",
+    title: "Hook rate, hold rate, thumbstop: definitions and benchmarks",
+    h1: "Hook rate, hold rate, thumbstop,",
+    h1Accent: "defined.",
+    description:
+      "What hook rate, hold rate, and thumbstop ratio actually measure, how to calculate them, and why published benchmarks disagree with each other.",
+    type: "glossary",
+    pillar: "creative",
+    keywords: ["hook rate", "hold rate", "thumb stop ratio", "thumbstop rate"],
+    priority: 14,
+    byline: "peachblue",
+    status: "planned",
+    faq: [],
+    rawMaterial: ["truth/proof.md: cite the benchmark disagreement itself, not one number"],
+  },
+  {
+    slug: "amazon-dsp-reports-api",
+    title: "The Amazon DSP Reports API, from the trenches",
+    h1: "Shipping against the DSP Reports API: what the docs",
+    h1Accent: "don't say.",
+    description:
+      "31-day chunks, 60-day retention, 14-day-only attribution, versioned Accept headers, and the other things you learn by actually building on the DSP Reports API.",
+    type: "essay",
+    pillar: "dsp",
+    keywords: ["amazon dsp reporting api", "amazon dsp api"],
+    priority: 15,
+    byline: "nick",
+    status: "planned",
+    faq: [],
+    rawMaterial: ["Nick/engineering war story; keep to practitioner-useful detail, no internals beyond API behavior"],
+  },
+  {
+    slug: "creative-fatigue",
+    title: "Creative fatigue: diagnose it from your own data",
+    h1: "Creative fatigue is measurable. Here is",
+    h1Accent: "how.",
+    description:
+      "How to spot creative fatigue in frequency, CTR decay, and CPA drift, and a simple refresh cadence that does not burn your winners early.",
+    type: "guide",
+    pillar: "creative",
+    keywords: ["creative fatigue", "ad fatigue", "meta creative fatigue"],
+    priority: 16,
+    byline: "peachblue",
+    status: "planned",
+    faq: [],
+  },
+  {
+    slug: "reddit-brand-monitoring-for-dtc",
+    title: "Reddit brand monitoring for DTC brands (2026 guide)",
+    h1: "Reddit is talking about your brand. Start",
+    h1Accent: "listening.",
+    description:
+      "How DTC brands monitor Reddit for brand and competitor mentions, read sentiment honestly, and turn threads into creative angles.",
+    type: "guide",
+    pillar: "reddit",
+    keywords: [
+      "reddit brand monitoring",
+      "reddit social listening",
+      "reddit marketing for brands",
+    ],
+    priority: 17,
+    byline: "peachblue",
+    status: "planned",
+    faq: [],
+  },
+  {
+    slug: "ctv-pacing-reporting",
+    title: "CTV pacing and reporting for agencies (2026)",
+    h1: "CTV flights need pacing",
+    h1Accent: "discipline.",
+    description:
+      "How to pace and report CTV campaigns run through Amazon DSP: flight math, frequency, supplier breakdowns, and client-ready reporting.",
+    type: "guide",
+    pillar: "dsp",
+    keywords: ["ctv pacing", "ctv campaign reporting", "ctv reporting for agencies"],
+    priority: 18,
+    byline: "peachblue",
+    status: "planned",
+    faq: [],
+  },
+  {
+    slug: "peachblue-vs-motion",
+    title: "Peachblue vs Motion (2026): an honest comparison",
+    h1: "Peachblue vs Motion, from the founder of",
+    h1Accent: "one of them.",
+    description:
+      "A transparent comparison of Peachblue and Motion: pricing, platforms, AI depth, and exactly who should pick which. Yes, we make one of them.",
+    type: "vs",
+    pillar: "comparisons",
+    keywords: ["peachblue vs motion", "motion alternative"],
+    competitors: ["Motion", "Peachblue"],
+    priority: 19,
+    byline: "nick",
+    status: "planned",
+    faq: [],
+  },
+  {
+    slug: "peachblue-vs-atria",
+    title: "Peachblue vs Atria (2026): an honest comparison",
+    h1: "Peachblue vs Atria, from the founder of",
+    h1Accent: "one of them.",
+    description:
+      "A transparent comparison of Peachblue and Atria: pricing, platform coverage, AI agents, and exactly who should pick which.",
+    type: "vs",
+    pillar: "comparisons",
+    keywords: ["peachblue vs atria", "atria alternative"],
+    competitors: ["Atria", "Peachblue"],
+    priority: 20,
+    byline: "nick",
+    status: "planned",
+    faq: [],
+  },
+];
