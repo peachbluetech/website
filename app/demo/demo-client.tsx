@@ -36,7 +36,7 @@ export default function DemoClient() {
           <p className="text-[15px] text-pb-fg-muted leading-relaxed mb-10 max-w-[440px] mx-auto">
             {salesIntent
               ? "Multi-client workspaces, per-client reporting, and pricing shaped to your roster. Tell us about your agency and we'll set up a walkthrough."
-              : "Leave your details and we'll walk you through Peachblue live — your platforms connected, your creatives analyzed."}
+              : "Leave your details and we'll walk you through Peachblue live: your platforms connected, your creatives analyzed."}
           </p>
 
           <DemoForm salesIntent={salesIntent} showIntro={false} />

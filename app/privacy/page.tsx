@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "Privacy Policy — peachblue",
-  description: "Privacy Policy for peachblue — how we collect, use, and protect your data.",
+  title: "Privacy Policy · Peachblue",
+  description: "Privacy Policy for Peachblue: how we collect, use, and protect your data.",
 };
 
 export default function PrivacyPage() {
@@ -88,7 +88,7 @@ export default function PrivacyPage() {
         <p>These third-party AI services process data under their respective data processing agreements. Peachblue does not use your ad data to train AI models. Processing is performed on-demand and data is not retained by the AI provider beyond the scope of each individual processing request.</p>
 
         <h2>6. Payments</h2>
-        <p>Subscription payments are processed by Stripe, Inc. Your payment card details are entered on and handled entirely by Stripe&apos;s hosted checkout and billing pages — Peachblue never receives or stores your card number. We share with Stripe the information needed to manage your subscription (email address, plan selection, and billing status), and Stripe processes payment data under its own privacy policy and PCI-DSS compliance. Invoices, payment methods, and cancellation are managed through Stripe&apos;s customer portal, accessible from your billing settings.</p>
+        <p>Subscription payments are processed by Stripe, Inc. Your payment card details are entered on and handled entirely by Stripe&apos;s hosted checkout and billing pages, so Peachblue never receives or stores your card number. We share with Stripe the information needed to manage your subscription (email address, plan selection, and billing status), and Stripe processes payment data under its own privacy policy and PCI-DSS compliance. Invoices, payment methods, and cancellation are managed through Stripe&apos;s customer portal, accessible from your billing settings.</p>
 
         <h2>7. Data Sharing</h2>
         <p>We do not sell your personal information or advertising data. We may share limited data with:</p>

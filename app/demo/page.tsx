@@ -5,7 +5,7 @@ import DemoClient from "./demo-client";
 export const metadata: Metadata = {
   title: "Book a demo",
   description:
-    "Get a guided walkthrough of Peachblue on your own ad data — creative analysis, Agent Peach, and cross-platform reporting.",
+    "Get a guided walkthrough of Peachblue on your own ad data: creative analysis, Agent Peach, and cross-platform reporting.",
   alternates: { canonical: "/demo" },
 };
 

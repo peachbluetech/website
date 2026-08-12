@@ -24,7 +24,7 @@ const SOCIAL_DESC =
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Peachblue — Creative Intelligence for Ads",
+    default: "Peachblue · Creative Intelligence for Ads",
     template: "%s · Peachblue",
   },
   description: SITE_DESC,
@@ -74,13 +74,13 @@ export const metadata: Metadata = {
     type: "website",
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: "Peachblue — Creative Intelligence for Ads",
+    title: "Peachblue · Creative Intelligence for Ads",
     description: SOCIAL_DESC,
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Peachblue — Creative Intelligence for Ads",
+    title: "Peachblue · Creative Intelligence for Ads",
     description: SOCIAL_DESC,
   },
   // TODO: add `verification.google` once GSC gives you the token, and

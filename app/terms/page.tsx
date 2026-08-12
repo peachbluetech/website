@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "Terms of Service — peachblue",
-  description: "Terms of Service for peachblue — the creative intelligence platform.",
+  title: "Terms of Service · Peachblue",
+  description: "Terms of Service for Peachblue, the creative intelligence platform.",
 };
 
 export default function TermsPage() {
