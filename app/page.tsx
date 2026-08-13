@@ -174,7 +174,7 @@ export default function Home() {
         reverse
         tinted
         eyebrow="Creative Intelligence"
-        title={<>29 creative dimensions, <span className="italic">decoded</span>.</>}
+        title={<>31 creative dimensions, <span className="italic">decoded</span>.</>}
         bullets={[
           "Every creative tagged across hook style, tone, format, CTA, and more",
           "Patterns and archetypes show which combinations actually drive ROAS",

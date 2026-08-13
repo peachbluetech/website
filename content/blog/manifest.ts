@@ -108,7 +108,7 @@ export const ARTICLES: Article[] = [
     byline: "nick",
     status: "published",
     datePublished: "2026-08-12",
-    dateUpdated: "2026-08-12",
+    dateUpdated: "2026-08-13",
     faq: [
       {
         q: "Why did MagicBrief shut down?",

@@ -44,7 +44,7 @@ const PLANS: Plan[] = [
     tagline: "For growing teams running multiple channels.",
     inherits: "Starter",
     features: [
-      "Google Ads + Amazon Sponsored sync",
+      "Google Ads auto-sync",
       "Creative intelligence patterns",
       "Brand Intel (Reddit monitoring)",
       "Full history",
@@ -79,7 +79,6 @@ const PLANS: Plan[] = [
     inherits: "Scale",
     features: [
       "Client-ready reports + pacing",
-      "Priority processing",
       "Priority support + onboarding",
       "6,000 credits/mo",
     ],
@@ -120,7 +119,6 @@ const COMPARE: CompareGroup[] = [
       { label: "Meta auto-sync", values: [true, true, true, true, true] },
       { label: "TikTok auto-sync", values: [true, true, true, true, true] },
       { label: "Google Ads sync", values: [false, true, true, true, true] },
-      { label: "Amazon Sponsored Ads sync", values: [false, true, true, true, true] },
       { label: "Amazon DSP sync (incl. Connected TV)", values: [false, false, true, true, true] },
     ],
   },
@@ -156,7 +154,6 @@ const COMPARE: CompareGroup[] = [
     rows: [
       { label: "Seats", values: ["1", "3", "10", "8", "25"] },
       { label: "Credits per month", values: ["400", "1,500", "4,000", "6,000", "15,000"] },
-      { label: "Priority processing", values: [false, false, false, true, true] },
       { label: "Priority support + onboarding", values: [false, false, false, true, true] },
     ],
   },
@@ -177,7 +174,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "Which platforms can I connect?",
-    a: "Meta and TikTok on Starter. Pro adds Google Ads and Amazon Sponsored. Scale and up add Amazon DSP, including Connected TV.",
+    a: "Meta and TikTok on Starter. Pro adds Google Ads. Scale and up add Amazon DSP, including Connected TV.",
   },
 ];
 
