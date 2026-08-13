@@ -43,14 +43,16 @@ Snapchat, AppLovin, Performance Max. Do not imply otherwise.
   per client
 - Agency mode: client switcher scopes the whole app to one DSP advertiser;
   per-client reports, intelligence, and brand intel
-- MCP (roadmap, architecture shipped internally): the same 16 agent tools
-  exposed to Claude/Cursor so your own performance data is queryable in your
-  AI tools. Do not claim the MCP server is live yet.
+- MCP server (LIVE, Pro plan and up): the same 16 agent tools exposed over
+  the Model Context Protocol, so your own performance data is queryable
+  from Claude Desktop, Claude Code, Cursor, and any MCP client. OAuth
+  sign-in, connection URL in Settings > MCP. Works over Streamable HTTP
+  and SSE.
 
 ## Pricing (verified 2026-08-12)
 
 - Starter $79/mo — 1 seat, Meta + TikTok, 400 credits
-- Pro $199/mo — 3 seats, adds Google Ads, Intelligence, Brand Intel, 1,500 credits
+- Pro $199/mo — 3 seats, adds Google Ads, Intelligence, Brand Intel, MCP/API access, 1,500 credits
 - Scale $499/mo — 10 seats, adds Amazon DSP, 4,000 credits
 - Power $799/mo — 8 seats, adds Reports + Pacing, priority queue, 6,000 credits
 - Agency $1,499/mo — 25 seats, agency mode (multi-client), 15,000 credits

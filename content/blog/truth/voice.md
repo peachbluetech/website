@@ -34,9 +34,11 @@ draft.
 - Amazon DSP claim: "the only creative analytics platform for agencies at
   self-serve pricing that covers Amazon DSP." NEVER "nobody does creative
   analytics on Amazon DSP" (Skai, VidMob, CreativeX exist at enterprise).
-- MCP claim: frame as "your own performance data in Claude," never "the only
-  MCP in the category" (Foreplay, rule1, uplifted, DataDoe ship MCP for
-  other data).
+- MCP claim: the server is LIVE (Pro and up). Frame as "your own
+  performance data in Claude," never "the only MCP in the category"
+  (Foreplay, rule1, uplifted, DataDoe ship MCP for other data). The
+  defensible claim: the only creative analytics MCP that serves your own
+  cross-platform performance data, including Amazon DSP.
 - Never use the bare term "Amazon DSP" as a target keyword or title on its
   own; always an advertising-intent long-tail (pacing, reporting, agency,
   creative, report template). The bare SERP is polluted by Amazon's
