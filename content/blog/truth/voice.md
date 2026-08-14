@@ -57,6 +57,12 @@ draft.
   Peachblue lacks ("we do not have X" is banned framing). Where a conceded
   asset is freely available regardless of buying (Motion's newsletter,
   streams, events), say so, factually.
+- Spend-level routing is banned in BOTH directions (added 2026-08-13):
+  never say or imply "over $X/mo, choose [competitor]" in prose, tables,
+  FAQs, or decision lists. High-spend teams ($50k+/mo) are core Peachblue
+  target customers via Power and Agency. Competitors' own spend gates may
+  be stated as facts about their pricing, never as guidance about who
+  belongs where.
 - Product claims only from truth/product.md. Features on the roadmap are
   labeled as roadmap.
 - Pricing tables cite their verification date ("prices verified <date>").

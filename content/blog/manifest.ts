@@ -212,7 +212,7 @@ export const ARTICLES: Article[] = [
     h1: "Motion moved upmarket. Your alternatives,",
     h1Accent: "honestly.",
     description:
-      "Motion's entry price tripled to $750/mo in 2026. Honest alternatives for teams under $50k monthly spend, with verified pricing and who should stay on Motion.",
+      "Motion's entry price tripled to $750/mo in 2026. Honest alternatives at every spend level, from solo advertisers to agencies, with verified pricing.",
     type: "alternatives",
     pillar: "comparisons",
     keywords: [

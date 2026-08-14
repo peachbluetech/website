@@ -16,8 +16,11 @@ every competitor entry includes what they are genuinely good at.
   community and education in the space (Thumbstop newsletter 50k+ subs,
   summits, courses); attribution integrations (Northbeam, GA4); benchmark
   reports from $14B+ analyzed spend.
-- Fit: strong choice for teams spending $50k+/mo on paid social who want the
-  community and services layer.
+- Fit: teams on Meta/TikTok/YouTube/LinkedIn who want Motion's education
+  ecosystem bundled with their vendor relationship. Never frame Motion's
+  fit by spend level — high-spend teams are Peachblue target customers
+  (Power/Agency), and Motion's platform gaps (no Google Ads, no Amazon)
+  apply at every spend level.
 
 ## Atria (tryatria.com) — verified 2026-08-12
 
