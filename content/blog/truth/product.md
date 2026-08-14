@@ -85,7 +85,10 @@ Snapchat, AppLovin, Performance Max. Do not imply otherwise.
 - No Amazon Sponsored Ads sync — Amazon coverage is DSP only (audited
   2026-08-13: the sponsored flag exists in billing config but no ingestion
   code exists). Say "Amazon DSP", never "Amazon Sponsored".
-- No external ad-inspiration library (we analyze YOUR ads, not a swipe file)
+- No external ad-inspiration library or swipe file today. Competitor ads
+  comparison is on the near-term roadmap (per Nick, 2026-08-13) — it may be
+  described as "shipping soon", always clearly marked as coming, never as
+  live. Until it ships we analyze YOUR ads.
 - No ad buying/activation — we do not launch or edit campaigns
 - No attribution modeling (no Northbeam/Triple Whale integration yet)
 - No white-label reports yet

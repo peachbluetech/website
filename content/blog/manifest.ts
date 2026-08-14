@@ -94,7 +94,7 @@ export const ARTICLES: Article[] = [
     h1: "MagicBrief is gone. Here is where to go",
     h1Accent: "next.",
     description:
-      "MagicBrief shut down July 31, 2026. An honest comparison of the alternatives, from Canva Grow to Foreplay, Motion, Atria, and Peachblue, with verified pricing.",
+      "MagicBrief shut down July 31, 2026. An honest comparison of the alternatives for solo advertisers through agencies: Canva Grow, Foreplay, Motion, Atria, and Peachblue, with verified pricing.",
     type: "alternatives",
     pillar: "comparisons",
     keywords: [
@@ -124,7 +124,7 @@ export const ARTICLES: Article[] = [
       },
       {
         q: "What should I use if I mainly need creative performance analytics?",
-        a: "That depends on budget and platforms. Motion is the incumbent at $750 per month and up for Meta-centric teams over $50k monthly spend. Peachblue starts at $79 per month and covers Meta, TikTok, Google Ads, and Amazon DSP with AI analysis of your own creatives.",
+        a: "Motion is the incumbent at $750 per month and up, strongest for Meta-centric teams who want its community and services layer. Peachblue covers Meta, TikTok, Google Ads, and Amazon DSP with AI analysis of your own creatives, from $79 self-serve plans up to a $1,499 Agency tier with multi-client workspaces and per-client DSP reporting.",
       },
     ],
     rawMaterial: [

@@ -45,6 +45,14 @@ draft.
   delivery-driver program.
 - Competitor facts only from truth/competitors.md, with concessions included.
   Every comparison page says who the competitor is genuinely right for.
+- Positioning rule for comparisons (added 2026-08-13): show Peachblue's FULL
+  range, $79 Starter through $1,499 Agency. Never position Peachblue as
+  only the budget option and never concede high-spend or agency buyers to a
+  competitor by default. Concessions go to genuine capability gaps
+  (Motion's community and services layer, Foreplay's swipe file), not to
+  spend level: Power and Agency exist precisely for bigger operations, and
+  agency mode (multi-client workspaces, DSP/CTV pacing, margin-aware client
+  reports) has no equivalent at Motion, Atria, or Foreplay at any price.
 - Product claims only from truth/product.md. Features on the roadmap are
   labeled as roadmap.
 - Pricing tables cite their verification date ("prices verified <date>").
