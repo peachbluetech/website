@@ -57,6 +57,16 @@ draft.
   Peachblue lacks ("we do not have X" is banned framing). Where a conceded
   asset is freely available regardless of buying (Motion's newsletter,
   streams, events), say so, factually.
+- The Peachblue entry in any comparison must cover the FULL capability
+  stack, not just creative scoring (added 2026-08-13): (1) 31-dimension AI
+  analysis with written analysis + copy suggestions, (2) Intelligence
+  patterns and archetypes ("what to make next from your own data"),
+  (3) Agent Peach + MCP into Claude/Cursor (own performance data incl.
+  DSP; contrast with Foreplay's inspiration-library MCP), (4) Brand Intel
+  Reddit monitoring (brand, competitors, topics; category-of-one),
+  (5) agency infrastructure (multi-client workspaces, margin-aware client
+  reports, DSP/CTV pacing). Write like the superior product it is;
+  superiority is delivered through specifics, never adjectives.
 - Spend-level routing is banned in BOTH directions (added 2026-08-13):
   never say or imply "over $X/mo, choose [competitor]" in prose, tables,
   FAQs, or decision lists. High-spend teams ($50k+/mo) are core Peachblue
