@@ -49,10 +49,14 @@ draft.
   range, $79 Starter through $1,499 Agency. Never position Peachblue as
   only the budget option and never concede high-spend or agency buyers to a
   competitor by default. Concessions go to genuine capability gaps
-  (Motion's community and services layer, Foreplay's swipe file), not to
+  (Motion's education ecosystem, Foreplay's swipe file), not to
   spend level: Power and Agency exist precisely for bigger operations, and
   agency mode (multi-client workspaces, DSP/CTV pacing, margin-aware client
   reports) has no equivalent at Motion, Atria, or Foreplay at any price.
+  Phrase concessions as what the competitor is known for, never as what
+  Peachblue lacks ("we do not have X" is banned framing). Where a conceded
+  asset is freely available regardless of buying (Motion's newsletter,
+  streams, events), say so, factually.
 - Product claims only from truth/product.md. Features on the roadmap are
   labeled as roadmap.
 - Pricing tables cite their verification date ("prices verified <date>").
