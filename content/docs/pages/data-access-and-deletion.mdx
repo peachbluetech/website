@@ -1,0 +1,31 @@
+Peachblue reads advertising data; it never writes to your ad accounts. This page states exactly what is accessed per platform, where it is stored, and how to disconnect or delete.
+
+## Access model
+
+Every integration is OAuth: you approve read scopes in the platform's own consent screen, and the resulting token is stored encrypted. Peachblue does not see your platform passwords, and no integration requests write or manage permissions on your campaigns.
+
+## What is accessed, per platform
+
+- **Meta**: ads performance data (spend, impressions, clicks, results), ad creative content (images, videos, copy), campaign and ad set names, audience demographics of ad delivery, and page-published ad posts. Governed by Meta's ads_read and related read permissions.
+- **TikTok**: advertiser account ads performance, ad creative content, and campaign context.
+- **Google Ads**: campaign and ad performance for Search, Display, and Video, including responsive search ad asset performance. Google Ads data use complies with the Google Ads API policies, including its Limited Use requirements.
+- **Amazon DSP**: DSP report data (performance by creative, order, and line item), order and line item metadata, and creative assets from the creative asset library.
+- **Reddit (Brand Intel)**: public posts and comments matching your tracked keywords. No account connection involved.
+
+## What is stored
+
+- Performance data in Peachblue's database, scoped to your workspace
+- Mirrored copies of your ad creatives (images and videos) in Peachblue's storage, because platform CDN links expire and durable analysis requires the asset
+- AI analysis output: tags, written analyses, scores, and embeddings derived from your creatives
+
+Your data is never shared across workspaces, never sold, and never used to train models for other customers.
+
+## Disconnecting
+
+Disconnect any platform from Settings under Integrations. Disconnecting removes the stored OAuth token immediately, which ends Peachblue's access; synced historical data remains in your workspace unless you also request deletion.
+
+## Deletion
+
+To delete synced data or your entire account, contact support@peachblue.io from your account email. Meta connections additionally support Meta's own data deletion callback: removing the Peachblue app from your Facebook settings triggers a signed deletion request that disconnects the integration and invalidates its token.
+
+The full picture lives in the [privacy policy](https://peachblue.io/privacy) and [terms](https://peachblue.io/terms).

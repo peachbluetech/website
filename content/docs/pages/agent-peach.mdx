@@ -1,0 +1,29 @@
+Agent Peach is a conversational agent over your own ad data. Ask a question in plain language; it queries your synced accounts and answers with your actual numbers, ranked lists, and side-by-side comparisons. Every answer is grounded in your data, never in generic benchmarks.
+
+## What you can ask
+
+- **Performance**: "how did last week go," "where is my spend going," "what changed since yesterday"
+- **Rankings**: "top creatives this month," "worst performers with real spend"
+- **Comparisons**: "compare my two hero videos" produces a winner-and-challenger breakdown decided by [composite score](/docs/scoring)
+- **Creative dimensions**: "which hook styles work best for me," "do UGC-style ads beat studio ads in my account"
+- **Copy**: "which headlines win," and for Google RSAs, per-variant winners inside each ad
+- **Audiences**: "which age and gender segments convert cheapest," "where are my ads showing"
+- **Patterns**: "what do my winning creatives have in common"
+- **Brand Intel**: "what is Reddit saying about my brand this week"
+- **Trends and campaigns**: daily time-series for an ad, campaign rollups
+
+Answers include cards for creatives with images, scores, and key metrics, so a ranked list is scannable rather than a wall of text. The agent keeps session context, so follow-ups like "and the second one?" work naturally.
+
+## How it stays honest
+
+Agent Peach only sees your workspace's data, scoped exactly like the rest of the app (agency workspaces: scoped to the selected client). It uses the same scoring, grouping, and analysis as every page in the product, so its answers match what the Performance page and Creative Library show. When the data cannot support an answer, it says so.
+
+## Message allowances
+
+- Starter: 500 messages per month
+- Pro: 3,000 messages per month
+- Scale, Power, Agency: unlimited under fair use
+
+## Your data in Claude
+
+The same tools behind Agent Peach are exposed over the Model Context Protocol, so Pro and higher plans can query their Peachblue data from Claude and other MCP clients. MCP documentation is coming to this site shortly.

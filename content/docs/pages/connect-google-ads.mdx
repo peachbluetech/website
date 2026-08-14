@@ -1,0 +1,24 @@
+Peachblue syncs Google Ads Search, Display, and Video campaigns, including per-asset performance for responsive search ads. Available on Pro plans and up. Read-only access; nothing in your account is ever changed.
+
+## Connect
+
+1. In Peachblue, go to Settings, then Integrations, and click Connect next to Google Ads.
+2. Sign in with the Google account that has access to your Google Ads customer accounts and approve read-only ads access.
+3. Select the customer accounts to sync. Manager accounts (MCCs) are shown for context but you sync the child accounts that actually contain campaigns.
+
+## What syncs
+
+- Daily performance for Search, Display, and Video campaigns, segmented by network (Search, Display, YouTube)
+- Responsive search ads with **per-asset performance**: each headline and description variant with its own impressions and clicks, so analysis can tell you which specific lines win
+- Campaign names, types, and status for context
+
+Text-only ads (RSAs) go through a dedicated text analysis path: strategic tagging, a written analysis grounded in which of your variants actually performed, and suggested alternative headlines and descriptions based on your winning patterns. See [creative analysis](/docs/creative-analysis).
+
+## Not yet covered
+
+- **Performance Max**: uses a different asset structure in Google's API; on the roadmap
+- **Shopping and App campaigns**: excluded by design, as they carry no analyzable creative content
+
+## Sync schedule
+
+Initial backfill on connect, then daily automatic sync, with manual sync available from the Data Hub.

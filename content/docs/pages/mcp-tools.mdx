@@ -1,0 +1,39 @@
+Every tool the Peachblue MCP server exposes, in one place. These are the same tools Agent Peach uses in the app, so answers in Claude match answers in Peachblue. All tools are read-only and scoped to your workspace.
+
+## Performance and rankings
+
+- **get_performance_summary**: account overview with health tiers, top creatives, and recommendations. The "how are we doing" tool.
+- **get_creatives**: rank unique creatives by fingerprint group with aggregated metrics. The primary tool for "top performer" questions.
+- **get_creative_detail**: deep dive on one creative: tags, written analysis, placements, demographics, aggregated across every ad it ran in.
+- **rank_ads**: rank individual ads rather than grouped creatives, for ad-level questions.
+- **get_ad_details**: full detail for a single ad.
+- **view_creative**: fetch a creative's image for display.
+- **compare_ads**: head-to-head comparison with a winner decided by composite score.
+
+## Patterns and dimensions
+
+- **get_patterns**: creative archetypes and outliers, the "what do my winners have in common" tool.
+- **filter_by_tags**: analyze and filter creatives by the 31 tagged dimensions (hook style, emotional tone, format, and more).
+- **get_copy_performance**: headline and body variant performance, deduplicated by text across ads.
+- **get_google_ads_rsa_performance**: per-variant winners and losers inside each Google responsive search ad.
+
+## Time and structure
+
+- **get_ad_trend**: daily time-series for a specific ad.
+- **get_digest**: daily summary with yesterday's winners and week-to-date rollup.
+- **get_campaigns**: campaign-level rollups with spend, results, ROAS, and CPA.
+
+## Audience and search
+
+- **get_audience_insights**: demographics and placements aggregated, with best and cheapest segments.
+- **search_creatives**: keyword search across headlines, copy, and on-image text.
+
+## Beyond ad accounts
+
+- **get_brand_mentions**: Brand Intel's Reddit monitoring: mentions, sentiment, and the latest editorial brief.
+
+## Notes
+
+- Tool responses are data payloads; your MCP client's model does the reasoning and writing.
+- Tools that return ranked lists use creative-grouped data by default, matching the app's By Creative view, so the same creative running in ten ads counts once.
+- Availability follows your plan (Pro and up), and all calls respect workspace and client scoping.

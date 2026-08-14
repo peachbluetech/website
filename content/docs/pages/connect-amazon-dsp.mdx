@@ -1,0 +1,30 @@
+Peachblue syncs Amazon DSP campaign performance, orders, line items, and creative assets, and powers per-order flight pacing and client reporting on top. Available on Scale plans and up; [Reports and pacing](/docs/reports-and-pacing) are Power and up. Read-only; your DSP campaigns are never modified.
+
+## Connect
+
+1. In Peachblue, go to Settings, then Integrations, and click Connect next to Amazon.
+2. Sign in with your Amazon Ads account and approve access.
+3. Select the advertising profile to sync (one per marketplace or entity) and confirm.
+
+## What syncs
+
+- Daily creative-level DSP performance: spend, impressions, clicks, viewability, video metrics, purchases, detail page views, add-to-carts, and new-to-brand metrics
+- Orders and line items with budgets and flight dates, which power [pacing](/docs/reports-and-pacing)
+- Creative assets, retrieved and mirrored automatically so DSP creatives get the same [AI analysis](/docs/creative-analysis) as your social ads
+- Advertiser names and IDs, which power the per-client views in agency workspaces
+
+## Amazon DSP specifics worth knowing
+
+Amazon's DSP reporting behaves differently from social platforms, and Peachblue works within those rules rather than papering over them:
+
+- **14-day attribution only.** DSP reports conversions on a 14-day window; there are no 1-day or 7-day windows. Peachblue labels DSP conversion metrics accordingly instead of mixing windows across platforms.
+- **Roughly 60 days of history.** Amazon retains about 60 days of DSP report data, so the initial backfill covers what Amazon makes available and your history builds forward from daily syncs. Connect early; your history compounds.
+- **Multiple line items per creative.** The same creative often runs through several line items on the same day. Peachblue aggregates these correctly so daily numbers match what you would compute from the console.
+
+## Sync schedule
+
+Initial backfill on connect (in windowed chunks, matching Amazon's report limits), then daily automatic sync. Manual sync is available from the Data Hub. Backfills are rate-limited to protect your API quota.
+
+## For agencies
+
+Agency workspaces get a client switcher that scopes Performance, Creative Library, Reports, Brand Intel, and Agent Peach to one DSP advertiser at a time, plus per-client reporting with your agency margin applied. See [Reports and pacing](/docs/reports-and-pacing).

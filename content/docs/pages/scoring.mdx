@@ -1,0 +1,32 @@
+Every creative gets a composite score from 0 to 100 and a performance tier. The score answers one question: relative to everything else in your account, how much does this creative deserve your budget?
+
+## How the score is built
+
+The score blends percentile ranks across four signals: click-through rate, return on ad spend, cost per acquisition, and spend. Each creative is ranked against the other creatives in your account on each signal, and the blend weights conversion outcomes (ROAS and CPA) most heavily, engagement and scale less so.
+
+Percentile-based means the score is **relative to your account**, not an industry benchmark. A 90 means this creative beats almost everything else you are running. That makes the score directly actionable: it is a ranking of where your next dollar should go.
+
+## The tiers
+
+| Tier | Score | Read it as |
+| --- | --- | --- |
+| Top Performer | 75 and up | Scale it |
+| Above Average | 50 to 74 | Working; watch and iterate |
+| Average | 30 to 49 | Middle of your pack |
+| Underperformer | below 30 | Candidate to cut |
+| Insufficient Data | no score | Not enough conversion signal to rank fairly |
+
+## Guardrails against misleading scores
+
+Two adjustments keep the score honest:
+
+- **Zero-conversion creatives are capped.** A creative with spend but no results cannot score above the Average floor, no matter how good its CTR looks. Clicks without outcomes do not earn a scale recommendation.
+- **Low-data creatives are capped.** One or two conversions is luck, not signal. Creatives with very few results are capped below the Top Performer line until the data earns it.
+
+Creatives with no ROAS and no CPA signal at all show **Insufficient Data** instead of a score. That is deliberate: a fabricated number would be worse than none.
+
+## Where the score shows up
+
+The Performance page ranks everything by tier and drives its recommendations. The Creative Library shows the score on every ad and creative. Agent Peach uses the same score when you ask it to rank or compare, and comparisons declare a winner by composite score rather than by whoever wins the most individual metrics.
+
+When multiple platforms are connected, creatives are also ranked within their platform, so a strong TikTok creative is visible even when your Meta account dominates total spend.

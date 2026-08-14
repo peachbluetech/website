@@ -19,10 +19,13 @@ const LINKS = [
   { label: "Platforms", href: "/#platforms" },
   { label: "Pricing", href: "/pricing" },
   { label: "Blog", href: "/blog" },
+  { label: "Docs", href: "/docs" },
   { label: "FAQ", href: "/#faq" },
 ];
 
-export function SiteNav({ current }: { current?: "pricing" | "demo" | "blog" }) {
+const PAGE_HREF: Record<string, string> = { pricing: "/pricing", blog: "/blog", docs: "/docs" };
+
+export function SiteNav({ current }: { current?: "pricing" | "demo" | "blog" | "docs" }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -44,15 +47,9 @@ export function SiteNav({ current }: { current?: "pricing" | "demo" | "blog" }) 
               <Link
                 key={l.label}
                 href={l.href}
-                aria-current={
-                  (current === "pricing" && l.href === "/pricing") ||
-                  (current === "blog" && l.href === "/blog")
-                    ? "page"
-                    : undefined
-                }
+                aria-current={current && PAGE_HREF[current] === l.href ? "page" : undefined}
                 className={
-                  (current === "pricing" && l.href === "/pricing") ||
-                  (current === "blog" && l.href === "/blog")
+                  current && PAGE_HREF[current] === l.href
                     ? "text-pb-fg"
                     : "hover:text-pb-fg transition-colors"
                 }

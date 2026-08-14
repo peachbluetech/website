@@ -1,0 +1,39 @@
+Peachblue's MCP server puts your own ad performance data inside Claude Desktop, Claude Code, Cursor, and any client that speaks the Model Context Protocol. The same 17 tools that power Agent Peach become tools your AI can call: rankings, comparisons, patterns, audience insights, and more, over your Meta, TikTok, Google Ads, and Amazon DSP data. Available on Pro plans and up.
+
+This is different from the MCP servers other ad tools ship: those expose inspiration libraries or generic reporting. Peachblue's serves your own cross-platform performance data, including Amazon DSP, with the same scoring and creative grouping the app uses.
+
+## Get your connection URL
+
+1. In Peachblue, go to Settings and open the MCP tab.
+2. Copy your connection URL.
+3. Add it to your MCP client (steps below). The first connection opens an OAuth sign-in where you approve access with your Peachblue account; no API keys to manage.
+
+Access is governed by your Peachblue login: members of your workspace connect with their own accounts, tier gating applies automatically, and disconnecting or revoking is instant from the same Settings tab.
+
+## Claude Desktop
+
+Settings, then Connectors, then Add custom connector. Paste your connection URL, and complete the OAuth sign-in when prompted. Peachblue's tools appear in Claude's tool menu; ask something like "what were my top 5 creatives by composite score last month" to confirm it works.
+
+## Claude Code
+
+```bash
+claude mcp add --transport http peachblue <your-connection-url>
+```
+
+Then authenticate when prompted on first use.
+
+## Cursor
+
+Settings, then MCP, then Add new MCP server. Choose the URL type, paste your connection URL, and complete the sign-in.
+
+## What to expect
+
+- Answers use your real synced data with the same scoping as the app. Agency workspaces are scoped per selected client.
+- Creative results can render as inline cards with thumbnails and scores in clients that support MCP Apps.
+- Rate limits apply per workspace under fair use; normal analytical use never hits them.
+- The full tool list is in the [MCP tool reference](/docs/mcp-tools).
+
+## Troubleshooting
+
+- **401 on connect**: your plan may not include MCP (Pro and up), or the OAuth sign-in was not completed. Check Settings under MCP for your tier status.
+- **Tools listed but responses empty**: confirm the connected Peachblue account belongs to the workspace with synced data, and that at least one platform has completed its first sync.

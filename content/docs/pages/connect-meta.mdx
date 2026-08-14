@@ -1,0 +1,26 @@
+Connecting Meta takes about a minute: an OAuth sign-in with your Facebook account, then selecting which ad accounts to sync. Peachblue reads ads data only; it never creates, edits, or pauses anything in your account.
+
+## Connect
+
+1. In Peachblue, go to Settings, then Integrations, and click Connect next to Meta.
+2. A Facebook window opens. Sign in and approve the requested permissions (read access to your ads and pages).
+3. Back in Peachblue, pick the ad accounts to sync and confirm.
+
+The connection uses a token issued by Meta to Peachblue, stored encrypted. You can disconnect at any time from the same screen, which removes the token. See [data access and deletion](/docs/data-access-and-deletion).
+
+## What syncs
+
+- Daily performance rows per ad: spend, impressions, clicks, results, and revenue where available, broken down by placement, device, and country
+- Demographics: performance by age and gender
+- Headline and body copy variants with per-variant performance
+- Campaign and ad set names for context
+- Creative assets: Peachblue mirrors your ad images and videos to its own storage during sync, because Meta's CDN links expire. This is what makes durable [creative analysis](/docs/creative-analysis) and cross-ad creative grouping possible.
+
+## Sync schedule
+
+The initial connection triggers a backfill of your recent history. After that, a daily automatic sync keeps data current, and you can trigger a manual sync from the Data Hub whenever you want. Sync history, per-account status, and any errors are visible in Settings under the connection's details.
+
+## Notes
+
+- The same creative running in multiple ads is recognized and grouped automatically, so your By Creative view aggregates performance across every ad that used it.
+- If an ad account is shared across businesses, connect it from the profile that has at least ads_read access to it.

@@ -1,0 +1,33 @@
+Reports turn your synced data into client-ready output: date-range performance reports with PDF and CSV export, and per-order Amazon DSP flight pacing with CPM goals and agency margin. Available on Power plans and up.
+
+## Report mode
+
+Pick a date range (7, 30, 90 days, or custom) and get a live report: total spend, impressions, and derived metrics, plus your top creatives by spend for the period. Two export paths:
+
+- **Print / PDF**: a print stylesheet strips the app chrome so the browser's print dialog produces a clean paper or PDF report.
+- **CSV**: an RFC-4180 file with a per-ad performance section, and, when Amazon DSP data is present, additional daily-by-supplier and rollup-by-supplier sections that spreadsheet apps detect as separate tables.
+
+When an agency margin is in effect, the CSV includes a metadata section documenting the margin so exported numbers are auditable.
+
+## Pacing mode
+
+One row per Amazon DSP order, with the full flight math computed for you:
+
+- Budget, flight dates, and status (active, upcoming, ended)
+- Spend to date vs expected spend to date, assuming even delivery
+- **Pace %**: under 90% flags underdelivery risk, over 110% flags early exhaustion
+- Blended CPM actual, and an inline-editable **CPM goal** per order that persists and colors the row against target
+- Supplier filtering, derived from your order naming conventions
+
+Pacing is the daily 5-minute check across every active flight: sort by risk, act on the exceptions. For the practice behind it, see the guide on [Amazon DSP pacing](/blog/amazon-dsp-pacing-guide).
+
+## Agency margin
+
+Agency workspaces can set a margin percentage per client. When set, spend and every spend-derived metric (CPM, CPC, CPA, ROAS) in Reports and Pacing is marked up server-side, so client-facing numbers reflect billable spend. Two deliberate rules:
+
+- **Budgets stay raw.** Pace % compares billable spend against the original DSP budget, so delivery math stays honest.
+- **The all-clients view never applies margin.** Markup exists only in the context of a specific client.
+
+## Scope notes
+
+Pacing and supplier breakdowns are Amazon DSP features, since they depend on DSP order budgets and flight dates. Date-range reports cover all connected platforms.

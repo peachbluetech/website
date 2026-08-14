@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/site";
 import { publishedArticles } from "@/lib/blog";
+import { publishedDocs } from "@/lib/docs";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
@@ -50,5 +51,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticEntries, ...postEntries];
+  const docEntries: MetadataRoute.Sitemap = [
+    {
+      url: `${SITE_URL}/docs`,
+      lastModified,
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    },
+    ...publishedDocs().map((d) => ({
+      url: `${SITE_URL}/docs/${d.slug}`,
+      lastModified: new Date(`${d.updated}T00:00:00Z`),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    })),
+  ];
+
+  return [...staticEntries, ...postEntries, ...docEntries];
 }
