@@ -52,7 +52,9 @@ Snapchat, AppLovin, Performance Max. Do not imply otherwise.
   per-client reports, intelligence, and brand intel
 - MCP server (LIVE, Pro plan and up): all 17 agent tools exposed over the
   Model Context Protocol, so your own performance data is queryable from
-  Claude Desktop, Claude Code, Cursor, and any MCP client. Full OAuth
+  Claude Desktop, Claude Code, and any MCP client. Marketing focus (per
+  Nick, 2026-08-13): name Claude only; do not name Cursor or other
+  clients in copy. Full OAuth
   sign-in flow; Streamable HTTP and SSE transports; inline creative cards
   render inside Claude/ChatGPT responses (MCP Apps). CAVEAT (2026-08-13):
   the Settings > MCP tab is currently hidden in the app nav, so users

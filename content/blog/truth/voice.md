@@ -61,7 +61,7 @@ draft.
   stack, not just creative scoring (added 2026-08-13): (1) 31-dimension AI
   analysis with written analysis + copy suggestions, (2) Intelligence
   patterns and archetypes ("what to make next from your own data"),
-  (3) Agent Peach + MCP into Claude/Cursor (own performance data incl.
+  (3) Agent Peach + MCP into Claude (own performance data incl.
   DSP; contrast with Foreplay's inspiration-library MCP), (4) Brand Intel
   Reddit monitoring (brand, competitors, topics; category-of-one),
   (5) agency infrastructure (multi-client workspaces, margin-aware client

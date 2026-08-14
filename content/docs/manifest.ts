@@ -218,10 +218,10 @@ export const DOC_PAGES: DocPage[] = [
   // is re-enabled. Flip status to "published" then.
   {
     slug: "mcp",
-    title: "Peachblue MCP: your ad data in Claude and Cursor",
+    title: "Peachblue MCP: your ad data in Claude",
     navLabel: "MCP setup",
     description:
-      "Connect Peachblue to Claude Desktop, Claude Code, or Cursor over the Model Context Protocol: OAuth sign-in, connection URL, and what your AI can query.",
+      "Connect Peachblue to Claude Desktop or Claude Code over the Model Context Protocol: OAuth sign-in, connection URL, and what Claude can query.",
     section: "mcp",
     order: 1,
     status: "draft",

@@ -48,7 +48,7 @@ const PLANS: Plan[] = [
       "Creative intelligence patterns",
       "Brand Intel (Reddit monitoring)",
       "Full history",
-      "MCP/API access (Claude Desktop, Cursor)",
+      "MCP/API access (your data in Claude)",
       "1,500 credits/mo",
       "3,000 agent messages/mo",
     ],
@@ -137,7 +137,7 @@ const COMPARE: CompareGroup[] = [
     title: "Agent + integrations",
     rows: [
       { label: "Agent Peach messages", values: ["500/mo", "3,000/mo", "Unlimited", "Unlimited", "Unlimited"] },
-      { label: "MCP/API access (Claude Desktop, Cursor)", values: [false, true, true, true, true] },
+      { label: "MCP/API access (your data in Claude)", values: [false, true, true, true, true] },
       { label: "Daily performance digest", values: [true, true, true, true, true] },
     ],
   },

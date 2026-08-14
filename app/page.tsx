@@ -235,9 +235,9 @@ export default function Home() {
         reverse
         tinted
         eyebrow="MCP integration"
-        title={<>Works inside Claude and Cursor. Your data, <span className="italic">wherever</span> you think.</>}
+        title={<>Works inside Claude. Your data, <span className="italic">wherever</span> you think.</>}
         bullets={[
-          "Connect Peachblue to Claude Desktop or Cursor in one step",
+          "Connect Peachblue to Claude in one step",
           "Query your creative performance from the tools you already live in",
           "The same intelligence engine, available wherever you work",
         ]}
