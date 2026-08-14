@@ -56,10 +56,10 @@ Snapchat, AppLovin, Performance Max. Do not imply otherwise.
   Nick, 2026-08-13): name Claude only; do not name Cursor or other
   clients in copy. Full OAuth
   sign-in flow; Streamable HTTP and SSE transports; inline creative cards
-  render inside Claude/ChatGPT responses (MCP Apps). CAVEAT (2026-08-13):
-  the Settings > MCP tab is currently hidden in the app nav, so users
-  cannot self-serve discover the connection URL. Do not publish self-serve
-  MCP setup instructions until the tab is re-enabled.
+  render inside Claude/ChatGPT responses (MCP Apps). Settings > MCP tab is
+  visible for brand orgs (fixed 2026-08-13); agency orgs see a Coming soon
+  card, so phrase agency MCP as "coming soon". Setup docs live at
+  /docs/mcp.
 
 ## Pricing (verified 2026-08-12)
 

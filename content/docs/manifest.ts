@@ -214,8 +214,6 @@ export const DOC_PAGES: DocPage[] = [
     status: "published",
     updated: "2026-08-13",
   },
-  // MCP pages: written and ready, held until the app's Settings > MCP tab
-  // is re-enabled. Flip status to "published" then.
   {
     slug: "mcp",
     title: "Peachblue MCP: your ad data in Claude",
@@ -224,8 +222,22 @@ export const DOC_PAGES: DocPage[] = [
       "Connect Peachblue to Claude Desktop or Claude Code over the Model Context Protocol: OAuth sign-in, connection URL, and what Claude can query.",
     section: "mcp",
     order: 1,
-    status: "draft",
+    status: "published",
     updated: "2026-08-13",
+    faq: [
+      {
+        q: "Which plans include MCP access?",
+        a: "Pro, Scale, and Power. Access is enforced at the server, and the Settings MCP tab shows your tier status. Agency workspace support is coming soon.",
+      },
+      {
+        q: "Does the MCP server expose competitor ads or an ad library?",
+        a: "No. The Peachblue MCP server serves your own synced performance data across Meta, TikTok, Google Ads, and Amazon DSP. It is the same data and scoring the Peachblue app uses.",
+      },
+      {
+        q: "Can Claude change my campaigns through MCP?",
+        a: "No. Every tool is read-only. Claude can query, rank, and compare your data; nothing can create, edit, or pause anything in your ad accounts.",
+      },
+    ],
   },
   {
     slug: "mcp-tools",
@@ -235,7 +247,7 @@ export const DOC_PAGES: DocPage[] = [
       "Every tool the Peachblue MCP server exposes: performance summaries, creative rankings, comparisons, audience insights, patterns, and more.",
     section: "mcp",
     order: 2,
-    status: "draft",
+    status: "published",
     updated: "2026-08-13",
   },
 ];
