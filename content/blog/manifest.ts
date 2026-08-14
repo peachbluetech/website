@@ -224,8 +224,27 @@ export const ARTICLES: Article[] = [
     competitors: ["Motion", "Atria", "Foreplay", "Segwise", "rule1", "Peachblue"],
     priority: 4,
     byline: "nick",
-    status: "planned",
-    faq: [],
+    status: "published",
+    datePublished: "2026-08-14",
+    dateUpdated: "2026-08-14",
+    faq: [
+      {
+        q: "How much does Motion cost now?",
+        a: "As of August 2026, Motion's Starter tier is $750 per month for accounts up to $50k in monthly ad spend, Pro is $1,050 per month, and the Growth tier above that is custom-priced. A limited free plan exists. Most comparison articles still cite the old $250 entry price, which was retired during 2026.",
+      },
+      {
+        q: "What is the best Motion alternative for creative analytics?",
+        a: "Peachblue is the strongest like-for-like alternative for analyzing your own ads: AI analysis across 31 creative dimensions, pattern detection, and coverage of Meta, TikTok, Google Ads, and Amazon DSP, from $79 per month. Atria fits Meta-and-TikTok-only teams who also want AI generation, and rule1 is a cheap agent-first newcomer for Meta-centric accounts.",
+      },
+      {
+        q: "Does any Motion alternative match its community and courses?",
+        a: "No. Motion's education ecosystem, including the Thumbstop newsletter, summits, and courses, is the best in the category. Most of it is free to everyone regardless of whether you pay for the software, so you can keep the content and choose your analytics tool separately.",
+      },
+      {
+        q: "Which Motion alternatives cover Google Ads or Amazon?",
+        a: "Motion covers neither. Peachblue syncs Google Ads (Search, Display, Video) and Amazon DSP alongside Meta and TikTok. Segwise covers Google plus the mobile app networks, and rule1 covers Google for Meta-centric teams. If Google or Amazon is a meaningful share of your spend, that gap decides the comparison.",
+      },
+    ],
     rawMaterial: ["truth/competitors.md all entries; re-verify Motion pricing before publish"],
   },
   {
