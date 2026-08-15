@@ -686,7 +686,9 @@ function DemoAd({
         : `/ads/${brand}-story-1.png`;
   return (
     <div
-      className={`relative overflow-hidden rounded-lg shrink-0 ${format === "story" ? "aspect-[9/16]" : "aspect-square"} ${className}`}
+      // Aspect ratios match the actual demo-ad slices (story ~1:2, square
+      // 203:215) so object-cover never crops the brand captions at the edges.
+      className={`relative overflow-hidden rounded-lg shrink-0 ${format === "story" ? "aspect-[1/2]" : "aspect-[203/215]"} ${className}`}
       aria-hidden="true"
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
