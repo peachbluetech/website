@@ -1,33 +1,96 @@
 import Link from "next/link";
 import { PeachblueMark } from "./PeachblueMark";
+import { DEMO_HREF, TRIAL_HREF, TRIAL_LABEL } from "@/lib/site";
+
+const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
+  {
+    title: "Product",
+    links: [
+      { label: "How it works", href: "/#product" },
+      { label: "Pricing", href: "/pricing" },
+      { label: TRIAL_LABEL, href: TRIAL_HREF },
+      { label: "Book a demo", href: DEMO_HREF },
+    ],
+  },
+  {
+    title: "Platforms",
+    links: [
+      { label: "Meta ad analysis", href: "/integrations/meta" },
+      { label: "TikTok ad analytics", href: "/integrations/tiktok" },
+      { label: "Google Ads analytics", href: "/integrations/google-ads" },
+      { label: "Amazon DSP reporting", href: "/integrations/amazon-dsp" },
+    ],
+  },
+  {
+    title: "Resources",
+    links: [
+      { label: "Blog", href: "/blog" },
+      { label: "Docs", href: "/docs" },
+      { label: "Your ad data in Claude", href: "/docs/mcp" },
+      { label: "Amazon DSP pacing guide", href: "/blog/amazon-dsp-pacing-guide" },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { label: "Contact", href: "mailto:nick@peachblue.io" },
+      { label: "Privacy Policy", href: "/privacy" },
+      { label: "Terms of Service", href: "/terms" },
+    ],
+  },
+];
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-pb-border py-8 px-6">
+    <footer className="border-t border-pb-border pt-12 pb-8 px-6">
       <div className="max-w-[1100px] mx-auto">
-        <div className="flex gap-x-4 gap-y-2 text-[12px] text-pb-fg-muted flex-wrap justify-center sm:justify-start mb-6 pb-6 border-b border-pb-border/60">
-          <span className="font-semibold text-pb-fg">Platforms</span>
-          <Link href="/integrations/meta" className="hover:text-pb-fg transition-colors">Meta ad analysis</Link>
-          <Link href="/integrations/tiktok" className="hover:text-pb-fg transition-colors">TikTok ad analytics</Link>
-          <Link href="/integrations/google-ads" className="hover:text-pb-fg transition-colors">Google Ads analytics</Link>
-          <Link href="/integrations/amazon-dsp" className="hover:text-pb-fg transition-colors">Amazon DSP reporting</Link>
-        </div>
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <div className="size-6 rounded-md pb-gradient-peach flex items-center justify-center">
-              <PeachblueMark size={14} color="#ffffff" />
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-10">
+          <div className="col-span-2 md:col-span-1">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="size-7 rounded-lg pb-gradient-peach flex items-center justify-center">
+                <PeachblueMark size={16} color="#ffffff" />
+              </div>
+              <span className="font-display text-[15px] font-semibold tracking-tight">peachblue</span>
             </div>
-            <span className="font-display text-[14px] font-semibold tracking-tight">peachblue</span>
+            <p className="text-[12px] text-pb-fg-muted leading-relaxed max-w-[200px]">
+              Creative intelligence for Meta, TikTok, Google Ads, and Amazon DSP.
+            </p>
           </div>
-          <div className="text-[12px] text-pb-fg-muted">&copy; {new Date().getFullYear()} Peachblue Technologies Inc.</div>
-          <div className="flex gap-4 text-[12px] text-pb-fg-muted flex-wrap justify-center">
-            <Link href="/pricing" className="hover:text-pb-fg transition-colors">Pricing</Link>
-            <Link href="/blog" className="hover:text-pb-fg transition-colors">Blog</Link>
-            <Link href="/docs" className="hover:text-pb-fg transition-colors">Docs</Link>
-            <Link href="/demo" className="hover:text-pb-fg transition-colors">Book a demo</Link>
-            <Link href="/privacy" className="hover:text-pb-fg transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-pb-fg transition-colors">Terms of Service</Link>
-            <a href="mailto:nick@peachblue.io" className="hover:text-pb-fg transition-colors">Contact</a>
+          {COLUMNS.map((col) => (
+            <div key={col.title}>
+              <div className="text-[10.5px] font-semibold uppercase tracking-[0.14em] text-pb-fg mb-3">
+                {col.title}
+              </div>
+              <ul className="space-y-2">
+                {col.links.map((l) => (
+                  <li key={l.label}>
+                    {l.href.startsWith("/") ? (
+                      <Link
+                        href={l.href}
+                        className="text-[12.5px] text-pb-fg-muted hover:text-pb-fg transition-colors"
+                      >
+                        {l.label}
+                      </Link>
+                    ) : (
+                      <a
+                        href={l.href}
+                        className="text-[12.5px] text-pb-fg-muted hover:text-pb-fg transition-colors"
+                      >
+                        {l.label}
+                      </a>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <div className="pt-6 border-t border-pb-border/60 flex flex-col sm:flex-row items-center justify-between gap-2">
+          <div className="text-[12px] text-pb-fg-muted">
+            &copy; {new Date().getFullYear()} Peachblue Technologies Inc.
+          </div>
+          <div className="text-[12px] text-pb-fg-muted">
+            Know what ads work, and why.
           </div>
         </div>
       </div>
