@@ -36,11 +36,11 @@ Amazon released its [Ads MCP server in open beta](https://advertising.amazon.com
 
 ### TikTok ads MCP
 
-TikTok [announced its ads MCP server at TikTok World in May 2026](https://digiday.com/marketing/tiktok-launches-mcp-server-to-let-ai-agents-run-campaigns/), but as of this writing it is an announcement, not a generally available product: no public install path and no confirmed release date. Third-party TikTok MCP servers exist with the usual caveats of unofficial API wrappers.
+Announced at TikTok World in May 2026, the [TikTok for Business MCP server](https://ads.tiktok.com/resources/help/article/about-tiktok-for-business-mcp-server?lang=en) is now live: zero-code setup, hosted endpoints, and explicitly recommended for Claude. It is the most ambitious of the four, exposing roughly 400 tools in full-disclosure mode (a trimmed set of about 40 in progressive mode) that go beyond reporting into campaign creation, bidding, and budget changes. Which makes the shape worth understanding: it is a campaign management surface, handing Claude TikTok's API. Four hundred raw tools is a lot of surface area, and none of it tells Claude which of your creatives is winning or why.
 
 ### What you end up with
 
-Wire up everything above and this is the stack: three separate connections plus a TikTok workaround, four auth flows, four different toolsets with four different vocabularies, and each one seeing only its own silo. Claude has to stitch the platforms together by hand in every conversation, reconcile attribution windows that do not match (Amazon DSP reports 14-day only; social platforms differ), and reconstruct basic concepts like "this is the same creative running in nine ads" from scratch, every single time, because raw rows carry no creative identity, no scoring, and no tags. It works, in the way that four spreadsheets and a prayer work.
+Wire up everything above and this is the stack: four separate connections, four auth flows, four different toolsets with four different vocabularies (one of them 400 tools deep), and each one seeing only its own silo. Claude has to stitch the platforms together by hand in every conversation, reconcile attribution windows that do not match (Amazon DSP reports 14-day only; social platforms differ), and reconstruct basic concepts like "this is the same creative running in nine ads" from scratch, every single time, because raw rows carry no creative identity, no scoring, and no tags. It works, in the way that four spreadsheets and a prayer work.
 
 ## Or: one connection, with the analysis already done
 

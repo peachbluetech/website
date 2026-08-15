@@ -351,7 +351,7 @@ export const ARTICLES: Article[] = [
       },
       {
         q: "Do Meta, Google, Amazon, and TikTok have official MCP servers?",
-        a: "As of mid-2026, yes with one asterisk. Google shipped its official Google Ads MCP server in April 2026, Amazon's Ads MCP server has been in open beta since February 2026, and Meta launched its ads MCP connectors in spring 2026. TikTok announced its ads MCP server at TikTok World in May 2026 but it is not yet generally available. Each covers only its own platform and returns raw account data.",
+        a: "Yes, all four as of August 2026. Google shipped its official Google Ads MCP server in April 2026, Amazon's Ads MCP server has been in open beta since February 2026, Meta launched its ads MCP connectors in spring 2026, and TikTok's for Business MCP server went live in August 2026 with roughly 400 tools including campaign management. Each covers only its own platform and hands Claude raw account data or API surface, with no cross-platform creative identity, scoring, or tagging.",
       },
       {
         q: "Does this work with assistants other than Claude?",

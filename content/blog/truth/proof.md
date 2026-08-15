@@ -48,9 +48,12 @@ the other truth files.
   (advertising.amazon.com library announcement). Practitioner writeups note
   visibility gaps in exposed data.
 - Meta: official ads MCP connectors launched spring 2026, open beta.
-- TikTok: announced at TikTok World May 2026; NOT generally available as of
-  August 2026 (no public install path, no GA date). Third-party servers
-  exist. RE-VERIFY before repeating; this will change.
+- TikTok: TikTok for Business MCP server LIVE as of August 2026 (verified
+  2026-08-14 against ads.tiktok.com help article). Zero-code hosted
+  endpoints, ~400 tools full-disclosure / ~40 progressive, explicitly
+  recommended for Claude, includes WRITE operations (campaign creation,
+  bidding, budgets). Contrast honestly: it is a management surface handing
+  Claude raw API tools, not an analysis layer.
 - All are single-platform and return raw account/API data: no cross-platform
   creative identity, scoring, or tagging.
 
