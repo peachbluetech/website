@@ -3,19 +3,20 @@
 import { useState } from "react";
 
 /**
- * Creative waste diagnostic (V3).
+ * Creative waste diagnostic (V4).
  *
- * Design rule learned the hard way: every input is independent, nothing is
- * silently coupled, and the accounting identity is shown on the page.
+ * Design rules learned across three user-falsified iterations:
+ * 1. Every slider is an independent lever; nothing moves unless the user
+ *    moves it.
+ * 2. There is NO spend slider: waste = launches x (1 - hit rate) x test
+ *    spend per creative, and monthly spend is not in that formula. A spend
+ *    slider can only mislead (silently move other sliders, or do nothing).
+ *    Account size enters through explicit preset chips that seed typical
+ *    launches + test budgets when clicked.
  *
  *   testing budget   = launched x test spend per creative   (displayed live)
  *   waste/mo         = launched x (1 - hit rate) x test spend per creative
  *   cost per winner  = test spend per creative / hit rate
- *
- * So: more launches -> more waste (linearly). Bigger test budgets per
- * creative -> more waste. Spend alone changes only the share-of-budget
- * context line; account size flows into waste through the levers you
- * actually control, and the line makes that visible.
  *
  * Hit-rate value (revenue-framed, assumptions stated in the page copy):
  *   extra winners/mo = launched x 0.10
@@ -91,20 +92,25 @@ function Result({ label, value, note }: { label: string; value: string; note: st
   );
 }
 
+const PRESETS = [
+  { label: "~$50k/mo account", launched: 20, perCreative: 300 },
+  { label: "~$250k/mo", launched: 40, perCreative: 1_000 },
+  { label: "~$1M/mo", launched: 80, perCreative: 2_500 },
+  { label: "$3M+/mo", launched: 150, perCreative: 4_000 },
+];
+
 export function CreativeWasteDiagnostic() {
-  const [spend, setSpend] = useState(100_000);
   const [launched, setLaunched] = useState(40);
   const [perCreative, setPerCreative] = useState(500);
   const [hitRatePct, setHitRatePct] = useState(20);
   const [winnerRoas, setWinnerRoas] = useState(3);
+  const [activePreset, setActivePreset] = useState<number | null>(null);
 
   const h = hitRatePct / 100;
   const testingBudget = launched * perCreative;
-  const testingSharePct = spend > 0 ? (testingBudget / spend) * 100 : 0;
   const losersPerMonth = launched * (1 - h);
   const winnersPerMonth = launched * h;
   const wasteMonthly = losersPerMonth * perCreative;
-  const wasteOfTotalPct = spend > 0 ? (wasteMonthly / spend) * 100 : 0;
   const costPerWinner = h > 0 ? perCreative / h : 0;
 
   const improvedH = Math.min(h + 0.1, 0.95);
@@ -114,36 +120,61 @@ export function CreativeWasteDiagnostic() {
   const testSavings = testingBudget * (1 - h / improvedH);
   const totalHitRateValue = revenueValue + testSavings;
 
-  const testingOverBudget = testingBudget > spend;
+  const applyPreset = (i: number) => {
+    setActivePreset(i);
+    setLaunched(PRESETS[i].launched);
+    setPerCreative(PRESETS[i].perCreative);
+  };
 
   return (
     <div className="rounded-3xl border border-pb-border bg-pb-muted/40 p-6 md:p-8">
+      <div className="mb-7">
+        <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-pb-fg-muted mb-2.5">
+          Start from your account size
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {PRESETS.map((p, i) => (
+            <button
+              key={p.label}
+              type="button"
+              onClick={() => applyPreset(i)}
+              className={`h-9 px-4 rounded-full text-[12.5px] font-semibold border transition-all ${
+                activePreset === i
+                  ? "pb-gradient-peach text-white border-transparent shadow-[0_4px_12px_rgba(242,119,73,0.3)]"
+                  : "border-pb-border bg-pb-card text-pb-fg hover:shadow-pb-soft"
+              }`}
+            >
+              {p.label}
+            </button>
+          ))}
+        </div>
+        <p className="text-[11.5px] text-pb-fg-muted mt-2">
+          Presets set typical launches and test budgets for the account size; fine-tune below.
+        </p>
+      </div>
+
       <div className="grid md:grid-cols-2 gap-8 md:gap-10">
         <div className="space-y-6">
-          <Field
-            label="Monthly ad spend"
-            hint="Across your paid social accounts. Context for the shares below; waste moves through the levers you control."
-            value={spend}
-            onChange={setSpend}
-            min={10_000}
-            max={5_000_000}
-            step={10_000}
-            prefix="$"
-          />
           <Field
             label="New creatives launched per month"
             hint="A team testing daily typically launches 30 to 60; large accounts run hundreds."
             value={launched}
-            onChange={setLaunched}
+            onChange={(v) => {
+              setActivePreset(null);
+              setLaunched(v);
+            }}
             min={4}
             max={400}
             step={2}
           />
           <Field
             label="Test spend per creative"
-            hint="What each new creative spends before you call winner or loser. Bigger accounts typically test bigger."
+            hint="What each new creative spends before you call winner or loser. Bigger accounts test bigger."
             value={perCreative}
-            onChange={setPerCreative}
+            onChange={(v) => {
+              setActivePreset(null);
+              setPerCreative(v);
+            }}
             min={100}
             max={10_000}
             step={100}
@@ -171,14 +202,8 @@ export function CreativeWasteDiagnostic() {
           />
           <p className="text-[12px] leading-relaxed text-pb-fg-muted">
             That is a testing budget of{" "}
-            <span className="font-medium text-pb-fg tnum">{usd(testingBudget)}/mo</span>,{" "}
-            <span className={`font-medium tnum ${testingOverBudget ? "text-pb-peach-700" : "text-pb-fg"}`}>
-              {testingSharePct.toFixed(1)}%
-            </span>{" "}
-            of your spend.
-            {testingOverBudget
-              ? " That exceeds your monthly budget; lower launches or test spend to match reality."
-              : " Most high-volume teams run 10 to 30 percent."}
+            <span className="font-medium text-pb-fg tnum">{usd(testingBudget)}/mo</span>. Most
+            high-volume teams run testing at 10 to 30 percent of total spend.
           </p>
         </div>
 
@@ -186,7 +211,7 @@ export function CreativeWasteDiagnostic() {
           <Result
             label="Spend going to losing creatives"
             value={`${usd(wasteMonthly)}/mo`}
-            note={`${Math.round(losersPerMonth)} of your ${launched} monthly launches will not become winners at a ${hitRatePct}% hit rate, each burning its ${usd(perCreative)} test budget finding out. ${wasteOfTotalPct.toFixed(1)}% of total spend, ${usd(wasteMonthly * 12)} a year.`}
+            note={`${Math.round(losersPerMonth)} of your ${launched} monthly launches will not become winners at a ${hitRatePct}% hit rate, each burning its ${usd(perCreative)} test budget finding out. ${usd(wasteMonthly * 12)} a year.`}
           />
           <Result
             label="Cost per winning creative"

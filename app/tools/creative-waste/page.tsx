@@ -117,12 +117,16 @@ export default function CreativeWastePage() {
             </h2>
             <div className="prose-pb-lg">
               <p>
-                Every input is an independent lever; nothing moves unless you
+                Every slider is an independent lever; nothing moves unless you
                 move it. Waste is launches times one minus your hit rate times
                 the test spend each creative gets: launch more creatives and
                 waste rises linearly, test bigger per creative and it rises
-                too. Your testing budget is launches times test spend, shown
-                live under the sliders as a share of total spend, so the
+                too. There is deliberately no ad-spend slider, because monthly
+                spend is not in the waste formula: account size flows into
+                waste through how many creatives you launch and how much each
+                one tests with, which is what the account-size presets set,
+                explicitly, when you click them. Your testing budget, launches
+                times test spend, is shown live under the sliders so the
                 accounting is always visible. Cost per winning creative is
                 test spend divided by hit rate, because every winner carries
                 the test spend of the losers it took to find it.
