@@ -28,12 +28,16 @@ Peachblue's MCP sits on top of synced, analyzed data instead, and the practical 
 
 | You ask Claude | With Meta's MCP alone | With Peachblue's MCP |
 | --- | --- | --- |
+| "How did last week go, and what drove the change?" | Metric deltas with no creative context; Claude guesses at causes | Performance summaries and trends tied to the specific creatives that drove them, so the "why" has a name and a thumbnail |
 | "What is my best creative?" | Best *ad* per metric. The same creative split across 12 ads looks like 12 mediocre ads | Creatives grouped by fingerprint across every ad and platform, ranked by composite score |
 | "Which hook styles are winning?" | No such concept exists in the data | Every creative is tagged across 31 dimensions; hook style is a filter, not a research project |
 | "Compare Meta vs TikTok performance" | Cannot; one platform per connection | One connection covers Meta, TikTok, Google Ads, and Amazon DSP |
 | "Rank last month and tell me what to scale" | Claude invents a ranking method per conversation; answers drift between chats | Same composite score the app uses; Claude's answer matches your team's dashboard |
 | "What do my winners have in common?" | Claude would need to inspect every creative itself, which does not scale in chat | Pattern detection and archetypes are precomputed; Claude retrieves and reasons |
+| "What should we make next to keep scaling?" | No concept of a winner beyond a metric sort | Winning patterns across 31 dimensions feed the next brief, so scaling means repeating what your data proves works |
 | "What is Reddit saying about my brand?" | Not ad-platform data at all | Brand Intel mentions, sentiment, and the editorial brief are tools Claude can call |
+
+The thread running through every row: answers stay grounded in your performance data *and* tied to the creative level, which is where scaling decisions actually live. The loop this enables is the one that matters: find the winners, understand why they win, make more of what wins, and verify the next batch against the same score.
 
 Two quieter advantages compound over time. **History**: Peachblue keeps what it syncs, so analysis is not capped by platform retention limits (Amazon DSP, for instance, only retains about 60 days of report data; your Peachblue history builds forward past it). **Context efficiency**: tools return ranked, aggregated payloads instead of raw row dumps, so Claude spends its context reasoning rather than arithmetic, which in practice means fewer wrong numbers.
 
