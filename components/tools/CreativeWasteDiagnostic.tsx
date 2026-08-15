@@ -77,11 +77,29 @@ function Result({ label, value, note }: { label: string; value: string; note: st
   );
 }
 
+const BASE_SPEND = 100_000;
+const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
+
+/* Testing inputs scale with budget (sqrt on each keeps the implied testing
+   budget a constant ~20% share of spend) until the user adjusts them. */
+const defaultLaunched = (spend: number) =>
+  clamp(Math.round((40 * Math.sqrt(spend / BASE_SPEND)) / 2) * 2, 4, 400);
+const defaultPerVerdict = (spend: number) =>
+  clamp(Math.round((500 * Math.sqrt(spend / BASE_SPEND)) / 100) * 100, 100, 10_000);
+
 export function CreativeWasteDiagnostic() {
-  const [spend, setSpend] = useState(100_000);
+  const [spend, setSpendRaw] = useState(100_000);
   const [launched, setLaunched] = useState(40);
   const [hitRatePct, setHitRatePct] = useState(20);
   const [perVerdict, setPerVerdict] = useState(500);
+  const [launchedTouched, setLaunchedTouched] = useState(false);
+  const [perVerdictTouched, setPerVerdictTouched] = useState(false);
+
+  const setSpend = (v: number) => {
+    setSpendRaw(v);
+    if (!launchedTouched) setLaunched(defaultLaunched(v));
+    if (!perVerdictTouched) setPerVerdict(defaultPerVerdict(v));
+  };
 
   const h = hitRatePct / 100;
   const losersPerMonth = launched * (1 - h);
@@ -101,21 +119,24 @@ export function CreativeWasteDiagnostic() {
         <div className="space-y-6">
           <Field
             label="Monthly ad spend"
-            hint="Across your paid social accounts."
+            hint="Across your paid social accounts. The two testing inputs below scale with budget until you set them yourself."
             value={spend}
             onChange={setSpend}
             min={10_000}
-            max={1_000_000}
+            max={5_000_000}
             step={10_000}
             prefix="$"
           />
           <Field
             label="New creatives launched per month"
-            hint="A team testing daily typically launches 30 to 60."
+            hint="A team testing daily typically launches 30 to 60; large accounts run hundreds."
             value={launched}
-            onChange={setLaunched}
+            onChange={(v) => {
+              setLaunchedTouched(true);
+              setLaunched(v);
+            }}
             min={4}
-            max={200}
+            max={400}
             step={2}
           />
           <Field
@@ -132,9 +153,12 @@ export function CreativeWasteDiagnostic() {
             label="Spend per creative before the verdict"
             hint="What a creative gets to spend before you call it a winner or kill it."
             value={perVerdict}
-            onChange={setPerVerdict}
+            onChange={(v) => {
+              setPerVerdictTouched(true);
+              setPerVerdict(v);
+            }}
             min={100}
-            max={5_000}
+            max={10_000}
             step={100}
             prefix="$"
           />
