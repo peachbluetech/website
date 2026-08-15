@@ -1,0 +1,59 @@
+Claude is genuinely useful for media buying now, but how useful depends entirely on one question: can it see your data? Without access to your accounts, Claude is a smart intern with amnesia. With access, it becomes something closer to an analyst who has read every row of your ad history. This guide covers both modes honestly, and how to set up the second one.
+
+Disclosure: I am the founder of Peachblue, which builds one of the tools below. The workflow advice stands regardless of whose tool you use.
+
+## What Claude does well with no setup at all
+
+Plenty, actually. Paste in your creative copy and Claude critiques hooks and angles competently. Paste a screenshot of a results table and it reads the numbers. Describe your product and audience and it drafts briefs, generates angle lists, and rewrites headlines in volume. For creative ideation, it is already better than most brainstorm meetings.
+
+The ceiling is just as real:
+
+- **It cannot see your accounts.** Every number arrives by copy-paste, which means stale snapshots, tiny samples, and no follow-up questions the data could answer.
+- **Manual data entry invites errors.** A pasted table loses the context around it: attribution window, date range, currency, which campaigns were excluded.
+- **It will reason confidently about numbers it half-remembers.** Ask a follow-up two screens later and the model may be working from a garbled version of what you pasted.
+
+Copy-paste Claude is a writing tool. The unlock is making it an analysis tool.
+
+## The unlock: MCP
+
+The Model Context Protocol is an open standard that lets Claude call tools that fetch live data. Instead of you pasting numbers in, Claude queries the source and reasons over what comes back. The ads ecosystem is adopting it fast: Meta now ships its own ads MCP server, generic data connectors expose raw platform metrics, and analytics tools are exposing their processed data.
+
+The differences between those options matter more than the shared acronym:
+
+- **Raw platform MCPs** (Meta's own, generic connectors) give Claude the same rows you see in Ads Manager. Useful, but Claude starts from zero: no creative grouping, no scoring, no history of what it all means.
+- **Analytics-layer MCPs** give Claude processed intelligence: creatives already grouped across ads and platforms, scored, tagged, and trended. Claude reasons at the level you actually think at.
+
+Peachblue's MCP server is the second kind. It exposes the same 17 tools that power our in-app agent: performance summaries, creative rankings by fingerprint group, head-to-head comparisons, pattern detection across 31 creative dimensions, audience insights, copy variant performance, and Reddit brand monitoring, over your synced Meta, TikTok, Google Ads, and Amazon DSP data. Everything is read-only; nothing can touch your campaigns.
+
+## Setting it up
+
+Prerequisites: a Peachblue account (Pro or higher) with at least one platform synced, and Claude Desktop or Claude Code.
+
+1. In Peachblue, open Settings and go to the MCP tab. Copy your connection URL.
+2. In Claude Desktop: Settings, then Connectors, then Add custom connector. Paste the URL.
+3. Approve the OAuth sign-in with your Peachblue account when prompted. No API keys.
+
+Full setup details, including Claude Code, are in the [MCP docs](/docs/mcp), and the complete tool list is in the [tool reference](/docs/mcp-tools).
+
+## What to actually ask
+
+The queries that earn their keep daily:
+
+- "How did last week compare to the week before, and what drove the change?"
+- "Rank my top 10 creatives by composite score this month and tell me what they have in common."
+- "Compare my two hero videos head to head. Which one deserves the next budget increase?"
+- "Which hook styles are winning in my account right now?"
+- "Which headlines are underperforming across my Google RSAs?"
+- "What is Reddit saying about my brand this week, and is there an angle worth testing?"
+
+Then the compound move: because Claude holds the whole conversation, you can chain analysis into action. Pull the patterns behind your winners, then in the same thread have Claude draft five new concepts that fit those patterns. Analysis to brief in one sitting, grounded in your own data at every step.
+
+## What this replaces, and what it does not
+
+It replaces the export-paste-reformat loop, the "quick question" that used to mean opening four dashboard tabs, and a decent share of weekly report assembly. It does not replace your analytics app for visual browsing, it does not buy or edit media (by design), and it does not replace judgment: Claude with your data is a sharper analyst, not a decision-maker.
+
+Honest limitations: you need a Claude plan that supports connectors, MCP access starts on Peachblue's Pro tier ([pricing](/pricing)), and agency workspaces with per-client scoping are coming soon. Fair-use rate limits apply but normal analytical use never meets them.
+
+## Where this is heading
+
+Every serious ads tool will expose MCP within a year; the question will shift from "can my AI see my ad data" to "how good is what it sees." Grouped, scored, analyzed data beats raw rows for the same reason a good analyst beats a CSV export. If you want to try it on your own accounts, [start a trial](/pricing), sync a platform, and connect Claude in the time it takes to make coffee. And if you are choosing an analytics layer in the first place, our [comparison of the current field](/blog/motion-alternatives) is the honest place to start.

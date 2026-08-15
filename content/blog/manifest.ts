@@ -325,8 +325,27 @@ export const ARTICLES: Article[] = [
     ],
     priority: 8,
     byline: "nick",
-    status: "planned",
-    faq: [],
+    status: "published",
+    datePublished: "2026-08-14",
+    dateUpdated: "2026-08-14",
+    faq: [
+      {
+        q: "Can Claude analyze my Facebook ads?",
+        a: "Yes, two ways. You can paste exports and screenshots into any Claude conversation for one-off analysis, or connect an MCP server so Claude queries your ad data live. The MCP route is far more reliable: no stale snapshots, no copy-paste errors, and Claude can answer follow-up questions against the actual data.",
+      },
+      {
+        q: "What is MCP in plain terms?",
+        a: "The Model Context Protocol is an open standard that lets AI assistants call tools that fetch real data. Instead of pasting numbers into the chat, you connect a data source once, and Claude queries it directly during the conversation.",
+      },
+      {
+        q: "Can Claude change or pause my campaigns through Peachblue?",
+        a: "No. Every tool the Peachblue MCP server exposes is read-only. Claude can query, rank, compare, and summarize your data; it cannot create, edit, pause, or spend anything.",
+      },
+      {
+        q: "Does this work with assistants other than Claude?",
+        a: "The Peachblue MCP server speaks the open MCP standard, so any client that supports remote MCP connectors can connect the same way. The setup docs cover Claude Desktop and Claude Code, which is where we focus.",
+      },
+    ],
     rawMaterial: [
       "Frame per voice.md MCP claim rule: own-performance-data angle",
       "Meta official Ads MCP server (April 2026) as context",
