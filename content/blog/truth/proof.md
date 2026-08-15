@@ -40,6 +40,20 @@ the other truth files.
   30-45% vs 60%+ across ranked articles). Cite the disagreement itself, not
   any single number, until we publish our own benchmark data.
 
+## Official ad-platform MCP servers (verified August 2026)
+
+- Google: official Google Ads MCP server shipped April 2026
+  (developers.google.com developer toolkit).
+- Amazon: Amazon Ads MCP server in open beta since February 2, 2026
+  (advertising.amazon.com library announcement). Practitioner writeups note
+  visibility gaps in exposed data.
+- Meta: official ads MCP connectors launched spring 2026, open beta.
+- TikTok: announced at TikTok World May 2026; NOT generally available as of
+  August 2026 (no public install path, no GA date). Third-party servers
+  exist. RE-VERIFY before repeating; this will change.
+- All are single-platform and return raw account/API data: no cross-platform
+  creative identity, scoring, or tagging.
+
 ## Our own data
 
 - Nothing cleared for publication yet. When aggregate platform data is

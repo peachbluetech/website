@@ -310,17 +310,21 @@ export const ARTICLES: Article[] = [
   },
   {
     slug: "claude-for-media-buyers",
-    title: "Claude for media buyers: a practical guide (2026)",
+    title: "Claude for media buyers: MCP for Meta, TikTok, Google, Amazon",
     h1: "Put your ad data in",
     h1Accent: "Claude.",
     description:
-      "What Claude can and cannot do for media buying today: analysis workflows, MCP connections to ad data, and where the hype outruns reality.",
+      "Every ad platform now ships an official MCP server. What Meta, Google, Amazon, and TikTok's MCPs actually give Claude, what stitching all four costs you, and the one-connection alternative.",
     type: "guide",
     pillar: "ai",
     keywords: [
       "claude for media buying",
+      "meta ads mcp",
+      "google ads mcp",
+      "amazon ads mcp",
+      "tiktok ads mcp",
+      "ads mcp server",
       "analyze ads with claude",
-      "chatgpt for media buying",
       "mcp for marketing",
     ],
     priority: 8,
@@ -344,6 +348,10 @@ export const ARTICLES: Article[] = [
       {
         q: "Can Claude change or pause my campaigns through Peachblue?",
         a: "No. Every tool the Peachblue MCP server exposes is read-only. Claude can query, rank, compare, and summarize your data; it cannot create, edit, pause, or spend anything.",
+      },
+      {
+        q: "Do Meta, Google, Amazon, and TikTok have official MCP servers?",
+        a: "As of mid-2026, yes with one asterisk. Google shipped its official Google Ads MCP server in April 2026, Amazon's Ads MCP server has been in open beta since February 2026, and Meta launched its ads MCP connectors in spring 2026. TikTok announced its ads MCP server at TikTok World in May 2026 but it is not yet generally available. Each covers only its own platform and returns raw account data.",
       },
       {
         q: "Does this work with assistants other than Claude?",
