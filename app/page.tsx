@@ -199,6 +199,15 @@ export default function Home() {
         ctaLabel="See plans"
         ctaHref="/pricing"
         frame={<DataHubFrame />}
+        afterCta={
+          <div className="flex flex-wrap gap-x-4 gap-y-1.5 text-[12.5px] text-pb-fg-muted">
+            <span>Platform details:</span>
+            <a href="/integrations/meta" className="underline underline-offset-2 hover:text-pb-fg transition-colors">Meta</a>
+            <a href="/integrations/tiktok" className="underline underline-offset-2 hover:text-pb-fg transition-colors">TikTok</a>
+            <a href="/integrations/google-ads" className="underline underline-offset-2 hover:text-pb-fg transition-colors">Google Ads</a>
+            <a href="/integrations/amazon-dsp" className="underline underline-offset-2 hover:text-pb-fg transition-colors">Amazon DSP</a>
+          </div>
+        }
       />
 
       <FeatureSection
@@ -430,6 +439,7 @@ function FeatureSection({
   frame,
   reverse = false,
   tinted = false,
+  afterCta,
 }: {
   id?: string;
   eyebrow: string;
@@ -440,6 +450,7 @@ function FeatureSection({
   frame: React.ReactNode;
   reverse?: boolean;
   tinted?: boolean;
+  afterCta?: React.ReactNode;
 }) {
   return (
     <section id={id} className="py-16 md:py-24 px-6 relative">
@@ -468,6 +479,11 @@ function FeatureSection({
                 {ctaLabel} &rarr;
               </a>
             </motion.div>
+            {afterCta && (
+              <motion.div variants={fade} className="mt-4">
+                {afterCta}
+              </motion.div>
+            )}
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 24 }}
