@@ -24,6 +24,10 @@ const FAQ = [
     q: "How do I raise my hit rate?",
     a: "Two levers move it most: build new creatives from the patterns your own winners share (hook style, format, tone) instead of guessing, and call verdicts consistently so losers stop absorbing budget past the point of information. Both require creative-level measurement across every ad a creative runs in.",
   },
+  {
+    q: "How is the value of a higher hit rate calculated?",
+    a: "Two parts. Revenue: extra winners from the same launches, each assumed to scale to roughly ten times its test spend, earning your winner ROAS with a 30 percent advantage over the fatigued spend it replaces. Savings: the testing budget no longer burned on losers. Both assumptions are stated openly so you can judge them against your account.",
+  },
 ];
 
 export const metadata: Metadata = {
@@ -113,25 +117,28 @@ export default function CreativeWastePage() {
             </h2>
             <div className="prose-pb-lg">
               <p>
-                Four numbers drive everything. Your testing budget is monthly
-                spend times the share of budget you run through unproven
-                creatives, and it splits evenly across your launches, so each
-                creative&apos;s test spend is testing budget divided by launches.
-                Waste is the testing budget times one minus your hit rate: the
-                share that flowed through creatives that never became winners.
-                Cost per winning creative is testing budget divided by winners,
-                because every winner carries the test spend of the losers it
-                took to find it. And ten more points of hit rate is worth your
-                testing budget times the efficiency gained.
+                Every input is an independent lever; nothing moves unless you
+                move it. Waste is launches times one minus your hit rate times
+                the test spend each creative gets: launch more creatives and
+                waste rises linearly, test bigger per creative and it rises
+                too. Your testing budget is launches times test spend, shown
+                live under the sliders as a share of total spend, so the
+                accounting is always visible. Cost per winning creative is
+                test spend divided by hit rate, because every winner carries
+                the test spend of the losers it took to find it.
               </p>
               <p>
-                Because waste is a share of the testing budget, it scales
-                linearly with spend: a $1M account testing 20 creatives wastes
-                ten times what a $100k account testing the same 20 does, since
-                each loser burns ten times more before the verdict. The
-                assumptions are deliberately simple: even test budgets per
-                creative and a binary winner-or-loser verdict. Your account is
-                messier than that, which is the point of measuring it properly.
+                The hit-rate value is revenue-framed, with the assumptions in
+                the open: ten more points of hit rate means more winners from
+                the same launches, each winner goes on to absorb scaled spend
+                of roughly ten times its test budget, and that spend earns
+                your winner ROAS against the fatigued spend it replaces, which
+                we credit at a 30 percent ROAS advantage. Add the testing
+                budget you no longer burn on losers and you get the headline
+                figure. The assumptions are deliberately simple: even test
+                budgets, a binary verdict, and a flat fatigue delta. Your
+                account is messier than that, which is the point of measuring
+                it properly.
               </p>
             </div>
           </section>
