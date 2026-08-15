@@ -3,14 +3,18 @@
 import { useState } from "react";
 
 /**
- * Creative waste diagnostic (V1) — for teams launching new creative daily.
- * Four inputs, three outputs, methodology transparent on the page.
+ * Creative waste diagnostic (V2) — for teams launching new creative daily.
  *
- * Model:
- *   losers/mo        = launched x (1 - hit rate)
- *   waste/mo         = losers x spend-per-verdict
- *   cost per winner  = spend-per-verdict / hit rate
- *   +10pp hit rate   = launched x spend-per-verdict x (1 - h / (h + 0.1))
+ * Model (all derived, no hidden coupling between sliders):
+ *   testing budget   = spend x testing share
+ *   test per creative= testing budget / launched     (derived, displayed)
+ *   waste/mo         = testing budget x (1 - hit rate)
+ *   cost per winner  = testing budget / (launched x hit rate)
+ *   +10pp hit rate   = testing budget x (1 - h / (h + 0.1))
+ *
+ * Waste is linear in spend at fixed creative count: a $1M account with 20
+ * creatives wastes 10x what a $100k account with 20 creatives does, because
+ * each loser burns 10x more before the verdict.
  * Scope: paid social testing volume. No DSP inputs by design.
  */
 
@@ -77,41 +81,23 @@ function Result({ label, value, note }: { label: string; value: string; note: st
   );
 }
 
-const BASE_SPEND = 100_000;
-const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
-
-/* Testing inputs scale with budget (sqrt on each keeps the implied testing
-   budget a constant ~20% share of spend) until the user adjusts them. */
-const defaultLaunched = (spend: number) =>
-  clamp(Math.round((40 * Math.sqrt(spend / BASE_SPEND)) / 2) * 2, 4, 400);
-const defaultPerVerdict = (spend: number) =>
-  clamp(Math.round((500 * Math.sqrt(spend / BASE_SPEND)) / 100) * 100, 100, 10_000);
-
 export function CreativeWasteDiagnostic() {
-  const [spend, setSpendRaw] = useState(100_000);
+  const [spend, setSpend] = useState(100_000);
   const [launched, setLaunched] = useState(40);
   const [hitRatePct, setHitRatePct] = useState(20);
-  const [perVerdict, setPerVerdict] = useState(500);
-  const [launchedTouched, setLaunchedTouched] = useState(false);
-  const [perVerdictTouched, setPerVerdictTouched] = useState(false);
-
-  const setSpend = (v: number) => {
-    setSpendRaw(v);
-    if (!launchedTouched) setLaunched(defaultLaunched(v));
-    if (!perVerdictTouched) setPerVerdict(defaultPerVerdict(v));
-  };
+  const [testSharePct, setTestSharePct] = useState(20);
 
   const h = hitRatePct / 100;
+  const testingBudget = spend * (testSharePct / 100);
+  const testPerCreative = launched > 0 ? testingBudget / launched : 0;
   const losersPerMonth = launched * (1 - h);
   const winnersPerMonth = launched * h;
-  const wasteMonthly = losersPerMonth * perVerdict;
-  const testingBudget = launched * perVerdict;
+  const wasteMonthly = testingBudget * (1 - h);
   const wasteOfTotalPct = spend > 0 ? (wasteMonthly / spend) * 100 : 0;
-  const costPerWinner = h > 0 ? perVerdict / h : 0;
+  const costPerWinner = winnersPerMonth > 0 ? testingBudget / winnersPerMonth : 0;
   const improvedH = Math.min(h + 0.1, 0.95);
   const savingsMonthly = testingBudget * (1 - h / improvedH);
-  const costPerWinnerImproved = perVerdict / improvedH;
-  const testingExceedsSpend = testingBudget > spend;
+  const costPerWinnerImproved = launched > 0 ? testingBudget / (launched * improvedH) : 0;
 
   return (
     <div className="rounded-3xl border border-pb-border bg-pb-muted/40 p-6 md:p-8">
@@ -119,7 +105,7 @@ export function CreativeWasteDiagnostic() {
         <div className="space-y-6">
           <Field
             label="Monthly ad spend"
-            hint="Across your paid social accounts. The two testing inputs below scale with budget until you set them yourself."
+            hint="Across your paid social accounts."
             value={spend}
             onChange={setSpend}
             min={10_000}
@@ -128,13 +114,20 @@ export function CreativeWasteDiagnostic() {
             prefix="$"
           />
           <Field
+            label="Share of budget in testing"
+            hint="How much of your spend flows through unproven creatives. Most high-volume teams run 10 to 30 percent."
+            value={testSharePct}
+            onChange={setTestSharePct}
+            min={5}
+            max={50}
+            step={1}
+            suffix="%"
+          />
+          <Field
             label="New creatives launched per month"
             hint="A team testing daily typically launches 30 to 60; large accounts run hundreds."
             value={launched}
-            onChange={(v) => {
-              setLaunchedTouched(true);
-              setLaunched(v);
-            }}
+            onChange={setLaunched}
             min={4}
             max={400}
             step={2}
@@ -149,31 +142,20 @@ export function CreativeWasteDiagnostic() {
             step={1}
             suffix="%"
           />
-          <Field
-            label="Spend per creative before the verdict"
-            hint="What a creative gets to spend before you call it a winner or kill it."
-            value={perVerdict}
-            onChange={(v) => {
-              setPerVerdictTouched(true);
-              setPerVerdict(v);
-            }}
-            min={100}
-            max={10_000}
-            step={100}
-            prefix="$"
-          />
-          {testingExceedsSpend && (
-            <p className="text-[12px] text-pb-peach-700 leading-relaxed">
-              Note: launched x spend-per-verdict exceeds your monthly budget; lower one of the inputs to match reality.
-            </p>
-          )}
+          <p className="text-[12px] text-pb-fg-muted leading-relaxed">
+            That puts your testing budget at{" "}
+            <span className="font-medium text-pb-fg tnum">{usd(testingBudget)}/mo</span>, which gives
+            each new creative about{" "}
+            <span className="font-medium text-pb-fg tnum">{usd(testPerCreative)}</span> to prove
+            itself before the verdict.
+          </p>
         </div>
 
         <div className="space-y-4">
           <Result
             label="Spend going to losing creatives"
             value={`${usd(wasteMonthly)}/mo`}
-            note={`${Math.round(losersPerMonth)} of your ${launched} monthly launches will not become winners at a ${hitRatePct}% hit rate. That is ${wasteOfTotalPct.toFixed(1)}% of your total budget spent finding out, ${usd(wasteMonthly * 12)} a year.`}
+            note={`${Math.round(losersPerMonth)} of your ${launched} monthly launches will not become winners at a ${hitRatePct}% hit rate, and they burn their test budget finding out. That is ${wasteOfTotalPct.toFixed(1)}% of your total spend, ${usd(wasteMonthly * 12)} a year.`}
           />
           <Result
             label="Cost per winning creative"

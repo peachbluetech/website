@@ -113,17 +113,23 @@ export default function CreativeWastePage() {
             </h2>
             <div className="prose-pb-lg">
               <p>
-                Four numbers drive everything. Losers per month is launches times
-                one minus your hit rate. Waste is losers times the spend each
-                creative gets before you call the verdict. Cost per winning
-                creative is verdict spend divided by hit rate, because every
-                winner carries the test spend of the losers it took to find it.
-                And the value of ten more points of hit rate is your testing
-                budget times the efficiency gained, which compounds into either a
-                lower cost per winner or more winners from the same budget.
+                Four numbers drive everything. Your testing budget is monthly
+                spend times the share of budget you run through unproven
+                creatives, and it splits evenly across your launches, so each
+                creative&apos;s test spend is testing budget divided by launches.
+                Waste is the testing budget times one minus your hit rate: the
+                share that flowed through creatives that never became winners.
+                Cost per winning creative is testing budget divided by winners,
+                because every winner carries the test spend of the losers it
+                took to find it. And ten more points of hit rate is worth your
+                testing budget times the efficiency gained.
               </p>
               <p>
-                The assumptions are deliberately simple: even test budgets per
+                Because waste is a share of the testing budget, it scales
+                linearly with spend: a $1M account testing 20 creatives wastes
+                ten times what a $100k account testing the same 20 does, since
+                each loser burns ten times more before the verdict. The
+                assumptions are deliberately simple: even test budgets per
                 creative and a binary winner-or-loser verdict. Your account is
                 messier than that, which is the point of measuring it properly.
               </p>
