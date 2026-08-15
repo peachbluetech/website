@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/site";
 import { publishedArticles } from "@/lib/blog";
 import { publishedDocs } from "@/lib/docs";
+import { INTEGRATION_PAGES } from "@/content/integrations/manifest";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
@@ -66,5 +67,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   ];
 
-  return [...staticEntries, ...postEntries, ...docEntries];
+  const integrationEntries: MetadataRoute.Sitemap = INTEGRATION_PAGES.map((p) => ({
+    url: `${SITE_URL}/integrations/${p.slug}`,
+    lastModified: new Date(`${p.updated}T00:00:00Z`),
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+
+  return [...staticEntries, ...postEntries, ...docEntries, ...integrationEntries];
 }

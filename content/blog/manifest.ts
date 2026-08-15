@@ -338,6 +338,10 @@ export const ARTICLES: Article[] = [
         a: "The Model Context Protocol is an open standard that lets AI assistants call tools that fetch real data. Instead of pasting numbers into the chat, you connect a data source once, and Claude queries it directly during the conversation.",
       },
       {
+        q: "Why use Peachblue's MCP instead of Meta's official ads MCP?",
+        a: "Meta's MCP gives Claude raw Ads Manager rows for one platform. Peachblue's MCP gives Claude analyzed intelligence across Meta, TikTok, Google Ads, and Amazon DSP: creatives grouped across ads and platforms, composite scores, 31 tagged creative dimensions, precomputed patterns, and Reddit brand monitoring. Raw rows make Claude a query runner; the intelligence layer makes it an analyst. You can also connect both.",
+      },
+      {
         q: "Can Claude change or pause my campaigns through Peachblue?",
         a: "No. Every tool the Peachblue MCP server exposes is read-only. Claude can query, rank, compare, and summarize your data; it cannot create, edit, pause, or spend anything.",
       },

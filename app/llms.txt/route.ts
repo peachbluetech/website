@@ -39,6 +39,13 @@ export function GET(): Response {
     `- [Docs](${SITE_URL}/docs): setup guides and product reference`,
     `- [Blog](${SITE_URL}/blog)`,
     `- [Book a demo](${SITE_URL}/demo)`,
+    "",
+    "## Integrations",
+    "",
+    `- [Amazon DSP reporting and creative analytics](${SITE_URL}/integrations/amazon-dsp)`,
+    `- [Google Ads creative analytics](${SITE_URL}/integrations/google-ads)`,
+    `- [Meta ads creative analysis](${SITE_URL}/integrations/meta)`,
+    `- [TikTok ads creative analytics](${SITE_URL}/integrations/tiktok)`,
   ];
 
   for (const { title, pages } of docsBySection()) {

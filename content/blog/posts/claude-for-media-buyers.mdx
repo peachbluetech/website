@@ -18,12 +18,28 @@ Copy-paste Claude is a writing tool. The unlock is making it an analysis tool.
 
 The Model Context Protocol is an open standard that lets Claude call tools that fetch live data. Instead of you pasting numbers in, Claude queries the source and reasons over what comes back. The ads ecosystem is adopting it fast: Meta now ships its own ads MCP server, generic data connectors expose raw platform metrics, and analytics tools are exposing their processed data.
 
-The differences between those options matter more than the shared acronym:
+Those options are not interchangeable, and the difference decides what Claude can actually do for you.
 
-- **Raw platform MCPs** (Meta's own, generic connectors) give Claude the same rows you see in Ads Manager. Useful, but Claude starts from zero: no creative grouping, no scoring, no history of what it all means.
-- **Analytics-layer MCPs** give Claude processed intelligence: creatives already grouped across ads and platforms, scored, tagged, and trended. Claude reasons at the level you actually think at.
+## Meta's MCP vs an intelligence layer: what changes
 
-Peachblue's MCP server is the second kind. It exposes the same 17 tools that power our in-app agent: performance summaries, creative rankings by fingerprint group, head-to-head comparisons, pattern detection across 31 creative dimensions, audience insights, copy variant performance, and Reddit brand monitoring, over your synced Meta, TikTok, Google Ads, and Amazon DSP data. Everything is read-only; nothing can touch your campaigns.
+Connecting Meta's own MCP (or a generic connector) gives Claude the same rows you see in Ads Manager: one platform, per-ad metrics, no interpretation. That is genuinely useful for quick lookups. But every hard question a media buyer asks lives above the row level, and raw rows leave Claude to reconstruct that level from scratch inside the chat, every single time, with limited context and no memory of how it did it yesterday.
+
+Peachblue's MCP sits on top of synced, analyzed data instead, and the practical differences stack up fast:
+
+| You ask Claude | With Meta's MCP alone | With Peachblue's MCP |
+| --- | --- | --- |
+| "What is my best creative?" | Best *ad* per metric. The same creative split across 12 ads looks like 12 mediocre ads | Creatives grouped by fingerprint across every ad and platform, ranked by composite score |
+| "Which hook styles are winning?" | No such concept exists in the data | Every creative is tagged across 31 dimensions; hook style is a filter, not a research project |
+| "Compare Meta vs TikTok performance" | Cannot; one platform per connection | One connection covers Meta, TikTok, Google Ads, and Amazon DSP |
+| "Rank last month and tell me what to scale" | Claude invents a ranking method per conversation; answers drift between chats | Same composite score the app uses; Claude's answer matches your team's dashboard |
+| "What do my winners have in common?" | Claude would need to inspect every creative itself, which does not scale in chat | Pattern detection and archetypes are precomputed; Claude retrieves and reasons |
+| "What is Reddit saying about my brand?" | Not ad-platform data at all | Brand Intel mentions, sentiment, and the editorial brief are tools Claude can call |
+
+Two quieter advantages compound over time. **History**: Peachblue keeps what it syncs, so analysis is not capped by platform retention limits (Amazon DSP, for instance, only retains about 60 days of report data; your Peachblue history builds forward past it). **Context efficiency**: tools return ranked, aggregated payloads instead of raw row dumps, so Claude spends its context reasoning rather than arithmetic, which in practice means fewer wrong numbers.
+
+To be fair to the raw option: Meta's MCP is the right tool for platform-native lookups, and nothing stops you from connecting both. The distinction is what you want Claude to be. Raw rows make it a query runner. An intelligence layer makes it an analyst.
+
+Peachblue's server exposes the same 17 tools that power our in-app agent, over your Meta, TikTok, Google Ads, and Amazon DSP data. Everything is read-only; nothing can touch your campaigns.
 
 ## Setting it up
 
