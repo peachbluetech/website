@@ -117,19 +117,18 @@ export default function CreativeWastePage() {
             </h2>
             <div className="prose-pb-lg">
               <p>
-                Every slider is an independent lever; nothing moves unless you
-                move it. Waste is launches times one minus your hit rate times
-                the test spend each creative gets: launch more creatives and
-                waste rises linearly, test bigger per creative and it rises
-                too. There is deliberately no ad-spend slider, because monthly
-                spend is not in the waste formula: account size flows into
-                waste through how many creatives you launch and how much each
-                one tests with, which is what the account-size presets set,
-                explicitly, when you click them. Your testing budget, launches
-                times test spend, is shown live under the sliders so the
-                accounting is always visible. Cost per winning creative is
-                test spend divided by hit rate, because every winner carries
-                the test spend of the losers it took to find it.
+                Waste is launches times one minus your hit rate times the test
+                spend each creative gets before the verdict. Launch more
+                creatives and waste rises linearly. Raise your monthly spend
+                and waste rises too, because test spend per creative scales
+                with account size: we assume each creative tests with half a
+                percent of monthly spend (floored at $200, capped at $10,000),
+                which is the typical pattern, and the assumption is printed
+                live under the sliders with the resulting testing budget. If
+                your account tests differently, pin your own number and it
+                stays fixed. Cost per winning creative is test spend divided
+                by hit rate, because every winner carries the test spend of
+                the losers it took to find it.
               </p>
               <p>
                 The hit-rate value is revenue-framed, with the assumptions in

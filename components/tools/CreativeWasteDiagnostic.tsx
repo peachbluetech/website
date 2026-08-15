@@ -3,34 +3,34 @@
 import { useState } from "react";
 
 /**
- * Creative waste diagnostic (V4).
+ * Creative waste diagnostic (V5).
  *
- * Design rules learned across three user-falsified iterations:
- * 1. Every slider is an independent lever; nothing moves unless the user
- *    moves it.
- * 2. There is NO spend slider: waste = launches x (1 - hit rate) x test
- *    spend per creative, and monthly spend is not in that formula. A spend
- *    slider can only mislead (silently move other sliders, or do nothing).
- *    Account size enters through explicit preset chips that seed typical
- *    launches + test budgets when clicked.
+ * The resolution of four falsified iterations: monthly spend IS the primary
+ * slider, and test spend per creative is a DERIVED, displayed assumption
+ * (0.5% of monthly spend, floored/capped), not a slider. That makes both
+ * user intuitions hold at once with zero hidden slider motion:
+ *   spend up    -> each creative tests bigger -> waste up
+ *   launches up -> waste up, linearly
+ * A customize override pins test spend for accounts that differ; pinning is
+ * explicit and labeled, and clears via the reset link.
  *
- *   testing budget   = launched x test spend per creative   (displayed live)
- *   waste/mo         = launched x (1 - hit rate) x test spend per creative
- *   cost per winner  = test spend per creative / hit rate
- *
- * Hit-rate value (revenue-framed, assumptions stated in the page copy):
- *   extra winners/mo = launched x 0.10
- *   each winner scales to ~10x its test spend (SCALE_MULTIPLE)
- *   incremental ROAS vs the fatigued spend it replaces = winner ROAS x 30%
- *   revenue value    = extra winners x (10 x T) x ROAS x 0.30
- *   plus test savings = testing budget x (1 - h / (h + 0.1))
+ *   T(S)             = clamp(0.5% x spend, $200, $5,000)  [unless pinned]
+ *   waste/mo         = launched x (1 - hit rate) x T
+ *   cost per winner  = T / hit rate
+ *   hit-rate value   = extra winners x (10 x T) x ROAS x 0.30 + test savings
  */
 
 const SCALE_MULTIPLE = 10; // scaled spend a winner absorbs, as a multiple of its test spend
 const FATIGUE_DELTA = 0.3; // ROAS advantage of a fresh winner over the fatigued spend it replaces
+const TEST_SPEND_RATE = 0.005; // test spend per creative as a share of monthly spend
+const TEST_SPEND_MIN = 200;
+const TEST_SPEND_MAX = 10_000;
 
 const usd = (n: number) =>
   n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+
+const derivedTestSpend = (spend: number) =>
+  Math.min(TEST_SPEND_MAX, Math.max(TEST_SPEND_MIN, Math.round((spend * TEST_SPEND_RATE) / 100) * 100));
 
 function Field({
   label,
@@ -92,93 +92,52 @@ function Result({ label, value, note }: { label: string; value: string; note: st
   );
 }
 
-const PRESETS = [
-  { label: "~$50k/mo account", launched: 20, perCreative: 300 },
-  { label: "~$250k/mo", launched: 40, perCreative: 1_000 },
-  { label: "~$1M/mo", launched: 80, perCreative: 2_500 },
-  { label: "$3M+/mo", launched: 150, perCreative: 4_000 },
-];
-
 export function CreativeWasteDiagnostic() {
+  const [spend, setSpend] = useState(100_000);
   const [launched, setLaunched] = useState(40);
-  const [perCreative, setPerCreative] = useState(500);
   const [hitRatePct, setHitRatePct] = useState(20);
   const [winnerRoas, setWinnerRoas] = useState(3);
-  const [activePreset, setActivePreset] = useState<number | null>(null);
+  const [pinnedTestSpend, setPinnedTestSpend] = useState<number | null>(null);
+  const [customizing, setCustomizing] = useState(false);
 
+  const perCreative = pinnedTestSpend ?? derivedTestSpend(spend);
   const h = hitRatePct / 100;
   const testingBudget = launched * perCreative;
+  const testingSharePct = spend > 0 ? (testingBudget / spend) * 100 : 0;
   const losersPerMonth = launched * (1 - h);
   const winnersPerMonth = launched * h;
   const wasteMonthly = losersPerMonth * perCreative;
+  const wasteOfTotalPct = spend > 0 ? (wasteMonthly / spend) * 100 : 0;
   const costPerWinner = h > 0 ? perCreative / h : 0;
 
   const improvedH = Math.min(h + 0.1, 0.95);
   const extraWinners = launched * (improvedH - h);
-  const scaledSpendPerWinner = perCreative * SCALE_MULTIPLE;
-  const revenueValue = extraWinners * scaledSpendPerWinner * winnerRoas * FATIGUE_DELTA;
+  const revenueValue = extraWinners * perCreative * SCALE_MULTIPLE * winnerRoas * FATIGUE_DELTA;
   const testSavings = testingBudget * (1 - h / improvedH);
   const totalHitRateValue = revenueValue + testSavings;
 
-  const applyPreset = (i: number) => {
-    setActivePreset(i);
-    setLaunched(PRESETS[i].launched);
-    setPerCreative(PRESETS[i].perCreative);
-  };
-
   return (
     <div className="rounded-3xl border border-pb-border bg-pb-muted/40 p-6 md:p-8">
-      <div className="mb-7">
-        <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-pb-fg-muted mb-2.5">
-          Start from your account size
-        </div>
-        <div className="flex flex-wrap gap-2">
-          {PRESETS.map((p, i) => (
-            <button
-              key={p.label}
-              type="button"
-              onClick={() => applyPreset(i)}
-              className={`h-9 px-4 rounded-full text-[12.5px] font-semibold border transition-all ${
-                activePreset === i
-                  ? "pb-gradient-peach text-white border-transparent shadow-[0_4px_12px_rgba(242,119,73,0.3)]"
-                  : "border-pb-border bg-pb-card text-pb-fg hover:shadow-pb-soft"
-              }`}
-            >
-              {p.label}
-            </button>
-          ))}
-        </div>
-        <p className="text-[11.5px] text-pb-fg-muted mt-2">
-          Presets set typical launches and test budgets for the account size; fine-tune below.
-        </p>
-      </div>
-
       <div className="grid md:grid-cols-2 gap-8 md:gap-10">
         <div className="space-y-6">
+          <Field
+            label="Monthly ad spend"
+            hint="Across your paid social accounts."
+            value={spend}
+            onChange={setSpend}
+            min={10_000}
+            max={5_000_000}
+            step={10_000}
+            prefix="$"
+          />
           <Field
             label="New creatives launched per month"
             hint="A team testing daily typically launches 30 to 60; large accounts run hundreds."
             value={launched}
-            onChange={(v) => {
-              setActivePreset(null);
-              setLaunched(v);
-            }}
+            onChange={setLaunched}
             min={4}
             max={400}
             step={2}
-          />
-          <Field
-            label="Test spend per creative"
-            hint="What each new creative spends before you call winner or loser. Bigger accounts test bigger."
-            value={perCreative}
-            onChange={(v) => {
-              setActivePreset(null);
-              setPerCreative(v);
-            }}
-            min={100}
-            max={10_000}
-            step={100}
-            prefix="$"
           />
           <Field
             label="Hit rate"
@@ -200,18 +159,67 @@ export function CreativeWasteDiagnostic() {
             step={0.5}
             suffix=":1"
           />
-          <p className="text-[12px] leading-relaxed text-pb-fg-muted">
-            That is a testing budget of{" "}
-            <span className="font-medium text-pb-fg tnum">{usd(testingBudget)}/mo</span>. Most
-            high-volume teams run testing at 10 to 30 percent of total spend.
-          </p>
+
+          <div className="rounded-xl border border-pb-border bg-pb-card p-4">
+            <p className="text-[12.5px] leading-relaxed text-pb-fg">
+              At this account size, each creative tests with{" "}
+              <span className="font-semibold tnum">{usd(perCreative)}</span> before the verdict
+              {pinnedTestSpend === null ? (
+                <span className="text-pb-fg-muted">
+                  {" "}
+                  ({perCreative >= TEST_SPEND_MAX
+                    ? "at our $10,000 cap for very large accounts; pin your own number below if you test bigger"
+                    : "0.5% of monthly spend, the typical pattern: bigger accounts test bigger"}
+                  ).
+                </span>
+              ) : (
+                <span className="text-pb-fg-muted"> (set by you).</span>
+              )}{" "}
+              Testing budget: <span className="font-semibold tnum">{usd(testingBudget)}/mo</span>,{" "}
+              <span className="tnum">{testingSharePct.toFixed(1)}%</span> of spend.
+            </p>
+            {customizing ? (
+              <div className="mt-3">
+                <Field
+                  label="Test spend per creative"
+                  hint="Pinned: this value now stays fixed when you move monthly spend."
+                  value={perCreative}
+                  onChange={(v) => setPinnedTestSpend(v)}
+                  min={100}
+                  max={10_000}
+                  step={100}
+                  prefix="$"
+                />
+                {pinnedTestSpend !== null && (
+                  <button
+                    type="button"
+                    className="mt-2 text-[11.5px] font-medium text-pb-peach-600 underline underline-offset-2"
+                    onClick={() => {
+                      setPinnedTestSpend(null);
+                      setCustomizing(false);
+                    }}
+                  >
+                    Reset to the account-size default
+                  </button>
+                )}
+              </div>
+            ) : (
+              <button
+                type="button"
+                className="mt-2 text-[11.5px] font-medium text-pb-fg-muted underline underline-offset-2 hover:text-pb-fg"
+                onClick={() => setCustomizing(true)}
+              >
+                My account tests differently
+              </button>
+            )}
+          </div>
         </div>
 
         <div className="space-y-4">
           <Result
             label="Spend going to losing creatives"
             value={`${usd(wasteMonthly)}/mo`}
-            note={`${Math.round(losersPerMonth)} of your ${launched} monthly launches will not become winners at a ${hitRatePct}% hit rate, each burning its ${usd(perCreative)} test budget finding out. ${usd(wasteMonthly * 12)} a year.`}
+            note={`${Math.round(losersPerMonth)} of your ${launched} monthly launches will not become winners at a ${hitRatePct}% hit rate, each burning its ${usd(perCreative)} test budget finding out. ${wasteOfTotalPct.toFixed(1)}% of total spend, ${usd(wasteMonthly * 12)} a year.`}
           />
           <Result
             label="Cost per winning creative"
