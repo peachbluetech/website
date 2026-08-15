@@ -339,7 +339,7 @@ export const ARTICLES: Article[] = [
       },
       {
         q: "Why use Peachblue's MCP instead of Meta's official ads MCP?",
-        a: "Meta's MCP gives Claude raw Ads Manager rows for one platform. Peachblue's MCP gives Claude analyzed intelligence across Meta, TikTok, Google Ads, and Amazon DSP: creatives grouped across ads and platforms, composite scores, 31 tagged creative dimensions, precomputed patterns, and Reddit brand monitoring. Raw rows make Claude a query runner; the intelligence layer makes it an analyst. You can also connect both.",
+        a: "Meta's MCP gives Claude raw Ads Manager rows for one platform, and the same is true of any single-platform connector for TikTok, Google Ads, or Amazon. Peachblue's MCP gives Claude analyzed intelligence across all four in one connection: creatives grouped across ads and platforms, composite scores, 31 tagged creative dimensions, precomputed patterns, DSP flight pacing, and Reddit brand monitoring. Raw rows make Claude a query runner; the intelligence layer makes it an analyst. You can also connect both.",
       },
       {
         q: "Can Claude change or pause my campaigns through Peachblue?",

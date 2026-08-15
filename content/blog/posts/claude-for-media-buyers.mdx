@@ -20,18 +20,19 @@ The Model Context Protocol is an open standard that lets Claude call tools that 
 
 Those options are not interchangeable, and the difference decides what Claude can actually do for you.
 
-## Meta's MCP vs an intelligence layer: what changes
+## Raw platform MCPs vs an intelligence layer: what changes
 
-Connecting Meta's own MCP (or a generic connector) gives Claude the same rows you see in Ads Manager: one platform, per-ad metrics, no interpretation. That is genuinely useful for quick lookups. But every hard question a media buyer asks lives above the row level, and raw rows leave Claude to reconstruct that level from scratch inside the chat, every single time, with limited context and no memory of how it did it yesterday.
+Every raw connector shares the same shape, whichever platform it covers. Meta's official MCP gives Claude the rows you see in Ads Manager. A TikTok, Google Ads, or Amazon connector gives Claude that platform's rows. In each case: one platform per connection, per-ad metrics, no interpretation. Genuinely useful for quick lookups. But every hard question a media buyer asks lives above the row level, and raw rows leave Claude to reconstruct that level from scratch inside the chat, every single time, with limited context and no memory of how it did it yesterday. Run four platforms through four raw connectors and you have four silos that Claude has to stitch together by hand in every conversation.
 
-Peachblue's MCP sits on top of synced, analyzed data instead, and the practical differences stack up fast:
+Peachblue's MCP sits on top of synced, analyzed data across all four platforms instead, and the practical differences stack up fast:
 
-| You ask Claude | With Meta's MCP alone | With Peachblue's MCP |
+| You ask Claude | With a raw platform MCP | With Peachblue's MCP |
 | --- | --- | --- |
 | "How did last week go, and what drove the change?" | Metric deltas with no creative context; Claude guesses at causes | Performance summaries and trends tied to the specific creatives that drove them, so the "why" has a name and a thumbnail |
 | "What is my best creative?" | Best *ad* per metric. The same creative split across 12 ads looks like 12 mediocre ads | Creatives grouped by fingerprint across every ad and platform, ranked by composite score |
 | "Which hook styles are winning?" | No such concept exists in the data | Every creative is tagged across 31 dimensions; hook style is a filter, not a research project |
-| "Compare Meta vs TikTok performance" | Cannot; one platform per connection | One connection covers Meta, TikTok, Google Ads, and Amazon DSP |
+| "Compare Meta vs TikTok performance" | Cannot; each connector sees one platform's silo | One connection covers Meta, TikTok, Google Ads, and Amazon DSP, with creatives matched across them |
+| "How are my DSP flights pacing?" | Amazon connectors return raw report rows; no flight math | Budget, expected spend, pace percent, and CPM goals per order, computed the way an agency reports them |
 | "Rank last month and tell me what to scale" | Claude invents a ranking method per conversation; answers drift between chats | Same composite score the app uses; Claude's answer matches your team's dashboard |
 | "What do my winners have in common?" | Claude would need to inspect every creative itself, which does not scale in chat | Pattern detection and archetypes are precomputed; Claude retrieves and reasons |
 | "What should we make next to keep scaling?" | No concept of a winner beyond a metric sort | Winning patterns across 31 dimensions feed the next brief, so scaling means repeating what your data proves works |
@@ -41,7 +42,7 @@ The thread running through every row: answers stay grounded in your performance 
 
 Two quieter advantages compound over time. **History**: Peachblue keeps what it syncs, so analysis is not capped by platform retention limits (Amazon DSP, for instance, only retains about 60 days of report data; your Peachblue history builds forward past it). **Context efficiency**: tools return ranked, aggregated payloads instead of raw row dumps, so Claude spends its context reasoning rather than arithmetic, which in practice means fewer wrong numbers.
 
-To be fair to the raw option: Meta's MCP is the right tool for platform-native lookups, and nothing stops you from connecting both. The distinction is what you want Claude to be. Raw rows make it a query runner. An intelligence layer makes it an analyst.
+To be fair to the raw option: platform-native MCPs are the right tool for platform-native lookups, and nothing stops you from connecting them alongside Peachblue. The distinction is what you want Claude to be. Raw rows make it a query runner. An intelligence layer makes it an analyst.
 
 Peachblue's server exposes the same 17 tools that power our in-app agent, over your Meta, TikTok, Google Ads, and Amazon DSP data. Everything is read-only; nothing can touch your campaigns.
 
