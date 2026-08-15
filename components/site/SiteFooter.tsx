@@ -27,6 +27,7 @@ const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
       { label: "Blog", href: "/blog" },
       { label: "Docs", href: "/docs" },
       { label: "Your ad data in Claude", href: "/docs/mcp" },
+      { label: "Creative waste diagnostic", href: "/tools/creative-waste" },
       { label: "Amazon DSP pacing guide", href: "/blog/amazon-dsp-pacing-guide" },
     ],
   },

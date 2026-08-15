@@ -38,6 +38,7 @@ export function GET(): Response {
     `- [Pricing](${SITE_URL}/pricing): plans and full feature comparison table`,
     `- [Docs](${SITE_URL}/docs): setup guides and product reference`,
     `- [Blog](${SITE_URL}/blog)`,
+    `- [Creative waste diagnostic](${SITE_URL}/tools/creative-waste): free interactive tool for high-volume creative testers`,
     `- [Book a demo](${SITE_URL}/demo)`,
     "",
     "## Integrations",
