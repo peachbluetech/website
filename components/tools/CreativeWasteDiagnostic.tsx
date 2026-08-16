@@ -99,9 +99,9 @@ function Result({ label, value, note }: { label: string; value: string; note: st
 }
 
 export function CreativeWasteDiagnostic() {
-  const [spend, setSpend] = useState(100_000);
-  const [launched, setLaunched] = useState(40);
-  const [hitRatePct, setHitRatePct] = useState(20);
+  const [spend, setSpend] = useState(500_000);
+  const [launched, setLaunched] = useState(50);
+  const [hitRatePct, setHitRatePct] = useState(10);
   const [winnerRoas, setWinnerRoas] = useState(3);
   const [pinnedTestSpend, setPinnedTestSpend] = useState<number | null>(null);
   const [customizing, setCustomizing] = useState(false);
