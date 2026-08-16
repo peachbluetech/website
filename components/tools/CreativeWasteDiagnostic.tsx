@@ -14,10 +14,16 @@ import { useState } from "react";
  * A customize override pins test spend for accounts that differ; pinning is
  * explicit and labeled, and clears via the reset link.
  *
- *   T(S)             = clamp(0.5% x spend, $200, $5,000)  [unless pinned]
+ *   T(S)             = clamp(0.5% x spend, $200, $10,000)  [unless pinned]
  *   waste/mo         = launched x (1 - hit rate) x T
  *   cost per winner  = T / hit rate
- *   hit-rate value   = extra winners x (10 x T) x ROAS x 0.30 + test savings
+ *
+ * Hit-rate value is scarcity-based (v5.1): +10pp means a share of your
+ * future winner supply is new — refreshShare = 0.1 / (h + 0.1) — and that
+ * share of the SCALE budget (spend - testing budget) gets carried by fresh
+ * winners instead of fatigued spend, credited at ROAS x FATIGUE_DELTA.
+ * Lower current hit rate -> bigger share -> each point worth more.
+ *   hit-rate value   = scaleBudget x refreshShare x ROAS x 0.30 + savings
  */
 
 const SCALE_MULTIPLE = 10; // scaled spend a winner absorbs, as a multiple of its test spend
@@ -112,7 +118,9 @@ export function CreativeWasteDiagnostic() {
 
   const improvedH = Math.min(h + 0.1, 0.95);
   const extraWinners = launched * (improvedH - h);
-  const revenueValue = extraWinners * perCreative * SCALE_MULTIPLE * winnerRoas * FATIGUE_DELTA;
+  const scaleBudget = Math.max(0, spend - testingBudget);
+  const refreshShare = (improvedH - h) / improvedH;
+  const revenueValue = scaleBudget * refreshShare * winnerRoas * FATIGUE_DELTA;
   const testSavings = testingBudget * (1 - h / improvedH);
   const totalHitRateValue = revenueValue + testSavings;
 
@@ -229,7 +237,7 @@ export function CreativeWasteDiagnostic() {
           <Result
             label="What 10 points of hit rate is worth"
             value={`${usd(totalHitRateValue)}/mo`}
-            note={`${Math.round(extraWinners)} more winners a month, each scaling to roughly ${SCALE_MULTIPLE}x its test spend. At ${winnerRoas}:1 winner ROAS against the fatigued spend it replaces, that is ${usd(revenueValue)}/mo in incremental revenue, plus ${usd(testSavings)}/mo saved in testing. ${usd(totalHitRateValue * 12)} a year.`}
+            note={`${Math.round(extraWinners)} more winners a month means ${Math.round(refreshShare * 100)}% of your winner supply is new, refreshing that share of your ${usd(scaleBudget)} scale budget with fresh winners instead of fatigued spend. At ${winnerRoas}:1 that is ${usd(revenueValue)}/mo in incremental revenue, plus ${usd(testSavings)}/mo saved in testing. ${usd(totalHitRateValue * 12)} a year. The lower your hit rate today, the more each point is worth.`}
           />
         </div>
       </div>

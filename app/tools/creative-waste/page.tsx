@@ -26,7 +26,7 @@ const FAQ = [
   },
   {
     q: "How is the value of a higher hit rate calculated?",
-    a: "Two parts. Revenue: extra winners from the same launches, each assumed to scale to roughly ten times its test spend, earning your winner ROAS with a 30 percent advantage over the fatigued spend it replaces. Savings: the testing budget no longer burned on losers. Both assumptions are stated openly so you can judge them against your account.",
+    a: "Two parts. Revenue: ten more points of hit rate makes a share of your future winner supply new (at a 20 percent hit rate, a third of it), and that share of your scale budget gets carried by fresh winners instead of fatigued spend, credited at your winner ROAS with a 30 percent freshness advantage. Savings: the testing budget no longer burned on losers. This is why the value is largest when your hit rate is low: winners are scarcest exactly when each one matters most.",
   },
 ];
 
