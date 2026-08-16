@@ -124,6 +124,11 @@ export function CreativeWasteDiagnostic() {
   const testSavings = testingBudget * (1 - h / improvedH);
   const totalHitRateValue = revenueValue + testSavings;
 
+  // Fixed better-winners scenario, symmetric with the fixed +10pp: a ROAS
+  // lift pays on every dollar of scaled spend, at any hit rate.
+  const ROAS_LIFT = 0.5;
+  const roasLiftValue = scaleBudget * ROAS_LIFT;
+
   return (
     <div className="rounded-3xl border border-pb-border bg-pb-muted/40 p-6 md:p-8">
       <div className="grid md:grid-cols-2 gap-8 md:gap-10">
@@ -238,6 +243,11 @@ export function CreativeWasteDiagnostic() {
             label="What 10 points of hit rate is worth"
             value={`${usd(totalHitRateValue)}/mo`}
             note={`${Math.round(extraWinners)} more winners a month means ${Math.round(refreshShare * 100)}% of your winner supply is new, refreshing that share of your ${usd(scaleBudget)} scale budget with fresh winners instead of fatigued spend. At ${winnerRoas}:1 that is ${usd(revenueValue)}/mo in incremental revenue, plus ${usd(testSavings)}/mo saved in testing. ${usd(totalHitRateValue * 12)} a year. The lower your hit rate today, the more each point is worth.`}
+          />
+          <Result
+            label="What half a point of winner ROAS is worth"
+            value={`${usd(roasLiftValue)}/mo`}
+            note={`Better creative does not just win more often, it wins bigger. Going from ${winnerRoas}:1 to ${winnerRoas + ROAS_LIFT}:1 pays on every dollar of your ${usd(scaleBudget)} scaled budget: ${usd(roasLiftValue * 12)} a year in revenue, at any hit rate. Each improvement is valued in isolation; improving both compounds.`}
           />
         </div>
       </div>

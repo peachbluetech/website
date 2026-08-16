@@ -28,6 +28,10 @@ const FAQ = [
     q: "How is the value of a higher hit rate calculated?",
     a: "Two parts. Revenue: ten more points of hit rate makes a share of your future winner supply new (at a 20 percent hit rate, a third of it), and that share of your scale budget gets carried by fresh winners instead of fatigued spend, credited at your winner ROAS with a 30 percent freshness advantage. Savings: the testing budget no longer burned on losers. This is why the value is largest when your hit rate is low: winners are scarcest exactly when each one matters most.",
   },
+  {
+    q: "Why is a small ROAS improvement worth so much?",
+    a: "Because it pays on your whole scaled budget, not just on new winners. Half a point of winner ROAS on an account scaling $80,000 a month is $40,000 a month in revenue, regardless of hit rate. Hit rate determines how many winners you find; winner ROAS determines how hard every scaled dollar works. Better creative moves both, and the two compound.",
+  },
 ];
 
 export const metadata: Metadata = {
