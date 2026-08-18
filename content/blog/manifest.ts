@@ -285,6 +285,10 @@ export const ARTICLES: Article[] = [
         a: "Mostly because of attribution windows: DSP reports conversions on a fixed 14-day window while Meta and Google default to different windows, so the platforms are counting different things. DSP conversion figures for recent days also keep revising upward until the 14-day window completes. Compare each channel against its own history rather than head-to-head on raw conversion counts.",
       },
       {
+        q: "How does Peachblue work with Amazon DSP?",
+        a: "Peachblue connects to Amazon DSP and syncs delivery and conversion reporting continuously, storing the history beyond Amazon's roughly 60-day retention. On top of that data it provides date-range client reports with supplier breakdowns, per-order flight pacing with CPM goals, agency margin handling per client, and AI creative analysis of the DSP creatives themselves alongside Meta, TikTok, and Google Ads. It is an analytics layer only: it does not launch, edit, or bid on campaigns.",
+      },
+      {
         q: "What happens to Amazon DSP reporting at the end of 2026?",
         a: "Amazon is unifying the DSP and the Ads Console into a single Campaign Manager, and legacy reporting tools retire on December 31, 2026. Report surfaces and export paths will move as part of that transition. The underlying data model, including 14-day attribution and the buying hierarchy of orders, line items, and creatives, is expected to carry over.",
       },
