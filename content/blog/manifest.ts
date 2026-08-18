@@ -572,4 +572,58 @@ export const ARTICLES: Article[] = [
     status: "planned",
     faq: [],
   },
+  // Creative economics pillar (Pillar C2 in the strategy doc). NEXT UP.
+  {
+    slug: "creative-economics",
+    title: "Creative economics: the scaling math of paid social (2026)",
+    h1: "The scaling math nobody puts in the",
+    h1Accent: "media plan.",
+    description:
+      "Platform automation took targeting away from buyers, so creative supply is the last scaling lever. The four metrics that gate growth: hit rate, kill speed, winner longevity, and bench depth.",
+    type: "essay",
+    pillar: "creative",
+    keywords: [
+      "creative economics",
+      "creative testing budget",
+      "scaling facebook ads creative",
+      "creative supply",
+    ],
+    priority: 21,
+    byline: "nick",
+    status: "planned",
+    faq: [],
+    rawMaterial: [
+      "Pillar C2 spec + five-beat structure in ~/Documents/peachblue strategy/blog-content-strategy.md",
+      "The creative waste diagnostic at /tools/creative-waste (link it; hit-rate piece embeds it)",
+      "Scarcity insight: value of a hit-rate point is largest when hit rate is low",
+      "Hub for spokes: creative-hit-rate, kill speed (future), bench depth (future), creative-fatigue, creative-testing-framework",
+    ],
+  },
+  {
+    slug: "creative-hit-rate",
+    title: "Creative hit rate: what it is, how to measure it, how to raise it",
+    h1: "Your hit rate is the ceiling on your",
+    h1Accent: "growth.",
+    description:
+      "Creative hit rate is the share of new creatives that become scalable winners. How to measure yours in a spreadsheet today, why it breaks at scale, and the two levers that raise it.",
+    type: "guide",
+    pillar: "creative",
+    keywords: [
+      "creative hit rate",
+      "ad creative win rate",
+      "creative testing success rate",
+      "how many ad creatives to test",
+    ],
+    priority: 22,
+    byline: "nick",
+    status: "planned",
+    faq: [],
+    rawMaterial: [
+      "Five-beat structure per Pillar C2: define w/ formula, teach manual measurement, why it breaks at scale, tool-agnostic levers, Peachblue as instrumented version",
+      "EMBED the CreativeWasteDiagnostic component (components/tools/CreativeWasteDiagnostic.tsx) mid-post",
+      "Benchmark honesty per truth/proof.md: published hit-rate numbers contradict each other; teach measuring your own baseline",
+      "Scarcity math from the diagnostic: refreshShare = 0.1/(h+0.1); lower hit rate = each point worth more",
+      "Link hub (creative-economics), /tools/creative-waste, /docs/scoring",
+    ],
+  },
 ];
