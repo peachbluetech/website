@@ -264,12 +264,36 @@ export const ARTICLES: Article[] = [
     ],
     priority: 5,
     byline: "peachblue",
-    status: "planned",
-    faq: [],
+    status: "published",
+    datePublished: "2026-08-18",
+    dateUpdated: "2026-08-18",
+    faq: [
+      {
+        q: "What reports does Amazon DSP offer?",
+        a: "The DSP console offers downloadable delivery reports sliced by order, line item, and creative, plus report families covering audience, inventory, geography, device, and on-Amazon shopping activity. The same data is available programmatically through the Reports API for scheduled, automated pulls. All reporting is scoped to a single advertiser at a time; there is no cross-client view in the console.",
+      },
+      {
+        q: "What attribution window does Amazon DSP use?",
+        a: "Amazon DSP uses a 14-day attribution window, and it is the only window available: there is no 1-day, 7-day, or 30-day option. Every conversion metric in every DSP report, including purchases, sales, detail page views, add to carts, and new-to-brand, is a 14-day figure. This makes raw side-by-side comparison with platforms on other windows, like Meta on 7-day click, misleading unless each column is labeled with its window.",
+      },
+      {
+        q: "How long does Amazon keep DSP report data?",
+        a: "The Reports API retains roughly 60 days of history, and requests for older date ranges fail. Each request is also capped at a 31-day range, so longer windows are pulled in chunks. Any reporting workflow that needs quarterly reviews or year-over-year comparisons must warehouse the data outside Amazon from the first pull onward.",
+      },
+      {
+        q: "Why do my DSP numbers not match Meta or Google?",
+        a: "Mostly because of attribution windows: DSP reports conversions on a fixed 14-day window while Meta and Google default to different windows, so the platforms are counting different things. DSP conversion figures for recent days also keep revising upward until the 14-day window completes. Compare each channel against its own history rather than head-to-head on raw conversion counts.",
+      },
+      {
+        q: "What happens to Amazon DSP reporting at the end of 2026?",
+        a: "Amazon is unifying the DSP and the Ads Console into a single Campaign Manager, and legacy reporting tools retire on December 31, 2026. Report surfaces and export paths will move as part of that transition. The underlying data model, including 14-day attribution and the buying hierarchy of orders, line items, and creatives, is expected to carry over.",
+      },
+    ],
     rawMaterial: [
       "truth/proof.md DSP facts (31-day chunks, 60-day retention, 14d attribution)",
       "Our Reports API integration experience",
     ],
+    related: ["amazon-dsp-pacing-guide", "claude-for-media-buyers"],
   },
   {
     slug: "creative-strategist-workflow",
