@@ -1,0 +1,73 @@
+Paid social scaling used to be a targeting discipline. It is now a creative supply discipline, because targeting, bidding, and placement have been absorbed by platform automation, and creative is the input the algorithm still takes from you. This essay lays out the math of that shift: why growth stalls when creative production falls behind, the four metrics that decide whether your supply keeps up, and how to run them as operating numbers instead of vibes.
+
+## What automation took, and what it left
+
+The buyer's controllable inputs on Meta, TikTok, and Google have narrowed to roughly three: budget, account structure, and creative. Audience selection went first, as broad targeting started beating hand-built segments in most accounts. Bidding went next. Placement optimization was never really yours. Advantage+ and Performance Max are the end state of the trend: you hand the platform money and assets, and it decides who sees what, where, at what price.
+
+This is not a complaint. The automation mostly performs, which is exactly why it won. The point is where the leverage moved. When every advertiser in the auction runs the same automated delivery, the differentiating input is the one the machine cannot generate for you: the creative itself. And creative now does the job targeting used to do, because the platform reads who engages with an ad and finds more people like them. Your hook is your audience definition.
+
+So the question that decides whether an account scales is no longer "can we find more efficient pockets of the auction." It is "can we produce winning creative faster than our current winners wear out." That is a supply chain question, and it deserves supply chain math.
+
+## Why scaling stalls: the supply equation
+
+An account's spend can only grow as fast as its supply of creatives that absorb spend efficiently. Winners fatigue, so the supply drains on its own even if you change nothing. Growth is the difference between two rates:
+
+```
+winner supply per month  = creatives launched x hit rate
+required supply          = winners lost to fatigue + winners needed for new spend
+```
+
+When supply runs below requirement, the account does not announce it. Budget quietly concentrates onto aging winners, frequency climbs, efficiency drifts down a few percent a month, and eventually someone says the account "hit a ceiling." The ceiling is usually a production shortfall wearing a media-metrics costume.
+
+Executives run this math instinctively for physical inventory: fill rates, lead times, safety stock. Almost nobody runs it for creative, even though creative is now the scarce input. The rest of this essay names the four numbers that make it runnable.
+
+## What are the four metrics that gate growth?
+
+Four metrics describe the health of a creative supply chain: hit rate (production efficiency), kill speed (the cost of a no), winner longevity (how fast supply decays), and bench depth (concentration risk). Here is each one as a formula and the question it answers.
+
+| Metric | Definition | The question it answers |
+| --- | --- | --- |
+| Creative hit rate | winners / creatives launched | How efficient is production? |
+| Kill speed | spend a losing creative absorbs before the verdict | What does each no cost? |
+| Winner longevity | productive days or spend a winner delivers before fatigue | How fast does supply decay? |
+| Bench depth | proven challengers ready to absorb spend | What happens when a hero dies? |
+
+### Creative hit rate
+
+Hit rate is the share of launched creatives that become scalable winners. It is the master number: at a fixed production volume, hit rate determines winner supply, and winner supply determines how much spend you can add without leaning harder on fatigued creative. A team launching 50 creatives a month at a 10 percent hit rate and a team launching 20 at 25 percent produce the same five winners, at very different production costs. Measuring it takes a definition of "winner," a cohort window, and a spreadsheet, and it breaks in predictable ways at scale. The full method is in the companion guide: [creative hit rate, what it is, how to measure it, how to raise it](/blog/creative-hit-rate).
+
+### Kill speed
+
+Kill speed is how many dollars a losing creative absorbs before someone calls the verdict. It has two failure modes. Killing too slowly burns testing budget past the point where the data had already answered the question, and at volume this is usually the single largest recoverable line item in the account. Killing too quickly manufactures false negatives, which silently lowers your measured hit rate by executing winners before they matured. Most teams have no written verdict rule at all, which means their kill speed is whatever the busiest buyer's calendar allows.
+
+### Winner longevity
+
+Longevity is the productive life of a winner between graduation and fatigue, measured in days or in spend absorbed. It sets your replacement cadence: an account whose winners last 90 days needs a fraction of the production volume of one whose winners burn out in three weeks at the same spend. Longevity varies enormously with audience size, frequency, and category, which is why it has to be measured per account rather than assumed from someone else's benchmark.
+
+### Bench depth
+
+Bench depth is the count of proven-but-not-yet-scaled creatives standing behind your current heroes. It is the difference between fatigue as routine maintenance and fatigue as an account-level event. When one hero carries most of the spend and the bench is empty, that creative's decay takes the account's efficiency down with it, and the team is forced into panic production, which is exactly the mode that produces low hit rates. The hero-ad problem gets its own piece in this series.
+
+## The scarcity effect: why the worst hit rate has the best ROI
+
+These four numbers are not equally valuable to improve at any given moment, and the pattern is counterintuitive: the lower your hit rate, the more each point of improvement is worth. Going from 10 percent to 20 percent doubles your winner supply. Going from 40 to 50 adds a quarter. Winners are scarcest exactly when each one matters most, so teams with weak hit rates are sitting on the largest improvement upside, not the smallest.
+
+Winner quality compounds the effect from the other side. Hit rate determines how many winners you find; the ROAS of those winners determines how hard every scaled dollar works afterward. A modest improvement in winner quality pays on the entire scaled budget, at any hit rate. Better creative moves both numbers at once, which is why creative improvements compound in a way media optimizations do not.
+
+You can run this arithmetic on your own account in about a minute: the [creative waste diagnostic](/tools/creative-waste) takes monthly spend, launch volume, hit rate, and winner ROAS, and returns what losing creatives currently cost you and what raising each number is worth.
+
+## Running creative economics as an operating discipline
+
+The minimum viable version is a monthly cohort review with five numbers on one page: creatives launched, hit rate, average spend per killed creative, the age of your top three spend-carrying winners, and the bench count. Everything on that page is computable from ad-level exports and a spreadsheet.
+
+Two rules make the numbers trustworthy. First, write down the verdict criteria (what test budget a creative gets, and what it must do to graduate) so hit rate means the same thing in March and in September, regardless of who ran the reviews. Second, baseline before you target. Published benchmarks for creative metrics contradict each other wildly, so the only number worth managing against is your own trailing 90 days.
+
+One scope note: this is paid social math. Amazon DSP and CTV run on delivery economics (flights, budgets, pacing, CPM goals), which is a different discipline with different failure modes. We cover that world separately, starting with [the Amazon DSP pacing guide](/blog/amazon-dsp-pacing-guide).
+
+## The instrumented version
+
+Everything above works with exports and a spreadsheet, and the [hit rate guide](/blog/creative-hit-rate) walks through the manual method step by step. The honest limit is that the manual version breaks at exactly the scale where these numbers start to matter, mostly on one problem: knowing which ads are actually the same creative.
+
+That problem is why we built [Peachblue](/pricing). It groups your ads into creatives with perceptual fingerprinting, so the same asset is recognized across ads, campaigns, and platforms even after re-crops and re-compression, which makes hit rate computable instead of hand-counted. On top of that unit of account it runs the rest of the discipline: [composite scoring](/docs/scoring) that gives every creative a consistent tier so verdicts stop drifting between buyers, AI analysis across 31 creative dimensions with a written expert read and copy suggestions per creative, Intelligence patterns and archetypes that tell you what to make next from your own winners rather than from a mood board, Agent Peach and a live MCP server so you can interrogate your own performance data in Claude, Brand Intel monitoring Reddit for the customer language your next hooks should use, and agency mode with multi-client workspaces, margin-aware client reports, and DSP pacing for teams running this discipline across a book of clients. Plans run from Starter to Agency, all self-serve, on [the pricing page](/pricing).
+
+Whether or not you ever touch the product, start the monthly review. Four numbers on one page, measured the same way every month, will change what your team argues about: less "why was last month soft," more "what do we build next." That is creative economics doing its job.

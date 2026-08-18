@@ -572,7 +572,7 @@ export const ARTICLES: Article[] = [
     status: "planned",
     faq: [],
   },
-  // Creative economics pillar (Pillar C2 in the strategy doc). NEXT UP.
+  // Creative economics pillar (Pillar C2 in the strategy doc).
   {
     slug: "creative-economics",
     title: "Creative economics: the scaling math of paid social (2026)",
@@ -590,14 +590,38 @@ export const ARTICLES: Article[] = [
     ],
     priority: 21,
     byline: "nick",
-    status: "planned",
-    faq: [],
+    status: "published",
+    datePublished: "2026-08-17",
+    dateUpdated: "2026-08-17",
+    faq: [
+      {
+        q: "What is creative economics?",
+        a: "Creative economics is running your ad creative pipeline on operating metrics instead of instinct: how many creatives you launch, what share become winners, what losers cost before they are cut, how long winners last, and how many proven challengers stand behind them. It treats creative as the supply chain that gates paid social growth, because with targeting and bidding automated, creative is the input buyers still control.",
+      },
+      {
+        q: "Why is creative called the last scaling lever?",
+        a: "Platform automation has absorbed audience selection, bidding, and placement on Meta, TikTok, and Google, so every advertiser in the auction runs roughly the same delivery machinery. The remaining inputs a buyer controls are budget and creative, and creative now also does the targeting job, since platforms find audiences based on who engages with each ad. When an account stalls, the binding constraint is usually the supply of creative that can absorb more spend efficiently.",
+      },
+      {
+        q: "What are the four creative supply metrics?",
+        a: "Creative hit rate (winners divided by creatives launched) measures production efficiency. Kill speed measures the spend a losing creative absorbs before the verdict. Winner longevity measures how many productive days or dollars a winner delivers before fatigue. Bench depth counts proven challengers ready to absorb spend when a hero fades. Together they describe whether winner supply keeps up with spend growth.",
+      },
+      {
+        q: "Do these metrics apply to Amazon DSP and CTV?",
+        a: "Mostly not. Hit rate and kill speed assume paid social testing volume: many creatives launched, fast verdicts, continuous replacement. DSP and CTV buying runs on delivery economics, meaning flights, budgets, pacing, and CPM goals, with few produced creatives and long flight commitments. That world needs pacing discipline rather than hit rate math.",
+      },
+      {
+        q: "How do I start measuring creative economics?",
+        a: "Run a monthly cohort review with five numbers: creatives launched, hit rate, average spend per killed creative, the age of your top spend-carrying winners, and the bench count. All of it is computable from ad-level platform exports in a spreadsheet. Write down your winner criteria first so the numbers stay comparable month to month, and baseline against your own trailing 90 days rather than published benchmarks.",
+      },
+    ],
     rawMaterial: [
       "Pillar C2 spec + five-beat structure in ~/Documents/peachblue strategy/blog-content-strategy.md",
       "The creative waste diagnostic at /tools/creative-waste (link it; hit-rate piece embeds it)",
       "Scarcity insight: value of a hit-rate point is largest when hit rate is low",
       "Hub for spokes: creative-hit-rate, kill speed (future), bench depth (future), creative-fatigue, creative-testing-framework",
     ],
+    related: ["creative-hit-rate", "amazon-dsp-pacing-guide"],
   },
   {
     slug: "creative-hit-rate",
@@ -616,8 +640,31 @@ export const ARTICLES: Article[] = [
     ],
     priority: 22,
     byline: "nick",
-    status: "planned",
-    faq: [],
+    status: "published",
+    datePublished: "2026-08-17",
+    dateUpdated: "2026-08-17",
+    faq: [
+      {
+        q: "What is a good creative hit rate?",
+        a: "There is no trustworthy published benchmark; the numbers in ranked articles contradict each other, which suggests nobody is working from representative data. Most high-volume teams sit somewhere between 10 and 30 percent, depending on how strict their winner definition is and how many iterations they count. The practical move is to measure your own trailing 90 days and improve against that baseline instead of chasing an industry number.",
+      },
+      {
+        q: "What counts as a winning creative?",
+        a: "A winner is a creative that graduated out of testing and then absorbed meaningful spend at or above your target efficiency. A workable concrete rule: it went on to absorb at least five times its test spend while holding your target CPA or ROAS. The exact thresholds matter less than writing the rule down and applying it identically to every creative in the cohort.",
+      },
+      {
+        q: "Do iterations count as new creatives?",
+        a: "Either convention works, but pick one and keep it. Counting iterations gives you a blended production number; excluding them isolates your ability to find new concepts. Iterations win more often than new concepts, so a cohort heavy on them posts a flattering hit rate while the concept portfolio quietly narrows. Note the convention next to the metric so the trend stays comparable.",
+      },
+      {
+        q: "How many creatives should I test per month?",
+        a: "Derive it from your own numbers rather than an industry figure: decide the test budget each creative gets, decide what share of monthly spend goes to testing, and the launch count falls out. Working backward also works: the winners you need per month divided by your measured hit rate gives the required launch volume. Both calculations need your own hit rate baseline first.",
+      },
+      {
+        q: "Why is a low hit rate worth more per point of improvement?",
+        a: "Because winners are scarcest exactly when each one matters most. Moving from 10 to 20 percent doubles your winner supply; moving from 40 to 50 percent adds a quarter. The lower your starting point, the larger the share of your future winner supply each point represents, and the more fatigued spend those fresh winners can take over.",
+      },
+    ],
     rawMaterial: [
       "Five-beat structure per Pillar C2: define w/ formula, teach manual measurement, why it breaks at scale, tool-agnostic levers, Peachblue as instrumented version",
       "EMBED the CreativeWasteDiagnostic component (components/tools/CreativeWasteDiagnostic.tsx) mid-post",
@@ -625,5 +672,6 @@ export const ARTICLES: Article[] = [
       "Scarcity math from the diagnostic: refreshShare = 0.1/(h+0.1); lower hit rate = each point worth more",
       "Link hub (creative-economics), /tools/creative-waste, /docs/scoring",
     ],
+    related: ["creative-economics", "claude-for-media-buyers"],
   },
 ];

@@ -1,0 +1,100 @@
+import { CreativeWasteDiagnostic } from "@/components/tools/CreativeWasteDiagnostic";
+
+Creative hit rate is the share of creatives you launch that become winners: winners divided by creatives launched, measured over a cohort old enough to judge. If you scale paid social it is the ceiling on your growth, because spend can only grow as fast as your supply of efficient creative, and that supply is launch volume times hit rate. This guide covers the whole practice: the definition, how to measure yours in a spreadsheet this afternoon, why the measurement breaks at scale, and the levers that actually raise it.
+
+It is a companion to [the creative economics essay](/blog/creative-economics), which covers why creative supply became the last scaling lever and how hit rate fits alongside kill speed, winner longevity, and bench depth.
+
+## What is creative hit rate?
+
+Creative hit rate is winning creatives divided by creatives launched, over a fixed window:
+
+```
+creative hit rate = winning creatives / creatives launched
+```
+
+Measured over a launch cohort, not a calendar of impressions: the denominator is every distinct creative that started running in the window, and the numerator is how many of those went on to win. A trailing 90 days is a good default window, with the most recent two to three weeks excluded because those launches are too young to call either way. Counting them as losses punishes your most recent work; counting them as undecided keeps the number honest.
+
+The unit is the creative, not the ad. The same video running in six ads across three campaigns is one launch and at most one winner. Getting this distinction right is most of the measurement work, and losing it is the main way the metric breaks later.
+
+### What counts as a winner?
+
+A winner is a creative that earned its way out of testing and then absorbed meaningful spend at or above your target efficiency. That definition only becomes a metric once you make it concrete. A workable example rule: the creative graduated from the test budget, went on to absorb at least five times its test spend, and held your target CPA or ROAS while doing it. Yours can differ. What matters is that it is written down, uses your own efficiency target, and gets applied identically to every creative in the cohort.
+
+Resist the urge to grade on upside ("it almost worked"). A creative either took scaled spend at target efficiency or it did not. The near-misses are useful as creative intelligence, but the moment they enter the numerator, the metric stops being comparable month to month.
+
+Decide the iteration question up front too: does a re-cut of an existing winner count as a new launch? Either answer works. Counting iterations gives you a blended production number; excluding them isolates your ability to find new concepts. Pick one, note it next to the metric, and keep it.
+
+## What is a good creative hit rate?
+
+There is no trustworthy published benchmark, and anyone quoting one precisely is guessing. Published benchmarks for creative metrics contradict each other wildly across the articles that rank for them (claims about a "good hook rate," for instance, range from around 20 percent to over 60 percent depending on the source), which tells you nobody is working from representative data. Most high-volume teams sit somewhere between 10 and 30 percent, and where you fall inside or outside that band depends on how strict your winner definition is, your iteration mix, and your category.
+
+The practical move is to skip the benchmark hunt entirely: measure your own trailing 90 days with the method below, treat that as the baseline, and manage against it. A team that moves its own hit rate from 12 to 18 percent has grown winner supply by half. No industry table needed.
+
+## How to measure your hit rate in a spreadsheet
+
+The manual method takes one export and about an hour: pull ad-level data, map ads to creatives, apply your winner rule, and divide. Step by step:
+
+1. **Export ad-level performance** for the last 90 days from each platform: ad name, creative thumbnail or ID, launch date, spend, results, and your efficiency metric (CPA or ROAS).
+2. **Map ads to creatives.** Group every ad that runs the same underlying asset into one row. Naming conventions help if your team actually follows them; otherwise this is eyeballing thumbnails. This step is the real work.
+3. **Stamp each creative with its launch date**, the first date any ad containing it spent money.
+4. **Drop the too-young cohort**, everything launched in the last two to three weeks.
+5. **Apply the winner rule** to each remaining creative and mark it winner, loser, or undecided.
+6. **Divide.** Winners over judgeable launches is your hit rate.
+
+A worked example: 47 creatives launched in the window, 9 of them too young to judge, leaves 38 judgeable. Six passed the winner rule. Hit rate: 6 / 38, or roughly 16 percent.
+
+The sheet needs only these columns:
+
+| Column | What goes in it |
+| --- | --- |
+| Creative | One row per distinct asset, not per ad |
+| Launch date | First spend date of any ad using it |
+| Ads containing it | Count, as a sanity check on your grouping |
+| Test spend | Spend before the graduation decision |
+| Total spend | Lifetime spend in the window |
+| Efficiency | CPA or ROAS at the creative level |
+| Verdict | Winner, loser, or undecided, by the written rule |
+
+Repeat monthly on the same rules and you also get the trend, which is worth more than the level.
+
+## Why does hit rate measurement break at scale?
+
+Manual measurement fails on three fronts, roughly in this order: creative identity, verdict consistency, and maintenance. Each one gets worse with volume.
+
+**Identity breaks first.** At 10 launches a month you can eyeball thumbnails. At 50, the same video exists as a 9:16, a 1:1, and a 4:5 crop, re-exported twice, uploaded by two different buyers under names that follow last quarter's convention. Every mis-grouped ad corrupts both the numerator and the denominator. Add a second platform and the same asset lives two unconnected lives in two exports, so cross-platform winners get counted twice or judged on half their data.
+
+**Verdicts drift second.** Without a written rule, "winner" means whatever each buyer feels reviewing their own launches, and the bar moves with the month's mood. A hit rate computed on drifting verdicts can move without anything real changing, which is worse than no metric, because it looks like signal.
+
+**The sheet dies third.** The measurement is nobody's core job. It survives about six weekly cycles of manual grouping before it quietly stops being updated, and with it goes the trend line, which was the point.
+
+None of this makes the manual method worthless. It makes it a starting point: measure the baseline by hand, and treat the pain of maintaining it as data about when instrumentation is worth paying for.
+
+## What is a higher hit rate worth?
+
+The value of a hit rate improvement is largest exactly when your hit rate is low, because winners are scarcest there. Moving from 10 to 20 percent doubles your winner supply; moving from 40 to 50 adds a quarter. Each point buys a bigger share of fresh winner supply the lower you start, and fresh winners carry the spend that fatigued creative was dragging down. On top of the revenue effect, every point also shrinks the testing budget burned on losers.
+
+Run your own numbers here: monthly spend, launches, hit rate, and winner ROAS in, and the cost of your losing creatives plus the value of improvement out.
+
+<CreativeWasteDiagnostic />
+
+The standalone version lives at [/tools/creative-waste](/tools/creative-waste) if you want to share it. Two things worth noticing in the output: the waste number is not a budget to eliminate (testing spend is the price of finding winners, and a team funding no losers is not testing enough), and the ROAS card usually surprises people, because winner quality pays on every scaled dollar at any hit rate. Hit rate determines how many winners you find; winner ROAS determines how hard each scaled dollar works. The two compound.
+
+## How do you raise your creative hit rate?
+
+Two levers move hit rate more than everything else combined: building new creatives from the patterns your winners already prove, and standardizing the verdict so the metric stays honest while losers stop absorbing budget. Two more protect it over time.
+
+**Build from your winners' shared patterns.** Most briefs are written from a brainstorm, a competitor screenshot, or whatever the team is bored of. Your own winner cohort is a better brief: look at what the top creatives share in hook style, format, angle, tone, and offer framing, and manufacture against those patterns deliberately. This is the single highest-leverage change because it moves the quality of every launch, not the judgment of launches after the fact.
+
+**Standardize the verdict.** Give every creative the same test budget and the same written graduation rule. This raises measured honesty immediately, and it usually raises the real number too, because a standard verdict kills zombie spend on obvious losers (freeing test budget for more launches) and stops premature kills of slow starters (recovering false negatives your gut was executing early).
+
+**Manage the iteration mix explicitly.** Iterations of proven concepts win more often than new concepts; a cohort heavy on iterations posts a flattering hit rate while the concept portfolio quietly narrows and fatigues together. Decide a mix (a majority iterating on proven concepts, a protected minority exploring new ones) and hold it, so today's hit rate is not borrowed from next quarter's supply.
+
+**Mine customer language for angles.** New concepts fail most often at the angle, not the execution. The way customers describe the problem in Reddit threads and reviews is a stack of pre-validated hooks; creatives built on those angles enter testing with better odds than ones built on internal assumptions.
+
+## The instrumented version
+
+Full disclosure: I build [Peachblue](/pricing), and this discipline is what it instruments. Everything above works without it. Here is the honest mapping from each manual pain to the product, so you can judge when the trade is worth it.
+
+The identity problem is the core of it. Peachblue groups ads into creatives with perceptual fingerprinting, recognizing the same asset across ads, campaigns, and platforms even after re-crops and re-compression, across Meta, TikTok, Google Ads, and Amazon DSP. That makes the creative, not the ad, the unit of account, which is the precondition for a hit rate you can trust. Verdict drift is handled by [composite scoring](/docs/scoring): every creative gets a percentile score blending CTR, ROAS, CPA, and spend, with consistent tiers from Top Performer to Underperformer, so graduation decisions stop depending on who reviewed that week. The build-from-winners lever runs on the analysis layer: every creative is tagged across 31 dimensions with a written expert read and copy suggestions, and Intelligence detects the patterns and archetypes your winners share, which turns "what do we make next" into a query on your own data. You can literally ask: Agent Peach answers questions about your performance conversationally, and the same tools are exposed over a live MCP server, so [your own cross-platform ad data is queryable from Claude](/blog/claude-for-media-buyers). The angle-mining lever is Brand Intel, which monitors Reddit for your brand, competitors, and topics and turns the chatter into an editorial brief. And for agencies running this across a book of clients, agency mode adds multi-client workspaces, margin-aware client reports, and DSP pacing.
+
+Start with the spreadsheet either way. Measure the baseline, write down the verdict rule, run the monthly review from [the creative economics essay](/blog/creative-economics), and raise the number against your own history. The teams that treat hit rate as an operating metric stop arguing about last month and start compounding.
