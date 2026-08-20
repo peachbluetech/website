@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { motion, animate, useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { SiteNav } from "@/components/site/SiteNav";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { PeachblueMark } from "@/components/site/PeachblueMark";
@@ -15,222 +15,98 @@ const stagger = { show: { transition: { staggerChildren: 0.1 } } };
 
 /* ── Page ───────────────────────────────────────────────────────── */
 export default function Home() {
+  const MOVES = [
+    {
+      num: "01",
+      title: "Connect",
+      desc: "Secure OAuth to Meta, TikTok, Google Ads, and Amazon DSP. Peachblue syncs your creatives and daily performance automatically, every day.",
+      visual: <StepConnectVisual />,
+    },
+    {
+      num: "02",
+      title: "Analyze",
+      desc: "AI reads every image and video: hook, tone, format, CTA, 29 dimensions in all. Every creative is scored against the objective its campaign was bought for.",
+      visual: <StepAnalyzeVisual />,
+    },
+    {
+      num: "03",
+      title: "Act",
+      desc: "A Today worklist, a Monday digest in email and Slack, and a generation-ready brief built from your own winners.",
+      visual: <StepActVisual />,
+    },
+  ];
+
+  const TOOLKIT = [
+    { title: "Brand Intel", desc: "Reddit brand monitoring: sentiment on every mention, plus an AI editorial brief.", href: "/docs/brand-intel" },
+    { title: "Reports and pacing", desc: "Client-ready reports, DSP flight pacing, and agency margin baked in.", href: "/docs/reports-and-pacing" },
+    { title: "Your data in Claude", desc: "The 19-tool MCP server, included on Pro and up.", href: "/mcp" },
+    { title: "Objective-aware scoring", desc: "Reach ranks for awareness and CTV, with components you can audit.", href: "/docs/scoring" },
+    { title: "Creative Library", desc: "Every ad and creative, tagged, filterable, and deep-linkable.", href: "/docs/creative-analysis" },
+  ];
+
   return (
-    <div className="flex flex-col min-h-full bg-pb-bg">
-
-      {/* SEO: semantic, visually-hidden H1 anchored to the brand name.
-          The visible hero uses H2 so the brand owns the single H1. */}
-      <h1 className="sr-only">Peachblue: Creative Intelligence for Ads</h1>
-
+    <div className="min-h-screen bg-pb-bg text-pb-fg overflow-x-clip">
       <SiteNav />
 
-      {/* ── 1 · HERO ─────────────────────────────────────── */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-20 px-6">
-        <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-[48fr_52fr] gap-12 md:gap-14 items-center">
+      {/* SEO: semantic, visually-hidden H1 anchored to the brand name. */}
+      <h1 className="sr-only">Peachblue: AI creative intelligence for Meta, TikTok, Google Ads, and Amazon DSP</h1>
 
-          {/* Left: editorial copy */}
-          <div>
-            <motion.div initial="hidden" animate="show" variants={stagger}>
-              <motion.div
-                variants={fade}
-                className="text-[11px] font-semibold uppercase tracking-[0.18em] text-pb-peach-600 mb-4"
-              >
-                Marketing intelligence
-              </motion.div>
-              <motion.h2
-                variants={fade}
-                className="font-display text-[clamp(40px,6vw,72px)] leading-[1.04] font-medium tracking-[-0.02em] text-pb-fg mb-5"
-              >
-                Know what ads work <span className="italic">and why.</span>
-              </motion.h2>
-              <motion.p
-                variants={fade}
-                className="text-[clamp(15px,1.8vw,18px)] leading-[1.7] text-pb-fg-muted max-w-[460px] mb-8"
-              >
-                Peachblue syncs every ad platform you run: Meta, TikTok, Google, and Amazon DSP. It
-                analyzes every creative with AI, and tells you what to make next.
-              </motion.p>
-              <motion.div variants={fade} className="flex gap-3 flex-wrap items-center">
-                <a
-                  href={TRIAL_HREF}
-                  className="inline-flex items-center gap-2 h-12 px-7 rounded-full pb-gradient-peach text-white text-[15px] font-semibold shadow-[0_8px_24px_rgba(242,119,73,0.35)] hover:brightness-105 hover:-translate-y-0.5 transition-all"
-                >
-                  {TRIAL_LABEL} &rarr;
-                </a>
-                <a
-                  href={DEMO_HREF}
-                  className="inline-flex items-center gap-2 h-12 px-7 rounded-full border border-pb-border bg-pb-card text-[15px] font-medium shadow-pb-soft hover:shadow-pb-lift hover:-translate-y-0.5 transition-all"
-                >
-                  Book a demo
-                </a>
-              </motion.div>
-              <motion.p variants={fade} className="mt-4 text-[12.5px] text-pb-fg-muted">
-                {RISK_REVERSAL}
-              </motion.p>
+      {/* ── 1 · MASTHEAD HERO ────────────────────────────── */}
+      <section className="pt-32 md:pt-40 pb-14 px-6">
+        <div className="max-w-[1100px] mx-auto">
+          <motion.div initial="hidden" animate="show" variants={stagger} className="text-center max-w-[860px] mx-auto">
+            <motion.div
+              variants={fade}
+              className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-pb-peach-600 mb-5"
+            >
+              Creative intelligence
             </motion.div>
-          </div>
-
-          {/* Right: Agent Peach product frame */}
+            <motion.h2
+              variants={fade}
+              className="font-display text-[clamp(44px,7.2vw,92px)] leading-[1.02] font-medium tracking-[-0.025em] text-pb-fg mb-6"
+            >
+              Know what ads work, <span className="italic">and why.</span>
+            </motion.h2>
+            <motion.p
+              variants={fade}
+              className="text-[clamp(15px,1.8vw,18px)] leading-[1.7] text-pb-fg-muted max-w-[560px] mx-auto mb-8"
+            >
+              Peachblue syncs every platform you run, reads every creative with AI, and turns your
+              own results into the next brief.
+            </motion.p>
+            <motion.div variants={fade} className="flex gap-3 flex-wrap items-center justify-center">
+              <a
+                href={TRIAL_HREF}
+                className="inline-flex items-center gap-2 h-12 px-7 rounded-full pb-gradient-peach text-white text-[15px] font-semibold shadow-[0_8px_24px_rgba(242,119,73,0.35)] hover:brightness-105 hover:-translate-y-0.5 transition-all"
+              >
+                {TRIAL_LABEL} &rarr;
+              </a>
+              <a
+                href={DEMO_HREF}
+                className="inline-flex items-center gap-2 h-12 px-7 rounded-full border border-pb-border bg-pb-card text-[15px] font-medium shadow-pb-soft hover:shadow-pb-lift hover:-translate-y-0.5 transition-all"
+              >
+                Book a demo
+              </a>
+            </motion.div>
+            <motion.p variants={fade} className="mt-4 text-[12.5px] text-pb-fg-muted">
+              {RISK_REVERSAL}
+            </motion.p>
+          </motion.div>
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.15, ease: EASE }}
+            transition={{ duration: 0.6, delay: 0.25, ease: EASE }}
+            className="mt-14 md:mt-16"
           >
-            <AgentPeachHeroFrame />
+            <CommandPanelFrame />
           </motion.div>
         </div>
       </section>
 
-      {/* ── 2 · PROOF STRIP ──────────────────────────────── */}
-      <section className="pb-4 px-6">
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-40px" }}
-          variants={fade}
-          className="max-w-[1100px] mx-auto mb-5"
-        >
-          <div className="border-y border-dashed border-pb-border py-4 grid grid-cols-2 md:grid-cols-5 gap-x-6 gap-y-3 px-1">
-            {PROOF_POINTS.map((p) => (
-              <div key={p} className="flex items-start gap-2 text-[12.5px] leading-snug text-pb-fg-muted">
-                <Check />
-                <span>{p}</span>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-40px" }}
-          variants={fade}
-          className="max-w-[1100px] mx-auto"
-        >
-          <div className="rounded-2xl border border-pb-border bg-pb-card shadow-pb-soft px-6 py-5 flex flex-col lg:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-3 flex-wrap justify-center">
-              <span className="text-[10.5px] font-semibold uppercase tracking-[0.14em] text-pb-fg-muted mr-1">Syncs</span>
-              {PLATFORMS.map((p) => (
-                <span key={p.name} className="inline-flex items-center gap-2 h-8 pl-1.5 pr-3 rounded-full border border-pb-border bg-pb-bg text-[12.5px] font-medium text-pb-fg">
-                  <span
-                    className="size-5 rounded-md flex items-center justify-center text-white text-[10px] font-semibold"
-                    style={{ background: p.bg }}
-                    aria-hidden="true"
-                  >
-                    {p.letter}
-                  </span>
-                  {p.name}
-                </span>
-              ))}
-            </div>
-            <div className="flex items-center gap-8 shrink-0">
-              <div className="text-center lg:text-left">
-                <div className="font-display text-[24px] font-medium tracking-tight text-pb-fg leading-none">
-                  <CountUp to={2.1} decimals={1} suffix="x" />
-                </div>
-                <div className="text-[11.5px] text-pb-fg-muted mt-1">hook-test lift found</div>
-              </div>
-              <div className="w-px h-9 bg-pb-border" aria-hidden="true" />
-              <div className="text-center lg:text-left">
-                <div className="font-display text-[24px] font-medium tracking-tight text-pb-fg leading-none">
-                  <CountUp to={44} decimals={0} suffix="%" />
-                </div>
-                <div className="text-[11.5px] text-pb-fg-muted mt-1">lower CPA, UGC vs studio</div>
-              </div>
-            </div>
-            {/* Kingstar testimonial goes here when approved */}
-          </div>
-        </motion.div>
-      </section>
+      {/* ── 2 · TICKER ───────────────────────────────────── */}
+      <TickerStrip />
 
-      {/* ── 3 · HOW IT WORKS ─────────────────────────────── */}
-      <section id="product" className="py-24 md:py-32 px-6">
-        <div className="max-w-[1100px] mx-auto">
-          <SectionHeader
-            eyebrow="How it works"
-            title={<>From raw ad data to creative <span className="italic">intelligence</span></>}
-            subtitle="Peachblue automates the entire workflow. From syncing your ad accounts to delivering AI-powered analysis on every creative."
-          />
-          <div className="grid md:grid-cols-3 gap-5">
-            {[
-              { num: "1", title: "Connect", desc: "Securely connect your ad accounts via OAuth. Peachblue syncs all your creative assets and performance data automatically, every day.", visual: <StepConnectVisual /> },
-              { num: "2", title: "Analyze", desc: "AI vision models process every image and video, generating structured intelligence tags. Hook style, emotional tone, CTA type, pacing, and more.", visual: <StepAnalyzeVisual /> },
-              { num: "3", title: "Act", desc: "Explore your Creative Library, ask Agent Peach questions, and turn your winners into a generation-ready brief for your next campaign.", visual: <StepActVisual /> },
-            ].map((s) => (
-              <motion.div key={s.num} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-60px" }} variants={fade} className="rounded-xl border border-dashed border-pb-border p-7 flex flex-col">
-                <div className="size-9 rounded-full pb-gradient-peach text-white text-[13px] font-semibold flex items-center justify-center mb-5 shadow-[0_4px_12px_rgba(242,119,73,0.3)]">
-                  {s.num}
-                </div>
-                <h3 className="font-display text-[20px] font-medium tracking-tight mb-2 text-pb-fg">{s.title}</h3>
-                <p className="text-[13.5px] leading-relaxed text-pb-fg-muted mb-5">{s.desc}</p>
-                <div className="mt-auto">{s.visual}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── 3b · MANIFESTO INTERLUDE ─────────────────────── */}
-      <section className="py-20 md:py-28 px-6">
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-80px" }}
-          variants={stagger}
-          className="max-w-[900px] mx-auto text-center"
-        >
-          <motion.p
-            variants={fade}
-            className="font-display text-[clamp(30px,4.6vw,54px)] leading-[1.14] font-medium tracking-[-0.015em] text-pb-fg"
-          >
-            Automation took targeting and bidding.
-            <br />
-            Creative is the lever you <span className="italic">still own</span>.
-          </motion.p>
-          <motion.p variants={fade} className="mt-6 text-[13px] text-pb-fg-muted">
-            Creative quality drives roughly 56% of auction outcomes, more than bid, targeting, and
-            placement combined, per Meta data science.
-          </motion.p>
-        </motion.div>
-      </section>
-
-      {/* ── 4 · FEATURE SECTIONS ─────────────────────────── */}
-
-      <FeatureSection
-        eyebrow="Agent Peach"
-        title={<>Ask your ad accounts <span className="italic">anything</span>.</>}
-        bullets={[
-          "One conversation across every account you run: Meta, TikTok, Google, Amazon DSP",
-          "Answers grounded in your real performance data, not generic advice",
-          "Every number states the time window it came from, so you can audit any answer",
-          "Follow-up questions reuse the data behind earlier answers instead of guessing",
-          "Ranked creative lists, head-to-head comparisons, and deep dives",
-        ]}
-        ctaLabel={TRIAL_LABEL}
-        ctaHref={TRIAL_HREF}
-        frame={<AgentPeachSpotlightFrame />}
-      />
-
-      <FeatureSection
-        reverse
-        tinted
-        eyebrow="Creative Intelligence"
-        title={<>29 creative dimensions, <span className="italic">decoded</span>.</>}
-        bullets={[
-          "Every creative tagged across hook style, tone, format, CTA, and more",
-          "Patterns and archetypes show which combinations actually drive ROAS",
-          "Filter your entire library by any tag or metric in seconds",
-          "Objective-aware scores judge each creative against its campaign's actual job",
-        ]}
-        ctaLabel={TRIAL_LABEL}
-        ctaHref={TRIAL_HREF}
-        frame={<CreativeIntelligenceFrame />}
-      />
-
-      <EconomicsBand />
-
-      <DigestShowcase />
-
-      {/* ── Editorial passage: the judgment gap ──────────── */}
+      {/* ── 3 · ESSAY: THE JUDGMENT GAP ──────────────────── */}
       <section className="py-20 md:py-28 px-6">
         <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-[5fr_7fr] gap-10 md:gap-16 items-start">
           <motion.div
@@ -239,7 +115,7 @@ export default function Home() {
             viewport={{ once: true, margin: "-80px" }}
             variants={fade}
           >
-            <div className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-pb-peach-600 mb-4">
+            <div className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-pb-peach-600 mb-4">
               Why Peachblue exists
             </div>
             <h2 className="font-display text-[clamp(28px,4vw,48px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-fg">
@@ -271,14 +147,66 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── 4 · THREE MOVES ──────────────────────────────── */}
+      <section id="product" className="py-16 md:py-24 px-6 relative">
+        <div className="pointer-events-none absolute inset-0 bg-pb-muted/40" aria-hidden="true" />
+        <div className="max-w-[1100px] mx-auto relative">
+          <div className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-pb-fg-muted mb-8">
+            How it works
+          </div>
+          {MOVES.map((m, i) => (
+            <motion.div
+              key={m.num}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-60px" }}
+              variants={fade}
+              className={`grid grid-cols-[56px_1fr] md:grid-cols-[110px_1fr_280px] gap-x-6 gap-y-5 items-center py-9 border-t border-dashed border-pb-border ${i === MOVES.length - 1 ? "border-b" : ""}`}
+            >
+              <div className="font-display text-[clamp(34px,4.5vw,56px)] font-medium text-pb-peach-500 leading-none">
+                {m.num}
+              </div>
+              <div>
+                <h3 className="font-display text-[clamp(20px,2.6vw,28px)] font-medium tracking-[-0.01em] text-pb-fg mb-2">
+                  {m.title}
+                </h3>
+                <p className="text-[14px] leading-relaxed text-pb-fg-muted max-w-[520px]">{m.desc}</p>
+              </div>
+              <div className="col-span-2 md:col-span-1">{m.visual}</div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── 5 · FEATURE SPREADS ──────────────────────────── */}
+
+      <FeatureSection
+        eyebrow="Agent Peach"
+        title={<>Ask your ad accounts <span className="italic">anything</span>.</>}
+        bullets={[
+          "One conversation across every account you run: Meta, TikTok, Google, Amazon DSP",
+          "Answers grounded in your real performance data, not generic advice",
+          "Every number states the time window it came from, so you can audit any answer",
+          "Follow-up questions reuse the data behind earlier answers instead of guessing",
+          "Ranked creative lists, head-to-head comparisons, and deep dives",
+        ]}
+        ctaLabel={TRIAL_LABEL}
+        ctaHref={TRIAL_HREF}
+        frame={<AgentPeachSpotlightFrame />}
+      />
+
+      <EconomicsBand />
+
+      <DigestShowcase />
+
       <FeatureSection
         reverse
         eyebrow="Next Creative Brief"
         title={<>Stop guessing what to make <span className="italic">next</span>.</>}
         bullets={[
-          "One click turns your account's winning patterns into a brief a freelancer can execute",
+          "One click turns your account&rsquo;s winning patterns into a brief a freelancer can execute",
           "Proven hooks with their real CTRs, and reference ads labeled as top performers",
-          "Do and don't rules in plain language, with the evidence behind each one",
+          "Do and don&rsquo;t rules in plain language, with the evidence behind each one",
           "A generation-ready prompt block for whichever creative tool you use",
           "Share it with a public link, no login needed on the other end",
         ]}
@@ -287,80 +215,77 @@ export default function Home() {
         frame={<BriefFrame />}
       />
 
-      <FeatureSection
-        id="platforms"
-        eyebrow="Every platform, one brain"
-        title={<>Meta, TikTok, Google, Amazon DSP. <span className="italic">Unified</span>.</>}
-        bullets={[
-          "Meta, TikTok, Google Ads, and Amazon DSP. All live, all synced daily",
-          "Amazon DSP includes Connected TV, coverage nobody else offers",
-          "One creative library and one scoring system across every channel",
-          "Secure OAuth connections you can disconnect at any time",
-        ]}
-        ctaLabel="See plans"
-        ctaHref="/pricing"
-        frame={<DataHubFrame />}
-        afterCta={
-          <div className="flex flex-wrap gap-x-4 gap-y-1.5 text-[12.5px] text-pb-fg-muted">
-            <span>Platform details:</span>
+      {/* ── 6 · MANIFESTO INTERLUDE ──────────────────────── */}
+      <section className="py-20 md:py-28 px-6">
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-80px" }}
+          variants={stagger}
+          className="max-w-[900px] mx-auto text-center"
+        >
+          <motion.p
+            variants={fade}
+            className="font-display text-[clamp(30px,4.6vw,54px)] leading-[1.14] font-medium tracking-[-0.015em] text-pb-fg"
+          >
+            Automation took targeting and bidding.
+            <br />
+            Creative is the lever you <span className="italic">still own</span>.
+          </motion.p>
+          <motion.p variants={fade} className="mt-6 text-[13px] text-pb-fg-muted">
+            Creative quality drives roughly 56% of auction outcomes, more than bid, targeting, and
+            placement combined, per Meta data science.
+          </motion.p>
+        </motion.div>
+      </section>
+
+      {/* ── 7 · DSP CALLOUT ──────────────────────────────── */}
+      <section id="platforms" className="px-6 pb-4">
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-40px" }}
+          variants={fade}
+          className="max-w-[1100px] mx-auto rounded-2xl border border-pb-peach-200 bg-pb-peach-50 px-6 py-5 flex flex-col md:flex-row md:items-center justify-between gap-4"
+        >
+          <p className="text-[14.5px] leading-relaxed text-pb-fg">
+            <strong className="font-semibold">Amazon DSP and Connected TV, included.</strong>{" "}
+            No creative analytics tool at self-serve pricing touches DSP.
+          </p>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[12.5px] text-pb-fg-muted shrink-0">
             <a href="/integrations/meta" className="underline underline-offset-2 hover:text-pb-fg transition-colors">Meta</a>
             <a href="/integrations/tiktok" className="underline underline-offset-2 hover:text-pb-fg transition-colors">TikTok</a>
             <a href="/integrations/google-ads" className="underline underline-offset-2 hover:text-pb-fg transition-colors">Google Ads</a>
-            <a href="/integrations/amazon-dsp" className="underline underline-offset-2 hover:text-pb-fg transition-colors">Amazon DSP</a>
+            <a href="/integrations/amazon-dsp" className="font-semibold text-pb-peach-700 underline underline-offset-2 hover:text-pb-fg transition-colors">Amazon DSP &rarr;</a>
           </div>
-        }
-      />
+        </motion.div>
+      </section>
 
-      <FeatureSection
-        reverse
-        tinted
-        eyebrow="Brand Intel"
-        title={<>Hear what consumers <span className="italic">actually</span> say.</>}
-        bullets={[
-          "Track your brand, competitors, and category topics across Reddit",
-          "Sentiment analysis on every mention, updated with each scan",
-          "AI-written editorial briefs turn raw chatter into creative direction",
-          "Feed real consumer language straight into your next brief",
-        ]}
-        ctaLabel={TRIAL_LABEL}
-        ctaHref={TRIAL_HREF}
-        frame={<BrandIntelFrame />}
-      />
-
-      <FeatureSection
-        eyebrow="Reports & pacing"
-        title={<>Client-ready reports in <span className="italic">minutes</span>.</>}
-        bullets={[
-          "Multi-client workspaces with per-client scoping for agencies",
-          "Margin-aware reporting, so you bill the numbers you actually invoice",
-          "DSP flight pacing with budget, delivery, and CPM goals at a glance",
-          "Export to PDF or CSV, ready to send",
-        ]}
-        ctaLabel="See plans"
-        ctaHref="/pricing"
-        frame={<ReportsFrame />}
-      />
-
-      <FeatureSection
-        reverse
-        tinted
-        eyebrow="MCP integration"
-        title={<>Works inside Claude. Your data, <span className="italic">wherever</span> you think.</>}
-        bullets={[
-          "Connect Peachblue to Claude or Cursor in one step",
-          "The only creative analytics MCP serving your own cross-platform performance data, including Amazon DSP",
-          "Query your creative performance from the tools you already live in",
-          "The same intelligence engine, available wherever you work",
-        ]}
-        ctaLabel={TRIAL_LABEL}
-        ctaHref={TRIAL_HREF}
-        frame={<McpFrame />}
-        afterCta={
-          <Link href="/mcp" className="text-[12.5px] text-pb-fg-muted underline underline-offset-2 hover:text-pb-fg transition-colors">
-            How the MCP connection works
-          </Link>
-        }
-      />
+      {/* ── 8 · TOOLKIT INDEX ────────────────────────────── */}
+      <section className="py-20 md:py-24 px-6">
+        <div className="max-w-[860px] mx-auto">
+          <div className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-pb-fg-muted mb-8">
+            Also in Peachblue
+          </div>
+          <div>
+            {TOOLKIT.map((t, i) => (
+              <Link
+                key={t.title}
+                href={t.href}
+                className={`group grid md:grid-cols-[250px_1fr_24px] gap-x-6 gap-y-1 items-baseline py-5 border-t border-dashed border-pb-border ${i === TOOLKIT.length - 1 ? "border-b" : ""}`}
+              >
+                <span className="font-display text-[20px] font-medium text-pb-fg group-hover:text-pb-peach-600 transition-colors">
+                  {t.title}
+                </span>
+                <span className="text-[13.5px] text-pb-fg-muted leading-relaxed">{t.desc}</span>
+                <span className="hidden md:block text-pb-fg-muted group-hover:text-pb-peach-600 group-hover:translate-x-1 transition-all" aria-hidden="true">
+                  &rarr;
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ── PULL QUOTE (enable when the Kingstar testimonial is approved;
              oversized editorial style per the journal direction) ──
@@ -374,7 +299,7 @@ export default function Home() {
       </section>
       */}
 
-      {/* ── 5 · PRICING TEASER ───────────────────────────── */}
+      {/* ── 9 · PRICING TEASER ───────────────────────────── */}
       <section id="pricing" className="py-24 md:py-32 px-6">
         <div className="max-w-[1100px] mx-auto">
           <SectionHeader
@@ -427,7 +352,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 6 · FAQ ──────────────────────────────────────── */}
+      {/* ── 10 · FAQ ─────────────────────────────────────── */}
       <section id="faq" className="py-24 md:py-32 px-6 relative">
         <div className="pointer-events-none absolute inset-0 bg-pb-muted/40" aria-hidden="true" />
         <div className="max-w-[1100px] mx-auto relative">
@@ -436,7 +361,7 @@ export default function Home() {
             title={<>Good to <span className="italic">know</span>.</>}
             subtitle="Everything you might want to check before starting a trial."
           />
-          <div className="grid md:grid-cols-2 gap-5 max-w-[900px] mx-auto">
+          <div className="grid md:grid-cols-2 gap-x-10 gap-y-2 max-w-[900px] mx-auto">
             {FAQS.map((f) => (
               <motion.div
                 key={f.q}
@@ -444,7 +369,7 @@ export default function Home() {
                 whileInView="show"
                 viewport={{ once: true, margin: "-60px" }}
                 variants={fade}
-                className="border-t border-dashed border-pb-border pt-5"
+                className="border-t border-dashed border-pb-border pt-5 pb-4"
               >
                 <h3 className="text-[14.5px] font-semibold mb-2 text-pb-fg">{f.q}</h3>
                 <p className="text-[13px] leading-relaxed text-pb-fg-muted">{f.a}</p>
@@ -454,11 +379,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 7 · FINAL CTA + DEMO ─────────────────────────── */}
+      {/* ── 11 · FINAL CTA + DEMO ────────────────────────── */}
       <section id="demo" className="py-24 md:py-32 px-6 relative overflow-hidden">
         <div className="pointer-events-none absolute inset-0 opacity-50" style={{ background: "radial-gradient(60% 50% at 25% 20%, rgba(255,214,200,0.55) 0%, transparent 55%), radial-gradient(60% 50% at 85% 80%, rgba(168,210,255,0.45) 0%, transparent 60%)" }} aria-hidden="true" />
         <div className="max-w-[560px] mx-auto relative text-center">
-          <div className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-pb-fg-muted mb-3">Get started</div>
+          <div className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-pb-fg-muted mb-3">Get started</div>
           <h2 className="font-display text-[clamp(32px,4.8vw,56px)] leading-[1.06] font-medium tracking-[-0.015em] text-pb-fg mb-4">
             See what&apos;s <span className="italic">working</span>.<br />Make more of it.
           </h2>
@@ -474,9 +399,6 @@ export default function Home() {
             </a>
           </div>
           <p className="text-[12.5px] text-pb-fg-muted mb-12">{RISK_REVERSAL}</p>
-
-          {/* The lead form now lives on its own /demo page (better mobile
-              experience than a deep anchor on this very long page). */}
           <a
             href={DEMO_HREF}
             className="inline-flex items-center gap-2 h-12 px-7 rounded-full border border-pb-border bg-pb-card text-[15px] font-medium shadow-pb-soft hover:shadow-pb-lift hover:-translate-y-0.5 transition-all"
@@ -486,7 +408,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 8 · FOOTER ───────────────────────────────────── */}
+      {/* ── 12 · FOOTER ──────────────────────────────────── */}
       <SiteFooter />
     </div>
   );
@@ -494,12 +416,16 @@ export default function Home() {
 
 /* ── Data ───────────────────────────────────────────────────────── */
 
-const PROOF_POINTS = [
-  "A Monday digest in your inbox and Slack",
-  "One-click briefs built from your own winners",
-  "An agent that cites its time windows",
-  "Scores that match each campaign's objective",
-  "Amazon DSP and Connected TV included",
+const TICKER_ITEMS = [
+  "Syncs Meta",
+  "TikTok",
+  "Google Ads",
+  "Amazon DSP + CTV",
+  "29 creative dimensions",
+  "2.1x hook-test lift found",
+  "44% lower CPA, UGC vs studio",
+  "Monday digest, email + Slack",
+  "Every score cites its window",
 ];
 
 const PLATFORMS = [
@@ -541,7 +467,7 @@ const FAQS: { q: string; a: string }[] = [
 function SectionHeader({ eyebrow, title, subtitle }: { eyebrow: string; title: React.ReactNode; subtitle: string }) {
   return (
     <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger} className="text-center mb-14 max-w-2xl mx-auto">
-      <motion.div variants={fade} className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-pb-fg-muted mb-2">{eyebrow}</motion.div>
+      <motion.div variants={fade} className="font-mono text-[10.5px] font-semibold uppercase tracking-[0.2em] text-pb-fg-muted mb-2">{eyebrow}</motion.div>
       <motion.h2 variants={fade} className="font-display text-[clamp(30px,4.6vw,52px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-fg mb-3">{title}</motion.h2>
       <motion.p variants={fade} className="text-[15px] text-pb-fg-muted leading-relaxed">{subtitle}</motion.p>
     </motion.div>
@@ -591,7 +517,7 @@ function FeatureSection({
             variants={stagger}
             className={reverse ? "md:order-2" : ""}
           >
-            <motion.div variants={fade} className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-pb-peach-600 mb-3">{eyebrow}</motion.div>
+            <motion.div variants={fade} className="font-mono text-[10.5px] font-semibold uppercase tracking-[0.2em] text-pb-peach-600 mb-3">{eyebrow}</motion.div>
             <motion.h2 variants={fade} className="font-display text-[clamp(26px,3.8vw,44px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-fg mb-5">{title}</motion.h2>
             <motion.ul variants={fade} className="space-y-3 mb-7">
               {bullets.map((b) => (
@@ -687,24 +613,6 @@ function MiniPlanCard({
 
 /* ── Animation primitives ───────────────────────────────────────── */
 
-/* Counts a number up from 0 when scrolled into view */
-function CountUp({ to, decimals = 0, prefix = "", suffix = "", duration = 1.2, className = "" }: { to: number; decimals?: number; prefix?: string; suffix?: string; duration?: number; className?: string }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-40px" });
-  useEffect(() => {
-    if (!inView || !ref.current) return;
-    const controls = animate(0, to, {
-      duration,
-      ease: EASE,
-      onUpdate: (v) => {
-        if (ref.current) ref.current.textContent = `${prefix}${v.toFixed(decimals)}${suffix}`;
-      },
-    });
-    return () => controls.stop();
-  }, [inView, to, decimals, prefix, suffix, duration]);
-  return <span ref={ref} className={`tnum ${className}`}>{`${prefix}${(0).toFixed(decimals)}${suffix}`}</span>;
-}
-
 /* Types text in character by character once started */
 function Typewriter({ text, start, delay = 0, speed = 16 }: { text: string; start: boolean; delay?: number; speed?: number }) {
   const [count, setCount] = useState(0);
@@ -766,20 +674,6 @@ function Sk({ w, h = "h-2", className = "" }: { w: string; h?: string; className
   return <div className={`${h} ${w} rounded-full bg-pb-fg/[0.08] ${className}`} aria-hidden="true" />;
 }
 
-/* Small gradient square standing in for a creative thumbnail */
-const THUMB_GRADIENTS = [
-  "linear-gradient(135deg, #FFD2BB 0%, #FF9466 100%)",
-  "linear-gradient(135deg, #E0EFFF 0%, #4C8DFF 100%)",
-  "linear-gradient(135deg, #F1E7FF 0%, #c084fc 100%)",
-  "linear-gradient(135deg, #E6F4EC 0%, #6ee7b7 100%)",
-  "linear-gradient(135deg, #FFE8DC 0%, #F27749 100%)",
-  "linear-gradient(135deg, #FFF4EE 0%, #FFB48C 100%)",
-];
-
-function Thumb({ i = 0, className = "size-10" }: { i?: number; className?: string }) {
-  return <div className={`rounded-lg shrink-0 ${className}`} style={{ background: THUMB_GRADIENTS[i % THUMB_GRADIENTS.length] }} aria-hidden="true" />;
-}
-
 /* ── Demo ad creatives (fictional brands) ───────────────────────── */
 /* Mock ad creatives for three invented demo brands, built from pure
    CSS/SVG. All type scales with the container via cqw units so the
@@ -837,80 +731,6 @@ const SQUARE_ADS: Record<DemoBrand, string> = {
 
 function ScoreDot({ tone = "good" }: { tone?: "good" | "warn" }) {
   return <span className={`size-2.5 rounded-full shrink-0 ${tone === "good" ? "bg-[#3AA976]" : "bg-pb-peach-400"}`} aria-hidden="true" />;
-}
-
-/* A ranked-creative row shape: rank, demo ad thumb, skeleton copy, metric pills */
-function RankedRow({ rank, brand, delay, inView }: { rank: number; brand: DemoBrand; delay: number; inView: boolean }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.4, delay, ease: EASE }}
-      className="flex items-center gap-3.5 rounded-xl border border-pb-border bg-pb-card p-3"
-    >
-      <span className="font-display text-[18px] font-medium text-pb-fg-muted w-4 text-center shrink-0">{rank}</span>
-      <DemoAd brand={brand} format="story" className="w-9" />
-      <div className="flex-1 min-w-0 space-y-2">
-        <Sk w="w-3/4" h="h-2.5" />
-        <div className="flex gap-1.5">
-          <Sk w="w-10" />
-          <Sk w="w-10" />
-          <Sk w="w-10" />
-        </div>
-      </div>
-      <ScoreDot tone={rank === 3 ? "warn" : "good"} />
-    </motion.div>
-  );
-}
-
-/* ── Hero frame: Agent Peach answering with ranked cards ────────── */
-/* TODO: replace with real app screenshot */
-function AgentPeachHeroFrame() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-  return (
-    <div ref={ref}>
-      <BrowserFrame url="app.peachblue.io/agent">
-        <div className="space-y-4">
-          {/* User question bubble */}
-          <div className="flex justify-end">
-            <div className="max-w-[85%] rounded-2xl rounded-br-md pb-gradient-peach text-white px-4 py-2.5 text-[13px] font-medium shadow-[0_4px_14px_rgba(242,119,73,0.25)]">
-              <Typewriter start={inView} delay={300} text="What's my best performing creative this month?" speed={22} />
-            </div>
-          </div>
-
-          {/* Agent identity row */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.4, delay: 1.6 }}
-            className="flex items-center gap-2"
-          >
-            <div className="size-6 rounded-full pb-gradient-peach flex items-center justify-center shrink-0">
-              <PeachblueMark size={13} color="#ffffff" />
-            </div>
-            <span className="text-[11px] font-semibold text-pb-fg-muted uppercase tracking-[0.1em]">Agent Peach</span>
-          </motion.div>
-
-          {/* Agent answer: skeleton line + ranked creative cards */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.4, delay: 1.9 }}
-            className="space-y-2"
-          >
-            <Sk w="w-5/6" />
-            <Sk w="w-2/3" />
-          </motion.div>
-          <div className="space-y-2.5">
-            <RankedRow rank={1} brand="fizzli" delay={2.2} inView={inView} />
-            <RankedRow rank={2} brand="trailform" delay={2.45} inView={inView} />
-            <RankedRow rank={3} brand="sagelle" delay={2.7} inView={inView} />
-          </div>
-        </div>
-      </BrowserFrame>
-    </div>
-  );
 }
 
 /* ── Feature frame: Agent Peach spotlight card ──────────────────── */
@@ -978,316 +798,122 @@ function AgentPeachSpotlightFrame() {
   );
 }
 
-/* ── Feature frame: Creative Intelligence tag grid ──────────────── */
-/* TODO: replace with real app screenshot */
-function CreativeIntelligenceFrame() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-  const tags = [
-    { dot: "#4C8DFF", label: "Hook style", value: "Problem-first" },
-    { dot: "#ffb89a", label: "Emotional tone", value: "Urgency" },
-    { dot: "#c084fc", label: "CTA type", value: "Shop now" },
-    { dot: "#6ee7b7", label: "Visual complexity", value: "Minimal" },
-  ];
-  /* Rows pair matching formats so grid row heights stay even.
-     First tile (Fizzli) keeps the selected ring — the tag values
-     shown to the right describe it. */
-  const libraryAds: { brand: DemoBrand; format: DemoAdFormat; layout?: DemoAdLayout }[] = [
-    { brand: "fizzli", format: "story" },
-    { brand: "trailform", format: "story" },
-    { brand: "sagelle", format: "square", layout: "split" },
-    { brand: "fizzli", format: "square", layout: "split" },
-    { brand: "sagelle", format: "story", layout: "productCenter" },
-    { brand: "trailform", format: "story", layout: "productCenter" },
-  ];
-  return (
-    <div ref={ref}>
-      <BrowserFrame url="app.peachblue.io/intelligence">
-        <div className="grid grid-cols-[minmax(0,11fr)_minmax(0,13fr)] gap-4 items-start">
-          {/* Creative library mini-grid */}
-          <div className="grid grid-cols-2 gap-2">
-            {libraryAds.map((a, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, scale: 0.94 }}
-                animate={inView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.35, delay: 0.15 + i * 0.08, ease: EASE }}
-              >
-                <DemoAd
-                  brand={a.brand}
-                  format={a.format}
-                  layout={a.layout}
-                  className={`w-full ${i === 0 ? "ring-2 ring-pb-peach-400 ring-offset-2 ring-offset-pb-bg" : ""}`}
-                />
-              </motion.div>
-            ))}
-          </div>
-          {/* Extracted tag rows */}
-          <div className="min-w-0">
-            <div className="text-[10px] font-semibold uppercase tracking-[0.12em] text-pb-fg-muted mb-2">Intelligence tags</div>
-            <div className="divide-y divide-pb-border/60">
-              {tags.map((t, i) => (
-                <motion.div
-                  key={t.label}
-                  initial={{ opacity: 0, x: 10 }}
-                  animate={inView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.4, delay: 0.7 + i * 0.15, ease: EASE }}
-                  className="flex items-center justify-between py-2.5"
-                >
-                  <div className="flex items-center gap-2.5">
-                    <span className="size-2.5 rounded-full shrink-0" style={{ background: t.dot }} />
-                    <span className="text-[12px] font-medium text-pb-fg">{t.label}</span>
-                  </div>
-                  <span className="text-[12px] text-pb-fg-muted">{t.value}</span>
-                </motion.div>
-              ))}
-            </div>
-            <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: 1.4 }}
-              className="mt-3 rounded-lg bg-pb-muted/50 border border-pb-border/60 p-2.5 space-y-1.5"
-            >
-              <div className="text-[10px] font-semibold uppercase tracking-[0.12em] text-pb-fg-muted mb-1">Pattern detected</div>
-              <Sk w="w-full" h="h-1.5" />
-              <Sk w="w-3/4" h="h-1.5" />
-            </motion.div>
-          </div>
-        </div>
-      </BrowserFrame>
-    </div>
-  );
-}
-
-/* ── Feature frame: Data Hub platform rows ──────────────────────── */
-/* TODO: replace with real app screenshot */
-function DataHubFrame() {
+/* ── Hero frame: the Today command center as an ink instrument panel ── */
+/* TODO: replace with a real Today screenshot once slice-2 captures land */
+function CommandPanelFrame() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
   return (
-    <div ref={ref}>
-      <BrowserFrame url="app.peachblue.io">
-        <div className="space-y-2.5">
-          <div className="flex items-center justify-between mb-1">
-            <div className="text-[10px] font-semibold uppercase tracking-[0.12em] text-pb-fg-muted">Connected platforms</div>
-            <span className="inline-flex items-center h-6 px-3 rounded-full border border-pb-border bg-pb-card text-[10.5px] font-semibold text-pb-fg-muted">Sync all</span>
-          </div>
-          {PLATFORMS.map((p, i) => (
-            <motion.div
-              key={p.name}
-              initial={{ opacity: 0, y: 10 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: 0.15 + i * 0.12, ease: EASE }}
-              className="flex items-center gap-3.5 rounded-xl border border-pb-border bg-pb-card p-3.5"
-            >
-              <span
-                className="size-9 rounded-lg flex items-center justify-center text-white text-[13px] font-semibold shrink-0"
-                style={{ background: p.bg }}
-                aria-hidden="true"
-              >
-                {p.letter}
-              </span>
-              <div className="flex-1 min-w-0">
-                <div className="text-[13px] font-semibold text-pb-fg mb-1.5">{p.name}</div>
-                <Sk w="w-2/3" h="h-1.5" />
-              </div>
-              <span className="inline-flex items-center gap-1.5 h-6 rounded-full px-2.5 bg-[#E6F4EC] text-[#3AA976] text-[10px] font-semibold uppercase tracking-[0.08em] shrink-0">
-                <span className="size-1.5 rounded-full bg-[#3AA976] animate-pulse" />
-                Live
-              </span>
-            </motion.div>
-          ))}
-        </div>
-      </BrowserFrame>
-    </div>
-  );
-}
-
-/* ── Feature frame: Brand Intel editorial brief ─────────────────── */
-/* TODO: replace with real app screenshot */
-function BrandIntelFrame() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-  const sentiments = [
-    { label: "Positive", dot: "#3AA976" },
-    { label: "Neutral", dot: "#5A6678" },
-    { label: "Negative", dot: "#D64545" },
-  ];
-  return (
-    <div ref={ref}>
-      <BrowserFrame url="app.peachblue.io/brand-intel">
-        <div className="space-y-4">
-          <div className="text-[10px] font-semibold uppercase tracking-[0.12em] text-pb-fg-muted">Intelligence brief</div>
-          {/* Headline skeleton in editorial style */}
+    <div ref={ref} className="pb-gradient-ink rounded-[28px] shadow-pb-lift p-5 md:p-8">
+      {/* Header row */}
+      <div className="flex items-center justify-between mb-6">
+        <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em]" style={{ color: "#A9B7DD" }}>
+          Today &middot; Creative command center
+        </span>
+        <span className="inline-flex items-center gap-2 font-mono text-[10px] font-semibold uppercase tracking-[0.14em]" style={{ color: "#A9B7DD" }}>
+          <span className="size-1.5 rounded-full bg-[#3AA976] animate-pulse" aria-hidden="true" /> Synced
+        </span>
+      </div>
+      {/* Stat tiles */}
+      <div className="grid grid-cols-3 gap-2.5 md:gap-4 mb-5">
+        {["Spend this week", "Blended ROAS", "Waste found"].map((label, i) => (
           <motion.div
+            key={label}
             initial={{ opacity: 0, y: 10 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.45, delay: 0.2, ease: EASE }}
-            className="space-y-2.5"
+            transition={{ duration: 0.45, delay: 0.2 + i * 0.1, ease: EASE }}
+            className="rounded-xl border p-3 md:p-4"
+            style={{ background: "rgba(255,255,255,0.05)", borderColor: "rgba(255,255,255,0.10)" }}
           >
-            <Sk w="w-full" h="h-4" />
-            <Sk w="w-3/5" h="h-4" />
+            <div className="font-mono text-[8.5px] md:text-[9.5px] font-semibold uppercase tracking-[0.14em] mb-2.5" style={{ color: "#7080AC" }}>
+              {label}
+            </div>
+            <div className={`h-3 rounded-full max-w-full ${i === 2 ? "bg-pb-peach-400/80 w-16" : "bg-white/30"} ${i === 0 ? "w-24" : "w-16"}`} aria-hidden="true" />
           </motion.div>
-          {/* Sentiment chips */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.4, delay: 0.55 }}
-            className="flex gap-2"
-          >
-            {sentiments.map((s) => (
-              <span key={s.label} className="inline-flex items-center gap-1.5 h-7 px-3 rounded-full border border-pb-border bg-pb-card text-[11px] font-medium text-pb-fg-muted">
-                <span className="size-2 rounded-full" style={{ background: s.dot }} />
-                {s.label}
-              </span>
-            ))}
-          </motion.div>
-          {/* Key takeaways */}
-          <div className="space-y-2.5">
-            {[0, 1, 2].map((i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: 10 }}
-                animate={inView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.4, delay: 0.75 + i * 0.15, ease: EASE }}
-                className="flex items-start gap-3 rounded-xl border border-pb-border bg-pb-card p-3.5"
-              >
-                <span className="size-2 rounded-full bg-pb-peach-400 mt-1.5 shrink-0" />
-                <div className="flex-1 space-y-1.5">
-                  <Sk w="w-full" h="h-1.5" />
-                  <Sk w={i === 1 ? "w-2/3" : "w-4/5"} h="h-1.5" />
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </BrowserFrame>
-    </div>
-  );
-}
-
-/* ── Feature frame: Reports pacing table ────────────────────────── */
-/* TODO: replace with real app screenshot */
-function ReportsFrame() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-  const rows = [
-    { pace: 72, tone: "good" as const, chip: "On pace", chipCls: "bg-[#E6F4EC] text-[#3AA976]" },
-    { pace: 92, tone: "good" as const, chip: "Ahead", chipCls: "bg-pb-blue-50 text-pb-blue-700" },
-    { pace: 38, tone: "warn" as const, chip: "Behind", chipCls: "bg-pb-peach-50 text-pb-peach-700" },
-  ];
-  return (
-    <div ref={ref}>
-      <BrowserFrame url="app.peachblue.io/reports">
-        <div className="space-y-2.5">
-          <div className="grid grid-cols-[minmax(0,5fr)_minmax(0,4fr)_minmax(0,3fr)] gap-3 px-3">
-            {["Order", "Pacing", "Status"].map((h) => (
-              <div key={h} className="text-[10px] font-semibold uppercase tracking-[0.12em] text-pb-fg-muted">{h}</div>
-            ))}
-          </div>
-          {rows.map((r, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 10 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: 0.15 + i * 0.14, ease: EASE }}
-              className="grid grid-cols-[minmax(0,5fr)_minmax(0,4fr)_minmax(0,3fr)] gap-3 items-center rounded-xl border border-pb-border bg-pb-card p-3"
-            >
-              <div className="space-y-1.5">
-                <Sk w="w-4/5" h="h-2" />
-                <Sk w="w-1/2" h="h-1.5" />
-              </div>
-              <div className="h-[5px] bg-pb-border/70 rounded-full overflow-hidden">
-                <motion.div
-                  className={`h-full rounded-full ${r.tone === "good" ? "bg-[#3AA976]" : "pb-gradient-peach"}`}
-                  initial={{ width: 0 }}
-                  animate={inView ? { width: `${r.pace}%` } : {}}
-                  transition={{ duration: 1, delay: 0.4 + i * 0.14, ease: EASE }}
-                />
-              </div>
-              <span className={`inline-flex self-start items-center h-6 rounded-full px-2.5 text-[10px] font-semibold uppercase tracking-[0.06em] justify-self-start ${r.chipCls}`}>
-                {r.chip}
-              </span>
-            </motion.div>
+        ))}
+      </div>
+      {/* Spark chart */}
+      <div className="rounded-xl border p-4 mb-5" style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.10)" }}>
+        <svg viewBox="0 0 600 90" className="w-full h-20 md:h-24" preserveAspectRatio="none" aria-hidden="true">
+          {[22, 45, 68].map((y) => (
+            <line key={y} x1="0" y1={y} x2="600" y2={y} stroke="rgba(255,255,255,0.07)" strokeWidth="1" />
           ))}
+          <motion.path
+            d="M0,64 C50,60 90,42 150,46 C210,50 250,30 310,34 C370,38 420,18 480,24 C520,28 560,14 600,18"
+            fill="none"
+            stroke="#FF9466"
+            strokeWidth="2.5"
+            initial={{ pathLength: 0 }}
+            animate={inView ? { pathLength: 1 } : {}}
+            transition={{ duration: 1.4, delay: 0.5, ease: "easeInOut" }}
+          />
+        </svg>
+      </div>
+      {/* Pulse rows */}
+      <div className="space-y-2.5 mb-5">
+        {[
+          { dot: "#3AA976", chip: "Scale", w: "w-2/5" },
+          { dot: "#D64545", chip: "Fix tracking", w: "w-1/3" },
+        ].map((r, i) => (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.4, delay: 0.9 }}
-            className="flex justify-end gap-2 pt-1"
+            key={r.chip}
+            initial={{ opacity: 0, x: 12 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.4, delay: 0.9 + i * 0.15, ease: EASE }}
+            className="flex items-center gap-3 rounded-xl border px-3.5 py-3"
+            style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.10)" }}
           >
-            {["Print / PDF", "CSV"].map((b) => (
-              <span key={b} className="inline-flex items-center h-7 px-3 rounded-full border border-pb-border bg-pb-card text-[10.5px] font-semibold text-pb-fg-muted">{b}</span>
-            ))}
+            <span className="size-2 rounded-full shrink-0" style={{ background: r.dot }} aria-hidden="true" />
+            <div className={`h-2 ${r.w} rounded-full bg-white/20`} aria-hidden="true" />
+            <span
+              className="ml-auto inline-flex items-center h-6 px-2.5 rounded-full border font-mono text-[9.5px] font-semibold uppercase tracking-[0.1em]"
+              style={{ borderColor: "rgba(255,255,255,0.16)", color: "#F6F8FF" }}
+            >
+              {r.chip}
+            </span>
           </motion.div>
-        </div>
-      </BrowserFrame>
+        ))}
+      </div>
+      {/* Agent ask bar */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={inView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.5, delay: 1.3 }}
+        className="flex items-center gap-3 rounded-full border px-4 py-3"
+        style={{ background: "rgba(255,255,255,0.06)", borderColor: "rgba(255,255,255,0.12)" }}
+      >
+        <span className="size-6 rounded-full pb-gradient-peach flex items-center justify-center shrink-0">
+          <PeachblueMark size={13} color="#ffffff" />
+        </span>
+        <span className="text-[13px] font-medium" style={{ color: "#F6F8FF" }}>
+          <Typewriter start={inView} delay={1500} text="Why did CPA rise last week?" speed={24} />
+        </span>
+        <span className="ml-auto font-mono text-[9.5px] font-semibold uppercase tracking-[0.12em] shrink-0" style={{ color: "#7080AC" }}>
+          Ask Peach
+        </span>
+      </motion.div>
     </div>
   );
 }
 
-/* ── Feature frame: MCP in an editor/chat client ────────────────── */
-/* TODO: replace with real app screenshot */
-function McpFrame() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
+/* ── Ticker: live-strip of platform + proof stats ── */
+function TickerStrip() {
+  const row = (key: string) => (
+    <div key={key} className="flex shrink-0 items-center" aria-hidden={key === "b"}>
+      {TICKER_ITEMS.map((t) => (
+        <span key={t} className="flex items-center font-mono text-[10.5px] font-semibold uppercase tracking-[0.18em] text-pb-fg-muted">
+          <span className="px-8">{t}</span>
+          <span className="size-1 rounded-full bg-pb-peach-400" aria-hidden="true" />
+        </span>
+      ))}
+    </div>
+  );
   return (
-    <div ref={ref}>
-      <BrowserFrame url="Your AI workspace">
-        <div className="space-y-4">
-          {/* Connection pill */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.4, delay: 0.15 }}
-            className="flex"
-          >
-            <span className="inline-flex items-center gap-2 h-8 px-3.5 rounded-full border border-pb-border bg-pb-card text-[11.5px] font-semibold text-pb-fg">
-              <span className="size-5 rounded-md pb-gradient-peach flex items-center justify-center">
-                <PeachblueMark size={11} color="#ffffff" />
-              </span>
-              Peachblue connected
-              <span className="size-1.5 rounded-full bg-[#3AA976] animate-pulse" />
-            </span>
-          </motion.div>
-          {/* Prompt bubble */}
-          <div className="flex justify-end">
-            <div className="max-w-[85%] rounded-2xl rounded-br-md bg-pb-fg text-white px-4 py-2.5 text-[13px] font-medium">
-              <Typewriter start={inView} delay={500} text="Which hooks drove the most ROAS last quarter?" speed={20} />
-            </div>
-          </div>
-          {/* Tool-call chip */}
-          <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.4, delay: 1.7, ease: EASE }}
-            className="flex"
-          >
-            <span className="inline-flex items-center gap-2 h-7 px-3 rounded-lg bg-pb-muted/70 border border-pb-border/70 text-[11px] font-medium text-pb-fg-muted" style={{ fontFamily: "var(--font-mono)" }}>
-              <span className="size-1.5 rounded-full bg-pb-blue-500 animate-pulse" />
-              peachblue · creative intelligence
-            </span>
-          </motion.div>
-          {/* Response skeleton */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.45, delay: 2.1, ease: EASE }}
-            className="rounded-xl border border-pb-border bg-pb-card p-4 space-y-2.5"
-          >
-            <Sk w="w-full" h="h-1.5" />
-            <Sk w="w-5/6" h="h-1.5" />
-            <div className="flex items-center gap-3 pt-1.5">
-              <Thumb i={1} className="size-8" />
-              <div className="flex-1 space-y-1.5">
-                <Sk w="w-1/2" h="h-1.5" />
-                <Sk w="w-1/3" h="h-1.5" />
-              </div>
-              <ScoreDot />
-            </div>
-          </motion.div>
-        </div>
-      </BrowserFrame>
+    <div className="border-y border-pb-border bg-pb-card/70 overflow-hidden py-3.5" aria-label="Peachblue at a glance">
+      <div className="pb-marquee flex w-max">
+        {row("a")}
+        {row("b")}
+      </div>
     </div>
   );
 }
@@ -1360,7 +986,7 @@ function EconomicsBand() {
           variants={stagger}
           className="text-center max-w-2xl mx-auto mb-12"
         >
-          <motion.div variants={fade} className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-pb-peach-300 mb-3">
+          <motion.div variants={fade} className="font-mono text-[10.5px] font-semibold uppercase tracking-[0.2em] text-pb-peach-300 mb-3">
             Creative Economics
           </motion.div>
           <motion.h2

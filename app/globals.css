@@ -67,6 +67,21 @@ body {
 
 .tnum { font-variant-numeric: tabular-nums; }
 
+/* Ticker marquee: two duplicated content rows translate half their joint
+   width for a seamless loop. Respects reduced-motion. */
+.pb-marquee {
+  animation: pb-marquee 44s linear infinite;
+}
+.pb-marquee:hover {
+  animation-play-state: paused;
+}
+@keyframes pb-marquee {
+  to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pb-marquee { animation: none; }
+}
+
 /* Editorial drop cap for journal-style passages. First letter set in the
    display serif, peach, floated like a magazine opener. */
 .pb-dropcap::first-letter {
