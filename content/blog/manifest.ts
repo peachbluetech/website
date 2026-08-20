@@ -499,9 +499,31 @@ export const ARTICLES: Article[] = [
     keywords: ["hook rate", "hold rate", "thumb stop ratio", "thumbstop rate"],
     priority: 14,
     byline: "peachblue",
-    status: "planned",
-    faq: [],
-    rawMaterial: ["truth/proof.md: cite the benchmark disagreement itself, not one number"],
+    status: "published",
+    datePublished: "2026-08-20",
+    dateUpdated: "2026-08-20",
+    faq: [
+      {
+        q: "What is hook rate?",
+        a: "Hook rate is the share of impressions where the viewer watched at least the opening of your video ad. On Meta it is calculated as 3-second video plays divided by impressions; on TikTok the analogous calculation uses 2-second video views. It measures whether the first moments of the creative stop the scroll, which gates every downstream metric.",
+      },
+      {
+        q: "Are thumbstop ratio and hook rate the same thing?",
+        a: "In most working usage, yes: both mean 3-second video plays divided by impressions, with thumbstop being the agency-coined name for the same behavior. Some teams reserve one term for a stricter cutoff such as 25 percent video completion, but that is a house convention rather than a standard. If your team uses both words, write down which formula each one refers to.",
+      },
+      {
+        q: "How is hold rate calculated?",
+        a: "The most common calculation is ThruPlays divided by 3-second video plays, which measures how many hooked viewers kept watching to 15 seconds or completion. A large share of published articles instead divide ThruPlays by impressions, which blends hook and hold into one smaller number. Both appear in the wild, so pick one definition and apply it identically in every report.",
+      },
+      {
+        q: "What is a good hook rate?",
+        a: "There is no trustworthy published benchmark: ranked articles claim anywhere from 20 to 25 percent up to 60 percent and beyond, contradictions too large to explain by audience or vertical. Placement mix, video length, and definition drift all move the number. The reliable practice is to measure your own account's trailing average per placement and format, and judge new creatives against that baseline.",
+      },
+      {
+        q: "Do hook rate and hold rate apply to image ads?",
+        a: "No. Both metrics are built on video play counts, which do not exist for static images. For image creatives, CTR remains the primary attention metric, and the same own-baseline discipline applies: compare each image against your account's history rather than a published benchmark.",
+      },
+    ],
   },
   {
     slug: "amazon-dsp-reports-api",
@@ -531,8 +553,31 @@ export const ARTICLES: Article[] = [
     keywords: ["creative fatigue", "ad fatigue", "meta creative fatigue"],
     priority: 16,
     byline: "peachblue",
-    status: "planned",
-    faq: [],
+    status: "published",
+    datePublished: "2026-08-20",
+    dateUpdated: "2026-08-20",
+    faq: [
+      {
+        q: "What is creative fatigue?",
+        a: "Creative fatigue is the performance decay that sets in when an audience has seen an ad too many times: the people most likely to respond already have, and the rest have learned to scroll past it. It shows up as rising frequency, declining CTR against the creative's own history, and drifting CPA. It is an audience phenomenon rather than a creative defect, which is why the same asset can win, fatigue, rest, and win again.",
+      },
+      {
+        q: "How do I know if an ad is fatigued?",
+        a: "Read three signals together per creative: frequency rising over rolling 7-day windows, CTR sustained well below that creative's own best rolling week for two consecutive weeks, and CPA drifting up while delivery stays stable. One signal alone is a hint; all three moving together is close to proof. Only evaluate creatives above a minimum spend floor, since low-spend flags are noise.",
+      },
+      {
+        q: "What frequency is too high for Facebook ads?",
+        a: "Published thresholds contradict each other because the tolerable frequency depends on audience size, placement mix, and product. The diagnostic signal is the trend, not a universal cutoff: a creative whose weekly frequency climbs while its response rates fall is re-serving a saturated audience. Track frequency on rolling windows against each creative's own history rather than enforcing a borrowed number.",
+      },
+      {
+        q: "How often should I refresh ad creative?",
+        a: "Refresh on signal, not on calendar. A fixed cadence retires producing winners early and forces production volume for its own sake. Define a written fatigue tripwire, trim budget before killing the ad outright, iterate from proven winners before replacing them with cold concepts, and keep proven challengers ready so spend has somewhere to go when a hero fades.",
+      },
+      {
+        q: "Can a fatigued ad recover?",
+        a: "Often, yes. A fatigued winner is usually saturated at its current spend level rather than dead, so cutting its budget share can restore efficiency at lower volume. After a rest period long enough for the audience to churn, proven concepts can frequently be relaunched or re-cut. Keep a record of what won and why; it is the cheapest creative brief you will ever produce.",
+      },
+    ],
   },
   {
     slug: "reddit-brand-monitoring-for-dtc",

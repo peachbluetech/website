@@ -41,6 +41,13 @@ Snapchat, AppLovin, Performance Max. Do not imply otherwise.
   views (All / Top / Under / Low-data). Do NOT claim user-created saved
   views; presets are hardcoded.
 - Intelligence: pattern detection across creative dimensions, archetypes
+- Today + Creative Economics dashboards (shipped 2026-08-18): a portfolio
+  insight layer over your daily data: week-over-week deltas, hit rate,
+  wasted spend, bench depth, and a fatigue board that flags CTR decay
+  measured against each creative's own best rolling week. Zero-spend
+  creatives are never flagged; every flag carries a dollar consequence.
+  Awareness/DSP delivery spend is bucketed separately and never counted
+  as waste.
 - Brand Intel: Reddit monitoring for brand/competitor/topic keywords with
   sentiment and an AI editorial brief
 - Reports: date-range reports with print/PDF and CSV export; supplier

@@ -1,0 +1,54 @@
+Creative fatigue is the performance decay that sets in when your audience has seen an ad too many times: the people most likely to respond already have, and everyone else has learned to scroll past it. It is measurable from three signals you already have (frequency, CTR decay against the creative's own history, and CPA drift), and this guide covers how to read each one, how to rule out the look-alike causes, and a refresh practice that does not burn winners early.
+
+The reason to get this right is money in both directions. Kill a producing winner on a hunch and you throw away the scaled spend it still had in it, which matters because winners are scarce: if your [creative hit rate](/blog/creative-hit-rate) is 15 percent, each winner carries the testing cost of roughly six losers. Let a fatigued ad run unexamined and it quietly converts budget into impressions nobody responds to. Fatigue diagnosis is the discipline of telling those two situations apart with numbers instead of nerves.
+
+## What causes creative fatigue?
+
+Fatigue is an audience phenomenon, not a creative defect. The ad that fatigued is the same asset that won; what changed is that the pool of people it can still surprise has shrunk. Delivery systems on Meta and TikTok show your ad first to the users most likely to act on it, so early performance reflects the most receptive slice of the audience. As spend accumulates, the system reaches deeper into less receptive users while simultaneously re-serving the ad to people who already declined to act. Both forces push response rates down.
+
+That mechanism has two practical implications. First, fatigue speed scales with spend concentration: a creative absorbing a large share of budget into a narrow audience fatigues in weeks, while the same creative on broad targeting at moderate spend can produce for months. Second, fatigue is creative-specific. If every ad in the account decayed at once, the cause is almost never fatigue (more on the look-alikes below).
+
+## How do you diagnose creative fatigue from your own data?
+
+The diagnosis rests on three signals read together, per creative, against that creative's own history. One signal alone is a hint; all three moving together is close to proof.
+
+**Frequency rising.** Frequency is impressions per unique user over a window. Published thresholds for "too high" vary so much by audience size, placement, and product that a universal cutoff is not worth citing; what is diagnostic is the trend. A creative whose weekly frequency climbs while its response rates fall is re-serving a saturated audience. Pull frequency at the ad set or creative level over rolling 7-day windows, not lifetime, because lifetime frequency flattens exactly the movement you are looking for.
+
+**CTR decaying against the creative's own best.** The clean way to read CTR decay is to compare each creative's current rolling week to the best rolling week that same creative ever had. That anchors the comparison to what this ad proved it could do, rather than to an account average that mixes fresh launches with tired veterans. A worked example: a video's best 7-day CTR was 1.8 percent. Three weeks later its current 7-day CTR is 1.1 percent, a 39 percent decline from its own peak, while frequency moved from 1.9 to 3.4. That pattern, sustained across two consecutive weeks, is fatigue. A single soft week is not; every metric wobbles, and reacting to one bad Tuesday is how winners get killed early. For video, the same decay read applies to hook rate, which often slides before CTR does (definitions in [the hook rate glossary](/blog/hook-rate-hold-rate-thumbstop)).
+
+**CPA or CPM drifting on stable delivery.** Falling CTR mechanically raises cost per click, and saturated audiences convert worse, so cost per result drifts up. The qualifier "on stable delivery" is doing real work: CPA can rise for reasons that have nothing to do with the creative, which is the next section.
+
+One threshold rule worth enforcing before any of this: only diagnose creatives that are actually spending. A "fatigued" flag on an ad spending a few dollars a day is noise with a label on it. Set a minimum weekly spend below which you do not evaluate fatigue at all, and spend your review time where the dollars are.
+
+## Is it fatigue, or something else?
+
+Fatigue has look-alikes, and the differential matters because the fixes are different. Run these checks before refreshing anything:
+
+| Symptom pattern | Likely cause | Check |
+| --- | --- | --- |
+| One creative decays, others stable | Genuine fatigue | Frequency + own-history CTR decay |
+| Every creative decays at once | Auction inflation, seasonality | Did CPM rise account-wide while CTRs held? |
+| CTR stable, CPA up | Landing page, offer, tracking | Post-click funnel and pixel checks |
+| Cliff-shaped drop overnight | Delivery or tracking event | Learning phase reset, edits, pixel changes |
+| New creative never performed | Weak creative, not fatigue | It cannot fatigue if it never worked |
+
+The account-wide case is the most common misdiagnosis. Rising CPMs in Q4, a competitor entering the auction, or a seasonal demand dip will raise CPA on every ad simultaneously, and a team that reads that as fatigue will refresh its whole library at exactly the moment it should hold steady and let stable creatives ride out the auction.
+
+## What refresh cadence avoids burning winners early?
+
+Refresh on signal, not on calendar. A fixed rule like "new creative every two weeks" retires producing winners with productive spend left in them and forces production volume for its own sake. The signal-based practice:
+
+1. **Set the tripwire.** Define fatigue in writing, for example: two consecutive weeks with rolling 7-day CTR more than 30 percent below the creative's own best week, with frequency rising, on spend above your evaluation floor. The exact numbers matter less than applying them identically to every creative.
+2. **Cut spend before you cut the ad.** A fatigued winner is usually saturated at its current spend level, not dead. Reducing its budget share often restores efficiency at lower volume while a replacement scales up.
+3. **Refresh from the winner before replacing it.** New hooks and openings on a proven body, new formats of a proven concept, and new audiences for the proven asset all extend a winner's franchise more cheaply than a cold new concept. This is where iteration economics beat invention economics.
+4. **Keep a bench.** The real cost of fatigue is having nowhere to move the spend. The refresh cadence that works is the one your testing pipeline can supply: proven challengers ready before the hero fades. Bench depth, and the supply math behind it, is covered in [the creative economics essay](/blog/creative-economics).
+
+Retired winners are also not dead forever. After a rest period long enough for the audience to churn and the memory to fade, a proven concept can often be relaunched or re-cut. Keep a record of what won and why; it is the cheapest creative brief you will ever produce.
+
+## A weekly fatigue review that takes ten minutes
+
+The practice compresses to one pass over your spending creatives each week: rank by spend, and for everything above your evaluation floor, pull rolling 7-day CTR versus that creative's best-ever week, frequency trend, and CPA trend. Flag anything tripping your written rule, check the look-alike table before acting, then decide per flag: trim budget, queue a refresh iteration, or promote from the bench. Log the decision. Over a quarter, that log tells you your winner longevity, which feeds directly into the monthly review from the creative economics practice.
+
+This weekly pass is also exactly what [Peachblue](/pricing) automates. The Creative Economics dashboard maintains a fatigue board over your daily data: CTR decay is measured against each creative's own best rolling week, zero-spend creatives are never flagged, and every flag carries the dollar amount at stake so the review starts where the money is. The same layer tracks hit rate, wasted spend, and bench depth, and because creatives are grouped by perceptual fingerprint across ads and platforms, the decay read follows the asset rather than fragmenting across duplicate ads. Delivery-objective and DSP spend is bucketed separately, so awareness campaigns are never mislabeled as fatigued conversion ads.
+
+Start manually either way. Write the tripwire rule, run the ten-minute pass for a month, and you will know your account's real fatigue curves better than any published threshold could tell you.
