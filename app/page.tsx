@@ -129,10 +129,11 @@ export default function Home() {
             variants={fade}
             className="space-y-6"
           >
-            <p className="pb-dropcap font-display text-[clamp(17px,1.9vw,20px)] leading-[1.75] text-pb-fg">
-              Ad creation has never been faster. AI writes the scripts, cuts the variants, and
-              fills the queue, and 82% of teams now use it to generate ideas. But only 7% trust
-              it with the decision that actually moves budget: which ad to make next.
+            <p className="font-display text-[clamp(17px,1.9vw,20px)] leading-[1.75] text-pb-fg">
+              <span className="text-[1.4em] font-medium text-pb-peach-600">Ad</span> creation has
+              never been faster. AI writes the scripts, cuts the variants, and fills the queue,
+              and 82% of teams now use it to generate ideas. But only 7% trust it with the
+              decision that actually moves budget: which ad to make next.
             </p>
             <p className="font-display text-[clamp(19px,2.2vw,24px)] leading-[1.5] font-medium text-pb-fg">
               The making got automated. The judgment <span className="italic">didn&rsquo;t</span>.
@@ -140,10 +141,7 @@ export default function Home() {
             <p className="font-display text-[clamp(17px,1.9vw,20px)] leading-[1.75] text-pb-fg">
               Peachblue closes that gap. It connects your creative to your performance data
               across every platform, finds the patterns behind what works, and turns those
-              insights into a brief your team can execute.
-            </p>
-            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-pb-peach-600">
-              Evidence in. Brief out.
+              insights into a blueprint for your next winning creative.
             </p>
             <p className="text-[12.5px] text-pb-fg-muted">
               Adoption figures from Motion&rsquo;s 2026 AI Divide study.
