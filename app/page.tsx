@@ -195,45 +195,19 @@ export default function Home() {
           "Every creative tagged across hook style, tone, format, CTA, and more",
           "Patterns and archetypes show which combinations actually drive ROAS",
           "Filter your entire library by any tag or metric in seconds",
-          "Composite scoring surfaces top performers and underperformers instantly",
+          "Objective-aware scores judge each creative against its campaign's actual job",
         ]}
         ctaLabel={TRIAL_LABEL}
         ctaHref={TRIAL_HREF}
         frame={<CreativeIntelligenceFrame />}
       />
 
-      <FeatureSection
-        eyebrow="Creative Economics"
-        title={<>How much budget reached creatives that <span className="italic">earned</span> it?</>}
-        bullets={[
-          "Hit rate on qualified launches, so you know how often new creative earns its spend",
-          "Waste in dollars: exactly how much budget went to creatives that never performed",
-          "A bleeding-now list that catches drains while they are still running",
-          "Fatigue flagged against each creative's own best week, not a generic decay curve",
-          "Hero concentration and bench depth show how fragile the account really is",
-        ]}
-        ctaLabel={TRIAL_LABEL}
-        ctaHref={TRIAL_HREF}
-        frame={<EconomicsFrame />}
-      />
+      <EconomicsBand />
+
+      <DigestShowcase />
 
       <FeatureSection
         reverse
-        tinted
-        eyebrow="The Monday digest"
-        title={<>Peachblue <span className="italic">tells</span> you.</>}
-        bullets={[
-          "Every Monday: what won, what bled, what fatigued, and the one thing to act on",
-          "Delivered to your inbox and posted straight into your Slack channel",
-          "Spend and ROAS against the prior week, waste, and hit rate in one read",
-          "A heads-up email the moment a platform's first sync finishes",
-        ]}
-        ctaLabel={TRIAL_LABEL}
-        ctaHref={TRIAL_HREF}
-        frame={<DigestFrame />}
-      />
-
-      <FeatureSection
         eyebrow="Next Creative Brief"
         title={<>Stop guessing what to make <span className="italic">next</span>.</>}
         bullets={[
@@ -246,22 +220,6 @@ export default function Home() {
         ctaLabel={TRIAL_LABEL}
         ctaHref={TRIAL_HREF}
         frame={<BriefFrame />}
-      />
-
-      <FeatureSection
-        reverse
-        tinted
-        eyebrow="Objective-aware scoring"
-        title={<>Reach judged on reach. Sales judged on <span className="italic">sales</span>.</>}
-        bullets={[
-          "Peachblue reads the objective each campaign was bought with and scores against it",
-          "Awareness and CTV creatives earn Reach ranks built on CPM and CTR, not punished zeros",
-          "Conversion campaigns spending with zero reported results get a broken-tracking alert",
-          "Every score shows its components and weights, so you can check the math",
-        ]}
-        ctaLabel={TRIAL_LABEL}
-        ctaHref={TRIAL_HREF}
-        frame={<ScoreFrame />}
       />
 
       <FeatureSection
@@ -1257,73 +1215,165 @@ function McpFrame() {
   );
 }
 
-/* ── Feature frame: Creative Economics (ink hero surface) ───────── */
-/* Ink surface matches the app's V3 Economics hero, so this mockup reads
-   like the real product. TODO: replace with real /economics screenshot */
-function EconomicsFrame() {
+/* ── Section: Creative Economics ink band ───────────────────────── */
+/* Full-width ink surface matching the app's V3 Economics hero — the one
+   place the site goes dark, so it reads as a deliberate showcase rather
+   than another alternating split. TODO: swap card visuals for a real
+   /economics screenshot when captured */
+function EconomicsBand() {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-  const bars = [34, 58, 42, 78, 64, 90, 52];
-  return (
-    <div ref={ref}>
-      <BrowserFrame url="app.peachblue.io/economics">
-        <div className="space-y-2.5">
-          {/* Ink hero card: stat tiles + spend bars */}
-          <div className="rounded-xl pb-gradient-ink p-4">
-            <div className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[color:var(--color-pb-ink-fg-muted)] mb-3">
-              Creative economics
-            </div>
-            <div className="grid grid-cols-3 gap-2.5 mb-3.5">
-              {["Hit rate", "Waste", "Bench depth"].map((label) => (
-                <div
-                  key={label}
-                  className="rounded-lg p-2.5 border"
-                  style={{ background: "rgba(255,255,255,0.06)", borderColor: "var(--color-pb-ink-border)" }}
-                >
-                  <div className="text-[8.5px] font-semibold uppercase tracking-[0.1em] text-[color:var(--color-pb-ink-fg-faint)] mb-1.5">
-                    {label}
-                  </div>
-                  <div className="h-2.5 w-9 rounded-full bg-white/30" aria-hidden="true" />
-                </div>
-              ))}
-            </div>
-            <div className="flex items-end gap-1.5 h-10" aria-hidden="true">
-              {bars.map((h, i) => (
-                <motion.div
-                  key={i}
-                  className={`flex-1 rounded-sm ${i === 5 ? "bg-pb-peach-400" : "bg-white/[0.18]"}`}
-                  initial={{ height: 0 }}
-                  animate={inView ? { height: `${h}%` } : {}}
-                  transition={{ duration: 0.6, delay: 0.3 + i * 0.06, ease: EASE }}
-                />
-              ))}
-            </div>
-          </div>
-          {/* Bleeding-now rows */}
-          {[
-            { brand: "sagelle" as DemoBrand, chip: "Bleeding", chipCls: "bg-[#FBEAEA] text-[#D64545]" },
-            { brand: "trailform" as DemoBrand, chip: "Fatigued", chipCls: "bg-pb-peach-50 text-pb-peach-700" },
-          ].map((r, i) => (
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const cards = [
+    {
+      title: "Hit rate",
+      desc: "How often a qualified launch becomes a winner, so you know if new creative is earning its spend.",
+      visual: (
+        <div className="flex gap-1.5" aria-hidden="true">
+          {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
+            <motion.span
+              key={i}
+              className={`h-2 flex-1 rounded-full ${i < 3 ? "bg-pb-peach-400" : "bg-white/[0.14]"}`}
+              initial={{ opacity: 0 }}
+              animate={inView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.3, delay: 0.5 + i * 0.06 }}
+            />
+          ))}
+        </div>
+      ),
+    },
+    {
+      title: "Waste, in dollars",
+      desc: "Exactly how much budget went to creatives that never performed, with a bleeding-now list to catch drains early.",
+      visual: (
+        <div className="h-2 rounded-full bg-white/[0.14] overflow-hidden" aria-hidden="true">
+          <motion.div
+            className="h-full rounded-full bg-pb-peach-400"
+            initial={{ width: 0 }}
+            animate={inView ? { width: "38%" } : {}}
+            transition={{ duration: 0.8, delay: 0.6, ease: EASE }}
+          />
+        </div>
+      ),
+    },
+    {
+      title: "Bench and fatigue",
+      desc: "Hero concentration, what's ready behind it, and fatigue flagged against each creative's own best week.",
+      visual: (
+        <div className="flex items-end gap-1.5 h-8" aria-hidden="true">
+          {[85, 55, 38, 24].map((h, i) => (
             <motion.div
-              key={r.chip}
-              initial={{ opacity: 0, y: 10 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: 0.7 + i * 0.15, ease: EASE }}
-              className="flex items-center gap-3.5 rounded-xl border border-pb-border bg-pb-card p-3"
+              key={i}
+              className={`flex-1 rounded-sm ${i === 0 ? "bg-pb-peach-400" : "bg-white/[0.14]"}`}
+              initial={{ height: 0 }}
+              animate={inView ? { height: `${h}%` } : {}}
+              transition={{ duration: 0.6, delay: 0.6 + i * 0.08, ease: EASE }}
+            />
+          ))}
+        </div>
+      ),
+    },
+  ];
+  return (
+    <section ref={ref} className="py-20 md:py-28 px-6 pb-gradient-ink relative overflow-hidden">
+      <div className="max-w-[1100px] mx-auto relative">
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-80px" }}
+          variants={stagger}
+          className="text-center max-w-2xl mx-auto mb-12"
+        >
+          <motion.div variants={fade} className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-pb-peach-300 mb-3">
+            Creative Economics
+          </motion.div>
+          <motion.h2
+            variants={fade}
+            className="font-display text-[clamp(26px,4vw,40px)] leading-[1.08] font-medium tracking-[-0.015em] text-[color:var(--color-pb-ink-fg)] mb-3"
+          >
+            How much budget reached creatives that <span className="italic">earned</span> it?
+          </motion.h2>
+          <motion.p variants={fade} className="text-[15px] leading-relaxed text-[color:var(--color-pb-ink-fg-muted)]">
+            Hit rate, waste in dollars, bench depth, and fatigue, computed from your daily data.
+          </motion.p>
+        </motion.div>
+        <div className="grid md:grid-cols-3 gap-5">
+          {cards.map((c, i) => (
+            <motion.div
+              key={c.title}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.5, delay: i * 0.12, ease: EASE }}
+              className="rounded-2xl border p-6 flex flex-col gap-4"
+              style={{ background: "rgba(255,255,255,0.05)", borderColor: "var(--color-pb-ink-border)" }}
             >
-              <DemoAd brand={r.brand} format="story" className="w-8" />
-              <div className="flex-1 min-w-0 space-y-1.5">
-                <Sk w="w-2/3" h="h-2" />
-                <Sk w="w-2/5" h="h-1.5" />
+              <div>
+                <h3 className="text-[15px] font-semibold text-[color:var(--color-pb-ink-fg)] mb-2">{c.title}</h3>
+                <p className="text-[13px] leading-relaxed text-[color:var(--color-pb-ink-fg-muted)]">{c.desc}</p>
               </div>
-              <span className={`inline-flex items-center h-6 rounded-full px-2.5 text-[10px] font-semibold uppercase tracking-[0.06em] shrink-0 ${r.chipCls}`}>
-                {r.chip}
-              </span>
+              <div className="mt-auto">{c.visual}</div>
             </motion.div>
           ))}
         </div>
-      </BrowserFrame>
-    </div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="text-center mt-10"
+        >
+          <a
+            href={TRIAL_HREF}
+            className="inline-flex items-center gap-1.5 text-[14px] font-semibold text-[color:var(--color-pb-ink-fg)] hover:text-pb-peach-300 transition-colors"
+          >
+            {TRIAL_LABEL} &rarr;
+          </a>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Section: Monday digest centered showcase ───────────────────── */
+function DigestShowcase() {
+  return (
+    <section className="py-24 md:py-32 px-6 relative">
+      <div className="pointer-events-none absolute inset-0 bg-pb-muted/40" aria-hidden="true" />
+      <div className="max-w-[1100px] mx-auto relative">
+        <SectionHeader
+          eyebrow="The Monday digest"
+          title={<>Peachblue <span className="italic">tells</span> you.</>}
+          subtitle="Every Monday: what won, what bled, what fatigued, and the one thing to act on. In your inbox and your Slack."
+        />
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.55, ease: EASE }}
+          className="max-w-[540px] mx-auto"
+        >
+          <DigestFrame />
+        </motion.div>
+        <div className="grid sm:grid-cols-3 gap-x-8 gap-y-5 max-w-[860px] mx-auto mt-12">
+          {[
+            { title: "Email and Slack", desc: "The same digest lands in every opted-in inbox and posts to the channel your team already reads." },
+            { title: "Versus prior week", desc: "Spend and ROAS against the week before, plus waste and hit rate, in one short read." },
+            { title: "First-sync heads-up", desc: "A one-time email the moment a platform's first sync finishes, so you know when the data is ready." },
+          ].map((b, i) => (
+            <motion.div
+              key={b.title}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.45, delay: i * 0.1, ease: EASE }}
+            >
+              <h3 className="text-[14px] font-semibold text-pb-fg mb-1.5">{b.title}</h3>
+              <p className="text-[13px] leading-relaxed text-pb-fg-muted">{b.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -1472,82 +1522,6 @@ function BriefFrame() {
               <div className="h-1.5 w-full rounded-full bg-white/[0.16]" />
               <div className="h-1.5 w-5/6 rounded-full bg-white/[0.16]" />
               <div className="h-1.5 w-2/3 rounded-full bg-white/[0.16]" />
-            </div>
-          </motion.div>
-        </div>
-      </BrowserFrame>
-    </div>
-  );
-}
-
-/* ── Feature frame: objective-aware score banner ────────────────── */
-/* TODO: replace with a real score-banner screenshot once slice 2 is live */
-function ScoreFrame() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-  const components = [
-    { label: "CTR", w: 40 },
-    { label: "CPM", w: 35 },
-    { label: "Spend", w: 25 },
-  ];
-  return (
-    <div ref={ref}>
-      <BrowserFrame url="app.peachblue.io/creatives">
-        <div className="space-y-2.5">
-          {/* Score banner */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.45, delay: 0.15, ease: EASE }}
-            className="rounded-xl pb-gradient-ink p-4"
-          >
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-2.5">
-                <DemoAd brand="trailform" format="story" className="w-7" />
-                <div className="h-2 w-24 rounded-full bg-white/25" aria-hidden="true" />
-              </div>
-              <span className="inline-flex items-center gap-1.5 h-6 px-2.5 rounded-full bg-pb-peach-400/20 border border-pb-peach-400/40 text-[10px] font-semibold uppercase tracking-[0.06em] text-pb-peach-200">
-                Reach Leader
-              </span>
-            </div>
-            <div className="flex items-center gap-2 mb-3.5">
-              <span className="inline-flex items-center h-6 px-2.5 rounded-full border text-[10px] font-medium text-[color:var(--color-pb-ink-fg-muted)]" style={{ borderColor: "var(--color-pb-ink-border)" }}>
-                Objective: Awareness
-              </span>
-              <span className="inline-flex items-center h-6 px-2.5 rounded-full border text-[10px] font-medium text-[color:var(--color-pb-ink-fg-muted)]" style={{ borderColor: "var(--color-pb-ink-border)" }}>
-                Scored against CTV peers
-              </span>
-            </div>
-            {/* Component weights */}
-            <div className="space-y-2">
-              {components.map((c, i) => (
-                <div key={c.label} className="flex items-center gap-2.5">
-                  <span className="text-[9.5px] font-semibold uppercase tracking-[0.1em] text-[color:var(--color-pb-ink-fg-faint)] w-9 shrink-0">
-                    {c.label}
-                  </span>
-                  <div className="flex-1 h-[5px] rounded-full bg-white/[0.1] overflow-hidden">
-                    <motion.div
-                      className="h-full rounded-full bg-pb-peach-400"
-                      initial={{ width: 0 }}
-                      animate={inView ? { width: `${c.w}%` } : {}}
-                      transition={{ duration: 0.8, delay: 0.5 + i * 0.12, ease: EASE }}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-          {/* Broken-tracking alert */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.4, delay: 0.9, ease: EASE }}
-            className="flex items-start gap-3 rounded-xl border border-pb-peach-200 bg-pb-peach-50 p-3.5"
-          >
-            <span className="size-2 rounded-full bg-pb-peach-500 mt-1.5 shrink-0" aria-hidden="true" />
-            <div className="flex-1 min-w-0">
-              <div className="text-[11.5px] font-semibold text-pb-peach-700 mb-1.5">Tracking looks broken</div>
-              <Sk w="w-5/6" h="h-1.5" />
             </div>
           </motion.div>
         </div>
