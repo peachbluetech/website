@@ -59,20 +59,20 @@ export default function Home() {
               variants={fade}
               className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-pb-peach-600 mb-5"
             >
-              Creative intelligence
+              Meta &middot; TikTok &middot; Google Ads &middot; Amazon DSP + CTV
             </motion.div>
             <motion.h2
               variants={fade}
               className="font-display text-[clamp(44px,7.2vw,92px)] leading-[1.02] font-medium tracking-[-0.025em] text-pb-fg mb-6"
             >
-              Know what ads work, <span className="italic">and why.</span>
+              The intelligence layer for <span className="italic">ad creative.</span>
             </motion.h2>
             <motion.p
               variants={fade}
               className="text-[clamp(15px,1.8vw,18px)] leading-[1.7] text-pb-fg-muted max-w-[560px] mx-auto mb-8"
             >
-              Peachblue syncs every platform you run, reads every creative with AI, and turns your
-              own results into the next brief.
+              Peachblue turns your ad data and creative into the blueprint for your next
+              winning ad.
             </motion.p>
             <motion.div variants={fade} className="flex gap-3 flex-wrap items-center justify-center">
               <a
