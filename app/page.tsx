@@ -204,9 +204,9 @@ export default function Home() {
         eyebrow="Next Creative Brief"
         title={<>Stop guessing what to make <span className="italic">next</span>.</>}
         bullets={[
-          "One click turns your account&rsquo;s winning patterns into a brief a freelancer can execute",
+          "One click turns your account’s winning patterns into a brief a freelancer can execute",
           "Proven hooks with their real CTRs, and reference ads labeled as top performers",
-          "Do and don&rsquo;t rules in plain language, with the evidence behind each one",
+          "Do and don’t rules in plain language, with the evidence behind each one",
           "A generation-ready prompt block for whichever creative tool you use",
           "Share it with a public link, no login needed on the other end",
         ]}
@@ -1089,9 +1089,9 @@ function DigestShowcase() {
       <div className="pointer-events-none absolute inset-0 bg-pb-muted/40" aria-hidden="true" />
       <div className="max-w-[1100px] mx-auto relative">
         <SectionHeader
-          eyebrow="The Monday digest"
+          eyebrow="The weekly report"
           title={<>Peachblue <span className="italic">tells</span> you.</>}
-          subtitle="Every Monday: what won, what bled, what fatigued, and the one thing to act on. In your inbox and your Slack."
+          subtitle="Your Today worklist updates with every sync. The full report lands Monday morning, in your inbox and your Slack."
         />
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -1104,9 +1104,9 @@ function DigestShowcase() {
         </motion.div>
         <div className="grid sm:grid-cols-3 gap-x-8 gap-y-5 max-w-[860px] mx-auto mt-12">
           {[
-            { title: "Email and Slack", desc: "The same digest lands in every opted-in inbox and posts to the channel your team already reads." },
-            { title: "Versus prior week", desc: "Spend and ROAS against the week before, plus waste and hit rate, in one short read." },
-            { title: "First-sync heads-up", desc: "A one-time email the moment a platform's first sync finishes, so you know when the data is ready." },
+            { title: "Daily, in the app", desc: "Today refreshes as each platform syncs: new winners, drains, and fatigue flags, every one carrying its dollars." },
+            { title: "Monday, in your inbox", desc: "Spend and ROAS against the week before, plus waste, hit rate, and the one thing to act on." },
+            { title: "And in your Slack", desc: "The same report posts to the channel your team already reads, so nobody has to log in to see it." },
           ].map((b, i) => (
             <motion.div
               key={b.title}
@@ -1155,30 +1155,38 @@ function DigestFrame() {
             <div className="p-4 space-y-3">
               <div className="rounded-lg border border-pb-blue-200 bg-pb-blue-50 p-3">
                 <div className="grid grid-cols-3 gap-3">
-                  {["Spend", "ROAS", "Hit rate"].map((m) => (
-                    <div key={m}>
-                      <div className="text-[8.5px] font-semibold uppercase tracking-[0.1em] text-pb-blue-700 mb-1.5">{m}</div>
-                      <div className="h-2.5 w-9 rounded-full bg-pb-blue-200" aria-hidden="true" />
+                  {[
+                    { m: "Spend", v: "$48,320", d: "+12%" },
+                    { m: "ROAS", v: "3.4x", d: "+0.4" },
+                    { m: "Hit rate", v: "34%", d: "+6pts" },
+                  ].map((t) => (
+                    <div key={t.m}>
+                      <div className="text-[8.5px] font-semibold uppercase tracking-[0.1em] text-pb-blue-700 mb-1">{t.m}</div>
+                      <div className="font-display text-[17px] font-medium leading-none text-pb-fg tnum">{t.v}</div>
+                      <div className="text-[9.5px] text-pb-blue-700/80 mt-0.5 tnum">{t.d} vs last week</div>
                     </div>
                   ))}
                 </div>
               </div>
               {/* Pulse rows */}
-              <div className="space-y-2">
+              <div className="space-y-2.5">
                 {[
-                  { dot: "#3AA976", w: "w-4/5" },
-                  { dot: "#F27749", w: "w-2/3" },
-                  { dot: "#D64545", w: "w-3/4" },
+                  { dot: "#3AA976", label: "Won", text: "Fizzli scaled to $9,400 at 4.1x ROAS" },
+                  { dot: "#F27749", label: "Fatigued", text: "Sagelle CTR down 38% from its best week" },
+                  { dot: "#D64545", label: "Bled", text: "Trailform spent $4,260 with 0 results" },
                 ].map((r, i) => (
                   <motion.div
-                    key={i}
+                    key={r.label}
                     initial={{ opacity: 0, x: 10 }}
                     animate={inView ? { opacity: 1, x: 0 } : {}}
                     transition={{ duration: 0.4, delay: 0.5 + i * 0.15, ease: EASE }}
-                    className="flex items-center gap-2.5"
+                    className="flex items-start gap-2.5"
                   >
-                    <span className="size-2 rounded-full shrink-0" style={{ background: r.dot }} aria-hidden="true" />
-                    <Sk w={r.w} h="h-1.5" />
+                    <span className="size-2 rounded-full shrink-0 mt-1.5" style={{ background: r.dot }} aria-hidden="true" />
+                    <div className="min-w-0">
+                      <span className="text-[9px] font-semibold uppercase tracking-[0.1em] text-pb-fg-muted mr-1.5">{r.label}</span>
+                      <span className="text-[11.5px] text-pb-fg leading-snug">{r.text}</span>
+                    </div>
                   </motion.div>
                 ))}
               </div>
@@ -1212,15 +1220,18 @@ function BriefFrame() {
       <BrowserFrame url="peachblue.io/brief/8kf3…">
         <div className="space-y-3">
           <div className="text-[10px] font-semibold uppercase tracking-[0.12em] text-pb-fg-muted">Next creative brief</div>
-          {/* Editorial headline skeleton */}
+          {/* Brief title */}
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.45, delay: 0.15, ease: EASE }}
-            className="space-y-2"
           >
-            <Sk w="w-11/12" h="h-3.5" />
-            <Sk w="w-1/2" h="h-3.5" />
+            <h4 className="font-display text-[17px] leading-[1.25] font-medium text-pb-fg">
+              Problem-first UGC, product on screen by 0:03
+            </h4>
+            <p className="text-[10.5px] text-pb-fg-muted mt-1.5">
+              Built from 34 creatives &middot; last 90 days
+            </p>
           </motion.div>
           {/* Winning recipe rows */}
           <motion.div
@@ -1231,9 +1242,9 @@ function BriefFrame() {
           >
             <div className="text-[10px] font-semibold uppercase tracking-[0.12em] text-pb-fg-muted">The winning recipe</div>
             {[
-              { label: "Proven hook", dot: "#4C8DFF" },
-              { label: "Reference ad", dot: "#3AA976" },
-              { label: "Do / don't rules", dot: "#F27749" },
+              { label: "Proven hook", dot: "#4C8DFF", value: "\u201cThirsty? Fix it.\u201d", metric: "3.8% CTR" },
+              { label: "Reference ad", dot: "#3AA976", value: "Fizzli \u00b7 story", metric: "4.1x ROAS" },
+              { label: "Rule", dot: "#F27749", value: "Product by 0:03", metric: "+31% hold" },
             ].map((r, i) => (
               <motion.div
                 key={r.label}
@@ -1243,8 +1254,11 @@ function BriefFrame() {
                 className="flex items-center gap-2.5"
               >
                 <span className="size-2 rounded-full shrink-0" style={{ background: r.dot }} aria-hidden="true" />
-                <span className="text-[11.5px] font-medium text-pb-fg shrink-0">{r.label}</span>
-                <Sk w="w-2/5" h="h-1.5" className="ml-auto" />
+                <span className="text-[10px] font-semibold uppercase tracking-[0.08em] text-pb-fg-muted shrink-0 w-[86px]">
+                  {r.label}
+                </span>
+                <span className="text-[11.5px] font-medium text-pb-fg truncate">{r.value}</span>
+                <span className="ml-auto shrink-0 text-[10.5px] font-semibold text-[#3AA976] tnum">{r.metric}</span>
               </motion.div>
             ))}
           </motion.div>
@@ -1266,11 +1280,14 @@ function BriefFrame() {
                 Copy
               </span>
             </div>
-            <div className="space-y-1.5" aria-hidden="true">
-              <div className="h-1.5 w-full rounded-full bg-white/[0.16]" />
-              <div className="h-1.5 w-5/6 rounded-full bg-white/[0.16]" />
-              <div className="h-1.5 w-2/3 rounded-full bg-white/[0.16]" />
-            </div>
+            <p
+              className="text-[10.5px] leading-[1.6] text-pb-ink-fg-muted"
+              style={{ fontFamily: "var(--font-mono)" }}
+            >
+              15s vertical UGC. Open on the problem, no logo. Product in frame
+              by 0:03. Warm kitchen setting, single presenter, captions on.
+              CTA: &ldquo;Shop now&rdquo; at 0:12.
+            </p>
           </motion.div>
         </div>
       </BrowserFrame>
