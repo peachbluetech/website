@@ -39,7 +39,7 @@ export default function Home() {
               </motion.div>
               <motion.h2
                 variants={fade}
-                className="font-display text-[clamp(36px,5.5vw,58px)] leading-[1.06] font-medium tracking-[-0.02em] text-pb-fg mb-5"
+                className="font-display text-[clamp(40px,6vw,72px)] leading-[1.04] font-medium tracking-[-0.02em] text-pb-fg mb-5"
               >
                 Know what ads work <span className="italic">and why.</span>
               </motion.h2>
@@ -90,7 +90,7 @@ export default function Home() {
           variants={fade}
           className="max-w-[1100px] mx-auto mb-5"
         >
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-x-6 gap-y-3 px-1">
+          <div className="border-y border-dashed border-pb-border py-4 grid grid-cols-2 md:grid-cols-5 gap-x-6 gap-y-3 px-1">
             {PROOF_POINTS.map((p) => (
               <div key={p} className="flex items-start gap-2 text-[12.5px] leading-snug text-pb-fg-muted">
                 <Check />
@@ -156,7 +156,7 @@ export default function Home() {
               { num: "2", title: "Analyze", desc: "AI vision models process every image and video, generating structured intelligence tags. Hook style, emotional tone, CTA type, pacing, and more.", visual: <StepAnalyzeVisual /> },
               { num: "3", title: "Act", desc: "Explore your Creative Library, ask Agent Peach questions, and turn your winners into a generation-ready brief for your next campaign.", visual: <StepActVisual /> },
             ].map((s) => (
-              <motion.div key={s.num} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-60px" }} variants={fade} className="rounded-2xl border border-pb-border bg-pb-card p-7 shadow-pb-soft flex flex-col">
+              <motion.div key={s.num} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-60px" }} variants={fade} className="rounded-xl border border-dashed border-pb-border p-7 flex flex-col">
                 <div className="size-9 rounded-full pb-gradient-peach text-white text-[13px] font-semibold flex items-center justify-center mb-5 shadow-[0_4px_12px_rgba(242,119,73,0.3)]">
                   {s.num}
                 </div>
@@ -167,6 +167,30 @@ export default function Home() {
             ))}
           </div>
         </div>
+      </section>
+
+      {/* ── 3b · MANIFESTO INTERLUDE ─────────────────────── */}
+      <section className="py-20 md:py-28 px-6">
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-80px" }}
+          variants={stagger}
+          className="max-w-[900px] mx-auto text-center"
+        >
+          <motion.p
+            variants={fade}
+            className="font-display text-[clamp(30px,4.6vw,54px)] leading-[1.14] font-medium tracking-[-0.015em] text-pb-fg"
+          >
+            Automation took targeting and bidding.
+            <br />
+            Creative is the lever you <span className="italic">still own</span>.
+          </motion.p>
+          <motion.p variants={fade} className="mt-6 text-[13px] text-pb-fg-muted">
+            Creative quality drives roughly 56% of auction outcomes, more than bid, targeting, and
+            placement combined, per Meta data science.
+          </motion.p>
+        </motion.div>
       </section>
 
       {/* ── 4 · FEATURE SECTIONS ─────────────────────────── */}
@@ -205,6 +229,47 @@ export default function Home() {
       <EconomicsBand />
 
       <DigestShowcase />
+
+      {/* ── Editorial passage: the judgment gap ──────────── */}
+      <section className="py-20 md:py-28 px-6">
+        <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-[5fr_7fr] gap-10 md:gap-16 items-start">
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={fade}
+          >
+            <div className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-pb-peach-600 mb-4">
+              Why Peachblue exists
+            </div>
+            <h2 className="font-display text-[clamp(28px,4vw,48px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-fg">
+              The judgment <span className="italic">gap</span>.
+            </h2>
+          </motion.div>
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={fade}
+            className="space-y-6"
+          >
+            <p className="pb-dropcap font-display text-[clamp(17px,1.9vw,20px)] leading-[1.75] text-pb-fg">
+              Teams have never made more ads. AI writes the scripts, cuts the variants, and fills
+              the queue, and 82% of teams now use it to generate ideas. But only 7% trust it with
+              the decision that actually moves budget: which ad to make next. The making got
+              automated. The judgment didn&rsquo;t.
+            </p>
+            <p className="font-display text-[clamp(17px,1.9vw,20px)] leading-[1.75] text-pb-fg">
+              Peachblue is the judgment engine. It reads your own results across every platform,
+              finds the patterns your winners share, and turns them into a brief your team can
+              execute. Evidence in, brief out.
+            </p>
+            <p className="text-[12.5px] text-pb-fg-muted">
+              Adoption figures from Motion&rsquo;s 2026 AI Divide study.
+            </p>
+          </motion.div>
+        </div>
+      </section>
 
       <FeatureSection
         reverse
@@ -382,7 +447,7 @@ export default function Home() {
         <div className="pointer-events-none absolute inset-0 opacity-50" style={{ background: "radial-gradient(60% 50% at 25% 20%, rgba(255,214,200,0.55) 0%, transparent 55%), radial-gradient(60% 50% at 85% 80%, rgba(168,210,255,0.45) 0%, transparent 60%)" }} aria-hidden="true" />
         <div className="max-w-[560px] mx-auto relative text-center">
           <div className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-pb-fg-muted mb-3">Get started</div>
-          <h2 className="font-display text-[clamp(28px,4vw,44px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-fg mb-4">
+          <h2 className="font-display text-[clamp(32px,4.8vw,56px)] leading-[1.06] font-medium tracking-[-0.015em] text-pb-fg mb-4">
             See what&apos;s <span className="italic">working</span>.<br />Make more of it.
           </h2>
           <p className="text-[15px] text-pb-fg-muted leading-relaxed mb-8">
@@ -465,7 +530,7 @@ function SectionHeader({ eyebrow, title, subtitle }: { eyebrow: string; title: R
   return (
     <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger} className="text-center mb-14 max-w-2xl mx-auto">
       <motion.div variants={fade} className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-pb-fg-muted mb-2">{eyebrow}</motion.div>
-      <motion.h2 variants={fade} className="font-display text-[clamp(26px,4vw,40px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-fg mb-3">{title}</motion.h2>
+      <motion.h2 variants={fade} className="font-display text-[clamp(30px,4.6vw,52px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-fg mb-3">{title}</motion.h2>
       <motion.p variants={fade} className="text-[15px] text-pb-fg-muted leading-relaxed">{subtitle}</motion.p>
     </motion.div>
   );
@@ -515,7 +580,7 @@ function FeatureSection({
             className={reverse ? "md:order-2" : ""}
           >
             <motion.div variants={fade} className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-pb-peach-600 mb-3">{eyebrow}</motion.div>
-            <motion.h2 variants={fade} className="font-display text-[clamp(24px,3.4vw,36px)] leading-[1.1] font-medium tracking-[-0.015em] text-pb-fg mb-5">{title}</motion.h2>
+            <motion.h2 variants={fade} className="font-display text-[clamp(26px,3.8vw,44px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-fg mb-5">{title}</motion.h2>
             <motion.ul variants={fade} className="space-y-3 mb-7">
               {bullets.map((b) => (
                 <li key={b} className="flex items-start gap-3 text-[14px] leading-relaxed text-pb-fg-muted">
@@ -1288,7 +1353,7 @@ function EconomicsBand() {
           </motion.div>
           <motion.h2
             variants={fade}
-            className="font-display text-[clamp(26px,4vw,40px)] leading-[1.08] font-medium tracking-[-0.015em] text-[color:var(--color-pb-ink-fg)] mb-3"
+            className="font-display text-[clamp(30px,4.6vw,52px)] leading-[1.08] font-medium tracking-[-0.015em] text-[color:var(--color-pb-ink-fg)] mb-3"
           >
             How much budget reached creatives that <span className="italic">earned</span> it?
           </motion.h2>

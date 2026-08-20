@@ -67,6 +67,19 @@ body {
 
 .tnum { font-variant-numeric: tabular-nums; }
 
+/* Editorial drop cap for journal-style passages. First letter set in the
+   display serif, peach, floated like a magazine opener. */
+.pb-dropcap::first-letter {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 3.4em;
+  line-height: 0.82;
+  float: left;
+  padding-right: 0.12em;
+  padding-top: 0.04em;
+  color: var(--color-pb-peach-600);
+}
+
 /* Editorial long-form typography for /blog. Larger than .prose-pb (which is
    sized for legal fine print). Headings use the Fraunces display face to
    match the site's hero pattern; body stays Inter. */
