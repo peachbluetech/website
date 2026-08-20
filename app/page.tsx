@@ -119,7 +119,7 @@ export default function Home() {
               Why Peachblue exists
             </div>
             <h2 className="font-display text-[clamp(28px,4vw,48px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-fg">
-              The judgment <span className="italic">gap</span>.
+              The creative feedback loop is <span className="italic">broken</span>.
             </h2>
           </motion.div>
           <motion.div
@@ -130,15 +130,20 @@ export default function Home() {
             className="space-y-6"
           >
             <p className="pb-dropcap font-display text-[clamp(17px,1.9vw,20px)] leading-[1.75] text-pb-fg">
-              Teams have never made more ads. AI writes the scripts, cuts the variants, and fills
-              the queue, and 82% of teams now use it to generate ideas. But only 7% trust it with
-              the decision that actually moves budget: which ad to make next. The making got
-              automated. The judgment didn&rsquo;t.
+              Ad creation has never been faster. AI writes the scripts, cuts the variants, and
+              fills the queue, and 82% of teams now use it to generate ideas. But only 7% trust
+              it with the decision that actually moves budget: which ad to make next.
+            </p>
+            <p className="font-display text-[clamp(19px,2.2vw,24px)] leading-[1.5] font-medium text-pb-fg">
+              The making got automated. The judgment <span className="italic">didn&rsquo;t</span>.
             </p>
             <p className="font-display text-[clamp(17px,1.9vw,20px)] leading-[1.75] text-pb-fg">
-              Peachblue is the judgment engine. It reads your own results across every platform,
-              finds the patterns your winners share, and turns them into a brief your team can
-              execute. Evidence in, brief out.
+              Peachblue closes that gap. It connects your creative to your performance data
+              across every platform, finds the patterns behind what works, and turns those
+              insights into a brief your team can execute.
+            </p>
+            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-pb-peach-600">
+              Evidence in. Brief out.
             </p>
             <p className="text-[12.5px] text-pb-fg-muted">
               Adoption figures from Motion&rsquo;s 2026 AI Divide study.
