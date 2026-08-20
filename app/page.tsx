@@ -143,9 +143,6 @@ export default function Home() {
               across every platform, finds the patterns behind what works, and turns those
               insights into a blueprint for your next winning creative.
             </p>
-            <p className="text-[12.5px] text-pb-fg-muted">
-              Adoption figures from Motion&rsquo;s 2026 AI Divide study.
-            </p>
           </motion.div>
         </div>
       </section>
@@ -225,14 +222,15 @@ export default function Home() {
           whileInView="show"
           viewport={{ once: true, margin: "-80px" }}
           variants={stagger}
-          className="max-w-[900px] mx-auto text-center"
+          className="max-w-[1020px] mx-auto text-center"
         >
           <motion.p
             variants={fade}
-            className="font-display text-[clamp(30px,4.6vw,54px)] leading-[1.14] font-medium tracking-[-0.015em] text-pb-fg"
+            className="font-display text-[clamp(24px,3.4vw,42px)] leading-[1.2] font-medium tracking-[-0.015em] text-pb-fg"
           >
             Automation took targeting and bidding.
-            <br />
+            <br className="hidden md:block" />
+            <span className="md:hidden"> </span>
             Creative is the lever you <span className="italic">still own</span>.
           </motion.p>
           <motion.p variants={fade} className="mt-6 text-[13px] text-pb-fg-muted">
