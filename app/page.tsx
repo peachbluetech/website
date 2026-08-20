@@ -222,11 +222,11 @@ export default function Home() {
           whileInView="show"
           viewport={{ once: true, margin: "-80px" }}
           variants={stagger}
-          className="max-w-[1020px] mx-auto text-center"
+          className="max-w-[1200px] mx-auto text-center"
         >
           <motion.p
             variants={fade}
-            className="font-display text-[clamp(24px,3.4vw,42px)] leading-[1.2] font-medium tracking-[-0.015em] text-pb-fg"
+            className="font-display text-[clamp(28px,4.4vw,56px)] leading-[1.15] font-medium tracking-[-0.02em] text-pb-fg"
           >
             Automation took targeting and bidding.
             <br className="hidden md:block" />
