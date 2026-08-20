@@ -811,30 +811,53 @@ function CommandPanelFrame() {
         <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em]" style={{ color: "#A9B7DD" }}>
           Today &middot; Creative command center
         </span>
-        <span className="inline-flex items-center gap-2 font-mono text-[10px] font-semibold uppercase tracking-[0.14em]" style={{ color: "#A9B7DD" }}>
-          <span className="size-1.5 rounded-full bg-[#3AA976] animate-pulse" aria-hidden="true" /> Synced
+        <span className="inline-flex items-center gap-3 font-mono text-[10px] font-semibold uppercase tracking-[0.14em]" style={{ color: "#A9B7DD" }}>
+          <span style={{ color: "#7080AC" }}>Sample account</span>
+          <span className="inline-flex items-center gap-2">
+            <span className="size-1.5 rounded-full bg-[#3AA976] animate-pulse" aria-hidden="true" /> Synced
+          </span>
         </span>
       </div>
       {/* Stat tiles */}
       <div className="grid grid-cols-3 gap-2.5 md:gap-4 mb-5">
-        {["Spend this week", "Blended ROAS", "Waste found"].map((label, i) => (
+        {[
+          { label: "Spend this week", value: "$48,320", delta: "+12% WoW", tone: "up" as const },
+          { label: "Blended ROAS", value: "3.4x", delta: "+0.4 WoW", tone: "up" as const },
+          { label: "Waste found", value: "$6,180", delta: "9 creatives", tone: "warn" as const },
+        ].map((t, i) => (
           <motion.div
-            key={label}
+            key={t.label}
             initial={{ opacity: 0, y: 10 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.45, delay: 0.2 + i * 0.1, ease: EASE }}
             className="rounded-xl border p-3 md:p-4"
             style={{ background: "rgba(255,255,255,0.05)", borderColor: "rgba(255,255,255,0.10)" }}
           >
-            <div className="font-mono text-[8.5px] md:text-[9.5px] font-semibold uppercase tracking-[0.14em] mb-2.5" style={{ color: "#7080AC" }}>
-              {label}
+            <div className="font-mono text-[8.5px] md:text-[9.5px] font-semibold uppercase tracking-[0.14em] mb-2" style={{ color: "#7080AC" }}>
+              {t.label}
             </div>
-            <div className={`h-3 rounded-full max-w-full ${i === 2 ? "bg-pb-peach-400/80 w-16" : "bg-white/30"} ${i === 0 ? "w-24" : "w-16"}`} aria-hidden="true" />
+            <div
+              className="font-display text-[clamp(20px,2.6vw,30px)] font-medium leading-none tnum mb-1.5"
+              style={{ color: t.tone === "warn" ? "#FF9466" : "#F6F8FF" }}
+            >
+              {t.value}
+            </div>
+            <div className="font-mono text-[9px] md:text-[10px] tracking-[0.06em]" style={{ color: t.tone === "up" ? "#6FD39B" : "#A9B7DD" }}>
+              {t.delta}
+            </div>
           </motion.div>
         ))}
       </div>
       {/* Spark chart */}
       <div className="rounded-xl border p-4 mb-5" style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.10)" }}>
+        <div className="flex items-baseline justify-between mb-3">
+          <span className="font-mono text-[9px] md:text-[10px] font-semibold uppercase tracking-[0.14em]" style={{ color: "#7080AC" }}>
+            Spend &middot; last 30 days
+          </span>
+          <span className="font-mono text-[9px] md:text-[10px] tracking-[0.06em]" style={{ color: "#6FD39B" }}>
+            Trending up
+          </span>
+        </div>
         <svg viewBox="0 0 600 90" className="w-full h-20 md:h-24" preserveAspectRatio="none" aria-hidden="true">
           {[22, 45, 68].map((y) => (
             <line key={y} x1="0" y1={y} x2="600" y2={y} stroke="rgba(255,255,255,0.07)" strokeWidth="1" />
@@ -853,8 +876,18 @@ function CommandPanelFrame() {
       {/* Pulse rows */}
       <div className="space-y-2.5 mb-5">
         {[
-          { dot: "#3AA976", chip: "Scale", w: "w-2/5" },
-          { dot: "#D64545", chip: "Fix tracking", w: "w-1/3" },
+          {
+            dot: "#3AA976",
+            chip: "Scale",
+            text: "Fizzli \u201cThirsty? Fix it.\u201d is your best launch this month",
+            meta: "4.1x ROAS \u00b7 $9,400 spent \u00b7 7 days live",
+          },
+          {
+            dot: "#D64545",
+            chip: "Fix tracking",
+            text: "Trailform is spending with zero reported conversions",
+            meta: "$4,260 spent \u00b7 0 results \u00b7 conversion campaign",
+          },
         ].map((r, i) => (
           <motion.div
             key={r.chip}
@@ -864,10 +897,17 @@ function CommandPanelFrame() {
             className="flex items-center gap-3 rounded-xl border px-3.5 py-3"
             style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.10)" }}
           >
-            <span className="size-2 rounded-full shrink-0" style={{ background: r.dot }} aria-hidden="true" />
-            <div className={`h-2 ${r.w} rounded-full bg-white/20`} aria-hidden="true" />
+            <span className="size-2 rounded-full shrink-0 mt-0.5" style={{ background: r.dot }} aria-hidden="true" />
+            <div className="min-w-0 flex-1">
+              <div className="text-[12px] md:text-[13px] font-medium leading-snug truncate" style={{ color: "#F6F8FF" }}>
+                {r.text}
+              </div>
+              <div className="font-mono text-[9px] md:text-[10px] tracking-[0.04em] mt-1 truncate" style={{ color: "#7080AC" }}>
+                {r.meta}
+              </div>
+            </div>
             <span
-              className="ml-auto inline-flex items-center h-6 px-2.5 rounded-full border font-mono text-[9.5px] font-semibold uppercase tracking-[0.1em]"
+              className="ml-auto shrink-0 inline-flex items-center h-6 px-2.5 rounded-full border font-mono text-[9.5px] font-semibold uppercase tracking-[0.1em]"
               style={{ borderColor: "rgba(255,255,255,0.16)", color: "#F6F8FF" }}
             >
               {r.chip}
