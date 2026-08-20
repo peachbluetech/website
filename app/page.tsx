@@ -55,12 +55,6 @@ export default function Home() {
       <section className="pt-28 md:pt-36 pb-14 px-6">
         <div className="max-w-[1100px] mx-auto">
           <motion.div initial="hidden" animate="show" variants={stagger} className="text-center max-w-[860px] mx-auto">
-            <motion.div
-              variants={fade}
-              className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-pb-peach-600 mb-5"
-            >
-              Meta &middot; TikTok &middot; Google Ads &middot; Amazon DSP
-            </motion.div>
             <motion.h2
               variants={fade}
               className="font-display text-[clamp(44px,7.2vw,92px)] leading-[1.02] font-medium tracking-[-0.025em] text-pb-fg mb-6"
