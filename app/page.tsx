@@ -52,7 +52,7 @@ export default function Home() {
       <h1 className="sr-only">Peachblue: AI creative intelligence for Meta, TikTok, Google Ads, and Amazon DSP</h1>
 
       {/* ── 1 · MASTHEAD HERO ────────────────────────────── */}
-      <section className="pt-32 md:pt-40 pb-14 px-6">
+      <section className="pt-28 md:pt-36 pb-14 px-6">
         <div className="max-w-[1100px] mx-auto">
           <motion.div initial="hidden" animate="show" variants={stagger} className="text-center max-w-[860px] mx-auto">
             <motion.div
@@ -69,10 +69,10 @@ export default function Home() {
             </motion.h2>
             <motion.p
               variants={fade}
-              className="text-[clamp(15px,1.8vw,18px)] leading-[1.7] text-pb-fg-muted max-w-[560px] mx-auto mb-8"
+              className="text-[clamp(15px,1.8vw,18px)] leading-[1.7] text-pb-fg-muted max-w-[640px] mx-auto mb-8"
             >
               Peachblue turns your ad data and creative into the blueprint for your next
-              winning ad.
+              winning ad. What&rsquo;s working, what&rsquo;s wasting, and what to make next.
             </motion.p>
             <motion.div variants={fade} className="flex gap-3 flex-wrap items-center justify-center">
               <a
@@ -96,7 +96,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.25, ease: EASE }}
-            className="mt-14 md:mt-16"
+            className="mt-12 md:mt-14"
           >
             <CommandPanelFrame />
           </motion.div>
