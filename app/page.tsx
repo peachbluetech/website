@@ -751,15 +751,28 @@ function AgentPeachSpotlightFrame() {
             <div className="flex gap-4">
               <DemoAd brand="fizzli" format="story" className="w-20" />
               <div className="flex-1 min-w-0">
-                <div className="flex items-center justify-between mb-3">
-                  <Sk w="w-1/2" h="h-2.5" />
-                  <ScoreDot />
+                <div className="flex items-start justify-between gap-3 mb-3">
+                  <div className="min-w-0">
+                    <div className="text-[12.5px] font-semibold text-pb-fg truncate">
+                      Fizzli &middot; &ldquo;Thirsty? Fix it.&rdquo;
+                    </div>
+                    <div className="text-[10px] text-pb-fg-muted mt-0.5">Meta &middot; 3 ads &middot; last 30 days</div>
+                  </div>
+                  <div className="flex items-center gap-1.5 shrink-0">
+                    <ScoreDot />
+                    <span className="text-[12px] font-semibold text-pb-fg tnum">92</span>
+                  </div>
                 </div>
                 <div className="grid grid-cols-2 gap-2">
-                  {["Spend", "CTR", "ROAS", "CPA"].map((m) => (
-                    <div key={m} className="rounded-lg bg-pb-muted/60 p-2">
-                      <div className="text-[9px] font-semibold uppercase tracking-[0.1em] text-pb-fg-muted mb-1.5">{m}</div>
-                      <Sk w="w-8" h="h-2.5" />
+                  {[
+                    { m: "Spend", v: "$9,400" },
+                    { m: "CTR", v: "3.8%" },
+                    { m: "ROAS", v: "4.1x" },
+                    { m: "CPA", v: "$18.40" },
+                  ].map((t) => (
+                    <div key={t.m} className="rounded-lg bg-pb-muted/60 p-2">
+                      <div className="text-[9px] font-semibold uppercase tracking-[0.1em] text-pb-fg-muted mb-1">{t.m}</div>
+                      <div className="text-[13px] font-semibold text-pb-fg tnum leading-none">{t.v}</div>
                     </div>
                   ))}
                 </div>
@@ -769,10 +782,12 @@ function AgentPeachSpotlightFrame() {
               initial={{ opacity: 0 }}
               animate={inView ? { opacity: 1 } : {}}
               transition={{ duration: 0.4, delay: 0.9 }}
-              className="mt-3 rounded-lg bg-pb-muted/50 border border-pb-border/60 p-2.5 space-y-1.5"
+              className="mt-3 rounded-lg bg-pb-muted/50 border border-pb-border/60 p-3"
             >
-              <Sk w="w-full" h="h-1.5" />
-              <Sk w="w-4/5" h="h-1.5" />
+              <p className="text-[11.5px] leading-relaxed text-pb-fg">
+                Your top creative over the last 30 days. Problem-first hook with the product on
+                screen by 0:03, holding attention 31% longer than your account average.
+              </p>
             </motion.div>
           </motion.div>
           <motion.div
