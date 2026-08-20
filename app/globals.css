@@ -16,6 +16,17 @@
   --color-pb-blue-500: #4C8DFF;
   --color-pb-blue-700: #2563EB;
 
+  /* Ink surface — the deep ink-blue the product's V3 redesign uses for hero
+     and chart surfaces. Values mirror the app's globals.css so site mockups
+     match real product screenshots. */
+  --color-pb-ink: #13214B;
+  --color-pb-ink-2: #1C2E63;
+  --color-pb-ink-deep: #0C1430;
+  --color-pb-ink-fg: #F6F8FF;
+  --color-pb-ink-fg-muted: #A9B7DD;
+  --color-pb-ink-fg-faint: #7080AC;
+  --color-pb-ink-border: rgba(255, 255, 255, 0.10);
+
   --color-pb-bg: #FBFAF7;
   --color-pb-card: #FFFFFF;
   --color-pb-muted: #F4F2EE;
@@ -37,6 +48,14 @@
 
 .pb-gradient-brand {
   background: linear-gradient(100deg, #E0EBFF 0%, #F1E7FF 35%, #FFE8DC 70%, #FFD2BB 100%);
+}
+
+/* Ink hero surface — same recipe as the app's pb-gradient-ink, so site
+   product mockups read as the real thing. */
+.pb-gradient-ink {
+  background:
+    radial-gradient(120% 140% at 8% 0%, rgba(59, 111, 224, 0.38) 0%, transparent 55%),
+    linear-gradient(135deg, #1D306B 0%, #13214B 55%, #0C1430 100%);
 }
 
 body {

@@ -88,6 +88,22 @@ export default function Home() {
           whileInView="show"
           viewport={{ once: true, margin: "-40px" }}
           variants={fade}
+          className="max-w-[1100px] mx-auto mb-5"
+        >
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-x-6 gap-y-3 px-1">
+            {PROOF_POINTS.map((p) => (
+              <div key={p} className="flex items-start gap-2 text-[12.5px] leading-snug text-pb-fg-muted">
+                <Check />
+                <span>{p}</span>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-40px" }}
+          variants={fade}
           className="max-w-[1100px] mx-auto"
         >
           <div className="rounded-2xl border border-pb-border bg-pb-card shadow-pb-soft px-6 py-5 flex flex-col lg:flex-row items-center justify-between gap-6">
@@ -138,7 +154,7 @@ export default function Home() {
             {[
               { num: "1", title: "Connect", desc: "Securely connect your ad accounts via OAuth. Peachblue syncs all your creative assets and performance data automatically, every day.", visual: <StepConnectVisual /> },
               { num: "2", title: "Analyze", desc: "AI vision models process every image and video, generating structured intelligence tags. Hook style, emotional tone, CTA type, pacing, and more.", visual: <StepAnalyzeVisual /> },
-              { num: "3", title: "Act", desc: "Explore your Creative Library, ask Agent Peach questions, and use AI-powered insights to understand what's working and brief your next campaign.", visual: <StepActVisual /> },
+              { num: "3", title: "Act", desc: "Explore your Creative Library, ask Agent Peach questions, and turn your winners into a generation-ready brief for your next campaign.", visual: <StepActVisual /> },
             ].map((s) => (
               <motion.div key={s.num} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-60px" }} variants={fade} className="rounded-2xl border border-pb-border bg-pb-card p-7 shadow-pb-soft flex flex-col">
                 <div className="size-9 rounded-full pb-gradient-peach text-white text-[13px] font-semibold flex items-center justify-center mb-5 shadow-[0_4px_12px_rgba(242,119,73,0.3)]">
@@ -161,9 +177,9 @@ export default function Home() {
         bullets={[
           "One conversation across every account you run: Meta, TikTok, Google, Amazon DSP",
           "Answers grounded in your real performance data, not generic advice",
+          "Every number states the time window it came from, so you can audit any answer",
+          "Follow-up questions reuse the data behind earlier answers instead of guessing",
           "Ranked creative lists, head-to-head comparisons, and deep dives",
-          "Spots the patterns behind your winners and says why",
-          "Every answer cites the metrics it's built on",
         ]}
         ctaLabel={TRIAL_LABEL}
         ctaHref={TRIAL_HREF}
@@ -174,7 +190,7 @@ export default function Home() {
         reverse
         tinted
         eyebrow="Creative Intelligence"
-        title={<>31 creative dimensions, <span className="italic">decoded</span>.</>}
+        title={<>29 creative dimensions, <span className="italic">decoded</span>.</>}
         bullets={[
           "Every creative tagged across hook style, tone, format, CTA, and more",
           "Patterns and archetypes show which combinations actually drive ROAS",
@@ -184,6 +200,68 @@ export default function Home() {
         ctaLabel={TRIAL_LABEL}
         ctaHref={TRIAL_HREF}
         frame={<CreativeIntelligenceFrame />}
+      />
+
+      <FeatureSection
+        eyebrow="Creative Economics"
+        title={<>How much budget reached creatives that <span className="italic">earned</span> it?</>}
+        bullets={[
+          "Hit rate on qualified launches, so you know how often new creative earns its spend",
+          "Waste in dollars: exactly how much budget went to creatives that never performed",
+          "A bleeding-now list that catches drains while they are still running",
+          "Fatigue flagged against each creative's own best week, not a generic decay curve",
+          "Hero concentration and bench depth show how fragile the account really is",
+        ]}
+        ctaLabel={TRIAL_LABEL}
+        ctaHref={TRIAL_HREF}
+        frame={<EconomicsFrame />}
+      />
+
+      <FeatureSection
+        reverse
+        tinted
+        eyebrow="The Monday digest"
+        title={<>Peachblue <span className="italic">tells</span> you.</>}
+        bullets={[
+          "Every Monday: what won, what bled, what fatigued, and the one thing to act on",
+          "Delivered to your inbox and posted straight into your Slack channel",
+          "Spend and ROAS against the prior week, waste, and hit rate in one read",
+          "A heads-up email the moment a platform's first sync finishes",
+        ]}
+        ctaLabel={TRIAL_LABEL}
+        ctaHref={TRIAL_HREF}
+        frame={<DigestFrame />}
+      />
+
+      <FeatureSection
+        eyebrow="Next Creative Brief"
+        title={<>Stop guessing what to make <span className="italic">next</span>.</>}
+        bullets={[
+          "One click turns your account's winning patterns into a brief a freelancer can execute",
+          "Proven hooks with their real CTRs, and reference ads labeled as top performers",
+          "Do and don't rules in plain language, with the evidence behind each one",
+          "A generation-ready prompt block for whichever creative tool you use",
+          "Share it with a public link, no login needed on the other end",
+        ]}
+        ctaLabel={TRIAL_LABEL}
+        ctaHref={TRIAL_HREF}
+        frame={<BriefFrame />}
+      />
+
+      <FeatureSection
+        reverse
+        tinted
+        eyebrow="Objective-aware scoring"
+        title={<>Reach judged on reach. Sales judged on <span className="italic">sales</span>.</>}
+        bullets={[
+          "Peachblue reads the objective each campaign was bought with and scores against it",
+          "Awareness and CTV creatives earn Reach ranks built on CPM and CTR, not punished zeros",
+          "Conversion campaigns spending with zero reported results get a broken-tracking alert",
+          "Every score shows its components and weights, so you can check the math",
+        ]}
+        ctaLabel={TRIAL_LABEL}
+        ctaHref={TRIAL_HREF}
+        frame={<ScoreFrame />}
       />
 
       <FeatureSection
@@ -246,13 +324,19 @@ export default function Home() {
         eyebrow="MCP integration"
         title={<>Works inside Claude. Your data, <span className="italic">wherever</span> you think.</>}
         bullets={[
-          "Connect Peachblue to Claude in one step",
+          "Connect Peachblue to Claude or Cursor in one step",
+          "The only creative analytics MCP serving your own cross-platform performance data, including Amazon DSP",
           "Query your creative performance from the tools you already live in",
           "The same intelligence engine, available wherever you work",
         ]}
         ctaLabel={TRIAL_LABEL}
         ctaHref={TRIAL_HREF}
         frame={<McpFrame />}
+        afterCta={
+          <Link href="/mcp" className="text-[12.5px] text-pb-fg-muted underline underline-offset-2 hover:text-pb-fg transition-colors">
+            How the MCP connection works
+          </Link>
+        }
       />
 
       {/* ── 5 · PRICING TEASER ───────────────────────────── */}
@@ -374,6 +458,14 @@ export default function Home() {
 }
 
 /* ── Data ───────────────────────────────────────────────────────── */
+
+const PROOF_POINTS = [
+  "A Monday digest in your inbox and Slack",
+  "One-click briefs built from your own winners",
+  "An agent that cites its time windows",
+  "Scores that match each campaign's objective",
+  "Amazon DSP and Connected TV included",
+];
 
 const PLATFORMS = [
   { name: "Meta", bg: "#1877F2", letter: "f" },
@@ -1157,6 +1249,305 @@ function McpFrame() {
                 <Sk w="w-1/3" h="h-1.5" />
               </div>
               <ScoreDot />
+            </div>
+          </motion.div>
+        </div>
+      </BrowserFrame>
+    </div>
+  );
+}
+
+/* ── Feature frame: Creative Economics (ink hero surface) ───────── */
+/* Ink surface matches the app's V3 Economics hero, so this mockup reads
+   like the real product. TODO: replace with real /economics screenshot */
+function EconomicsFrame() {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const bars = [34, 58, 42, 78, 64, 90, 52];
+  return (
+    <div ref={ref}>
+      <BrowserFrame url="app.peachblue.io/economics">
+        <div className="space-y-2.5">
+          {/* Ink hero card: stat tiles + spend bars */}
+          <div className="rounded-xl pb-gradient-ink p-4">
+            <div className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[color:var(--color-pb-ink-fg-muted)] mb-3">
+              Creative economics
+            </div>
+            <div className="grid grid-cols-3 gap-2.5 mb-3.5">
+              {["Hit rate", "Waste", "Bench depth"].map((label) => (
+                <div
+                  key={label}
+                  className="rounded-lg p-2.5 border"
+                  style={{ background: "rgba(255,255,255,0.06)", borderColor: "var(--color-pb-ink-border)" }}
+                >
+                  <div className="text-[8.5px] font-semibold uppercase tracking-[0.1em] text-[color:var(--color-pb-ink-fg-faint)] mb-1.5">
+                    {label}
+                  </div>
+                  <div className="h-2.5 w-9 rounded-full bg-white/30" aria-hidden="true" />
+                </div>
+              ))}
+            </div>
+            <div className="flex items-end gap-1.5 h-10" aria-hidden="true">
+              {bars.map((h, i) => (
+                <motion.div
+                  key={i}
+                  className={`flex-1 rounded-sm ${i === 5 ? "bg-pb-peach-400" : "bg-white/[0.18]"}`}
+                  initial={{ height: 0 }}
+                  animate={inView ? { height: `${h}%` } : {}}
+                  transition={{ duration: 0.6, delay: 0.3 + i * 0.06, ease: EASE }}
+                />
+              ))}
+            </div>
+          </div>
+          {/* Bleeding-now rows */}
+          {[
+            { brand: "sagelle" as DemoBrand, chip: "Bleeding", chipCls: "bg-[#FBEAEA] text-[#D64545]" },
+            { brand: "trailform" as DemoBrand, chip: "Fatigued", chipCls: "bg-pb-peach-50 text-pb-peach-700" },
+          ].map((r, i) => (
+            <motion.div
+              key={r.chip}
+              initial={{ opacity: 0, y: 10 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.4, delay: 0.7 + i * 0.15, ease: EASE }}
+              className="flex items-center gap-3.5 rounded-xl border border-pb-border bg-pb-card p-3"
+            >
+              <DemoAd brand={r.brand} format="story" className="w-8" />
+              <div className="flex-1 min-w-0 space-y-1.5">
+                <Sk w="w-2/3" h="h-2" />
+                <Sk w="w-2/5" h="h-1.5" />
+              </div>
+              <span className={`inline-flex items-center h-6 rounded-full px-2.5 text-[10px] font-semibold uppercase tracking-[0.06em] shrink-0 ${r.chipCls}`}>
+                {r.chip}
+              </span>
+            </motion.div>
+          ))}
+        </div>
+      </BrowserFrame>
+    </div>
+  );
+}
+
+/* ── Feature frame: Monday digest email + Slack ─────────────────── */
+/* Sky-blue card mirrors the app's digest card. TODO: replace with a real
+   digest email capture */
+function DigestFrame() {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+  return (
+    <div ref={ref}>
+      <BrowserFrame url="Your inbox">
+        <div className="space-y-3">
+          {/* Email header */}
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.4, delay: 0.15, ease: EASE }}
+            className="rounded-xl border border-pb-border bg-pb-card overflow-hidden"
+          >
+            <div className="flex items-center gap-2.5 px-4 py-3 border-b border-pb-border/70">
+              <div className="size-7 rounded-full pb-gradient-peach flex items-center justify-center shrink-0">
+                <PeachblueMark size={14} color="#ffffff" />
+              </div>
+              <div className="min-w-0">
+                <div className="text-[12px] font-semibold text-pb-fg truncate">Your week in creative</div>
+                <div className="text-[10.5px] text-pb-fg-muted">Peachblue &middot; Monday morning</div>
+              </div>
+            </div>
+            {/* Sky-blue digest stat card */}
+            <div className="p-4 space-y-3">
+              <div className="rounded-lg border border-pb-blue-200 bg-pb-blue-50 p-3">
+                <div className="grid grid-cols-3 gap-3">
+                  {["Spend", "ROAS", "Hit rate"].map((m) => (
+                    <div key={m}>
+                      <div className="text-[8.5px] font-semibold uppercase tracking-[0.1em] text-pb-blue-700 mb-1.5">{m}</div>
+                      <div className="h-2.5 w-9 rounded-full bg-pb-blue-200" aria-hidden="true" />
+                    </div>
+                  ))}
+                </div>
+              </div>
+              {/* Pulse rows */}
+              <div className="space-y-2">
+                {[
+                  { dot: "#3AA976", w: "w-4/5" },
+                  { dot: "#F27749", w: "w-2/3" },
+                  { dot: "#D64545", w: "w-3/4" },
+                ].map((r, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, x: 10 }}
+                    animate={inView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ duration: 0.4, delay: 0.5 + i * 0.15, ease: EASE }}
+                    className="flex items-center gap-2.5"
+                  >
+                    <span className="size-2 rounded-full shrink-0" style={{ background: r.dot }} aria-hidden="true" />
+                    <Sk w={r.w} h="h-1.5" />
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+          {/* Slack delivery chip */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.4, delay: 1.1 }}
+            className="flex"
+          >
+            <span className="inline-flex items-center gap-2 h-8 px-3.5 rounded-full border border-pb-border bg-pb-card text-[11.5px] font-medium text-pb-fg-muted">
+              <span className="size-1.5 rounded-full bg-[#3AA976]" aria-hidden="true" />
+              Also posted to #creative-performance
+            </span>
+          </motion.div>
+        </div>
+      </BrowserFrame>
+    </div>
+  );
+}
+
+/* ── Feature frame: Next Creative Brief share page ──────────────── */
+/* TODO: replace with a real shared-brief screenshot */
+function BriefFrame() {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+  return (
+    <div ref={ref}>
+      <BrowserFrame url="peachblue.io/brief/8kf3…">
+        <div className="space-y-3">
+          <div className="text-[10px] font-semibold uppercase tracking-[0.12em] text-pb-fg-muted">Next creative brief</div>
+          {/* Editorial headline skeleton */}
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.45, delay: 0.15, ease: EASE }}
+            className="space-y-2"
+          >
+            <Sk w="w-11/12" h="h-3.5" />
+            <Sk w="w-1/2" h="h-3.5" />
+          </motion.div>
+          {/* Winning recipe rows */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.4, delay: 0.45, ease: EASE }}
+            className="rounded-xl border border-pb-border bg-pb-card p-3.5 space-y-2.5"
+          >
+            <div className="text-[10px] font-semibold uppercase tracking-[0.12em] text-pb-fg-muted">The winning recipe</div>
+            {[
+              { label: "Proven hook", dot: "#4C8DFF" },
+              { label: "Reference ad", dot: "#3AA976" },
+              { label: "Do / don't rules", dot: "#F27749" },
+            ].map((r, i) => (
+              <motion.div
+                key={r.label}
+                initial={{ opacity: 0, x: 10 }}
+                animate={inView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.4, delay: 0.6 + i * 0.14, ease: EASE }}
+                className="flex items-center gap-2.5"
+              >
+                <span className="size-2 rounded-full shrink-0" style={{ background: r.dot }} aria-hidden="true" />
+                <span className="text-[11.5px] font-medium text-pb-fg shrink-0">{r.label}</span>
+                <Sk w="w-2/5" h="h-1.5" className="ml-auto" />
+              </motion.div>
+            ))}
+          </motion.div>
+          {/* Generation-ready prompt block */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.45, delay: 1.1, ease: EASE }}
+            className="rounded-xl pb-gradient-ink p-3.5"
+          >
+            <div className="flex items-center justify-between mb-2.5">
+              <span
+                className="text-[9.5px] font-semibold uppercase tracking-[0.12em] text-[color:var(--color-pb-ink-fg-muted)]"
+                style={{ fontFamily: "var(--font-mono)" }}
+              >
+                Generation-ready prompt
+              </span>
+              <span className="inline-flex items-center h-6 px-2.5 rounded-full border text-[10px] font-semibold text-[color:var(--color-pb-ink-fg)]" style={{ borderColor: "var(--color-pb-ink-border)" }}>
+                Copy
+              </span>
+            </div>
+            <div className="space-y-1.5" aria-hidden="true">
+              <div className="h-1.5 w-full rounded-full bg-white/[0.16]" />
+              <div className="h-1.5 w-5/6 rounded-full bg-white/[0.16]" />
+              <div className="h-1.5 w-2/3 rounded-full bg-white/[0.16]" />
+            </div>
+          </motion.div>
+        </div>
+      </BrowserFrame>
+    </div>
+  );
+}
+
+/* ── Feature frame: objective-aware score banner ────────────────── */
+/* TODO: replace with a real score-banner screenshot once slice 2 is live */
+function ScoreFrame() {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const components = [
+    { label: "CTR", w: 40 },
+    { label: "CPM", w: 35 },
+    { label: "Spend", w: 25 },
+  ];
+  return (
+    <div ref={ref}>
+      <BrowserFrame url="app.peachblue.io/creatives">
+        <div className="space-y-2.5">
+          {/* Score banner */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.45, delay: 0.15, ease: EASE }}
+            className="rounded-xl pb-gradient-ink p-4"
+          >
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-2.5">
+                <DemoAd brand="trailform" format="story" className="w-7" />
+                <div className="h-2 w-24 rounded-full bg-white/25" aria-hidden="true" />
+              </div>
+              <span className="inline-flex items-center gap-1.5 h-6 px-2.5 rounded-full bg-pb-peach-400/20 border border-pb-peach-400/40 text-[10px] font-semibold uppercase tracking-[0.06em] text-pb-peach-200">
+                Reach Leader
+              </span>
+            </div>
+            <div className="flex items-center gap-2 mb-3.5">
+              <span className="inline-flex items-center h-6 px-2.5 rounded-full border text-[10px] font-medium text-[color:var(--color-pb-ink-fg-muted)]" style={{ borderColor: "var(--color-pb-ink-border)" }}>
+                Objective: Awareness
+              </span>
+              <span className="inline-flex items-center h-6 px-2.5 rounded-full border text-[10px] font-medium text-[color:var(--color-pb-ink-fg-muted)]" style={{ borderColor: "var(--color-pb-ink-border)" }}>
+                Scored against CTV peers
+              </span>
+            </div>
+            {/* Component weights */}
+            <div className="space-y-2">
+              {components.map((c, i) => (
+                <div key={c.label} className="flex items-center gap-2.5">
+                  <span className="text-[9.5px] font-semibold uppercase tracking-[0.1em] text-[color:var(--color-pb-ink-fg-faint)] w-9 shrink-0">
+                    {c.label}
+                  </span>
+                  <div className="flex-1 h-[5px] rounded-full bg-white/[0.1] overflow-hidden">
+                    <motion.div
+                      className="h-full rounded-full bg-pb-peach-400"
+                      initial={{ width: 0 }}
+                      animate={inView ? { width: `${c.w}%` } : {}}
+                      transition={{ duration: 0.8, delay: 0.5 + i * 0.12, ease: EASE }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+          {/* Broken-tracking alert */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.4, delay: 0.9, ease: EASE }}
+            className="flex items-start gap-3 rounded-xl border border-pb-peach-200 bg-pb-peach-50 p-3.5"
+          >
+            <span className="size-2 rounded-full bg-pb-peach-500 mt-1.5 shrink-0" aria-hidden="true" />
+            <div className="flex-1 min-w-0">
+              <div className="text-[11.5px] font-semibold text-pb-peach-700 mb-1.5">Tracking looks broken</div>
+              <Sk w="w-5/6" h="h-1.5" />
             </div>
           </motion.div>
         </div>

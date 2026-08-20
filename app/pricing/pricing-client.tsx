@@ -30,9 +30,9 @@ const PLANS: Plan[] = [
     features: [
       "Meta + TikTok auto-sync",
       "29-dimension AI creative analysis (400 credits/mo)",
-      "Creative Library + performance scoring",
+      "Creative Library + objective-aware scoring",
       "Agent Peach chat (500 messages/mo)",
-      "Daily performance digest",
+      "Weekly digest email + Slack delivery",
     ],
     cta: "trial",
   },
@@ -46,6 +46,7 @@ const PLANS: Plan[] = [
     features: [
       "Google Ads auto-sync",
       "Creative intelligence patterns",
+      "Next Creative Brief (shareable, generation-ready)",
       "Brand Intel (Reddit monitoring)",
       "Full history",
       "MCP/API access (your data in Claude)",
@@ -126,10 +127,12 @@ const COMPARE: CompareGroup[] = [
     title: "Creative analysis",
     rows: [
       { label: "AI creative analysis (29 dimensions)", values: [true, true, true, true, true] },
-      { label: "Composite scoring + performance tiers", values: [true, true, true, true, true] },
+      { label: "Objective-aware scoring + performance tiers", values: [true, true, true, true, true] },
+      { label: "Creative economics (hit rate, waste in dollars, fatigue)", values: [true, true, true, true, true] },
       { label: "Creative Library (By Ad / By Creative)", values: [true, true, true, true, true] },
       { label: "Performance history", values: ["30 days", "Full", "Full", "Full", "Full"] },
       { label: "Creative intelligence patterns", values: [false, true, true, true, true] },
+      { label: "Next Creative Brief (shareable, generation-ready)", values: [false, true, true, true, true] },
       { label: "Brand Intel (Reddit monitoring)", values: [false, true, true, true, true] },
     ],
   },
@@ -139,6 +142,7 @@ const COMPARE: CompareGroup[] = [
       { label: "Agent Peach messages", values: ["500/mo", "3,000/mo", "Unlimited", "Unlimited", "Unlimited"] },
       { label: "MCP/API access (your data in Claude)", values: [false, true, true, true, true] },
       { label: "Daily performance digest", values: [true, true, true, true, true] },
+      { label: "Weekly digest email + Slack delivery", values: [true, true, true, true, true] },
     ],
   },
   {
