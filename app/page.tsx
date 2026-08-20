@@ -72,7 +72,7 @@ export default function Home() {
               className="text-[clamp(15px,1.8vw,18px)] leading-[1.7] text-pb-fg-muted max-w-[640px] mx-auto mb-8"
             >
               Peachblue turns your ad data and creative into the blueprint for your next
-              winning ad. What&rsquo;s working, what&rsquo;s wasting, and what to make next.
+              winning ad. Create what works. Scale what wins.
             </motion.p>
             <motion.div variants={fade} className="flex gap-3 flex-wrap items-center justify-center">
               <a
