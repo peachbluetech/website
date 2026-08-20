@@ -45,7 +45,7 @@ const TOOL_GROUPS = [
   },
   {
     title: "Patterns and dimensions",
-    desc: "Creative archetypes, 29-dimension tag analysis, and copy variant performance across every ad.",
+    desc: "Creative archetypes, 31-dimension tag analysis, and copy variant performance across every ad.",
   },
   {
     title: "Time and risk",

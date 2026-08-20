@@ -77,7 +77,7 @@ draft.
   labeled as roadmap.
 - Pricing tables cite their verification date ("prices verified <date>").
 - Never disclose internal implementation details (model providers, exact tag
-  counts beyond the public "29 dimensions", API internals beyond what a
+  counts beyond the public "31 dimensions", API internals beyond what a
   practitioner needs).
 
 ## CTAs

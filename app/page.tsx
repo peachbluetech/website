@@ -25,7 +25,7 @@ export default function Home() {
     {
       num: "02",
       title: "Analyze",
-      desc: "AI reads every image and video: hook, tone, format, CTA, 29 dimensions in all. Every creative is scored against the objective its campaign was bought for.",
+      desc: "AI reads every image and video: hook, tone, format, CTA, 31 dimensions in all. Every creative is scored against the objective its campaign was bought for.",
       visual: <StepAnalyzeVisual />,
     },
     {
@@ -422,7 +422,7 @@ const TICKER_ITEMS = [
   "TikTok",
   "Google Ads",
   "Amazon DSP",
-  "29 creative dimensions",
+  "31 creative dimensions",
   "2.1x hook-test lift found",
   "44% lower CPA, UGC vs studio",
   "Monday digest, email + Slack",

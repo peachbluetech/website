@@ -29,7 +29,7 @@ const PLANS: Plan[] = [
     tagline: "For solo advertisers getting started.",
     features: [
       "Meta + TikTok auto-sync",
-      "29-dimension AI creative analysis (400 credits/mo)",
+      "31-dimension AI creative analysis (400 credits/mo)",
       "Creative Library + objective-aware scoring",
       "Agent Peach chat (500 messages/mo)",
       "Weekly digest email + Slack delivery",
@@ -126,7 +126,7 @@ const COMPARE: CompareGroup[] = [
   {
     title: "Creative analysis",
     rows: [
-      { label: "AI creative analysis (29 dimensions)", values: [true, true, true, true, true] },
+      { label: "AI creative analysis (31 dimensions)", values: [true, true, true, true, true] },
       { label: "Objective-aware scoring + performance tiers", values: [true, true, true, true, true] },
       { label: "Creative economics (hit rate, waste in dollars, fatigue)", values: [true, true, true, true, true] },
       { label: "Creative Library (By Ad / By Creative)", values: [true, true, true, true, true] },
