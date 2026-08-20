@@ -221,7 +221,7 @@ export default function PricingClient() {
           </motion.div>
           <motion.h2
             variants={fade}
-            className="font-display text-[clamp(27px,3.6vw,38px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-fg mb-3"
+            className="font-display text-[clamp(34px,5vw,56px)] leading-[1.06] font-medium tracking-[-0.015em] text-pb-fg mb-3"
           >
             Plans that scale with your ad <span className="italic">spend</span>.
           </motion.h2>
@@ -318,7 +318,7 @@ export default function PricingClient() {
             <motion.div variants={fade} className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-pb-fg-muted mb-2">
               Compare
             </motion.div>
-            <motion.h2 variants={fade} className="font-display text-[clamp(24px,3.5vw,34px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-fg">
+            <motion.h2 variants={fade} className="font-display text-[clamp(28px,4vw,44px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-fg">
               Every plan, side by <span className="italic">side</span>.
             </motion.h2>
           </motion.div>
@@ -391,7 +391,7 @@ export default function PricingClient() {
         <div className="max-w-[1100px] mx-auto">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger} className="text-center mb-12 max-w-2xl mx-auto">
             <motion.div variants={fade} className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-pb-fg-muted mb-2">Questions</motion.div>
-            <motion.h2 variants={fade} className="font-display text-[clamp(24px,3.5vw,34px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-fg">
+            <motion.h2 variants={fade} className="font-display text-[clamp(28px,4vw,44px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-fg">
               Good to <span className="italic">know</span>.
             </motion.h2>
           </motion.div>

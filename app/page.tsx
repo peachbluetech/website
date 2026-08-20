@@ -362,6 +362,18 @@ export default function Home() {
         }
       />
 
+      {/* ── PULL QUOTE (enable when the Kingstar testimonial is approved;
+             oversized editorial style per the journal direction) ──
+      <section className="py-20 md:py-28 px-6">
+        <figure className="max-w-[900px] mx-auto text-center">
+          <blockquote className="font-display text-[clamp(26px,4vw,44px)] leading-[1.2] font-medium tracking-[-0.01em] text-pb-fg">
+            &ldquo;Quote goes here.&rdquo;
+          </blockquote>
+          <figcaption className="mt-6 text-[13px] text-pb-fg-muted">Name, Title, Kingstar</figcaption>
+        </figure>
+      </section>
+      */}
+
       {/* ── 5 · PRICING TEASER ───────────────────────────── */}
       <section id="pricing" className="py-24 md:py-32 px-6">
         <div className="max-w-[1100px] mx-auto">
@@ -432,7 +444,7 @@ export default function Home() {
                 whileInView="show"
                 viewport={{ once: true, margin: "-60px" }}
                 variants={fade}
-                className="rounded-2xl border border-pb-border bg-pb-card p-6 shadow-pb-soft"
+                className="border-t border-dashed border-pb-border pt-5"
               >
                 <h3 className="text-[14.5px] font-semibold mb-2 text-pb-fg">{f.q}</h3>
                 <p className="text-[13px] leading-relaxed text-pb-fg-muted">{f.a}</p>
@@ -1339,8 +1351,8 @@ function EconomicsBand() {
     },
   ];
   return (
-    <section ref={ref} className="py-20 md:py-28 px-6 pb-gradient-ink relative overflow-hidden">
-      <div className="max-w-[1100px] mx-auto relative">
+    <section ref={ref} className="py-16 md:py-24 px-6">
+      <div className="max-w-[1100px] mx-auto pb-gradient-ink rounded-[28px] px-6 py-14 md:px-14 md:py-16 relative overflow-hidden">
         <motion.div
           initial="hidden"
           whileInView="show"
@@ -1353,11 +1365,11 @@ function EconomicsBand() {
           </motion.div>
           <motion.h2
             variants={fade}
-            className="font-display text-[clamp(30px,4.6vw,52px)] leading-[1.08] font-medium tracking-[-0.015em] text-[color:var(--color-pb-ink-fg)] mb-3"
+            className="font-display text-[clamp(30px,4.6vw,52px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-ink-fg mb-3"
           >
             How much budget reached creatives that <span className="italic">earned</span> it?
           </motion.h2>
-          <motion.p variants={fade} className="text-[15px] leading-relaxed text-[color:var(--color-pb-ink-fg-muted)]">
+          <motion.p variants={fade} className="text-[15px] leading-relaxed text-pb-ink-fg-muted">
             Hit rate, waste in dollars, bench depth, and fatigue, computed from your daily data.
           </motion.p>
         </motion.div>
@@ -1373,8 +1385,8 @@ function EconomicsBand() {
               style={{ background: "rgba(255,255,255,0.05)", borderColor: "var(--color-pb-ink-border)" }}
             >
               <div>
-                <h3 className="text-[15px] font-semibold text-[color:var(--color-pb-ink-fg)] mb-2">{c.title}</h3>
-                <p className="text-[13px] leading-relaxed text-[color:var(--color-pb-ink-fg-muted)]">{c.desc}</p>
+                <h3 className="text-[15px] font-semibold text-pb-ink-fg mb-2">{c.title}</h3>
+                <p className="text-[13px] leading-relaxed text-pb-ink-fg-muted">{c.desc}</p>
               </div>
               <div className="mt-auto">{c.visual}</div>
             </motion.div>
@@ -1387,9 +1399,13 @@ function EconomicsBand() {
           transition={{ duration: 0.5, delay: 0.5 }}
           className="text-center mt-10"
         >
+          {/* Inline color: class-based color on this anchor computed white but
+              painted dark in Chromium (stale paint with transition-colors on a
+              composited layer). Literal inline style paints reliably. */}
           <a
             href={TRIAL_HREF}
-            className="inline-flex items-center gap-1.5 text-[14px] font-semibold text-[color:var(--color-pb-ink-fg)] hover:text-pb-peach-300 transition-colors"
+            className="inline-flex items-center gap-1.5 text-[14px] font-semibold hover:opacity-80 transition-opacity"
+            style={{ color: "#F6F8FF" }}
           >
             {TRIAL_LABEL} &rarr;
           </a>
@@ -1574,12 +1590,12 @@ function BriefFrame() {
           >
             <div className="flex items-center justify-between mb-2.5">
               <span
-                className="text-[9.5px] font-semibold uppercase tracking-[0.12em] text-[color:var(--color-pb-ink-fg-muted)]"
+                className="text-[9.5px] font-semibold uppercase tracking-[0.12em] text-pb-ink-fg-muted"
                 style={{ fontFamily: "var(--font-mono)" }}
               >
                 Generation-ready prompt
               </span>
-              <span className="inline-flex items-center h-6 px-2.5 rounded-full border text-[10px] font-semibold text-[color:var(--color-pb-ink-fg)]" style={{ borderColor: "var(--color-pb-ink-border)" }}>
+              <span className="inline-flex items-center h-6 px-2.5 rounded-full border text-[10px] font-semibold text-pb-ink-fg" style={{ borderColor: "var(--color-pb-ink-border)" }}>
                 Copy
               </span>
             </div>

@@ -68,7 +68,7 @@ export default function McpPage() {
             <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-pb-peach-600 mb-4">
               MCP integration
             </div>
-            <h1 className="font-display text-[clamp(32px,5vw,52px)] leading-[1.08] font-medium tracking-[-0.02em] text-pb-fg mb-5">
+            <h1 className="font-display text-[clamp(38px,5.6vw,64px)] leading-[1.06] font-medium tracking-[-0.02em] text-pb-fg mb-5">
               Bring your ad performance <span className="italic">into</span> Claude.
             </h1>
             <p className="text-[clamp(15px,1.8vw,17.5px)] leading-[1.7] text-pb-fg-muted max-w-[620px] mb-4">
@@ -103,7 +103,7 @@ export default function McpPage() {
         <section className="py-16 px-6 relative">
           <div className="pointer-events-none absolute inset-0 bg-pb-muted/40" aria-hidden="true" />
           <div className="max-w-[860px] mx-auto relative">
-            <h2 className="font-display text-[clamp(24px,3.4vw,34px)] leading-[1.1] font-medium tracking-[-0.015em] text-pb-fg mb-3">
+            <h2 className="font-display text-[clamp(28px,4vw,44px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-fg mb-3">
               Ask in plain language.
             </h2>
             <p className="text-[14.5px] text-pb-fg-muted leading-relaxed mb-8 max-w-[560px]">
@@ -130,7 +130,7 @@ export default function McpPage() {
         {/* Setup steps */}
         <section className="py-16 md:py-24 px-6">
           <div className="max-w-[860px] mx-auto">
-            <h2 className="font-display text-[clamp(24px,3.4vw,34px)] leading-[1.1] font-medium tracking-[-0.015em] text-pb-fg mb-8">
+            <h2 className="font-display text-[clamp(28px,4vw,44px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-fg mb-8">
               Connected in <span className="italic">three</span> steps.
             </h2>
             <div className="grid md:grid-cols-3 gap-5">
@@ -156,7 +156,7 @@ export default function McpPage() {
         <section className="py-16 px-6 relative">
           <div className="pointer-events-none absolute inset-0 bg-pb-muted/40" aria-hidden="true" />
           <div className="max-w-[860px] mx-auto relative">
-            <h2 className="font-display text-[clamp(24px,3.4vw,34px)] leading-[1.1] font-medium tracking-[-0.015em] text-pb-fg mb-8">
+            <h2 className="font-display text-[clamp(28px,4vw,44px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-fg mb-8">
               19 tools, four jobs.
             </h2>
             <div className="grid sm:grid-cols-2 gap-4">
@@ -179,7 +179,7 @@ export default function McpPage() {
         {/* CTA */}
         <section className="py-20 md:py-28 px-6">
           <div className="max-w-[560px] mx-auto text-center">
-            <h2 className="font-display text-[clamp(26px,4vw,40px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-fg mb-4">
+            <h2 className="font-display text-[clamp(30px,4.6vw,52px)] leading-[1.06] font-medium tracking-[-0.015em] text-pb-fg mb-4">
               Your data, wherever you <span className="italic">think</span>.
             </h2>
             <p className="text-[14.5px] text-pb-fg-muted leading-relaxed mb-8">
