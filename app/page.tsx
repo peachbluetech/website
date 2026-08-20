@@ -59,7 +59,7 @@ export default function Home() {
               variants={fade}
               className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-pb-peach-600 mb-5"
             >
-              Meta &middot; TikTok &middot; Google Ads &middot; Amazon DSP + CTV
+              Meta &middot; TikTok &middot; Google Ads &middot; Amazon DSP
             </motion.div>
             <motion.h2
               variants={fade}
@@ -421,7 +421,7 @@ const TICKER_ITEMS = [
   "Syncs Meta",
   "TikTok",
   "Google Ads",
-  "Amazon DSP + CTV",
+  "Amazon DSP",
   "29 creative dimensions",
   "2.1x hook-test lift found",
   "44% lower CPA, UGC vs studio",
