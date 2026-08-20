@@ -64,7 +64,7 @@ const PLANS: Plan[] = [
     tagline: "For teams scaling spend across platforms.",
     inherits: "Pro",
     features: [
-      "Amazon DSP sync (incl. Connected TV)",
+      "Amazon DSP sync",
       "10 seats for the whole team",
       "4,000 credits/mo",
       "Unlimited agent messages",
@@ -120,7 +120,7 @@ const COMPARE: CompareGroup[] = [
       { label: "Meta auto-sync", values: [true, true, true, true, true] },
       { label: "TikTok auto-sync", values: [true, true, true, true, true] },
       { label: "Google Ads sync", values: [false, true, true, true, true] },
-      { label: "Amazon DSP sync (incl. Connected TV)", values: [false, false, true, true, true] },
+      { label: "Amazon DSP sync", values: [false, false, true, true, true] },
     ],
   },
   {
@@ -178,7 +178,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "Which platforms can I connect?",
-    a: "Meta and TikTok on Starter. Pro adds Google Ads. Scale and up add Amazon DSP, including Connected TV.",
+    a: "Meta and TikTok on Starter. Pro adds Google Ads. Scale and up add Amazon DSP.",
   },
 ];
 

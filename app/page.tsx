@@ -40,7 +40,7 @@ export default function Home() {
     { title: "Brand Intel", desc: "Reddit brand monitoring: sentiment on every mention, plus an AI editorial brief.", href: "/docs/brand-intel" },
     { title: "Reports and pacing", desc: "Client-ready reports, DSP flight pacing, and agency margin baked in.", href: "/docs/reports-and-pacing" },
     { title: "Your data in Claude", desc: "The 19-tool MCP server, included on Pro and up.", href: "/mcp" },
-    { title: "Objective-aware scoring", desc: "Reach ranks for awareness and CTV, with components you can audit.", href: "/docs/scoring" },
+    { title: "Objective-aware scoring", desc: "Reach ranks for awareness creatives, with components you can audit.", href: "/docs/scoring" },
     { title: "Creative Library", desc: "Every ad and creative, tagged, filterable, and deep-linkable.", href: "/docs/creative-analysis" },
   ];
 
@@ -250,7 +250,7 @@ export default function Home() {
           className="max-w-[1100px] mx-auto rounded-2xl border border-pb-peach-200 bg-pb-peach-50 px-6 py-5 flex flex-col md:flex-row md:items-center justify-between gap-4"
         >
           <p className="text-[14.5px] leading-relaxed text-pb-fg">
-            <strong className="font-semibold">Amazon DSP and Connected TV, included.</strong>{" "}
+            <strong className="font-semibold">Amazon DSP, included.</strong>{" "}
             No creative analytics tool at self-serve pricing touches DSP.
           </p>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[12.5px] text-pb-fg-muted shrink-0">
@@ -459,7 +459,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "Do you support Amazon DSP?",
-    a: "Yes, and we lead with it. Peachblue syncs Amazon DSP campaigns including Connected TV, with flight pacing and DSP-aware reporting built in. Very few tools in this category cover DSP at all.",
+    a: "Yes, and we lead with it. Peachblue syncs Amazon DSP campaigns with flight pacing and DSP-aware reporting built in. Very few tools in this category cover DSP at all.",
   },
 ];
 
