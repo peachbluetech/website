@@ -111,6 +111,22 @@ const jsonLd = {
         width: 512,
         height: 512,
       },
+      // Google picks per surface and crops its result thumbnail to roughly a
+      // square, so offer 1:1 alongside the 1.91:1 social card.
+      image: [
+        {
+          "@type": "ImageObject",
+          url: `${SITE_URL}/og-square`,
+          width: 1200,
+          height: 1200,
+        },
+        {
+          "@type": "ImageObject",
+          url: `${SITE_URL}/opengraph-image`,
+          width: 1200,
+          height: 630,
+        },
+      ],
       email: "nick@peachblue.io",
       sameAs: [],
     },
@@ -122,6 +138,20 @@ const jsonLd = {
       description: SITE_DESC,
       publisher: { "@id": `${SITE_URL}/#organization` },
       inLanguage: "en-US",
+      image: [
+        {
+          "@type": "ImageObject",
+          url: `${SITE_URL}/og-square`,
+          width: 1200,
+          height: 1200,
+        },
+        {
+          "@type": "ImageObject",
+          url: `${SITE_URL}/opengraph-image`,
+          width: 1200,
+          height: 630,
+        },
+      ],
     },
     {
       "@type": "SoftwareApplication",

@@ -155,3 +155,79 @@ export async function renderOgCard(content: OgCardContent = {}): Promise<ImageRe
     { ...OG_SIZE, fonts: fonts.length > 0 ? fonts : undefined },
   );
 }
+
+export const OG_SQUARE_SIZE = { width: 1200, height: 1200 };
+
+/**
+ * 1:1 variant for Google Search thumbnails, which render around 50-90px.
+ * At that size a headline is illegible regardless of ratio, so this card is
+ * mark-led: the peach mark does the recognition work and the type is only
+ * there for the larger surfaces that also accept a square.
+ */
+export async function renderSquareCard(): Promise<ImageResponse> {
+  const regular = await fetchFrauncesTtf(false);
+  const fonts: NonNullable<ConstructorParameters<typeof ImageResponse>[1]>["fonts"] = [];
+  if (regular) fonts.push({ name: "Fraunces", data: regular, style: "normal", weight: 500 });
+  const serif = fonts.length > 0 ? "Fraunces" : "sans-serif";
+
+  return new ImageResponse(
+    (
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: "#13214B",
+          backgroundImage:
+            "radial-gradient(120% 140% at 8% 0%, rgba(59,111,224,0.42) 0%, rgba(59,111,224,0) 58%), linear-gradient(135deg, #1D306B 0%, #13214B 55%, #0C1430 100%)",
+          color: "#F6F8FF",
+        }}
+      >
+        <div
+          style={{
+            width: 400,
+            height: 400,
+            borderRadius: 108,
+            background: "linear-gradient(135deg, #FFB48C 0%, #F27749 100%)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            boxShadow: "0 30px 80px rgba(242,119,73,0.45)",
+          }}
+        >
+          <svg width="240" height="240" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="18" cy="11" r="5" fill="#ffffff" />
+            <rect x="10.5" y="17" width="3" height="11" rx="1.5" fill="#ffffff" />
+          </svg>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            fontFamily: serif,
+            fontSize: 116,
+            fontWeight: 500,
+            letterSpacing: "-0.02em",
+            marginTop: 72,
+          }}
+        >
+          peachblue
+        </div>
+        <div
+          style={{
+            display: "flex",
+            fontFamily: serif,
+            fontSize: 42,
+            color: "#A9B7DD",
+            marginTop: 20,
+          }}
+        >
+          The intelligence layer for ad creative
+        </div>
+      </div>
+    ),
+    { ...OG_SQUARE_SIZE, fonts: fonts.length > 0 ? fonts : undefined },
+  );
+}
