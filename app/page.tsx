@@ -31,7 +31,7 @@ export default function Home() {
     {
       num: "03",
       title: "Act",
-      desc: "A Today worklist, a Monday digest in email and Slack, and a generation-ready brief built from your own winners.",
+      desc: "Every finding arrives with an action and a dollar figure. Scale, cut, fix, and when you’re ready, turn what’s working into your next set of winning ads.",
       visual: <StepActVisual />,
     },
   ];
