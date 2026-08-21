@@ -198,7 +198,7 @@ export default function Home() {
         eyebrow="Next Creative Brief"
         title={<>Stop guessing what to make <span className="italic">next</span>.</>}
         bullets={[
-          "One click turns your account’s winning patterns into a brief a freelancer can execute",
+          "One click turns your account’s proven patterns into a brief your creative team can build from",
           "Proven hooks with their real CTRs, and reference ads labeled as top performers",
           "Do and don’t rules in plain language, with the evidence behind each one",
           "A generation-ready prompt block for whichever creative tool you use",
