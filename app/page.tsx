@@ -1377,14 +1377,36 @@ const REEL: FizzliAd[] = [
   FIZZLI_ADS.threePm,
 ];
 
-const VISIBLE = 5;        // cards across the panel interior
-const CARD_W = 46;        // px
-const CARD_GAP = 6;       // px
-const STEP = CARD_W + CARD_GAP;
-const WINNER_SLOT = 2;    // middle of the five, so the ring is never on an edge
+/* The panel is a fixed 280px column on desktop but goes full width on
+   mobile, where the row shares the grid cell with the step copy. The track
+   used to be a hardcoded 254px, which left a wide gap to the right of the
+   last card on a phone.
+
+   Sizing is now pure CSS, no measurement. The track is exactly as wide as
+   the window, so a percentage inside it resolves against the visible area:
+   each card takes calc((100% - gaps) / VISIBLE) and the surplus cards
+   overflow to the right, where the window clips them. A translateX
+   percentage also resolves against the track's own width, so one step is
+   expressible in the same calc.
+
+   Doing it this way rather than with a ResizeObserver means it is correct
+   in the server render and the first paint, with no measure-then-resize
+   flash, and no dependency on rendering-step callbacks. */
+const VISIBLE = 5;      // cards across the window at every breakpoint
+const CARD_GAP = 6;     // px
+const GAPS_PX = (VISIBLE - 1) * CARD_GAP;
+/* One card plus its gap, as a CSS length that resolves against the track. */
+const STEP_CSS = `((100% - ${GAPS_PX}px) / ${VISIBLE} + ${CARD_GAP}px)`;
+const CARD_CSS = `calc((100% - ${GAPS_PX}px) / ${VISIBLE})`;
+const WINNER_SLOT = Math.floor(VISIBLE / 2); // middle, never a clipped edge card
+
 const ADVANCE_MS = 1250;  // between steps while running
 const HOLD_MS = 2400;     // parked on a winner
 const STEPS_PER_HOLD = 4;
+
+/* Two copies of the reel cover the window at any offset: the offset never
+   exceeds REEL.length - 1, so the furthest card needed is
+   (REEL.length - 1) + VISIBLE, which stays inside 2 x REEL.length. */
 
 function StepAnalyzeVisual() {
   const reduced = useReducedMotion();
@@ -1433,21 +1455,20 @@ function StepAnalyzeVisual() {
 
   return (
     <div className="rounded-xl border border-pb-border bg-pb-bg p-3">
-      <div
-        className="relative overflow-hidden"
-        style={{ width: VISIBLE * CARD_W + (VISIBLE - 1) * CARD_GAP }}
-      >
-        <motion.div
-          className="flex"
-          style={{ gap: CARD_GAP }}
-          animate={{ x: -offset * STEP }}
-          transition={jumping ? { duration: 0 } : { duration: 0.62, ease: EASE }}
+      <div className="relative w-full overflow-hidden">
+        <div
+          className="flex w-full"
+          style={{
+            gap: CARD_GAP,
+            transform: `translateX(calc(${STEP_CSS} * ${-offset}))`,
+            transition: jumping ? "none" : "transform 620ms cubic-bezier(0.25,0.1,0.25,1)",
+          }}
         >
           {/* Rendered twice so the row never runs dry before the reset. */}
           {[...REEL, ...REEL].map((ad, i) => {
             const isWinner = winner && i === winningIndex;
             return (
-              <div key={`${ad.slug}-${i}`} className="relative shrink-0" style={{ width: CARD_W }}>
+              <div key={`${ad.slug}-${i}`} className="relative shrink-0" style={{ width: CARD_CSS }}>
                 <motion.div
                   /* ring-inset on both states: the track clips to exactly
                      the card bounds, so an outward ring would lose its top
@@ -1483,7 +1504,7 @@ function StepAnalyzeVisual() {
               </div>
             );
           })}
-        </motion.div>
+        </div>
       </div>
       <div className="mt-3 flex flex-wrap gap-1.5">
         {["Hook", "Tone", "CTA", "Format"].map((t) => (
