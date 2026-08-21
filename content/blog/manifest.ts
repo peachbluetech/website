@@ -747,4 +747,92 @@ export const ARTICLES: Article[] = [
     ],
     related: ["creative-economics", "claude-for-media-buyers"],
   },
+  {
+    slug: "what-is-roas",
+    title: "ROAS: what it is, how to calculate it, and ROAS vs ACoS",
+    h1: "ROAS, calculated",
+    h1Accent: "honestly.",
+    description:
+      "How to calculate return on ad spend, how ROAS relates to ACoS and CPA, and why chasing a published 'good ROAS' number leads teams astray.",
+    type: "glossary",
+    pillar: "creative",
+    keywords: [
+      "what is roas",
+      "how to calculate roas",
+      "roas vs acos",
+      "good roas",
+    ],
+    priority: 12,
+    byline: "peachblue",
+    status: "published",
+    datePublished: "2026-08-21",
+    dateUpdated: "2026-08-21",
+    faq: [
+      {
+        q: "What is ROAS?",
+        a: "ROAS (return on ad spend) is revenue attributed to advertising divided by the ad spend that produced it, expressed as a ratio or multiple. A 4:1 ROAS means four dollars of attributed revenue for every dollar spent. It measures advertising efficiency at whatever level you calculate it: account, campaign, or individual creative.",
+      },
+      {
+        q: "How do you calculate ROAS?",
+        a: "Divide attributed revenue by ad spend over the same window and the same scope. The two mistakes that break the calculation are mismatched windows (revenue counted over a longer period than the spend that drove it) and mismatched scope (platform-attributed revenue divided by total marketing spend). Keep both sides of the division describing the same thing.",
+      },
+      {
+        q: "What is a good ROAS?",
+        a: "There is no universal answer, because the ROAS you need is set by your margin, not by an industry table. A business with 70 percent gross margin breaks even on ads at roughly 1.4:1, while one at 25 percent margin needs about 4:1 for the same result. Calculate your own breakeven first, then treat any published benchmark as trivia.",
+      },
+      {
+        q: "What is the difference between ROAS and ACoS?",
+        a: "They are mathematical inverses. ACoS (advertising cost of sale, the standard Amazon term) is ad spend divided by attributed revenue, expressed as a percentage, while ROAS is revenue divided by spend. A 25 percent ACoS is the same efficiency as a 4:1 ROAS. Lower is better for ACoS; higher is better for ROAS.",
+      },
+      {
+        q: "Should I optimize for ROAS or CPA?",
+        a: "ROAS is the better target when order values vary meaningfully, since it accounts for the size of each purchase rather than just the count. CPA is more practical when order values are consistent or when you are optimizing for a non-revenue event such as a lead or install. Many teams track both and let ROAS govern budget allocation while CPA governs creative-level pass or fail decisions.",
+      },
+    ],
+    related: ["creative-roas", "creative-economics"],
+  },
+  {
+    slug: "creative-roas",
+    title: "Creative-level ROAS: why your account average lies",
+    h1: "Your account ROAS is hiding",
+    h1Accent: "the truth.",
+    description:
+      "Blended account ROAS averages your heroes and your losers into one number. How to measure ROAS per creative, and what the spread tells you.",
+    type: "guide",
+    pillar: "creative",
+    keywords: [
+      "creative level roas",
+      "roas by creative",
+      "which creatives drive roas",
+      "blended roas",
+    ],
+    priority: 13,
+    byline: "peachblue",
+    status: "published",
+    datePublished: "2026-08-21",
+    dateUpdated: "2026-08-21",
+    faq: [
+      {
+        q: "What is creative-level ROAS?",
+        a: "Creative-level ROAS is return on ad spend calculated per creative asset rather than per account, campaign, or ad. It requires grouping every ad that runs the same underlying asset into one unit, then dividing that asset's attributed revenue by its spend. It answers which creatives actually earn the account's efficiency, rather than what the account averages to.",
+      },
+      {
+        q: "Why does blended account ROAS mislead?",
+        a: "An average weights by spend, so a small number of heroes carrying most of the budget can hold the account number up while the majority of creatives underperform. A healthy-looking 4:1 account ROAS is frequently one creative at 7:1 subsidizing a long tail below breakeven. The account number tells you the portfolio outcome; it cannot tell you which inputs produced it.",
+      },
+      {
+        q: "How do I calculate ROAS per creative?",
+        a: "Export ad-level performance with spend and attributed revenue, group ads by the underlying creative asset rather than by ad ID, sum spend and revenue within each group, then divide. The grouping step is the real work, because the same video typically runs across several ads, ad sets, and sometimes platforms. Set a minimum spend floor before reading any individual creative's ratio.",
+      },
+      {
+        q: "What does the spread between creatives tell you?",
+        a: "A wide spread means your account outcome depends on a few assets, which is concentration risk: when a hero fatigues, the account average falls with it. A narrow spread at acceptable efficiency means the portfolio is genuinely healthy and scaling is a budget decision rather than a creative one. Tracking the spread over time is more informative than tracking the average.",
+      },
+      {
+        q: "How much spend does a creative need before its ROAS is readable?",
+        a: "Enough conversions for the ratio to stabilize, which is a function of conversion count rather than spend alone. A creative with two purchases has a ROAS number that will move dramatically with the third. Set a floor in conversions rather than dollars where you can, and treat everything below it as undecided rather than as a loser.",
+      },
+    ],
+    related: ["what-is-roas", "creative-hit-rate", "creative-economics"],
+  },
 ];

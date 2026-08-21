@@ -1,0 +1,72 @@
+Creative-level ROAS is return on ad spend calculated per creative asset instead of per account, and it routinely tells a different story than the account average does. A blended 4:1 is a spend-weighted average, which means a small number of heroes carrying most of the budget can hold the number up while the majority of your creatives sit below breakeven. This guide covers why that happens, how to calculate ROAS per creative from a platform export, what the spread between creatives tells you, and what to do about it.
+
+If you need the underlying formula and the ROAS-versus-ACoS conversion first, start with [the ROAS glossary](/blog/what-is-roas). This piece assumes the arithmetic and goes after the distribution.
+
+## Why does account-level ROAS mislead?
+
+Because an average tells you the outcome and hides the inputs. Consider an account that spent $100,000 last month and attributed $400,000 in revenue, a clean 4:1 that would pass any board review. Broken out by creative:
+
+| Creative | Spend | Attributed revenue | ROAS | Share of spend |
+| --- | --- | --- | --- | --- |
+| Hero A | $42,000 | $256,000 | 6.1:1 | 42% |
+| Hero B | $18,000 | $79,000 | 4.4:1 | 18% |
+| Mid C | $12,000 | $38,000 | 3.2:1 | 12% |
+| Bottom 9 combined | $28,000 | $27,000 | 0.96:1 | 28% |
+| **Account** | **$100,000** | **$400,000** | **4:1** | **100%** |
+
+Three facts fall out of that table that the account number cannot express. Nine of twelve creatives are running below 1:1, meaning they return less revenue than they consume before margin is even considered. Twenty-eight percent of the budget is going to those nine, contributing nothing and costing something. And one asset is responsible for 64 percent of the revenue.
+
+That last one is the number to sit with. Remove Hero A and the same account reads 2.5:1. Nothing about the strategy, the audience, or the offer would have changed. The account was never a 4:1 business; it was one creative's performance wearing an account's clothing.
+
+## What does the spread tell you?
+
+The distribution is more informative than the average, and it resolves into three recognizable shapes.
+
+**Concentrated.** A few creatives carry most of the spend and most of the return, as in the table above. The account is healthy today and fragile on a schedule, because heroes fatigue. The binding risk is not efficiency, it is succession: when the hero decays, the average follows it down, and the replacement has to already exist.
+
+**Flat and acceptable.** Most creatives cluster near your target with no runaway winner. Scaling here is a budget decision rather than a creative one, which is the most comfortable position in paid social and the rarest.
+
+**Flat and poor.** Everything clusters below target with no standouts. This is not a creative-selection problem to be solved by reallocation, because there is nothing to reallocate toward. It points at the offer, the landing experience, the audience, or the tracking, and shuffling budget between equally weak assets will not fix any of those.
+
+Tracking which shape you are in, month over month, is worth more than tracking the average. An account moving from flat-and-poor to concentrated is making progress even if the headline ROAS barely moved, because it has found something that works and now needs more of it.
+
+## How do you calculate ROAS per creative?
+
+The mechanics are simple; the grouping is the work. Four steps:
+
+1. **Export ad-level performance** with spend and attributed revenue for the window, holding one attribution setting across the whole pull.
+2. **Group ads by the underlying creative asset, not by ad ID.** The same video typically runs across several ads, ad sets, and campaigns, and often across platforms. Every one of those rows belongs to one creative.
+3. **Sum spend and revenue within each group, then divide.** Sum the raw numbers and divide once. Averaging the per-ad ROAS values instead will give you a different and wrong answer, because it weights a $50 ad the same as a $40,000 one.
+4. **Apply a readability floor** and mark everything under it undecided rather than failing.
+
+That fourth step prevents the most common misreading. ROAS stabilizes as a function of conversion count, not spend: a creative with two purchases has a ratio that will move sharply on the third. Set the floor in conversions where your reporting allows it, something like 15 to 25 attributed conversions before you take the number seriously, and treat the rest as unread rather than as losers. Young creatives still inside their test window belong in the same undecided bucket, for the same reason they do in [creative hit rate](/blog/creative-hit-rate) measurement.
+
+One scope caveat. This entire framing assumes conversion-objective spend. Awareness and delivery campaigns, including most Amazon DSP and CTV buying, are not trying to produce attributed revenue in the window, so a low ROAS on that spend is a category error rather than a finding. Separate those buckets before you calculate anything, and judge delivery spend on delivery terms such as CPM, reach, and pacing.
+
+## Why does this break down at scale?
+
+The grouping step is where creative-level ROAS quietly stops working, and it fails silently. It depends on knowing that six ads run the same asset, and that knowledge lives in naming conventions your team maintains by hand. Conventions drift. Assets get re-cropped for placements, re-cut to shorter lengths, re-compressed on upload, and re-uploaded by a different person under a different name. Each of those produces a row that looks like a new creative to a spreadsheet and to the platform's own reporting.
+
+The failure mode is specific and expensive: your hero fragments into four half-heroes, none of which clears your readability floor, so the one asset actually carrying the account never appears as a winner in the analysis. You then optimize against a picture in which your best creative does not exist. The problem compounds across platforms, where the same asset running on Meta and TikTok has no shared identifier at all.
+
+## What do you do with the answer?
+
+Read the distribution, then act on the shape rather than on individual numbers.
+
+**Cut the confirmed bottom, not the undecided.** Creatives past the readability floor and well below breakeven are funding nothing. Creatives below the floor are unfinished experiments, and killing those is how teams accidentally stop testing.
+
+**Do not simply move budget to the hero.** The hero is often already at the spend level where its efficiency starts to decay, and pushing more through it accelerates saturation. Concentration is the risk you are trying to reduce, not increase.
+
+**Iterate from the top.** New hooks on a proven body, new formats of a proven concept, new angles on the message that worked. Iterating from a winner has a materially better hit rate than inventing cold, which is the cheapest lever available for changing the shape of next month's distribution.
+
+**Watch the hero for decay.** A concentrated account's real countdown is hero fatigue, and it shows in CTR against the creative's own best week before it shows in ROAS. The diagnosis is in [the creative fatigue guide](/blog/creative-fatigue).
+
+**Build the bench before you need it.** Succession is the whole game in a concentrated account. Bench depth and the supply math behind it are covered in [the creative economics essay](/blog/creative-economics).
+
+## The instrumented version
+
+Everything above works in a spreadsheet, and it is worth doing manually once, because the exercise teaches you your own distribution better than any dashboard will. What it does not survive is doing it every month across four platforms.
+
+The grouping problem is the part [Peachblue](/pricing) exists to solve. Creatives are grouped by perceptual fingerprint, using DCT hashing with triple-frame sampling for video, so the same asset is recognized across ads, campaigns, and platforms even after re-crops and re-compression, with byte-identical collapse for Amazon DSP assets. That makes the creative the unit of account rather than the ad, which is the precondition for a creative-level ROAS you can trust. From there, ROAS is one of four inputs to a percentile [composite score](/docs/scoring) alongside CTR, CPA, and spend, so a single high ratio on thin volume does not masquerade as a winner. The Creative Economics view maintains the distribution continuously: heroes and bench, waste dollars flowing to confirmed losers, hit rate, and a fatigue board reading each creative against its own best week. Conversion and awareness spend are bucketed separately, so DSP and CTV delivery is never scored on revenue it was never asked to produce.
+
+Start with the export either way. Pull one month, group it by hand, and look at the shape. Most teams find the account average was the least interesting number in the file.

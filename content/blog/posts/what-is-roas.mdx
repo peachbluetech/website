@@ -1,0 +1,79 @@
+ROAS (return on ad spend) is revenue attributed to advertising divided by the ad spend that produced it, expressed as a ratio: spend $10,000, attribute $40,000 in revenue, and your ROAS is 4:1. It is the most-quoted efficiency metric in paid media and the most casually miscalculated, because both halves of the division are easier to get wrong than they look. This page covers the formula, a worked example, how ROAS relates to ACoS and CPA, and why the "good ROAS" number you are looking for is set by your margins rather than by any published table.
+
+## How do you calculate ROAS?
+
+Divide attributed revenue by ad spend, over the same window and the same scope:
+
+```
+ROAS = attributed revenue / ad spend
+```
+
+Both qualifiers carry weight. **Same window** means the revenue you count came from the period the spend covers, under a stated attribution window. **Same scope** means both numbers describe the same thing: platform-reported revenue divided by that platform's spend, or total revenue divided by total marketing cost, never one of each.
+
+Mixing scopes is the most common error in the wild. Platform-attributed revenue divided by total marketing spend produces a number that is neither a platform ROAS nor a blended one, and it will disagree with every other report in the business.
+
+A worked example. A brand spends $10,000 on Meta in a month and the platform attributes $38,500 in purchase value under a 7-day click window:
+
+| Input | Value |
+| --- | --- |
+| Ad spend | $10,000 |
+| Attributed revenue | $38,500 |
+| ROAS | 3.85:1 |
+| Expressed as a percentage | 385% |
+| Equivalent ACoS | 26% |
+
+Note that ROAS is unitless. A 3.85:1 on Meta and a 3.85:1 on Amazon DSP are only comparable if the attribution rules behind them match, and they usually do not.
+
+## What is a good ROAS?
+
+The ROAS you need is determined by your gross margin, not by an industry benchmark. Breakeven ROAS is the inverse of your gross margin:
+
+```
+breakeven ROAS = 1 / gross margin
+```
+
+A business with 70 percent gross margin breaks even on ad spend at roughly 1.4:1. A business at 25 percent margin needs about 4:1 to reach the same place. Those two companies could read the same "aim for 4:1" advice and one of them would be tripling profit while the other treads water.
+
+| Gross margin | Breakeven ROAS | Target for healthy contribution |
+| --- | --- | --- |
+| 70% | 1.4:1 | 2.5:1 and up |
+| 50% | 2.0:1 | 3.5:1 and up |
+| 35% | 2.9:1 | 5:1 and up |
+| 25% | 4.0:1 | 6:1 and up |
+
+Calculate your own breakeven first. Then a published benchmark becomes what it always was: trivia about somebody else's cost structure.
+
+Two adjustments worth making once the basic number is in hand. If you are acquiring repeat customers, first-order ROAS understates the truth, and the honest target sits between first-order and lifetime-value economics. And if a meaningful share of your sales close through channels the pixel cannot see, platform ROAS understates as well, which is why blended ROAS (total revenue over total ad spend) is worth tracking alongside it as a sanity check.
+
+## ROAS vs ACoS: what is the difference?
+
+They are mathematical inverses of each other. ACoS (advertising cost of sale) is the standard term on Amazon and runs the division the other way:
+
+```
+ACoS = ad spend / attributed revenue
+```
+
+So a 25 percent ACoS and a 4:1 ROAS describe identical efficiency. Lower is better for ACoS; higher is better for ROAS. The conversion is simple: ROAS equals 1 divided by ACoS, and ACoS equals 1 divided by ROAS.
+
+| ACoS | Equivalent ROAS |
+| --- | --- |
+| 10% | 10:1 |
+| 20% | 5:1 |
+| 25% | 4:1 |
+| 50% | 2:1 |
+
+The trap is not the arithmetic, it is the attribution underneath. Amazon DSP reports on a 14-day attribution window only, with no 1-day, 7-day, or 30-day options, so a DSP-sourced ROAS is counting a different span of consumer behavior than a Meta 7-day-click ROAS. Converting the ratio is trivial; the two numbers still are not equivalent. More on how DSP reporting differs in [the Amazon DSP reporting guide](/blog/amazon-dsp-reporting-guide).
+
+## ROAS vs CPA: which should you optimize for?
+
+ROAS is the better target when order values vary, because it accounts for the size of each purchase rather than just the count. CPA (cost per acquisition) is more practical when order values are consistent, or when the conversion is not a purchase at all: leads, installs, and signups have no revenue to divide by.
+
+Most teams need both. A workable division of labor: ROAS governs budget allocation across campaigns and platforms, where revenue differences matter, while CPA governs individual pass-or-fail decisions on creatives, where it is more stable at low conversion counts. Both appear in [Peachblue's composite scoring](/docs/scoring) for exactly that reason, weighted alongside CTR and spend rather than used alone.
+
+## Where ROAS stops being useful
+
+Account-level ROAS answers what the portfolio did. It cannot answer which creatives produced it, and that limitation is the source of a lot of bad budget decisions: a healthy account average is frequently one hero creative subsidizing a long tail below breakeven. Calculating the same metric per creative is a different exercise with a different answer, covered in [creative-level ROAS](/blog/creative-roas).
+
+## Related metrics
+
+ACoS is ROAS inverted, standard on Amazon. CPA measures cost per conversion and stays more readable at low volume. AOV (average order value) is the lever that moves ROAS without touching ad performance at all. MER, or blended ROAS, divides total revenue by total ad spend across every channel and is the number your finance team probably means. And [creative hit rate](/blog/creative-hit-rate) measures the supply side: how many of the creatives you launch ever earn a ROAS worth scaling. The efficiency metrics tell you how the money performed; the supply metrics tell you whether next quarter has anything to spend it on. Both sides of that equation are laid out in [the creative economics essay](/blog/creative-economics).
