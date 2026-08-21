@@ -77,13 +77,16 @@ export const metadata: Metadata = {
     // The share card stacks image then title, so these must complement
     // rather than repeat: the image says what Peachblue is, the title says
     // what it enables. The <title> tag carries the SEO keywords instead.
-    title: "Peachblue · Know what works. Make what wins.",
+    // No brand prefix: the wordmark is already in the image and the domain
+    // sits directly beneath, so "Peachblue ·" would be the third mention in
+    // one card and it is what pushed the title onto a second line.
+    title: "Know what works. Make what wins.",
     description: SOCIAL_DESC,
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Peachblue · Know what works. Make what wins.",
+    title: "Know what works. Make what wins.",
     description: SOCIAL_DESC,
   },
   // TODO: add `verification.google` once GSC gives you the token, and
