@@ -6,6 +6,7 @@ import { motion, useInView } from "framer-motion";
 import { SiteNav } from "@/components/site/SiteNav";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { PeachblueMark } from "@/components/site/PeachblueMark";
+import { FacebookMark, InstagramMark, TikTokMark, GoogleMark, YouTubeMark, AmazonMark } from "@/components/site/PlatformMarks";
 import { TRIAL_HREF, STARTER_HREF, PRO_HREF, SALES_HREF, DEMO_HREF, TRIAL_LABEL, RISK_REVERSAL } from "@/lib/site";
 
 /* ── Animation ──────────────────────────────────────────────────── */
@@ -423,12 +424,6 @@ const TICKER_ITEMS = [
   "Every score cites its window",
 ];
 
-const PLATFORMS = [
-  { name: "Meta", bg: "#1877F2", letter: "f" },
-  { name: "TikTok", bg: "#111111", letter: "t" },
-  { name: "Google Ads", bg: "#EA4335", letter: "G" },
-  { name: "Amazon DSP", bg: "#FF9900", letter: "a" },
-];
 
 const FAQS: { q: string; a: string }[] = [
   {
@@ -1307,18 +1302,29 @@ function BriefFrame() {
 /* ── How-it-works step visuals (compact abstract panels) ────────── */
 /* TODO: replace with real app screenshots */
 
+/* Surfaces Peachblue syncs. Facebook and Instagram arrive through one Meta
+   connection; Google Ads and YouTube through one Google connection. The
+   copy still names the four OAuth integrations, these are the placements. */
+const CONNECT_MARKS = [
+  { name: "Facebook", Mark: FacebookMark },
+  { name: "Instagram", Mark: InstagramMark },
+  { name: "TikTok", Mark: TikTokMark },
+  { name: "Google Ads", Mark: GoogleMark },
+  { name: "YouTube", Mark: YouTubeMark },
+  { name: "Amazon DSP", Mark: AmazonMark },
+];
+
 function StepConnectVisual() {
   return (
     <div className="rounded-xl border border-pb-border bg-pb-bg p-3 flex items-center justify-between gap-2">
       <div className="flex -space-x-1.5">
-        {PLATFORMS.map((p) => (
+        {CONNECT_MARKS.map(({ name, Mark }) => (
           <span
-            key={p.name}
-            className="size-7 rounded-lg border-2 border-pb-bg flex items-center justify-center text-white text-[10px] font-semibold"
-            style={{ background: p.bg }}
-            aria-hidden="true"
+            key={name}
+            title={name}
+            className="size-7 rounded-lg border-2 border-pb-bg bg-pb-card shadow-pb-soft flex items-center justify-center"
           >
-            {p.letter}
+            <Mark size={15} />
           </span>
         ))}
       </div>
