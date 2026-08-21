@@ -19,12 +19,12 @@ const FB_APP_ID = "4460340567557146";
 const SITE_DESC =
   "Peachblue connects to your ad platforms, syncs creative assets and performance data, and uses AI to analyze what's working and why. Creative intelligence for modern marketing teams.";
 const SOCIAL_DESC =
-  "AI-powered creative analysis across Meta, Google, Amazon, and TikTok. Know what's working and why.";
+  "Peachblue reads every creative you run across Meta, TikTok, Google Ads and Amazon DSP, scores it against what it earned, and turns your winners into the next brief.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Peachblue · Creative Intelligence for Ads",
+    default: "Creative intelligence for ad performance · Peachblue",
     template: "%s · Peachblue",
   },
   description: SITE_DESC,
@@ -74,13 +74,16 @@ export const metadata: Metadata = {
     type: "website",
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: "Peachblue · Creative Intelligence for Ads",
+    // The share card stacks image then title, so these must complement
+    // rather than repeat: the image says what Peachblue is, the title says
+    // what it enables. The <title> tag carries the SEO keywords instead.
+    title: "Peachblue · Know what works. Make what wins.",
     description: SOCIAL_DESC,
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Peachblue · Creative Intelligence for Ads",
+    title: "Peachblue · Know what works. Make what wins.",
     description: SOCIAL_DESC,
   },
   // TODO: add `verification.google` once GSC gives you the token, and
