@@ -1305,26 +1305,32 @@ function BriefFrame() {
 /* Surfaces Peachblue syncs. Facebook and Instagram arrive through one Meta
    connection; Google Ads and YouTube through one Google connection. The
    copy still names the four OAuth integrations, these are the placements. */
+/* `scale` is optical, not mathematical. Every Simple Icons glyph fills a
+   24x24 box, so a solid circle and a wide filled rectangle read far heavier
+   than a narrow glyph at the same pixel size. Heavy filled marks come down,
+   light outlined marks go up, until the row looks even. */
 const CONNECT_MARKS = [
-  { name: "Facebook", Mark: FacebookMark },
-  { name: "Instagram", Mark: InstagramMark },
-  { name: "TikTok", Mark: TikTokMark },
-  { name: "Google Ads", Mark: GoogleMark },
-  { name: "YouTube", Mark: YouTubeMark },
-  { name: "Amazon DSP", Mark: AmazonMark },
+  { name: "Facebook", Mark: FacebookMark, scale: 0.9 },
+  { name: "Instagram", Mark: InstagramMark, scale: 1.04 },
+  { name: "TikTok", Mark: TikTokMark, scale: 0.98 },
+  { name: "Google Ads", Mark: GoogleMark, scale: 0.98 },
+  { name: "YouTube", Mark: YouTubeMark, scale: 1.0 },
+  { name: "Amazon DSP", Mark: AmazonMark, scale: 1 },
 ];
 
 function StepConnectVisual() {
   return (
     <div className="rounded-xl border border-pb-border bg-pb-bg p-3 flex items-center justify-between gap-2">
-      <div className="flex -space-x-1.5">
-        {CONNECT_MARKS.map(({ name, Mark }) => (
+      {/* Six chips plus the status pill have to fit a 280px column, so the
+          chips run at 24px rather than 28px. */}
+      <div className="flex items-center gap-1">
+        {CONNECT_MARKS.map(({ name, Mark, scale }) => (
           <span
             key={name}
             title={name}
-            className="size-7 rounded-lg border-2 border-pb-bg bg-pb-card shadow-pb-soft flex items-center justify-center"
+            className="size-6 rounded-md border border-pb-border bg-pb-card flex items-center justify-center shrink-0"
           >
-            <Mark size={15} />
+            <Mark size={13 * scale} />
           </span>
         ))}
       </div>

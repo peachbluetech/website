@@ -102,13 +102,18 @@ export function YouTubeMark({ size = 16, className = "" }: MarkProps) {
 }
 
 export function AmazonMark({ size = 16, className = "" }: MarkProps) {
-  // Letterform stand-in, not the Amazon smile. Sized and weighted to sit
-  // level with the real marks so the row reads as deliberate rather than
-  // broken. Swap for the official Amazon Ads asset when we have one.
+  // Tile stand-in, not the Amazon smile. Rendered as a filled rounded square
+  // so it carries the same visual mass as the real marks instead of reading
+  // as loose text. Swap for the official Amazon Ads asset when we have one.
   return (
     <span
-      className={`inline-flex items-center justify-center font-bold leading-none ${className}`}
-      style={{ color: "#FF9900", fontSize: size * 1.15, marginTop: -size * 0.06 }}
+      className={`inline-flex items-center justify-center rounded-[4px] font-bold leading-none text-white ${className}`}
+      style={{
+        width: size,
+        height: size,
+        background: "#FF9900",
+        fontSize: size * 0.72,
+      }}
       role="img"
       aria-label="Amazon"
     >
