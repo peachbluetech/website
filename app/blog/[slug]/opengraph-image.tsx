@@ -5,8 +5,9 @@ export const runtime = "edge";
 export const size = OG_SIZE;
 export const contentType = "image/png";
 
-export default async function PostOgImage({ params }: { params: { slug: string } }) {
-  const article = ARTICLES.find((a) => a.slug === params.slug);
+export default async function PostOgImage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const article = ARTICLES.find((a) => a.slug === slug);
   if (!article) return renderOgCard();
   return renderOgCard({
     line1: article.h1,

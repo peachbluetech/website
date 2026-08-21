@@ -3,16 +3,19 @@ import { ImageResponse } from "next/og";
 /**
  * Shared social-card renderer for opengraph-image and twitter-image.
  *
+ * 1200x630 is the Open Graph standard and what iMessage, Slack, LinkedIn and
+ * X's large card all crop to. Square would get letterboxed in most of them.
+ *
  * Design goals: legible at Google-thumbnail size (few words, high contrast),
- * on-brand (cream background, peach gradient mark, Fraunces serif headline
- * with the italic accent word). Fraunces is fetched from Google Fonts at
+ * on-brand (the V3 ink surface, peach gradient mark, Fraunces serif headline
+ * with the italic peach accent). Fraunces is fetched from Google Fonts at
  * render time (the no-User-Agent request returns TTF, which satori can
  * embed); if the fetch fails we fall back to the default sans rather than
  * erroring the image route.
  */
 
 export const OG_SIZE = { width: 1200, height: 630 };
-export const OG_ALT = "Peachblue · Creative Intelligence for Ads";
+export const OG_ALT = "Peachblue · The intelligence layer for ad creative";
 
 async function fetchFrauncesTtf(italic: boolean): Promise<ArrayBuffer | null> {
   try {
@@ -40,11 +43,20 @@ export interface OgCardContent {
   compact?: boolean;
 }
 
+/** Auto-fit: long lines would overflow the 1040px text column at 92px. */
+function headlineSize(line1: string, line2: string, compact: boolean): number {
+  if (compact) return 64;
+  const longest = Math.max(line1.length, line2.length);
+  if (longest > 24) return 68;
+  if (longest > 18) return 78;
+  return 92;
+}
+
 export async function renderOgCard(content: OgCardContent = {}): Promise<ImageResponse> {
   const {
-    line1 = "Know what ads work",
-    line2 = "and why.",
-    kicker = "Creative intelligence for Meta · TikTok · Google · Amazon DSP",
+    line1 = "The intelligence layer",
+    line2 = "for ad creative.",
+    kicker = "Meta · TikTok · Google Ads · Amazon DSP",
     compact = false,
   } = content;
   const [regular, italic] = await Promise.all([
@@ -67,10 +79,10 @@ export async function renderOgCard(content: OgCardContent = {}): Promise<ImageRe
           flexDirection: "column",
           justifyContent: "space-between",
           padding: "72px 84px",
-          backgroundColor: "#FBFAF7",
+          backgroundColor: "#13214B",
           backgroundImage:
-            "radial-gradient(52% 60% at 8% 0%, rgba(255,214,200,0.85) 0%, rgba(255,214,200,0) 60%), radial-gradient(55% 55% at 100% 100%, rgba(168,210,255,0.55) 0%, rgba(168,210,255,0) 55%)",
-          color: "#1F2430",
+            "radial-gradient(120% 140% at 8% 0%, rgba(59,111,224,0.42) 0%, rgba(59,111,224,0) 58%), linear-gradient(135deg, #1D306B 0%, #13214B 55%, #0C1430 100%)",
+          color: "#F6F8FF",
         }}
       >
         {/* Logo row */}
@@ -84,7 +96,7 @@ export async function renderOgCard(content: OgCardContent = {}): Promise<ImageRe
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              boxShadow: "0 14px 36px rgba(242,119,73,0.35)",
+              boxShadow: "0 14px 36px rgba(242,119,73,0.45)",
             }}
           >
             <svg width="58" height="58" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
@@ -99,6 +111,7 @@ export async function renderOgCard(content: OgCardContent = {}): Promise<ImageRe
               fontWeight: 500,
               marginLeft: 30,
               letterSpacing: "-0.02em",
+              color: "#F6F8FF",
             }}
           >
             peachblue
@@ -111,7 +124,7 @@ export async function renderOgCard(content: OgCardContent = {}): Promise<ImageRe
             display: "flex",
             flexDirection: "column",
             fontFamily: serif,
-            fontSize: compact ? 68 : 92,
+            fontSize: headlineSize(line1, line2, compact),
             fontWeight: 500,
             lineHeight: 1.08,
             letterSpacing: "-0.025em",
@@ -119,7 +132,7 @@ export async function renderOgCard(content: OgCardContent = {}): Promise<ImageRe
           }}
         >
           <span>{line1}</span>
-          <span style={{ fontStyle: "italic", color: "#F27749" }}>{line2}</span>
+          <span style={{ fontStyle: "italic", color: "#FF9466" }}>{line2}</span>
         </div>
 
         {/* Platform line */}
@@ -129,11 +142,11 @@ export async function renderOgCard(content: OgCardContent = {}): Promise<ImageRe
             alignItems: "center",
             justifyContent: "space-between",
             fontSize: 27,
-            color: "#5B5648",
+            color: "#A9B7DD",
           }}
         >
           <div style={{ display: "flex", whiteSpace: "nowrap" }}>{kicker}</div>
-          <div style={{ display: "flex", fontWeight: 600, color: "#1F2430", whiteSpace: "nowrap", marginLeft: 40 }}>
+          <div style={{ display: "flex", fontWeight: 600, color: "#F6F8FF", whiteSpace: "nowrap", marginLeft: 40 }}>
             peachblue.io
           </div>
         </div>
