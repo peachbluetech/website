@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { SiteNav } from "@/components/site/SiteNav";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { PeachblueMark } from "@/components/site/PeachblueMark";
@@ -664,47 +664,54 @@ function Sk({ w, h = "h-2", className = "" }: { w: string; h?: string; className
   return <div className={`${h} ${w} rounded-full bg-pb-fg/[0.08] ${className}`} aria-hidden="true" />;
 }
 
-/* ── Demo ad creatives (fictional brands) ───────────────────────── */
-/* Mock ad creatives for three invented demo brands, built from pure
-   CSS/SVG. All type scales with the container via cqw units so the
-   same ad reads correctly from a 36px thumb up to a 260px tile.
-   No photos, no real brands, no performance claims. */
+/* ── Demo ad creatives (Fizzli) ─────────────────────────────────── */
+/* One fictional brand across the whole site. A spread of one brand's
+   creatives reads as one ad account, which is the thing the product
+   actually analyses; a mix of brands would read as a portfolio.
 
-type DemoBrand = "fizzli" | "sagelle" | "trailform";
-type DemoAdFormat = "story" | "square";
-type DemoAdLayout = "typeTop" | "productCenter" | "split";
+   Photographed 9:16 creatives in public/ads, sharing a brand system:
+   cream lower band, lowercase serif wordmark, flavour name in small caps,
+   coral "Shop now" pill. They differ by flavour colourway, setting and
+   hook, so a row of them stays legible at thumbnail size.
 
-function DemoAd({
-  brand,
-  format = "story",
-  layout = "typeTop",
-  className = "",
-}: {
-  brand: DemoBrand;
-  format?: "story" | "square";
-  layout?: DemoAdLayout;
-  className?: string;
-}) {
-  /* Real generated demo-brand creatives (fictional brands, sliced from
-     assets-raw/Gemini_Generated_Image_qejricqejricqejr.png).
-     story typeTop = ad 1, story productCenter/split = ad 2,
-     square = the brand's chosen square variant. */
-  const src =
-    format === "square"
-      ? SQUARE_ADS[brand]
-      : layout === "productCenter"
-        ? `/ads/${brand}-story-2.png`
-        : `/ads/${brand}-story-1.png`;
+   `headline` is the ad's own on-image copy. Anywhere the page names the
+   creative in a mockup it has to quote the ad the reader can see, so pull
+   the string from here rather than typing it twice. */
+
+type FizzliAd = { slug: string; headline: string; score: number };
+
+const FIZZLI_ADS = {
+  faveFizz: { slug: "fizzli-fave-fizz", headline: "Found my new fave fizz", score: 88 },
+  fridgePick: { slug: "fizzli-fridge-pick", headline: "Fridge pick", score: 84 },
+  wouldRebuy: { slug: "fizzli-would-rebuy", headline: "Would rebuy", score: 91 },
+  zeroSugar: { slug: "fizzli-zero-sugar", headline: "Zero sugar. Still fun.", score: 92 },
+  obsessed: { slug: "fizzli-obsessed", headline: "Currently obsessed", score: 79 },
+  inMyTote: { slug: "fizzli-in-my-tote", headline: "In my tote", score: 72 },
+  summerCarry: { slug: "fizzli-summer-carry", headline: "Summer carry", score: 86 },
+  currentLineup: { slug: "fizzli-current-lineup", headline: "Current lineup", score: 68 },
+  anytime: { slug: "fizzli-anytime", headline: "Post-workout, pre-brunch, anytime.", score: 90 },
+  littleRitual: { slug: "fizzli-little-ritual", headline: "Your new little ritual.", score: 83 },
+  notAnotherSoda: { slug: "fizzli-not-another-soda", headline: "Not just another soda.", score: 77 },
+  honestlySoGood: { slug: "fizzli-honestly-so-good", headline: "Honestly? So good.", score: 81 },
+  threePm: { slug: "fizzli-3pm-pick-me-up", headline: "My new 3pm pick me up", score: 75 },
+  bigMood: { slug: "fizzli-big-mood", headline: "Little can. Big mood.", score: 94 },
+} satisfies Record<string, FizzliAd>;
+
+/* The creative the page treats as the account's winner: it carries the
+   tag chips in step 02, fronts the Agent spotlight, and is the launch the
+   digest names. Same ad in all three, so the mockups agree with each
+   other. Highest score in the set, which is why it wins. */
+const HERO_AD = FIZZLI_ADS.bigMood;
+
+function DemoAd({ ad, className = "" }: { ad: FizzliAd; className?: string }) {
   return (
     <div
-      // Aspect ratios match the actual demo-ad slices (story ~1:2, square
-      // 203:215) so object-cover never crops the brand captions at the edges.
-      className={`relative overflow-hidden rounded-lg shrink-0 ${format === "story" ? "aspect-[1/2]" : "aspect-[203/215]"} ${className}`}
+      className={`relative overflow-hidden rounded-lg shrink-0 aspect-[9/16] ${className}`}
       aria-hidden="true"
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={src}
+        src={`/ads/${ad.slug}.jpg`}
         alt=""
         className="absolute inset-0 w-full h-full object-cover"
         loading="lazy"
@@ -712,12 +719,6 @@ function DemoAd({
     </div>
   );
 }
-
-const SQUARE_ADS: Record<DemoBrand, string> = {
-  fizzli: "/ads/fizzli-square-a.png",
-  sagelle: "/ads/sagelle-square-a.png",
-  trailform: "/ads/trailform-square-b.png",
-};
 
 function ScoreDot({ tone = "good" }: { tone?: "good" | "warn" }) {
   return <span className={`size-2.5 rounded-full shrink-0 ${tone === "good" ? "bg-[#3AA976]" : "bg-pb-peach-400"}`} aria-hidden="true" />;
@@ -744,18 +745,18 @@ function AgentPeachSpotlightFrame() {
             className="rounded-xl border border-pb-border bg-pb-card p-4"
           >
             <div className="flex gap-4">
-              <DemoAd brand="fizzli" format="story" className="w-20" />
+              <DemoAd ad={HERO_AD} className="w-20" />
               <div className="flex-1 min-w-0">
                 <div className="flex items-start justify-between gap-3 mb-3">
                   <div className="min-w-0">
                     <div className="text-[12.5px] font-semibold text-pb-fg truncate">
-                      Fizzli &middot; &ldquo;Thirsty? Fix it.&rdquo;
+                      Fizzli &middot; &ldquo;{HERO_AD.headline}&rdquo;
                     </div>
                     <div className="text-[10px] text-pb-fg-muted mt-0.5">Meta &middot; 3 ads &middot; last 30 days</div>
                   </div>
                   <div className="flex items-center gap-1.5 shrink-0">
                     <ScoreDot />
-                    <span className="text-[12px] font-semibold text-pb-fg tnum">92</span>
+                    <span className="text-[12px] font-semibold text-pb-fg tnum">{HERO_AD.score}</span>
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-2">
@@ -883,7 +884,7 @@ function CommandPanelFrame() {
           {
             dot: "#3AA976",
             chip: "Scale",
-            text: "Fizzli \u201cThirsty? Fix it.\u201d is your best launch this month",
+            text: `Fizzli \u201c${HERO_AD.headline}\u201d is your best launch this month`,
             meta: "4.1x ROAS \u00b7 $9,400 spent \u00b7 7 days live",
           },
           {
@@ -1246,7 +1247,7 @@ function BriefFrame() {
           >
             <div className="text-[10px] font-semibold uppercase tracking-[0.12em] text-pb-fg-muted">The winning recipe</div>
             {[
-              { label: "Proven hook", dot: "#4C8DFF", value: "\u201cThirsty? Fix it.\u201d", metric: "3.8% CTR" },
+              { label: "Proven hook", dot: "#4C8DFF", value: `\u201c${HERO_AD.headline}\u201d`, metric: "3.8% CTR" },
               { label: "Reference ad", dot: "#3AA976", value: "Fizzli \u00b7 story", metric: "4.1x ROAS" },
               { label: "Rule", dot: "#F27749", value: "Product by 0:03", metric: "+31% hold" },
             ].map((r, i) => (
@@ -1342,26 +1343,157 @@ function StepConnectVisual() {
   );
 }
 
+/* Step 02 claims "AI reads every image and video ... 31 dimensions in
+   all", so the panel runs the account past you rather than showing one ad.
+
+   The row advances a card at a time, and every fourth step it holds,
+   fades the rest back and rings the middle card as the winner with its
+   score. Then it releases and carries on.
+
+   The track translates; cards never mount or unmount. Nothing reflows,
+   the spacing cannot drift, and the loop resets invisibly at the halfway
+   mark of a doubled list, with transitions off for that single frame.
+
+   REEL order is hardcoded rather than shuffled at runtime. Math.random()
+   during render gives the server and the client different orders and
+   React throws a hydration mismatch. Hardcoding also lets the mix be art
+   directed: the sequence alternates background tone (yellow, black, blue,
+   cream, purple ...) because at 46px it is the background, not the can,
+   that separates one card from the next. Re-order by hand, do not sort. */
+const REEL: FizzliAd[] = [
+  FIZZLI_ADS.zeroSugar,
+  FIZZLI_ADS.anytime,
+  FIZZLI_ADS.faveFizz,
+  FIZZLI_ADS.honestlySoGood,
+  FIZZLI_ADS.wouldRebuy,
+  FIZZLI_ADS.fridgePick,
+  FIZZLI_ADS.inMyTote,
+  FIZZLI_ADS.littleRitual,
+  FIZZLI_ADS.summerCarry,
+  FIZZLI_ADS.bigMood,
+  FIZZLI_ADS.obsessed,
+  FIZZLI_ADS.currentLineup,
+  FIZZLI_ADS.notAnotherSoda,
+  FIZZLI_ADS.threePm,
+];
+
+const VISIBLE = 5;        // cards across the panel interior
+const CARD_W = 46;        // px
+const CARD_GAP = 6;       // px
+const STEP = CARD_W + CARD_GAP;
+const WINNER_SLOT = 2;    // middle of the five, so the ring is never on an edge
+const ADVANCE_MS = 1250;  // between steps while running
+const HOLD_MS = 2400;     // parked on a winner
+const STEPS_PER_HOLD = 4;
+
 function StepAnalyzeVisual() {
+  const reduced = useReducedMotion();
+  const [offset, setOffset] = useState(0);
+  const [held, setHeld] = useState(false);
+  /* Suppresses the transition for the one frame where the track snaps
+     back to the start, so the loop reset is invisible. */
+  const [jumping, setJumping] = useState(false);
+  const steps = useRef(0);
+
+  /* Reduced motion gets the parked state permanently: a still row with
+     the winner already picked, which is the same information without the
+     movement. Derived rather than set, so the effect never writes state
+     synchronously. */
+  const winner = reduced || held;
+
+  useEffect(() => {
+    if (reduced) return;
+    let timer: ReturnType<typeof setTimeout>;
+    const advance = () => {
+      setHeld(false);
+      setOffset((o) => {
+        const next = o + 1;
+        if (next >= REEL.length) {
+          setJumping(true);
+          return 0;
+        }
+        return next;
+      });
+      steps.current += 1;
+      const holding = steps.current % STEPS_PER_HOLD === 0;
+      if (holding) setHeld(true);
+      timer = setTimeout(advance, holding ? HOLD_MS : ADVANCE_MS);
+    };
+    timer = setTimeout(advance, ADVANCE_MS);
+    return () => clearTimeout(timer);
+  }, [reduced]);
+
+  useEffect(() => {
+    if (!jumping) return;
+    const id = requestAnimationFrame(() => setJumping(false));
+    return () => cancelAnimationFrame(id);
+  }, [jumping]);
+
+  const winningIndex = offset + WINNER_SLOT;
+
   return (
-    <div className="rounded-xl border border-pb-border bg-pb-bg p-3 flex items-center gap-3">
-      <div className="relative overflow-hidden rounded-lg shrink-0">
-        <DemoAd brand="fizzli" format="story" className="w-10" />
+    <div className="rounded-xl border border-pb-border bg-pb-bg p-3">
+      <div
+        className="relative overflow-hidden"
+        style={{ width: VISIBLE * CARD_W + (VISIBLE - 1) * CARD_GAP }}
+      >
         <motion.div
-          className="absolute left-0 right-0 h-4 pointer-events-none"
-          style={{ background: "linear-gradient(180deg, transparent, rgba(76,141,255,0.35), transparent)" }}
-          initial={{ top: "-30%" }}
-          whileInView={{ top: "120%" }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 1.3, delay: 0.4, ease: "easeInOut" }}
-        />
+          className="flex"
+          style={{ gap: CARD_GAP }}
+          animate={{ x: -offset * STEP }}
+          transition={jumping ? { duration: 0 } : { duration: 0.62, ease: EASE }}
+        >
+          {/* Rendered twice so the row never runs dry before the reset. */}
+          {[...REEL, ...REEL].map((ad, i) => {
+            const isWinner = winner && i === winningIndex;
+            return (
+              <div key={`${ad.slug}-${i}`} className="relative shrink-0" style={{ width: CARD_W }}>
+                <motion.div
+                  /* ring-inset on both states: the track clips to exactly
+                     the card bounds, so an outward ring would lose its top
+                     and bottom edges. Inset draws it over the image instead,
+                     which never clips. */
+                  className={`relative aspect-[9/16] overflow-hidden rounded-md bg-pb-card ring-inset ${
+                    isWinner ? "ring-2 ring-pb-blue-500" : "ring-1 ring-pb-border"
+                  }`}
+                  animate={{ opacity: winner && !isWinner ? 0.4 : 1 }}
+                  transition={{ duration: 0.35, ease: EASE }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={`/ads/${ad.slug}.jpg`}
+                    alt=""
+                    className="absolute inset-0 w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </motion.div>
+                {/* The score rides in only on the winner, so the row stays
+                    quiet the rest of the time. Sits inside the card, not
+                    hung off its corner: the track clips to show five cards,
+                    so anything outside a card's bounds gets cropped. */}
+                <motion.span
+                  className="absolute top-1 right-1 flex items-center justify-center rounded-full bg-pb-blue-500 px-1 h-[14px] text-[8.5px] font-semibold text-white tnum shadow-[0_2px_6px_rgba(76,141,255,0.45)]"
+                  initial={false}
+                  animate={{ opacity: isWinner ? 1 : 0, scale: isWinner ? 1 : 0.6 }}
+                  transition={{ duration: 0.28, ease: EASE }}
+                  aria-hidden="true"
+                >
+                  {ad.score}
+                </motion.span>
+              </div>
+            );
+          })}
+        </motion.div>
       </div>
-      <div className="flex flex-wrap gap-1.5">
+      <div className="mt-3 flex flex-wrap gap-1.5">
         {["Hook", "Tone", "CTA", "Format"].map((t) => (
           <span key={t} className="inline-flex items-center h-[22px] px-2 rounded-full border border-pb-border bg-pb-card text-[10px] font-medium text-pb-fg-muted">
             {t}
           </span>
         ))}
+        <span className="inline-flex items-center h-[22px] px-2 rounded-full border border-dashed border-pb-border text-[10px] font-medium text-pb-fg-muted">
+          +27
+        </span>
       </div>
     </div>
   );
