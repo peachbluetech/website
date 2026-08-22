@@ -57,6 +57,37 @@ the other truth files.
 - All are single-platform and return raw account/API data: no cross-platform
   creative identity, scoring, or tagging.
 
+## AI ad generation tools (verified August 2026)
+
+Cite for the cost-asymmetry argument. Generation pricing moves fast;
+re-verify before any post that quotes it.
+
+- Arcads: roughly $11 per generated video, no free trial; "testing at volume
+  gets expensive" (Wireflow, Arcads vs Creatify comparison).
+- Creatify: Free (10 credits/mo), Starter $39/mo, Pro $99/mo, Enterprise
+  custom (Wireflow / hyperfx comparisons).
+- Higgsfield: Basic tier $9/mo entry point incl. URL-to-ad and generated
+  video; Marketing Studio + "Supercomputer 2.0" autonomous marketing
+  system; revenue nearly quadrupled in the first five months of 2026
+  (Inc., contentgrip). Their own blog markets "100+ creative ads without a
+  team" (higgsfield.ai/blog/make-100-creative-ads).
+- Runway Gen-4: positioned for cinematic/hero brand ads rather than volume.
+- SERP note (not for publication, planning only): "best AI UGC/ad tools
+  2026" is saturated with tool listicles (gethookd, rework, heygen, alici,
+  hyperfx, wireflow, adlibrary). The economics argument is unclaimed; the
+  listicle format is not. Never write the listicle.
+- COMPETITIVE NOTE: Higgsfield is building create + launch + optimize
+  (Inc.: "create, launch, and optimize your ads without you"). Treat as a
+  category entrant, not a partner platform. Never position Peachblue as an
+  add-on to a generation tool.
+
+## Test spend (framing rule, not a statistic)
+
+The media spend required to reach a verdict on a creative is set by the
+conversion count needed for a readable signal, not by production cost, and
+AI generation did not change it. Posts must present per-creative test spend
+as a plug-your-own-number assumption, never as a benchmark.
+
 ## Our own data
 
 - Nothing cleared for publication yet. When aggregate platform data is

@@ -835,4 +835,56 @@ export const ARTICLES: Article[] = [
     ],
     related: ["what-is-roas", "creative-hit-rate", "creative-economics"],
   },
+  {
+    slug: "ai-generated-ads",
+    title: "AI generated ads: the cost that did not fall",
+    h1: "AI made creative cheap. Testing it",
+    h1Accent: "did not.",
+    description:
+      "AI generation collapsed the cost of making ads and left the cost of finding out which ones work untouched. The arithmetic, and what it means for testing.",
+    type: "guide",
+    pillar: "creative",
+    keywords: [
+      "ai generated ads",
+      "do ai generated ads work",
+      "ai ugc ads",
+      "testing ai creative",
+      "ai ad creative tools",
+    ],
+    priority: 11,
+    byline: "peachblue",
+    status: "published",
+    datePublished: "2026-08-22",
+    dateUpdated: "2026-08-22",
+    faq: [
+      {
+        q: "Do AI generated ads actually work?",
+        a: "Some do, at roughly the rate any other creative does. AI generation changes how quickly and cheaply a creative gets made; it does not change whether an audience responds to it. The practical consequence is that the share of your launches that become winners matters more than where the asset came from, so measure AI creative in the same cohort and against the same winner rule as everything else.",
+      },
+      {
+        q: "How much does it cost to generate an AI ad?",
+        a: "Low single-digit to low double-digit dollars per asset at 2026 pricing. Arcads runs roughly $11 per generated video with no free trial, Creatify sells tiers from free through $99 per month, and Higgsfield starts at $9 per month (pricing verified August 2026). Against traditional production costs, that is a collapse of one to three orders of magnitude.",
+      },
+      {
+        q: "If generation is cheap, why is creative still expensive?",
+        a: "Because generation was never the expensive half. The media spend required to reach a verdict on a creative is set by how many conversions you need for a readable signal, and AI did not change that number. At any realistic volume, test spend dominates the generation bill by a wide margin, so the total cost of creative barely moved even as the cost of making it collapsed.",
+      },
+      {
+        q: "Should I test every AI generated creative?",
+        a: "No, and this is the main discipline the cheap-generation era demands. Test spend is now the scarce input, so every asset that enters testing consumes budget that a different asset cannot use. Raising the bar for what earns a test slot matters more when supply is unlimited than it did when production volume capped it for you.",
+      },
+      {
+        q: "Which AI ad generation tool is best?",
+        a: "They differ by job rather than by rank. Avatar and UGC-style volume tools such as Creatify and Arcads suit high-variation direct response, while Runway Gen-4 targets cinematic hero creative, and Higgsfield covers URL-to-ad and commercial formats. The choice matters far less to your results than your selection discipline does, because every one of them can produce more creatives than your test budget can judge.",
+      },
+    ],
+    rawMaterial: [
+      "truth/proof.md: AI ad generation tools section (verified Aug 2026); test spend is a plug-your-own-number assumption, never a benchmark",
+      "NEVER write the tool listicle: that SERP is saturated. The economics argument is the unclaimed angle.",
+      "COMPETITIVE: Higgsfield is building create+launch+optimize. Never position Peachblue as an add-on to a generation tool.",
+      "Product bridge is the Next Creative Brief's generation-ready prompt block (winners become the prompt), not an integration. No integration exists.",
+      "BYLINE UPGRADEABLE: written brand-byline because the authority is arithmetic. Nick uses Higgsfield for plubo motion work and can flip this to his byline by adding the hands-on section flagged in the draft.",
+    ],
+    related: ["creative-hit-rate", "creative-economics", "creative-roas"],
+  },
 ];

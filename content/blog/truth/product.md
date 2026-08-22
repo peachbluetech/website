@@ -41,6 +41,14 @@ Snapchat, AppLovin, Performance Max. Do not imply otherwise.
   views (All / Top / Under / Low-data). Do NOT claim user-created saved
   views; presets are hardcoded.
 - Intelligence: pattern detection across creative dimensions, archetypes
+- Next Creative Brief (shipped Aug 2026): generates a brief from your own
+  winning creatives. Contains the winning recipe (what your winners share),
+  concepts to make next, proven hooks pulled from your own headline
+  performance, do/don't rules with cohort counts, labeled reference ads,
+  and a GENERATION-READY PROMPT BLOCK intended to be pasted into an AI
+  image or video generator. Shareable via public token link, copy-as-
+  markdown. Generated from the Intelligence page. Correlational language
+  is enforced (patterns observed, never "this will work").
 - Today + Creative Economics dashboards (shipped 2026-08-18): a portfolio
   insight layer over your daily data: week-over-week deltas, hit rate,
   wasted spend, bench depth, and a fatigue board that flags CTR decay

@@ -1,0 +1,58 @@
+AI generation collapsed the cost of making an ad and left the cost of finding out whether it works exactly where it was. Those are two different line items, and only one of them fell. The result is that the total cost of running creative has barely moved for most advertisers, even as the price of producing an asset dropped by two or three orders of magnitude, because the expensive half was never production. It was the media spend required to reach a verdict.
+
+This matters more than the tool you pick. Every generator on the market can now produce more creatives than your test budget can judge, which means the binding constraint moved from the studio to the auction.
+
+## What actually got cheaper?
+
+Making the asset, and only that. At August 2026 pricing, Arcads runs roughly $11 per generated video with no free trial (Wireflow's Arcads vs Creatify comparison), Creatify sells tiers from a free 10-credit plan through $99 per month, and Higgsfield starts at $9 per month for a bundle that includes URL-to-ad generation. Against traditional production, where a single performance asset carries a videographer, an editor, and days of turnaround, that is a collapse of one to three orders of magnitude.
+
+What did not get cheaper is the number of impressions and conversions required before a creative's performance is readable. That figure is set by the statistics of your conversion rate, not by how the asset was made. A creative that needs 20 attributed conversions to produce a stable read needed 20 before AI generation existed and needs 20 now.
+
+Put both costs in one table. Assume a $300 test budget per creative and $800 per traditionally produced asset, and substitute your own numbers, because both vary enormously by category:
+
+| | Traditional, 20 creatives | AI, 20 creatives | AI, 100 creatives |
+| --- | --- | --- | --- |
+| Making the assets | $16,000 | $220 | $1,100 |
+| Test spend to judge them | $6,000 | $6,000 | $30,000 |
+| **Total** | **$22,000** | **$6,220** | **$31,100** |
+| Making, as share of total | 73% | 3.5% | 3.5% |
+
+Two things fall out of that table. The cost structure inverted: making the creative went from roughly three quarters of the program to about three percent of it. And scaling into the new capacity costs more in total than the old way did, because the column that grows with volume is the one AI never touched.
+
+That is the whole argument. You can now afford to make far more creative than you can afford to test.
+
+## Why does cheap generation make selection harder?
+
+Because test spend is now the scarce input, and every asset that enters testing consumes budget no other asset can use. When production capped your volume at 20 creatives a month, the cap did your prioritizing for you: you made the 20 things you believed in most. When you can generate 500, nothing is doing that job unless you do it deliberately.
+
+Run the loser math. At a 10 percent [creative hit rate](/blog/creative-hit-rate), 100 launches produce 10 winners and 90 losers. Those 90 losers consumed $27,000 of test spend and $990 of generation. Anyone optimizing the generation invoice is negotiating over 3.5 percent of what their losers actually cost.
+
+The honest counterpoint is that volume genuinely does buy winners. Ten winners beat two, and if you can fund the tests, more launches is a real strategy rather than a trap. Higgsfield markets "100+ creative ads without a team" and that capability is not a lie. The question is only whether your test budget can convert the volume into verdicts, because unjudged creatives are not winners, they are inventory.
+
+## Does the tool you choose matter?
+
+Less than the discipline you apply to it. The tools differ by job rather than by rank: avatar and UGC-style generators such as Creatify and Arcads suit high-variation direct response, Runway Gen-4 targets cinematic hero creative, and Higgsfield covers URL-to-ad and commercial formats. Any of them will outrun your test budget.
+
+Two things do vary in ways worth caring about. Per-asset pricing matters at volume, where $11 each and a $99 monthly bundle diverge sharply at 200 assets. And output consistency matters more than raw quality, because a generator that holds a character, product, or brand look steady across variations lets you isolate one variable at a time, which is the difference between testing and guessing.
+
+## How do you run testing when supply is unlimited?
+
+Four adjustments, in order of how much they change the arithmetic above.
+
+**Put a gate in front of the test budget.** Selection used to happen implicitly through production scarcity. Now it has to be explicit: a written standard an asset clears before it earns a test slot. Without one, generation volume becomes test-spend volume automatically, and your media budget quietly becomes a random sampler.
+
+**Spend your test budget on iterations of proven winners first.** Iterating from something that already worked has a materially better hit rate than generating cold concepts, and when test spend is the scarce resource, hit rate is the return on it. This is where cheap generation genuinely pays: variations that were not worth $800 each are absolutely worth $11 each.
+
+**Kill faster.** The cost of a loser is now almost entirely test spend, so the dollars a creative absorbs before you call it is the number to compress. That is [kill speed](/blog/creative-economics), and it matters more at 100 launches than it did at 20.
+
+**Judge AI creative in the same cohort, by the same rule.** Do not run a separate scorecard for it. Same winner definition, same readability floor, same window as everything else, so you learn whether it actually performs rather than whether it feels novel. The same caution applies to reading results: a handful of conversions is not a verdict, which is covered in [creative-level ROAS](/blog/creative-roas).
+
+## Closing the loop: winners become the prompt
+
+The interesting move is not using AI to make more ads. It is using what already won to decide what the next ads should be, then letting a generator execute that brief.
+
+That loop needs a real input, and "make more like the good one" is not one. It needs the specific pattern: which hooks earned attention, which formats held it, which openings your audience responded to, stated concretely enough to become a prompt.
+
+This is the part [Peachblue](/pricing) does, and it is worth being precise about the boundary. We do not generate ads and we do not integrate with any generator. What we do is analyze the creative you already ran, across Meta, TikTok, Google Ads, and Amazon DSP, tagging every asset across 31 dimensions and grouping it by perceptual fingerprint so the same creative is recognized across ads and platforms. From that, the Next Creative Brief assembles your winning recipe, the hooks that actually performed in your own headline data, labeled reference ads, and a generation-ready prompt block written to be pasted straight into whichever generator you use. You take that prompt to Higgsfield, Runway, Creatify, or your editor, and you bring the results back to be measured. The tool at the generation step is interchangeable. The evidence going into it is not.
+
+That is the honest version of "AI supercharges your creative." The generator was never the constraint. Knowing what to point it at, and being able to afford the verdict, always was.
