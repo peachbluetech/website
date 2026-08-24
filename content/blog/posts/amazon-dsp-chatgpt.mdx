@@ -1,0 +1,60 @@
+You can connect Amazon DSP data to ChatGPT today, and the free route is the official one: Amazon's own Ads MCP server, added through ChatGPT's Developer Mode on any paid plan. Third-party connector pipes market the same integration at $19 to enterprise-quote prices, with one catch worth reading the fine print on. This guide covers every real route, what each one costs, and the part the connector landing pages skip: what the data you get through the pipe can and cannot tell you once it arrives.
+
+The distinction that organizes everything below: connecting DSP data to an AI and getting DSP analysis from an AI are different products. The routes differ mainly in which of the two they deliver.
+
+## What ChatGPT needs on its side
+
+Custom connectors live in ChatGPT's Developer Mode, available on Plus, Pro, Business, and Enterprise plans; on the workspace plans an admin can disable Developer Mode org-wide or allowlist specific connectors. The server you add must be remote: a public HTTPS endpoint speaking Streamable HTTP or SSE, with OAuth or open auth. Once added, every tool the server exposes becomes callable in your conversations.
+
+That is the whole mechanism. The question is what server you point it at.
+
+## Route 1: Amazon's official Ads MCP server (free)
+
+Amazon's Ads MCP server has been in open beta since February 2, 2026. It is official, free, and the right first thing to try: connect it in Developer Mode, authenticate with your Amazon Ads login, and ChatGPT can query your account conversationally.
+
+Know what you are getting. The server covers Amazon's platform only and returns raw account and report data, and early practitioner writeups note real visibility gaps in what it exposes. The DSP data underneath carries DSP's structural limits: 14-day attribution only, no 1, 7, or 30-day windows, and roughly 60 days of report retention, so any question about last quarter is unanswerable regardless of what is asking it.
+
+## Route 2: connector pipes
+
+Three vendors dominate the "connect Amazon DSP to your AI" search results. All three are pipes: they move raw rows from the platform into a destination, and the AI does whatever analysis happens.
+
+| Connector | Pricing (verified August 2026) | The relevant detail |
+| --- | --- | --- |
+| Windsor.ai | From $19/mo (3 sources), ~$99 to 118/mo standard | Cheapest route; flat pricing, all connectors on every tier |
+| Supermetrics | From roughly $37/mo, scaling with sources and destinations | See the destination restriction below |
+| Improvado | Enterprise, quote-based, priced on data volume and ad spend | MCP access includes write operations |
+
+Two of those details deserve expansion.
+
+Supermetrics markets a dedicated "Connect Amazon DSP to ChatGPT" page. Their own Amazon DSP connection guide states that "Amazon DSP is available only in Excel, data warehouse, and API data destinations." We are stating both facts side by side and letting you draw the conclusion; if you are considering that route, confirm with their support that the destination you want is actually available for DSP before paying.
+
+Improvado's MCP access advertises query, write, and monitor operations on your ad accounts. Write access through a chat interface is a real capability and a real risk surface; whether an AI assistant should be able to modify live campaigns is a question to answer deliberately, not inherit from a default.
+
+## What raw rows cannot tell you
+
+Every route above delivers the same category of thing: report rows in a chat window. Four limits follow from that, and they are structural rather than bugs, so they will not be fixed by a better pipe.
+
+**No creative identity.** The same video running through six line items arrives as six rows. Nothing in the data says they are one creative, so the AI ranks line items while your actual question ("which creative is working?") goes unanswered. Worse, the fragmentation splits each creative's performance into pieces too small to read.
+
+**No computed pacing.** DSP buying runs on flights, and the question that matters mid-flight is expected versus actual delivery. Raw rows carry spend but not flight math; the AI has to reconstruct budget, elapsed days, and pace percent in the chat, every conversation, from scratch.
+
+**Arithmetic in the context window.** An AI doing division over hundreds of pasted rows is where confidently wrong numbers come from. Tools that compute the answer and return it are reliable; tools that return raw material for the model to compute are not.
+
+**Silent window blending.** DSP reports 14-day attribution; social platforms report differently. Nothing stops a model from comparing the two as if they were the same number, and nothing in raw rows tells it not to.
+
+## Route 3: the analysis layer
+
+The alternative is connecting an MCP server that did the analysis before the conversation started. [Peachblue's MCP server](/docs/mcp) exposes the 19 tools that power our in-app agent, over Meta, TikTok, Google Ads, and Amazon DSP data together. The difference from a pipe, in DSP terms:
+
+Creatives arrive grouped, not fragmented: assets are matched by perceptual fingerprint across line items, ads, and platforms, with byte-identical collapse for DSP assets, so "which creative is working" is answerable because the creative exists as a unit. Pacing arrives computed: budget, expected spend, pace percent, and blended CPM per order, the way an agency reports it, covered in depth in [the DSP pacing guide](/blog/amazon-dsp-pacing-guide). Every creative carries 31 analyzed dimensions and a composite score, so the answer to "why is this one working" is tags and evidence rather than a guess. History accumulates past DSP's roughly 60-day retention, because we keep what we sync. And every tool result states the time window it covers, which is the guardrail against silently blended attribution windows. Everything is read-only by design: nothing that connects through us can create, edit, pause, or spend.
+
+The honest scoping: the server is available on Pro plans and up, Amazon DSP sync on Scale and up, and for agency workspaces the MCP connection is coming soon (see [pricing](/pricing)). Our setup documentation covers Claude Desktop and Claude Code, which is where we focus and test; the server speaks the open MCP standard over Streamable HTTP and SSE with OAuth, the same transports ChatGPT's Developer Mode accepts, so any client that supports remote MCP connectors can connect the same way. The full cross-platform picture of what that unlocks is in [Claude for media buyers](/blog/claude-for-media-buyers).
+
+## Which route should you take?
+
+- **You want to poke at your Amazon Ads data conversationally, for free**: Amazon's official MCP server in Developer Mode. Start here regardless; it costs nothing and you will learn what raw access feels like.
+- **You need raw multi-source rows in a warehouse or sheets, and AI chat is a bonus**: a connector pipe. Windsor.ai is the cheapest way in; verify destination support for DSP specifically before paying anyone.
+- **You want the AI to answer analysis questions (which creatives, why, what is pacing behind)**: an analysis layer. Raw rows do not become analysis by arriving in a chat window; the work has to happen before the model sees the data.
+- **You run DSP for clients at an agency**: the reporting layer matters more than the chat layer today. Start with [how DSP reporting actually works](/blog/amazon-dsp-reporting-guide) and the pacing discipline, and connect the AI when your workspace unlocks it.
+
+The pipes are real, the official server is real, and both are worth exactly what they deliver: your rows, somewhere an AI can see them. What you are actually after, most of the time, is the layer that turns rows into answers first.

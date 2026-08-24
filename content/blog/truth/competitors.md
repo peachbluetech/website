@@ -106,3 +106,56 @@ every competitor entry includes what they are genuinely good at.
   metrics, not creative intelligence.
 - Perpetua/Flywheel, Quartile, Intentwise, Adbrew, m19: DSP automation/BI at
   various tiers; none do AI creative analysis.
+
+## AI data connectors / ETL pipes (category, not creative-analytics rivals) — verified 2026-08-24
+
+These sell pipes, not analysis: they move raw ad-platform rows into
+spreadsheets, warehouses, or AI chat clients. They compete for the
+"connect X to ChatGPT/Claude" query space, not for the creative
+intelligence budget. Comparison rule: contrast on what raw rows cannot do
+(creative identity, scoring, pacing math, cross-platform), never on their
+reliability as pipes, which is genuinely good.
+
+### Supermetrics (supermetrics.com)
+- Programmatic landing pages for "Connect <source> to ChatGPT" incl. a
+  dedicated Amazon DSP page; markets a native ChatGPT connector with 170+
+  data sources, one-click setup inside ChatGPT.
+- Pricing (third-party guides, Aug 2026; their own pricing is variable by
+  tier x sources x destination): entry around $37-49/mo, common tiers
+  ~$199-499/mo, enterprise custom. Cite as "from roughly $37/mo, scaling
+  with sources and destinations" rather than exact tiers.
+- VERIFIED 2026-08-24 against their live docs
+  (docs.supermetrics.com/docs/amazon-dsp-connection-guide): "Amazon DSP is
+  available only in Excel, data warehouse, and API data destinations."
+  This excludes the ChatGPT destination their landing page markets.
+  Publishable as the two facts side by side (landing page markets it;
+  connection guide restricts it); no editorializing about intent.
+- Genuinely right for: teams that need many-source raw data delivered
+  into warehouses/BI at enterprise scale.
+
+### Windsor.ai (windsor.ai)
+- 350+ connectors incl. Amazon DSP and Amazon Ads; flat pricing, all
+  connectors and destinations on every tier, unlimited users. Basic
+  $19/mo (3 sources), Standard ~$99-118/mo, Professional/Enterprise by
+  monthly-active-rows volume.
+- Markets Amazon Ads -> ChatGPT integration pages; cheapest route into
+  the space.
+- Genuinely right for: budget-conscious teams that want raw multi-source
+  rows in sheets/BI/AI clients without per-connector fees.
+
+### Improvado (improvado.io)
+- Enterprise marketing-data platform; no public pricing, quote-based,
+  priced on data volume and ad spend (typical client ~$10M/yr ad spend;
+  tiers Growth/Advanced/Enterprise by row volume). AI Agent and MCP
+  access are credit-based add-ons.
+- Markets Amazon DSP over MCP for Claude/ChatGPT/Cursor incl. WRITE
+  operations ("query, write, and monitor") — contrast honestly with our
+  read-only-by-design posture.
+- Genuinely right for: enterprise data teams consolidating very large
+  multi-channel volumes with dedicated support.
+
+### Amazon Ads MCP server (official)
+- Open beta since 2026-02-02 (see proof.md). Free, official, single
+  platform, raw account/API data; practitioner writeups note visibility
+  gaps in exposed data. The free-and-official baseline every
+  "connect DSP to AI" post must cover fairly.

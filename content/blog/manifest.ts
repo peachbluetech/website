@@ -226,7 +226,7 @@ export const ARTICLES: Article[] = [
     byline: "nick",
     status: "published",
     datePublished: "2026-08-14",
-    dateUpdated: "2026-08-14",
+    dateUpdated: "2026-08-24",
     faq: [
       {
         q: "How much does Motion cost now?",
@@ -359,7 +359,7 @@ export const ARTICLES: Article[] = [
     byline: "nick",
     status: "published",
     datePublished: "2026-08-14",
-    dateUpdated: "2026-08-14",
+    dateUpdated: "2026-08-24",
     faq: [
       {
         q: "Can Claude analyze my Facebook ads?",
@@ -886,5 +886,57 @@ export const ARTICLES: Article[] = [
       "BYLINE UPGRADEABLE: written brand-byline because the authority is arithmetic. Nick uses Higgsfield for plubo motion work and can flip this to his byline by adding the hands-on section flagged in the draft.",
     ],
     related: ["creative-hit-rate", "creative-economics", "creative-roas"],
+  },
+  {
+    slug: "amazon-dsp-chatgpt",
+    title: "Connect Amazon DSP to ChatGPT (2026): every real route",
+    h1: "Amazon DSP to ChatGPT: what you",
+    h1Accent: "actually get.",
+    description:
+      "The real routes to Amazon DSP data in ChatGPT in 2026, what each costs, what raw report rows cannot tell you, and the analysis-layer alternative.",
+    type: "guide",
+    pillar: "ai",
+    keywords: [
+      "connect amazon dsp to chatgpt",
+      "amazon dsp chatgpt",
+      "analyze amazon dsp with ai",
+      "amazon dsp mcp",
+      "amazon ads mcp chatgpt",
+    ],
+    competitors: ["Supermetrics", "Windsor.ai", "Improvado"],
+    priority: 10,
+    byline: "peachblue",
+    status: "published",
+    datePublished: "2026-08-24",
+    dateUpdated: "2026-08-24",
+    faq: [
+      {
+        q: "Can I connect Amazon DSP to ChatGPT?",
+        a: "Yes, through ChatGPT's Developer Mode, which accepts custom remote MCP servers on paid plans. The free, official route is Amazon's own Ads MCP server, in open beta since February 2026. Third-party connector pipes also market this integration, but check the fine print: at least one major connector's own documentation restricts Amazon DSP data to Excel, warehouse, and API destinations.",
+      },
+      {
+        q: "Does Amazon have an official MCP server?",
+        a: "Yes. The Amazon Ads MCP server has been in open beta since February 2, 2026, and connects Amazon Ads data to AI assistants including ChatGPT and Claude. It is free and official, covers only Amazon's platform, and returns raw account and report data; practitioner writeups note real visibility gaps in what it exposes.",
+      },
+      {
+        q: "What do I need on the ChatGPT side?",
+        a: "A paid ChatGPT plan (Plus, Pro, Business, or Enterprise) with Developer Mode enabled, which is where custom MCP connectors are added. The server must be remote: a public HTTPS endpoint speaking Streamable HTTP or SSE, with OAuth or open auth. On Business and Enterprise plans a workspace admin can disable Developer Mode or allowlist specific connectors.",
+      },
+      {
+        q: "What can raw DSP rows in a chat not tell you?",
+        a: "Anything that requires computation or identity the rows do not carry. Raw report rows have no creative identity (the same asset in six line items looks like six creatives), no flight pacing math, and no cross-platform view, and Amazon DSP reporting is 14-day attribution only with roughly 60 days of retention. An AI reading raw rows must do arithmetic in the chat, which is where wrong numbers come from.",
+      },
+      {
+        q: "Does Peachblue work with ChatGPT?",
+        a: "Peachblue's MCP server speaks the open MCP standard over Streamable HTTP and SSE with OAuth sign-in, the same transports ChatGPT's Developer Mode accepts, so any client that supports remote MCP connectors can connect. Our setup documentation covers Claude Desktop and Claude Code, which is where we focus and what we test against.",
+      },
+    ],
+    rawMaterial: [
+      "truth/competitors.md: AI data connectors section (verified 2026-08-24) incl. the Supermetrics DSP-destination restriction, publishable as facts side by side",
+      "truth/proof.md: Amazon Ads MCP open beta Feb 2026, visibility gaps; DSP 14d attribution, ~60d retention",
+      "Naming rule amended 2026-08-24: ChatGPT may be named; Peachblue-in-ChatGPT UNVERIFIED, no setup steps or works-with claims until Nick's Developer Mode test; open-standard phrasing only",
+      "UPGRADE PATH: when Nick verifies the ChatGPT connection, add a Connect Peachblue to ChatGPT section with real steps and flip the FAQ answer to verified",
+    ],
+    related: ["claude-for-media-buyers", "amazon-dsp-reporting-guide", "amazon-dsp-pacing-guide"],
   },
 ];

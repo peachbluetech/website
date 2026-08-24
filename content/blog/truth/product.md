@@ -33,7 +33,7 @@ Snapchat, AppLovin, Performance Max. Do not imply otherwise.
   platforms, even after re-crops and re-compression. Cross-platform fuzzy
   matching; byte-identical SHA-256 collapse for Amazon DSP assets. This is
   stronger than "byte hash" — claim it.
-- Agent Peach: conversational agent over your own ad data (17 tools:
+- Agent Peach: conversational agent over your own ad data (19 tools:
   performance summaries, rankings, comparisons, audience insights, copy
   variants, patterns, trends). Session memory: the agent remembers entities
   across a conversation.
@@ -65,11 +65,20 @@ Snapchat, AppLovin, Performance Max. Do not imply otherwise.
   per client
 - Agency mode: client switcher scopes the whole app to one DSP advertiser;
   per-client reports, intelligence, and brand intel
-- MCP server (LIVE, Pro plan and up): all 17 agent tools exposed over the
+- MCP server (LIVE, Pro plan and up): all 19 agent tools exposed over the
   Model Context Protocol, so your own performance data is queryable from
   Claude Desktop, Claude Code, and any MCP client. Marketing focus (per
-  Nick, 2026-08-13): name Claude only; do not name Cursor or other
-  clients in copy. Full OAuth
+  Nick, 2026-08-13; amended 2026-08-24): Claude is the primary named
+  client. ChatGPT may be named where the content targets ChatGPT demand
+  (Nick's call, 2026-08-24). Never name Cursor or other dev-tool clients
+  in copy. IMPORTANT: Peachblue-in-ChatGPT is UNVERIFIED as of 2026-08-24.
+  The server speaks the open standard (Streamable HTTP, SSE, OAuth), the
+  same transports ChatGPT Developer Mode accepts, but nobody has completed
+  a live connection test. Until verified: no setup steps for ChatGPT, no
+  claim that it works; the honest phrasing is the open-standard one
+  ("any client that supports remote MCP connectors"). The earlier
+  "inline creative cards render inside Claude/ChatGPT responses" claim
+  below is under the same caveat for the ChatGPT half. Full OAuth
   sign-in flow; Streamable HTTP and SSE transports; inline creative cards
   render inside Claude/ChatGPT responses (MCP Apps). Settings > MCP tab is
   visible for brand orgs (fixed 2026-08-13); agency orgs see a Coming soon
