@@ -57,7 +57,13 @@ Snapchat, AppLovin, Performance Max. Do not imply otherwise.
   Awareness/DSP delivery spend is bucketed separately and never counted
   as waste.
 - Brand Intel: Reddit monitoring for brand/competitor/topic keywords with
-  sentiment and an AI editorial brief
+  sentiment and an AI editorial brief. Brief sections include sentiment
+  snapshot, trending topics, opportunities, competitive signals, action
+  items, and a comparison to the previous scan. Keyword expansion suggests
+  related phrases and discovers relevant subreddits. Queryable via Agent
+  Peach and the MCP server (get_brand_mentions). Agency mode: keywords,
+  mentions, and briefs scope per client. (Detail added 2026-08-27,
+  verified against the app's brand-intel routes.)
 - Reports: date-range reports with print/PDF and CSV export; supplier
   breakdowns for DSP
 - Pacing (DSP): per-order flight pacing — budget, spend to date, pace %,
