@@ -595,8 +595,29 @@ export const ARTICLES: Article[] = [
     ],
     priority: 17,
     byline: "peachblue",
-    status: "planned",
-    faq: [],
+    status: "draft",
+    faq: [
+      {
+        q: "What is Reddit brand monitoring?",
+        a: "Reddit brand monitoring is systematically tracking what Reddit says about your brand, your competitors, and your category's problem language. For DTC brands it matters because buyers deliberately search Reddit for unfiltered opinions before purchasing, and AI assistants draw on Reddit threads when recommending products. The practice covers finding mentions, reading sentiment in context, and turning recurring themes into marketing decisions.",
+      },
+      {
+        q: "Is Reddit monitoring worth it for a small DTC brand?",
+        a: "Yes, and arguably more than for large brands, because the manual version is free and the signal is purchase-adjacent. Threads asking whether your product or a competitor's is worth buying are live purchase-research moments, and category complaint threads are a standing list of objections your creative can answer. Fifteen minutes a day with saved searches covers a small brand's footprint.",
+      },
+      {
+        q: "How do I monitor Reddit mentions for free?",
+        a: "Combine Reddit's native search sorted by new for brand and competitor names, Google site:reddit.com queries for problem-language phrases, and subscriptions to the handful of subreddits where your category lives. Log what matters in a simple sheet with date, link, sentiment, and a note. The manual method finds mentions fine; its weakness is consistency over months, not capability.",
+      },
+      {
+        q: "Can brands participate on Reddit without getting banned?",
+        a: "Yes, with strict discipline: keep at least a 90/10 ratio of genuinely helpful contributions to anything brand-related, disclose your affiliation every single time, mention your product only when directly relevant or asked, never link-drop, and read each subreddit's self-promotion rules before commenting. Communities tolerate disclosed builders who add value and are unforgiving of stealth marketing.",
+      },
+      {
+        q: "How is Reddit different from other social listening channels?",
+        a: "Reddit threads are longform, pseudonymous, and searchable for years, so they carry more candid detail than other social platforms and keep influencing buyers long after posting. The same properties raise the stakes: threads about your brand rank in Google and get cited by AI assistants, so a persistent complaint thread works against you continuously. Monitoring is less about fast replies and more about reading patterns and answering them in your product and creative.",
+      },
+    ],
   },
   {
     slug: "ctv-pacing-reporting",
