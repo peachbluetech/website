@@ -595,7 +595,9 @@ export const ARTICLES: Article[] = [
     ],
     priority: 17,
     byline: "peachblue",
-    status: "draft",
+    status: "published",
+    datePublished: "2026-08-27",
+    dateUpdated: "2026-08-27",
     faq: [
       {
         q: "What is Reddit brand monitoring?",
