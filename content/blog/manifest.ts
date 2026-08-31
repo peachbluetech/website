@@ -407,8 +407,31 @@ export const ARTICLES: Article[] = [
     ],
     priority: 9,
     byline: "peachblue",
-    status: "planned",
-    faq: [],
+    status: "published",
+    datePublished: "2026-08-31",
+    dateUpdated: "2026-08-31",
+    faq: [
+      {
+        q: "What is the minimum spend for Amazon DSP?",
+        a: "There is no official minimum for self-service Amazon DSP accounts since November 2025, when Amazon removed the floor at unBoxed. The practical working entry for a meaningful program is $5,000 to $10,000 per month, and Amazon's managed service still expects roughly $35,000 to $50,000 per month. Any page citing a $50,000 minimum is describing the pre-November-2025 rules.",
+      },
+      {
+        q: "What is the difference between self-service and managed Amazon DSP?",
+        a: "Self-service means your team or your agency operates the DSP console directly, with no official spend minimum since November 2025. Managed service means Amazon's own team runs the campaigns, which in practice expects roughly $35,000 to $50,000 per month. Self-service trades the spend floor for an operational one: someone has to actually know the console.",
+      },
+      {
+        q: "Why do agencies still quote minimums for Amazon DSP?",
+        a: "Because the working costs did not disappear with the official floor. Setup, creative, audience strategy, and weekly flight management cost roughly the same at low spend as at high spend, so agencies set minimums that keep the overhead per delivered dollar sane. An agency seat also means inheriting that agency's fee structure on top of media.",
+      },
+      {
+        q: "Is Amazon DSP worth it for smaller advertisers now?",
+        a: "For many, yes, primarily because of the inventory: Prime Video's ad-supported audience of 315 million average monthly viewers, plus Netflix and Spotify inventory available through Amazon DSP since late 2025. That is streaming TV and audio reach that used to require enterprise commitments. The honest costs of entry are operational: a real console learning curve, 14-day-only attribution, and reporting discipline.",
+      },
+      {
+        q: "Do I need to sell on Amazon to use Amazon DSP?",
+        a: "No. Non-endemic advertisers, brands that do not sell on Amazon, made up 23.8 percent of Amazon ad spend in 2026, up from 9.1 percent in 2023. The DSP buys audiences and inventory, including CTV and streaming audio, not just placements pointing at Amazon listings.",
+      },
+    ],
     rawMaterial: ["truth/proof.md Nov 2025 floor removal; most ranked content is stale pre-Nov-2025"],
   },
   {
