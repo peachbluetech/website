@@ -1,0 +1,51 @@
+Creative performance on Amazon DSP is measurable, unequally distributed, and almost never examined, because everything about how DSP buying works points attention at orders and line items instead of the creatives running inside them. The console answers "did the flight deliver," budgets live on flights, pacing lives on flights, and the creative, the thing the viewer actually experiences, reports as an afterthought. This guide covers what creative-level performance means on DSP, which metrics exist for it, how to measure it manually from DSP reports, and the two structural problems (creative identity and cross-platform comparison) that make the manual version fight you.
+
+The premise worth stating plainly: on a platform where targeting, bidding, and inventory access are increasingly automated, the creative is one of the few inputs you still control. Two video assets running through identical line items can deliver meaningfully different results, and if you never look, you keep paying for the difference without collecting the lesson.
+
+## Why does nobody measure DSP creative performance?
+
+Three structural reasons, none of them good excuses.
+
+**The buying model hides it.** DSP runs on delivery economics: flights, budgets, CPM goals, pacing. Success is defined at the order level, so reporting attention follows the order. A flight can pace perfectly at 100 percent while one of its three creatives quietly outperforms the other two on every engagement and conversion metric.
+
+**The volume is low, so testing instincts never engage.** Paid social teams test dozens of creatives monthly and build measurement habits around the volume. A DSP advertiser might run three to ten creatives per quarter, which feels too few to "test." But fewer creatives make each one matter more, not less: a bad creative on DSP absorbs a bigger share of budget for longer than a bad creative in a social rotation ever could.
+
+**The reports make you work for it.** Creative-level data exists in DSP reporting, but assembling a clean creative view means pulling reports in 31-day chunks against roughly 60 days of retention, then reconciling creatives that run across multiple line items and orders. It is doable, which is the point of the next sections, and tedious, which is why it rarely happens.
+
+## What does creative performance mean on DSP?
+
+Not what it means on Meta, and importing paid-social scoring wholesale is the classic mistake. The right frame depends on what the line item is buying:
+
+**For awareness and CTV buying** (most DSP spend, including Prime Video and streaming placements), creative performance is delivery-quality performance: viewability (viewable over measurable impressions), video completion behavior, CTR where clicks are even possible, and effective CPM against comparable inventory. A CTV spot has no add-to-cart button; judging it on ROAS is a category error, the same one covered from the other side in [creative-level ROAS](/blog/creative-roas).
+
+**For retail-endemic conversion lines**, DSP reports 14-day attributed outcomes: purchases, detail page views, add-to-carts, sales, and new-to-brand purchases and sales, which is DSP's genuinely distinctive metric, since new-to-brand tells you whether a creative recruits new customers or reconverts existing ones. Two creatives with identical purchase counts and very different new-to-brand shares are doing different jobs for the business.
+
+The single most important discipline: **compare creatives within the same objective bucket only.** An awareness CTV asset against a conversion display asset produces a meaningless comparison in both directions. Awareness spend judged on conversion metrics reads as waste when it is doing exactly its job.
+
+## How do you measure it manually?
+
+The workflow, from DSP reports to a defensible creative view:
+
+1. **Pull creative-level reports for your window**, in 31-day chunks, and archive every pull immediately. DSP retains roughly 60 days, so any history you do not save is history you lose. Attribution is 14-day only, so label the columns accordingly and never blend them with other platforms' windows.
+2. **Reconcile creatives across line items and orders.** The same asset typically runs in several line items; sum its impressions, spend, and outcomes into one row per creative. This is the step that breaks, covered below.
+3. **Bucket by objective before comparing.** Awareness and CTV lines in one pool, conversion lines in another, per the framing above.
+4. **Compute per-creative rates, not totals**: viewability rate, completion behavior, CTR, CPM, and for conversion lines, cost per 14-day purchase and new-to-brand share. Totals reward whichever creative got the most budget; rates reveal which earned it.
+5. **Apply a readability floor** (impressions for delivery metrics, conversions for outcome metrics) and mark everything under it undecided, the same discipline as any [creative verdict](/blog/creative-hit-rate).
+
+Run monthly, this produces the thing almost no DSP advertiser has: a ranked answer to "which creatives should the next flight run," grounded in delivery history rather than whoever produced the most recent asset.
+
+## Why does the manual version break?
+
+**The identity problem.** DSP creative reporting keys on creative IDs, and the same underlying asset frequently exists as multiple creatives: re-uploaded for a new campaign, resized for a different placement, renamed by a different team member. Your best-performing video can be split across three creative IDs, none of which individually clears your readability floor, so your actual winner never surfaces. The fix requires recognizing that two creative IDs contain the same bytes, which a spreadsheet cannot do.
+
+**The cross-platform blindness.** The question that matters most to a brand running DSP alongside paid social ("does our hero video perform on Amazon the way it performs on Meta?") is unanswerable from inside either platform, because neither knows the other's creatives exist. DSP tells you its numbers; nothing connects them to the same asset's life elsewhere.
+
+**The persistence problem.** Sixty days of retention means the manual practice has no institutional memory unless someone maintains the archive forever, and the analysis quality is capped by the discipline of whoever pulls the reports.
+
+## The instrumented version
+
+This is the gap [Peachblue](/pricing) was built into: it is the only creative analytics platform for agencies at self-serve pricing that covers Amazon DSP. Enterprise creative analytics for DSP exists at enterprise prices; below that tier, the category simply had no product, which is also why no content about DSP creative performance exists beyond ad-spec pages.
+
+What the instrumented version does with the problems above: creative assets are mirrored from Amazon's Creative Asset Library and matched by content, with byte-identical assets collapsing to one creative regardless of how many creative IDs, line items, or re-uploads they run through, which dissolves the identity problem at the root. The same fingerprinting matches creatives across platforms, so the Meta-versus-DSP question about your hero asset becomes answerable, in both the app and [conversationally through Claude](/blog/amazon-dsp-chatgpt). Every creative gets the 31-dimension analysis and scoring, with DSP and awareness delivery bucketed separately from conversion spend, so CTV assets are judged on delivery quality and never miscounted as waste. History accumulates from the day you connect, past the 60-day console horizon, which is the [day-one argument](/blog/amazon-dsp-minimum-spend) for new DSP advertisers in miniature: your creative learnings compound only if something keeps them. And for agencies, all of it scopes per client.
+
+Start with one manual pull either way. Rank last quarter's creatives within their objective buckets and look at the spread; on most accounts, the gap between the best and worst creative is the largest unexamined number in the whole program. The flights were pacing fine the entire time.

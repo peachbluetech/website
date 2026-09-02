@@ -507,8 +507,29 @@ export const ARTICLES: Article[] = [
     ],
     priority: 13,
     byline: "peachblue",
-    status: "planned",
-    faq: [],
+    status: "draft",
+    faq: [
+      {
+        q: "Can you measure creative performance in Amazon DSP?",
+        a: "Yes. DSP reporting includes creative-level data: impressions, viewability, clicks, video behavior, and for retail-endemic conversion lines, 14-day attributed purchases, detail page views, add-to-carts, and new-to-brand outcomes. The catch is operational: reports pull in 31-day chunks against roughly 60 days of retention, and the same asset often reports under multiple creative IDs, so building a clean creative-level view takes real reconciliation work.",
+      },
+      {
+        q: "What metrics matter for DSP creative performance?",
+        a: "It depends on what the line item is buying. For awareness and CTV, judge creatives on delivery quality: viewability rate, video completion behavior, CTR where applicable, and effective CPM. For conversion-oriented lines, use 14-day attributed outcomes, with new-to-brand share as DSP's most distinctive signal since it separates recruiting new customers from reconverting existing ones. Never compare creatives across objective buckets.",
+      },
+      {
+        q: "Does ROAS apply to Amazon DSP creatives?",
+        a: "Only for conversion-oriented retail lines, and only within DSP's 14-day attribution window. Most DSP spend, including CTV and streaming placements, is awareness buying where revenue-based judgment is a category error: a Prime Video spot has no add-to-cart button. Judging awareness creatives on delivery quality rather than ROAS is the difference between reading the data and misreading it.",
+      },
+      {
+        q: "How is DSP creative testing different from Meta creative testing?",
+        a: "Volume and cadence. Paid social testing assumes many launches, fast verdicts, and continuous replacement; DSP advertisers typically run a handful of creatives through long flights. That makes each creative matter more, not less, because a weak DSP creative absorbs a large budget share for a full flight. The discipline shifts from high-volume testing to rigorous ranking of a small set within objective buckets.",
+      },
+      {
+        q: "Why does the same creative show up as multiple creative IDs in DSP?",
+        a: "Re-uploads, resizes for different placements, and renames across campaigns each mint a new creative ID for the same underlying asset. Reporting then splits one creative's performance across several rows, which can hide your actual best performer below any per-ID significance threshold. Fixing it requires matching creatives by content rather than by ID, byte-identical or perceptual.",
+      },
+    ],
   },
   {
     slug: "hook-rate-hold-rate-thumbstop",
