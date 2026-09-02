@@ -508,8 +508,8 @@ export const ARTICLES: Article[] = [
     priority: 13,
     byline: "peachblue",
     status: "published",
-    datePublished: "2026-08-31",
-    dateUpdated: "2026-08-31",
+    datePublished: "2026-09-02",
+    dateUpdated: "2026-09-02",
     faq: [
       {
         q: "Can you measure creative performance in Amazon DSP?",
