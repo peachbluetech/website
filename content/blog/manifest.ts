@@ -108,7 +108,7 @@ export const ARTICLES: Article[] = [
     byline: "nick",
     status: "published",
     datePublished: "2026-08-12",
-    dateUpdated: "2026-08-13",
+    dateUpdated: "2026-09-02",
     faq: [
       {
         q: "Why did MagicBrief shut down?",
@@ -120,7 +120,7 @@ export const ARTICLES: Article[] = [
       },
       {
         q: "What is the closest MagicBrief alternative for creative research and swipe files?",
-        a: "Foreplay. It has the strongest ad discovery library and swipe-file workflow in the category, from $49 per month billed annually, with creative analytics available through its Lens add-on tiers.",
+        a: "Foreplay. It has the strongest ad discovery library and swipe-file workflow in the category, from $49 per month billed annually, with its Lens creative analytics included from the Basic tier; brand coverage scales by plan.",
       },
       {
         q: "What should I use if I mainly need creative performance analytics?",
@@ -226,7 +226,7 @@ export const ARTICLES: Article[] = [
     byline: "nick",
     status: "published",
     datePublished: "2026-08-14",
-    dateUpdated: "2026-08-24",
+    dateUpdated: "2026-09-02",
     faq: [
       {
         q: "How much does Motion cost now?",
@@ -461,7 +461,7 @@ export const ARTICLES: Article[] = [
     h1: "Atria alternatives, priced",
     h1Accent: "honestly.",
     description:
-      "Atria's Plus tier jumped to $479-599/mo and the platform still covers only Meta and TikTok. The alternatives, with verified pricing.",
+      "Atria's Plus tier jumped to $479/mo and the platform still covers only Meta and TikTok. The alternatives, with verified pricing.",
     type: "alternatives",
     pillar: "comparisons",
     keywords: ["atria alternatives", "tryatria alternatives", "atria pricing"],
