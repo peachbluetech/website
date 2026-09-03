@@ -108,7 +108,7 @@ export const ARTICLES: Article[] = [
     byline: "nick",
     status: "published",
     datePublished: "2026-08-12",
-    dateUpdated: "2026-09-04",
+    dateUpdated: "2026-09-03",
     faq: [
       {
         q: "Why did MagicBrief shut down?",
@@ -226,7 +226,7 @@ export const ARTICLES: Article[] = [
     byline: "nick",
     status: "published",
     datePublished: "2026-08-14",
-    dateUpdated: "2026-09-04",
+    dateUpdated: "2026-09-03",
     faq: [
       {
         q: "How much does Motion cost now?",
@@ -489,8 +489,8 @@ export const ARTICLES: Article[] = [
     priority: 12,
     byline: "nick",
     status: "published",
-    datePublished: "2026-09-04",
-    dateUpdated: "2026-09-04",
+    datePublished: "2026-09-03",
+    dateUpdated: "2026-09-03",
     faq: [
       {
         q: "What is a creative analytics tool?",
@@ -502,7 +502,7 @@ export const ARTICLES: Article[] = [
       },
       {
         q: "How much do creative analytics tools cost?",
-        a: "As of September 4, 2026: entries range from $59 per month (Foreplay) and $79 (Peachblue Starter) through $129 (Atria Core), $249 (uplifted), $499 (Segwise Growth), and $750 (Motion Starter), with agency and enterprise tiers running $459 to $1,699 or custom. rule1 sells an MCP-only plan for 20 euros. Most tools discount annual billing 10 to 20 percent.",
+        a: "As of September 3, 2026: entries range from $59 per month (Foreplay) and $79 (Peachblue Starter) through $129 (Atria Core), $249 (uplifted), $499 (Segwise Growth), and $750 (Motion Starter), with agency and enterprise tiers running $459 to $1,699 or custom. rule1 sells an MCP-only plan for 20 euros. Most tools discount annual billing 10 to 20 percent.",
       },
       {
         q: "Which creative analytics tools support Amazon DSP?",
