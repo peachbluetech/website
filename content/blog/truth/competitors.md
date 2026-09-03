@@ -5,7 +5,7 @@ Comparison pages must be regenerated only after re-verifying against live
 pricing pages — third-party articles are routinely months stale. Be fair:
 every competitor entry includes what they are genuinely good at.
 
-## Motion (motionapp.com) — verified 2026-08-12
+## Motion (motionapp.com) — verified 2026-09-02 (live pricing page)
 
 - Pricing: Starter $750/mo (up to $50k/mo ad spend), Pro $1,050/mo (over
   $50k), Growth custom (over $125k). Demo-led sales. Free plan exists as a
@@ -22,7 +22,7 @@ every competitor entry includes what they are genuinely good at.
   (Power/Agency), and Motion's platform gaps (no Google Ads, no Amazon)
   apply at every spend level.
 
-## Atria (tryatria.com) — verified 2026-08-12
+## Atria (tryatria.com) — verified 2026-09-02 (live pricing page)
 
 - Pricing: Core $129/mo annual (~$161 monthly), Plus $479/mo annual (~$599
   monthly), Business $959/mo annual (~$1,199 monthly), Enterprise custom.
@@ -43,7 +43,7 @@ every competitor entry includes what they are genuinely good at.
 - Canva Grow gaps vs MagicBrief: not a media-buyer analytics tool; no deep
   creative-performance analysis, no agency reporting.
 
-## Foreplay (foreplay.co) — verified 2026-08-12
+## Foreplay (foreplay.co) — verified 2026-09-02 (live pricing page)
 
 - Pricing: Basic $59/mo ($49 annual), Workflow $175 ($149), Agency $459
   ($389), Enterprise custom. $20 per extra seat.
@@ -159,3 +159,64 @@ reliability as pipes, which is genuinely good.
   platform, raw account/API data; practitioner writeups note visibility
   gaps in exposed data. The free-and-official baseline every
   "connect DSP to AI" post must cover fairly.
+
+## Pricing re-verification 2026-09-02 (live pages, supersedes any conflicting figures above)
+
+- Motion: Starter $750/mo (up to $50k monthly ad spend), Pro $1,200/mo
+  (over $50k), Growth custom (over $125k). Unlimited seats and ad
+  accounts on all tiers. Starter now includes "full data & MCP access";
+  Slack-native workflows (briefs, reports, alerts) are the positioning.
+  Demo-gated, no self-serve checkout.
+- Atria: Core $129/mo, Plus $479/mo, Business $959/mo, Enterprise custom.
+  Annual = 20% off. Still Meta + TikTok only for ad platforms. NEW AND
+  IMPORTANT: all plans now include free unlimited MCP access, with
+  ChatGPT, Claude, and Cursor named as supported clients. Credit-based
+  AI usage; per-seat add-ons $20.
+- Foreplay: Basic $59/mo ($49 annual), Workflow $175/mo ($149 annual),
+  Agency $459/mo ($389 annual), Enterprise custom. Lens (their
+  analytics layer) and MCP are now included from Basic up; Lens brand
+  counts scale by tier ($50 per extra brand). 7-day trial, no card.
+
+## The AI-native cohort (added 2026-09-02, all from live pages except where noted)
+
+### Segwise (segwise.ai) — verified 2026-09-02 (live pricing page)
+- Growth $499/mo (up to $250k monthly ad spend; startup discount $250/mo
+  for teams under $50k spend), Pro $1,699/mo ($250k-500k spend),
+  Enterprise custom ($500k+). Annual = 10% off. 7-day trial, no card.
+- AI creative analytics + tagging, creative strategy agent, competitor
+  insights, fatigue tracking, unlimited seats. Tilt: mobile games and
+  apps (Unity, ironSource, Mintegral, Axon networks; AppsFlyer/Adjust/
+  Singular/Kochava MMPs) plus DTC. 15+ network connections.
+- Genuinely right for: mobile-app and gaming advertisers who need
+  MMP-integrated creative analytics.
+- Publishes aggressive comparison SEO (own "best tools" listicles).
+
+### rule1 (rule1.ai) — verified 2026-09-02 (search + their site)
+- EUR 20/mo MCP-server-only plan, EUR 149/mo Growth (5 seats), Agency
+  custom. 20 AI tagging dimensions, frame-by-frame video analysis.
+- CLAIM WATCH: rule1 publicly claims to be "the only creative analytics
+  platform offering an MCP Server" (their comparison pages, as of
+  2026-09-02). False: Peachblue, Motion, Atria, and Foreplay all ship
+  MCP. Correct with facts, never with outrage; never repeat their claim
+  as fact.
+- Publishes aggressive comparison SEO (vs Motion, vs Atria, vs Madgicx,
+  alternative pages).
+- Genuinely right for: small Meta-centric teams wanting cheap tagging
+  plus an MCP hookup.
+
+### GetCrux (getcrux.ai) — noted 2026-09-02, pricing UNVERIFIED
+- Pricing page returned 404 on 2026-09-02; no public pricing found.
+  Quote-based, "flexible plans based on ad spend and scale." YC W24,
+  ~11 people, ~$1.7M est. ARR (getlatka). Meta, Google, TikTok.
+  Creative-strategist positioning (insights + ideation + generation +
+  pre-screening).
+- Do NOT print a GetCrux price anywhere until verified; say "pricing on
+  request" and date it.
+
+### uplifted (uplifted.ai) — verified 2026-09-02 (live pricing page)
+- Core $249/mo (AI-organized creative asset library), Scale $499/mo
+  (adds ad performance + AI agent, 7-day trial), Enterprise custom.
+- Positioning: creative asset management + analytics hybrid (replaces
+  Air/Frame.io/Drive angle). Ships MCP per earlier verification.
+- Genuinely right for: creative teams whose pain is asset chaos first,
+  performance questions second.

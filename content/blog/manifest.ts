@@ -488,8 +488,31 @@ export const ARTICLES: Article[] = [
     competitors: ["Motion", "Atria", "Foreplay", "Segwise", "rule1", "GetCrux", "Peachblue"],
     priority: 12,
     byline: "nick",
-    status: "planned",
-    faq: [],
+    status: "published",
+    datePublished: "2026-09-02",
+    dateUpdated: "2026-09-02",
+    faq: [
+      {
+        q: "What is a creative analytics tool?",
+        a: "A creative analytics tool connects to your ad accounts and analyzes the creatives themselves rather than just campaign settings: which images, videos, hooks, and copy drive results and why. Most tag creatives across visual and strategic dimensions, score performance, and surface patterns. They differ mainly on platform coverage, whether they analyze your ads or competitors' ads, and how queryable the analysis is.",
+      },
+      {
+        q: "What is the best creative analytics tool in 2026?",
+        a: "It depends on the axis that constrains you. Motion is the Meta-centric incumbent with the strongest community, Atria covers Meta and TikTok at a low entry price, Foreplay leads competitor research, Segwise owns the mobile and MMP niche, and Peachblue (which we make) is the multi-platform option covering Meta, TikTok, Google Ads, and Amazon DSP with agency infrastructure. Platform coverage is the constraint that cannot be worked around later, so start there.",
+      },
+      {
+        q: "How much do creative analytics tools cost?",
+        a: "As of September 2, 2026: entries range from $59 per month (Foreplay) and $79 (Peachblue Starter) through $129 (Atria Core), $249 (uplifted), $499 (Segwise Growth), and $750 (Motion Starter), with agency and enterprise tiers running $459 to $1,699 or custom. rule1 sells an MCP-only plan for 20 euros. Most tools discount annual billing 10 to 20 percent.",
+      },
+      {
+        q: "Which creative analytics tools support Amazon DSP?",
+        a: "At self-serve pricing, Peachblue is the only creative analytics platform covering Amazon DSP, alongside Meta, TikTok, and Google Ads. Enterprise creative analytics for DSP exists from vendors like Skai, VidMob, and CreativeX at enterprise pricing. The other tools in this comparison cover Meta and TikTok, and in some cases Google and mobile networks.",
+      },
+      {
+        q: "Do creative analytics tools work with Claude and ChatGPT?",
+        a: "Increasingly yes, via MCP servers, and claims of exclusivity here are outdated: Peachblue, Motion, Atria, Foreplay, rule1, and uplifted all ship MCP as of September 2026. They differ in what the MCP serves: Foreplay pipes its competitor-ad library, most others pipe single-platform or two-platform data, and Peachblue serves analyzed cross-platform performance data including Amazon DSP.",
+      },
+    ],
   },
   {
     slug: "amazon-dsp-creative-performance",
