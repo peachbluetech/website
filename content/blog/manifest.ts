@@ -332,8 +332,29 @@ export const ARTICLES: Article[] = [
     competitors: ["Motion", "Atria"],
     priority: 7,
     byline: "nick",
-    status: "planned",
-    faq: [],
+    status: "draft",
+    faq: [
+      {
+        q: "Is Motion or Atria better for creative analytics?",
+        a: "Motion is the better fit for Meta-centric teams that live in Slack and want the category's strongest education and community ecosystem with a demo-led purchase. Atria is the better fit for Meta and TikTok teams that want AI generation and research bundled with analytics at a self-serve $129 entry. They overlap heavily on core tagging and scoring; the real differences are workflow, bundling, and how you buy.",
+      },
+      {
+        q: "How much do Motion and Atria cost in 2026?",
+        a: "Motion starts at $750 per month for up to $50k in monthly ad spend, $1,200 above that, and custom pricing over $125k, all demo-gated with unlimited seats. Atria runs $129, $479, and $959 per month billed annually, gated by AI credits, ad accounts, and analyzed spend, with extra seats at $20. Both repriced within the last year; prices verified September 10, 2026.",
+      },
+      {
+        q: "Do Motion or Atria support Google Ads or Amazon DSP?",
+        a: "No. Motion is Meta-centric and Atria covers Meta and TikTok; neither analyzes Google Ads or Amazon DSP creative. Teams running those platforms alongside paid social need a different tool for that spend. Peachblue, which we make, covers all four platforms including Amazon DSP at self-serve pricing.",
+      },
+      {
+        q: "Do Motion and Atria work with Claude and ChatGPT?",
+        a: "Both ship MCP access as of September 2026: Motion includes it from its Starter tier, and Atria offers it free for now on every plan with Claude, ChatGPT, and Cursor named. Any claim of MCP exclusivity in this category is outdated; at least five creative analytics tools ship it, differing mainly in what data the MCP serves.",
+      },
+      {
+        q: "Is there an alternative to both Motion and Atria?",
+        a: "Yes. If the constraint is platform coverage, pricing, or agency workflows, Peachblue covers Meta, TikTok, Google Ads, and Amazon DSP with 31-dimension creative analysis, pattern detection that produces generation-ready briefs, and agency infrastructure, from $79 self-serve through a $1,499 Agency tier. Full disclosure: Peachblue is our product; the complete eight-tool comparison with verified pricing is linked in the article.",
+      },
+    ],
     rawMaterial: ["truth/competitors.md; disclose we compete with both, concessions mandatory"],
   },
   {

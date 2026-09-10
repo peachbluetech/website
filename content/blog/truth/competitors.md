@@ -160,6 +160,16 @@ reliability as pipes, which is genuinely good.
   gaps in exposed data. The free-and-official baseline every
   "connect DSP to AI" post must cover fairly.
 
+## Spot re-verification 2026-09-10 (before motion-vs-atria publish)
+
+Both unchanged from 2026-09-03: Motion $750 / $1,200 / custom (demo-gated,
+unlimited seats, MCP in Starter). Atria Core $129 / Plus $479 / Business
+$959 / Enterprise custom. Refinements from Atria's live page: displayed
+prices are BILLED-ANNUALLY figures (say "billed annually" when quoting);
+included seats Core 5 / Plus 8 / Business 15, extra seats $20/mo; MCP is
+"free for now" on all plans, unlimited use inside Claude, ChatGPT, Cursor
+(note the "for now" when citing); REST API costs 1 credit/request.
+
 ## Pricing re-verification 2026-09-03 (live pages, supersedes any conflicting figures above)
 
 - Motion: Starter $750/mo (up to $50k monthly ad spend), Pro $1,200/mo
