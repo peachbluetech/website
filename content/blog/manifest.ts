@@ -332,7 +332,9 @@ export const ARTICLES: Article[] = [
     competitors: ["Motion", "Atria"],
     priority: 7,
     byline: "nick",
-    status: "draft",
+    status: "published",
+    datePublished: "2026-09-10",
+    dateUpdated: "2026-09-10",
     faq: [
       {
         q: "Is Motion or Atria better for creative analytics?",
