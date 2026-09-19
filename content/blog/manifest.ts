@@ -741,7 +741,9 @@ export const ARTICLES: Article[] = [
     competitors: ["Motion", "Peachblue"],
     priority: 19,
     byline: "nick",
-    status: "draft",
+    status: "published",
+    datePublished: "2026-09-19",
+    dateUpdated: "2026-09-19",
     faq: [
       {
         q: "What is the difference between Peachblue and Motion?",
