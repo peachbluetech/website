@@ -731,8 +731,8 @@ export const ARTICLES: Article[] = [
   {
     slug: "peachblue-vs-motion",
     title: "Peachblue vs Motion (2026): an honest comparison",
-    h1: "Peachblue vs Motion, from the founder of",
-    h1Accent: "one of them.",
+    h1: "Peachblue vs",
+    h1Accent: "Motion.",
     description:
       "A transparent comparison of Peachblue and Motion: pricing, platforms, AI depth, and exactly who should pick which. Yes, we make one of them.",
     type: "vs",
