@@ -160,6 +160,14 @@ reliability as pipes, which is genuinely good.
   gaps in exposed data. The free-and-official baseline every
   "connect DSP to AI" post must cover fairly.
 
+## Spot re-verification 2026-09-19 (before peachblue-vs-motion publish)
+
+Motion unchanged from 2026-09-10: Starter $750 (to $50k spend), Pro $1,200,
+Growth custom. Feature bullets unchanged (AI brain/dedicated VM, unlimited
+seats + accounts, Inspo + benchmarks, MCP in Starter, Slack routines; Pro
+adds Northbeam/GA attribution, video QA; Growth adds CSM + closed-loop
+pipelines).
+
 ## Spot re-verification 2026-09-10 (before motion-vs-atria publish)
 
 Both unchanged from 2026-09-03: Motion $750 / $1,200 / custom (demo-gated,

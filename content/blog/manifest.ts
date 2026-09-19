@@ -741,8 +741,29 @@ export const ARTICLES: Article[] = [
     competitors: ["Motion", "Peachblue"],
     priority: 19,
     byline: "nick",
-    status: "planned",
-    faq: [],
+    status: "draft",
+    faq: [
+      {
+        q: "What is the difference between Peachblue and Motion?",
+        a: "Platform coverage and direction of analysis. Motion is Meta-centric with the category's best education ecosystem and a Slack-native workflow that pushes reports and briefs to the team on routines. Peachblue covers Meta, TikTok, Google Ads, and Amazon DSP, analyzes every creative across 31 dimensions, and points the analysis forward: patterns behind your winners become a generation-ready brief for the next round. Full disclosure: Peachblue is our product.",
+      },
+      {
+        q: "How much do Peachblue and Motion cost?",
+        a: "Motion starts at $750 per month for up to $50k in monthly ad spend analyzed, $1,200 above that, and custom pricing over $125k, demo-gated with unlimited seats. Peachblue runs $79 to $1,499 per month self-serve with a 7-day trial on the first two tiers, metered by monthly analysis credits rather than ad spend. Prices verified September 19, 2026.",
+      },
+      {
+        q: "Does Motion support Amazon DSP or Google Ads?",
+        a: "No. Motion's center of gravity is Meta, with attribution integrations arriving at its Pro tier. Peachblue analyzes creative across Meta, TikTok, Google Ads, and Amazon DSP in one account and is the only creative analytics platform for agencies at self-serve pricing that covers Amazon DSP.",
+      },
+      {
+        q: "Is Motion worth $750 a month?",
+        a: "For its best-fit customer, genuinely yes: a Meta-centric team that lives in Slack, wants always-on analysis pushed on routines, and values the community and education layer will get real value, and unlimited seats make the price efficient for large teams. If your platforms extend beyond Meta or you prefer trying software self-serve before committing, the fit weakens and alternatives start at a tenth of the price.",
+      },
+      {
+        q: "Which is better for agencies, Peachblue or Motion?",
+        a: "This is the one-sided dimension of the comparison: Motion has no multi-client mode. Peachblue's Agency tier runs multi-client workspaces with a client switcher, per-client reporting with agency margin applied, and Amazon DSP and CTV flight pacing across the roster. Agencies evaluating Motion typically run one seat per client account instead, which its unlimited-seat pricing supports but its architecture does not scope.",
+      },
+    ],
   },
   {
     slug: "peachblue-vs-atria",
