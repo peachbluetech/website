@@ -459,22 +459,44 @@ export const ARTICLES: Article[] = [
   },
   {
     slug: "creative-testing-framework",
-    title: "A creative testing framework for $10k/mo budgets (2026)",
-    h1: "Creative testing that fits your",
-    h1Accent: "budget.",
+    title: "A creative testing framework for Meta ads (2026)",
+    h1: "A creative testing framework for",
+    h1Accent: "Meta.",
     description:
-      "A creative testing framework sized for $5-25k/mo accounts: how many concepts, how to read results with small samples, and when to kill a test.",
+      "The four written decisions of a Meta creative testing framework: the gate, the verdict floor, the winner rule, and what happens after, at any budget.",
     type: "guide",
     pillar: "creative",
     keywords: [
       "creative testing framework",
-      "ad creative testing",
-      "facebook ad testing budget",
+      "meta creative testing",
+      "facebook ad testing",
+      "how to test ad creative",
     ],
     priority: 10,
     byline: "nick",
-    status: "planned",
-    faq: [],
+    status: "draft",
+    faq: [
+      {
+        q: "What is a creative testing framework?",
+        a: "A written system with four decisions made in advance: what earns a test slot, how much spend buys a verdict, what counts as a winner, and what happens to winners and losers afterward. The point is spending verdicts well, since the media cost of learning whether a creative works is the scarce resource, not the creatives themselves. Unwritten frameworks drift with whoever reviewed that week.",
+      },
+      {
+        q: "How much should I spend testing an ad on Meta?",
+        a: "Set the floor in conversions, not dollars: the verdict budget is the conversion count you need for a readable signal multiplied by your CPA. At a $40 CPA, a 10-conversion floor prices a verdict around $400; at a $120 CPA the same confidence costs $1,200. Borrowed dollar rules buy different amounts of information in different accounts, which is why they fail.",
+      },
+      {
+        q: "Should I test creative in a separate campaign or inside Advantage+?",
+        a: "A dedicated testing campaign with its own budget, broad targeting, and one creative per ad is the workable default, because it protects test spend from scaled winners and makes per-creative spend legible. Testing inside Advantage+ works if you read results per creative and treat low-spend members of the batch as undecided rather than judged. Either way, the verdict floor is enforced per creative, never per batch.",
+      },
+      {
+        q: "How many creatives should I test per month on Meta?",
+        a: "Derive it from your budget rather than a benchmark: test budget share divided by your per-verdict cost gives your monthly verdict count. A $10k account at a $500 verdict price affords three to four real verdicts a month, which makes selection the whole game; a $250k account affords fifty or more, where the constraint becomes organizing verdicts into learnings. The framework's rules stay identical across budgets.",
+      },
+      {
+        q: "When should I kill a test early?",
+        a: "On attention signals, before the conversion floor: a hook rate far below your account baseline after a few thousand impressions means nobody stayed long enough to convert, and waiting for conversion data spends money on an answer you already have. Graduation works the opposite way: only the conversion floor graduates a creative, never early enthusiasm.",
+      },
+    ],
     rawMaterial: ["Nick's testing approach; scoring tiers from product truth as the readout layer"],
   },
   // Wave two (weeks 8-16). Keep priorities sequential.

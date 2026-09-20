@@ -1,0 +1,55 @@
+A creative testing framework is a written system with four decisions made in advance: what earns a test slot, how much spend buys a verdict, what counts as a winner, and what happens to everything else. On Meta in 2026 this is the whole game, because the platform has absorbed the other levers: Advantage+ handles targeting and delivery, so the test you are running is no longer audience versus audience, it is creative versus creative. This guide is the full framework, with the Meta-specific mechanics, a worked example, and how the same system scales from a $10k month to a $250k one without changing its rules.
+
+The premise it rests on: verdicts are the scarce resource, not creatives. Making an ad is cheap and getting cheaper; the media spend that tells you whether it works costs what it always did, and every dollar of it you spend on an ad that should never have entered testing is a dollar a better candidate did not get. The framework exists to spend verdicts well.
+
+## Decision one: what earns a test slot
+
+Before Meta sees anything, a creative clears a written gate. The gate can be simple: it tests one deliberate variable against something you know (a new hook on a proven body, a new format of a proven concept, a new angle from [mined customer language](/blog/reddit-brand-monitoring-for-dtc)), or it is a genuinely new concept with a stated reason to exist. What the gate exists to kill is the third category, the "might as well run it" creative, because unlimited generation has made that category infinite and every member of it consumes a verdict.
+
+A useful companion rule: hold an iteration ratio. Iterations of proven winners carry a materially better hit rate than cold concepts, so most accounts want the majority of test slots going to iteration, with a protected minority for new concepts so the well does not run dry. Write the ratio down; under pressure, teams drift toward whichever is easier to produce.
+
+## Decision two: how much spend buys a verdict
+
+Set the verdict budget in conversions, not dollars. A creative's numbers stabilize as results accumulate, so the honest floor is the conversion count you need for a readable signal, converted into dollars through your CPA. At a $40 CPA, a 10-conversion floor prices a verdict around $400; at a $120 CPA the same confidence costs $1,200. This is why borrowed dollar rules ("give every ad $100") fail across accounts: they buy different amounts of information depending on your economics.
+
+For the structure on Meta, a dedicated testing campaign with its own budget, broad targeting, and one creative per ad is the workable default: it keeps test spend from being starved by your scaled winners, and it makes per-creative spend legible. Some teams test inside Advantage+ instead and accept that the platform will distribute spend unevenly; if you do, read results per creative and accept that low-spend creatives in the batch got a partial verdict, not a real one. Either structure works if, and only if, the verdict floor is enforced per creative rather than per batch.
+
+Early signals can end a test before the floor. A creative whose [hook rate](/blog/hook-rate-hold-rate-thumbstop) sits far below your account baseline after a few thousand impressions is telling you something conversions never will: nobody stayed long enough to convert. Kill early on attention signals; graduate only on the conversion floor.
+
+## Decision three: the verdict rule
+
+Write the winner definition before the first test: graduated from the test budget, then absorbed meaningful scaled spend at or above your target efficiency, judged against your own account baseline rather than a published benchmark. The full discipline, including why the definition must be applied identically month over month, is in [the creative hit rate guide](/blog/creative-hit-rate); the short version is that an unwritten verdict rule drifts with whoever reviewed that week, and a drifting rule makes your hit rate unmeasurable, which makes your whole pipeline unmanageable.
+
+Everything that is not a winner gets one of two labels, never a third: killed (took its verdict, failed, spend stopped) or undecided (has not reached the floor, still earning its verdict). The forbidden third label is the zombie: past the floor, not a winner, still spending because nobody made the call. Zombie spend is the largest waste line in most testing programs and it does not appear on any report, because no single day of it looks like a decision.
+
+## Decision four: what happens after the verdict
+
+Winners graduate into scaling campaigns and immediately generate work: their patterns become the brief for the next iteration batch, which is how the gate in decision one stays fed with candidates that deserve slots. Losers get logged with a one-line reason, because twelve losers with the same failed angle is creative intelligence that twelve silent kills are not. And graduated winners enter a different watch: [fatigue diagnosis](/blog/creative-fatigue), where the question stops being "does this work" and becomes "is this still working," read against the creative's own best week.
+
+## The same framework at three budgets
+
+The rules never change. The volume does.
+
+| | $10k/mo | $50k/mo | $250k/mo |
+| --- | --- | --- | --- |
+| Test budget share | ~15-20% | ~15-20% | ~10-15% |
+| Verdict price (at $50 CPA, 10 conv.) | $500 | $500 | $500 |
+| Verdicts per month | 3-4 | 15-20 | 50-75 |
+| Launch cadence | Weekly batch of 1 | Weekly batch of 4-5 | Continuous |
+| Binding constraint | Verdict scarcity: the gate is everything | Production keeping up with slots | Organizing verdicts into learnings |
+
+At $10k, three to four verdicts a month means the gate does almost all the work: you cannot afford a single "might as well" test, and iteration-heavy slates make each verdict compound. At $250k the problem inverts: verdicts are plentiful and the constraint becomes memory, keeping fifty monthly verdicts from evaporating into a spreadsheet nobody rereads. Same framework, opposite pressure. TikTok runs on the same system with one adjustment: creative decays faster there, so the fatigue watch in decision four runs hotter and the iteration engine matters more.
+
+## The failure modes to write into the framework
+
+- **Calendar refresh.** Replacing creative on a schedule instead of on verdicts kills producing winners early and ships untested work on deadline pressure. Refresh on signal.
+- **Batch verdicts.** "The test batch did well" is not a result; per-creative floors or nothing.
+- **Small-sample calls.** Two conversions is a coin flip wearing a trend line. The floor exists for the days you are tempted.
+- **Benchmark shopping.** Published hit rates and hook-rate targets contradict each other wildly; your own trailing baseline is the only comparison that means anything.
+- **Testing without a ledger.** If launches, verdicts, and reasons are not logged, you are not running a framework, you are running ads.
+
+## Where the tooling meets the framework
+
+Every step above works in a spreadsheet, and the [creative economics](/blog/creative-economics) practice is the monthly review that sits on top. What [Peachblue](/pricing) instruments is the parts that decay under manual pressure: creatives grouped by fingerprint so verdicts attach to the creative rather than fragmenting across ads, composite scoring so the verdict rule is applied identically every week, hit rate and waste computed continuously instead of at month-end, fatigue flagged against each creative's own history, and the winning patterns rendered as a generation-ready brief so decision four feeds decision one without a brainstorm in between. The framework is yours either way; the tooling is the difference between running it for a quarter and running it for a year.
+
+Start this week, at any budget: write the four decisions on one page, price your verdict floor from your real CPA, and log the first batch. The framework pays from the first test it prevents.
