@@ -474,7 +474,9 @@ export const ARTICLES: Article[] = [
     ],
     priority: 10,
     byline: "nick",
-    status: "draft",
+    status: "published",
+    datePublished: "2026-09-20",
+    dateUpdated: "2026-09-20",
     faq: [
       {
         q: "What is a creative testing framework?",
@@ -871,7 +873,7 @@ export const ARTICLES: Article[] = [
     byline: "nick",
     status: "published",
     datePublished: "2026-08-17",
-    dateUpdated: "2026-08-17",
+    dateUpdated: "2026-09-20",
     faq: [
       {
         q: "What is a good creative hit rate?",
