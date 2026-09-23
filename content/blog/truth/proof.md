@@ -81,6 +81,50 @@ re-verify before any post that quotes it.
   category entrant, not a partner platform. Never position Peachblue as an
   add-on to a generation tool.
 
+## UGC creator economics (verified 2026-09-23)
+
+Vendor self-published figures are marked. Re-verify marketplace pricing
+before reuse (30-day rule).
+
+- Creator rates: "many UGC creators charge between $150 and $250 per video
+  on average"; short product videos $100-400 (Influencer Marketing Hub,
+  influencermarketinghub.com/ugc-creators, Sept 2026).
+- Collabstr 2026 Influencer Marketing Report (VENDOR, own marketplace data,
+  472k+ packages): avg UGC asking price $180, avg final negotiated $154.
+  The same report cites a different "campaign" average ($197); do not mix.
+- Usage rights: paid-ads/extended licensing adds 25-100%+ to base (IMH);
+  30-50% of base for a usage extension (PPC.io Jan 2026, inBeat Aug 2026;
+  inBeat's underlying data is a 2022 survey, weak). Whitelisting / Spark
+  Ads: 30-100% of base per month (PPC.io); 30%/month (inBeat).
+- Marketplaces (live pricing pages, VENDOR): Insense Brand $500/mo
+  ($400 annual), Agency $800/mo ($640 annual), Trial $650 for one month;
+  7-20% marketplace fee; creator payments budgeted separately; brand gets
+  full digital copyright. Trend credit packs ~$69-92/video, fully licensed
+  for ads, 2-3 weeks for a full order. JoinBrands Free to $499/mo plans,
+  8-15% fee, UGC videos "$25+", unlimited usage rights, content within
+  3-7 days. Billo pricing page is login-gated; Billo's own blog (Sept 2026)
+  says "from $99 per video, bought as packs"; help center: 7-12 days after
+  receiving product. PPC.io lists Billo packs at 6/$500, 14/$1,000,
+  37/$2,500. Minisocial pricing page 404 (unverified).
+- Definitions (official): Meta partnership ads (formerly branded content
+  ads) show the partner's account in the ad header (facebook.com/business
+  help 759293997849980). TikTok Spark Ads promote organic posts via an
+  authorization code with a customizable duration (ads.tiktok.com help).
+- No checkable primary-source stat on UGC performance lift or UGC-specific
+  fatigue speed was found. Do not cite the "29% higher conversions (Adweek)"
+  figure; it only appears second-hand without a link.
+
+## AI generation pricing re-check (2026-09-23)
+
+Supersedes the August figures above where they conflict:
+- Higgsfield: no Basic $9 tier any more; entry is Starter $19/mo
+  (higgsfield.ai/pricing). Plus $47 annual / $59 monthly.
+- Arcads: pricing page 404s; homepage now says "Free trial available".
+  ~$11/video is third-party only (Fluxnote: $110 for 10 videos).
+- Creatify: unchanged (Free 10 credits, Starter $39, Pro $99).
+- JoinBrands sells AI videos at $5/video (VENDOR).
+- /blog/ai-generated-ads corrected 2026-09-23 (body + FAQ) to these figures.
+
 ## Test spend (framing rule, not a statistic)
 
 The media spend required to reach a verdict on a creative is set by the

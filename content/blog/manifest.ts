@@ -1013,7 +1013,7 @@ export const ARTICLES: Article[] = [
     byline: "peachblue",
     status: "published",
     datePublished: "2026-08-22",
-    dateUpdated: "2026-08-22",
+    dateUpdated: "2026-09-23",
     faq: [
       {
         q: "Do AI generated ads actually work?",
@@ -1021,7 +1021,7 @@ export const ARTICLES: Article[] = [
       },
       {
         q: "How much does it cost to generate an AI ad?",
-        a: "Low single-digit to low double-digit dollars per asset at 2026 pricing. Arcads runs roughly $11 per generated video with no free trial, Creatify sells tiers from free through $99 per month, and Higgsfield starts at $9 per month (pricing verified August 2026). Against traditional production costs, that is a collapse of one to three orders of magnitude.",
+        a: "Low single-digit to low double-digit dollars per asset at 2026 pricing. Arcads works out to roughly $11 per generated video on its entry pack, Creatify sells tiers from free through $99 per month, and Higgsfield plans start at $19 per month (pricing verified September 2026). Against traditional production costs, that is a collapse of one to three orders of magnitude.",
       },
       {
         q: "If generation is cheap, why is creative still expensive?",
@@ -1044,6 +1044,57 @@ export const ARTICLES: Article[] = [
       "BYLINE UPGRADEABLE: written brand-byline because the authority is arithmetic. Nick uses Higgsfield for plubo motion work and can flip this to his byline by adding the hands-on section flagged in the draft.",
     ],
     related: ["creative-hit-rate", "creative-economics", "creative-roas"],
+  },
+  {
+    slug: "ugc-ads-cost",
+    title: "What UGC ads really cost (2026)",
+    h1: "UGC ads are priced per video. You pay per",
+    h1Accent: "winner.",
+    description:
+      "UGC creator rates, usage-rights add-ons, and marketplace pricing for 2026, and the cost-per-winner math that decides creator vs AI UGC for your account.",
+    type: "guide",
+    pillar: "creative",
+    keywords: [
+      "ugc ads cost",
+      "how much do ugc creators charge",
+      "ugc creator rates 2026",
+      "ugc vs ai ugc",
+      "ugc usage rights",
+    ],
+    priority: 14,
+    byline: "peachblue",
+    status: "published",
+    datePublished: "2026-09-23",
+    dateUpdated: "2026-09-23",
+    faq: [
+      {
+        q: "How much does a UGC video cost in 2026?",
+        a: "Most UGC creators charge roughly $150 to $250 per video, with short product videos ranging from $100 to $400 (Influencer Marketing Hub, 2026). Paid-ads usage rights typically add 25 to 100 percent on top. Marketplaces package it differently, from per-video credit packs to monthly platform fees with creator payments billed separately.",
+      },
+      {
+        q: "What do UGC usage rights and whitelisting cost?",
+        a: "Paid-ads licensing usually adds 25 to 100 percent or more to the base rate, and whitelisting (running the ad from the creator's handle) is commonly priced monthly at 30 to 100 percent of the base fee. Some marketplaces include full usage rights in the per-video price. Buy the shortest term that covers the test and negotiate a pre-priced extension for winners.",
+      },
+      {
+        q: "Is AI UGC cheaper than creator UGC?",
+        a: "Per video, by an order of magnitude or more. Per winner, only if AI videos win at a comparable rate, because test spend is the same for both. At typical assumptions creator UGC costs about 1.7 times as much per test, so it is the better buy only if its hit rate in your account is more than 1.7 times higher.",
+      },
+      {
+        q: "How do you calculate the cost of a winning UGC ad?",
+        a: "Add production cost and test spend per creative, then divide by your hit rate. At $300 per video, $400 of test spend, and a 10 percent hit rate, each winner costs $7,000. The formula makes clear which lever matters: raising hit rate cuts cost per winner faster than negotiating the creator fee.",
+      },
+      {
+        q: "How many UGC videos should I order per month?",
+        a: "As many as your test budget can judge, and no more. Divide your monthly test budget by your per-verdict cost to get the number of creatives you can actually test; anything beyond that is inventory with a license clock running. Place orders ahead of winner fatigue, since turnaround ranges from days to weeks.",
+      },
+    ],
+    rawMaterial: [
+      "truth/proof.md: UGC creator economics section (verified 2026-09-23); AI generation cost is a plug-your-own assumption here, not a quoted price",
+      "Extends the ai-generated-ads cost-asymmetry argument into the UGC wave (Meta + TikTok ecommerce focus)",
+      "Boundary: Peachblue does not source creators, manage licenses, or generate video. Bridge is grouping, hit rate, fatigue board, Next Creative Brief as the creator brief.",
+      "BYLINE UPGRADEABLE: if Nick has run creator UGC himself, a first-hand section on licensing or ordering flips this to his byline.",
+    ],
+    related: ["ai-generated-ads", "creative-testing-framework", "creative-hit-rate"],
   },
   {
     slug: "amazon-dsp-chatgpt",
