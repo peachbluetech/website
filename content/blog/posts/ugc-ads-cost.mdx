@@ -14,7 +14,7 @@ Most UGC creators charge between $150 and $250 per video on average, with short 
 | JoinBrands | Free to $499/mo plan + 8-15% fee, videos from $25 | Unlimited usage rights | Content within 3-7 days |
 | Billo | From $99 per video in packs (Billo's own blog) | Per pack terms (pricing page is login-gated) | 7-12 days after receiving product |
 
-The spread between routes is real, but it is a spread in how the fee is packaged, not in the underlying problem. Every route sells you a video. None of them can sell you a verdict.
+The routes differ in how the fee is packaged. Every one of them sells you a video. None of them can sell you a verdict.
 
 ## What do usage rights and whitelisting add?
 
@@ -23,6 +23,8 @@ Paid-ads licensing typically adds 25 to 100 percent or more to a creator's base 
 On Meta that creator-identity format is now called partnership ads (formerly branded content ads), where the creator's account appears in the ad header alongside yours. On TikTok the equivalent is Spark Ads, which promote a creator's organic post through an authorization code with a set duration. Both are worth knowing precisely because both expire.
 
 That expiry is the hidden cost in UGC, and it lands on the wrong ads. A licensing term you buy for a video that loses its test is money spent on nothing. A licensing term that runs out on a video that won is worse: the ad gets pulled while it is still producing, at the exact moment it is worth the most. The fix is contractual, not creative. Buy the shortest term that covers the test, and negotiate a pre-priced extension option at the same time, so graduating a winner is a signature rather than a renegotiation.
+
+Which licenses to extend is a performance call, and it deserves the same evidence as any other verdict. In [Peachblue](/pricing) that evidence is already on screen when a term comes up for renewal: whether the video still sits in the Top Performer tier of [composite scoring](/docs/scoring), and whether the fatigue board has flagged it for decay against its own best rolling week. A winner with no flag is an easy extension. A winner already sliding is a weaker case for another month of whitelisting fees, and the flag carries its dollar consequence, so the decision is priced rather than guessed.
 
 ## What does a winning UGC ad actually cost?
 
@@ -40,13 +42,17 @@ Assume a $200 creator base plus 50 percent for paid usage, so $300 per video. As
 
 Two things fall out of the table. First, creator UGC is the one format where production is still a large share of the bill. With AI generation, making the asset has fallen to a rounding error ([the arithmetic is here](/blog/ai-generated-ads)); with creators, the fee is still close to half. So the creator fee is worth negotiating in a way the AI invoice is not.
 
-Second, and more useful: the table turns the creator-versus-AI debate into a single testable number. At these assumptions, creator UGC costs 1.7 times as much per test. It is the better buy if, and only if, creator videos win at more than 1.7 times the rate AI videos do in your account. That is not a question a vendor, a benchmark, or a hot take can answer for you. It is a question your own ledger answers after a few months of testing both in the same cohort under the same winner rule.
+Second, and more useful: the table turns the creator-versus-AI debate into a single testable number. At these assumptions, creator UGC costs 1.7 times as much per test. It is the better buy if, and only if, creator videos win at more than 1.7 times the rate AI videos do in your account. Your own ledger answers that after a few months of testing both in the same cohort under the same winner rule.
+
+Keeping that ledger honest has one trap. The same UGC video usually runs in several ads, often on both Meta and TikTok, and a spreadsheet counts it once per ad, which inflates the test count and deflates the hit rate. Peachblue groups ads into creatives by perceptual fingerprint, across platforms and through re-crops and re-compression, so each video gets one verdict, and its Economics view computes hit rate and wasted spend continuously instead of once a quarter. Every creative is also [tagged across 31 dimensions](/docs/creative-analysis), including format, hook style, emotional tone, and CTA type, and Intelligence shows which of those traits your winners share. That is how you learn whether the creator format itself is winning, or something the good creator videos happen to do that an AI video could do too.
 
 ## Is AI UGC cheaper than creator UGC?
 
-Per video, by an order of magnitude or more. Per winner, only if its hit rate holds up, which is the whole question. The honest version of the comparison is that the two formats are bets on different things: creators sell authenticity, a real face and voice that holds the scroll, and AI tools sell volume and variation. Neither is universally better, and a hit-rate ratio measured in your own account will settle it faster than any argument.
+Per video, by an order of magnitude or more. Per winner, only if its hit rate holds up, which is the whole question. The honest version of the comparison is that the two formats are bets on different things: creators sell authenticity, a real face and voice that holds the scroll, and AI tools sell volume and variation.
 
 The hybrid column is where most ecommerce teams should start. A creator-shot body that has already won is the proven asset; the hook is the cheapest part of a video to change and the part worth varying most. Recutting a winning creator body with new openings (from the creator, an editor, or a generator) buys many verdicts on the variable that moves [hook rate](/blog/hook-rate-hold-rate-thumbstop), without paying for a new shoot each time. Check that your license covers edits and recuts before you do this.
+
+Choosing which bodies earn the re-hook treatment is easier with a reason attached. Each creative in Peachblue comes with a written analysis and copy suggestions alongside its tags, so you can read why a video worked, not only that it did, and re-hook the ones whose strength is in the body rather than the opening.
 
 ## How many UGC videos should you order?
 
@@ -54,14 +60,18 @@ Order from your verdict budget, not from a package size. Your monthly test budge
 
 Turnaround sets the other constraint. Creator content arrives anywhere from 3 days to 3 weeks after an order depending on the route, so the order has to go out before the winners you are replacing fatigue, not after. The signal to watch is each winner's decay against its own best week ([how to read it](/blog/creative-fatigue)); when a winner starts sliding, the replacement order is already late if it has not been placed.
 
+Two numbers turn this into a schedule instead of a scramble. Bench depth, on Peachblue's Economics view, counts the proven creatives standing behind your current winners; when it runs thin, the next order is due. And the fatigue board flags each winner's decay against its own best week, never on zero-spend creatives, so the reorder signal arrives while there is still time to cover a two-week turnaround.
+
 ## What should go in a UGC creator brief?
 
 What already won, stated concretely enough to act on. Creators are fast and good at being themselves; they cannot guess which hook style, opening line, product angle, or format your audience responded to last month. A brief that says "authentic, energetic, show the product" produces the average of every UGC ad ever made. A brief that says "open on the problem in the first second, handheld, product in frame by second three, this objection answered out loud" produces a test of something.
 
 The best raw material for the script is your customers' own language. The phrases people use to describe the problem in reviews and on Reddit are, word for word, better hooks than anything written in a meeting ([mining that language](/blog/reddit-brand-monitoring-for-dtc) is a fifteen-minute weekly habit).
 
+Peachblue writes the first kind of brief from your own data. The Next Creative Brief lists what your winners share, concepts to make next, the hooks that performed in your own headline data, do and don't rules with the cohort counts behind them, and labeled reference ads. It shares by link, so it goes to a creator as-is, and the same brief carries a generation-ready prompt block for the AI half of a hybrid slate. [Brand Intel](/docs/brand-intel) covers the language side: it monitors Reddit for your brand, competitors, and topics, and its editorial brief surfaces the trending topics and opportunities worth scripting against.
+
 ## Where the tooling meets UGC
 
-Everything above works in a spreadsheet: log each video's total cost, test spend, verdict, and source (creator, AI, hybrid), and compute cost per winner by source every month. That one table is what settles the creator-versus-AI question for your account. The monthly review that sits on top of it is covered in [creative economics](/blog/creative-economics).
+Everything above works in a spreadsheet: log each video's total cost, test spend, verdict, and source (creator, AI, hybrid), and compute cost per winner by source every month. That one table is what settles the creator-versus-AI question for your account, and the monthly review that sits on top of it is covered in [creative economics](/blog/creative-economics).
 
-This is where [Peachblue](/pricing) fits, and it is worth being exact about the boundary: we do not source creators, manage licenses, or generate video. What we do is analyze the creative you ran on Meta and TikTok (and Google Ads and Amazon DSP): every asset tagged across 31 dimensions, including format, hook style, and emotional tone, and grouped by perceptual fingerprint, so the same creator video recut into five ads is still one creative with one verdict. Hit rate and wasted spend are computed continuously, the fatigue board flags a winner's decay against its own best week before it is too late to reorder, and the Next Creative Brief turns your winners' shared patterns and best-performing hooks into a brief you can hand to a creator or paste into a generator. The source of the video is interchangeable. The evidence that decides what to order next is not.
+The instrumented version runs through every step of this guide: one verdict per video across Meta and TikTok (and Google Ads and Amazon DSP), hit rate and waste computed continuously, license renewals and reorders timed by the fatigue board and bench depth, and winners turned into the next creator brief. To be exact about the boundary, [Peachblue](/pricing) does not source creators, manage licenses, or generate video. The source of the video is interchangeable. The evidence that decides what to order next is not.
