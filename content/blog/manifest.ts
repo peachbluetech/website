@@ -771,7 +771,7 @@ export const ARTICLES: Article[] = [
     faq: [
       {
         q: "What is the difference between Peachblue and Motion?",
-        a: "Platform coverage and direction of analysis. Motion is Meta-centric with the category's best education ecosystem and a Slack-native workflow that pushes reports and briefs to the team on routines. Peachblue covers Meta, TikTok, Google Ads, and Amazon DSP, analyzes every creative across 31 dimensions, and points the analysis forward: patterns behind your winners become a generation-ready brief for the next round. Full disclosure: Peachblue is our product.",
+        a: "Platform coverage and direction of analysis. Motion is Meta-centric with the category's best education ecosystem and a Slack-native workflow that pushes reports and briefs to the team on routines. Peachblue covers Meta, TikTok, Google Ads, and Amazon DSP, analyzes every creative across 31 dimensions, and points the analysis forward: patterns behind your winners become a generation-ready brief for the next round.",
       },
       {
         q: "How much do Peachblue and Motion cost?",
@@ -806,7 +806,7 @@ export const ARTICLES: Article[] = [
     faq: [
       {
         q: "What is the difference between Peachblue and Atria?",
-        a: "They cover opposite ends of the creative pipeline. Atria is built around research, generation, and launch: an ad library, image ad and script generation, and bulk upload to Meta, for Meta and TikTok accounts. Peachblue analyzes your own ads across Meta, TikTok, Google Ads, and Amazon DSP, explains why winners won, and turns them into the brief for what to make next. Full disclosure: Peachblue is our product.",
+        a: "They cover opposite ends of the creative pipeline. Atria is built around research, generation, and launch: an ad library, image ad and script generation, and bulk upload to Meta, for Meta and TikTok accounts. Peachblue analyzes your own ads across Meta, TikTok, Google Ads, and Amazon DSP, explains why winners won, and turns them into the brief for what to make next.",
       },
       {
         q: "How much do Peachblue and Atria cost?",

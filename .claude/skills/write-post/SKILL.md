@@ -40,7 +40,10 @@ Pick the structure from the entry's `type`:
   for" segmentation. At-a-glance comparison table with price-verification
   date. One section per tool: what it is, honest strengths, gaps, "Choose
   X if". Closing "how to decide" list keyed to use cases.
-- **vs** — disclosure first if we compete. Verdict paragraph up top (who
+- **vs** — no founder/bias disclosure paragraph when Peachblue is one of the
+  two (Nick, 2026-09-28: it reads as a bias confession; the domain already
+  says who we are). Open with the verdict, then one line with the
+  verification date. Verdict paragraph up top (who
   should pick which, in two sentences). Dimension-by-dimension comparison
   with a table. Honest concessions in both directions. "Who should pick
   [A]" / "Who should pick [B]" sections.

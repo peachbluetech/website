@@ -29,6 +29,12 @@ draft.
 - Every post links: its pillar hub, at least two sibling posts, and /pricing
   at least once in context. Comparison pages link /pricing twice.
 
+- Head-to-head pages where Peachblue is one of the two (Peachblue vs X):
+  no founder or bias disclosure paragraph and no "founder of one of them"
+  headlines (Nick, 2026-09-28). Credibility comes from the verification
+  date and genuine concessions. Referee pages (X vs Y, neither ours) keep
+  their short disclosure line.
+
 ## Claim rules (hard)
 
 - Amazon DSP claim: "the only creative analytics platform for agencies at
