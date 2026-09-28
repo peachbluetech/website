@@ -789,11 +789,11 @@ export const ARTICLES: Article[] = [
   },
   {
     slug: "peachblue-vs-atria",
-    title: "Peachblue vs Atria (2026): an honest comparison",
-    h1: "Peachblue vs Atria, from the founder of",
-    h1Accent: "one of them.",
+    title: "Peachblue vs Atria (2026): pricing and features compared",
+    h1: "Peachblue vs",
+    h1Accent: "Atria.",
     description:
-      "A transparent comparison of Peachblue and Atria: pricing, platform coverage, AI agents, and exactly who should pick which.",
+      "Peachblue vs Atria in 2026: Atria pricing, platform coverage, AI agents, MCP limits, and who should pick which. Prices verified September 28, 2026.",
     type: "vs",
     pillar: "comparisons",
     keywords: ["peachblue vs atria", "atria alternative", "atria pricing"],
