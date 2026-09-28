@@ -226,7 +226,7 @@ export const ARTICLES: Article[] = [
     byline: "nick",
     status: "published",
     datePublished: "2026-08-14",
-    dateUpdated: "2026-09-03",
+    dateUpdated: "2026-09-28",
     faq: [
       {
         q: "How much does Motion cost now?",
@@ -334,7 +334,7 @@ export const ARTICLES: Article[] = [
     byline: "nick",
     status: "published",
     datePublished: "2026-09-10",
-    dateUpdated: "2026-09-10",
+    dateUpdated: "2026-09-28",
     faq: [
       {
         q: "Is Motion or Atria better for creative analytics?",
@@ -350,7 +350,7 @@ export const ARTICLES: Article[] = [
       },
       {
         q: "Do Motion and Atria work with Claude and ChatGPT?",
-        a: "Both ship MCP access as of September 2026: Motion includes it from its Starter tier, and Atria offers it free for now on every plan with Claude, ChatGPT, and Cursor named. Any claim of MCP exclusivity in this category is outdated; at least five creative analytics tools ship it, differing mainly in what data the MCP serves.",
+        a: "Both ship MCP access as of September 2026: Motion includes it from its Starter tier, and Atria includes it on every plan, capped at 600 calls a month on Core and unlimited from Plus up. Any claim of MCP exclusivity in this category is outdated; at least five creative analytics tools ship it, differing mainly in what data the MCP serves.",
       },
       {
         q: "Is there an alternative to both Motion and Atria?",
@@ -537,7 +537,7 @@ export const ARTICLES: Article[] = [
     byline: "nick",
     status: "published",
     datePublished: "2026-09-03",
-    dateUpdated: "2026-09-03",
+    dateUpdated: "2026-09-28",
     faq: [
       {
         q: "What is a creative analytics tool?",
@@ -767,7 +767,7 @@ export const ARTICLES: Article[] = [
     byline: "nick",
     status: "published",
     datePublished: "2026-09-19",
-    dateUpdated: "2026-09-19",
+    dateUpdated: "2026-09-28",
     faq: [
       {
         q: "What is the difference between Peachblue and Motion?",
@@ -796,12 +796,35 @@ export const ARTICLES: Article[] = [
       "A transparent comparison of Peachblue and Atria: pricing, platform coverage, AI agents, and exactly who should pick which.",
     type: "vs",
     pillar: "comparisons",
-    keywords: ["peachblue vs atria", "atria alternative"],
+    keywords: ["peachblue vs atria", "atria alternative", "atria pricing"],
     competitors: ["Atria", "Peachblue"],
     priority: 20,
     byline: "nick",
-    status: "planned",
-    faq: [],
+    status: "published",
+    datePublished: "2026-09-28",
+    dateUpdated: "2026-09-28",
+    faq: [
+      {
+        q: "What is the difference between Peachblue and Atria?",
+        a: "They cover opposite ends of the creative pipeline. Atria is built around research, generation, and launch: an ad library, image ad and script generation, and bulk upload to Meta, for Meta and TikTok accounts. Peachblue analyzes your own ads across Meta, TikTok, Google Ads, and Amazon DSP, explains why winners won, and turns them into the brief for what to make next. Full disclosure: Peachblue is our product.",
+      },
+      {
+        q: "How much do Peachblue and Atria cost?",
+        a: "Atria runs $129, $479, and $959 per month billed annually ($159, $599, and $1,199 monthly), plus custom Enterprise, with a free start of 1,000 credits and no card. Peachblue runs $79 to $1,499 per month self-serve, with a 7-day trial on Starter and Pro and two months free on annual plans. Prices verified September 28, 2026.",
+      },
+      {
+        q: "Does Atria support Google Ads or Amazon DSP?",
+        a: "Atria analyzes performance from connected Meta and TikTok ad accounts. Peachblue analyzes Meta, TikTok, Google Ads, and Amazon DSP in one account and is the only creative analytics platform for agencies at self-serve pricing that covers Amazon DSP.",
+      },
+      {
+        q: "Can I use Atria and Peachblue together?",
+        a: "Yes, and for some teams it is the natural setup: generate and launch creative wherever you like, then judge it in Peachblue. Peachblue's Next Creative Brief turns your winners into proven hooks, rules, reference ads, and a generation-ready prompt block, which is the input a generation tool needs.",
+      },
+      {
+        q: "Which is better for agencies, Peachblue or Atria?",
+        a: "Atria's Business tier adds guest invites, but its plans do not list multi-client workspaces or client reporting. Peachblue's Agency tier runs multi-client workspaces with a client switcher, per-client reporting with agency margin applied, and Amazon DSP and CTV flight pacing across the roster.",
+      },
+    ],
   },
   // Creative economics pillar (Pillar C2 in the strategy doc).
   {

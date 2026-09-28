@@ -160,6 +160,35 @@ reliability as pipes, which is genuinely good.
   gaps in exposed data. The free-and-official baseline every
   "connect DSP to AI" post must cover fairly.
 
+## Atria re-verification 2026-09-28 (before peachblue-vs-atria; supersedes conflicting Atria figures above)
+
+Live pages (pricing, /mcp, homepage, help center, /slack, /experts):
+- Prices unchanged: Core $129 / Plus $479 / Business $959 billed annually;
+  monthly toggle (checked in browser) $159 / $599 / $1,199. Enterprise
+  custom. Annual saves 20%. Business marked "Most Popular".
+- Free start: 1,000 credits, no card ("Start for free"); demo secondary.
+  No trial length on the live pricing page.
+- Limits: AI credits 4,000 / 10,000 / 25,000; ad accounts 5 / 10 /
+  unlimited; analyzed spend $500K / $1M / unlimited; seats 5 / 8 / 15,
+  $20 per extra. Business adds custom metrics + guest invites.
+- CHANGED: MCP is capped on Core at 600 calls/mo (Plus+ unlimited; overage
+  1 AI credit per call). /mcp page still says "free for now". REST API:
+  Core 1,200 calls/mo, Plus+ unlimited, overage 1 credit each (the earlier
+  "1 credit per request" note was wrong).
+- Ad platforms for performance: Meta + TikTok only. Other connectors:
+  Slack, Shopify, Triple Whale, Notion, Google Drive/Sheets, Gmail.
+- Modules: research (auto-pulled hooks, personas, landing pages; review
+  mining), ad library (own pages say both 25M+ and 100M+; do not print a
+  size), auto-tagging (hook, persona, USP, format), generation (image ads,
+  scripts, briefs; clone-and-iterate; no video/avatar generation found),
+  Launch (bulk upload to Meta). Raya: AI strategist "trained on over $9
+  billion in ad spend data", in Slack on every plan. Radar: grades every
+  ad into scale / iterate / leave alone with fix recommendations.
+- Agencies: landing page + guest invites; no multi-client workspaces,
+  white-label, or client reporting listed. No Reddit/social listening.
+- Community: no free course/newsletter/community found; /experts is a PAID
+  expert network. Drop "strong founder-led community" as a strength.
+
 ## Spot re-verification 2026-09-19 (before peachblue-vs-motion publish)
 
 Motion unchanged from 2026-09-10: Starter $750 (to $50k spend), Pro $1,200,
