@@ -707,13 +707,12 @@ export const ARTICLES: Article[] = [
     keywords: [
       "reddit brand monitoring",
       "reddit social listening",
-      "reddit marketing for brands",
     ],
     priority: 17,
     byline: "peachblue",
     status: "published",
     datePublished: "2026-08-27",
-    dateUpdated: "2026-08-27",
+    dateUpdated: "2026-09-30",
     faq: [
       {
         q: "What is Reddit brand monitoring?",
@@ -1118,6 +1117,56 @@ export const ARTICLES: Article[] = [
       "BYLINE UPGRADEABLE: if Nick has run creator UGC himself, a first-hand section on licensing or ordering flips this to his byline.",
     ],
     related: ["ai-generated-ads", "creative-testing-framework", "creative-hit-rate"],
+  },
+  {
+    slug: "reddit-marketing-for-dtc",
+    title: "Reddit marketing for DTC brands (2026 guide)",
+    h1: "Reddit marketing that doesn't get you",
+    h1Accent: "banned.",
+    description:
+      "The four plays of Reddit marketing for DTC brands: listen, participate, advertise, and be findable. Official rules, ad formats, and how to measure it.",
+    type: "guide",
+    pillar: "reddit",
+    keywords: [
+      "reddit marketing",
+      "reddit marketing for brands",
+      "reddit marketing strategy",
+      "how to market on reddit",
+      "reddit ads for ecommerce",
+    ],
+    priority: 23,
+    byline: "peachblue",
+    status: "published",
+    datePublished: "2026-09-30",
+    dateUpdated: "2026-09-30",
+    faq: [
+      {
+        q: "Does Reddit marketing work for DTC brands?",
+        a: "Yes, when it is run as research and participation first and advertising second. Reddit reported 130.3 million daily active uniques in Q2 2026, most of them logged out and arriving from search, which makes its threads a place buyers read before they purchase. Brands that lead with ads before understanding the communities usually get criticized in the comments and conclude the channel does not work.",
+      },
+      {
+        q: "Is it allowed to promote your brand on Reddit?",
+        a: "Within limits. Reddit's rules ask users to participate authentically and not spam, and its spam policy suggests businesses posting mostly their own links consider advertising instead. Each subreddit's moderators set their own self-promotion rules on top, so read them before posting. Disclose your affiliation every time, even though Reddit does not publish that as a formal requirement.",
+      },
+      {
+        q: "What is the 9:1 rule on Reddit?",
+        a: "A guideline that only one in ten of your submissions should be your own content. It still appears on Reddit's Reddiquette page as a widely used rule of thumb, though Reddit describes Reddiquette as informal. Treat it as a minimum standard of helpfulness, not a target, and follow each subreddit's own rules where they are stricter.",
+      },
+      {
+        q: "What Reddit ad formats work for ecommerce?",
+        a: "Promoted image, video, and carousel posts for prospecting, conversation ads placed deeper in relevant threads, and dynamic product ads built from your catalog for physical products. Dynamic product ads require a catalog plus the Reddit Pixel or Conversions API sending view, add-to-cart, and purchase events. Shopify merchants can use Reddit's Shopify integration, generally available as of Q2 2026.",
+      },
+      {
+        q: "How do you measure Reddit marketing?",
+        a: "Per play: mention volume and sentiment for listening, profile and comment metrics for participation, CPA and ROAS with the Conversions API for ads, and which threads rank for your buyers' searches. The most overlooked measure is downstream: label Reddit-sourced creative angles and compare their hit rate on Meta and TikTok against angles from other sources.",
+      },
+    ],
+    rawMaterial: [
+      "truth/proof.md: Reddit section (verified 2026-09-30): Q2 2026 scale, rules, Reddit Pro, ad formats, AI citation study disagreement, Reddit-commissioned survey flagged",
+      "Hub for the reddit pillar; reddit-brand-monitoring-for-dtc is the listening spoke. Keyword 'reddit marketing for brands' moved here from the spoke to avoid cannibalization.",
+      "Boundary: Peachblue does NOT sync Reddit Ads. Reddit angles are measured downstream on Meta/TikTok.",
+    ],
+    related: ["reddit-brand-monitoring-for-dtc", "creative-testing-framework", "creative-hit-rate"],
   },
   {
     slug: "amazon-dsp-chatgpt",

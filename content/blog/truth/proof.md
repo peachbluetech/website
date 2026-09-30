@@ -125,6 +125,46 @@ Supersedes the August figures above where they conflict:
 - JoinBrands sells AI videos at $5/video (VENDOR).
 - /blog/ai-generated-ads corrected 2026-09-23 (body + FAQ) to these figures.
 
+## Reddit (verified 2026-09-30)
+
+- Q2 2026 (Reddit Q2'26 shareholder letter, s203.q4cdn.com ... /2026/q2/
+  Q2-26-Shareholder-Letter.pdf): DAUq 130.3M (+18%), WAUq 514.6M (+24%);
+  logged-in DAUq 52.6M (+7%), logged-out 77.7M (+27%). Revenue $805M,
+  ad revenue $762M. "100k+ active communities", "26B+ posts & comments".
+  Letter says search referrals were "choppy" in the quarter. Shopify
+  integration GA; Shopping Listing Ads in alpha.
+- Rules: Reddit Rules (redditinc.com/policies/reddit-rules) rule 2
+  "participate authentically... do not spam"; rule 5 no deceptive
+  impersonation; community rules enforced by moderators. Spam policy
+  (Reddit Help): businesses posting mostly own links should be thoughtful
+  about frequency "or consider advertising opportunities using our
+  self-serve platform". 9:1 ratio still on Reddiquette page as "a widely
+  used rule of thumb"; Reddiquette is described as informal. No official
+  Reddit page found requiring brands to disclose affiliation (our practice,
+  not their rule; say so).
+- Reddit Pro: free organic business suite, beta, eligible businesses,
+  English-speaking countries; Trends keyword monitoring; post/comment
+  performance metrics; verified profiles (grey checkmark, public beta).
+- Ads (business.reddit.com ad types; Reddit Help): image, video, carousel,
+  free-form, conversation ads (conversation pages, deeper in threads),
+  product ads, AMA ads, takeovers. Dynamic product ads: catalog + Pixel or
+  CAPI with ViewContent/AddToCart/Purchase; physical products only.
+  Minimum spend NOT on any official page; do not print one.
+- Partnerships: Google gained Reddit Data API access (Google blog, Feb 22,
+  2024); ~$60M/yr is Reuters-reported only, never state as fact. OpenAI
+  partnership May 16, 2024 (openai.com), terms undisclosed.
+- AI citation studies CONFLICT (all vendor studies; cite the disagreement):
+  Profound (680M citations, Aug 2024-Jun 2025): Reddit #1 in Google AI
+  Overviews (2.2%) and Perplexity (6.6%). Ahrefs (Jun 2025): 7.4% of AI
+  Overview citations but outside top 10 on ChatGPT and Perplexity. Semrush
+  (Nov 2025, 230K prompts): ChatGPT cited Reddit in close to 60% of
+  responses early Aug 2025, around 10% by mid-Sept.
+- Reddit Answers / search: Q4 2025 letter, core search merged with Answers,
+  "over 80 million people searching directly on Reddit every week".
+- Reddit-commissioned (FLAG AS SUCH): 84% of shoppers more confident after
+  researching on Reddit (n=1,004 US monthly users, Attest, Feb 2026; Q1'26
+  letter).
+
 ## Test spend (framing rule, not a statistic)
 
 The media spend required to reach a verdict on a creative is set by the
