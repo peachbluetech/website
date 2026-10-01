@@ -227,7 +227,7 @@ export const DOC_PAGES: DocPage[] = [
     faq: [
       {
         q: "Which plans include MCP access?",
-        a: "Pro, Scale, and Power. Access is enforced at the server, and the Settings MCP tab shows your tier status. Agency workspace support is coming soon.",
+        a: "Pro, Scale, Power, and Agency. Access is enforced at the server, and the Settings MCP tab shows your tier status. In Agency workspaces, calls are scoped per client.",
       },
       {
         q: "Does the MCP server expose competitor ads or an ad library?",

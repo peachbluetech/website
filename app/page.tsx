@@ -40,7 +40,7 @@ export default function Home() {
   const TOOLKIT = [
     { title: "Brand Intel", desc: "Reddit brand monitoring: sentiment on every mention, plus an AI editorial brief.", href: "/docs/brand-intel" },
     { title: "Reports and pacing", desc: "Client-ready reports, DSP flight pacing, and agency margin baked in.", href: "/docs/reports-and-pacing" },
-    { title: "Your data in Claude", desc: "The 19-tool MCP server, included on Pro and up.", href: "/mcp" },
+    { title: "Your data in Claude", desc: "The 23-tool MCP server, included on Pro and up.", href: "/mcp" },
     { title: "Objective-aware scoring", desc: "Reach ranks for awareness creatives, with components you can audit.", href: "/docs/scoring" },
     { title: "Creative Library", desc: "Every ad and creative, tagged, filterable, and deep-linkable.", href: "/docs/creative-analysis" },
   ];
@@ -418,8 +418,6 @@ const TICKER_ITEMS = [
   "Google Ads",
   "Amazon DSP",
   "31 creative dimensions",
-  "2.1x hook-test lift found",
-  "44% lower CPA, UGC vs studio",
   "Monday digest, email + Slack",
   "Every score cites its window",
 ];

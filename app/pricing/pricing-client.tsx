@@ -166,7 +166,7 @@ const COMPARE: CompareGroup[] = [
 const FAQS: { q: string; a: string }[] = [
   {
     q: "What counts as a credit?",
-    a: "One credit covers the full AI analysis of a single creative: visual breakdown, copy strategy, and intelligence tags. Credits reset every month.",
+    a: "Credits pay for AI creative analysis. An image or text creative uses 5 credits and a video uses 10, which covers the full analysis: visual breakdown, copy strategy, and intelligence tags. A creative that has already been analyzed is never charged twice. Credits reset every month.",
   },
   {
     q: "What happens after the trial?",

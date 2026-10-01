@@ -55,6 +55,10 @@ const TOOL_GROUPS = [
     title: "Audience and brand",
     desc: "Demographics, placements, keyword search across your library, and Reddit brand sentiment.",
   },
+  {
+    title: "Pacing and reporting",
+    desc: "Amazon DSP flight pacing against budget, supplier breakdowns, daily spend, and client-by-client comparison for agencies.",
+  },
 ];
 
 export default function McpPage() {
@@ -72,7 +76,7 @@ export default function McpPage() {
               Bring your ad performance <span className="italic">into</span> Claude.
             </h1>
             <p className="text-[clamp(15px,1.8vw,17.5px)] leading-[1.7] text-pb-fg-muted max-w-[620px] mb-4">
-              Peachblue's MCP server exposes the same 19 tools that power Agent Peach to any MCP
+              Peachblue's MCP server exposes the same 23 tools that power Agent Peach to any MCP
               client: Claude Desktop, claude.ai, Cursor, and Claude Code. Rankings, comparisons,
               patterns, fatigue, and risk, over your Meta, TikTok, Google Ads, and Amazon DSP data.
             </p>
@@ -157,11 +161,11 @@ export default function McpPage() {
           <div className="pointer-events-none absolute inset-0 bg-pb-muted/40" aria-hidden="true" />
           <div className="max-w-[860px] mx-auto relative">
             <h2 className="font-display text-[clamp(28px,4vw,44px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-fg mb-8">
-              19 tools, four jobs.
+              23 tools, five jobs.
             </h2>
             <div className="grid sm:grid-cols-2 gap-4">
               {TOOL_GROUPS.map((g) => (
-                <div key={g.title} className="rounded-2xl border border-pb-border bg-pb-card p-5 shadow-pb-soft">
+                <div key={g.title} className="rounded-2xl border border-pb-border bg-pb-card p-5 shadow-pb-soft sm:last:odd:col-span-2">
                   <div className="text-[14.5px] font-semibold text-pb-fg mb-1.5">{g.title}</div>
                   <p className="text-[13px] text-pb-fg-muted leading-relaxed">{g.desc}</p>
                 </div>

@@ -33,9 +33,10 @@ Snapchat, AppLovin, Performance Max. Do not imply otherwise.
   platforms, even after re-crops and re-compression. Cross-platform fuzzy
   matching; byte-identical SHA-256 collapse for Amazon DSP assets. This is
   stronger than "byte hash" — claim it.
-- Agent Peach: conversational agent over your own ad data (19 tools:
-  performance summaries, rankings, comparisons, audience insights, copy
-  variants, patterns, trends). Session memory: the agent remembers entities
+- Agent Peach: conversational agent over your own ad data (23 tools as
+  of 2026-09-11: performance summaries, rankings, comparisons, audience
+  insights, copy variants, patterns, trends, plus four reporting tools:
+  DSP pacing, supplier breakdown, daily spend, client comparison). Session memory: the agent remembers entities
   across a conversation.
 - Creative Library: by-ad and by-creative views, filters, one-click preset
   views (All / Top / Under / Low-data). Do NOT claim user-created saved
@@ -71,7 +72,7 @@ Snapchat, AppLovin, Performance Max. Do not imply otherwise.
   per client
 - Agency mode: client switcher scopes the whole app to one DSP advertiser;
   per-client reports, intelligence, and brand intel
-- MCP server (LIVE, Pro plan and up): all 19 agent tools exposed over the
+- MCP server (LIVE, Pro plan and up): all 23 agent tools exposed over the
   Model Context Protocol, so your own performance data is queryable from
   Claude Desktop, Claude Code, and any MCP client. Marketing focus (per
   Nick, 2026-08-13; amended 2026-08-24): Claude is the primary named
@@ -87,8 +88,8 @@ Snapchat, AppLovin, Performance Max. Do not imply otherwise.
   below is under the same caveat for the ChatGPT half. Full OAuth
   sign-in flow; Streamable HTTP and SSE transports; inline creative cards
   render inside Claude/ChatGPT responses (MCP Apps). Settings > MCP tab is
-  visible for brand orgs (fixed 2026-08-13); agency orgs see a Coming soon
-  card, so phrase agency MCP as "coming soon". Setup docs live at
+  visible for brand orgs (fixed 2026-08-13) and for agency orgs (shipped
+  2026-09-30), so agency MCP is live, with calls scoped per client. Setup docs live at
   /docs/mcp.
 
 ## Pricing (verified 2026-08-12)
