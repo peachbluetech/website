@@ -14,6 +14,9 @@ export const SELF_SERVE = process.env.NEXT_PUBLIC_SELF_SERVE_LIVE === "1";
 export const DEMO_HREF = "/demo";
 export const SALES_HREF = "/demo?intent=agency";
 
+/** Cal.com event the /demo page embeds: cal.com/<CAL_LINK>. */
+export const CAL_LINK = "peachblue/30min";
+
 export const TRIAL_LABEL = SELF_SERVE ? "Start 7-day trial" : "Get early access";
 export const NAV_CTA_LABEL = SELF_SERVE ? "Start free trial" : "Get early access";
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import posthog from "posthog-js";
 
 /**
  * Qualified-lead form (name / company / email / spend band / note), posted
@@ -64,6 +65,7 @@ export function DemoForm({ salesIntent, showIntro = true }: { salesIntent: boole
                 return;
               }
               setSubmitted(true);
+              if (posthog.__loaded) posthog.capture("demo_form_submitted", { intent: salesIntent ? "agency" : "demo" });
             } catch {
               setFormError("Something went wrong. Email us at nick@peachblue.io.");
               setSending(false);

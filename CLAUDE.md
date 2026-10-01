@@ -6,7 +6,7 @@ Read `AGENTS.md` first: this Next.js version has breaking changes from what you 
 
 ## What the site does
 
-- `/` long-scroll conversion homepage, `/pricing`, `/demo` (lead form; `?intent=agency` variant), `/privacy`, `/terms`, `/mcp`, `/og-square`.
+- `/` long-scroll conversion homepage, `/pricing`, `/demo` (Cal.com booking embed with the lead form as a fallback; `?intent=agency` variant), `/privacy`, `/terms`, `/mcp`, `/og-square`.
 - `/blog` and `/blog/[slug]`: manifest-driven articles with FAQ schema, per-post OG images, RSS at `/feed.xml`.
 - `/docs` and `/docs/[slug]`: product documentation from a manifest.
 - `/integrations/[slug]`: one page per connected platform.
