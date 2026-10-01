@@ -38,7 +38,7 @@ Read `AGENTS.md` first: this Next.js version has breaking changes from what you 
 
 ## Environment
 
-`NEXT_PUBLIC_APP_URL` (defaults to the production app), `NEXT_PUBLIC_SELF_SERVE_LIVE` (`1` in production), `RESEND_API_KEY`, `RESEND_FROM`. Values live in Vercel and a local `.env.local`; only names are recorded here.
+`NEXT_PUBLIC_APP_URL` (defaults to the production app), `NEXT_PUBLIC_SELF_SERVE_LIVE` (`1` in production), `RESEND_API_KEY`, `RESEND_FROM`, `NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN` and `NEXT_PUBLIC_POSTHOG_HOST` (cookieless web analytics, initialized in `instrumentation-client.ts`; no-ops when the token is unset). Values live in Vercel and a local `.env.local`; only names are recorded here.
 
 ## Local development
 
