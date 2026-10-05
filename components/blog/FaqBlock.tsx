@@ -10,7 +10,7 @@ export function FaqBlock({ faq }: { faq: FaqEntry[] }) {
     <section className="mt-14" aria-labelledby="faq-heading">
       <h2
         id="faq-heading"
-        className="font-display text-[26px] font-medium tracking-[-0.015em] text-pb-fg mb-6"
+        className="font-display text-[26px] font-medium tracking-[-0.015em] text-pb-ink mb-6"
       >
         Frequently asked questions
       </h2>
@@ -18,9 +18,9 @@ export function FaqBlock({ faq }: { faq: FaqEntry[] }) {
         {faq.map((f) => (
           <details
             key={f.q}
-            className="group rounded-2xl border border-pb-border bg-pb-card shadow-pb-soft px-5 py-4 open:pb-5"
+            className="group rounded-[10px] border border-pb-border bg-pb-card px-5 py-4 open:pb-5"
           >
-            <summary className="cursor-pointer list-none flex items-start justify-between gap-4 text-[15px] font-semibold text-pb-fg">
+            <summary className="cursor-pointer list-none flex items-start justify-between gap-4 rounded-sm text-[15px] font-semibold text-pb-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pb-peach-500 focus-visible:ring-offset-2">
               {f.q}
               <span
                 aria-hidden="true"
@@ -29,7 +29,7 @@ export function FaqBlock({ faq }: { faq: FaqEntry[] }) {
                 +
               </span>
             </summary>
-            <p className="mt-3 text-[14.5px] leading-relaxed text-pb-fg-muted">{f.a}</p>
+            <p className="mt-3 text-[14.5px] leading-relaxed text-pb-fg-secondary">{f.a}</p>
           </details>
         ))}
       </div>

@@ -29,16 +29,16 @@ export default function BlogIndexPage() {
     <div className="flex flex-col min-h-screen bg-pb-bg">
       <SiteNav current="blog" />
 
-      <main className="flex-1 pt-32 md:pt-40 pb-24 px-6">
+      <main className="flex-1 pt-12 md:pt-[72px] pb-24 px-6">
         <div className="max-w-[760px] mx-auto">
           <header className="mb-12 md:mb-16">
-            <div className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-pb-fg-muted mb-3">
+            <div className="text-[13px] font-semibold text-pb-peach-700 mb-3">
               Peachblue blog
             </div>
-            <h1 className="font-display text-[clamp(30px,5vw,44px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-fg mb-4">
-              Notes from the creative <span className="italic">trenches.</span>
+            <h1 className="font-display text-[clamp(30px,5vw,44px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-ink text-balance mb-4">
+              Notes from the creative trenches.
             </h1>
-            <p className="text-[15px] text-pb-fg-muted leading-relaxed max-w-[560px]">
+            <p className="text-[16px] text-pb-fg-secondary leading-relaxed max-w-[560px]">
               Practitioner guides on creative analytics, Amazon DSP reporting,
               and AI for media buying. No filler, verified numbers, honest
               comparisons.
@@ -50,24 +50,24 @@ export default function BlogIndexPage() {
               <Link
                 key={a.slug}
                 href={`/blog/${a.slug}`}
-                className="block rounded-3xl border border-pb-border bg-pb-card shadow-pb-soft p-6 md:p-7 hover:shadow-pb-lift transition-shadow"
+                className="block rounded-[10px] border border-pb-border bg-pb-card p-6 md:p-7 hover:border-pb-border-control transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pb-peach-500 focus-visible:ring-offset-2"
               >
-                <div className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-pb-fg-muted mb-2.5">
-                  <span className="text-pb-peach-600">{PILLARS[a.pillar].title}</span>
+                <div className="flex items-center gap-2.5 text-[13px] font-semibold text-pb-fg-muted mb-2.5">
+                  <span className="text-pb-peach-700">{PILLARS[a.pillar].title}</span>
                   {a.datePublished && (
                     <>
                       <span aria-hidden="true">·</span>
-                      <time dateTime={a.datePublished} className="normal-case tracking-normal font-medium">
+                      <time dateTime={a.datePublished} className="font-normal">
                         {formatDate(a.datePublished)}
                       </time>
                     </>
                   )}
                 </div>
-                <h2 className="font-display text-[22px] md:text-[24px] leading-snug font-medium tracking-[-0.015em] text-pb-fg mb-2">
+                <h2 className="font-display text-[22px] md:text-[24px] leading-snug font-medium tracking-[-0.015em] text-pb-ink mb-2">
                   {a.h1}
-                  {a.h1Accent ? <span className="italic"> {a.h1Accent}</span> : null}
+                  {a.h1Accent ? <span> {a.h1Accent}</span> : null}
                 </h2>
-                <p className="text-[14.5px] text-pb-fg-muted leading-relaxed mb-3">
+                <p className="text-[14.5px] text-pb-fg-secondary leading-relaxed mb-3">
                   {a.description}
                 </p>
                 <div className="text-[12.5px] text-pb-fg-muted">{bylineName(a.byline)}</div>

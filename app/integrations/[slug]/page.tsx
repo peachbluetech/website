@@ -6,6 +6,7 @@ import { SiteFooter } from "@/components/site/SiteFooter";
 import { FaqBlock } from "@/components/blog/FaqBlock";
 import { TrialCta } from "@/components/blog/TrialCta";
 import { INTEGRATION_PAGES } from "@/content/integrations/manifest";
+import { OutlineLink, PrimaryLink } from "@/components/site/Button";
 import { SITE_URL, TRIAL_HREF, TRIAL_LABEL, RISK_REVERSAL } from "@/lib/site";
 
 export const dynamicParams = false;
@@ -91,34 +92,24 @@ export default async function IntegrationPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <SiteNav />
-      <main className="flex-1 pt-32 md:pt-40 pb-24 px-6">
+      <main className="flex-1 pt-12 md:pt-[72px] pb-24 px-6">
         <div className="max-w-[860px] mx-auto">
           {/* Hero */}
           <header className="mb-14 text-center">
-            <div className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-pb-peach-600 mb-3">
+            <div className="text-[13px] font-semibold text-pb-peach-700 mb-3">
               {page.eyebrow}
             </div>
-            <h1 className="font-display text-[clamp(30px,5vw,46px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-fg mb-4">
-              {page.h1} <span className="italic">{page.h1Accent}</span>
+            <h1 className="font-display text-[clamp(30px,5vw,46px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-ink text-balance mb-4">
+              {page.h1} {page.h1Accent}
             </h1>
-            <p className="text-[15.5px] text-pb-fg-muted leading-relaxed max-w-[600px] mx-auto mb-7">
+            <p className="text-[16px] text-pb-fg-secondary leading-relaxed max-w-[600px] mx-auto mb-7">
               {page.description}
             </p>
-            <div className="flex items-center justify-center gap-4 flex-wrap">
-              <a
-                href={TRIAL_HREF}
-                className="inline-flex items-center h-11 px-7 rounded-full pb-gradient-peach text-white text-[14px] font-semibold shadow-[0_4px_16px_rgba(242,119,73,0.35)] hover:brightness-105 transition"
-              >
-                {TRIAL_LABEL}
-              </a>
-              <Link
-                href="/pricing"
-                className="text-[14px] font-medium text-pb-fg underline underline-offset-4 decoration-pb-border hover:decoration-pb-fg transition"
-              >
-                See pricing
-              </Link>
+            <div className="flex items-center justify-center gap-3 flex-wrap">
+              <PrimaryLink href={TRIAL_HREF}>{TRIAL_LABEL}</PrimaryLink>
+              <OutlineLink href="/pricing">See pricing</OutlineLink>
             </div>
-            <p className="mt-3 text-[12px] text-pb-fg-muted">{RISK_REVERSAL}</p>
+            <p className="mt-4 text-[12.5px] text-pb-fg-muted">{RISK_REVERSAL}</p>
           </header>
 
           {/* Features */}
@@ -127,10 +118,10 @@ export default async function IntegrationPage({
               {page.features.map((f) => (
                 <div
                   key={f.title}
-                  className="rounded-2xl border border-pb-border bg-pb-card shadow-pb-soft p-6"
+                  className="rounded-[10px] border border-pb-border bg-pb-card p-6"
                 >
                   <h2 className="text-[15px] font-semibold text-pb-fg mb-2">{f.title}</h2>
-                  <p className="text-[13.5px] text-pb-fg-muted leading-relaxed">{f.body}</p>
+                  <p className="text-[14px] text-pb-fg-secondary leading-relaxed">{f.body}</p>
                 </div>
               ))}
             </div>
@@ -141,7 +132,7 @@ export default async function IntegrationPage({
           <section aria-labelledby="how-heading" className="mb-14">
             <h2
               id="how-heading"
-              className="font-display text-[24px] font-medium tracking-[-0.015em] text-pb-fg mb-5"
+              className="font-display text-[24px] font-medium tracking-[-0.015em] text-pb-ink mb-5"
             >
               How it works
             </h2>
@@ -150,7 +141,7 @@ export default async function IntegrationPage({
                 <li key={s} className="flex gap-3 text-[15px] text-pb-fg leading-relaxed">
                   <span
                     aria-hidden="true"
-                    className="shrink-0 size-6 rounded-full pb-gradient-peach text-white text-[12px] font-semibold inline-flex items-center justify-center mt-0.5"
+                    className="shrink-0 w-5 font-mono text-[13px] text-pb-fg-muted tnum mt-[3px]"
                   >
                     {i + 1}
                   </span>
@@ -162,7 +153,7 @@ export default async function IntegrationPage({
               Full setup guide:{" "}
               <Link
                 href={`/docs/${page.docsSlug}`}
-                className="underline underline-offset-2 hover:text-pb-fg"
+                className="underline underline-offset-2 decoration-pb-border-control hover:text-pb-peach-600 transition-colors"
               >
                 docs
               </Link>
@@ -178,7 +169,7 @@ export default async function IntegrationPage({
             <section className="mt-12" aria-labelledby="related-heading">
               <h2
                 id="related-heading"
-                className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-pb-fg-muted mb-4"
+                className="text-[13px] font-semibold text-pb-peach-700 mb-4"
               >
                 From the blog
               </h2>
@@ -187,7 +178,7 @@ export default async function IntegrationPage({
                   <li key={r.href}>
                     <Link
                       href={r.href}
-                      className="text-[15px] font-medium text-pb-fg underline underline-offset-4 decoration-pb-border hover:decoration-pb-peach-500 transition"
+                      className="text-[15px] rounded-sm font-semibold text-pb-fg underline underline-offset-4 decoration-pb-border-control hover:text-pb-peach-600 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pb-peach-500 focus-visible:ring-offset-2"
                     >
                       {r.label}
                     </Link>

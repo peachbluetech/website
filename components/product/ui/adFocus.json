@@ -1,0 +1,21 @@
+{
+  "fizzli-big-mood": { "thumb": 63, "tile": 22, "square": 10, "wide": 16 },
+  "fizzli-big-mood-selfie": { "thumb": 55, "tile": 28, "square": 33, "wide": 37 },
+  "fizzli-zero-sugar": { "thumb": 28, "tile": 36, "square": 32, "wide": 82 },
+  "fizzli-would-rebuy": { "thumb": 39, "tile": 0, "square": 6, "wide": 10 },
+  "fizzli-anytime": { "thumb": 57, "tile": 0, "square": 4, "wide": 36 },
+  "fizzli-fave-fizz": { "thumb": 55, "tile": 8, "square": 0, "wide": 7 },
+  "fizzli-summer-carry": { "thumb": 32, "tile": 80, "square": 85, "wide": 89 },
+  "fizzli-fridge-pick": { "thumb": 0, "tile": 38, "square": 60, "wide": 18 },
+  "fizzli-little-ritual": { "thumb": 46, "tile": 50, "square": 46, "wide": 44 },
+  "fizzli-honestly-so-good": { "thumb": 31, "tile": 25, "square": 31, "wide": 18 },
+  "fizzli-obsessed": { "thumb": 60, "tile": 20, "square": 10, "wide": 17 },
+  "fizzli-not-another-soda": { "thumb": 39, "tile": 38, "square": 39, "wide": 22 },
+  "fizzli-3pm-pick-me-up": { "thumb": 50, "tile": 50, "square": 50, "wide": 54 },
+  "fizzli-in-my-tote": { "thumb": 50, "tile": 22, "square": 25, "wide": 17 },
+  "fizzli-story-2": { "thumb": 60, "tile": 6, "square": 18, "wide": 13 },
+  "fizzli-current-lineup": { "thumb": 64, "tile": 20, "square": 23, "wide": 18 },
+  "fizzli-story-1": { "thumb": 57, "tile": 12, "square": 17, "wide": 12 },
+  "fizzli-square-a": { "thumb": 50, "tile": 50, "square": 50, "wide": 9 },
+  "fizzli-square-b": { "thumb": 50, "tile": 50, "square": 50, "wide": 9 }
+}

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { SiteNav } from "@/components/site/SiteNav";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { PeachblueMark } from "@/components/site/PeachblueMark";
+import { OutlineLink, PrimaryLink } from "@/components/site/Button";
 import { TRIAL_HREF, TRIAL_LABEL, RISK_REVERSAL } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -67,51 +68,45 @@ export default function McpPage() {
       <SiteNav />
       <main className="flex-1">
         {/* Hero */}
-        <section className="pt-32 md:pt-40 pb-16 px-6">
+        <section className="pt-12 md:pt-[72px] pb-16 md:pb-20 px-6">
           <div className="max-w-[860px] mx-auto">
-            <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-pb-peach-600 mb-4">
+            <div className="text-[13px] font-semibold text-pb-peach-700 mb-4">
               MCP integration
             </div>
-            <h1 className="font-display text-[clamp(38px,5.6vw,64px)] leading-[1.06] font-medium tracking-[-0.02em] text-pb-fg mb-5">
-              Bring your ad performance <span className="italic">into</span> Claude.
+            <h1 className="font-display text-[clamp(34px,4.4vw,56px)] leading-[1.07] font-medium tracking-[-0.02em] text-pb-ink text-balance mb-5">
+              Bring your ad performance into Claude.
             </h1>
-            <p className="text-[clamp(15px,1.8vw,17.5px)] leading-[1.7] text-pb-fg-muted max-w-[620px] mb-4">
-              Peachblue's MCP server exposes the same 23 tools that power Agent Peach to any MCP
+            <p className="text-[clamp(15px,1.8vw,17.5px)] leading-[1.7] text-pb-fg-secondary max-w-[620px] mb-4">
+              Peachblue&apos;s MCP server exposes the same 23 tools that power Agent Peach to any MCP
               client: Claude Desktop, claude.ai, Cursor, and Claude Code. Rankings, comparisons,
               patterns, fatigue, and risk, over your Meta, TikTok, Google Ads, and Amazon DSP data.
             </p>
-            <p className="text-[14px] leading-[1.7] text-pb-fg-muted max-w-[620px] mb-8">
+            <p className="text-[14px] leading-[1.7] text-pb-fg-secondary max-w-[620px] mb-8">
               Other ad tools ship MCP servers for inspiration libraries or competitor research.
-              Peachblue's is the only creative analytics MCP that serves your own cross-platform
+              Peachblue&apos;s is the only creative analytics MCP that serves your own cross-platform
               performance data, including Amazon DSP.
             </p>
             <div className="flex gap-3 flex-wrap items-center">
-              <a
-                href={TRIAL_HREF}
-                className="inline-flex items-center gap-2 h-12 px-7 rounded-full pb-gradient-peach text-white text-[15px] font-semibold shadow-[0_8px_24px_rgba(242,119,73,0.35)] hover:brightness-105 hover:-translate-y-0.5 transition-all"
-              >
-                {TRIAL_LABEL} &rarr;
-              </a>
-              <Link
-                href="/docs/mcp"
-                className="inline-flex items-center gap-2 h-12 px-7 rounded-full border border-pb-border bg-pb-card text-[15px] font-medium shadow-pb-soft hover:shadow-pb-lift hover:-translate-y-0.5 transition-all"
-              >
-                Setup docs
-              </Link>
+              {/* The arrow is a child, not the arrow prop, so the anchor's text
+                  stays exactly as published (no space before the arrow). */}
+              <PrimaryLink href={TRIAL_HREF}>
+                {TRIAL_LABEL}
+                <span aria-hidden="true">&rarr;</span>
+              </PrimaryLink>
+              <OutlineLink href="/docs/mcp">Setup docs</OutlineLink>
             </div>
             <p className="mt-4 text-[12.5px] text-pb-fg-muted">{RISK_REVERSAL} &middot; MCP included on Pro and up</p>
           </div>
         </section>
 
         {/* What you can ask */}
-        <section className="py-16 px-6 relative">
-          <div className="pointer-events-none absolute inset-0 bg-pb-muted/40" aria-hidden="true" />
-          <div className="max-w-[860px] mx-auto relative">
-            <h2 className="font-display text-[clamp(28px,4vw,44px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-fg mb-3">
+        <section className="py-16 md:py-20 px-6 border-y border-pb-border bg-pb-stone">
+          <div className="max-w-[860px] mx-auto">
+            <h2 className="font-display text-[clamp(28px,3.2vw,38px)] leading-[1.12] font-medium tracking-[-0.015em] text-pb-ink text-balance mb-3">
               Ask in plain language.
             </h2>
-            <p className="text-[14.5px] text-pb-fg-muted leading-relaxed mb-8 max-w-[560px]">
-              Claude calls Peachblue's tools and reasons over the results. Answers match the app,
+            <p className="text-[15px] text-pb-fg-secondary leading-relaxed mb-8 max-w-[560px]">
+              Claude calls Peachblue&apos;s tools and reasons over the results. Answers match the app,
               because they run on the same engine, and every number states the time window it
               came from.
             </p>
@@ -119,12 +114,12 @@ export default function McpPage() {
               {EXAMPLE_QUESTIONS.map((q) => (
                 <div
                   key={q}
-                  className="flex items-center gap-3 rounded-xl border border-pb-border bg-pb-card px-4 py-3 shadow-pb-soft"
+                  className="flex items-center gap-3 rounded-[10px] border border-pb-border bg-pb-card px-4 py-3"
                 >
-                  <div className="size-6 rounded-full pb-gradient-peach flex items-center justify-center shrink-0">
-                    <PeachblueMark size={12} color="#ffffff" />
+                  <div className="size-6 rounded-md bg-pb-peach-50 text-pb-peach-600 flex items-center justify-center shrink-0">
+                    <PeachblueMark size={14} />
                   </div>
-                  <span className="text-[13.5px] text-pb-fg">{q}</span>
+                  <span className="text-[14px] text-pb-fg">{q}</span>
                 </div>
               ))}
             </div>
@@ -134,46 +129,45 @@ export default function McpPage() {
         {/* Setup steps */}
         <section className="py-16 md:py-24 px-6">
           <div className="max-w-[860px] mx-auto">
-            <h2 className="font-display text-[clamp(28px,4vw,44px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-fg mb-8">
-              Connected in <span className="italic">three</span> steps.
+            <h2 className="font-display text-[clamp(28px,3.2vw,38px)] leading-[1.12] font-medium tracking-[-0.015em] text-pb-ink text-balance mb-8">
+              Connected in three steps.
             </h2>
             <div className="grid md:grid-cols-3 gap-5">
               {STEPS.map((s) => (
-                <div key={s.num} className="rounded-2xl border border-pb-border bg-pb-card p-6 shadow-pb-soft">
-                  <div className="size-8 rounded-full pb-gradient-peach text-white text-[12.5px] font-semibold flex items-center justify-center mb-4">
+                <div key={s.num} className="rounded-[10px] border border-pb-border bg-pb-card p-6">
+                  <div className="font-mono text-[13px] text-pb-fg-muted tnum mb-3">
                     {s.num}
                   </div>
                   <h3 className="text-[15px] font-semibold text-pb-fg mb-2">{s.title}</h3>
-                  <p className="text-[13px] leading-relaxed text-pb-fg-muted">{s.desc}</p>
+                  <p className="text-[13.5px] leading-relaxed text-pb-fg-secondary">{s.desc}</p>
                 </div>
               ))}
             </div>
             <p className="mt-6 text-[13px] text-pb-fg-muted">
               Access follows your Peachblue login: workspace scoping, tier gating, and instant
               revocation from the same Settings tab. Full client-by-client instructions are in
-              the <Link href="/docs/mcp" className="underline underline-offset-2 hover:text-pb-fg transition-colors">setup docs</Link>.
+              the <Link href="/docs/mcp" className="underline underline-offset-2 decoration-pb-border-control hover:text-pb-peach-600 transition-colors">setup docs</Link>.
             </p>
           </div>
         </section>
 
         {/* Tool groups */}
-        <section className="py-16 px-6 relative">
-          <div className="pointer-events-none absolute inset-0 bg-pb-muted/40" aria-hidden="true" />
-          <div className="max-w-[860px] mx-auto relative">
-            <h2 className="font-display text-[clamp(28px,4vw,44px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-fg mb-8">
+        <section className="py-16 md:py-20 px-6 border-y border-pb-border bg-pb-stone">
+          <div className="max-w-[860px] mx-auto">
+            <h2 className="font-display text-[clamp(28px,3.2vw,38px)] leading-[1.12] font-medium tracking-[-0.015em] text-pb-ink text-balance mb-8">
               23 tools, five jobs.
             </h2>
             <div className="grid sm:grid-cols-2 gap-4">
               {TOOL_GROUPS.map((g) => (
-                <div key={g.title} className="rounded-2xl border border-pb-border bg-pb-card p-5 shadow-pb-soft sm:last:odd:col-span-2">
+                <div key={g.title} className="rounded-[10px] border border-pb-border bg-pb-card p-5 sm:last:odd:col-span-2">
                   <div className="text-[14.5px] font-semibold text-pb-fg mb-1.5">{g.title}</div>
-                  <p className="text-[13px] text-pb-fg-muted leading-relaxed">{g.desc}</p>
+                  <p className="text-[13.5px] text-pb-fg-secondary leading-relaxed">{g.desc}</p>
                 </div>
               ))}
             </div>
             <p className="mt-6 text-[13px] text-pb-fg-muted">
               Every tool is read-only and scoped to your workspace. See the full list in the{" "}
-              <Link href="/docs/mcp-tools" className="underline underline-offset-2 hover:text-pb-fg transition-colors">
+              <Link href="/docs/mcp-tools" className="underline underline-offset-2 decoration-pb-border-control hover:text-pb-peach-600 transition-colors">
                 MCP tool reference
               </Link>.
             </p>
@@ -183,19 +177,17 @@ export default function McpPage() {
         {/* CTA */}
         <section className="py-20 md:py-28 px-6">
           <div className="max-w-[560px] mx-auto text-center">
-            <h2 className="font-display text-[clamp(30px,4.6vw,52px)] leading-[1.06] font-medium tracking-[-0.015em] text-pb-fg mb-4">
-              Your data, wherever you <span className="italic">think</span>.
+            <h2 className="font-display text-[clamp(28px,3.2vw,38px)] leading-[1.12] font-medium tracking-[-0.015em] text-pb-ink text-balance mb-4">
+              Your data, wherever you think.
             </h2>
-            <p className="text-[14.5px] text-pb-fg-muted leading-relaxed mb-8">
+            <p className="text-[15px] text-pb-fg-secondary leading-relaxed mb-8">
               MCP access is included on Pro and up. Connect a platform, let the first sync land,
               and ask Claude about your own ads.
             </p>
-            <a
-              href={TRIAL_HREF}
-              className="inline-flex items-center gap-2 h-12 px-7 rounded-full pb-gradient-peach text-white text-[15px] font-semibold shadow-[0_8px_24px_rgba(242,119,73,0.35)] hover:brightness-105 hover:-translate-y-0.5 transition-all"
-            >
-              {TRIAL_LABEL} &rarr;
-            </a>
+            <PrimaryLink href={TRIAL_HREF}>
+              {TRIAL_LABEL}
+              <span aria-hidden="true">&rarr;</span>
+            </PrimaryLink>
             <p className="mt-4 text-[12.5px] text-pb-fg-muted">{RISK_REVERSAL}</p>
           </div>
         </section>

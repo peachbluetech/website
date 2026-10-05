@@ -2,6 +2,8 @@ import Link from "next/link";
 import { PeachblueMark } from "./PeachblueMark";
 import { DEMO_HREF, TRIAL_HREF, TRIAL_LABEL } from "@/lib/site";
 
+/* The site's main internal-link block. Every label and href here is
+   deliberate anchor text for search: restyle freely, do not reword. */
 const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
   {
     title: "Product",
@@ -41,42 +43,41 @@ const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
   },
 ];
 
+/* Keyboard focus shows the same peach ring as the nav and the buttons. */
+const LINK_CLASS =
+  "rounded-sm text-pb-fg-secondary hover:text-pb-fg transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pb-peach-700";
+
 export function SiteFooter() {
   return (
-    <footer className="border-t border-pb-border pt-12 pb-8 px-6">
-      <div className="max-w-[1100px] mx-auto">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-10">
-          <div className="col-span-2 md:col-span-1">
+    <footer className="border-t border-pb-border bg-pb-bg px-6 pt-14 pb-10">
+      <div className="max-w-[1200px] mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-[repeat(4,max-content)] md:justify-between lg:grid-cols-[minmax(0,1fr)_repeat(4,max-content)] xl:grid-cols-[1.5fr_repeat(4,minmax(0,1fr))] gap-x-8 lg:gap-x-10 xl:gap-x-8 gap-y-10 mb-12">
+          <div className="col-span-2 md:col-span-4 lg:col-span-1">
             <div className="flex items-center gap-2 mb-3">
-              <div className="size-7 rounded-lg pb-gradient-peach flex items-center justify-center">
+              {/* The logo square: the one gradient on the site. */}
+              <div className="size-7 rounded-lg pb-logo flex items-center justify-center">
                 <PeachblueMark size={16} color="#ffffff" />
               </div>
-              <span className="font-display text-[15px] font-semibold tracking-tight">peachblue</span>
+              <span className="font-display text-[15px] font-semibold tracking-tight text-pb-fg">peachblue</span>
             </div>
-            <p className="text-[12px] text-pb-fg-muted leading-relaxed max-w-[200px]">
+            <p className="text-[14px] leading-[1.55] text-pb-fg-secondary max-w-[260px]">
               Creative intelligence for Meta, TikTok, Google Ads, and Amazon DSP.
             </p>
           </div>
           {COLUMNS.map((col) => (
             <div key={col.title}>
-              <div className="text-[10.5px] font-semibold uppercase tracking-[0.14em] text-pb-fg mb-3">
+              <div className="text-[13px] font-semibold text-pb-fg mb-3.5">
                 {col.title}
               </div>
-              <ul className="space-y-2">
+              <ul className="space-y-3 text-[14px] leading-[1.4]">
                 {col.links.map((l) => (
                   <li key={l.label}>
                     {l.href.startsWith("/") ? (
-                      <Link
-                        href={l.href}
-                        className="text-[12.5px] text-pb-fg-muted hover:text-pb-fg transition-colors"
-                      >
+                      <Link href={l.href} className={LINK_CLASS}>
                         {l.label}
                       </Link>
                     ) : (
-                      <a
-                        href={l.href}
-                        className="text-[12.5px] text-pb-fg-muted hover:text-pb-fg transition-colors"
-                      >
+                      <a href={l.href} className={LINK_CLASS}>
                         {l.label}
                       </a>
                     )}
@@ -86,11 +87,11 @@ export function SiteFooter() {
             </div>
           ))}
         </div>
-        <div className="pt-6 border-t border-pb-border/60 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <div className="text-[12px] text-pb-fg-muted">
+        <div className="pt-6 border-t border-pb-border flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div className="text-[12.5px] text-pb-fg-muted">
             &copy; {new Date().getFullYear()} Peachblue Technologies Inc.
           </div>
-          <div className="text-[12px] text-pb-fg-muted">
+          <div className="text-[12.5px] text-pb-fg-muted">
             Know what ads work, and why.
           </div>
         </div>

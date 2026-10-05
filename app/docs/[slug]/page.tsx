@@ -108,7 +108,7 @@ export default async function DocPage({ params }: { params: Promise<{ slug: stri
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <SiteNav current="docs" />
-      <main className="flex-1 pt-32 md:pt-36 pb-24 px-6">
+      <main className="flex-1 pt-12 md:pt-16 pb-24 px-6">
         <div className="max-w-[1060px] mx-auto lg:grid lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-14">
           <aside className="hidden lg:block">
             <DocsSidebar currentSlug={doc.slug} />
@@ -123,11 +123,11 @@ export default async function DocPage({ params }: { params: Promise<{ slug: stri
                 <span aria-hidden="true" className="mx-2">
                   /
                 </span>
-                <span className="text-pb-peach-600 font-medium">
+                <span className="text-pb-peach-700 font-medium">
                   {DOC_SECTIONS[doc.section].title}
                 </span>
               </nav>
-              <h1 className="font-display text-[clamp(26px,4vw,36px)] leading-[1.12] font-medium tracking-[-0.015em] text-pb-fg mb-3">
+              <h1 className="font-display text-[clamp(26px,4vw,36px)] leading-[1.12] font-medium tracking-[-0.015em] text-pb-ink mb-3">
                 {doc.title}
               </h1>
               <p className="text-[12.5px] text-pb-fg-muted">
@@ -135,7 +135,7 @@ export default async function DocPage({ params }: { params: Promise<{ slug: stri
                 {" · "}
                 <a
                   href={`/docs/${doc.slug}.md`}
-                  className="underline underline-offset-2 hover:text-pb-fg"
+                  className="underline underline-offset-2 decoration-pb-border-control hover:text-pb-peach-600 transition-colors"
                 >
                   View as markdown
                 </a>

@@ -19,7 +19,7 @@ import { useState } from "react";
  *   cost per winner  = T / hit rate
  *
  * Hit-rate value is scarcity-based (v5.1): +10pp means a share of your
- * future winner supply is new — refreshShare = 0.1 / (h + 0.1) — and that
+ * future winner supply is new (refreshShare = 0.1 / (h + 0.1)), and that
  * share of the SCALE budget (spend - testing budget) gets carried by fresh
  * winners instead of fatigued spend, credited at ROAS x FATIGUE_DELTA.
  * Lower current hit rate -> bigger share -> each point worth more.
@@ -63,7 +63,7 @@ function Field({
     <label className="block">
       <div className="flex items-baseline justify-between gap-3 mb-1.5">
         <span className="text-[13.5px] font-semibold text-pb-fg">{label}</span>
-        <span className="text-[14px] font-medium text-pb-fg tnum whitespace-nowrap">
+        <span className="font-mono text-[13.5px] font-medium text-pb-fg tnum whitespace-nowrap">
           {prefix}
           {value.toLocaleString("en-US")}
           {suffix}
@@ -76,24 +76,24 @@ function Field({
         step={step}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full accent-[#F27749]"
+        className="w-full accent-pb-peach-500"
         aria-label={label}
       />
-      <div className="text-[11.5px] text-pb-fg-muted mt-1">{hint}</div>
+      <div className="text-[12px] text-pb-fg-muted mt-1">{hint}</div>
     </label>
   );
 }
 
 function Result({ label, value, note }: { label: string; value: string; note: string }) {
   return (
-    <div className="rounded-2xl border border-pb-border bg-pb-card shadow-pb-soft p-5">
-      <div className="text-[10.5px] font-semibold uppercase tracking-[0.14em] text-pb-fg-muted mb-1.5">
+    <div className="rounded-[10px] border border-pb-border bg-pb-card p-5">
+      <div className="text-[13px] font-medium text-pb-fg-secondary mb-2">
         {label}
       </div>
-      <div className="font-display text-[30px] font-medium tracking-tight text-pb-fg tnum leading-none mb-2">
+      <div className="font-mono text-[26px] font-medium tracking-[-0.02em] text-pb-fg tnum leading-none mb-2.5">
         {value}
       </div>
-      <div className="text-[12.5px] text-pb-fg-muted leading-relaxed">{note}</div>
+      <div className="text-[13px] text-pb-fg-secondary leading-relaxed">{note}</div>
     </div>
   );
 }
@@ -130,7 +130,7 @@ export function CreativeWasteDiagnostic() {
   const roasLiftValue = scaleBudget * ROAS_LIFT;
 
   return (
-    <div className="rounded-3xl border border-pb-border bg-pb-muted/40 p-6 md:p-8">
+    <div className="rounded-[10px] border border-pb-border bg-pb-stone p-5 md:p-8">
       <div className="grid md:grid-cols-2 gap-8 md:gap-10">
         <div className="space-y-6">
           <Field
@@ -173,8 +173,8 @@ export function CreativeWasteDiagnostic() {
             suffix=":1"
           />
 
-          <div className="rounded-xl border border-pb-border bg-pb-card p-4">
-            <p className="text-[12.5px] leading-relaxed text-pb-fg">
+          <div className="rounded-[10px] border border-pb-border bg-pb-card p-4">
+            <p className="text-[13px] leading-relaxed text-pb-fg">
               At this account size, each creative tests with{" "}
               <span className="font-semibold tnum">{usd(perCreative)}</span> before the verdict
               {pinnedTestSpend === null ? (
@@ -206,7 +206,7 @@ export function CreativeWasteDiagnostic() {
                 {pinnedTestSpend !== null && (
                   <button
                     type="button"
-                    className="mt-2 text-[11.5px] font-medium text-pb-peach-600 underline underline-offset-2"
+                    className="mt-2 text-[13px] rounded-sm font-semibold text-pb-fg underline underline-offset-4 decoration-pb-border-control hover:text-pb-peach-600 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pb-peach-500 focus-visible:ring-offset-2"
                     onClick={() => {
                       setPinnedTestSpend(null);
                       setCustomizing(false);
@@ -219,7 +219,7 @@ export function CreativeWasteDiagnostic() {
             ) : (
               <button
                 type="button"
-                className="mt-2 text-[11.5px] font-medium text-pb-fg-muted underline underline-offset-2 hover:text-pb-fg"
+                className="mt-2 text-[13px] rounded-sm font-semibold text-pb-fg underline underline-offset-4 decoration-pb-border-control hover:text-pb-peach-600 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pb-peach-500 focus-visible:ring-offset-2"
                 onClick={() => setCustomizing(true)}
               >
                 My account tests differently

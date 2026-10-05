@@ -16,16 +16,16 @@ export default function DocsIndexPage() {
   return (
     <div className="flex flex-col min-h-screen bg-pb-bg">
       <SiteNav current="docs" />
-      <main className="flex-1 pt-32 md:pt-40 pb-24 px-6">
+      <main className="flex-1 pt-12 md:pt-[72px] pb-24 px-6">
         <div className="max-w-[860px] mx-auto">
           <header className="mb-12">
-            <div className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-pb-fg-muted mb-3">
+            <div className="text-[13px] font-semibold text-pb-peach-700 mb-3">
               Documentation
             </div>
-            <h1 className="font-display text-[clamp(30px,5vw,44px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-fg mb-4">
-              Everything, <span className="italic">documented.</span>
+            <h1 className="font-display text-[clamp(30px,5vw,44px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-ink text-balance mb-4">
+              Everything, documented.
             </h1>
-            <p className="text-[15px] text-pb-fg-muted leading-relaxed max-w-[560px]">
+            <p className="text-[16px] text-pb-fg-secondary leading-relaxed max-w-[560px]">
               Connect your platforms, understand the analysis, and get the most
               out of Peachblue. Every page is also available as raw markdown by
               appending .md to its URL.
@@ -37,7 +37,7 @@ export default function DocsIndexPage() {
               <section key={section} aria-labelledby={`section-${section}`}>
                 <h2
                   id={`section-${section}`}
-                  className="text-[11px] font-semibold uppercase tracking-[0.16em] text-pb-peach-600 mb-4"
+                  className="text-[13px] font-semibold text-pb-peach-700 mb-4"
                 >
                   {title}
                 </h2>
@@ -46,10 +46,10 @@ export default function DocsIndexPage() {
                     <Link
                       key={p.slug}
                       href={`/docs/${p.slug}`}
-                      className="block rounded-2xl border border-pb-border bg-pb-card shadow-pb-soft p-5 hover:shadow-pb-lift transition-shadow"
+                      className="block rounded-[10px] border border-pb-border bg-pb-card p-5 hover:border-pb-border-control transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pb-peach-500 focus-visible:ring-offset-2"
                     >
                       <div className="text-[15px] font-semibold text-pb-fg mb-1.5">{p.navLabel}</div>
-                      <p className="text-[13px] text-pb-fg-muted leading-relaxed">{p.description}</p>
+                      <p className="text-[13.5px] text-pb-fg-secondary leading-relaxed">{p.description}</p>
                     </Link>
                   ))}
                 </div>

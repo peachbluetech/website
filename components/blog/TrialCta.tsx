@@ -1,3 +1,4 @@
+import { PrimaryLink } from "@/components/site/Button";
 import { RISK_REVERSAL, SALES_HREF, TRIAL_HREF, TRIAL_LABEL } from "@/lib/site";
 
 /**
@@ -7,43 +8,30 @@ import { RISK_REVERSAL, SALES_HREF, TRIAL_HREF, TRIAL_LABEL } from "@/lib/site";
  */
 export function TrialCta({ agency = false }: { agency?: boolean }) {
   return (
-    <aside className="mt-14 rounded-3xl border border-pb-border bg-pb-card shadow-pb-soft p-7 md:p-9 relative overflow-hidden">
-      <div
-        className="pointer-events-none absolute inset-0 opacity-60"
-        style={{
-          background:
-            "radial-gradient(60% 80% at 100% 0%, rgba(255,210,187,0.5) 0%, transparent 60%)",
-        }}
-        aria-hidden="true"
-      />
-      <div className="relative">
-        <div className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-pb-fg-muted mb-2">
+    <aside className="mt-14 rounded-[10px] border border-pb-border bg-pb-card p-6 md:p-8">
+      <div>
+        <div className="text-[13px] font-semibold text-pb-peach-700 mb-2">
           Peachblue
         </div>
-        <p className="font-display text-[22px] md:text-[24px] font-medium tracking-[-0.015em] text-pb-fg mb-2">
-          Know what ads work <span className="italic">and why.</span>
+        <p className="font-display text-[22px] md:text-[24px] font-medium tracking-[-0.015em] text-pb-ink mb-2">
+          Know what ads work and why.
         </p>
-        <p className="text-[14.5px] text-pb-fg-muted leading-relaxed mb-5 max-w-[480px]">
+        <p className="text-[15px] text-pb-fg-secondary leading-relaxed mb-5 max-w-[480px]">
           AI creative analysis across Meta, TikTok, Google Ads, and Amazon DSP.
           Your creatives, scored and explained.
         </p>
         <div className="flex flex-wrap items-center gap-4">
-          <a
-            href={TRIAL_HREF}
-            className="inline-flex items-center h-10 px-6 rounded-full pb-gradient-peach text-white text-[13.5px] font-semibold shadow-[0_4px_16px_rgba(242,119,73,0.35)] hover:brightness-105 transition"
-          >
-            {TRIAL_LABEL}
-          </a>
+          <PrimaryLink href={TRIAL_HREF}>{TRIAL_LABEL}</PrimaryLink>
           {agency && (
             <a
               href={SALES_HREF}
-              className="text-[13.5px] font-medium text-pb-fg underline underline-offset-4 decoration-pb-border hover:decoration-pb-fg transition"
+              className="text-[14px] rounded-sm font-semibold text-pb-fg underline underline-offset-4 decoration-pb-border-control hover:text-pb-peach-600 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pb-peach-500 focus-visible:ring-offset-2"
             >
               Talk to us about agency plans
             </a>
           )}
         </div>
-        <p className="mt-3 text-[12px] text-pb-fg-muted">{RISK_REVERSAL}</p>
+        <p className="mt-4 text-[12.5px] text-pb-fg-muted">{RISK_REVERSAL}</p>
       </div>
     </aside>
   );

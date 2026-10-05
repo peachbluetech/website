@@ -7,8 +7,8 @@ import type { TocEntry } from "@/lib/blog";
 export function StickyToc({ entries }: { entries: TocEntry[] }) {
   if (entries.length === 0) return null;
   return (
-    <nav aria-label="Table of contents" className="sticky top-28">
-      <div className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-pb-fg-muted mb-3">
+    <nav aria-label="Table of contents" className="sticky top-24">
+      <div className="text-[13px] font-semibold text-pb-fg mb-3">
         On this page
       </div>
       <ul className="space-y-2 border-l border-pb-border">

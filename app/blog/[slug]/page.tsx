@@ -124,7 +124,7 @@ export default async function BlogPostPage({
       />
       <SiteNav current="blog" />
 
-      <main className="flex-1 pt-32 md:pt-40 pb-24 px-6">
+      <main className="flex-1 pt-12 md:pt-[72px] pb-24 px-6">
         <div className="max-w-[1060px] mx-auto">
           <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_220px] lg:gap-14">
             <article>
@@ -136,15 +136,15 @@ export default async function BlogPostPage({
                   <span aria-hidden="true" className="mx-2">
                     /
                   </span>
-                  <span className="text-pb-peach-600 font-medium">
+                  <span className="text-pb-peach-700 font-medium">
                     {PILLARS[article.pillar].title}
                   </span>
                 </nav>
-                <h1 className="font-display text-[clamp(30px,4.6vw,42px)] leading-[1.1] font-medium tracking-[-0.015em] text-pb-fg mb-4">
+                <h1 className="font-display text-[clamp(30px,4.6vw,42px)] leading-[1.1] font-medium tracking-[-0.015em] text-pb-ink mb-4">
                   {article.h1}
-                  {article.h1Accent ? <span className="italic"> {article.h1Accent}</span> : null}
+                  {article.h1Accent ? <span> {article.h1Accent}</span> : null}
                 </h1>
-                <p className="text-[16.5px] text-pb-fg-muted leading-relaxed mb-5 max-w-[640px]">
+                <p className="text-[16.5px] text-pb-fg-secondary leading-relaxed mb-5 max-w-[640px]">
                   {article.description}
                 </p>
                 <PostMeta article={article} />
@@ -162,7 +162,7 @@ export default async function BlogPostPage({
                   <section className="mt-14" aria-labelledby="related-heading">
                     <h2
                       id="related-heading"
-                      className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-pb-fg-muted mb-4"
+                      className="text-[13px] font-semibold text-pb-peach-700 mb-4"
                     >
                       Keep reading
                     </h2>
@@ -171,7 +171,7 @@ export default async function BlogPostPage({
                         <li key={r.slug}>
                           <Link
                             href={`/blog/${r.slug}`}
-                            className="text-[15px] font-medium text-pb-fg underline underline-offset-4 decoration-pb-border hover:decoration-pb-peach-500 transition"
+                            className="text-[15px] rounded-sm font-semibold text-pb-fg underline underline-offset-4 decoration-pb-border-control hover:text-pb-peach-600 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pb-peach-500 focus-visible:ring-offset-2"
                           >
                             {r.title}
                           </Link>

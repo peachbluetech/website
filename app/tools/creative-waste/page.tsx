@@ -93,16 +93,16 @@ export default function CreativeWastePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <SiteNav />
-      <main className="flex-1 pt-32 md:pt-40 pb-24 px-6">
+      <main className="flex-1 pt-12 md:pt-[72px] pb-24 px-6">
         <div className="max-w-[860px] mx-auto">
           <header className="mb-10 text-center">
-            <div className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-pb-peach-600 mb-3">
+            <div className="text-[13px] font-semibold text-pb-peach-700 mb-3">
               Free tool · For high-volume testers
             </div>
-            <h1 className="font-display text-[clamp(30px,5vw,44px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-fg mb-4">
-              What are losing creatives <span className="italic">costing you?</span>
+            <h1 className="font-display text-[clamp(30px,5vw,44px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-ink text-balance mb-4">
+              What are losing creatives costing you?
             </h1>
-            <p className="text-[15.5px] text-pb-fg-muted leading-relaxed max-w-[620px] mx-auto">
+            <p className="text-[16px] text-pb-fg-secondary leading-relaxed max-w-[620px] mx-auto">
               If you launch new creative every day, most of it will lose. That is
               how testing works. This diagnostic shows what the losers cost, what
               each winner really costs to find, and what a better hit rate is
@@ -115,7 +115,7 @@ export default function CreativeWastePage() {
           <section className="mt-12 max-w-[680px] mx-auto" aria-labelledby="method-heading">
             <h2
               id="method-heading"
-              className="font-display text-[24px] font-medium tracking-[-0.015em] text-pb-fg mb-4"
+              className="font-display text-[24px] font-medium tracking-[-0.015em] text-pb-ink mb-4"
             >
               The math, in the open
             </h2>
@@ -153,7 +153,7 @@ export default function CreativeWastePage() {
           <section className="mt-12 max-w-[680px] mx-auto" aria-labelledby="levers-heading">
             <h2
               id="levers-heading"
-              className="font-display text-[24px] font-medium tracking-[-0.015em] text-pb-fg mb-4"
+              className="font-display text-[24px] font-medium tracking-[-0.015em] text-pb-ink mb-4"
             >
               How you move these numbers
             </h2>

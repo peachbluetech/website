@@ -23,7 +23,7 @@ export function PostMeta({ article }: { article: Article }) {
     <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[13px] text-pb-fg-muted">
       <span className="inline-flex items-center gap-2">
         <span
-          className="size-6 rounded-full pb-gradient-peach inline-flex items-center justify-center text-white text-[11px] font-semibold"
+          className="size-6 rounded-full bg-pb-peach-50 inline-flex items-center justify-center text-pb-peach-700 text-[11px] font-semibold"
           aria-hidden="true"
         >
           {article.byline === "nick" ? "N" : "P"}

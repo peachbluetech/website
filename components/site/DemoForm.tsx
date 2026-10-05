@@ -22,13 +22,13 @@ export function DemoForm({ salesIntent, showIntro = true }: { salesIntent: boole
   const [submitted, setSubmitted] = useState(false);
 
   return (
-    <div className="rounded-2xl border border-pb-border bg-pb-card/80 backdrop-blur-sm p-7 shadow-pb-soft text-left">
+    <div className="rounded-[10px] border border-pb-border bg-pb-card p-6 sm:p-7 text-left">
       {showIntro && (
         <>
-          <h3 className="font-display text-[20px] font-medium tracking-tight text-pb-fg mb-1.5 text-center">
+          <h3 className="font-display text-[20px] font-medium tracking-tight text-pb-ink mb-1.5 text-center">
             {salesIntent ? "Talk to sales" : "Prefer a walkthrough?"}
           </h3>
-          <p className="text-[13.5px] text-pb-fg-muted leading-relaxed mb-5 text-center">
+          <p className="text-[13.5px] text-pb-fg-secondary leading-relaxed mb-5 text-center">
             {salesIntent
               ? "Tell us about your agency and we’ll tailor an Agency plan walkthrough to your client roster."
               : "Leave your details and we’ll set up a guided demo of Peachblue on your own ad data."}
@@ -36,8 +36,8 @@ export function DemoForm({ salesIntent, showIntro = true }: { salesIntent: boole
         </>
       )}
       {submitted ? (
-        <div className="rounded-2xl border border-[#3AA976]/30 bg-[#E6F4EC]/40 p-6 text-center">
-          <div className="text-[15px] font-medium text-[#3AA976]">
+        <div className="rounded-lg border border-pb-good-ring bg-pb-good-bg p-6 text-center">
+          <div className="text-[15px] font-medium text-pb-good-text">
             Thanks. We&apos;ll be in touch{salesIntent ? " about the Agency plan" : " to schedule your demo"} shortly.
           </div>
         </div>
@@ -74,12 +74,12 @@ export function DemoForm({ salesIntent, showIntro = true }: { salesIntent: boole
           className="space-y-3"
         >
           <div className="grid sm:grid-cols-2 gap-3">
-            <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name" className="h-12 w-full rounded-full border border-pb-border bg-pb-card px-5 text-[14px] placeholder:text-pb-fg-muted focus:outline-none focus:border-pb-peach-400 focus:ring-2 focus:ring-pb-peach-100 shadow-pb-soft" />
-            <input type="text" value={company} onChange={(e) => setCompany(e.target.value)} placeholder="Company" className="h-12 w-full rounded-full border border-pb-border bg-pb-card px-5 text-[14px] placeholder:text-pb-fg-muted focus:outline-none focus:border-pb-peach-400 focus:ring-2 focus:ring-pb-peach-100 shadow-pb-soft" />
+            <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name" className="h-11 w-full rounded-lg border border-pb-border-control bg-pb-card px-3.5 text-[14px] text-pb-fg placeholder:text-pb-fg-muted focus:outline-none focus:border-pb-peach-500 focus:ring-2 focus:ring-pb-peach-100" />
+            <input type="text" value={company} onChange={(e) => setCompany(e.target.value)} placeholder="Company" className="h-11 w-full rounded-lg border border-pb-border-control bg-pb-card px-3.5 text-[14px] text-pb-fg placeholder:text-pb-fg-muted focus:outline-none focus:border-pb-peach-500 focus:ring-2 focus:ring-pb-peach-100" />
           </div>
           <div className="grid sm:grid-cols-2 gap-3">
-            <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@company.com" className="h-12 w-full rounded-full border border-pb-border bg-pb-card px-5 text-[14px] placeholder:text-pb-fg-muted focus:outline-none focus:border-pb-peach-400 focus:ring-2 focus:ring-pb-peach-100 shadow-pb-soft" />
-            <select value={spend} onChange={(e) => setSpend(e.target.value)} className="h-12 w-full rounded-full border border-pb-border bg-pb-card px-5 text-[14px] text-pb-fg focus:outline-none focus:border-pb-peach-400 focus:ring-2 focus:ring-pb-peach-100 shadow-pb-soft appearance-none">
+            <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@company.com" className="h-11 w-full rounded-lg border border-pb-border-control bg-pb-card px-3.5 text-[14px] text-pb-fg placeholder:text-pb-fg-muted focus:outline-none focus:border-pb-peach-500 focus:ring-2 focus:ring-pb-peach-100" />
+            <select value={spend} onChange={(e) => setSpend(e.target.value)} className="h-11 w-full rounded-lg border border-pb-border-control bg-pb-card px-3.5 text-[14px] text-pb-fg focus:outline-none focus:border-pb-peach-500 focus:ring-2 focus:ring-pb-peach-100 appearance-none">
             <option value="">Monthly ad spend</option>
             <option value="Under $10k">Under $10k</option>
             <option value="$10k to $50k">$10k to $50k</option>
@@ -87,10 +87,10 @@ export function DemoForm({ salesIntent, showIntro = true }: { salesIntent: boole
             <option value="$250k plus">$250k plus</option>
             </select>
           </div>
-          <textarea value={note} onChange={(e) => setNote(e.target.value)} placeholder={salesIntent ? "Tell us about your client roster" : "Anything specific you want to see? (optional)"} rows={2} className="w-full rounded-2xl border border-pb-border bg-pb-card px-5 py-3 text-[14px] placeholder:text-pb-fg-muted focus:outline-none focus:border-pb-peach-400 focus:ring-2 focus:ring-pb-peach-100 shadow-pb-soft resize-none" />
+          <textarea value={note} onChange={(e) => setNote(e.target.value)} placeholder={salesIntent ? "Tell us about your client roster" : "Anything specific you want to see? (optional)"} rows={2} className="w-full rounded-lg border border-pb-border-control bg-pb-card px-3.5 py-2.5 text-[14px] text-pb-fg placeholder:text-pb-fg-muted focus:outline-none focus:border-pb-peach-500 focus:ring-2 focus:ring-pb-peach-100 resize-none" />
           <input type="text" value={hp} onChange={(e) => setHp(e.target.value)} tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" name="website" />
-          {formError && <p className="text-[12.5px] text-[#D64545] text-center">{formError}</p>}
-          <button type="submit" disabled={sending} className="inline-flex w-full items-center justify-center gap-2 h-12 px-6 rounded-full pb-gradient-peach text-white text-[14px] font-semibold shadow-[0_6px_18px_rgba(242,119,73,0.35)] hover:brightness-105 transition disabled:opacity-60">
+          {formError && <p className="text-[12.5px] text-pb-bad text-center">{formError}</p>}
+          <button type="submit" disabled={sending} className="inline-flex w-full items-center justify-center gap-2 h-11 px-5 rounded-lg bg-pb-peach-500 text-pb-ink-deep text-[15px] font-semibold hover:bg-[color-mix(in_srgb,var(--color-pb-peach-500)_84%,white)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pb-peach-500 focus-visible:ring-offset-2 disabled:opacity-60">
             {sending ? "Sending..." : salesIntent ? "Talk to sales" : "Book a demo"} &rarr;
           </button>
         </form>

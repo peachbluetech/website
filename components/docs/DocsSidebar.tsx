@@ -8,11 +8,11 @@ import { docsBySection } from "@/lib/docs";
 export function DocsSidebar({ currentSlug }: { currentSlug?: string }) {
   const sections = docsBySection();
   return (
-    <nav aria-label="Documentation" className="lg:sticky lg:top-28">
+    <nav aria-label="Documentation" className="lg:sticky lg:top-24">
       <div className="space-y-7">
         {sections.map(({ section, title, pages }) => (
           <div key={section}>
-            <div className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-pb-fg-muted mb-2.5">
+            <div className="text-[13px] font-semibold text-pb-fg mb-2.5">
               {title}
             </div>
             <ul className="space-y-1.5 border-l border-pb-border">

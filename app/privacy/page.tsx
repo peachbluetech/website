@@ -7,13 +7,13 @@ export const metadata = {
 
 export default function PrivacyPage() {
   return (
-    <div className="max-w-[720px] mx-auto px-6 py-20">
-      <Link href="/" className="text-[13px] text-pb-fg-muted hover:text-pb-fg transition-colors mb-8 inline-block">&larr; Back to home</Link>
-      <h1 className="font-display text-[clamp(28px,4vw,36px)] font-medium tracking-tight mb-2">Privacy Policy</h1>
+    <div className="max-w-[720px] mx-auto px-6 pt-12 md:pt-[72px] pb-24">
+      <Link href="/" className="rounded-sm text-[13px] font-semibold text-pb-fg hover:text-pb-peach-600 transition-colors mb-8 inline-block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pb-peach-500 focus-visible:ring-offset-2">&larr; Back to home</Link>
+      <h1 className="font-display text-[clamp(28px,4vw,36px)] font-medium tracking-tight text-pb-ink mb-2">Privacy Policy</h1>
       <p className="text-[13.5px] text-pb-fg-muted mb-10">Effective date: March 13, 2026 · Peachblue Technologies Inc.</p>
 
       <div className="prose-pb">
-        <p>Peachblue Technologies Inc. ("peachblue," "we," "us," or "our") operates the peachblue platform, a creative intelligence and ad performance analysis service. This Privacy Policy describes how we collect, use, store, and protect your information when you use our website and platform.</p>
+        <p>Peachblue Technologies Inc. (&quot;peachblue,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) operates the peachblue platform, a creative intelligence and ad performance analysis service. This Privacy Policy describes how we collect, use, store, and protect your information when you use our website and platform.</p>
 
         <h2>1. Information We Collect</h2>
 
@@ -62,7 +62,7 @@ export default function PrivacyPage() {
           <li>We access your ad platform data <strong>only with your explicit authorization</strong> via OAuth</li>
           <li>Your data is used <strong>solely to provide creative intelligence insights to you</strong>, the account owner</li>
           <li>We do <strong>not</strong> use your ad data to train AI models</li>
-          <li>We do <strong>not</strong> aggregate your data with other customers' data</li>
+          <li>We do <strong>not</strong> aggregate your data with other customers&apos; data</li>
           <li>We do <strong>not</strong> sell, rent, or share your advertising data with any third party for their own purposes</li>
           <li>You can disconnect your ad accounts and request deletion of your data at any time</li>
         </ul>
@@ -109,7 +109,7 @@ export default function PrivacyPage() {
           <li>Complete deletion within 30 days of the request</li>
           <li>Provide a confirmation code and status tracking URL to Meta for your records</li>
         </ul>
-        <p>You can also request data deletion at any time by contacting <a href="mailto:nick@peachblue.io" className="underline">nick@peachblue.io</a>.</p>
+        <p>You can also request data deletion at any time by contacting <a href="mailto:nick@peachblue.io" className="underline underline-offset-2 decoration-pb-border-control hover:text-pb-peach-600 transition-colors">nick@peachblue.io</a>.</p>
 
         <h2>9. Your Rights</h2>
         <p>Depending on your jurisdiction, you may have the right to:</p>
@@ -122,7 +122,7 @@ export default function PrivacyPage() {
           <li><strong>Object</strong> to certain types of processing</li>
         </ul>
         <p>We comply with applicable privacy legislation, including Canada&apos;s Personal Information Protection and Electronic Documents Act (PIPEDA). For users in the European Economic Area, we comply with the General Data Protection Regulation (GDPR). For users in California, we comply with the California Consumer Privacy Act (CCPA).</p>
-        <p>To exercise any of these rights, contact us at <strong><a href="mailto:nick@peachblue.io" className="underline">nick@peachblue.io</a></strong>.</p>
+        <p>To exercise any of these rights, contact us at <strong><a href="mailto:nick@peachblue.io" className="underline underline-offset-2 decoration-pb-border-control hover:text-pb-peach-600 transition-colors">nick@peachblue.io</a></strong>.</p>
 
         <h2>10. Children&apos;s Privacy</h2>
         <p>peachblue is a business-to-business service and is not directed at children under 16. We do not knowingly collect personal information from children.</p>
@@ -132,7 +132,7 @@ export default function PrivacyPage() {
 
         <h2>12. Contact Us</h2>
         <p>If you have questions about this Privacy Policy or how we handle your data, please contact us:</p>
-        <p><strong>Peachblue Technologies Inc.</strong><br /><a href="mailto:nick@peachblue.io" className="underline">nick@peachblue.io</a></p>
+        <p><strong>Peachblue Technologies Inc.</strong><br /><a href="mailto:nick@peachblue.io" className="underline underline-offset-2 decoration-pb-border-control hover:text-pb-peach-600 transition-colors">nick@peachblue.io</a></p>
       </div>
     </div>
   );
