@@ -6,25 +6,33 @@ import { ImageResponse } from "next/og";
  * 1200x630 is the Open Graph standard and what iMessage, Slack, LinkedIn and
  * X's large card all crop to. Square would get letterboxed in most of them.
  *
- * Design goals: legible at Google-thumbnail size (few words, high contrast),
- * on-brand (the V3 ink surface, peach gradient mark, Fraunces serif headline
- * with the italic peach accent). Fraunces is fetched from Google Fonts at
- * render time (the no-User-Agent request returns TTF, which satori can
- * embed); if the fetch fails we fall back to the default sans rather than
+ * The card is the site in small: the eggshell page, the frame of hairline
+ * rails and rules with a dot at each crossing, the logo, the headline in the
+ * display face in black, and the site's one filled navy pill, here carrying
+ * the address. Few words and high contrast, so it stays legible at thumbnail
+ * size.
+ *
+ * Both faces are fetched from Google Fonts at render time (the
+ * no-User-Agent request returns TTF, which satori can embed): the display
+ * face for the headline and the lines, the logo's serif for the wordmark.
+ * If a fetch fails that text falls back to the default sans rather than
  * erroring the image route.
  */
 
 export const OG_SIZE = { width: 1200, height: 630 };
 export const OG_ALT = "Peachblue · The intelligence layer for ad creative";
 
-async function fetchFrauncesTtf(italic: boolean): Promise<ArrayBuffer | null> {
+/* The site's own values (components/site/system.css): the eggshell page,
+   black type, smoke for the quiet line, the hairline, and the navy of the
+   filled pill. */
+const NAVY = "#13214B";
+const LOGO = "linear-gradient(135deg, #FFB48C 0%, #F27749 100%)";
+const PALETTE = { ground: "#FDFCFC", ink: "#000000", soft: "#777169", line: "rgba(0,0,0,0.09)", pill: NAVY, pillInk: "#FFFFFF" } as const;
+type Palette = typeof PALETTE;
+
+async function fetchTtf(family: string): Promise<ArrayBuffer | null> {
   try {
-    const family = italic
-      ? "Fraunces:ital,opsz,wght@1,9..144,500"
-      : "Fraunces:opsz,wght@9..144,500";
-    const css = await (
-      await fetch(`https://fonts.googleapis.com/css2?family=${family}&display=swap`)
-    ).text();
+    const css = await (await fetch(`https://fonts.googleapis.com/css2?family=${family}&display=swap`)).text();
     const url = css.match(/src: url\((.+?)\) format\('(?:truetype|opentype)'\)/)?.[1];
     if (!url) return null;
     return await (await fetch(url)).arrayBuffer();
@@ -33,8 +41,19 @@ async function fetchFrauncesTtf(italic: boolean): Promise<ArrayBuffer | null> {
   }
 }
 
+type Fonts = NonNullable<NonNullable<ConstructorParameters<typeof ImageResponse>[1]>["fonts"]>;
+
+/** The display face at 400 and the wordmark's serif at 600. */
+async function loadFonts(): Promise<{ fonts: Fonts; display: string; serif: string }> {
+  const [display, serif] = await Promise.all([fetchTtf("Zalando+Sans:wght@400"), fetchTtf("Fraunces:opsz,wght@9..144,600")]);
+  const fonts: Fonts = [];
+  if (display) fonts.push({ name: "Zalando Sans", data: display, style: "normal", weight: 400 });
+  if (serif) fonts.push({ name: "Fraunces", data: serif, style: "normal", weight: 600 });
+  return { fonts, display: display ? "Zalando Sans" : "sans-serif", serif: serif ? "Fraunces" : "serif" };
+}
+
 export interface OgCardContent {
-  /** Headline lines; the last one renders italic peach. */
+  /** Headline lines. Give line2 as "" for one headline that wraps on its own. */
   line1?: string;
   line2?: string;
   /** Footer left text. */
@@ -43,13 +62,81 @@ export interface OgCardContent {
   compact?: boolean;
 }
 
-/** Auto-fit: long lines would overflow the 1040px text column at 92px. */
+/** Auto-fit: long lines would overflow the 960px text column at 88px. A
+    headline given as one line (a post title) wraps and is balanced, so it
+    is sized by its whole length. */
 function headlineSize(line1: string, line2: string, compact: boolean): number {
-  if (compact) return 64;
+  if (!line2) {
+    if (line1.length > 60) return 50;
+    if (line1.length > 34) return 60;
+    if (line1.length > 22) return 74;
+    return 88;
+  }
+  if (compact) return 58;
   const longest = Math.max(line1.length, line2.length);
-  if (longest > 24) return 68;
-  if (longest > 18) return 78;
-  return 92;
+  if (longest > 24) return 62;
+  if (longest > 19) return 80;
+  return 88;
+}
+
+/** The frame: two rails, two rules, and a dot in a disc of canvas at each crossing. */
+function Frame({ inset, width, height, dot, c }: { inset: number; width: number; height: number; dot: number; c: Palette }) {
+  const disc = dot * 4;
+  const crossings: [number, number][] = [
+    [inset, inset],
+    [width - inset, inset],
+    [inset, height - inset],
+    [width - inset, height - inset],
+  ];
+  return (
+    <div style={{ position: "absolute", left: 0, top: 0, width, height, display: "flex" }}>
+      <div style={{ position: "absolute", left: inset, top: 0, width: 1, height, backgroundColor: c.line }} />
+      <div style={{ position: "absolute", left: width - inset, top: 0, width: 1, height, backgroundColor: c.line }} />
+      <div style={{ position: "absolute", left: 0, top: inset, width, height: 1, backgroundColor: c.line }} />
+      <div style={{ position: "absolute", left: 0, top: height - inset, width, height: 1, backgroundColor: c.line }} />
+      {crossings.map(([x, y]) => (
+        <div
+          key={`${x}-${y}`}
+          style={{
+            position: "absolute",
+            left: x - disc / 2,
+            top: y - disc / 2,
+            width: disc,
+            height: disc,
+            borderRadius: disc,
+            backgroundColor: c.ground,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <div style={{ width: dot, height: dot, borderRadius: dot, backgroundColor: c.ink }} />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/** The logo tile: the peach square with the mark, at any size. */
+function LogoTile({ size }: { size: number }) {
+  return (
+    <div
+      style={{
+        width: size,
+        height: size,
+        borderRadius: Math.round(size * 0.286),
+        background: LOGO,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <svg width={Math.round(size * 0.6)} height={Math.round(size * 0.6)} viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="18" cy="11" r="5" fill="#ffffff" />
+        <rect x="10.5" y="17" width="3" height="11" rx="1.5" fill="#ffffff" />
+      </svg>
+    </div>
+  );
 }
 
 export async function renderOgCard(content: OgCardContent = {}): Promise<ImageResponse> {
@@ -59,95 +146,79 @@ export async function renderOgCard(content: OgCardContent = {}): Promise<ImageRe
     kicker = "Meta · TikTok · Google Ads · Amazon DSP",
     compact = false,
   } = content;
-  const [regular, italic] = await Promise.all([
-    fetchFrauncesTtf(false),
-    fetchFrauncesTtf(true),
-  ]);
-
-  const fonts: NonNullable<ConstructorParameters<typeof ImageResponse>[1]>["fonts"] = [];
-  if (regular) fonts.push({ name: "Fraunces", data: regular, style: "normal", weight: 500 });
-  if (italic) fonts.push({ name: "Fraunces", data: italic, style: "italic", weight: 500 });
-  const serif = fonts.length > 0 ? "Fraunces" : "sans-serif";
+  const { fonts, display, serif } = await loadFonts();
+  const INSET = 56;
+  const c = PALETTE;
 
   return new ImageResponse(
     (
       <div
         style={{
+          position: "relative",
           width: "100%",
           height: "100%",
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          padding: "72px 84px",
-          backgroundColor: "#13214B",
-          backgroundImage:
-            "radial-gradient(120% 140% at 8% 0%, rgba(59,111,224,0.42) 0%, rgba(59,111,224,0) 58%), linear-gradient(135deg, #1D306B 0%, #13214B 55%, #0C1430 100%)",
-          color: "#F6F8FF",
+          backgroundColor: c.ground,
+          color: c.ink,
+          fontFamily: display,
         }}
       >
-        {/* Logo row */}
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <div
-            style={{
-              width: 96,
-              height: 96,
-              borderRadius: 26,
-              background: "linear-gradient(135deg, #FFB48C 0%, #F27749 100%)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              boxShadow: "0 14px 36px rgba(242,119,73,0.45)",
-            }}
-          >
-            <svg width="58" height="58" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="18" cy="11" r="5" fill="#ffffff" />
-              <rect x="10.5" y="17" width="3" height="11" rx="1.5" fill="#ffffff" />
-            </svg>
-          </div>
-          <div
-            style={{
-              fontFamily: serif,
-              fontSize: 52,
-              fontWeight: 500,
-              marginLeft: 30,
-              letterSpacing: "-0.02em",
-              color: "#F6F8FF",
-            }}
-          >
-            peachblue
-          </div>
-        </div>
+        <Frame inset={INSET} width={OG_SIZE.width} height={OG_SIZE.height} dot={6} c={c} />
 
-        {/* Headline */}
         <div
           style={{
+            position: "absolute",
+            left: INSET,
+            top: INSET,
+            width: OG_SIZE.width - INSET * 2,
+            height: OG_SIZE.height - INSET * 2,
             display: "flex",
             flexDirection: "column",
-            fontFamily: serif,
-            fontSize: headlineSize(line1, line2, compact),
-            fontWeight: 500,
-            lineHeight: 1.08,
-            letterSpacing: "-0.025em",
-            maxWidth: 1040,
-          }}
-        >
-          <span>{line1}</span>
-          <span style={{ fontStyle: "italic", color: "#FF9466" }}>{line2}</span>
-        </div>
-
-        {/* Platform line */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
             justifyContent: "space-between",
-            fontSize: 27,
-            color: "#A9B7DD",
+            padding: "52px 64px 48px",
           }}
         >
-          <div style={{ display: "flex", whiteSpace: "nowrap" }}>{kicker}</div>
-          <div style={{ display: "flex", fontWeight: 600, color: "#F6F8FF", whiteSpace: "nowrap", marginLeft: 40 }}>
-            peachblue.io
+          {/* Logo row */}
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <LogoTile size={60} />
+            <div style={{ display: "flex", fontFamily: serif, fontSize: 40, fontWeight: 600, marginLeft: 18, letterSpacing: "-0.025em" }}>peachblue</div>
+          </div>
+
+          {/* Headline */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              fontSize: headlineSize(line1, line2, compact),
+              fontWeight: 400,
+              lineHeight: 1.08,
+              letterSpacing: "-0.025em",
+              maxWidth: 960,
+            }}
+          >
+            <div style={{ display: "flex", textWrap: "balance" }}>{line1}</div>
+            {line2 ? <div style={{ display: "flex" }}>{line2}</div> : null}
+          </div>
+
+          {/* Platform line and the address */}
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <div style={{ display: "flex", whiteSpace: "nowrap", fontSize: 25, color: c.soft }}>{kicker}</div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                height: 52,
+                padding: "0 24px",
+                marginLeft: 40,
+                borderRadius: 26,
+                backgroundColor: c.pill,
+                color: c.pillInk,
+                fontSize: 23,
+                whiteSpace: "nowrap",
+              }}
+            >
+              peachblue.io
+            </div>
           </div>
         </div>
       </div>
@@ -165,66 +236,40 @@ export const OG_SQUARE_SIZE = { width: 1200, height: 1200 };
  * there for the larger surfaces that also accept a square.
  */
 export async function renderSquareCard(): Promise<ImageResponse> {
-  const regular = await fetchFrauncesTtf(false);
-  const fonts: NonNullable<ConstructorParameters<typeof ImageResponse>[1]>["fonts"] = [];
-  if (regular) fonts.push({ name: "Fraunces", data: regular, style: "normal", weight: 500 });
-  const serif = fonts.length > 0 ? "Fraunces" : "sans-serif";
+  const { fonts, display, serif } = await loadFonts();
+  const { width, height } = OG_SQUARE_SIZE;
+  const c = PALETTE;
 
   return new ImageResponse(
     (
       <div
         style={{
+          position: "relative",
           width: "100%",
           height: "100%",
           display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "#13214B",
-          backgroundImage:
-            "radial-gradient(120% 140% at 8% 0%, rgba(59,111,224,0.42) 0%, rgba(59,111,224,0) 58%), linear-gradient(135deg, #1D306B 0%, #13214B 55%, #0C1430 100%)",
-          color: "#F6F8FF",
+          backgroundColor: c.ground,
+          color: c.ink,
+          fontFamily: display,
         }}
       >
+        <Frame inset={88} width={width} height={height} dot={8} c={c} />
         <div
           style={{
-            width: 400,
-            height: 400,
-            borderRadius: 108,
-            background: "linear-gradient(135deg, #FFB48C 0%, #F27749 100%)",
+            position: "absolute",
+            left: 0,
+            top: 0,
+            width,
+            height,
             display: "flex",
+            flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            boxShadow: "0 30px 80px rgba(242,119,73,0.45)",
           }}
         >
-          <svg width="240" height="240" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="18" cy="11" r="5" fill="#ffffff" />
-            <rect x="10.5" y="17" width="3" height="11" rx="1.5" fill="#ffffff" />
-          </svg>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            fontFamily: serif,
-            fontSize: 116,
-            fontWeight: 500,
-            letterSpacing: "-0.02em",
-            marginTop: 72,
-          }}
-        >
-          peachblue
-        </div>
-        <div
-          style={{
-            display: "flex",
-            fontFamily: serif,
-            fontSize: 42,
-            color: "#A9B7DD",
-            marginTop: 20,
-          }}
-        >
-          The intelligence layer for ad creative
+          <LogoTile size={400} />
+          <div style={{ display: "flex", fontFamily: serif, fontSize: 116, fontWeight: 600, letterSpacing: "-0.025em", marginTop: 72 }}>peachblue</div>
+          <div style={{ display: "flex", fontSize: 42, color: c.soft, marginTop: 24 }}>The intelligence layer for ad creative</div>
         </div>
       </div>
     ),
