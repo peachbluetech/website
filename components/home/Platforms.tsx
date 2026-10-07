@@ -4,7 +4,7 @@ import { MonoMark, PLATFORM_MARKS } from "./Marks";
 import { PACING_CAPTION } from "@/components/product/reports";
 import { FLIGHTS, money, type Flight } from "@/components/product/reports/data";
 import { PaceChip, ProgressBar } from "@/components/product/reports/parts";
-import { Cell, Cells, Inner, Pill, Shot, T, TONE, cx } from "@/components/site/parts";
+import { ArrowNE, Cell, Cells, Inner, Shot, T, TONE, TextLink, cx } from "@/components/site/parts";
 
 /* Platforms (#platforms): the row that closes "For performance teams"
    and the target of the nav's Platforms link. Rendered by
@@ -16,12 +16,12 @@ import { Cell, Cells, Inner, Pill, Shot, T, TONE, cx } from "@/components/site/p
    - Left: one paragraph, not a heading, set as a row title over its
      line: the strong "Amazon DSP, included." at Inter
      24/32 in ink, weight 400, then the rest of the sentence at 16/24 in
-     smoke. 32px under it the four integration links as white pills,
-     two across and two down and all one width: each one anchor holding
-     the platform's one colour mark in ink (the site holds one colour
-     glyphs only) and the label. Meta keeps both of its marks. A white
-     pill is the system's shape for a link, so all four read as things
-     to press, and none carries an arrow.
+     smoke. 32px under it the four integration links, two across on a
+     44px pitch: each one anchor holding a 28px white tile with the
+     platform's one colour mark in ink (the site holds one colour
+     glyphs only), the label, and the small north-east arrow the page's
+     other link rows end on, in smoke. Meta keeps both of its marks. All
+     four carry the same arrow, so all four read as links.
    - Right: one white inner card with three rows of the product's DSP
      flight pacing, whole, and under it the published caption. */
 
@@ -29,22 +29,28 @@ import { Cell, Cells, Inner, Pill, Shot, T, TONE, cx } from "@/components/site/p
 
 /* The marks for link i are PLATFORM_MARKS[i].marks (the same four
    platforms in the same order). The anchor's text is the label alone:
-   the marks are decoration, and the Amazon mark's letter is generated
-   content. The copy flags an arrow on Amazon DSP; it is not drawn, so
-   the four pills are alike. */
+   the marks and the arrow are decoration, and the Amazon tile's letter
+   is generated content. The copy flags an arrow on Amazon DSP only; the
+   page gives every link the same one. Under the pointer the label goes
+   to smoke and the arrow to ink; the marks stay ink. */
 function IntegrationLinks() {
   return (
     <ul className="el-platforms-links">
       {PLATFORMS_CALLOUT.links.map((link, i) => (
         <li key={link.href}>
-          <Pill href={link.href} variant="outline" className="el-platforms-link">
+          <TextLink href={link.href} className="el-body-sm el-platforms-link">
             <span aria-hidden="true" className="el-platforms-marks">
               {PLATFORM_MARKS[i].marks.map((mark) => (
-                <MonoMark key={mark} mark={mark} size={16} />
+                <span key={mark} className="el-platforms-tile">
+                  <MonoMark mark={mark} size={16} />
+                </span>
               ))}
             </span>
-            <span>{link.label}</span>
-          </Pill>
+            <span className="el-platforms-name">{link.label}</span>
+            <span className="el-platforms-go">
+              <ArrowNE />
+            </span>
+          </TextLink>
         </li>
       ))}
     </ul>

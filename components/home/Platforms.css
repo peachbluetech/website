@@ -15,36 +15,71 @@
   margin-top: 16px;
 }
 
-/* The four links: white pills two across and two down, 8px apart as
-   pills are in every group. The grid shrinks to its content and its two
-   columns share it, so all four pills are as wide as the widest and the
-   block is the same shape at every width, a phone included. */
+/* The four links: two across, 28px rows 16px apart (a 44px pitch). The
+   two columns are equal wherever both fit; where the half is too narrow
+   for that (a phone under about 380) the second is as wide as "Amazon
+   DSP" with its arrow and the first takes the rest. */
 .el-platforms-links {
-  display: inline-grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(max-content, 1fr));
+  gap: 16px var(--el-gap-grid);
   margin-top: 32px;
 }
 .el-platforms-links > li {
-  display: grid;
+  display: flex;
   min-width: 0;
 }
-/* One pill: the mark or marks, 8px, the label at 15/22, from the left.
-   It is 4px tighter on the side of the mark, which carries its own air. */
+/* One anchor: the tiles, 8px, the label at 15/22, then its arrow 6px on.
+   Its box is 44px tall for the finger and takes no more room than its
+   28px tiles. */
 .el-platforms .el-platforms-link {
-  justify-content: flex-start;
+  display: flex;
+  align-items: center;
   gap: 8px;
-  padding-inline: 14px 18px;
-  font-size: 15px;
-  line-height: 22px;
+  margin-block: -8px;
+  padding-block: 8px;
+  white-space: nowrap;
 }
-/* The marks are ink and stay ink under the pointer. */
+/* The label goes to smoke on keyboard focus too, as under the pointer. */
+.el-platforms .el-platforms-link:focus-visible {
+  color: var(--el-smoke);
+}
 .el-platforms-marks {
   display: inline-flex;
   flex: none;
+  gap: 4px;
+}
+/* A mark's tile: white, 8px corners, a 1px inner ring (the image tile's
+   ring token). The mark is ink and stays ink under the pointer. */
+.el-platforms-tile {
+  display: flex;
+  flex: none;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--el-r-tag);
+  background: var(--el-white);
+  box-shadow: var(--el-tile-ring);
   color: var(--el-ink);
+}
+/* The arrow every link ends on: the link rows' own small north-east
+   arrow, in smoke at rest, 2px closer than the gap so it belongs to the
+   word. It goes to ink when the label goes to smoke. */
+.el-platforms-go {
+  display: inline-flex;
+  flex: none;
+  margin-left: -2px;
+  color: var(--el-smoke);
+  transition: color var(--el-t-fast) var(--el-ease);
+}
+.el-platforms .el-platforms-link:focus-visible .el-platforms-go {
+  color: var(--el-ink);
+}
+@media (hover: hover) {
+  .el-platforms .el-platforms-link:hover .el-platforms-go {
+    color: var(--el-ink);
+  }
 }
 
 /* The pacing card: three rows on stone hairlines. */
@@ -85,6 +120,10 @@
   grid-area: bar;
 }
 @media (max-width: 767.98px) {
+  /* A phone has no room for the grid's 48px gap between the columns. */
+  .el-platforms-links {
+    column-gap: 16px;
+  }
   .el-platforms .el-platforms-card {
     padding: 2px 16px;
   }
