@@ -13,11 +13,13 @@ import { cx } from "./cx";
    The image it requests is a resized copy of the creative (see adImage.ts),
    chosen with the size prop: "sm" for a square box up to 64px wide, "md"
    (the default) for anything up to about 280px wide, "wide" for a 16:9 box
-   wider than that, "full" for the original file. Pass the original path;
+   wider than that, "hero" for a page's one large first-screen image (a
+   lighter whole copy, for a box up to 224px wide), "full" for the original
+   file. Pass the original path;
    the copy is derived from it.
 
    Where the crop sits. "sm" and "wide" are files already cut at the
-   creative's focus, so they are painted centred. "md" and "full" hold the
+   creative's focus, so they are painted centred. "md", "hero" and "full" hold the
    whole creative, and a square, 4:5 or 16:9 box positions them at the
    creative's focus for that shape (adFocus, from adFocus.json) instead of
    the centre, so the box shows the can and the person, with the headline
@@ -96,7 +98,7 @@ export function AdThumb({
   const url = original ? adImage(original, size) : null;
   const [w, h] = RATIO_SIZE[ratio];
   const shape = RATIO_SHAPE[ratio];
-  const whole = size === "md" || size === "full";
+  const whole = size === "md" || size === "hero" || size === "full";
   const focus = original && shape && whole && fit === "cover" ? adFocus(original, shape) : undefined;
   return (
     <div className={cx("relative overflow-hidden rounded-xl bg-pb-muted", RATIO_CLASS[ratio], className)}>

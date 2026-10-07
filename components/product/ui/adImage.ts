@@ -1,7 +1,7 @@
 /* Resized variants of the creative images in /public/ads, and where each
    crop of a creative sits.
 
-   Every original (/ads/<name>.jpg or .png) has three WebP siblings, so a
+   Every original (/ads/<name>.jpg or .png) has four WebP siblings, so a
    36px thumbnail does not download a full-size file. The sample account's
    originals are 1080 by 1920; its one square cut is 1080 by 1080.
 
@@ -19,6 +19,11 @@
                                  creative's "wide" focus. For 16:9 slots
                                  wider than 280px, which only ever paint
                                  that band.
+     hero  /ads/hero/<name>.webp 420px wide at the original aspect ratio:
+                                 a lighter whole copy for a page's one large
+                                 first-screen image, in a box up to 224px
+                                 wide. It is what a phone fetches before the
+                                 page counts as loaded, so it is kept small.
      full  the original file, untouched.
 
    Focus. A 9:16 creative carries its headline in the top or the bottom
@@ -43,7 +48,7 @@
    - sm and wide are cut at their focus by the script that writes them
      (make-ad-variants.py reads the same JSON), so a painter shows them
      with the default centred object-position and nothing to restate.
-   - md and full hold the whole creative, so the painter positions them
+   - md, hero and full hold the whole creative, so the painter positions them
      with adFocus(): AdThumb does it for its own boxes, a direct img passes
      the result as its object-position.
 
@@ -52,7 +57,7 @@
    No directive and no JSX, so sample.ts and client code can import it. */
 import FOCUS from "./adFocus.json";
 
-export type AdImageSize = "sm" | "md" | "wide" | "full";
+export type AdImageSize = "sm" | "md" | "wide" | "hero" | "full";
 export type AdShape = "thumb" | "tile" | "square" | "wide";
 
 const ORIGINAL = /^\/ads\/([^/]+)\.(?:jpe?g|png)$/;

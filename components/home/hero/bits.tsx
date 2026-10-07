@@ -127,7 +127,7 @@ export function TagText({ tag, className, style }: { tag: AdTag; className?: str
 
 /** The winning ad, as wide as the class it is given makes it, with the three tags' marks on it.
     - The frame is the hero's own (FRAME in ./data): 2 by 3, from just over the headline to just under the can, so both are whole, because the hero is the one place where the whole idea of the ad has to read. The corners are the 8px of a picture inside a white card.
-    - `priority`: the page's one large eager image.
+    - `priority`: the page's one large eager image. It asks for the "hero" copy of the ad (420px wide), which covers this box at every size it takes and is the lightest whole copy.
     - The marks: each tag's mark stands at its point on the ad, with a hairline from it to the ad's right edge. The piece of hairline past the edge, and the tag itself, are the caller's: the same `top` as the mark (the point's `y` percent of the ad's height, rounded to a whole pixel as the mark's is) puts a tag level with it. */
 export function Ad({ priority = false, className }: { priority?: boolean; className?: string }) {
   /* The whole 9:16 creative ("portrait", which has no focus of its own)
@@ -137,7 +137,7 @@ export function Ad({ priority = false, className }: { priority?: boolean; classN
   return (
     <div className={cx("el-hs-ad el-hs-ad--hero", className)} style={framing}>
       <Tile small>
-        <AdThumb imageUrl={AD.image} ratio="portrait" size="md" priority={priority} />
+        <AdThumb imageUrl={AD.image} ratio="portrait" size="hero" priority={priority} />
       </Tile>
       {TAGS.map((tag) => (
         <Mark key={tag.key} at={tag.hero} />

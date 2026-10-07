@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Resized WebP variants of the mock ad creatives in public/ads.
 
-For every JPEG or PNG directly under public/ads this writes three files:
+For every JPEG or PNG directly under public/ads this writes four files:
 
   public/ads/sm/<stem>.webp   the square thumbnail, 128 by 128, cut at the
                               creative's "thumb" focus. Covers square slots
@@ -15,6 +15,11 @@ For every JPEG or PNG directly under public/ads this writes three files:
                               cut at the creative's "wide" focus. For 16:9
                               slots wider than 280px, which show only that
                               band.
+  public/ads/hero/<stem>.webp 420px wide at the file's own aspect ratio, a
+                              lighter whole copy for a page's one large
+                              first-screen image (a box up to 224px wide):
+                              it is the largest thing a phone has to fetch
+                              before the page counts as loaded.
 
 Focus. The creatives carry their headline in the top or the bottom third,
 so a crop about the centre cuts it in half. Where each crop sits is written
@@ -50,11 +55,13 @@ from PIL import Image
 
 SM_SIDE = 128
 MD_WIDTH = 560
+HERO_WIDTH = 420
 WIDE_RATIO = 9 / 16  # height over width
 FOCUS_TABLE = os.path.join("components", "product", "ui", "adFocus.json")
 SM_QUALITY = 80
 MD_QUALITY = 75
 WIDE_QUALITY = 75
+HERO_QUALITY = 68
 # A source that is already small is painted enlarged, so it gets a gentler
 # quality setting: compression marks would be magnified with it.
 NATIVE_QUALITY = 88
@@ -87,7 +94,8 @@ def main(repo):
     os.makedirs(os.path.join(ads, "sm"), exist_ok=True)
     os.makedirs(os.path.join(ads, "md"), exist_ok=True)
     os.makedirs(os.path.join(ads, "wide"), exist_ok=True)
-    totals = [0, 0, 0, 0]
+    os.makedirs(os.path.join(ads, "hero"), exist_ok=True)
+    totals = [0, 0, 0, 0, 0]
     for name in sorted(os.listdir(ads)):
         stem, ext = os.path.splitext(name)
         if ext.lower() not in (".jpg", ".jpeg", ".png"):
@@ -111,13 +119,21 @@ def main(repo):
         wide = window(im, WIDE_RATIO, focus.get("wide", 50))
         wide_bytes = save(wide, os.path.join(ads, "wide", stem + ".webp"), WIDE_QUALITY if w > MD_WIDTH else NATIVE_QUALITY)
 
+        if w > HERO_WIDTH:
+            hero = im.resize((HERO_WIDTH, round(h * HERO_WIDTH / w)), Image.LANCZOS)
+            hero_bytes = save(hero, os.path.join(ads, "hero", stem + ".webp"), HERO_QUALITY)
+        else:
+            hero = im
+            hero_bytes = save(hero, os.path.join(ads, "hero", stem + ".webp"), NATIVE_QUALITY)
+
         orig = os.path.getsize(src)
-        totals = [totals[0] + orig, totals[1] + sm_bytes, totals[2] + md_bytes, totals[3] + wide_bytes]
+        totals = [totals[0] + orig, totals[1] + sm_bytes, totals[2] + md_bytes, totals[3] + wide_bytes, totals[4] + hero_bytes]
         print(
             f"{name:34} {w}x{h} {orig:7d}  sm {sm.size[0]}x{sm.size[1]} {sm_bytes:5d}"
             f"  md {md.size[0]}x{md.size[1]} {md_bytes:6d}  wide {wide.size[0]}x{wide.size[1]} {wide_bytes:6d}"
+            f"  hero {hero.size[0]}x{hero.size[1]} {hero_bytes:6d}"
         )
-    print(f"{'total':34} {'':9} {totals[0]:7d}  sm {'':7} {totals[1]:5d}  md {'':7} {totals[2]:6d}  wide {'':7} {totals[3]:6d}")
+    print(f"{'total':34} {'':9} {totals[0]:7d}  sm {'':7} {totals[1]:5d}  md {'':7} {totals[2]:6d}  wide {'':7} {totals[3]:6d}  hero {'':7} {totals[4]:6d}")
 
 
 if __name__ == "__main__":

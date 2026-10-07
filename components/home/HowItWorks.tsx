@@ -92,7 +92,7 @@ function Analyze() {
   return (
     <div className="el-how-read">
       <Tile small className="el-how-read-ad">
-        <AdThumb imageUrl={HERO_CREATIVE.image} ratio="wide" size="wide" />
+        <AdThumb imageUrl={HERO_CREATIVE.image} ratio="wide" size="md" />
       </Tile>
       <div className="el-how-read-lines">
         {READ.map(([label, value]) => (
