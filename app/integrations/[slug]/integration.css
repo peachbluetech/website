@@ -1,0 +1,135 @@
+/* The platform pages' own rules (page.tsx and picture.tsx beside this
+   file). Classes are .el-integration-*. The shared system is
+   components/site/system.css and kit.css, which also holds the
+   picture's panel (.el-peek): nothing of them is restated here.
+   Colours, radii and distances are the system's tokens. */
+
+/* ── The line above the title ─────────────────────────────────────
+   The platform's mark, 10px, the eyebrow. A mark stands in a 28px white
+   tile with 8px corners and a 1px inner ring, as the homepage's platform
+   links show it, in ink. The tile gives back what it has over the
+   eyebrow's trimmed height, so the line is still 28px over the title. */
+.el-integration-kicker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.el-integration-marks {
+  display: inline-flex;
+  flex: none;
+  gap: 4px;
+}
+.el-integration-mark {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin-block: -8.5px;
+  border-radius: var(--el-r-tag);
+  background: var(--el-white);
+  box-shadow: var(--el-tile-ring);
+  color: var(--el-ink);
+}
+
+/* ── What it does ─────────────────────────────────────────────────
+   A capability's sentence keeps a measure it can be read at where a
+   cell is half the frame. */
+.el-integration-body {
+  max-width: 440px;
+}
+
+/* The line under the cells (the plan the platform is on) keeps a
+   measure it can be read at, the same one the line under the three
+   steps has on /mcp. */
+.el-integration-plan {
+  max-width: 760px;
+}
+
+/* ── How it works ─────────────────────────────────────────────────
+   The line that points at the setup guide, 40px under the last step:
+   as far as a row's text is from the next row's, so it reads as a note
+   on the list and not as the last step's second line. */
+.el-integration-setup {
+  margin-top: 40px;
+}
+
+/* ── The picture: library tiles ───────────────────────────────────
+   One row of the library's tiles at their own 276px, 16px apart. The
+   window shows as many of them as the panel has room for, each whole,
+   and the panel's foot cuts them in the white under their figures (a
+   tile is 448 tall and the window shows 440 of it), so the row runs off
+   the foot as the window does.
+     panel from 1100px   four tiles (1152)
+     820 to 1100         three (860)
+     444 to 820          two (568)
+     under 444           a phone: the first tile and the edge of the
+                         second, which the panel's right edge cuts */
+.el-integration-tiles {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 276px;
+  column-gap: 16px;
+}
+.el-integration-peek--tiles .el-peek-window {
+  --el-peek-w: 1152;
+  --el-peek-h: 440;
+}
+/* The shorter cut: in the white under the tiles' names (which end at
+   356 of a tile's own px; the pills start at 362). */
+.el-integration-peek--names .el-peek-window {
+  --el-peek-h: 359;
+}
+@container el-peek (max-width: 1099.98px) {
+  .el-integration-peek--tiles .el-peek-window {
+    --el-peek-w: 860;
+  }
+}
+@container el-peek (max-width: 819.98px) {
+  .el-integration-peek--tiles .el-peek-window {
+    --el-peek-w: 568;
+  }
+}
+@container el-peek (max-width: 443.98px) {
+  .el-integration-peek--tiles .el-peek-window {
+    --el-peek-w: 372;
+  }
+}
+
+/* ── The picture: the agency's flights ────────────────────────────
+   From 780px of panel the product's flight table, 760 wide: its head
+   and four flights, cut on the rule under the fourth. Under that the
+   same flights as rows, which bring their own padding, so the window
+   has no white of its own: four rows of 68px, cut on the rule under the
+   fourth. */
+.el-integration-peek--flights .el-peek-window {
+  --el-peek-w: 760;
+  --el-peek-h: 285;
+}
+.el-integration-peek--flights .el-integration-rows {
+  display: none;
+}
+@container el-peek (max-width: 779.98px) {
+  .el-integration-peek--flights .el-integration-table {
+    display: none;
+  }
+  .el-integration-peek--flights .el-integration-rows {
+    display: block;
+  }
+  .el-peek.el-integration-peek--flights .el-peek-window {
+    --el-peek-pad: 0px;
+    --el-peek-w: 520;
+    --el-peek-h: 272;
+  }
+}
+@container el-peek (max-width: 559.98px) {
+  .el-peek.el-integration-peek--flights .el-peek-window {
+    --el-peek-w: 420;
+  }
+}
+@container el-peek (max-width: 439.98px) {
+  .el-peek.el-integration-peek--flights .el-peek-window {
+    --el-peek-w: 318;
+  }
+}

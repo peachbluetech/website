@@ -1,6 +1,13 @@
-import Link from "next/link";
-import { PeachblueMark } from "./PeachblueMark";
 import { DEMO_HREF, TRIAL_HREF, TRIAL_LABEL } from "@/lib/site";
+import { Logo, MEDIUM, Shell, T, TONE, TextLink, cx } from "./parts";
+
+/* The site footer, the same on every page: the tagline, four column
+   titles (as divs), sixteen links, the computed-year copyright line and
+   the closing line.
+
+   On the canvas, outside the rails: no fill and no border of its own.
+   Titles are 13/18 at 500 in smoke; links are 14/21 at 500 in ink on a
+   28px pitch and go to smoke under the pointer. */
 
 /* The site's main internal-link block. Every label and href here is
    deliberate anchor text for search: restyle freely, do not reword. */
@@ -43,59 +50,33 @@ const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
   },
 ];
 
-/* Keyboard focus shows the same peach ring as the nav and the buttons. */
-const LINK_CLASS =
-  "rounded-sm text-pb-fg-secondary hover:text-pb-fg transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pb-peach-700";
-
 export function SiteFooter() {
   return (
-    <footer className="border-t border-pb-border bg-pb-bg px-6 pt-14 pb-10">
-      <div className="max-w-[1200px] mx-auto">
-        <div className="grid grid-cols-2 md:grid-cols-[repeat(4,max-content)] md:justify-between lg:grid-cols-[minmax(0,1fr)_repeat(4,max-content)] xl:grid-cols-[1.5fr_repeat(4,minmax(0,1fr))] gap-x-8 lg:gap-x-10 xl:gap-x-8 gap-y-10 mb-12">
-          <div className="col-span-2 md:col-span-4 lg:col-span-1">
-            <div className="flex items-center gap-2 mb-3">
-              {/* The logo square: the one gradient on the site. */}
-              <div className="size-7 rounded-lg pb-logo flex items-center justify-center">
-                <PeachblueMark size={16} color="#ffffff" />
-              </div>
-              <span className="font-display text-[15px] font-semibold tracking-tight text-pb-fg">peachblue</span>
-            </div>
-            <p className="text-[14px] leading-[1.55] text-pb-fg-secondary max-w-[260px]">
-              Creative intelligence for Meta, TikTok, Google Ads, and Amazon DSP.
-            </p>
+    <Shell as="footer" className="el-footer">
+      <div className="el-footer-grid">
+        <div className="el-footer-brand">
+          <div className="el-logo">
+            <Logo />
           </div>
-          {COLUMNS.map((col) => (
-            <div key={col.title}>
-              <div className="text-[13px] font-semibold text-pb-fg mb-3.5">
-                {col.title}
-              </div>
-              <ul className="space-y-3 text-[14px] leading-[1.4]">
-                {col.links.map((l) => (
-                  <li key={l.label}>
-                    {l.href.startsWith("/") ? (
-                      <Link href={l.href} className={LINK_CLASS}>
-                        {l.label}
-                      </Link>
-                    ) : (
-                      <a href={l.href} className={LINK_CLASS}>
-                        {l.label}
-                      </a>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          <p className={cx(T.ui, TONE.smoke, "el-balance el-footer-tagline")}>Creative intelligence for Meta, TikTok, Google Ads, and Amazon DSP.</p>
         </div>
-        <div className="pt-6 border-t border-pb-border flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-          <div className="text-[12.5px] text-pb-fg-muted">
-            &copy; {new Date().getFullYear()} Peachblue Technologies Inc.
+        {COLUMNS.map((col) => (
+          <div key={col.title}>
+            <div className={cx(T.caption, MEDIUM, TONE.smoke)}>{col.title}</div>
+            <ul className="el-footer-links">
+              {col.links.map((l) => (
+                <li key={l.label} className={cx(T.ui, MEDIUM, "el-balance")}>
+                  <TextLink href={l.href}>{l.label}</TextLink>
+                </li>
+              ))}
+            </ul>
           </div>
-          <div className="text-[12.5px] text-pb-fg-muted">
-            Know what ads work, and why.
-          </div>
-        </div>
+        ))}
       </div>
-    </footer>
+      <div className="el-footer-foot">
+        <div className={cx(T.caption, TONE.smoke)}>&copy; {new Date().getFullYear()} Peachblue Technologies Inc.</div>
+        <div className={cx(T.caption, TONE.smoke)}>Know what ads work, and why.</div>
+      </div>
+    </Shell>
   );
 }

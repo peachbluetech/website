@@ -1,0 +1,134 @@
+/* HowItWorks.tsx's own rules. Classes are .el-how-*. The shared system
+   is components/site/system.css: nothing of it is restated here.
+   Colours, radii, shadows and durations are the system's tokens. */
+
+/* ── The cells ────────────────────────────────────────────────────
+   Number, 24px, the picture slot, 32px, the title, 18px, the paragraph,
+   every distance between trimmed text edges (18px from the title's
+   baseline to the paragraph's cap top). */
+.el-how-steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.el-how-num {
+  display: block;
+}
+.el-how-slot {
+  margin-top: 24px;
+}
+.el-how-title {
+  margin-top: 32px;
+}
+.el-how-desc {
+  margin-top: 18px;
+  max-width: 295px;
+}
+
+/* The picture. One white inner card, whole, at the top left of its
+   slot. Stacked (under 1024) it is as wide as the cell's text on a
+   phone and no wider than 320px, and the slot is as tall as the card.
+   From 1024 the three slots are one height, so the three titles share a
+   line about 280px under the rule, and the card is as wide as the
+   cell's text, up to its own 294px. */
+.el-how-card {
+  width: min(100%, 320px);
+}
+@media (min-width: 1024px) {
+  .el-how-slot {
+    height: 168px;
+  }
+  .el-how-card {
+    width: min(100%, 294px);
+  }
+}
+/* Laid out at the slot's width, never painted larger than its own size
+   (the Fit box's cap, one and a half by default). */
+.el-how-fit {
+  --fk: 1;
+}
+
+/* One line of a card that may not wrap. */
+.el-how-line {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── 01 Connect: four platforms, two by two ─────────────────────── */
+.el-how-hub {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  color: var(--el-ink);
+}
+.el-how-hub-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 68px;
+  padding-inline: 16px;
+}
+.el-how-hub-cell:nth-child(odd) {
+  border-right: 1px solid var(--el-stone);
+}
+.el-how-hub-cell:nth-child(n + 3) {
+  border-top: 1px solid var(--el-stone);
+}
+
+/* ── 02 Analyze: the ad beside what was read from it ────────────── */
+.el-how-read {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 136px;
+  padding-inline: 16px;
+}
+.el-how-read-ad {
+  flex: none;
+  width: 112px;
+}
+/* Four lines on a 22px pitch: the key in its own column, the value
+   after it. */
+.el-how-read-lines {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  column-gap: 10px;
+  align-items: baseline;
+}
+.el-how-read-line {
+  display: contents;
+}
+.el-how-read-line > * {
+  line-height: 22px;
+}
+
+/* ── 03 Act: two findings, each with its dollars ────────────────── */
+.el-how-find {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 68px;
+  padding-inline: 16px;
+}
+.el-how-find + .el-how-find {
+  border-top: 1px solid var(--el-stone);
+}
+.el-how-find-ad {
+  flex: none;
+  width: 36px;
+}
+.el-how-find-text {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  row-gap: 2px;
+}
+.el-how-find-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}

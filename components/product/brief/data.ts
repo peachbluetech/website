@@ -37,54 +37,61 @@ export type Strategy = {
    the headline sentence. The emerging one has two creatives, so its card
    shows two thumbnails and an empty third slot, as the app does.
 
-   What separates the winning card from the losing one is tone. Both hold
-   product closeups on a flat ground (the can, a headline, a button), so
-   the first is "Playful Product Closeup" and the last "Bold Edgy Product
-   Closeup", which is what the art shows and what the top signal says
-   (Playful, +41.3%).
+   What the art shows. The winning card is the account's product
+   closeups: the can large in the frame, a short headline and a button.
+   Two are studio stills on one bold color ("Zero sugar. Still fun." and
+   the week's new winner, "Zero sugar. All fizz.") and the third is the
+   can held up to a stocked fridge ("Fridge pick"). All three are playful
+   in tone, which is also what the top signal says (Playful, +41.3%).
+   The second and third cards are creator-style photographs: a person
+   with the can held up (the account's top two creatives by score, the
+   mirror selfie "Little can. Big mood." and "Found my new fave fizz",
+   and a beach), and quieter scenes at home and in the car. The last
+   card is the two product shots that lead with a harder sell ("Bubbles,
+   upgraded.", "Thirsty? Fix it."): closeups like the winning card's, in
+   another tone.
 
-   The account's two lifestyle photographs with a person in them, "Would
-   rebuy" and "Post-workout, pre-brunch, anytime.", are on no card: they
-   are not product closeups and their tone is not cozy. The winning card's
-   TikTok creative is "Currently obsessed", the can on a pink ground. The
-   two photographs show in the brief's reference ads, which are the top
-   four by CTR whatever their look.
+   Two of the account's top creator photographs, "Restock day. Would
+   rebuy." and "Post-workout, pre-brunch, anytime.", are on no card: one
+   is an unboxing on a hallway floor, told as social proof, and the other
+   a workout scene with an empowering line, so neither is a scene to
+   aspire to or a cozy one. Both are among the brief's proven hooks.
 
    Order of the creatives. The card lays its signal pill over the top of
    the first thumbnail and its lift badge over the top of the third (the
-   pill also reaches a few pixels into the second), which is where most of
-   these ads carry their headline. Only the middle slot is clear. So each
-   card puts the headline that most needs to be read whole in the middle,
-   and an ad with its headline in the bottom third ("Summer carry",
-   "Fridge pick", "Your new little ritual.") on the outside wherever it
-   has one. The second card is clean throughout. The others keep one or
-   two outer thumbnails whose first line sits under a chip: "zero" and
-   "currently" on the first card, "Honestly?" on the third, "Bubbles," on the
-   last. That is how the app draws them too; do not move the chips. */
+   pill also reaches a few pixels into the second). Only the middle slot
+   is clear, so each card puts there the ad whose top matters most: the
+   week's new winner with its headline on the first card, the can held
+   against the sky on the second, a face on the third. On the second
+   card the two creator portraits take the outer slots: each has its
+   headline in the band a chip covers and its face and can under it, so
+   the chip hides the line and nothing else. An outer thumbnail keeps a
+   chip over the top of its ad, headline or not, as it would in the app;
+   do not move the chips. */
 export const STRATEGIES: Strategy[] = [
   {
     key: "playful-closeup",
     name: "Static Image · Playful Product Closeup",
-    meta: "Conversion · 5 ads · 1 format · Meta, TikTok",
+    meta: "Conversion · 5 ads · 1 format · Meta, Google",
     tier: "primary",
     confidence: "high",
     metric: "roas",
     liftPct: 38.2,
     spendSharePct: 31,
     creativeCount: 5,
-    creatives: [CREATIVES.zeroSugar, CREATIVES.bigMood, CREATIVES.obsessed],
+    creatives: [CREATIVES.zeroSugar, CREATIVES.allFizz, CREATIVES.fridgePick],
   },
   {
-    key: "aspirational-closeup",
-    name: "Static Image · Aspirational Product Closeup",
-    meta: "Conversion · 4 ads · 1 format · Meta, Google",
+    key: "aspirational-lifestyle",
+    name: "Static Image · Aspirational Lifestyle Scene",
+    meta: "Conversion · 4 ads · 1 format · Meta, TikTok",
     tier: "primary",
     confidence: "high",
     metric: "roas",
     liftPct: 24.6,
     spendSharePct: 19,
     creativeCount: 4,
-    creatives: [CREATIVES.summerCarry, CREATIVES.faveFizz, CREATIVES.fridgePick],
+    creatives: [CREATIVES.bigMood, CREATIVES.summerCarry, CREATIVES.faveFizz],
   },
   {
     key: "cozy-lifestyle",
@@ -96,7 +103,7 @@ export const STRATEGIES: Strategy[] = [
     liftPct: 14.1,
     spendSharePct: 12,
     creativeCount: 4,
-    creatives: [CREATIVES.honestlySoGood, CREATIVES.notAnotherSoda, CREATIVES.littleRitual],
+    creatives: [CREATIVES.notAnotherSoda, CREATIVES.honestlySoGood, CREATIVES.littleRitual],
   },
   {
     key: "bold-edgy-closeup",
@@ -128,7 +135,7 @@ export type Signal = {
    here also names a strategy, playful, and it carries more than that
    strategy's ads and spend (14 ads against 5; $164.2k against 31% of the
    $412.6k analyzed). graphic_text names no strategy: its 7 creatives are
-   text-led layouts, most of them not among the named sample creatives, and
+   text-led layouts, none of them among the named sample creatives, and
    the two ads on the losing strategy card are product closeups, not part
    of that count. One creative is one ad here, so adCount is also the
    creative count the brief prints, and every line of the brief's recipe is
@@ -173,24 +180,25 @@ export type Concept = { title: string; description: string; format: string; hook
 /** One reference ad as the brief prints it: the creative's own name, image, CTR and ROAS. */
 export type ReferenceAd = { key: string; name: string; image: string; ctr: number; roas: number };
 
-/** Top four creatives by CTR. Names, CTR and ROAS are the canonical ones.
-    The brief paints each as a square at the creative's own focus (the
-    "square" column of ui/adFocus.json), so the on-image headline is whole.
-    The first two are studio product stills and the last two are lifestyle
-    photographs with a person holding the can. All four are a few words on
-    one bold color, which is why the summary speaks of "playful stills on
-    bold color" and not of product stills; the recipe's setting line is the
-    account-wide signal (17 creatives), not a description of these four. */
-const REFERENCE_ADS: SampleCreative[] = [CREATIVES.bigMood, CREATIVES.zeroSugar, CREATIVES.wouldRebuy, CREATIVES.anytime];
+/** Top four creatives by CTR, best first. Names, CTR and ROAS are the
+    canonical ones. The brief paints each as a square at the creative's
+    own focus (the "square" column of ui/adFocus.json). The first two are
+    the creator ads, a mirror selfie and a can held to the cheek, both at
+    home; the other two are studio product stills on one bold color, the
+    week's new winner among them. The summary's "playful stills on bold
+    color" and the recipe's lines are the account-wide signals (a playful
+    tone across 14 creatives, a studio backdrop across 17), not a
+    description of these four. */
+const REFERENCE_ADS: SampleCreative[] = [CREATIVES.bigMood, CREATIVES.faveFizz, CREATIVES.allFizz, CREATIVES.zeroSugar];
 
 /** Live headlines from the account's own ads, best CTR first. */
 const PROVEN_HOOKS: SampleCreative[] = [
   CREATIVES.bigMood,
+  CREATIVES.faveFizz,
+  CREATIVES.allFizz,
   CREATIVES.zeroSugar,
   CREATIVES.wouldRebuy,
   CREATIVES.anytime,
-  CREATIVES.faveFizz,
-  CREATIVES.summerCarry,
 ];
 
 export const BRIEF = {
@@ -216,11 +224,11 @@ export const BRIEF = {
   ] as RecipeItem[],
   concepts: [
     {
-      title: "Little can, big color",
+      title: "Flavor, edge to edge",
       description:
-        "The can standing small at the foot of a tall field of one saturated color, a single cut orange beside it. One short line of copy sits in the top third and nothing else is on the image.",
+        "The Lime Zest can lying in a bed of whole and cut limes that fills the frame, shot from above. One short line of copy sits in the top third and nothing else is on the image.",
       format: "Static image, 9:16, studio backdrop",
-      hook: "Little can. Big mood.",
+      hook: "Zero sugar. All fizz.",
       why: "Playful stills correlate with the strongest return in this account (+41% ROAS, 14 creatives).",
     },
     {
@@ -252,7 +260,7 @@ export const BRIEF = {
      cohort is marked as a lead to test. */
   dos: [
     "Keep the tone playful; in this account it correlates with the highest return (+41% ROAS, 14 creatives)",
-    "Set the can on a studio backdrop: one flat, bold color behind it (+29% ROAS, 17 creatives)",
+    "Set the can on a studio backdrop: one bold color behind it (+29% ROAS, 17 creatives)",
     "Lead with the benefit in the headline (+24% ROAS, 9 creatives)",
     "Keep on-image text to a few words and let the can carry the ad (+22% ROAS, 19 creatives)",
   ],
@@ -275,12 +283,12 @@ export const BRIEF = {
     "",
     "Follow this recipe, taken from live account performance:",
     "- Tone: playful. Never urgent.",
-    "- Setting: a studio backdrop. One flat, bold color behind the can.",
+    "- Setting: a studio backdrop. One bold color behind the can.",
     "- Headline: lead with the benefit, in one short line.",
     "- On-image text: a few words at most. The can carries the ad.",
     "- Palette: vibrant, one flavor color per ad.",
     "",
-    'Use this proven hook verbatim in one concept: "Little can. Big mood."',
+    'Use this proven hook verbatim in one concept: "Zero sugar. All fizz."',
     "",
     "Avoid: graphic templates, stacked claims, price blocks, countdown framing.",
     "",

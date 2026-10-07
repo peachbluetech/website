@@ -1,0 +1,218 @@
+/* CreativeWasteDiagnostic.tsx's own rules. Classes are .el-waste-*.
+   The shared system is components/site/system.css and kit.css: do not
+   restate their classes here; to adjust a part inside the tool, put the
+   tool's class in front of it. Colours, radii, shadows and durations
+   are the system's tokens, never literals. */
+
+/* The card is a container: the tool has two columns where the card
+   itself is 860px or wider, wherever it stands. It clips without
+   becoming a scrolling box, so the sliders can rest under the nav
+   while the answers beside them scroll. */
+.el-waste {
+  container-type: inline-size;
+  overflow: clip;
+}
+.el-waste-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+  padding: 8px;
+}
+
+/* The sliders, on the taupe: 28px apart, and under them, past a dotted
+   separator, the assumption they rest on. */
+.el-waste-inputs {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+  padding: 16px 12px 20px;
+}
+.el-waste-fields {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 28px;
+  padding-bottom: 28px;
+}
+/* A slider's label and its value share a line; the value keeps its
+   width as it changes. */
+.el-waste-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+.el-waste-value {
+  flex: none;
+  font: 500 14px/21px var(--el-font-body);
+  letter-spacing: 0.01em;
+  color: var(--el-ink);
+  white-space: nowrap;
+}
+/* A hint stands on taupe here, where secondary text is earth. */
+.el-waste .el-help {
+  color: var(--el-earth);
+  text-wrap: pretty;
+}
+
+/* The slider. The browser's range, drawn in the system's terms: a 4px
+   hairline track, ink up to the thumb, and the thumb a white raised
+   disc with the whisper shadow as its only edge, as every white
+   control has. --el-waste-at (0 to 1) is how far along the thumb is;
+   the ink runs to the thumb's centre, which travels the track's width
+   less the thumb's own. The keyboard's focus ring is the kit's. The
+   control is 12px taller than its thumb, so a finger finds it, and
+   gives those 12px back to the lines above and under it. */
+.el-waste .el-waste-range {
+  --el-waste-thumb: 20px;
+  height: calc(var(--el-waste-thumb) + 12px);
+  margin-block: -6px;
+  padding: 0;
+  border: 0;
+  background: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.el-waste-range::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: var(--el-r-pill);
+  background: linear-gradient(
+    to right,
+    var(--el-ink) calc(var(--el-waste-thumb) / 2 + (100% - var(--el-waste-thumb)) * var(--el-waste-at, 0)),
+    var(--el-dot) 0
+  );
+}
+.el-waste-range::-webkit-slider-thumb {
+  width: var(--el-waste-thumb);
+  height: var(--el-waste-thumb);
+  margin-top: calc((4px - var(--el-waste-thumb)) / 2);
+  border: 0;
+  border-radius: 50%;
+  background: var(--el-white);
+  box-shadow: var(--el-whisper);
+  appearance: none;
+  -webkit-appearance: none;
+}
+.el-waste-range::-moz-range-track {
+  height: 4px;
+  border-radius: var(--el-r-pill);
+  background: var(--el-dot);
+}
+.el-waste-range::-moz-range-progress {
+  height: 4px;
+  border-radius: var(--el-r-pill);
+  background: var(--el-ink);
+}
+.el-waste-range::-moz-range-thumb {
+  box-sizing: border-box;
+  width: var(--el-waste-thumb);
+  height: var(--el-waste-thumb);
+  border: 0;
+  border-radius: 50%;
+  background: var(--el-white);
+  box-shadow: var(--el-whisper);
+}
+
+/* The assumption: one paragraph in earth with its figures in ink, the
+   link that opens the fifth slider, and the slider once it is open.
+   The dotted separator above it takes 2px of the 28. */
+.el-waste-assume {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 20px;
+  padding-top: 30px;
+}
+.el-waste-figure {
+  font-weight: 500;
+  color: var(--el-ink);
+}
+
+/* The answers: rows on dotted separators in the white inner card, each
+   a label, a figure and a sentence. */
+.el-waste .el-waste-results {
+  padding: 24px 20px 28px;
+}
+.el-waste-result {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 16px;
+  padding-block: 26px;
+}
+.el-waste-result:first-child {
+  padding-top: 0;
+}
+.el-waste-result:last-child {
+  padding-bottom: 0;
+}
+/* The period after a figure ("/mo"): small and quiet beside it, as the
+   period of a price is. It follows the figure with no space in the
+   text, so the gap is drawn. */
+.el-waste-per {
+  margin-left: 3px;
+  font: 400 15px/22px var(--el-font-body);
+  letter-spacing: 0.01em;
+  color: var(--el-smoke);
+}
+/* The sentence reads at the measure of a caption, not the card's width. */
+.el-waste-result > :last-child {
+  max-width: 560px;
+}
+
+/* The data bar, as the homepage's is: a hairline track with no ground
+   and a navy fill for exactly the share its sentence states. 8px tall
+   here, with no labels: the figure is in the sentence under it. The
+   ring is drawn over the fill so it is one line from end to end. */
+.el-waste-bar {
+  position: relative;
+  display: block;
+  height: 8px;
+  margin-block: 6px 2px;
+  overflow: clip;
+  border-radius: var(--el-r-bar);
+}
+.el-waste-bar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 0.5px var(--el-ring-strong);
+  pointer-events: none;
+}
+.el-waste-fill {
+  display: block;
+  block-size: 100%;
+  inline-size: var(--el-waste-share, 0%);
+  border-radius: var(--el-r-bar);
+  background: var(--el-navy);
+}
+
+/* Two columns where the card has room: the sliders in five twelfths,
+   the answers in seven, a card's gap apart, the white inner card a
+   card's inset from the taupe's edge. */
+@container (min-width: 860px) {
+  .el-waste-grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: 16px;
+    padding: 16px;
+  }
+  /* The sliders stay in view while the taller column of answers
+     scrolls past them. */
+  .el-waste-inputs {
+    position: sticky;
+    top: calc(var(--el-stick) - 16px);
+    align-self: start;
+    padding: 30px 32px 28px 24px;
+  }
+  .el-waste-fields {
+    row-gap: 32px;
+    padding-bottom: 32px;
+  }
+  .el-waste-assume {
+    padding-top: 34px;
+  }
+  .el-waste .el-waste-results {
+    padding: 36px 36px 40px;
+  }
+  .el-waste-result {
+    padding-block: 30px;
+  }
+}

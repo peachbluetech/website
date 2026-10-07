@@ -1,0 +1,187 @@
+/* The pricing page's own rules (app/pricing/page.tsx). The shared system
+   is components/site/system.css and kit.css: do not restate their
+   classes here; to adjust a part inside this page, put this page's
+   class in front of it. Colours, radii, shadows and durations are the
+   system's tokens, never literals.
+
+   Classes are .el-plans-..., not .el-pricing-...: that name belongs to
+   the homepage's pricing section (components/home/Pricing.css), and the
+   two stylesheets can be loaded together. */
+
+/* ── The plans ────────────────────────────────────────────────────
+   Two rows of three ruled cells. In a cell, top to bottom: the tile,
+   16px, the plan's pill, 20px, the plan's one line, 40px, the first row
+   of what the plan holds. The last row's baseline stands 40px over the
+   rule under the cells. */
+.el-plans .el-cell-card {
+  padding-bottom: 26px;
+}
+
+/* The tile: 200px, the name at its top left with the seats at its top
+   right, the price and the "billed" line at its foot, all 20px in (the
+   tile part's own padding). */
+.el-plans-tile {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 200px;
+}
+/* The name and the seats share a baseline; the tag of the popular plan
+   stands 16px under the name. The tag is first in the markup. */
+.el-plans-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: 12px;
+  align-items: start;
+}
+.el-plans-name {
+  grid-column: 1;
+  grid-row: 1;
+}
+/* 14/21 beside 24/32: the seats' line starts 1px under the name's cap
+   top, which puts both on one baseline (level with it beside the
+   phone's 22/28). */
+.el-plans-seats {
+  grid-column: 2;
+  grid-row: 1;
+  margin-top: 1px;
+}
+.el-plans-tag {
+  grid-column: 1;
+  grid-row: 2;
+  justify-self: start;
+  margin-top: 16px;
+}
+/* The cadence beside the figure, on its baseline. */
+.el-plans-cadence {
+  margin-left: 3px;
+}
+
+/* The plan's pill across the column. Where a plan has a second, quiet
+   link it stands beside the pill on the same line, and the pill takes
+   the rest. */
+.el-plans-cta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 16px;
+}
+.el-plans-cta > .el-pill {
+  flex: 1;
+  width: auto;
+  min-width: 0;
+}
+.el-plans-alt {
+  flex: none;
+}
+.el-plans-blurb {
+  margin-top: 20px;
+}
+/* What the plan holds. Its first row brings 14px of its own. */
+.el-plans-list {
+  margin-top: 26px;
+}
+
+/* From 1024 the cells stand side by side, and the four parts of a plan
+   share their rows across the three cells: every pill, every line and
+   every list starts level with its neighbours', whatever wraps. */
+@media (min-width: 1024px) {
+  @supports (grid-template-rows: subgrid) {
+    .el-plans .el-cell {
+      display: grid;
+      grid-row: span 4;
+      grid-template-rows: subgrid;
+    }
+    .el-plans .el-cell-card {
+      display: grid;
+      grid-row: 1 / -1;
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-rows: subgrid;
+    }
+  }
+}
+
+/* Between 768 and 1024 the cells are stacked at the frame's width: the
+   tile, the pill and the line take the left half and what the plan
+   holds takes the right, its first row level with the plan's name.
+   Enterprise, which has no list, runs the whole width. */
+@media (min-width: 768px) and (max-width: 1023.98px) {
+  .el-plans .el-cell-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: auto auto 1fr;
+    column-gap: 32px;
+    padding-bottom: 32px;
+  }
+  .el-plans-tile,
+  .el-plans-cta,
+  .el-plans-blurb {
+    grid-column: 1;
+  }
+  .el-plans-list {
+    grid-column: 2;
+    grid-row: 1 / -1;
+    margin-top: 6px;
+    padding-right: 32px;
+  }
+  .el-plans-solo .el-plans-tile,
+  .el-plans-solo .el-plans-cta {
+    grid-column: 1 / -1;
+  }
+  .el-plans-solo .el-cell-card {
+    padding-bottom: 16px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .el-plans-tile {
+    height: 176px;
+  }
+  .el-plans-seats {
+    margin-top: 0;
+  }
+  /* The tile sits 8px from the rails here; the text under it keeps the
+     page's 16px text inset. */
+  .el-plans-blurb,
+  .el-plans-list {
+    padding-inline: 8px;
+  }
+  .el-plans-solo .el-cell-card {
+    padding-bottom: 8px;
+  }
+}
+
+/* ── The comparison ───────────────────────────────────────────────
+   From 1024 the table always fits its column, so it does not need its
+   sideways scroll, and without it the plans' names can rest under the
+   nav while the rows pass: a long table is read with its columns named.
+   The head stands on the canvas over a hairline, 16px over the first
+   group's bar. */
+@media (min-width: 1024px) {
+  .el-plans-compare .el-compare-scroll {
+    overflow: visible;
+  }
+  /* The head's own 20px of room above its names, taken back from the
+     distance over the table. */
+  .el-plans-compare .el-compare {
+    margin-top: -20px;
+  }
+  .el-plans-compare .el-compare :is(.el-compare-corner, .el-compare-col) {
+    position: sticky;
+    top: calc(var(--el-nav-h) + 1px);
+    z-index: 2;
+    padding-top: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--el-ring-strong);
+    background-color: var(--el-canvas);
+  }
+  .el-plans-compare .el-compare thead + tbody .el-compare-group {
+    border-top: 16px solid transparent;
+    background-clip: padding-box;
+  }
+}
+
+/* The line of small print under the table. */
+.el-plans-more {
+  margin-top: var(--el-head-gap);
+}

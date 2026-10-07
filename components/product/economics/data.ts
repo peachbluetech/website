@@ -9,11 +9,11 @@
 
    - 30-day spend per creative where the page prints it (bench, cut list)
    - 90-day spend per creative for the launch cohort table
-   - five more under-tier creatives (the canon's "five unnamed"), so the
-     cut list sums to the week's waste and the 30-day under-tier spend
+   - one more under-tier creative (the canon's one unnamed), so the cut
+     list sums to the week's waste and the 30-day under-tier spend
    - the rolling-CTR curve of each fatigue flag, and one opt-in third flag
      that is not in the canon (the canon's count is two)
-   - the tier order of the 15 unnamed launches and 3 micro-tests
+   - the tier and spend of the 10 unnamed launches and 3 micro-tests
 
    No directive and no JSX. */
 
@@ -56,18 +56,21 @@ export const HERO = {
    screen fixes 30-day spend per creative in its own data file; if one is
    added to this directory, keep the two in step). Each is at least the
    creative's 7-day spend and below the hero's. The newest one has been
-   live 7 days, so its 30-day spend is its 7-day spend. */
+   live 7 days, so its 30-day spend is its 7-day spend. The earlier
+   winner, "Post-workout, pre-brunch, anytime.", spent most of its budget
+   before these 30 days. */
 const CHALLENGER_SPEND_30D: Partial<Record<CreativeKey, number>> = {
   wouldRebuy: 21240,
-  anytime: 18460,
+  bigMood: 18460,
   faveFizz: 13120,
   summerCarry: 12870,
   fridgePick: 10340,
-  bigMood: CREATIVES.bigMood.spend,
+  allFizz: CREATIVES.allFizz.spend,
   notAnotherSoda: 6480,
   littleRitual: 6240,
   obsessed: 4760,
   honestlySoGood: 4120,
+  anytime: 1940,
 };
 
 export type Challenger = { creative: SampleCreative; spend30d: number };
@@ -96,24 +99,22 @@ function named(key: CreativeKey, spend30d: number): BleedingRow {
   return { key, name: c.name, image: c.image, platform: c.platform, score: c.score, activeDays: c.daysLive, spend7d: c.spend, spend30d };
 }
 
-/* Nine under-tier creatives still spending, by 7-day spend. The four from
-   the canon carry their own 7-day spend (4,700 between them); the five
-   added here carry the other 1,480, so the list sums to 6,180. The 30-day
-   column sums to the account's 30-day under-tier spend, 14,960: the four
-   named rows carry the Performance screen's 30-day figures (11,880) and
-   the five added ones the remaining 3,080, each below the smallest named
-   30-day spend in the account. The five added ones also score below the
-   lowest named score (18), which is how the Performance screen describes
-   the account's five unnamed under-tier creatives. */
+/* Nine under-tier creatives still spending, by 7-day spend. The eight
+   from the canon carry their own 7-day spend (6,070 between them) and the
+   one added here the other 110, so the list sums to 6,180. The 30-day
+   column sums to the account's 30-day under-tier spend, 14,960: the eight
+   named rows carry the Performance screen's 30-day figures (14,730) and
+   the added one the remaining 230. The added one scores below every named
+   score and is the list's one row with no picture. */
 export const BLEEDING: BleedingRow[] = [
   named("currentLineup", 6600),
   named("thirsty", 1820),
   named("bubbles", 1900),
-  named("zeroAllFizz", 1560),
-  { key: "sipSipHooray", name: "Sip, sip, hooray", image: null, platform: "TikTok", score: 17, activeDays: 12, spend7d: 520, spend30d: 1040 },
-  { key: "fizzTheSeason", name: "Fizz the season", image: null, platform: "Meta", score: 14, activeDays: 14, spend7d: 380, spend30d: 820 },
-  { key: "restock", name: "The 12-pack restock", image: null, platform: "Google Ads", score: 16, activeDays: 11, spend7d: 290, spend30d: 610 },
-  { key: "popTheWeekend", name: "Pop the weekend", image: null, platform: "Meta", score: 11, activeDays: 9, spend7d: 180, spend30d: 380 },
+  named("earnedIt", 1560),
+  named("dinner", 1040),
+  named("groupChat", 820),
+  named("cooldown", 610),
+  named("quietNight", 380),
   { key: "sodaReconsidered", name: "Soda, reconsidered", image: null, platform: "TikTok", score: 9, activeDays: 8, spend7d: 110, spend30d: 230 },
 ];
 
@@ -202,47 +203,73 @@ function launchedOn(daysLive: number): string {
   return d.toISOString().slice(0, 10);
 }
 
-/* Spend since launch (all 17 launched inside the 90-day window). A
+/* Spend since launch (all 22 launched inside the 90-day window). A
    creative live 30 days or fewer carries its 30-day spend from the
    Performance screen unchanged; an older one carries more, and the
-   fatigued creatives were larger before they decayed. */
+   fatigued creatives and the earlier winner were larger before they
+   slowed. */
 const SPEND_90D: Record<CreativeKey, number> = {
   zeroSugar: 74810,
   wouldRebuy: 25460,
   notAnotherSoda: 22180,
   summerCarry: 21640,
-  anytime: 19870,
+  bigMood: 19870,
   inMyTote: 17930,
+  anytime: 16480,
   faveFizz: 13120,
   fridgePick: 12870,
   obsessed: 11260,
-  bigMood: 9400,
+  allFizz: 9400,
   currentLineup: 6600,
   littleRitual: 6240,
   honestlySoGood: 4120,
   threePm: 3540,
   bubbles: 1900,
   thirsty: 1820,
-  zeroAllFizz: 1560,
+  earnedIt: 1560,
+  dinner: 1040,
+  groupChat: 820,
+  cooldown: 610,
+  quietNight: 380,
 };
 
 export type CohortRow = { creative: SampleCreative; launched: string; spend: number };
 
-/** The named launches, by spend, highest first: the head of the cohort table. */
-export const COHORT_ROWS: CohortRow[] = (Object.keys(SPEND_90D) as CreativeKey[])
+/** The named launches, by spend, highest first. */
+const NAMED_LAUNCHES: CohortRow[] = (Object.keys(SPEND_90D) as CreativeKey[])
   .map((key) => ({ creative: CREATIVES[key] as SampleCreative, launched: launchedOn(CREATIVES[key].daysLive), spend: SPEND_90D[key] }))
   .sort((a, b) => b.spend - a.spend);
 
+/* The 10 qualified launches without a name here: tier and spend since
+   launch. With the named 22 that is the canon's 11 top, 8 above, 4
+   average and 9 under. The last is the cut list's row with no picture. */
+const UNNAMED_LAUNCHES: Array<[Tier, number]> = [
+  ["top", 1480],
+  ["above", 1320],
+  ["top", 990],
+  ["avg", 930],
+  ["above", 880],
+  ["top", 760],
+  ["above", 690],
+  ["avg", 560],
+  ["above", 470],
+  ["under", 230],
+];
+const UNNAMED_MAX = Math.max(...UNNAMED_LAUNCHES.map(([, spend]) => spend));
+
+/** The head of the cohort table: the named launches that outspent every
+    launch without a name here, by spend, highest first. The newest
+    under-tier ones spent less than that and sit further down the cohort,
+    between unnamed launches, so they are in the tick strip and not in
+    these rows. */
+export const COHORT_ROWS: CohortRow[] = NAMED_LAUNCHES.filter((r) => r.spend > UNNAMED_MAX);
+
 export type CohortTone = Tier | "none";
 
-/* The 15 qualified launches without a name here, by spend (all below the
-   named 17): 4 top, 4 above, 2 average, 5 under. With the named 17 that is
-   the canon's 11 top, 8 above, 4 average and 9 under. */
-const UNNAMED_TIERS: Tier[] = "TAUTVAUTAUVTAUU".split("").map((ch) => (ch === "T" ? "top" : ch === "A" ? "above" : ch === "V" ? "avg" : "under"));
-
-/** One tone per launch, by spend: 32 qualified, then the micro-tests with no score. */
+/** One tone per launch, by spend, highest first: 32 qualified, then the micro-tests with no score. */
 export const COHORT_TICKS: CohortTone[] = [
-  ...COHORT_ROWS.map((r) => r.creative.tier),
-  ...UNNAMED_TIERS,
+  ...[...NAMED_LAUNCHES.map((r): [Tier, number] => [r.creative.tier, r.spend]), ...UNNAMED_LAUNCHES]
+    .sort((a, b) => b[1] - a[1])
+    .map(([tier]) => tier),
   ...Array.from({ length: MICRO_TESTS }, () => "none" as const),
 ];

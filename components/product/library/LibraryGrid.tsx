@@ -111,9 +111,8 @@ export function LibraryGrid({
 }
 
 /* LibraryRow: one row of tiles, four across.
-   Design width 1152, 448 tall. The default four are the creatives whose
-   artwork crops cleanly at tile size; pass LIBRARY_GRID.slice(0, 4) for
-   one of each tier (its under-tier tile has a cut headline). */
+   Design width 1152, 448 tall. The default four are newest first, one of
+   each score tier; LIBRARY_GRID.slice(0, 4) is another such row. */
 export function LibraryRow({
   creatives = LIBRARY_ROW,
   className,

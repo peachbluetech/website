@@ -1,0 +1,77 @@
+/* The docs pages' own rules: the index (app/docs/page.tsx) and a doc
+   (app/docs/[slug]/page.tsx). Classes are .el-* with the page's name in
+   them (.el-docs-index-..., .el-doc-...). The shared system is
+   components/site/system.css and components/site/kit.css: do not
+   restate their classes here; to adjust a part on one of these pages,
+   put the page's class in front of it. Colours, radii, shadows and durations
+   are the system's tokens, never literals. */
+
+/* A band's distance is measured to text, above and below: the list
+   gives back its last row's own 20px, and from 1024, where it stands
+   beside the section's h2, its first row's too, so the first page's
+   name is level with the h2's cap top (the homepage's link rows do the
+   same beside their heading). */
+.el-docs-index-list {
+  margin-bottom: -20px;
+}
+@media (min-width: 1024px) {
+  .el-docs-index-list {
+    margin-top: -20px;
+  }
+}
+/* A row's first column holds a page's short name, never more than two
+   or three words. From 768 it follows the window between 168px and the
+   220px the kit gives an index, so in a narrow column (a tablet, a
+   small laptop) the room goes to the description. */
+@media (min-width: 768px) {
+  .el-docs-index-list .el-entry {
+    grid-template-columns: clamp(168px, 16vw, 220px) minmax(0, 1fr) 12px;
+  }
+}
+
+/* A doc has no header outside the frame. The frame starts 24px under
+   the site nav, so its first rule and the two marks on it are seen
+   before the page is scrolled. */
+.el-doc-top {
+  height: 24px;
+}
+
+/* The link to the markdown stays on one line. Where the date and the
+   link cannot share a line (a phone) the link takes the next line whole
+   and the dot between them, which would hang at a line's end, is not
+   drawn. From 480 the two always fit on one line. */
+.el-doc-head .el-ph-sub a {
+  white-space: nowrap;
+}
+@media (max-width: 479.98px) {
+  .el-doc-dot {
+    display: none;
+  }
+  .el-doc-head .el-ph-sub a {
+    display: block;
+    width: fit-content;
+  }
+}
+
+/* A table in a doc on a phone. It keeps the width the system gives it
+   and scrolls sideways; here every cell but the row's last stays on one
+   line, so a short figure ("75 and up") is not broken while the table
+   has room to scroll. */
+@media (max-width: 767.98px) {
+  .el-doc-prose .el-table-scroll :is(th, td):not(:last-child) {
+    white-space: nowrap;
+  }
+}
+
+/* From 640 a doc's column is never narrower than 566px, and the widest
+   table in the docs (five short columns) reads well at that. So from
+   there a table takes its column's width and does not scroll: the
+   600px the system keeps for a table of four columns or more would
+   leave it a few pixels wider than its column on a tablet and on a
+   small laptop, with its last words cut. Under 640 the system's width
+   stands and the table scrolls. */
+@media (min-width: 640px) {
+  .el-doc-prose.el-prose .el-table-scroll > table {
+    min-width: 0;
+  }
+}

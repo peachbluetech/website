@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SiteNav } from "@/components/site/SiteNav";
-import { SiteFooter } from "@/components/site/SiteFooter";
-import { FaqBlock } from "@/components/blog/FaqBlock";
-import { TrialCta } from "@/components/blog/TrialCta";
+import { Clause, Clauses, FaqBand, PageHeader, Prose, TrialBand } from "@/components/site/kit";
+import { Block, Frame, Rule, Shell } from "@/components/site/parts";
+import { SitePage } from "@/components/site/SitePage";
 import { CreativeWasteDiagnostic } from "@/components/tools/CreativeWasteDiagnostic";
 import { SITE_URL } from "@/lib/site";
 
@@ -86,114 +85,103 @@ export default function CreativeWastePage() {
     ],
   };
 
+  /* Built in the design system from the inner-page kit. The header,
+     then the tool itself, whole, on a taupe card the width of the
+     shell, as the homepage's hero panel is: the page's one object,
+     outside the frame. Then the frame: the method and the levers as
+     clauses (each heading in the narrow column, its text as running
+     text in the wide one), the questions, and the trial band. Every
+     word, heading, link and id is the published one. */
   return (
-    <div className="flex flex-col min-h-screen bg-pb-bg">
+    <SitePage>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <SiteNav />
-      <main className="flex-1 pt-12 md:pt-[72px] pb-24 px-6">
-        <div className="max-w-[860px] mx-auto">
-          <header className="mb-10 text-center">
-            <div className="text-[13px] font-semibold text-pb-peach-700 mb-3">
-              Free tool · For high-volume testers
-            </div>
-            <h1 className="font-display text-[clamp(30px,5vw,44px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-ink text-balance mb-4">
-              What are losing creatives costing you?
-            </h1>
-            <p className="text-[16px] text-pb-fg-secondary leading-relaxed max-w-[620px] mx-auto">
-              If you launch new creative every day, most of it will lose. That is
-              how testing works. This diagnostic shows what the losers cost, what
-              each winner really costs to find, and what a better hit rate is
-              worth in your numbers.
-            </p>
-          </header>
-
+      <PageHeader
+        eyebrow="Free tool · For high-volume testers"
+        title="What are losing creatives costing you?"
+        lead="If you launch new creative every day, most of it will lose. That is how testing works. This diagnostic shows what the losers cost, what each winner really costs to find, and what a better hit rate is worth in your numbers."
+        bottom="gap"
+      />
+      <Shell>
+        <Block inset="none" bottom="band">
           <CreativeWasteDiagnostic />
-
-          <section className="mt-12 max-w-[680px] mx-auto" aria-labelledby="method-heading">
-            <h2
-              id="method-heading"
-              className="font-display text-[24px] font-medium tracking-[-0.015em] text-pb-ink mb-4"
-            >
-              The math, in the open
-            </h2>
-            <div className="prose-pb-lg">
-              <p>
-                Waste is launches times one minus your hit rate times the test
-                spend each creative gets before the verdict. Launch more
-                creatives and waste rises linearly. Raise your monthly spend
-                and waste rises too, because test spend per creative scales
-                with account size: we assume each creative tests with half a
-                percent of monthly spend (floored at $200, capped at $10,000),
-                which is the typical pattern, and the assumption is printed
-                live under the sliders with the resulting testing budget. If
-                your account tests differently, pin your own number and it
-                stays fixed. Cost per winning creative is test spend divided
-                by hit rate, because every winner carries the test spend of
-                the losers it took to find it.
-              </p>
-              <p>
-                The hit-rate value is revenue-framed, with the assumptions in
-                the open: ten more points of hit rate means more winners from
-                the same launches, each winner goes on to absorb scaled spend
-                of roughly ten times its test budget, and that spend earns
-                your winner ROAS against the fatigued spend it replaces, which
-                we credit at a 30 percent ROAS advantage. Add the testing
-                budget you no longer burn on losers and you get the headline
-                figure. The assumptions are deliberately simple: even test
-                budgets, a binary verdict, and a flat fatigue delta. Your
-                account is messier than that, which is the point of measuring
-                it properly.
-              </p>
-            </div>
-          </section>
-
-          <section className="mt-12 max-w-[680px] mx-auto" aria-labelledby="levers-heading">
-            <h2
-              id="levers-heading"
-              className="font-display text-[24px] font-medium tracking-[-0.015em] text-pb-ink mb-4"
-            >
-              How you move these numbers
-            </h2>
-            <div className="prose-pb-lg">
-              <ul>
-                <li>
-                  <strong>Raise hit rate</strong>: build new creatives from the
-                  patterns your winners already share. Peachblue tags every
-                  creative across 31 dimensions and clusters your account into
-                  archetypes, so the next batch inherits what your data proves
-                  works.
-                </li>
-                <li>
-                  <strong>Call verdicts faster</strong>: Peachblue&apos;s composite
-                  score tiers every creative from Top Performer to
-                  Underperformer daily, with guardrails against low-data flukes,
-                  so losers stop absorbing budget past the point of information.
-                </li>
-                <li>
-                  <strong>Count winners honestly</strong>: perceptual
-                  fingerprinting groups the same creative across every ad and
-                  platform it runs in, so hit rate is measured per creative, not
-                  per ad placement.
-                </li>
-              </ul>
-              <p>
-                The deeper version of this thinking is in{" "}
-                <Link href="/blog">the Peachblue blog</Link>, and the product
-                behind it starts at $79 on <Link href="/pricing">pricing</Link>.
-              </p>
-            </div>
-          </section>
-
-          <div className="max-w-[680px] mx-auto">
-            <FaqBlock faq={FAQ} />
-            <TrialCta />
-          </div>
-        </div>
-      </main>
-      <SiteFooter />
-    </div>
+        </Block>
+      </Shell>
+      <Frame>
+        <Rule />
+        <Block top="band" bottom="band">
+          <Clauses>
+            <Clause title="The math, in the open" id="method-heading">
+              <Prose>
+                <p>
+                  Waste is launches times one minus your hit rate times the test
+                  spend each creative gets before the verdict. Launch more
+                  creatives and waste rises linearly. Raise your monthly spend
+                  and waste rises too, because test spend per creative scales
+                  with account size: we assume each creative tests with half a
+                  percent of monthly spend (floored at $200, capped at $10,000),
+                  which is the typical pattern, and the assumption is printed
+                  live under the sliders with the resulting testing budget. If
+                  your account tests differently, pin your own number and it
+                  stays fixed. Cost per winning creative is test spend divided
+                  by hit rate, because every winner carries the test spend of
+                  the losers it took to find it.
+                </p>
+                <p>
+                  The hit-rate value is revenue-framed, with the assumptions in
+                  the open: ten more points of hit rate means more winners from
+                  the same launches, each winner goes on to absorb scaled spend
+                  of roughly ten times its test budget, and that spend earns
+                  your winner ROAS against the fatigued spend it replaces, which
+                  we credit at a 30 percent ROAS advantage. Add the testing
+                  budget you no longer burn on losers and you get the headline
+                  figure. The assumptions are deliberately simple: even test
+                  budgets, a binary verdict, and a flat fatigue delta. Your
+                  account is messier than that, which is the point of measuring
+                  it properly.
+                </p>
+              </Prose>
+            </Clause>
+            <Clause title="How you move these numbers" id="levers-heading">
+              <Prose>
+                <ul>
+                  <li>
+                    <strong>Raise hit rate</strong>: build new creatives from the
+                    patterns your winners already share. Peachblue tags every
+                    creative across 31 dimensions and clusters your account into
+                    archetypes, so the next batch inherits what your data proves
+                    works.
+                  </li>
+                  <li>
+                    <strong>Call verdicts faster</strong>: Peachblue&apos;s composite
+                    score tiers every creative from Top Performer to
+                    Underperformer daily, with guardrails against low-data flukes,
+                    so losers stop absorbing budget past the point of information.
+                  </li>
+                  <li>
+                    <strong>Count winners honestly</strong>: perceptual
+                    fingerprinting groups the same creative across every ad and
+                    platform it runs in, so hit rate is measured per creative, not
+                    per ad placement.
+                  </li>
+                </ul>
+                <p>
+                  The deeper version of this thinking is in{" "}
+                  <Link href="/blog">the Peachblue blog</Link>, and the product
+                  behind it starts at $79 on <Link href="/pricing">pricing</Link>.
+                </p>
+              </Prose>
+            </Clause>
+          </Clauses>
+        </Block>
+        <Rule />
+        <FaqBand faq={FAQ} />
+        <Rule />
+        <TrialBand />
+        <Rule />
+      </Frame>
+    </SitePage>
   );
 }

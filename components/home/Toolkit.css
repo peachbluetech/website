@@ -1,0 +1,76 @@
+/* Toolkit.tsx's own rules. Classes are .el-* with this
+   section's name in them. The shared system is
+   components/site/system.css: do not restate its classes here; to
+   adjust a part inside this section, put this section's class in front
+   of it. Colours, radii, shadows and durations are the system's tokens,
+   never literals. */
+
+/* The band's distance is measured to text, above and below: the list
+   gives back its last row's own 20px, and from 1024, where it stands
+   beside the h2, its first row's too, so the first title's cap top is
+   level with the h2's (the FAQ's rows do the same beside their
+   heading). */
+.el-toolkit-list {
+  margin-bottom: -20px;
+}
+@media (min-width: 1024px) {
+  .el-toolkit-list {
+    margin-top: -20px;
+  }
+}
+
+/* The dotted separator takes its own 2px above a row, so every row's
+   text is 20px from its dots. */
+.el-toolkit-item + .el-toolkit-item {
+  padding-top: 2px;
+}
+
+/* One row, one link: the title in a 220px column, the description
+   beside it, the arrow at the end on the title's line. 20px above and
+   below the text. The corner is for the focus ring only, the same one
+   the disclosure rows' ring has. */
+.el-toolkit-row {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr) 12px;
+  align-items: start;
+  padding-block: 20px;
+  border-radius: var(--el-r-bar);
+}
+.el-toolkit-title {
+  grid-column: 1;
+  grid-row: 1;
+  padding-right: 16px;
+}
+/* Half a pixel down: the two sizes then share a baseline, not a cap top. */
+.el-toolkit-desc {
+  grid-column: 2;
+  grid-row: 1;
+  margin-top: 0.5px;
+  padding-right: 32px;
+}
+.el-toolkit-row .el-glyph {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+/* A phone: the title over its description, the arrow on the title's
+   line. */
+@media (max-width: 767.98px) {
+  .el-toolkit-row {
+    grid-template-columns: minmax(0, 1fr) 12px;
+    column-gap: 16px;
+    row-gap: 12px;
+  }
+  .el-toolkit-title {
+    padding-right: 0;
+  }
+  .el-toolkit-desc {
+    grid-column: 1;
+    grid-row: 2;
+    margin-top: 0;
+    padding-right: 0;
+  }
+  .el-toolkit-row .el-glyph {
+    grid-column: 2;
+  }
+}

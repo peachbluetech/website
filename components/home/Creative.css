@@ -1,0 +1,108 @@
+/* Creative.tsx's own rules. Classes are .el-* with this
+   section's name in them. The shared system is
+   components/site/system.css: do not restate its classes here; to
+   adjust a part inside this section, put this section's class in front
+   of it. Colours, radii, shadows and durations are the system's tokens,
+   never literals. */
+
+/* A card with a floated inner card: the inner card in its upper part,
+   40px from the top from 768, the sentence pinned on its foot (the
+   card's own 28px sides and 32px bottom). From 1024, where the two stand
+   side by side, both are one height. */
+.el-creative .el-creative-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 40px;
+}
+@media (min-width: 768px) {
+  .el-creative .el-creative-card {
+    padding-top: 40px;
+  }
+}
+/* 440 where the recipe's inner card is at its full 676 (from about
+   1221); under that the inner cards are smaller, and the cards with them
+   (390 at 1024), so the air between a picture and its sentence holds. */
+@media (min-width: 1024px) {
+  .el-creative .el-creative-card {
+    min-height: clamp(390px, calc(390px + (100vw - 1024px) * 0.254), 440px);
+  }
+}
+/* On a phone the card's 20px of padding is 16 at the sides, so an inner
+   card stands 16px from them as it does at 1440, and the sentence keeps
+   its 20. */
+@media (max-width: 767.98px) {
+  .el-creative .el-creative-card {
+    gap: 24px;
+    padding-inline: 16px;
+  }
+  .el-creative-caption {
+    padding-inline: 4px;
+  }
+}
+
+/* The recipe: one inner card, 676 wide at most (the ledger painted at
+   1.15), centred in the two thirds card. */
+.el-creative-recipe {
+  max-width: 676px;
+  margin-inline: auto;
+}
+/* The ledger's scaling box. The page's .pb-fluid with its two numbers
+   set here and not inline, so one render has two layouts, chosen by the
+   room the card has and not by the page's type breakpoint:
+   - from 600, 560 wide by 218: the ledger's own design width, and its
+     height as measured on the built page (painted at 0.85 at 600);
+   - under that, 284 wide with the cohort column left out, as the app
+     leaves it out in a narrow window. There the one two-word value that
+     does not fit its column takes a second line, as it does in the app,
+     so the ledger is 239 tall. Painted at 0.94 at 390 and never over
+     1.09: the inner card stops at 340 and is centred. */
+.el-creative-recipe .el-creative-ledger {
+  --fw: 560;
+  --fh: 218;
+  max-width: none;
+}
+@media (max-width: 599.98px) {
+  .el-creative-recipe {
+    max-width: 340px;
+  }
+  .el-creative-recipe .el-creative-ledger {
+    --fw: 284;
+    --fh: 239;
+  }
+  .el-creative-recipe .text-pb-fg-faint {
+    display: none;
+  }
+}
+
+/* The reference ads: one inner card 16px from the card's sides (the
+   card's own padding is 28). Where the cards are stacked, under 1024, it
+   keeps the width it has at 1440 and is centred, so the two ads are
+   never painted over 1.12. */
+.el-creative-refs {
+  margin-inline: -12px;
+}
+@media (max-width: 1023.98px) {
+  .el-creative-refs {
+    max-width: 340px;
+    margin-inline: auto;
+  }
+}
+/* The brief, anchored by its foot in a window as tall as its last row. */
+.el-creative-end {
+  position: relative;
+  overflow: hidden;
+  height: 205px;
+}
+.el-creative-end-in {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 276px;
+}
+/* A 132px tile cuts both names short with an ellipsis; here each name is
+   let onto a second line and given two, so the figures share a line. */
+.el-creative-refs .truncate {
+  white-space: normal;
+  min-height: 2lh;
+}

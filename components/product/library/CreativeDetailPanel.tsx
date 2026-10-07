@@ -29,8 +29,8 @@ import {
   type TagValue,
 } from "./data";
 
-/* The Creative Detail Panel for the sample account's top creative,
-   "Little can. Big mood.": the 540px drawer that opens from the right of
+/* The Creative Detail Panel for the sample account's new winner of the
+   week (HERO_CREATIVE): the 540px drawer that opens from the right of
    the Creative Library. Stone ground, a left hairline and the lift shadow
    of a floating surface. Inside 20px of padding the content column is 500.
 

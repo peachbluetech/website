@@ -11,10 +11,10 @@ For every JPEG or PNG directly under public/ads this writes three files:
                               A source narrower than 560px is never enlarged:
                               it is re-encoded at its own size.
   public/ads/wide/<stem>.webp the 16:9 band of the file at its full width
-                              (1080 by 608 from a 1080 by 1920 creative, 640
-                              by 360 from a 640 by 1137 one), cut at the
-                              creative's "wide" focus. For 16:9 slots wider
-                              than 280px, which show only that band.
+                              (1080 by 608 from a 1080 by 1920 creative),
+                              cut at the creative's "wide" focus. For 16:9
+                              slots wider than 280px, which show only that
+                              band.
 
 Focus. The creatives carry their headline in the top or the bottom third,
 so a crop about the centre cuts it in half. Where each crop sits is written

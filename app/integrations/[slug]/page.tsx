@@ -1,13 +1,38 @@
+import { Fragment } from "react";
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { SiteNav } from "@/components/site/SiteNav";
-import { SiteFooter } from "@/components/site/SiteFooter";
-import { FaqBlock } from "@/components/blog/FaqBlock";
-import { TrialCta } from "@/components/blog/TrialCta";
-import { INTEGRATION_PAGES } from "@/content/integrations/manifest";
-import { OutlineLink, PrimaryLink } from "@/components/site/Button";
-import { SITE_URL, TRIAL_HREF, TRIAL_LABEL, RISK_REVERSAL } from "@/lib/site";
+import { MonoMark, type PlatformMark } from "@/components/home/Marks";
+import { FaqBand, LinkBand, PageHeader, Stack, Steps, TrialBand } from "@/components/site/kit";
+import { Block, Cell, Cells, Eyebrow, Frame, Pill, Rule, Side, T, TONE, TextLink, cx } from "@/components/site/parts";
+import { SitePage } from "@/components/site/SitePage";
+import { INTEGRATION_PAGES, type IntegrationPage as Integration } from "@/content/integrations/manifest";
+import { RISK_REVERSAL, SITE_URL, TRIAL_HREF, TRIAL_LABEL } from "@/lib/site";
+import { PlatformPicture } from "./picture";
+import "./integration.css";
+
+/* One page for each connected platform (/integrations/<slug>), built in
+   the design system from the inner-page kit. Every word comes from
+   content/integrations/manifest.ts; the words, the heading levels, the
+   links and the ids are the published ones: restyle freely, do not
+   reword.
+
+   Top to bottom:
+   1. The header, split as the homepage's hero is: the platform's mark
+      and the eyebrow, the h1, the two pills and the risk line on the
+      left, the lead on the right. Under it one picture of the product
+      for that platform in a taupe panel (picture.tsx).
+   2. What it does (a section named "Capabilities" for assistive tech,
+      with no heading of its own): each capability a ruled cell, its
+      title an h2 as it always was, three across where there are six
+      and two across where there are four. Under the cells one line:
+      the plan the platform is on.
+   3. How it works: the h2 in the narrow column, the three steps on
+      dotted separators in the wide one, and the line that points at the
+      setup guide.
+   4. The questions (their schema is in the JSON-LD), the links to the
+      blog, the trial band.
+
+   A server component: every word is in the HTML the server sends. */
 
 export const dynamicParams = false;
 
@@ -36,6 +61,26 @@ export async function generateMetadata({
     },
     twitter: { card: "summary_large_image", title: page.title, description: page.description },
   };
+}
+
+/* The one-colour marks of each platform, as the homepage's platform
+   links show them: Meta keeps both of its marks. Decoration: the eyebrow
+   beside them names the platform. */
+const MARKS: Record<string, PlatformMark[]> = {
+  meta: ["facebook", "instagram"],
+  tiktok: ["tiktok"],
+  "google-ads": ["google"],
+  "amazon-dsp": ["amazon"],
+};
+
+/* The capabilities in rows of ruled cells: three across where the page
+   has a multiple of three, two across otherwise, so no row is ever
+   short. */
+function rowsOf(features: Integration["features"]) {
+  const cols = features.length % 3 === 0 ? 3 : 2;
+  const rows: Integration["features"][] = [];
+  for (let i = 0; i < features.length; i += cols) rows.push(features.slice(i, i + cols));
+  return { cols, marks: cols === 3 ? "thirds" : "halves", rows } as const;
 }
 
 export default async function IntegrationPage({
@@ -85,113 +130,121 @@ export default async function IntegrationPage({
     ],
   };
 
+  const marks = MARKS[page.slug] ?? [];
+  const features = rowsOf(page.features);
+
   return (
-    <div className="flex flex-col min-h-screen bg-pb-bg">
+    <SitePage>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <SiteNav />
-      <main className="flex-1 pt-12 md:pt-[72px] pb-24 px-6">
-        <div className="max-w-[860px] mx-auto">
-          {/* Hero */}
-          <header className="mb-14 text-center">
-            <div className="text-[13px] font-semibold text-pb-peach-700 mb-3">
-              {page.eyebrow}
-            </div>
-            <h1 className="font-display text-[clamp(30px,5vw,46px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-ink text-balance mb-4">
-              {page.h1} {page.h1Accent}
-            </h1>
-            <p className="text-[16px] text-pb-fg-secondary leading-relaxed max-w-[600px] mx-auto mb-7">
-              {page.description}
-            </p>
-            <div className="flex items-center justify-center gap-3 flex-wrap">
-              <PrimaryLink href={TRIAL_HREF}>{TRIAL_LABEL}</PrimaryLink>
-              <OutlineLink href="/pricing">See pricing</OutlineLink>
-            </div>
-            <p className="mt-4 text-[12.5px] text-pb-fg-muted">{RISK_REVERSAL}</p>
-          </header>
 
-          {/* Features */}
-          <section aria-label="Capabilities" className="mb-14">
-            <div className="grid sm:grid-cols-2 gap-4">
-              {page.features.map((f) => (
-                <div
-                  key={f.title}
-                  className="rounded-[10px] border border-pb-border bg-pb-card p-6"
-                >
-                  <h2 className="text-[15px] font-semibold text-pb-fg mb-2">{f.title}</h2>
-                  <p className="text-[14px] text-pb-fg-secondary leading-relaxed">{f.body}</p>
-                </div>
-              ))}
-            </div>
-            <p className="mt-4 text-[13px] text-pb-fg-muted">{page.planNote}</p>
-          </section>
-
-          {/* How it works */}
-          <section aria-labelledby="how-heading" className="mb-14">
-            <h2
-              id="how-heading"
-              className="font-display text-[24px] font-medium tracking-[-0.015em] text-pb-ink mb-5"
-            >
-              How it works
-            </h2>
-            <ol className="space-y-3">
-              {page.steps.map((s, i) => (
-                <li key={s} className="flex gap-3 text-[15px] text-pb-fg leading-relaxed">
-                  <span
-                    aria-hidden="true"
-                    className="shrink-0 w-5 font-mono text-[13px] text-pb-fg-muted tnum mt-[3px]"
-                  >
-                    {i + 1}
+      <PageHeader
+        crumb={
+          <div className="el-integration-kicker">
+            {marks.length > 0 && (
+              <span aria-hidden="true" className="el-integration-marks">
+                {marks.map((mark) => (
+                  <span key={mark} className="el-integration-mark">
+                    <MonoMark mark={mark} size={16} />
                   </span>
-                  {s}
-                </li>
-              ))}
-            </ol>
-            <p className="mt-4 text-[13.5px] text-pb-fg-muted">
-              Full setup guide:{" "}
-              <Link
-                href={`/docs/${page.docsSlug}`}
-                className="underline underline-offset-2 decoration-pb-border-control hover:text-pb-peach-600 transition-colors"
-              >
-                docs
-              </Link>
-              . Read-only access; Peachblue never modifies your campaigns.
-            </p>
-          </section>
-
-          {/* FAQ (visible; schema in JSON-LD above) */}
-          <FaqBlock faq={page.faq} />
-
-          {/* Related */}
-          {page.relatedBlog.length > 0 && (
-            <section className="mt-12" aria-labelledby="related-heading">
-              <h2
-                id="related-heading"
-                className="text-[13px] font-semibold text-pb-peach-700 mb-4"
-              >
-                From the blog
-              </h2>
-              <ul className="space-y-2.5">
-                {page.relatedBlog.map((r) => (
-                  <li key={r.href}>
-                    <Link
-                      href={r.href}
-                      className="text-[15px] rounded-sm font-semibold text-pb-fg underline underline-offset-4 decoration-pb-border-control hover:text-pb-peach-600 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pb-peach-500 focus-visible:ring-offset-2"
-                    >
-                      {r.label}
-                    </Link>
-                  </li>
                 ))}
-              </ul>
-            </section>
-          )}
+              </span>
+            )}
+            <Eyebrow>{page.eyebrow}</Eyebrow>
+          </div>
+        }
+        title={
+          <>
+            {page.h1} {page.h1Accent}
+          </>
+        }
+        lead={page.description}
+        actions={
+          <>
+            <Pill href={TRIAL_HREF}>{TRIAL_LABEL}</Pill>
+            <Pill href="/pricing" variant="outline">
+              See pricing
+            </Pill>
+          </>
+        }
+        note={RISK_REVERSAL}
+      >
+        <PlatformPicture slug={page.slug} />
+      </PageHeader>
 
-          <TrialCta agency={page.agency} />
-        </div>
-      </main>
-      <SiteFooter />
-    </div>
+      <Frame>
+        <Rule marks={features.marks} />
+
+        {/* What it does: ruled cells, then the plan it is on. */}
+        <section aria-label="Capabilities">
+          {features.rows.map((row, i) => (
+            <Fragment key={row[0].title}>
+              {i > 0 && <Rule marks={features.marks} />}
+              <Cells cols={features.cols}>
+                {row.map((f) => (
+                  <Cell key={f.title}>
+                    <Stack gap={16}>
+                      <h2 className={cx(T.subhead, "el-balance")}>{f.title}</h2>
+                      <p className={cx(T.bodySm, TONE.smoke, "el-pretty el-integration-body")}>{f.body}</p>
+                    </Stack>
+                  </Cell>
+                ))}
+              </Cells>
+            </Fragment>
+          ))}
+          <Rule marks={features.marks} />
+          <Block top="gap" bottom="gap">
+            <p className={cx(T.bodySm, "el-pretty el-integration-plan")}>{page.planNote}</p>
+          </Block>
+        </section>
+
+        <Rule />
+
+        {/* How it works */}
+        <section aria-labelledby="how-heading">
+          <Block top="band" bottom="band">
+            <Side>
+              <h2 id="how-heading" className={T.titleLg}>
+                How it works
+              </h2>
+              <div>
+                <Steps items={page.steps} />
+                <p className={cx(T.bodySm, TONE.smoke, "el-pretty el-integration-setup")}>
+                  Full setup guide:{" "}
+                  <TextLink href={`/docs/${page.docsSlug}`} underline>
+                    docs
+                  </TextLink>
+                  . Read-only access; Peachblue never modifies your campaigns.
+                </p>
+              </div>
+            </Side>
+          </Block>
+        </section>
+
+        <Rule />
+
+        {/* The questions (visible; their schema is in the JSON-LD above).
+            A band that has nothing to show draws no rule of its own. */}
+        {page.faq.length > 0 && (
+          <>
+            <FaqBand faq={page.faq} />
+            <Rule />
+          </>
+        )}
+
+        {page.relatedBlog.length > 0 && (
+          <>
+            <LinkBand id="related-heading" title="From the blog" links={page.relatedBlog} />
+            <Rule />
+          </>
+        )}
+
+        <TrialBand agency={page.agency} />
+
+        <Rule />
+      </Frame>
+    </SitePage>
   );
 }

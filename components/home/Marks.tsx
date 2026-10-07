@@ -1,9 +1,6 @@
-import type { ReactNode } from "react";
-import { PeachblueMark } from "@/components/site/PeachblueMark";
-
 /* Platform marks in one colour. Outside a product fragment the page
-   shows every platform in navy, so no brand colour competes with the one
-   peach accent. These are single-colour versions of the platforms'
+   shows every platform in ink, so no brand colour competes with the
+   product pictures. These are single-colour versions of the platforms'
    glyphs (Simple Icons, CC0) that paint in currentColor. Decoration: the
    platform's name is always printed beside its mark.
 
@@ -62,20 +59,10 @@ export const PLATFORM_MARKS: { marks: PlatformMark[] }[] = [
   { marks: ["amazon"] },
 ];
 
-/* The marks for one platform, side by side. */
-export function MarkGroup({ marks, size = 20 }: { marks: PlatformMark[]; size?: number }): ReactNode {
-  return (
-    <span className="flex shrink-0 items-center gap-1.5">
-      {marks.map((m) => (
-        <MonoMark key={m} mark={m} size={size} />
-      ))}
-    </span>
-  );
-}
-
-/* ── The two marks of the Agent Peach band ──────────────────────────
-   The band's two titles are a pair, "Chat with Agent Peach" and "Chat in
-   Claude", and each is led by the mark of the place it names. Both are
+/* ── The Claude mark of the Agent Peach section ─────────────────────
+   The section's two titles are a pair, "Chat with Agent Peach" and "Chat
+   in Claude", and each is led by the mark of the place it names (the
+   first is the logo tile, from components/site/parts.tsx). Both are
    decoration (aria-hidden): the title beside each says the name. They
    are drawn in those two places and nowhere else on the page. */
 
@@ -100,21 +87,5 @@ export function ClaudeMark({ className = "size-8" }: { className?: string }) {
     <svg aria-hidden="true" viewBox="0 0 24 24" fill={CLAUDE_FILL} className={`shrink-0 ${className}`}>
       <path d={CLAUDE_PATH} />
     </svg>
-  );
-}
-
-/* Peachblue's own p (components/site/PeachblueMark, the brand's geometry)
-   in navy on a white 4px square, the form the MCP tool row draws it in
-   at 20px. Not the gradient logo tile: that stays the nav's and the
-   footer's. `className` sets the square's size; the p is three quarters
-   of it. */
-export function PeachblueTile({ className = "size-8" }: { className?: string }) {
-  return (
-    <span
-      aria-hidden="true"
-      className={`grid shrink-0 place-items-center rounded-[4px] bg-[var(--mn-white)] text-[color:var(--mn-navy)] [&>svg]:size-3/4 ${className}`}
-    >
-      <PeachblueMark />
-    </span>
   );
 }

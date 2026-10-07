@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import { SitePage } from "@/components/site/SitePage";
 import DemoClient from "./demo-client";
 
 export const metadata: Metadata = {
@@ -9,10 +10,16 @@ export const metadata: Metadata = {
   alternates: { canonical: "/demo" },
 };
 
+/* Book a demo. The shell, the nav and the footer are the server's; what
+   stands between them (demo-client.tsx) reads the visit's intent from
+   the address, so it is a client component behind a Suspense boundary,
+   as it always was. */
 export default function DemoPage() {
   return (
-    <Suspense>
-      <DemoClient />
-    </Suspense>
+    <SitePage current="demo">
+      <Suspense>
+        <DemoClient />
+      </Suspense>
+    </SitePage>
   );
 }

@@ -1,0 +1,496 @@
+/* ShowcaseA.tsx's own rules: the hero picture. Classes are .el-ha-*.
+   The shared system is components/site/system.css and the picture's
+   pieces are showcase.css: neither is restated here; where a shared
+   part is adjusted inside this picture, .el-ha stands in front of it.
+   Colours, radii and shadows are the system's tokens, never literals.
+
+   One set of elements in four arrangements. Which one is decided by the
+   width of the panel's own content box (the panel less its side
+   padding; a container query on .el-ha), not by the screen, so the
+   picture is right wherever the panel is that wide. With the page's
+   gutters that comes to:
+
+     under 612     picture first: one column        (screens under 684)
+     612 and up    the lit card, a strip under it   (684 to 1023)
+     896 and up    the triptych, the brief's values (1024 to 1185)
+     1058 and up   the triptych, whole              (1186 and up)
+
+   and, at 1128 (the panel at its full 1176, screens from 1304) on a
+   screen 920 or more tall, the triptych with a larger ad. The rules are
+   written narrowest first; each wider block only says what changes. A
+   browser without container queries (before 2023) shows the phone
+   column at every width.
+
+   What does not change with the arrangement: the lit card (white, the
+   whisper shadow) and the two pale cards; the ad in the hero's frame
+   (2 by 3, its headline and its can whole) with 8px corners; a tag as
+   plain type, the key over its value, level with its mark and joined
+   to it by one hairline; the score, the dollars and the verb; the cut
+   list's thumbnails in grey.
+
+   Unlayered, like the rest of the system, so it outranks every Tailwind
+   utility: nothing here sets a background on an element that takes one
+   of the product's tier classes.
+
+   Nothing moves: no transition, no animation, no hover. */
+
+/* ── The panel ────────────────────────────────────────────────────
+   Taupe, 24px corners (the Card's). The same taupe over and under the
+   picture: 24px on a phone, 48 from 768, where the lit card is 328 tall
+   and the triptych's panel 424. */
+.el-ha {
+  container: el-ha / inline-size;
+  padding: 24px 16px;
+}
+@media (min-width: 768px) {
+  .el-ha {
+    padding: 48px 24px;
+  }
+}
+
+/* ── Picture first: one column ────────────────────────────────────
+   No wider than 440, centred in the panel. The lit card across it, then
+   the two pale cards side by side, 8px from it and from each other. A
+   half is never narrower than what it holds, so at 390 the next brief
+   (its longest line is 136px) takes a little from the cut list. */
+.el-ha-set {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(min-content, 1fr));
+  gap: 8px;
+  width: min(100%, 440px);
+  margin-inline: auto;
+  /* The ad's size. Its frame is 2 by 3 (the shared piece's own rule,
+     showcase.css) and every size it takes is a pair of whole pixels:
+     136 by 204, 160 by 240, 180 by 270, 192 by 288, 224 by 336.
+     Everything that depends on it is worked out from these two. */
+  --el-ha-ad-w: 160px;
+  --el-ha-ad-h: 240px;
+  /* A tag's hairline past the ad's edge; the tag starts 8px after it. */
+  --el-ha-reach: 20px;
+  /* The lit card's full width from the strip up. */
+  --el-ha-lead-w: 698px;
+  /* Between the head, the verdict and the reason, from the strip up. */
+  --el-ha-part: 18px;
+}
+
+/* The lit card: an Inner (white, 20px corners, the whisper shadow) with
+   its own 16px of padding, rows 14px apart: the head; the ad with the
+   lane of its tags; the verdict; the reason; the foot. The ad is as
+   large here as the card lets it be and its tags still point at it:
+   the card's reading column has only moved from beside the lane to
+   under it. */
+.el-ha .el-ha-lead {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: var(--el-ha-ad-w) minmax(0, 1fr);
+  row-gap: 14px;
+}
+.el-ha-head,
+.el-ha-verdict,
+.el-ha-why,
+.el-ha-foot {
+  grid-column: 1 / -1;
+}
+.el-ha-ad {
+  grid-column: 1;
+  width: var(--el-ha-ad-w);
+}
+/* The lane, as tall as the ad. A tag stands at its mark's height, one
+   hairline and 8px of white from the ad, centred on that line: 17px is
+   half of the key's 16 and the value's 18. The hairline is the lane's
+   continuation of the white one the mark draws over the ad. */
+.el-ha-tags {
+  grid-column: 2;
+  position: relative;
+}
+.el-ha-tag {
+  position: absolute;
+  top: var(--el-hs-y);
+  left: calc(var(--el-ha-reach) + 8px);
+  translate: 0 -50%;
+}
+.el-ha-tag::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: calc(100% + 8px);
+  width: var(--el-ha-reach);
+  height: 1px;
+  background: var(--el-dot);
+  translate: 0 -50%;
+}
+/* The white hairline over the ad has a dark edge, so it holds on the
+   photograph. That edge ends with the ad: without this it stands 1px
+   out into the lane, a tick at the start of the lane's own hairline. */
+.el-ha .el-hs-lead--in {
+  clip-path: inset(-1px 0 -1px -1px);
+}
+/* On whole pixels, like its mark (showcase.css says why). */
+@supports (top: round(1%, 1px)) {
+  .el-ha-tag {
+    top: calc(round(var(--el-hs-y), 1px) - 17px);
+    translate: none;
+  }
+  .el-ha-tag::before {
+    top: 17px;
+    translate: none;
+  }
+}
+
+/* A pale card: the quiet neighbour of a lit one. The pale ground, a
+   hairline ring as its only edge, 20px corners, no shadow. Its type is
+   earth. */
+.el-ha-pale {
+  border-radius: var(--el-r-card);
+  background: var(--el-pale);
+  box-shadow: var(--el-pale-ring);
+}
+.el-ha-cut,
+.el-ha-brief--under {
+  padding: 14px 14px 12px;
+}
+/* The next brief is in the HTML twice (see ShowcaseA.tsx): this is the
+   one for beside the lit card. */
+.el-ha-brief--side {
+  display: none;
+}
+/* A thumbnail of the cut list: 32px, grey, in every arrangement. The
+   ads on their way out are quiet, so the one ad in colour is the one
+   that won. */
+.el-ha .el-ha-thumb {
+  flex: none;
+  width: 32px;
+  filter: grayscale(1);
+  opacity: 0.7;
+}
+/* The cut list two by two: a thumbnail, 6px, its score. */
+.el-ha-cuts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px 6px;
+  margin-top: 10px;
+}
+.el-ha-cut-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+/* The next brief: four lines of 12px type in rows of 22, the value at
+   the left (regular), its lift at the right (medium). */
+.el-ha-lines {
+  margin-top: 6px;
+}
+.el-ha-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 22px;
+  white-space: nowrap;
+}
+.el-ha .el-ha-plain {
+  font-weight: 400;
+}
+
+/* A panel of 336 or more (a screen from 408, the larger phones): the
+   ad is 180 by 270. */
+@container el-ha (min-width: 336px) {
+  .el-ha-set {
+    --el-ha-ad-w: 180px;
+    --el-ha-ad-h: 270px;
+  }
+}
+/* A panel under 318 (a screen under 390): the two pale cards do not
+   fit side by side. One under the other, the cut list's four ads in
+   one row. The lane is narrower too: a tag's hairline is 12px, so the
+   longest tag ("Brand slogan", 82px) still ends inside it. */
+@container el-ha (max-width: 317.98px) {
+  .el-ha-set {
+    grid-template-columns: minmax(0, 1fr);
+    --el-ha-reach: 12px;
+  }
+  .el-ha-cuts {
+    grid-template-columns: repeat(4, auto);
+    justify-content: space-between;
+  }
+}
+/* A panel under 296 (a screen under 368): the ad is 136 by 204, so the
+   lane keeps that room. */
+@container el-ha (max-width: 295.98px) {
+  .el-ha-set {
+    --el-ha-ad-w: 136px;
+    --el-ha-ad-h: 204px;
+  }
+}
+/* Under 272 (a screen under 344) the lane cannot hold the longest tag
+   beside a 136px ad. The ad stands alone, centred, without its marks,
+   and the three tags are one row under it between two stone hairlines,
+   the first at the left edge and the last at the right. Four thumbnails
+   across do not fit either: two by two. */
+@container el-ha (max-width: 271.98px) {
+  .el-ha .el-ha-lead {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .el-ha-ad {
+    justify-self: center;
+  }
+  .el-ha .el-hs-pin,
+  .el-ha .el-hs-lead {
+    display: none;
+  }
+  .el-ha-tags {
+    grid-column: 1;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    justify-content: space-between;
+    column-gap: 12px;
+    padding-block: 10px;
+    border-block: 1px solid var(--el-stone);
+  }
+  .el-ha .el-ha-tag {
+    position: static;
+    translate: none;
+  }
+  .el-ha-tag::before {
+    content: none;
+  }
+  .el-ha-cuts {
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: normal;
+  }
+}
+
+/* ── From 612: the lit card as a row, a strip under it ────────────
+   The set is as wide as the panel lets it be, up to 698. */
+@container el-ha (min-width: 612px) {
+  .el-ha-set {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: min(100%, var(--el-ha-lead-w));
+    --el-ha-ad-w: 192px;
+    --el-ha-ad-h: 288px;
+    --el-ha-reach: 28px;
+  }
+
+  /* The lit card: 328 tall with 20px of padding, the ad's 288 and no
+     more. Four columns: the ad; the lane for its tags; a stone rule;
+     the reading column. At 698 wide they are 192, 150, 1 and 315 (the
+     reading column's 24px of air and 291 of text). Narrower, the lane
+     gives way first (to 140, where the longest tag ends 22px short of
+     the rule) and then the reading column (to 215 of text in a 612px
+     card). */
+  .el-ha .el-ha-lead {
+    grid-template-columns: var(--el-ha-ad-w) minmax(140px, 1fr) 1px minmax(0, 315px);
+    grid-template-rows: auto auto auto 1fr;
+    row-gap: 0;
+    height: calc(var(--el-ha-ad-h) + 40px);
+    padding: 20px;
+  }
+  .el-ha .el-ha-lead::before {
+    content: "";
+    grid-column: 3;
+    grid-row: 1 / -1;
+    background: var(--el-stone);
+  }
+  .el-ha-ad {
+    grid-column: 1;
+    grid-row: 1 / -1;
+    align-self: start;
+  }
+  .el-ha-tags {
+    grid-column: 2;
+    grid-row: 1 / -1;
+  }
+
+  /* The reading column, 24px from the rule: the head, the verdict, the
+     reason (18px apart), and the foot on the card's foot. */
+  .el-ha-head,
+  .el-ha-verdict,
+  .el-ha-why,
+  .el-ha-foot {
+    grid-column: 4;
+    min-width: 0;
+    margin-left: 24px;
+  }
+  .el-ha-head {
+    grid-row: 1;
+  }
+  .el-ha-verdict {
+    grid-row: 2;
+    margin-top: var(--el-ha-part);
+  }
+  .el-ha-why {
+    grid-row: 3;
+    margin-top: var(--el-ha-part);
+  }
+  .el-ha-foot {
+    grid-row: 4;
+    align-self: end;
+  }
+
+  /* The strip: the two pale cards in equal halves under the lit card,
+     both 90 tall. The cut list's four ads in one row, spread across;
+     the next brief's four lines in two columns, read down. A column is
+     as wide as its longer line and the two stand at the card's two
+     edges, so the first column's lift is never nearer than 12px to the
+     second column's value. */
+  .el-ha-cut,
+  .el-ha-brief--under {
+    padding: 14px 16px;
+  }
+  .el-ha-cuts {
+    grid-template-columns: repeat(4, auto);
+    justify-content: space-between;
+    margin-top: 12px;
+  }
+  .el-ha-lines {
+    display: grid;
+    grid-template-rows: repeat(2, auto);
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    justify-content: space-between;
+    gap: 4px 12px;
+    margin-top: 8px;
+  }
+  .el-ha-line {
+    min-height: 16px;
+  }
+}
+
+/* ── From 896: the triptych ───────────────────────────────────────
+   Pale card, lit card, pale card, 16px apart, centred on one axis. The
+   set runs 48px past the panel's edge on each side and the two pale
+   cards take what is left of it, so the panel always cuts them 48px
+   from their outer end: a crop, never a card that happens to end at
+   the wall. What a pale card holds is a column at its inner edge, 20px
+   in, no wider than 152 and never nearer than 16px to the cut.
+
+   The lit card is 698 wide wherever that leaves each pale card 142px
+   on show, a panel of 966; from there down to 896 (a 1024 screen) it
+   gives up to 70px (its lane first, then its reading column, which is
+   231px of text at 1024), so the pale cards keep those 142px and the
+   longest value of the next brief is whole. */
+@container el-ha (min-width: 896px) {
+  .el-ha-set {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: auto;
+    margin-inline: -72px;
+    --el-ha-lead-w: clamp(628px, 100cqw - 268px, 698px);
+  }
+  .el-ha .el-ha-lead {
+    order: 2;
+    flex: none;
+    width: var(--el-ha-lead-w);
+  }
+  .el-ha-cut {
+    order: 1;
+  }
+  .el-ha-brief--side {
+    order: 3;
+  }
+  .el-ha-brief--under {
+    display: none;
+  }
+
+  /* Beside the lit card: 264 tall, 32px shorter than it above and
+     below. */
+  .el-ha-cut,
+  .el-ha-brief--side {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    overflow: hidden;
+    height: calc(var(--el-ha-ad-h) - 24px);
+  }
+  .el-ha-cut {
+    justify-content: flex-end;
+    padding: 16px 20px 8px 64px;
+  }
+  .el-ha-brief--side {
+    padding: 16px 64px 8px 20px;
+  }
+  .el-ha-col {
+    display: flex;
+    flex-direction: column;
+    width: min(100%, 152px);
+  }
+  .el-ha-cut-head {
+    text-align: right;
+  }
+  /* Four rows of equal height. */
+  .el-ha-cuts,
+  .el-ha-brief-rows {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 6px;
+  }
+  .el-ha-cut-item,
+  .el-ha-brief-row {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    white-space: nowrap;
+  }
+  .el-ha-brief-row {
+    justify-content: space-between;
+  }
+  /* A hairline between two rows. It starts at the column's inner edge
+     and runs out through the cut (the card clips it at its own far
+     end), so the list is seen to go on past the panel's edge. Only
+     the lines are cut: every thumbnail, word and figure is whole. */
+  .el-ha-cut-item + .el-ha-cut-item::before,
+  .el-ha-brief-row + .el-ha-brief-row::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    height: 1px;
+    background: var(--el-ring);
+  }
+  .el-ha-cut-item + .el-ha-cut-item::before {
+    right: 0;
+    left: -400px;
+  }
+  .el-ha-brief-row + .el-ha-brief-row::before {
+    right: -400px;
+    left: 0;
+  }
+  .el-ha-cut-score {
+    width: 20px;
+    text-align: right;
+  }
+  /* Until the content box is 1058 wide the column cannot hold a value
+     and its lift 16px clear of the cut: the values alone, whole. */
+  .el-ha-lift {
+    display: none;
+  }
+}
+@container el-ha (min-width: 1058px) {
+  .el-ha-lift {
+    display: inline;
+  }
+}
+
+/* ── A tall, wide screen ──────────────────────────────────────────
+   Where the panel is at its full 1176 and the screen is 920 or more
+   tall (a desktop monitor, not a laptop), the ad is 224 by 336 and the
+   lit card 730 by 376, so the picture is not small on a large screen.
+   The panel is then 472 tall and still ends, with its caption, on the
+   first screen. Type does not grow: the lane and the reading column
+   are as they were, the column's parts 24px apart, with more air over
+   the foot. */
+@media (min-height: 920px) {
+  @container el-ha (min-width: 1128px) {
+    .el-ha-set {
+      --el-ha-ad-w: 224px;
+      --el-ha-ad-h: 336px;
+      --el-ha-lead-w: 730px;
+      --el-ha-part: 24px;
+    }
+  }
+}

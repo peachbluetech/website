@@ -1,0 +1,289 @@
+/* Agent.tsx's own rules. Classes are .el-agent-*. The shared system is
+   components/site/system.css: nothing of it is restated here. Colours,
+   radii, shadows and durations are the system's tokens. */
+
+/* ── The header's list ────────────────────────────────────────────
+   The line that names the two ways, 24px, then the rows. The line is
+   the lead and stays ink; the rows under it (and the rows "More" opens)
+   are smoke: sentence rows on dotted separators under an ink title. In
+   one tone the line that states the two ways read as one more row. */
+.el-agent-points {
+  margin-top: 24px;
+}
+.el-agent-points .el-row {
+  color: var(--el-smoke);
+}
+
+/* ── A card ───────────────────────────────────────────────────────
+   A column: the head, the question, the answer. The answer's window
+   stands on the card's foot, so the card gives up its bottom padding
+   and the window brings the height. Side by side the two cards are one
+   height; whatever one head has less than the other becomes white over
+   that card's fragment, never taupe under its window.
+
+   The card is a size container: what it holds is arranged by the card's
+   own width, which is what decides whether a title and its action share
+   a row and which layout of the product fits the window. The ranges,
+   by the card's content box (its width less its padding):
+     under 380px   a phone's card: narrow, and further (see below)
+     380 to 470    narrow: the two cards side by side between 1024 and
+                   about 1180
+     470 to 550    wide: the two cards side by side from about 1180
+                   (507px of content at 1440). The rules outside every
+                   query are this range's. Left: the turn over the
+                   compact rows.
+     550 to 650    one card across the frame, stacked: the wide range's
+                   pictures, the left laid out wider
+     from 650      across: one card across the frame, stacked, up to
+                   1024: the list and a wider grid */
+.el-agent .el-agent-card {
+  container: el-agent-card / inline-size;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0;
+}
+
+/* The head. In the HTML: the title, the line, the action. On screen the
+   action stands at the right end of the title's row and the line runs
+   under both. */
+.el-agent-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "name action"
+    "line line";
+  align-items: center;
+  column-gap: 16px;
+}
+/* The mark, 8px, the title. The mark is centred on the title's capitals. */
+.el-agent-name {
+  grid-area: name;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+/* The line: 8px under the title's row, which is 17px under the title's
+   baseline (the system's 18px from a card title to its paragraph). Each
+   phrase is a box of its own, so the two keep to their own lines and
+   the change of tone falls on the line break; a phrase wider than the
+   measure wraps inside itself. */
+.el-agent-line {
+  grid-area: line;
+  max-width: 420px;
+  margin-top: 8px;
+}
+.el-agent-phrase {
+  display: inline-block;
+  text-wrap: balance;
+}
+/* The link, and to its left what stands beside it ("Pro and up": after
+   the link in the HTML, outside its anchor). */
+.el-agent-action {
+  grid-area: action;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 12px;
+}
+
+/* The question: the user's turn, on the right. An outline and nothing
+   else: no fill, no shadow, so it cannot be taken for a control. */
+.el-agent-asked {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+.el-agent-bubble {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 8px 16px;
+  border: 1px solid var(--el-dot);
+  border-radius: var(--el-r-pill);
+  color: var(--el-ink);
+  white-space: nowrap;
+}
+
+/* The answer: a white window from 12px under the question to the card's
+   foot. Its fragment stands on the foot too. */
+.el-agent-answer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-top: 12px;
+}
+.el-agent .el-agent-win {
+  --el-window-pad: 16px 16px 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+/* The right card's window also runs off the card's right edge: through
+   the card's side padding (28px; 20 under 768), with no white on that
+   side. */
+.el-agent {
+  --el-agent-pad: 28px;
+}
+@media (max-width: 767.98px) {
+  .el-agent {
+    --el-agent-pad: 20px;
+  }
+}
+.el-agent-answer--bleed {
+  margin-right: calc(var(--el-agent-pad) * -1);
+}
+.el-agent .el-agent-answer--bleed .el-agent-win {
+  --el-window-pad: 16px 0 0 16px;
+}
+
+/* The tool row, then the card it returned: 31px under it where the two
+   cards stand side by side from about 1180 (the rules outside every
+   query), which puts the white under the ads' names level with the
+   white the left window is cut in; 24px in every other layout (set in
+   the queries below). */
+.el-agent-mcp {
+  display: flex;
+  flex-direction: column;
+  gap: 31px;
+}
+
+/* Each picture has more than one box in its one Shot, and the card's
+   width shows one of them. Left: the turn over the compact rows (side by
+   side from about 1180), the list (one card across the frame), the
+   compact rows alone (a narrow card). Right: the grid, and the card in
+   one column for a phone. */
+.el-agent-list,
+.el-agent-rows,
+.el-agent-one {
+  display: none;
+}
+
+/* The card's width decides the layout. A box's own layout is the one in
+   its markup; the others are numbers Agent.tsx measured and hands down
+   as custom properties on the answer (--el-agent-narrow-*, -across-*).
+   They replace the box's own two (--fw, --fh: the width the fragment is
+   laid out at and how much of its height shows), which are set on the
+   element itself, hence !important. A container query reads the card's
+   content box: the card's width less its padding. */
+
+/* ── A narrow card (content under 470px: a card under 526) ────────
+   The two cards side by side between 1024 and about 1180, and one card
+   on a screen under about 570.
+   The head stacks in the HTML's order: the title, the line, the action
+   on a row of its own with "Pro and up" after the link.
+   Left: the compact rows alone, without the turn's prose. */
+@container el-agent-card (max-width: 469.98px) {
+  .el-agent-head {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "name"
+      "line"
+      "action";
+  }
+  .el-agent-line {
+    margin-top: 16px;
+  }
+  .el-agent-action {
+    flex-direction: row;
+    margin-top: 20px;
+  }
+  .el-agent-talk {
+    display: none;
+  }
+  .el-agent-rows {
+    display: block;
+  }
+  .el-agent-mcp {
+    gap: 24px;
+  }
+}
+/* A narrow card that is not a phone's (content from 380px): the compact
+   rows laid out wider, four of them whole; the same grid, shown as far
+   as its second ad, so it is painted at nine tenths or more. */
+@container el-agent-card (min-width: 380px) and (max-width: 469.98px) {
+  .el-agent-rows,
+  .el-agent-grid {
+    --fw: var(--el-agent-narrow-w) !important;
+    --fh: var(--el-agent-narrow-h) !important;
+  }
+}
+/* A phone's card (content under 380px: a screen under about 480).
+   Neither window bleeds; each has 8px of white round its fragment; the
+   left holds the compact rows at their own size, the first two whole;
+   the right holds the card as it lays itself out in one column, whole
+   to the white under its first ad's name. */
+@container el-agent-card (max-width: 379.98px) {
+  .el-agent-answer--bleed {
+    margin-right: 0;
+  }
+  .el-agent .el-agent-win,
+  .el-agent .el-agent-answer--bleed .el-agent-win {
+    --el-window-pad: 8px 8px 0;
+    border-right: 0.5px solid var(--el-ring);
+    border-radius: var(--el-r-window) var(--el-r-window) 0 0;
+  }
+  .el-agent-grid {
+    display: none;
+  }
+  .el-agent-one {
+    display: block;
+  }
+}
+/* Where the question does not fit on a line it takes two, in a bubble
+   no wider than they need. */
+@container el-agent-card (max-width: 339.98px) {
+  .el-agent-bubble {
+    max-width: 200px;
+    border-radius: var(--el-r-bubble);
+    white-space: normal;
+    text-wrap: balance;
+  }
+}
+
+/* ── One card across the frame ────────────────────────────────────
+   Stacked, up to 1024. Two steps, so that neither picture is painted
+   under nine tenths (a list laid out 684 wide in a 564px slot, which is
+   what a 768 screen gives it, was painted at 0.82).
+
+   Content from 550 to 650px (a screen from about 650 to 820): the left
+   keeps the turn over the compact rows, laid out wider so it is painted
+   between 0.92 and 1.1; the grid keeps the layout it has side by side
+   and is painted between 0.99 and 1.17. */
+@container el-agent-card (min-width: 550px) and (max-width: 649.98px) {
+  .el-agent-talk {
+    --fw: var(--el-agent-mid-w) !important;
+    --fh: var(--el-agent-mid-h) !important;
+  }
+}
+/* Content from 650px (a screen from about 820): each fragment is laid
+   out wider, so it is painted near its own size and not half as large
+   again: the left shows the product's list at the app's own width (its
+   own box), the grid is given a wider host. */
+@container el-agent-card (min-width: 650px) {
+  .el-agent-talk {
+    display: none;
+  }
+  .el-agent-list {
+    display: block;
+  }
+  .el-agent-grid {
+    --fw: var(--el-agent-across-w) !important;
+    --fh: var(--el-agent-across-h) !important;
+  }
+  .el-agent-mcp {
+    gap: 24px;
+  }
+  .el-agent .el-agent-host {
+    width: var(--el-agent-across-host) !important;
+  }
+}
+
+/* ── The note row ─────────────────────────────────────────────────
+   40px under the cards and 40px over the rule: the system's distance
+   for a row under a set of cards. The shelf's 16 more under it made the
+   row bottom-heavy. */
+.el-agent-note {
+  padding-bottom: var(--el-head-gap);
+}

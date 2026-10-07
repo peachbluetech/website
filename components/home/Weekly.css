@@ -1,0 +1,116 @@
+/* Weekly.tsx's own rules. Classes are .el-* with this
+   section's name in them. The shared system is
+   components/site/system.css: do not restate its classes here; to
+   adjust a part inside this section, put this section's class in front
+   of it. Colours, radii, shadows and durations are the system's tokens,
+   never literals. */
+
+/* The text half. Distances between trimmed edges: title to paragraph
+   16, paragraph to the mini list 48, a mini title to its line 10, 32
+   between the list's rows.
+   The eyebrow stands 12 over the title, the page's label pair. */
+.el-weekly-title {
+  margin-top: 12px;
+}
+.el-weekly-sub {
+  margin-top: 16px;
+}
+.el-weekly-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px var(--el-gap-grid);
+  margin-top: 48px;
+}
+.el-weekly-line {
+  margin-top: 10px;
+}
+/* From 1024 to 1199 the half is too narrow for two columns of these
+   sentences (they would run to five and six lines), so the list is one
+   column there, as it is on a phone. */
+@media (min-width: 1024px) and (max-width: 1199.98px) {
+  .el-weekly-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 767.98px) {
+  .el-weekly-list {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+    margin-top: 32px;
+  }
+}
+
+/* The picture half: 16px from the centre rail, the right rail and both
+   rules (8 on a phone). The Shot's two wrappers are stretched, so from
+   1024 the stack of cards is as tall as the row: the two cards share
+   what the row has over their own heights, and each holds its fragment
+   in the middle of its white. */
+.el-weekly .el-weekly-media {
+  display: grid;
+  padding: var(--el-inset-card);
+}
+.el-weekly-media > figure {
+  display: grid;
+  min-width: 0;
+}
+.el-weekly-stage {
+  display: flex;
+  flex-direction: column;
+  gap: var(--el-gap-card);
+  min-width: 0;
+}
+@media (min-width: 1024px) {
+  .el-weekly-stage > .el-inner {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+/* The email's window: never painted over one and a quarter (622px of
+   window), and centred in the card's white where the card is wider. */
+.el-weekly-email-box {
+  width: 100%;
+  max-width: 622px;
+  margin-inline: auto;
+}
+.el-weekly-email-in {
+  position: absolute;
+}
+
+/* The channel post's scaling box (the page's .bp-fit; see Weekly.tsx).
+   Two layouts, chosen by the room the card has:
+   - From 600: laid out as wide as its slot and never under 528, the
+     narrowest at which its sentence (438px, in a column 80px narrower
+     than the post) still takes one line; painted down to fit under that
+     (0.83 at 1024) and never up. Measured on the built page, the sender
+     line, the title and that paragraph end 96px down and the worklist's
+     first line starts at 104, so the window is 100: the cut is in the
+     white between them.
+   - Under 600: laid out 332 wide, and wider only once it is painted at
+     1.15, which keeps it under 471, so the sentence takes two lines at
+     every such width: it ends 118px down, the next line starts at 126,
+     and the window is 122.
+   The inner card adds 12px of its own white under the window, so the
+   paragraph has the 16px under it that the sender line has over it. */
+.el-weekly-post {
+  --fw: 528;
+  --fh: 100;
+  --fk: 1;
+}
+@media (max-width: 599.98px) {
+  .el-weekly-post {
+    --fw: 332;
+    --fh: 122;
+    --fk: 1.15;
+  }
+}
+.el-weekly .el-weekly-slack {
+  padding-bottom: 12px;
+}
+/* The post's own card edge goes: the inner card is its edge. */
+.el-weekly-post-in > * {
+  border: 0;
+  border-radius: 0;
+}

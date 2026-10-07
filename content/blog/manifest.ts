@@ -1,13 +1,11 @@
 /**
- * Blog manifest — the single source of truth for every article, planned or
+ * Blog manifest: the single source of truth for every article, planned or
  * published. Drives the blog index, sitemap, llms.txt, RSS, internal links,
  * and the /write-post generator skill.
  *
  * Publishing flow: set an entry's status to "published", make sure
  * content/blog/posts/<slug>.mdx exists, commit. A build-time check in
  * lib/blog.ts fails the build if a published entry has no MDX file.
- *
- * Content strategy: ~/Documents/peachblue strategy/blog-content-strategy.md
  */
 
 export type ArticleType =
@@ -869,7 +867,7 @@ export const ARTICLES: Article[] = [
       },
     ],
     rawMaterial: [
-      "Pillar C2 spec + five-beat structure in ~/Documents/peachblue strategy/blog-content-strategy.md",
+      "Pillar C2 spec + five-beat structure in the blog content strategy",
       "The creative waste diagnostic at /tools/creative-waste (link it; hit-rate piece embeds it)",
       "Scarcity insight: value of a hit-rate point is largest when hit rate is low",
       "Hub for spokes: creative-hit-rate, kill speed (future), bench depth (future), creative-fatigue, creative-testing-framework",

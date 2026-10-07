@@ -6,14 +6,15 @@
 
    - Ad counts are ads, not creatives: one creative runs in several ads.
      84 + 46 + 28 = 158 ads, about 3.6 ads per creative for 44 creatives,
-     split like the 17 sample creatives' platforms (9 Meta, 5 TikTok,
-     3 Google Ads).
+     split like the 22 named sample creatives' platforms (12 Meta,
+     6 TikTok, 4 Google Ads).
    - Every account row carries the Oct 1 stamp of the canonical sync.
    - The rail reads as if opened at 08:00 New York time: the last full
      sync ran three hours ago and the next daily run is 18 hours out.
    - The analysis queue holds the three creatives that are not scored yet
      (44 less 41): new cuts of existing ads that arrived with the Oct 1
-     sync, each drawn with the artwork it was cut from.
+     sync, the first two drawn with the artwork they were cut from, the
+     third with its own square artwork.
 
    Amazon is not part of the canonical account. Its card is only ever drawn
    in the app's not-connected state, with the Connect pill, or left out. */
@@ -119,17 +120,22 @@ export const SYNC_OVERVIEW = {
 export type QueueItem = {
   /** The row's one line of text: the new ad's name. */
   name: string;
-  /** Path under /public: the artwork the cut was made from. */
+  /** Path under /public: the artwork the cut was made from, or the cut's own artwork. */
   image: string;
 };
 
 /* The analysis queue: creatives synced but not analysed yet. Pending is
-   the account's unscored count, so the queue and every other screen agree. */
+   the account's unscored count, so the queue and every other screen agree.
+   All three are new cuts of lines the account already runs: a studio cut
+   of its top creative's line (the blue splash still; the creative itself
+   is the creator's mirror selfie), a tighter crop of "Restock day. Would
+   rebuy.", and the square cut of the week's new winner. None has a score
+   yet, so none is a row of the sample account. */
 export const ANALYSIS_QUEUE: { pending: number; items: QueueItem[] } = {
   pending: ACCOUNT.creativesTotal - ACCOUNT.creativesScored,
   items: [
-    { name: "Big mood, square cut", image: "/ads/fizzli-big-mood.jpg" },
+    { name: "Big mood, studio cut", image: "/ads/fizzli-big-mood.jpg" },
     { name: "Would rebuy, tighter crop", image: "/ads/fizzli-would-rebuy.jpg" },
-    { name: "All fizz, citrus stack", image: "/ads/fizzli-square-b.png" },
+    { name: "All fizz, square cut", image: "/ads/fizzli-zero-sugar-all-fizz-square.jpg" },
   ],
 };

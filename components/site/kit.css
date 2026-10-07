@@ -1,0 +1,1328 @@
+/* ================================================================
+   The inner-page kit: what every page under the homepage is built
+   from. Plain CSS (.el-*) on the tokens of system.css, loaded once
+   for every page by app/layout.tsx, after system.css. The parts that
+   use these rules are in kit.tsx.
+
+   The same rules as system.css: class selectors on the system's own
+   elements, tokens for every colour, radius, shadow and duration, no
+   element selector that can reach into a product picture. The one
+   place elements are styled by name is running text (.el-prose), and
+   there only elements that carry no class of their own.
+
+   A page's own rules go in the stylesheet beside its component, never
+   here. To adjust a part inside a page, put the page's class in front
+   of it.
+
+   Contents
+     1. Page header, crumb, meta row
+     2. Article: body and side column, sticky, side nav
+     3. Clauses: a document in titled rows
+     4. Running text (prose), callout
+     5. Tables: data table, comparison table
+     6. Lists: entry rows, steps, ticked lines, stack
+     7. Badge
+     8. Form: field, input, select, textarea, tick box, range, segmented
+     9. Bands: questions, closing call to action, link rows
+    10. Picture panel: the product window under a page's header
+   ================================================================ */
+
+/* ── 1. Page header ───────────────────────────────────────────────
+   The first thing on an inner page, in the shell and outside the frame,
+   as the homepage's hero is: the line above the title (an eyebrow or a
+   crumb), the page's h1 in the display face, one quiet line under it
+   (a date), the lead, a byline row, the page's pills and the risk line
+   under them. Its top and bottom are named distances on the element
+   (120 above, 72 to the first rule, unless the page says otherwise).
+
+   Two layouts. "split" is the homepage hero's: the title in columns 1
+   to 6 and the lead in columns 7 to 12, everything else under the
+   title. The lead follows the system's rule for a split header: shorter
+   than the title, it ends on the title's last baseline; taller, it
+   starts level with the title's cap top. "stack" is one column, for a
+   long title and for an article: title, lead, byline. Under 1024 both
+   are one column in the order of the HTML. */
+.el-ph--inline {
+  padding: 0;
+}
+/* What follows a header that stands inside an article's body column
+   (a doc's text) starts 48px under it. */
+.el-ph--inline + * {
+  margin-top: var(--el-row);
+}
+/* The line above the title is 28px over it, as over a section heading. */
+.el-ph-pre {
+  margin-bottom: 28px;
+}
+.el-ph-title {
+  max-width: 880px;
+}
+.el-ph-sub {
+  margin-top: 20px;
+}
+.el-ph-lead {
+  max-width: 640px;
+  margin-top: 28px;
+}
+/* Two paragraphs of lead: 28 between trimmed edges is 16 between lines. */
+.el-ph-lead > * + * {
+  margin-top: 28px;
+}
+.el-ph-meta {
+  margin-top: 28px;
+}
+.el-ph-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 32px;
+}
+/* The risk line: 12px under the pills, indented 8px, as on the homepage. */
+.el-ph-note {
+  margin-top: 12px;
+  padding-left: 8px;
+}
+/* Whatever the page hangs under its header (a choice of billing period). */
+.el-ph-extra {
+  margin-top: var(--el-head-gap);
+}
+@media (min-width: 1024px) {
+  .el-ph--split .el-ph-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: repeat(5, auto) 1fr;
+    column-gap: var(--el-gap-grid);
+    align-items: start;
+  }
+  .el-ph--split .el-ph-title {
+    grid-column: 1;
+    grid-row: 1;
+    max-width: 564px;
+  }
+  .el-ph--split .el-ph-sub {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .el-ph--split .el-ph-meta {
+    grid-column: 1;
+    grid-row: 3;
+  }
+  .el-ph--split .el-ph-actions {
+    grid-column: 1;
+    grid-row: 4;
+  }
+  .el-ph--split .el-ph-note {
+    grid-column: 1;
+    grid-row: 5;
+  }
+  /* The lead shares the title's row and ends on its last baseline, as
+     the hero's lead and a section header's do. A lead taller than the
+     title makes the row as tall as itself, so it starts level with the
+     title's cap top. */
+  .el-ph--split .el-ph-lead {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: end;
+    max-width: none;
+    margin-top: 0;
+  }
+  /* A lead that is taller than the title in a header that has lines or
+     pills under the title (leadAt="top"): it runs down the whole right
+     half from the title's cap top, and the last row is the flexible
+     one, so it never pushes the pills away from the title. */
+  .el-ph--lead-top .el-ph-lead {
+    grid-row: 1 / -1;
+    align-self: start;
+  }
+}
+
+/* The crumb: where the page sits, as the line above its title. The
+   eyebrow's type; the link goes to ink under the pointer, the stroke
+   between the two is decoration. */
+.el-crumb a {
+  color: inherit;
+  text-decoration: none;
+  border-radius: var(--el-r-bar);
+  transition: color var(--el-t-fast) var(--el-ease);
+}
+@media (hover: hover) {
+  .el-crumb a:hover {
+    color: var(--el-ink);
+  }
+}
+.el-crumb-sep {
+  margin-inline: 8px;
+  color: var(--el-dot);
+}
+
+/* The meta row: who and when, on one line that wraps. 14/21 in smoke;
+   a name in it is ink (.el-meta-name). */
+.el-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  font: 400 14px/21px var(--el-font-body);
+  letter-spacing: 0.01em;
+  color: var(--el-smoke);
+  font-variant-numeric: tabular-nums;
+}
+.el-meta-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--el-ink);
+  font-weight: 500;
+}
+/* A link in the row or in the line under a title: quiet, underlined. */
+.el-meta a,
+.el-ph-sub a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--el-underline);
+  border-radius: var(--el-r-bar);
+  transition: color var(--el-t-fast) var(--el-ease);
+}
+@media (hover: hover) {
+  .el-meta a:hover,
+  .el-ph-sub a:hover {
+    color: var(--el-ink);
+  }
+}
+/* The initial of a person beside their name: a 24px taupe disc. */
+.el-avatar {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--el-taupe);
+  box-shadow: var(--el-card-ring);
+  font: 500 12px/16px var(--el-font-body);
+  color: var(--el-ink);
+}
+
+/* ── 2. Article ───────────────────────────────────────────────────
+   A long page inside the frame: the body in the wide column of the
+   side layout (724 of 1078) and a side column beside it (a table of
+   contents, a section's nav), which rests under the nav while the body
+   scrolls. The same two columns as the questions band, so a band under
+   the article lines up with it. Under 1024 there is one column: the
+   side column goes, or stands over the body. */
+.el-article-body,
+.el-article-side {
+  min-width: 0;
+}
+/* The side column runs the height of the body, so what is in it has
+   room to stay in view. */
+.el-article-side {
+  align-self: stretch;
+}
+@media (min-width: 1024px) {
+  .el-article--start > .el-article-side {
+    padding-right: var(--el-gap-grid);
+  }
+  .el-article--end > .el-article-side {
+    padding-left: var(--el-gap-grid);
+  }
+  /* The side column rests 32px under the nav. Taller than the screen,
+     it scrolls on its own. */
+  /* 4px of room on every side, so the focus ring of a link at its edge
+     is not cut by the scrolling box. */
+  .el-sticky {
+    position: sticky;
+    top: calc(var(--el-stick) - 4px);
+    max-height: calc(100vh - var(--el-stick) - 24px);
+    margin: -4px;
+    padding: 4px;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+  .el-sticky::-webkit-scrollbar {
+    display: none;
+  }
+}
+@media (max-width: 1023.98px) {
+  .el-article {
+    row-gap: var(--el-row);
+  }
+  .el-article--hide > .el-article-side {
+    display: none;
+  }
+}
+
+/* The side nav: a titled list of links (the docs' pages, "On this
+   page"). Titles are 13/18 at 500 in ink; links are 14/21 in smoke and
+   go to ink under the pointer; the link to the page the reader is on
+   is ink at 500. No line beside the list. */
+.el-sidenav-group + .el-sidenav-group {
+  margin-top: 36px;
+}
+.el-sidenav-list {
+  display: grid;
+  margin-top: 14px;
+}
+.el-sidenav-link {
+  display: block;
+  padding-block: 6.5px;
+  font: 400 14px/21px var(--el-font-body);
+  letter-spacing: 0.01em;
+  color: var(--el-smoke);
+  text-decoration: none;
+  text-wrap: pretty;
+  border-radius: var(--el-r-bar);
+  transition: color var(--el-t-fast) var(--el-ease);
+}
+.el-sidenav-link--sub {
+  padding-left: 14px;
+}
+@media (hover: hover) {
+  .el-sidenav-link:hover {
+    color: var(--el-ink);
+  }
+}
+.el-sidenav-link[aria-current="page"] {
+  color: var(--el-ink);
+  font-weight: 500;
+}
+
+/* ── 3. Clauses ───────────────────────────────────────────────────
+   A document in titled rows (a policy, a method): each row is its
+   heading in the narrow column and its text in the wide one, on the
+   side layout's two columns, with a dotted separator between rows. The
+   heading rests under the nav while its text scrolls. Under 1024 a row
+   is its heading over its text. */
+.el-clause {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 28px;
+  padding-block: 40px;
+}
+.el-clause:first-child {
+  padding-top: 0;
+}
+.el-clause:last-child {
+  padding-bottom: 0;
+}
+.el-clause-body {
+  min-width: 0;
+}
+@media (min-width: 1024px) {
+  .el-clause {
+    grid-template-columns: minmax(0, 354fr) minmax(0, 724fr);
+    align-items: start;
+    padding-block: 56px;
+  }
+  .el-clause-head {
+    position: sticky;
+    top: var(--el-stick);
+    padding-right: var(--el-gap-grid);
+  }
+  /* A row with no heading keeps its text in the wide column. */
+  .el-clause-body:first-child {
+    grid-column: 2;
+  }
+}
+
+/* ── 4. Running text ──────────────────────────────────────────────
+   One class for every long text: an article's MDX, a doc, a policy.
+   A measure of 680px; Inter 17/28 in ink; section headings in the
+   display face at 32/36 and Inter at 500 under that; links in ink on a
+   hairline underline; lists with quiet markers; code and callouts on
+   taupe; pictures with 20px corners; tables on hairlines.
+
+   Only elements that carry no class are styled, and nothing inside a
+   product picture (.pb-app) or an embedded component (.el-embed): a
+   part placed in running text keeps its own look. :where() keeps every
+   selector at the weight of one class and one element. */
+.el-prose {
+  max-width: var(--el-measure);
+  font: 400 17px/28px var(--el-font-body);
+  letter-spacing: 0.005em;
+  color: var(--el-ink);
+}
+.el-prose :where(p, li):where(:not([class], .pb-app *, .el-embed *)) {
+  text-wrap: pretty;
+}
+/* Like every block of text in the system, running text is cut to the
+   cap top of its first line and the baseline of its last, so a distance
+   beside it is the distance the eye sees (7 and 8px at 17/28, within a
+   pixel for a first line that is a heading). */
+.el-prose::before,
+.el-prose::after {
+  content: "";
+  display: table;
+}
+.el-prose::before {
+  margin-bottom: -7px;
+}
+.el-prose::after {
+  margin-top: -8px;
+}
+/* The rhythm: 20px between blocks, more over a heading, less under it. */
+.el-prose > * + * {
+  margin-top: 20px;
+}
+.el-prose > :first-child {
+  margin-top: 0;
+}
+.el-prose :where(h2, h3, h4):where(:not([class], .pb-app *, .el-embed *)) {
+  text-wrap: balance;
+}
+.el-prose h2:where(:not([class], .pb-app *, .el-embed *)) {
+  font-family: var(--el-font-display), var(--el-font-body);
+  font-weight: var(--el-display-weight);
+  font-size: 32px;
+  line-height: 36px;
+  letter-spacing: 0;
+}
+.el-prose > h2:where(:not([class])) {
+  margin-top: 72px;
+}
+.el-prose > h2:where(:not([class])) + * {
+  margin-top: 24px;
+}
+.el-prose h3:where(:not([class], .pb-app *, .el-embed *)) {
+  font-size: 20px;
+  line-height: 27px;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+.el-prose > h3:where(:not([class])) {
+  margin-top: 44px;
+}
+.el-prose > h3:where(:not([class])) + * {
+  margin-top: 12px;
+}
+.el-prose h4:where(:not([class], .pb-app *, .el-embed *)) {
+  font-size: 17px;
+  line-height: 28px;
+  font-weight: 500;
+}
+.el-prose > h4:where(:not([class])) {
+  margin-top: 32px;
+}
+.el-prose > h4:where(:not([class])) + * {
+  margin-top: 8px;
+}
+.el-prose > :is(h2, h3, h4):first-child {
+  margin-top: 0;
+}
+.el-prose strong:where(:not([class], .pb-app *, .el-embed *)) {
+  font-weight: 500;
+}
+.el-prose em:where(:not([class], .pb-app *, .el-embed *)) {
+  font-family: var(--el-font-italic), var(--el-font-body);
+  font-style: italic;
+}
+.el-prose a:where(:not([class], .pb-app *, .el-embed *)) {
+  color: var(--el-ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--el-underline);
+  border-radius: var(--el-r-bar);
+  transition: text-decoration-color var(--el-t-fast) var(--el-ease);
+}
+@media (hover: hover) {
+  .el-prose a:where(:not([class], .pb-app *, .el-embed *)):hover {
+    text-decoration-color: var(--el-ink);
+  }
+}
+/* Lists: the browser's own markers, in smoke. */
+.el-prose ul:where(:not([class], .pb-app *, .el-embed *)) {
+  padding-left: 22px;
+  list-style: disc;
+}
+.el-prose ol:where(:not([class], .pb-app *, .el-embed *)) {
+  padding-left: 22px;
+  list-style: decimal;
+}
+.el-prose li:where(:not([class], .pb-app *, .el-embed *)) {
+  padding-left: 4px;
+}
+.el-prose li:where(:not([class], .pb-app *, .el-embed *)) + li {
+  margin-top: 10px;
+}
+.el-prose li:where(:not([class], .pb-app *, .el-embed *))::marker {
+  color: var(--el-smoke);
+  font-variant-numeric: tabular-nums;
+}
+.el-prose li:where(:not([class], .pb-app *, .el-embed *)) > :is(ul, ol, p + p) {
+  margin-top: 10px;
+}
+/* A quotation and a callout are the same thing here: a quiet taupe card. */
+.el-prose blockquote:where(:not([class], .pb-app *, .el-embed *)),
+.el-callout {
+  padding: 20px 24px;
+  border-radius: var(--el-r-card);
+  background: var(--el-taupe);
+  box-shadow: var(--el-card-ring);
+  font: 400 16px/26px var(--el-font-body);
+  letter-spacing: 0.01em;
+  color: var(--el-ink);
+  text-wrap: pretty;
+}
+.el-prose blockquote:where(:not([class], .pb-app *, .el-embed *)) > * + *,
+.el-callout > * + * {
+  margin-top: 10px;
+}
+.el-callout-title {
+  font-weight: 500;
+}
+.el-prose > :is(blockquote, .el-callout) {
+  margin-block: 32px;
+}
+/* A rule in running text is a list's separator, not a frame's rule. */
+.el-prose hr:where(:not([class], .pb-app *, .el-embed *)) {
+  height: 2px;
+  margin-block: 48px;
+  border: 0;
+  background-image: radial-gradient(circle, var(--el-dot) 0 1px, transparent 1px 6px);
+  background-size: 6px 2px;
+  background-repeat: repeat-x;
+}
+/* Code: the one place a mono face appears, on taupe. */
+.el-prose code:where(:not([class], .pb-app *, .el-embed *)) {
+  padding: 2px 6px;
+  border-radius: var(--el-r-bar);
+  background: var(--el-taupe);
+  font-family: var(--el-font-mono);
+  font-size: 0.86em;
+  letter-spacing: 0;
+}
+.el-prose pre:where(:not([class], .pb-app *, .el-embed *)) {
+  padding: 20px 24px;
+  border-radius: var(--el-r-card);
+  background: var(--el-taupe);
+  box-shadow: var(--el-card-ring);
+  font: 400 14px/22px var(--el-font-mono);
+  letter-spacing: 0;
+  overflow-x: auto;
+  text-wrap: nowrap;
+}
+.el-prose pre:where(:not([class], .pb-app *, .el-embed *)) code {
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  font: inherit;
+}
+.el-prose > pre:where(:not([class])) {
+  margin-block: 32px;
+}
+/* Pictures: whole, 20px corners. */
+.el-prose img:where(:not([class], .pb-app *, .el-embed *)) {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--el-r-card);
+}
+.el-prose > :is(figure, p:has(> img:only-child)) {
+  margin-block: 40px;
+}
+.el-prose figcaption:where(:not([class], .pb-app *, .el-embed *)) {
+  margin-top: 12px;
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--el-smoke);
+}
+/* A component in running text: 40px above and below, its own look. */
+.el-prose > .el-embed {
+  margin-block: 40px;
+}
+@media (max-width: 767.98px) {
+  .el-prose {
+    font-size: 16px;
+    line-height: 26px;
+  }
+  .el-prose h2:where(:not([class], .pb-app *, .el-embed *)) {
+    font-size: 26px;
+    line-height: 32px;
+  }
+  .el-prose > h2:where(:not([class])) {
+    margin-top: 56px;
+  }
+  .el-prose h3:where(:not([class], .pb-app *, .el-embed *)) {
+    font-size: 18px;
+    line-height: 26px;
+  }
+  .el-prose h4:where(:not([class], .pb-app *, .el-embed *)) {
+    font-size: 16px;
+    line-height: 26px;
+  }
+  .el-prose blockquote:where(:not([class], .pb-app *, .el-embed *)),
+  .el-callout,
+  .el-prose pre:where(:not([class], .pb-app *, .el-embed *)) {
+    padding: 16px 20px;
+  }
+}
+
+/* ── 5. Tables ────────────────────────────────────────────────────
+   A table is rows on hairlines: no fill, no outer box, no zebra. The
+   head is 13/18 at 500 in smoke over a stronger hairline; cells are
+   15/22 in ink with tabular figures; the first column is the row's
+   name, at 500. A wide table scrolls sideways inside its wrapper and
+   never widens the page. The same rules draw a table written in MDX
+   and the DataTable part. */
+.el-table-scroll {
+  overflow-x: auto;
+}
+.el-prose > .el-table-scroll {
+  margin-block: 32px;
+}
+/* A table that is wider than its column says so: its last 48px fade
+   out while there is more to the right, and the fade goes as the reader
+   reaches the end. It is linked to the table's own scroll, as the site
+   nav's line is to the page's, so a table that fits is never faded.
+   Where a browser cannot link the two, the table is simply cut at the
+   column's edge. The length is registered so it can be animated.
+   Nothing here moves on its own: the fade follows the reader's own
+   scroll and says what is left, so it stays under reduced motion. */
+@property --el-table-fade {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+@supports (animation-timeline: scroll()) {
+  .el-table-scroll {
+    mask-image: linear-gradient(to right, var(--el-ink) calc(100% - var(--el-table-fade)), transparent);
+    animation: el-table-more linear both;
+    animation-timeline: scroll(self inline);
+  }
+  @keyframes el-table-more {
+    from,
+    80% {
+      --el-table-fade: 48px;
+    }
+    to {
+      --el-table-fade: 0px;
+    }
+  }
+}
+.el-table,
+.el-prose table:where(:not([class], .pb-app *, .el-embed *)) {
+  width: 100%;
+  border-collapse: collapse;
+  font: 400 15px/22px var(--el-font-body);
+  letter-spacing: 0.01em;
+  font-variant-numeric: tabular-nums;
+  text-align: left;
+  color: var(--el-ink);
+}
+.el-table th,
+.el-prose th:where(:not([class], .pb-app *, .el-embed *)) {
+  padding: 0 24px 12px 0;
+  border-bottom: 1px solid var(--el-ring-strong);
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--el-smoke);
+  text-align: left;
+  vertical-align: bottom;
+}
+.el-table td,
+.el-prose td:where(:not([class], .pb-app *, .el-embed *)) {
+  padding: 14px 24px 14px 0;
+  border-bottom: 1px solid var(--el-ring);
+  vertical-align: top;
+  text-wrap: pretty;
+}
+.el-table td:first-child,
+.el-prose td:where(:not([class], .pb-app *, .el-embed *)):first-child {
+  font-weight: 500;
+}
+.el-table :is(th, td):last-child,
+.el-prose :is(th, td):where(:not([class], .pb-app *, .el-embed *)):last-child {
+  padding-right: 0;
+}
+.el-table tbody tr:last-child td,
+.el-prose tbody tr:last-child td:where(:not([class], .pb-app *, .el-embed *)) {
+  border-bottom: 0;
+}
+/* A table keeps a width its columns can be read at and scrolls past
+   that: two columns always fit, three need 440px, four or more 600. */
+.el-table:has(th:nth-child(3)),
+.el-prose table:where(:not([class], .pb-app *, .el-embed *)):has(th:nth-child(3)) {
+  min-width: 440px;
+}
+.el-table:has(th:nth-child(4)),
+.el-prose table:where(:not([class], .pb-app *, .el-embed *)):has(th:nth-child(4)) {
+  min-width: 600px;
+}
+/* A column of figures: set to the right, head and cells. */
+.el-table .el-num {
+  text-align: right;
+}
+.el-table-caption {
+  margin-top: 16px;
+}
+
+/* The comparison table: plans across, features down, in groups. The
+   plan names head the columns at 16/24 at 500 with one quiet line under
+   each; a group's title is a taupe bar across the table; a row is its
+   name and a centred value per plan (a tick, a quiet dash, a figure, a
+   phrase). The names' column stays in place while the rest scrolls
+   sideways on a narrow screen. */
+.el-compare-scroll {
+  overflow-x: auto;
+  border-radius: var(--el-r-tag); /* the focus ring's corner */
+}
+.el-compare-scroll:focus-visible {
+  outline: 2px solid var(--el-focus);
+  outline-offset: 2px;
+}
+.el-compare {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: separate;
+  border-spacing: 0;
+  font: 400 15px/22px var(--el-font-body);
+  letter-spacing: 0.01em;
+  color: var(--el-ink);
+  text-align: left;
+}
+.el-compare-corner,
+.el-compare-col {
+  padding: 0 12px 20px;
+  vertical-align: bottom;
+  font-weight: 400;
+}
+.el-compare-corner {
+  width: 30%;
+  padding-left: 0;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--el-smoke);
+}
+.el-compare-col {
+  text-align: center;
+}
+.el-compare-name {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+}
+.el-compare-note {
+  margin-top: 2px;
+  font-size: 13px;
+  line-height: 18px;
+  letter-spacing: 0;
+  color: var(--el-smoke);
+  font-variant-numeric: tabular-nums;
+}
+.el-compare-group {
+  padding: 0;
+}
+.el-compare-group > span {
+  display: block;
+  padding: 9px 16px;
+  border-radius: var(--el-r-tag);
+  background: var(--el-taupe);
+  font: 500 13px/18px var(--el-font-body);
+  letter-spacing: 0;
+  color: var(--el-earth);
+}
+/* 24px over every group but the first, as a clear edge, so the bar's
+   ground never fills it. */
+.el-compare tbody + tbody .el-compare-group {
+  border-top: 24px solid transparent;
+  background-clip: padding-box;
+}
+.el-compare-row,
+.el-compare-cell {
+  padding: 15px 12px;
+  border-bottom: 1px solid var(--el-ring);
+  vertical-align: middle;
+}
+.el-compare-row {
+  padding-left: 16px;
+  font-weight: 400;
+  text-wrap: pretty;
+}
+.el-compare-cell {
+  text-align: center;
+  font-size: 14px;
+  line-height: 21px;
+  font-variant-numeric: tabular-nums;
+}
+.el-compare tbody tr:last-child > :is(.el-compare-row, .el-compare-cell) {
+  border-bottom: 0;
+}
+.el-compare-yes {
+  display: inline-flex;
+  vertical-align: middle;
+}
+.el-compare-no {
+  color: var(--el-smoke);
+}
+/* Between 768 and 1024 the table can still be wider than its column and
+   scroll sideways: the names' column stays in place there too. */
+@media (min-width: 768px) and (max-width: 1023.98px) {
+  .el-compare-corner,
+  .el-compare-row {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background-color: var(--el-canvas);
+  }
+}
+@media (max-width: 767.98px) {
+  .el-compare-corner,
+  .el-compare-row {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    width: 148px;
+    background: var(--el-canvas);
+  }
+  .el-compare-row {
+    padding-left: 0;
+    font-size: 14px;
+    line-height: 20px;
+  }
+  /* The bar runs the table's whole width; its title stays in view. */
+  .el-compare-group > span {
+    position: sticky;
+    left: 0;
+    display: inline-block;
+    background: none;
+  }
+  .el-compare-group {
+    background-color: var(--el-taupe);
+    background-clip: padding-box;
+  }
+}
+
+/* ── 6. Lists ─────────────────────────────────────────────────────
+   Rows on dotted separators carry an index: posts, pages, links. */
+
+/* The entry row: a row that is one link. A lead column of 220px (a
+   date, a name), the entry itself beside it, and the 12px arrow at the
+   row's end on the first line. 24px above and below; the dotted
+   separator takes its own 2px above a row. Without a lead the entry
+   fills the row. On a phone the lead stands over the entry. */
+.el-entry-item + .el-entry-item {
+  padding-top: 2px;
+}
+.el-entry {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr) 12px;
+  align-items: start;
+  padding-block: 24px;
+  border-radius: var(--el-r-bar);
+}
+.el-entry--bare {
+  grid-template-columns: minmax(0, 1fr) 12px;
+}
+.el-entry--tight {
+  padding-block: 20px;
+}
+/* The lead and the entry are small stacks of their own: every block in
+   them takes a T role and stands 12px under the one before. */
+.el-entry-lead,
+.el-entry-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+  row-gap: 12px;
+  min-width: 0;
+}
+.el-entry-lead {
+  grid-column: 1;
+  grid-row: 1;
+  padding-right: 24px;
+}
+.el-entry-main {
+  grid-row: 1;
+  padding-right: 32px;
+}
+.el-entry .el-glyph {
+  grid-column: -2;
+  grid-row: 1;
+  margin-top: 1px;
+}
+@media (max-width: 767.98px) {
+  .el-entry {
+    grid-template-columns: minmax(0, 1fr) 12px;
+    row-gap: 14px;
+    padding-block: 20px;
+  }
+  .el-entry-main {
+    grid-column: 1;
+    grid-row: 2;
+    padding-right: 0;
+  }
+  .el-entry--bare .el-entry-main {
+    grid-row: 1;
+    padding-right: 16px;
+  }
+}
+
+/* Steps: an ordered list on dotted separators, each row a figure in
+   smoke and its sentence. */
+.el-step {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  align-items: start;
+  padding-block: 20px;
+}
+.el-step:first-child {
+  padding-top: 0;
+}
+.el-step:last-child {
+  padding-bottom: 0;
+}
+
+/* Ticked lines: what a plan holds. 15/22; the tick is 16px, level with
+   the first line. */
+.el-checks {
+  display: grid;
+  row-gap: 12px;
+}
+.el-check {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr);
+  column-gap: 10px;
+  align-items: start;
+  font: 400 15px/22px var(--el-font-body);
+  letter-spacing: 0.01em;
+  text-wrap: pretty;
+}
+.el-check .el-mark {
+  margin-top: 3px;
+}
+
+/* The stack: blocks of text one under the other, a fixed distance
+   apart between their trimmed edges. For the inside of a card or a
+   cell, where a title, a line and a link follow each other. */
+.el-stack {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 16px;
+}
+/* A pill, a tag or a badge in a stack keeps its own width. */
+.el-stack > :is(.el-pill, .el-tag, .el-badge, .el-seg) {
+  justify-self: start;
+}
+.el-stack > .el-pill--block {
+  justify-self: stretch;
+}
+.el-stack--8 {
+  row-gap: 8px;
+}
+.el-stack--12 {
+  row-gap: 12px;
+}
+.el-stack--20 {
+  row-gap: 20px;
+}
+.el-stack--24 {
+  row-gap: 24px;
+}
+.el-stack--32 {
+  row-gap: 32px;
+}
+.el-stack--40 {
+  row-gap: 40px;
+}
+
+/* ── 7. Badge ─────────────────────────────────────────────────────
+   A small filled label (a saving, a state, a kind). Taupe on the
+   canvas, white on taupe. Not a control and not pill-shaped; the
+   outlined Tag is its sibling. */
+.el-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  border-radius: var(--el-r-tag);
+  background: var(--el-taupe);
+  box-shadow: var(--el-card-ring);
+  font: 500 12px/16px var(--el-font-body);
+  letter-spacing: 0;
+  color: var(--el-ink);
+  white-space: nowrap;
+}
+.el-badge--white {
+  background: var(--el-white);
+}
+
+/* ── 8. Form ──────────────────────────────────────────────────────
+   A field is a label, a control and one line under it (help, or the
+   error that replaces it). Controls are white raised things, as the
+   outline pill is: the whisper shadow is their only edge. An input and
+   a select are pills, 44px; a text area has the inner card's corners.
+   Text is 16px, so a phone does not zoom on focus. Focus draws the
+   system's ring; an error draws a ring in the error colour and says so
+   in words under the control. */
+.el-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 20px;
+}
+/* Two fields side by side from 768. */
+.el-form-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 20px 16px;
+}
+@media (min-width: 768px) {
+  .el-form-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.el-field {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 8px;
+}
+.el-label {
+  font: 500 14px/21px var(--el-font-body);
+  letter-spacing: 0.01em;
+  color: var(--el-ink);
+}
+.el-label-opt {
+  margin-left: 6px;
+  font-weight: 400;
+  color: var(--el-smoke);
+}
+.el-help,
+.el-error {
+  font: 400 13px/18px var(--el-font-body);
+  letter-spacing: 0;
+  color: var(--el-smoke);
+}
+.el-error {
+  color: var(--el-error);
+}
+.el-input,
+.el-select,
+.el-textarea {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  margin: 0;
+  border: 0;
+  background-color: var(--el-white);
+  box-shadow: var(--el-whisper);
+  font: 400 16px/24px var(--el-font-body);
+  letter-spacing: 0.01em;
+  color: var(--el-ink);
+  appearance: none;
+  transition: box-shadow var(--el-t-fast) var(--el-ease);
+}
+.el-input,
+.el-select {
+  height: 44px;
+  padding: 0 18px;
+  border-radius: var(--el-r-pill);
+}
+.el-textarea {
+  min-height: 108px;
+  padding: 12px 18px;
+  border-radius: var(--el-r-card);
+  resize: vertical;
+}
+.el-input::placeholder,
+.el-textarea::placeholder {
+  color: var(--el-smoke);
+  opacity: 1;
+}
+/* The select's chevron is the disclosure row's, drawn as an image. */
+.el-select {
+  padding-right: 44px;
+  background-image: var(--el-img-chevron);
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  cursor: pointer;
+}
+.el-select--empty {
+  color: var(--el-smoke);
+}
+.el-input:focus-visible,
+.el-select:focus-visible,
+.el-textarea:focus-visible,
+.el-box:focus-visible,
+.el-range:focus-visible {
+  outline: 2px solid var(--el-focus);
+  outline-offset: 2px;
+}
+.el-input[aria-invalid="true"],
+.el-select[aria-invalid="true"],
+.el-textarea[aria-invalid="true"] {
+  box-shadow:
+    inset 0 0 0 1px var(--el-error),
+    var(--el-whisper);
+}
+.el-input:disabled,
+.el-select:disabled,
+.el-textarea:disabled {
+  background-color: var(--el-taupe);
+  color: var(--el-earth);
+  cursor: default;
+}
+/* A tick box and its sentence. The box is 20px, white and raised; ticked
+   it is ink with a white tick. */
+.el-tick {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  column-gap: 12px;
+  align-items: start;
+  font: 400 15px/22px var(--el-font-body);
+  letter-spacing: 0.01em;
+  color: var(--el-ink);
+  cursor: pointer;
+}
+.el-box {
+  box-sizing: border-box;
+  width: 20px;
+  height: 20px;
+  margin: 1px 0 0;
+  border: 0;
+  border-radius: var(--el-r-bar);
+  background-color: var(--el-white);
+  box-shadow: var(--el-whisper);
+  appearance: none;
+  cursor: pointer;
+  transition: background-color var(--el-t-fast) var(--el-ease);
+}
+.el-box:checked {
+  background-color: var(--el-ink);
+  background-image: var(--el-img-tick);
+  background-repeat: no-repeat;
+  background-position: center;
+  box-shadow: none;
+}
+/* A range keeps the browser's own slider, in ink. */
+.el-range {
+  display: block;
+  width: 100%;
+  margin: 0;
+  accent-color: var(--el-ink);
+  border-radius: var(--el-r-pill);
+  cursor: pointer;
+}
+/* What a form says once it is sent: a quiet taupe card. */
+.el-form-done {
+  padding: 24px;
+  border-radius: var(--el-r-card);
+  background: var(--el-taupe);
+  box-shadow: var(--el-card-ring);
+}
+
+/* The segmented choice: two or three options of which one is on (a
+   billing period). A taupe pill holding buttons; the one that is on is
+   a white raised pill, the others are plain labels in earth. 44px. */
+.el-seg {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px;
+  border-radius: var(--el-r-pill);
+  background: var(--el-taupe);
+  box-shadow: var(--el-card-ring);
+}
+.el-seg-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: var(--el-r-pill);
+  background: none;
+  font: 400 14px/21px var(--el-font-body);
+  letter-spacing: 0.01em;
+  color: var(--el-earth);
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    color var(--el-t-fast) var(--el-ease),
+    background-color var(--el-t-fast) var(--el-ease);
+}
+@media (hover: hover) {
+  .el-seg-btn:hover {
+    color: var(--el-ink);
+  }
+}
+.el-seg-btn[aria-pressed="true"],
+.el-seg-btn[aria-selected="true"] {
+  background-color: var(--el-white);
+  box-shadow: var(--el-whisper);
+  color: var(--el-ink);
+}
+
+/* ── 9. Bands ─────────────────────────────────────────────────────
+   What closes an inner page, each a slice of the frame between two
+   rules that the page draws. */
+
+/* Questions: the homepage's own band. The heading in the narrow column,
+   the questions as disclosure rows on dotted separators in the wide
+   one, the first question level with the heading's cap top. */
+.el-faqs-grid {
+  row-gap: 0;
+}
+.el-faqs-eyebrow {
+  margin-bottom: 28px;
+}
+.el-faqs-title {
+  max-width: 300px;
+}
+.el-faqs-sub {
+  max-width: min(300px, calc(100% - 24px));
+  margin-top: 16px;
+}
+.el-faqs-list {
+  margin-top: 32px;
+}
+@media (min-width: 1024px) {
+  .el-faqs-grid {
+    grid-template-rows: auto auto 1fr;
+  }
+  .el-faqs-eyebrow {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  /* The two columns have no gutter, so the heading keeps 24px clear of
+     the rows beside it, as the line under it does: in the narrowest
+     column (a screen from 1024 to about 1090) "Frequently asked
+     questions" takes a third line and does not run up against the
+     first question. */
+  .el-faqs-title {
+    grid-column: 1;
+    grid-row: 2;
+    max-width: min(300px, calc(100% - 24px));
+  }
+  .el-faqs-sub {
+    grid-column: 1;
+    grid-row: 3;
+  }
+  /* The rows start on the heading's row and give back their first
+     row's own 20px. */
+  .el-faqs-list {
+    grid-column: 2;
+    grid-row: 2 / span 2;
+    margin-top: -20px;
+  }
+}
+/* The dotted separator takes its own 2px above a row. */
+.el-faqs-row + .el-faqs-row {
+  padding-top: 2px;
+}
+/* A question that takes two lines keeps its chevron on the first. */
+.el-faqs-row > summary {
+  align-items: flex-start;
+}
+/* The answer: 8px under its row, 32px over the next separator, clear of
+   the chevron's column. */
+.el-faqs-answer {
+  max-width: 688px;
+  padding: 8px 0 32px;
+}
+
+/* The closing call to action: the homepage's closing band. The eyebrow
+   12px over a heading at 32/36 on the left; on the right the line, the
+   pills and the risk line. */
+.el-cta .el-split-pre {
+  margin-bottom: 12px;
+}
+.el-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
+}
+.el-cta-note {
+  margin-top: 12px;
+  padding-left: 8px;
+}
+@media (max-width: 767.98px) {
+  .el-cta .el-cta-actions .el-pill {
+    padding-inline: 16px;
+  }
+}
+
+/* Link rows: a band's title in the narrow column and a short list of
+   links in the wide one ("Keep reading"). The list gives back its
+   rows' own padding so the band's distance is measured to text. */
+.el-links-list {
+  margin-bottom: -20px;
+}
+@media (min-width: 1024px) {
+  .el-links-list {
+    margin-top: -20px;
+  }
+}
+
+/* ── 10. Picture panel ────────────────────────────────────────────
+   The picture under a page's header (PeekPanel): a wide taupe panel,
+   one white window of the product cut by the panel's foot, one quiet
+   line under it.
+
+   The panel is a size container, so a page's stylesheet can say what the
+   window shows at each of the panel's widths. */
+.el-peek {
+  container: el-peek / inline-size;
+}
+
+/* The window: as wide as what it shows (its white and its edge
+   included) and no wider, in the middle of the panel. The white round
+   the fragment is 16px (8 on a phone) unless the page says the fragment
+   brings its own (--el-peek-pad: 0px). */
+.el-peek .el-peek-window {
+  --el-peek-pad: 16px;
+  --el-window-pad: var(--el-peek-pad) var(--el-peek-pad) 0;
+  max-width: calc(var(--el-peek-w) * 1px + 2 * var(--el-peek-pad) + 2px);
+  margin-inline: auto;
+}
+
+/* The box: it shows --el-peek-w by --el-peek-h px of the fragment and is
+   never painted larger than that. The scaling box sets its own two
+   numbers and its width on the element, hence !important. */
+.el-peek .el-peek-box {
+  --fw: var(--el-peek-w) !important;
+  --fh: var(--el-peek-h) !important;
+  max-width: calc(var(--el-peek-w) * 1px) !important;
+  margin-inline: auto;
+}
+
+/* The line under the panel, 12px under it at its left edge, as the
+   homepage's hero has it. Its words are generated content, so they are
+   on the screen and not in the page's text. */
+.el-peek-caption {
+  margin-top: 12px;
+}
+.el-peek-caption-text::before {
+  content: attr(data-caption);
+}
+
+/* A phone: 8px of white round the fragment, as the panel has 8px of
+   taupe round the window. */
+@media (max-width: 767.98px) {
+  .el-peek .el-peek-window {
+    --el-peek-pad: 8px;
+  }
+}
+
+/* A phone's panel with `bleed` (a screen under about 484): the window
+   runs through the panel's 8px of side padding and off its right edge,
+   with no white and no corner on that side, and the fragment is painted
+   at the width that leaves it. */
+@container el-peek (max-width: 443.98px) {
+  .el-peek--bleed .el-peek-window {
+    --el-window-pad: 8px 0 0 8px;
+    max-width: none;
+    margin-right: -8px;
+    border-right: 0;
+    border-radius: var(--el-r-window) 0 0 0;
+  }
+  .el-peek--bleed .el-peek-box {
+    max-width: none !important;
+  }
+}

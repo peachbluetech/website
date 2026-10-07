@@ -11,9 +11,9 @@ import { EconSection, RowThumb } from "./parts";
    row adds 69px (767px with all 9).
    narrow: design width 560. Same markup and, with the takeaway on two
    lines at both widths, the same heights.
-   The first four rows are the canon's creatives with their images; rows 5
-   to 9 have no thumbnail and show the app's initials tile. All nine sum to
-   the status figure.
+   The first eight rows are the canon's creatives with their images; the
+   ninth has no thumbnail and shows the app's initials tile. All nine sum
+   to the status figure.
    Type is the app's: the meta lines and bar labels are Inter with only
    their figures in mono; the red 7-day amount is mono throughout. */
 export function WasteLeak({

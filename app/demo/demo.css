@@ -1,0 +1,64 @@
+/* The demo page's own rules (demo-client.tsx). Classes are .el-demo-*.
+   The shared system is components/site/system.css and kit.css: do not
+   restate their classes here. Colours, radii, shadows and distances are
+   the system's tokens, never literals. */
+
+/* The calendar's card: taupe, the width of the shell, with the white
+   inner card centred on it. It is a container, so the inner card can
+   follow the room the card really has. */
+.el-demo-card {
+  container-type: inline-size;
+  padding: var(--el-inset-card);
+}
+@media (min-width: 768px) {
+  .el-demo-card {
+    padding-block: 32px;
+  }
+}
+
+/* The inner card holds the booking service's embed, which lays itself
+   out by the width it is given: one tall column under 768px, and from
+   there up three panes that are 960px in all (wider again from 1024px).
+   A width between those would cut the panes off, so the inner card is
+   a narrow column until the card has room for the three panes, and
+   then 960px to 1000px wide and no wider. It keeps a height while the
+   embed loads, so the page under it does not jump far when the
+   calendar arrives. */
+.el-demo-window {
+  max-width: 560px;
+  min-height: 640px;
+  margin-inline: auto;
+}
+@container (min-width: 960px) {
+  .el-demo-window {
+    max-width: 1000px;
+    min-height: 520px;
+  }
+}
+
+/* The band under the calendar: the note on the left half and the
+   address on the right, on the page's two columns. Under 1024 one over
+   the other. Once the reader asks for it, the form stands where the
+   note was. */
+.el-demo-alt {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 24px;
+  align-items: start;
+}
+@media (min-width: 1024px) {
+  .el-demo-alt {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: var(--el-gap-grid);
+  }
+  /* Beside the form, the address stands level with the text of the
+     form's first row (a 44px control) and not with its top edge. */
+  .el-demo-alt--form > :last-child {
+    margin-top: 16px;
+  }
+  /* Once the form is sent, what it says stands 24px inside a taupe
+     card, and the address stands level with that line. */
+  .el-demo-alt--form:has(.el-form-done) > :last-child {
+    margin-top: 24px;
+  }
+}

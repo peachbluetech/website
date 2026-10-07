@@ -27,7 +27,7 @@ export function CohortTable({
   header = false,
   className,
 }: {
-  /** How many launches to show, 1 to 17 (the named creatives). The app shows 20. */
+  /** How many launches to show, 1 to 18 (the named creatives at the head of the cohort). The app shows 20. */
   rows?: number;
   /** Show the section header ("The 90-day launch cohort", "34% hit rate") and takeaway above the table. */
   header?: boolean;

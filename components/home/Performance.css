@@ -1,0 +1,37 @@
+/* Performance.tsx's own rules. Classes are .el-* with this
+   section's name in them. The shared system is
+   components/site/system.css: do not restate its classes here; to
+   adjust a part inside this section, put this section's class in front
+   of it. Colours, radii, shadows and durations are the system's tokens,
+   never literals. */
+
+/* The window in the wide panel: 820px at most and centred, with taupe
+   either side of it. A window as wide as the panel left
+   700px of white between a creative's name and its dollars. The leak
+   section brings no padding of its own, so from 768 the window gives it
+   16px of white at the top and sides; on a phone the cut list's rows
+   bring their own and the window fills the panel. */
+@media (min-width: 768px) {
+  .el-econ .el-econ-window {
+    --el-window-pad: 16px 16px 0;
+    max-width: 820px;
+    margin-inline: auto;
+  }
+}
+/* The leak section is painted at 1.05 and laid out as wide as that
+   leaves it (750px in the 820 window), not scaled with its slot (see
+   Performance.tsx): the red amounts read at 14px beside their names. */
+.el-econ-sheet {
+  --fk: 1.05;
+}
+/* The phone's cut list is painted at its own size at 390 and never over
+   1.15: past that it is laid out wider. */
+.el-econ-cut {
+  --fk: 1.15;
+}
+
+/* The three measures: a title, 16px, its sentence. No rule over them,
+   no icons. */
+.el-econ-point {
+  margin-top: 16px;
+}

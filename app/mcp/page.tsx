@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { SiteNav } from "@/components/site/SiteNav";
-import { SiteFooter } from "@/components/site/SiteFooter";
-import { PeachblueMark } from "@/components/site/PeachblueMark";
-import { OutlineLink, PrimaryLink } from "@/components/site/Button";
-import { TRIAL_HREF, TRIAL_LABEL, RISK_REVERSAL } from "@/lib/site";
+import { AskedChip, CardGrid, MCP_RANKED, ToolCall } from "@/components/product/mcp";
+import { ACCOUNT } from "@/components/product/sample";
+import { CtaBand, LEAD, PageHeader, PeekBox, PeekPanel, Stack } from "@/components/site/kit";
+import { Block, Cell, Cells, Dotted, Frame, Pill, Rule, Side, T, TONE, TextLink, cx } from "@/components/site/parts";
+import { SitePage } from "@/components/site/SitePage";
+import { RISK_REVERSAL, TRIAL_HREF, TRIAL_LABEL } from "@/lib/site";
+import "./mcp.css";
 
 export const metadata: Metadata = {
   title: "Your ad data in Claude (MCP)",
@@ -12,6 +13,33 @@ export const metadata: Metadata = {
     "Connect Peachblue to Claude, Cursor, or any MCP client. The only creative analytics MCP that serves your own cross-platform performance data, including Amazon DSP.",
   alternates: { canonical: "/mcp" },
 };
+
+/* Your data in Claude (/mcp): the page that explains connecting
+   Peachblue to an MCP client, built in the design system from the
+   inner-page kit. The words, the heading levels and the links are the
+   published ones: restyle freely, do not reword, and do not add a claim.
+
+   Top to bottom:
+   1. The header, split as the homepage's hero is: the eyebrow, the h1,
+      the two pills and the risk line on the left, the two paragraphs on
+      the right. Under it one picture in a taupe panel: a question, the
+      Peachblue tool that answered it and the creative card it returned
+      (components/product/mcp), cut by the panel's foot under the ads'
+      names.
+   2. Ask in plain language: the h2 and its paragraph in the narrow
+      column, the five example questions as rows in the wide one.
+   3. Connected in three steps: a header cell, then three ruled cells,
+      then the line about access.
+   4. 23 tools, five jobs: the h2 in the narrow column, the five jobs as
+      rows on dotted separators in the wide one, then the line that
+      points at the tool reference.
+   5. The closing band.
+
+   Truth rules. Claude is named only as the client, in the page's own
+   words. The picture is Peachblue's own tool row and card on a plain
+   white window: no client's interface is drawn and no client's mark is
+   shown. A server component: every word is in the HTML the server
+   sends. */
 
 const EXAMPLE_QUESTIONS = [
   "What were my top 5 creatives by composite score last month?",
@@ -62,137 +90,170 @@ const TOOL_GROUPS = [
   },
 ];
 
+/* ── The picture ────────────────────────────────────────────────── */
+
+/* A question, the Peachblue tool row that answered it and the creative
+   card the tool returned: the product's own three pieces, in the order
+   and at the distances its own turn has them (mcp/Turn.tsx). The card is
+   given the width its panel has room for and lays itself out from it
+   (five ads across, four, three or two); mcp.css holds those widths and
+   where the panel's foot cuts each. */
+const [FIRST, SECOND] = MCP_RANKED.creatives;
+const PICTURE_LABEL = `A question asked of a sample account through Peachblue's MCP server, "${MCP_RANKED.question}": the Peachblue tool call that answered it, get_creatives with limit ${MCP_RANKED.call.args.limit} over the last 7 days, and Peachblue's creative card, a ranked grid of ${MCP_RANKED.creatives.length} creatives led by #1 ${FIRST.name} at score ${FIRST.score} and #2 ${SECOND.name} at ${SECOND.score}.`;
+
+function Picture() {
+  return (
+    <PeekPanel bleed className="el-mcp-peek" label={PICTURE_LABEL} caption={`Sample account: ${ACCOUNT.brand}`}>
+      <PeekBox>
+        <div className="el-mcp-turn">
+          <div className="el-mcp-asked">
+            <AskedChip question={MCP_RANKED.question} />
+          </div>
+          <ToolCall call={MCP_RANKED.call} />
+          <CardGrid ground={false} className="el-mcp-host" />
+        </div>
+      </PeekBox>
+    </PeekPanel>
+  );
+}
+
 export default function McpPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-pb-bg">
-      <SiteNav />
-      <main className="flex-1">
-        {/* Hero */}
-        <section className="pt-12 md:pt-[72px] pb-16 md:pb-20 px-6">
-          <div className="max-w-[860px] mx-auto">
-            <div className="text-[13px] font-semibold text-pb-peach-700 mb-4">
-              MCP integration
-            </div>
-            <h1 className="font-display text-[clamp(34px,4.4vw,56px)] leading-[1.07] font-medium tracking-[-0.02em] text-pb-ink text-balance mb-5">
-              Bring your ad performance into Claude.
-            </h1>
-            <p className="text-[clamp(15px,1.8vw,17.5px)] leading-[1.7] text-pb-fg-secondary max-w-[620px] mb-4">
+    <SitePage>
+      <PageHeader
+        eyebrow="MCP integration"
+        title="Bring your ad performance into Claude."
+        leadAt="top"
+        lead={
+          <>
+            <p className={LEAD}>
               Peachblue&apos;s MCP server exposes the same 23 tools that power Agent Peach to any MCP
               client: Claude Desktop, claude.ai, Cursor, and Claude Code. Rankings, comparisons,
               patterns, fatigue, and risk, over your Meta, TikTok, Google Ads, and Amazon DSP data.
             </p>
-            <p className="text-[14px] leading-[1.7] text-pb-fg-secondary max-w-[620px] mb-8">
+            <p className={cx(T.bodySm, TONE.smoke, "el-pretty")}>
               Other ad tools ship MCP servers for inspiration libraries or competitor research.
               Peachblue&apos;s is the only creative analytics MCP that serves your own cross-platform
               performance data, including Amazon DSP.
             </p>
-            <div className="flex gap-3 flex-wrap items-center">
-              {/* The arrow is a child, not the arrow prop, so the anchor's text
-                  stays exactly as published (no space before the arrow). */}
-              <PrimaryLink href={TRIAL_HREF}>
-                {TRIAL_LABEL}
-                <span aria-hidden="true">&rarr;</span>
-              </PrimaryLink>
-              <OutlineLink href="/docs/mcp">Setup docs</OutlineLink>
-            </div>
-            <p className="mt-4 text-[12.5px] text-pb-fg-muted">{RISK_REVERSAL} &middot; MCP included on Pro and up</p>
-          </div>
-        </section>
+          </>
+        }
+        actions={
+          <>
+            <Pill href={TRIAL_HREF}>{TRIAL_LABEL}</Pill>
+            <Pill href="/docs/mcp" variant="outline">
+              Setup docs
+            </Pill>
+          </>
+        }
+        note={
+          <>
+            {RISK_REVERSAL} &middot; <span className="el-keep">MCP included on Pro and up</span>
+          </>
+        }
+      >
+        <Picture />
+      </PageHeader>
+
+      <Frame>
+        <Rule />
 
         {/* What you can ask */}
-        <section className="py-16 md:py-20 px-6 border-y border-pb-border bg-pb-stone">
-          <div className="max-w-[860px] mx-auto">
-            <h2 className="font-display text-[clamp(28px,3.2vw,38px)] leading-[1.12] font-medium tracking-[-0.015em] text-pb-ink text-balance mb-3">
-              Ask in plain language.
-            </h2>
-            <p className="text-[15px] text-pb-fg-secondary leading-relaxed mb-8 max-w-[560px]">
-              Claude calls Peachblue&apos;s tools and reasons over the results. Answers match the app,
-              because they run on the same engine, and every number states the time window it
-              came from.
-            </p>
-            <div className="space-y-2.5">
-              {EXAMPLE_QUESTIONS.map((q) => (
-                <div
-                  key={q}
-                  className="flex items-center gap-3 rounded-[10px] border border-pb-border bg-pb-card px-4 py-3"
-                >
-                  <div className="size-6 rounded-md bg-pb-peach-50 text-pb-peach-600 flex items-center justify-center shrink-0">
-                    <PeachblueMark size={14} />
+        <section>
+          <Block top="top" bottom="pad">
+            <Side className="el-mcp-ask">
+              <h2 className={cx(T.heading, "el-mcp-ask-title")}>Ask in plain language.</h2>
+              <p className={cx(T.bodySm, TONE.smoke, "el-pretty el-mcp-ask-sub")}>
+                Claude calls Peachblue&apos;s tools and reasons over the results. Answers match the app,
+                because they run on the same engine, and every number states the time window it
+                came from.
+              </p>
+              <Dotted as="div" className="el-mcp-asks">
+                {EXAMPLE_QUESTIONS.map((q) => (
+                  <div key={q} className="el-mcp-asks-row">
+                    <span className={cx(T.bodyLg, "el-pretty")}>{q}</span>
                   </div>
-                  <span className="text-[14px] text-pb-fg">{q}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+                ))}
+              </Dotted>
+            </Side>
+          </Block>
         </section>
+
+        <Rule />
 
         {/* Setup steps */}
-        <section className="py-16 md:py-24 px-6">
-          <div className="max-w-[860px] mx-auto">
-            <h2 className="font-display text-[clamp(28px,3.2vw,38px)] leading-[1.12] font-medium tracking-[-0.015em] text-pb-ink text-balance mb-8">
-              Connected in three steps.
-            </h2>
-            <div className="grid md:grid-cols-3 gap-5">
-              {STEPS.map((s) => (
-                <div key={s.num} className="rounded-[10px] border border-pb-border bg-pb-card p-6">
-                  <div className="font-mono text-[13px] text-pb-fg-muted tnum mb-3">
-                    {s.num}
-                  </div>
-                  <h3 className="text-[15px] font-semibold text-pb-fg mb-2">{s.title}</h3>
-                  <p className="text-[13.5px] leading-relaxed text-pb-fg-secondary">{s.desc}</p>
-                </div>
-              ))}
-            </div>
-            <p className="mt-6 text-[13px] text-pb-fg-muted">
+        <section>
+          <Block top="top" bottom="gap">
+            <h2 className={T.heading}>Connected in three steps.</h2>
+          </Block>
+          <Rule marks="thirds" />
+          <Cells cols={3}>
+            {STEPS.map((s) => (
+              <Cell key={s.num}>
+                <Stack gap={24}>
+                  <div className={cx(T.eyebrow, "el-tnum")}>{s.num}</div>
+                  <Stack gap={16}>
+                    <h3 className={cx(T.subhead, "el-balance")}>{s.title}</h3>
+                    <p className={cx(T.bodySm, TONE.smoke, "el-pretty")}>{s.desc}</p>
+                  </Stack>
+                </Stack>
+              </Cell>
+            ))}
+          </Cells>
+          <Rule marks="thirds" />
+          <Block top="gap" bottom="gap">
+            <p className={cx(T.bodySm, "el-pretty el-mcp-line")}>
               Access follows your Peachblue login: workspace scoping, tier gating, and instant
               revocation from the same Settings tab. Full client-by-client instructions are in
-              the <Link href="/docs/mcp" className="underline underline-offset-2 decoration-pb-border-control hover:text-pb-peach-600 transition-colors">setup docs</Link>.
+              the{" "}
+              <TextLink href="/docs/mcp" underline>
+                setup docs
+              </TextLink>
+              .
             </p>
-          </div>
+          </Block>
         </section>
+
+        <Rule />
 
         {/* Tool groups */}
-        <section className="py-16 md:py-20 px-6 border-y border-pb-border bg-pb-stone">
-          <div className="max-w-[860px] mx-auto">
-            <h2 className="font-display text-[clamp(28px,3.2vw,38px)] leading-[1.12] font-medium tracking-[-0.015em] text-pb-ink text-balance mb-8">
-              23 tools, five jobs.
-            </h2>
-            <div className="grid sm:grid-cols-2 gap-4">
-              {TOOL_GROUPS.map((g) => (
-                <div key={g.title} className="rounded-[10px] border border-pb-border bg-pb-card p-5 sm:last:odd:col-span-2">
-                  <div className="text-[14.5px] font-semibold text-pb-fg mb-1.5">{g.title}</div>
-                  <p className="text-[13.5px] text-pb-fg-secondary leading-relaxed">{g.desc}</p>
-                </div>
-              ))}
-            </div>
-            <p className="mt-6 text-[13px] text-pb-fg-muted">
-              Every tool is read-only and scoped to your workspace. See the full list in the{" "}
-              <Link href="/docs/mcp-tools" className="underline underline-offset-2 decoration-pb-border-control hover:text-pb-peach-600 transition-colors">
-                MCP tool reference
-              </Link>.
-            </p>
-          </div>
+        <section>
+          <Block top="top" bottom="pad">
+            <Side>
+              <h2 className={cx(T.heading, "el-mcp-jobs-title")}>23 tools, five jobs.</h2>
+              <div>
+                <Dotted as="div" className="el-mcp-jobs">
+                  {TOOL_GROUPS.map((g) => (
+                    <div key={g.title} className="el-mcp-job">
+                      <div className={T.body}>{g.title}</div>
+                      <p className={cx(T.bodySm, TONE.smoke, "el-pretty el-mcp-job-desc")}>{g.desc}</p>
+                    </div>
+                  ))}
+                </Dotted>
+                <p className={cx(T.bodySm, TONE.smoke, "el-pretty el-mcp-jobs-note")}>
+                  Every tool is read-only and scoped to your workspace. See the full list in the{" "}
+                  <TextLink href="/docs/mcp-tools" underline>
+                    MCP tool reference
+                  </TextLink>
+                  .
+                </p>
+              </div>
+            </Side>
+          </Block>
         </section>
 
+        <Rule />
+
         {/* CTA */}
-        <section className="py-20 md:py-28 px-6">
-          <div className="max-w-[560px] mx-auto text-center">
-            <h2 className="font-display text-[clamp(28px,3.2vw,38px)] leading-[1.12] font-medium tracking-[-0.015em] text-pb-ink text-balance mb-4">
-              Your data, wherever you think.
-            </h2>
-            <p className="text-[15px] text-pb-fg-secondary leading-relaxed mb-8">
-              MCP access is included on Pro and up. Connect a platform, let the first sync land,
-              and ask Claude about your own ads.
-            </p>
-            <PrimaryLink href={TRIAL_HREF}>
-              {TRIAL_LABEL}
-              <span aria-hidden="true">&rarr;</span>
-            </PrimaryLink>
-            <p className="mt-4 text-[12.5px] text-pb-fg-muted">{RISK_REVERSAL}</p>
-          </div>
-        </section>
-      </main>
-      <SiteFooter />
-    </div>
+        <CtaBand
+          title="Your data, wherever you think."
+          lead="MCP access is included on Pro and up. Connect a platform, let the first sync land, and ask Claude about your own ads."
+          actions={<Pill href={TRIAL_HREF}>{TRIAL_LABEL}</Pill>}
+          note={RISK_REVERSAL}
+        />
+
+        <Rule />
+      </Frame>
+    </SitePage>
   );
 }

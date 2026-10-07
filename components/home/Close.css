@@ -1,0 +1,7 @@
+/* Close.tsx's own rule. The band itself is the kit's closing band
+   (.el-cta in components/site/kit.css): nothing of it is restated here. */
+
+/* The heading's two sentences, one to a line. */
+.el-close-line {
+  display: block;
+}

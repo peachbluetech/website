@@ -14,7 +14,7 @@ export type SampleCreative = {
   key: string;
   /** The ad's own on-image headline; also used as its name. */
   name: string;
-  /** Path under /public. The original file: 1080 by 1920 for the eight top creatives, 640 by 1137 for the other photo creatives. */
+  /** Path under /public. The original file: 1080 by 1920. */
   image: string;
   /** The 128px square thumbnail, cut at the creative's focus: for square slots up to 64px wide. */
   thumb: string;
@@ -84,18 +84,35 @@ function c(
 }
 
 /* Ordered by score. The under-tier rows sum to the week's waste figure
-   together with five unnamed creatives (see ACCOUNT.waste7d).
+   together with one unnamed creative (see ACCOUNT.waste7d), and with it
+   the rows sum to the week's spend: 22 of the 23 creatives with spend
+   are named here.
+
+   The two creator ads lead on score, "Little can. Big mood." (the mirror
+   selfie) and "Found my new fave fizz", with the two highest
+   click-through rates in the account. "Zero sugar. All fizz." is third on
+   score and is the week's new winner (HERO_CREATIVE below): new this
+   week, the most spend, the lowest cost per purchase.
+
+   "Post-workout, pre-brunch, anytime." is the earlier winner: still top
+   tier, kept live on a small budget, so its week is $100.
+
+   "Little can. Big mood." is pictured by its creator cut. The same
+   line's studio cut (/ads/fizzli-big-mood.jpg, the blue splash still) is
+   not a row here: it is a new cut waiting in the Data Hub's analysis
+   queue (connect/data.ts).
 
    Where each image is cropped (which part of a 9:16 ad a square, a 4:5
    tile or a 16:9 card shows) is not written here: it is one table keyed by
    file name, ui/adFocus.json, read by ui/adImage.ts and by the script that
    cuts the thumbnails. */
 export const CREATIVES = {
-  bigMood: c("bigMood", "Little can. Big mood.", "fizzli-big-mood.jpg", "Meta", 94, 9400, 3.8, 18.4, 4.1, 7),
+  bigMood: c("bigMood", "Little can. Big mood.", "fizzli-big-mood-selfie.jpg", "TikTok", 96, 4380, 4.31, 18.6, 4.0, 33),
+  faveFizz: c("faveFizz", "Found my new fave fizz", "fizzli-fave-fizz.jpg", "Meta", 95, 3480, 4.06, 18.8, 4.0, 27),
+  allFizz: c("allFizz", "Zero sugar. All fizz.", "fizzli-zero-sugar-all-fizz.jpg", "Meta", 94, 9400, 3.8, 18.4, 4.1, 7),
   zeroSugar: c("zeroSugar", "Zero sugar. Still fun.", "fizzli-zero-sugar.jpg", "Meta", 92, 6870, 3.42, 19.1, 3.9, 58),
-  wouldRebuy: c("wouldRebuy", "Would rebuy", "fizzli-would-rebuy.jpg", "TikTok", 91, 4960, 3.31, 19.6, 3.8, 41),
-  anytime: c("anytime", "Post-workout, pre-brunch, anytime.", "fizzli-anytime.jpg", "TikTok", 90, 4380, 3.18, 20.1, 3.7, 33),
-  faveFizz: c("faveFizz", "Found my new fave fizz", "fizzli-fave-fizz.jpg", "Meta", 88, 3480, 3.05, 20.8, 3.6, 27),
+  wouldRebuy: c("wouldRebuy", "Restock day. Would rebuy.", "fizzli-would-rebuy.jpg", "TikTok", 91, 4960, 3.31, 19.6, 3.8, 41),
+  anytime: c("anytime", "Post-workout, pre-brunch, anytime.", "fizzli-anytime.jpg", "Meta", 86, 100, 3.24, 19.8, 3.8, 68),
   summerCarry: c("summerCarry", "Summer carry", "fizzli-summer-carry.jpg", "Meta", 81, 3010, 2.84, 21.9, 3.3, 49),
   fridgePick: c("fridgePick", "Fridge pick", "fizzli-fridge-pick.jpg", "Google Ads", 78, 2460, 2.61, 22.7, 3.2, 36),
   littleRitual: c("littleRitual", "Your new little ritual.", "fizzli-little-ritual.jpg", "TikTok", 71, 1980, 2.52, 23.4, 3.0, 22),
@@ -104,16 +121,22 @@ export const CREATIVES = {
   notAnotherSoda: c("notAnotherSoda", "Not just another soda.", "fizzli-not-another-soda.jpg", "Meta", 52, 1290, 1.7, 29.3, 2.3, 63),
   threePm: c("threePm", "My new 3pm pick me up", "fizzli-3pm-pick-me-up.jpg", "Google Ads", 44, 860, 1.94, 31.2, 2.1, 30),
   inMyTote: c("inMyTote", "In my tote", "fizzli-in-my-tote.jpg", "Meta", 37, 690, 1.62, 35.9, 1.8, 52),
-  bubbles: c("bubbles", "Bubbles, upgraded.", "fizzli-story-2.png", "Meta", 28, 1060, 0.88, 58.9, 0.8, 21),
+  bubbles: c("bubbles", "Bubbles, upgraded.", "fizzli-bubbles-upgraded.jpg", "Meta", 28, 1060, 0.88, 58.9, 0.8, 21),
   currentLineup: c("currentLineup", "Current lineup", "fizzli-current-lineup.jpg", "Meta", 26, 1480, 0.92, 61.7, 0.7, 24),
-  thirsty: c("thirsty", "Thirsty? Fix it.", "fizzli-story-1.png", "TikTok", 22, 1240, 0.81, 68.9, 0.6, 18),
-  zeroAllFizz: c("zeroAllFizz", "Zero sugar. All fizz.", "fizzli-square-a.png", "Google Ads", 18, 920, 0.64, 83.6, 0.5, 26, "1:1"),
+  thirsty: c("thirsty", "Thirsty? Fix it.", "fizzli-thirsty-fix-it.jpg", "TikTok", 22, 1240, 0.81, 68.9, 0.6, 18),
+  earnedIt: c("earnedIt", "Earned it.", "fizzli-earned-it.jpg", "Google Ads", 18, 920, 0.64, 83.6, 0.5, 26),
+  dinner: c("dinner", "Dinner's plus one.", "fizzli-dinners-plus-one.jpg", "TikTok", 17, 520, 0.61, 86.7, 0.5, 12),
+  cooldown: c("cooldown", "Cooldown, sorted.", "fizzli-cooldown-sorted.jpg", "Google Ads", 16, 290, 0.57, 96.7, 0.4, 11),
+  groupChat: c("groupChat", "The group chat agrees.", "fizzli-group-chat.jpg", "Meta", 14, 380, 0.49, 126.7, 0.3, 14),
+  quietNight: c("quietNight", "Quiet night. Loud bubbles.", "fizzli-quiet-night.jpg", "Meta", 11, 180, 0.41, 180.0, 0.2, 9),
 } as const satisfies Record<string, SampleCreative>;
 
 export const CREATIVE_LIST: SampleCreative[] = Object.values(CREATIVES);
 
-/** The account's winner this week. Every visual that names "the top creative" uses this one. */
-export const HERO_CREATIVE = CREATIVES.bigMood;
+/** The account's new winner this week: launched inside the week, the most spend, the lowest cost
+    per purchase. Every visual that names "the week's winner" uses this one. It is not the top
+    creative by score: two longer-running creator ads score above it (see CREATIVES). */
+export const HERO_CREATIVE = CREATIVES.allFizz;
 
 export const ACCOUNT = {
   brand: "Fizzli",
@@ -154,7 +177,7 @@ export const ACCOUNT = {
   cohortTiers: { top: 11, above: 8, avg: 4, under: 9 },
   heroSharePct: 22,
   heroKey: "zeroSugar",
-  benchKeys: ["bigMood", "wouldRebuy", "anytime"],
+  benchKeys: ["allFizz", "wouldRebuy", "bigMood"],
   fatigue: [
     { key: "notAnotherSoda", dropPct: -50, fromCtr: 3.4, toCtr: 1.7, activeDays: 63 },
     { key: "inMyTote", dropPct: -31, fromCtr: 2.35, toCtr: 1.62, activeDays: 52 },

@@ -1,0 +1,75 @@
+/* The blog index's own rules, on the system's tokens. Everything else
+   on the page is the kit's entry row: the newest post's row on a taupe
+   card, the rest in a dotted list. */
+
+/* A row's title, description and byline stand 14px apart, so a title
+   that takes two lines on a phone does not run into its description. */
+.el-blog-list .el-entry-main {
+  row-gap: 14px;
+}
+
+/* A post's description keeps the measure of running text, so a row
+   reads as a short paragraph and not as one line across the frame. */
+.el-blog-line {
+  max-width: var(--el-measure);
+}
+
+/* The newest post stands on a taupe card over the list: the same row
+   with its title in the display face. The card is 16px from the rails
+   and its text 32px inside it, so its columns are the list's columns.
+   Its lines stand 20px apart, clear of the gap between two lines of
+   the larger title. */
+.el-blog-first {
+  padding: 16px 32px;
+}
+.el-blog-first .el-entry-main {
+  row-gap: 20px;
+}
+
+/* The pillar and the date of a row. From 768 they are two lines in the
+   row's narrow column, 12px apart, and the dot between them is not
+   drawn. */
+.el-blog-meta {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 12px;
+}
+.el-blog-dot {
+  display: none;
+}
+
+/* On a phone the pillar and the date share one line over the title,
+   with the dot between them, where the two fit. Where they do not, the
+   date goes under the pillar and its dot goes out of sight: the dot is
+   one piece with the date, the line is pulled left by the dot's width
+   and the row's narrow column cuts that strip off. So a line never
+   starts or ends with a dot. */
+@media (max-width: 767.98px) {
+  .el-blog-first {
+    padding: 4px 20px;
+  }
+  /* 12px stay clear between the line and the row's arrow. */
+  .el-blog-list .el-entry-lead,
+  .el-blog-first .el-entry-lead {
+    padding-right: 12px;
+    overflow-x: clip;
+  }
+  .el-blog-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    row-gap: 12px;
+    margin-left: -20px;
+  }
+  .el-blog-meta > :first-child {
+    margin-left: 20px;
+  }
+  .el-blog-when {
+    white-space: nowrap;
+  }
+  .el-blog-dot {
+    display: inline-block;
+    width: 20px;
+    text-align: center;
+  }
+}

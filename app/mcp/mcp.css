@@ -1,0 +1,159 @@
+/* The /mcp page's own rules (page.tsx beside this file). Classes are
+   .el-mcp-*. The shared system is components/site/system.css and
+   kit.css, which also holds the picture's panel (.el-peek): nothing of
+   them is restated here. Colours, radii and distances are the system's
+   tokens. */
+
+/* ── The picture ──────────────────────────────────────────────────
+   The question, 12px, the tool row, 12px, the card: the distances of
+   the product's own turn. */
+.el-mcp-turn {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+/* The card is given the width its range has room for (--el-mcp-host)
+   and lays itself out from it. The card sets its width on the element,
+   hence !important. */
+.el-mcp-peek .el-mcp-host {
+  width: calc(var(--el-mcp-host) * 1px) !important;
+}
+
+/* What the window shows at each of the panel's widths. In each range
+   the panel's foot cuts the card in the white under the first row's
+   names, over their figures (measured on the page: the names end at
+   523, 523, 527 and 525 of the card's own px and the figures start
+   10px lower).
+     panel from 1111px   five ads across (a 1104 card)
+     880 to 1111         four (880)
+     600 to 880          three (664)
+     444 to 600          two (436)
+     under 444           a phone: the first ad and most of the second,
+                         which the panel's right edge cuts */
+.el-mcp-peek .el-peek-window {
+  --el-mcp-host: 1104;
+  --el-peek-w: 1104;
+  --el-peek-h: 528;
+}
+@container el-peek (max-width: 1110.98px) {
+  .el-mcp-peek .el-peek-window {
+    --el-mcp-host: 880;
+    --el-peek-w: 880;
+  }
+}
+@container el-peek (max-width: 879.98px) {
+  .el-mcp-peek .el-peek-window {
+    --el-mcp-host: 664;
+    --el-peek-w: 664;
+    --el-peek-h: 532;
+  }
+}
+@container el-peek (max-width: 599.98px) {
+  .el-mcp-peek .el-peek-window {
+    --el-mcp-host: 436;
+    --el-peek-w: 436;
+    --el-peek-h: 530;
+  }
+}
+@container el-peek (max-width: 443.98px) {
+  .el-mcp-peek .el-peek-window {
+    --el-peek-w: 364;
+  }
+  /* The window has no white at its right here, so the question keeps
+     8px from the panel's edge. */
+  .el-mcp-asked {
+    padding-right: 8px;
+  }
+}
+
+/* ── Ask in plain language ────────────────────────────────────────
+   The questions band's two columns: the heading and its paragraph in
+   the narrow one, the five example questions as rows in the wide one,
+   the first level with the heading's cap top. */
+.el-mcp-ask {
+  row-gap: 0;
+}
+.el-mcp-ask-title,
+.el-mcp-ask-sub {
+  max-width: 640px;
+}
+.el-mcp-ask-sub {
+  margin-top: 24px;
+}
+.el-mcp-asks {
+  margin-top: 32px;
+}
+/* A row: the question at 17/25, 20px above and below. The dotted
+   separator takes its own 2px above a row. */
+.el-mcp-asks-row {
+  padding-block: 20px;
+}
+.el-mcp-asks-row + .el-mcp-asks-row {
+  padding-top: 22px;
+}
+@media (min-width: 1024px) {
+  .el-mcp-ask {
+    grid-template-rows: auto 1fr;
+  }
+  .el-mcp-ask-title {
+    grid-column: 1;
+    grid-row: 1;
+    max-width: 300px;
+  }
+  .el-mcp-ask-sub {
+    grid-column: 1;
+    grid-row: 2;
+    max-width: min(300px, calc(100% - 24px));
+  }
+  /* The rows start on the heading's row and give back their first
+     row's own 20px. */
+  .el-mcp-asks {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    margin-top: -20px;
+  }
+}
+
+/* ── Connected in three steps ─────────────────────────────────────
+   The line about access keeps a measure it can be read at. */
+.el-mcp-line {
+  max-width: 760px;
+}
+
+/* ── 23 tools, five jobs ──────────────────────────────────────────
+   Each job a row: its name in a 220px column, what it holds beside it,
+   20px above and below. The list gives back its first row's 20px so the
+   first name is level with the heading's cap top. */
+.el-mcp-job {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  align-items: start;
+  padding-block: 20px;
+}
+.el-mcp-job + .el-mcp-job {
+  padding-top: 22px;
+}
+/* Half a pixel down: the two sizes then share a baseline. */
+.el-mcp-job-desc {
+  margin-top: 0.5px;
+}
+.el-mcp-jobs-note {
+  margin-top: 20px;
+}
+@media (min-width: 1024px) {
+  .el-mcp-jobs-title {
+    max-width: 300px;
+  }
+  .el-mcp-jobs {
+    margin-top: -20px;
+  }
+}
+@media (max-width: 767.98px) {
+  .el-mcp-job {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 16px;
+  }
+  .el-mcp-job-desc {
+    margin-top: 0;
+  }
+}

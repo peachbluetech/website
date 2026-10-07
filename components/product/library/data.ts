@@ -2,8 +2,8 @@
 
    Everything here extends the canonical Fizzli account in ../sample and
    reconciles with it: counts come from ACCOUNT, per-creative figures from
-   CREATIVES, and the detail figures for the top creative are derived so
-   they divide back to its canonical spend, CTR, CPA and ROAS.
+   CREATIVES, and the detail figures for the week's new winner are derived
+   so they divide back to its canonical spend, CTR, CPA and ROAS.
 
    Every Fizzli creative is a still image, so no tag, pill or sentence here
    describes motion, timing or sound. */
@@ -61,83 +61,72 @@ export type TileTags = { primaryMessage: string; emotionalTone: string };
 export const TILE_FORMAT = "static_image";
 
 export const TILE_TAGS: Record<string, TileTags> = {
-  bigMood: { primaryMessage: "brand_story", emotionalTone: "playful" },
+  allFizz: { primaryMessage: "product_quality", emotionalTone: "playful" },
   zeroSugar: { primaryMessage: "product_quality", emotionalTone: "playful" },
   wouldRebuy: { primaryMessage: "social_proof", emotionalTone: "playful" },
   anytime: { primaryMessage: "brand_story", emotionalTone: "empowering" },
   faveFizz: { primaryMessage: "social_proof", emotionalTone: "aspirational" },
+  bigMood: { primaryMessage: "brand_story", emotionalTone: "playful" },
   summerCarry: { primaryMessage: "seasonal_event", emotionalTone: "playful" },
-  fridgePick: { primaryMessage: "bestseller", emotionalTone: "minimal_clean" },
+  fridgePick: { primaryMessage: "bestseller", emotionalTone: "playful" },
   littleRitual: { primaryMessage: "brand_story", emotionalTone: "aspirational" },
   honestlySoGood: { primaryMessage: "social_proof", emotionalTone: "playful" },
   obsessed: { primaryMessage: "social_proof", emotionalTone: "playful" },
-  notAnotherSoda: { primaryMessage: "brand_story", emotionalTone: "bold_edgy" },
+  notAnotherSoda: { primaryMessage: "brand_story", emotionalTone: "aspirational" },
   threePm: { primaryMessage: "problem_solution", emotionalTone: "playful" },
   inMyTote: { primaryMessage: "new_arrival", emotionalTone: "playful" },
   bubbles: { primaryMessage: "new_arrival", emotionalTone: "bold_edgy" },
   currentLineup: { primaryMessage: "new_arrival", emotionalTone: "playful" },
   thirsty: { primaryMessage: "problem_solution", emotionalTone: "urgent" },
-  zeroAllFizz: { primaryMessage: "product_quality", emotionalTone: "playful" },
+  earnedIt: { primaryMessage: "brand_story", emotionalTone: "empowering" },
+  dinner: { primaryMessage: "brand_story", emotionalTone: "aspirational" },
+  cooldown: { primaryMessage: "brand_story", emotionalTone: "empowering" },
+  groupChat: { primaryMessage: "social_proof", emotionalTone: "playful" },
+  quietNight: { primaryMessage: "brand_story", emotionalTone: "aspirational" },
 };
 
-/* Which artwork survives a tile. A tile crops its 9:16 image to 4:5, which
-   keeps 70% of the ad's height, and the platform and score chips cover the
-   top 28px of its two corners. The product crops about the centre; here
-   each ad sits at its own "tile" focus instead (ui/adFocus.json), chosen
-   so the on-image headline is whole and starts below the chips.
+/* Which artwork survives a tile. A tile crops its 9:16 image to 4:5,
+   which keeps 70% of the ad's height, and the platform and score chips
+   cover the top 28px of its two corners. The product crops about the
+   centre; here each ad sits at its own "tile" focus instead
+   (ui/adFocus.json), set to one rule: the can and the person come first
+   (the can whole or boldly cropped, a face never sliced), and the
+   on-image headline is in the tile whole, clear of the chips, or not in
+   it at all. So some tiles carry no headline: the name under the tile
+   says it.
 
-   - Headline in the top third, so the tile shows the upper part of the
-     ad and loses the bottom: "Little can. Big mood.", "Zero sugar.
-     Still fun.", "Would rebuy", "Post-workout, pre-brunch, anytime.",
-     "Found my new fave fizz", and of the older ads "Honestly? So good.",
-     "Currently obsessed", "Not just another soda.", "Current lineup".
-     "Little can. Big mood." and "Zero sugar. Still fun." lose their own
-     Shop now button this way, which is the cleaner cut.
-   - Headline in the bottom third, so the tile shows the lower part of
-     the ad and loses the top of the artwork: "Summer carry", "Fridge
-     pick", "Your new little ritual.".
-   - Headline mid-frame, centre crop: "My new 3pm pick me up".
-   - One ad cannot clear the chips: "Post-workout, pre-brunch, anytime."
-     starts 4% from the top of the artwork, so even with the tile at the
-     very top the platform chip touches its first line.
-   - Two ads are lifestyle photographs with a person in them, "Would
-     rebuy" and "Post-workout, pre-brunch, anytime.". Each carries its
-     headline in the top third with the can and the face below it, so the
-     tile, cut from the top, keeps the headline, the can and the face.
-   - Do not show "In my tote" as a tile, or anywhere larger than a 40px
-     thumbnail: a third party's printed name is legible in the artwork.
-     Hold it back until the image is retouched.
-   - The three under-tier creatives other than "Current lineup" have
-     small artwork only (about 200px wide) and blur at tile size. */
+   The account's one square file (the Data Hub's "All fizz, square cut")
+   is not a library tile: a 4:5 box is narrower than a square and would
+   cut its headline at the side. */
 
 /* The single-row default: four creatives that crop cleanly, newest first
-   (7, 22, 30 and 33 days live). Three platforms; top, above and average
-   tiers; one headline at the top, one at the bottom, one mid-frame and
-   one hard against the top edge. */
+   (7, 12, 19 and 30 days live). Three platforms and all four score
+   tiers. */
 export const LIBRARY_ROW: SampleCreative[] = [
-  CREATIVES.bigMood,
-  CREATIVES.littleRitual,
+  CREATIVES.allFizz,
+  CREATIVES.dinner,
+  CREATIVES.honestlySoGood,
   CREATIVES.threePm,
-  CREATIVES.anytime,
 ];
 
 /* The grid's default tiles under "Sort: Newest": eight of the account's
-   creatives in order of days live, fewest first (7, 22, 24, 30, then 33,
+   creatives in order of days live, fewest first (7, 14, 22, 30, then 33,
    44, 49, 63). The first row alone shows all four score tiers and all
-   three platforms; the under-tier tile is "Current lineup", the only one
-   with full-size artwork. Every tile shows its headline whole. */
+   three platforms; the under-tier tile is "The group chat agrees.". The
+   second row opens on the account's top creative by score, 33 days
+   live. */
 export const LIBRARY_GRID: SampleCreative[] = [
-  CREATIVES.bigMood,
+  CREATIVES.allFizz,
+  CREATIVES.groupChat,
   CREATIVES.littleRitual,
-  CREATIVES.currentLineup,
   CREATIVES.threePm,
-  CREATIVES.anytime,
+  CREATIVES.bigMood,
   CREATIVES.obsessed,
   CREATIVES.summerCarry,
   CREATIVES.notAnotherSoda,
 ];
 
-/* ── Creative detail panel: "Little can. Big mood." ───────────────── */
+/* ── Creative detail panel: the week's winner ─────────────────────── */
 
 const HERO = HERO_CREATIVE;
 
@@ -168,7 +157,7 @@ export const HERO_DETAIL = {
   /* The ad's own copy, as the panel prints it under the preview. The
      sample creative is named for its headline. */
   headline: HERO.name,
-  body: "Sparkling citrus in a can that fits your bag. Zero sugar, real juice, all mood.",
+  body: "Sparkling citrus with real juice. Zero sugar, all fizz.",
 } as const;
 
 /* What stands behind the 94: each metric's percentile against every other
@@ -183,11 +172,11 @@ export const SCORE_PARTS: Array<{ key: string; word: string; percentile: number 
   { key: "spend", word: "spend", percentile: 88 },
 ];
 
-/* Tags on the top creative. A string prints as "Key: Value"; true prints
+/* Tags on the week's new winner. A string prints as "Key: Value"; true prints
    the key alone; false, "none" and missing values are not shown. The image
-   is a studio product shot: no people, an orange can floating at a tilt in
-   a splash on flat cobalt blue, a two-line headline above it and a button
-   below. */
+   is a studio product shot: no people, an orange can lying among whole and
+   cut oranges that fill the frame, a two-line headline over the top of the
+   can and a button below. */
 export type TagValue = string | boolean;
 
 /* What the creative is doing, in the product's order. */
@@ -196,7 +185,7 @@ export const STRATEGIC_TAGS: Array<[key: string, value: TagValue]> = [
   ["cta_type", "shop_now"],
   ["emotional_tone", "playful"],
   ["headline_style", "brand_slogan"],
-  ["primary_message", "brand_story"],
+  ["primary_message", "product_quality"],
   ["funnel_stage", "awareness"],
   ["has_price", false],
   ["has_discount", false],
@@ -239,10 +228,10 @@ export function shownTags(tags: Array<[string, TagValue]>): Array<[string, TagVa
 export const ANALYSIS_OPEN = {
   title: "Visual Design Analysis",
   lines: [
-    ["Color psychology", "The orange can and its cut fruit sit on their complement, a flat cobalt blue, so the eye lands on the product first."],
-    ["Composition", "The can floats at a tilt in the center, ringed by a splash and four orange wedges, with the headline stacked above it."],
-    ["Typography", "A lower-case serif in cream, one small line over one large, makes the last two words the punchline."],
-    ["Imagery quality", "Clean studio light and a frozen splash make it read as a finished brand ad, not a snapshot."],
+    ["Color psychology", "The can sits in a frame of its own color, whole and cut oranges from edge to edge, so the flavor is read before a word is."],
+    ["Composition", "The can lies in the center and runs most of the height of the frame, ringed by oranges, with the headline stacked above its rim."],
+    ["Typography", "A serif in cream, two short lines of one size, sets the claim and its payoff as a pair."],
+    ["Imagery quality", "Clean studio light and beads of water on the can and the fruit make it read as a finished brand ad, not a snapshot."],
     ["Mobile legibility", "Two short lines of text and a large logo on the can stay readable at story size."],
   ] as Array<[label: string, body: string]>,
 };

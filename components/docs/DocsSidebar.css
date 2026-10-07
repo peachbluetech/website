@@ -1,0 +1,137 @@
+/* DocsSidebar.tsx's own rules. Classes are .el-* with this part's name
+   in them. The shared system is components/site/system.css and
+   components/site/kit.css: do not restate their classes here; to
+   adjust a part inside the docs navigation, put its class in front of
+   it. Colours, radii, shadows and durations are the system's tokens,
+   never literals.
+
+   From 1024 it is the kit's side nav, and the rule under the navigation
+   is not drawn. */
+.el-docs-side-rule {
+  display: none;
+}
+
+/* From 1024 the list is set a little closer than the kit sets a side
+   nav. This is the longest side nav on the site (five sections,
+   fourteen pages): at the kit's own distances it is cut by the foot of
+   a laptop's window, and set like this it fits a window 760px tall. In
+   a shorter window it scrolls on its own, as the kit's side column
+   does. */
+@media (min-width: 1024px) {
+  .el-docs-nav .el-sidenav-group + .el-sidenav-group {
+    margin-top: 28px;
+  }
+  .el-docs-nav .el-sidenav-list {
+    margin-top: 10px;
+  }
+  /* A link is as wide as its words, and 12px wider each way without
+     moving them: that is the plate's room, as a link of the site nav
+     has it. */
+  .el-docs-nav .el-sidenav-link {
+    width: fit-content;
+    margin-inline: -12px;
+    padding: 4px 12px;
+    border-radius: var(--el-r-pill);
+    transition:
+      color var(--el-t-fast) var(--el-ease),
+      background-color var(--el-t-fast) var(--el-ease);
+  }
+  /* The page the reader is on rests on the plate, the way the site nav
+     marks the section the reader is in. Ink at 400: the plate says
+     "here", and the weight stays with the sections' titles. Its plate
+     is a state, not feedback, so it is never faded in. Under the
+     pointer any other link takes the plate too, as a link of the site
+     nav does. */
+  .el-docs-nav .el-sidenav-link[aria-current="page"] {
+    background-color: var(--el-plate);
+    font-weight: 400;
+    transition: none;
+  }
+  @media (hover: hover) {
+    .el-docs-nav .el-sidenav-link:hover {
+      background-color: var(--el-plate);
+    }
+  }
+  /* The plate stands 12px outside the column, and a link's focus ring
+     4px outside that. The resting box clips what leaves it, so here it
+     is 16px wider each way, and its words stay where they were. */
+  .el-sticky.el-docs-side {
+    margin-inline: -16px;
+    padding-inline: 16px;
+  }
+}
+
+/* Under 1024 the navigation is a slim band under the page's first rule:
+   one line that scrolls sideways, and a rule under it with its two
+   marks on the rails. */
+@media (max-width: 1023.98px) {
+  /* The band leaves the article's block: it gives back the block's top
+     distance and its inset, so it stands flush under the rule and runs
+     from rail to rail. Under it the doc's header starts where it does
+     under any rule (the block's top distance; the article's own row gap
+     is already part of it). */
+  .el-docs-side {
+    margin: calc(var(--el-band) * -1) calc(var(--el-inset) * -1) calc(var(--el-band) - var(--el-row));
+  }
+  .el-docs-side-rule {
+    display: block;
+  }
+  /* The line. Its last 48px fade out, to say there is more; the end
+     padding lets the last link clear the fade. */
+  .el-docs-nav {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    height: 52px;
+    padding-inline: var(--el-inset) 48px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    white-space: nowrap;
+    mask-image: linear-gradient(to right, var(--el-ink) calc(100% - 48px), transparent);
+  }
+  .el-docs-nav::-webkit-scrollbar {
+    display: none;
+  }
+  .el-docs-nav .el-sidenav-group,
+  .el-docs-nav .el-sidenav-list {
+    display: flex;
+    flex: none;
+    align-items: center;
+  }
+  .el-docs-nav .el-sidenav-group {
+    gap: 16px;
+  }
+  .el-docs-nav .el-sidenav-group + .el-sidenav-group {
+    margin-top: 0;
+  }
+  .el-docs-nav .el-sidenav-list {
+    gap: 20px;
+    margin-top: 0;
+  }
+  /* A link is 44px tall, for a thumb. */
+  .el-docs-nav .el-sidenav-link {
+    padding-block: 11.5px;
+  }
+  /* A section's title is a small filled label here (the badge's look),
+     so it is not taken for a link or for the page the reader is on. It
+     is centred by the row, so it drops the text trim. */
+  .el-docs-nav .el-sidenav-group > :not(.el-sidenav-list) {
+    padding: 3px 8px;
+    border-radius: var(--el-r-tag);
+    background: var(--el-taupe);
+    box-shadow: var(--el-card-ring);
+    font-size: 12px;
+    line-height: 16px;
+  }
+  .el-docs-nav .el-sidenav-group > :not(.el-sidenav-list)::before,
+  .el-docs-nav .el-sidenav-group > :not(.el-sidenav-list)::after {
+    content: none;
+  }
+  /* The reader's section first, and in it the reader's page: the line
+     starts where the reader is. Only what is seen moves. */
+  .el-docs-nav .el-sidenav-group:has([aria-current="page"]),
+  .el-docs-nav .el-sidenav-list > li:has([aria-current="page"]) {
+    order: -1;
+  }
+}

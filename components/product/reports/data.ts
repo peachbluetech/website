@@ -93,10 +93,10 @@ export const REPORT_KPIS: ReportKpi[] = [
 
 /* Campaign names per platform. Invented; the canonical account has none. */
 const CAMPAIGN: Record<string, string> = {
-  bigMood: "Prospecting · Broad US",
+  allFizz: "Prospecting · Broad US",
   zeroSugar: "Prospecting · Broad US",
   wouldRebuy: "Spark Ads · Creators",
-  anytime: "Spark Ads · Creators",
+  bigMood: "Spark Ads · Creators",
   faveFizz: "Retargeting · 30d visitors",
 };
 

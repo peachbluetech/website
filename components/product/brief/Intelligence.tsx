@@ -133,9 +133,9 @@ function signalFor(s: Strategy): { label: string; tone: string } {
    the top of the first and the third thumbnail, and cover the first line
    of an ad whose headline is in its top third. Only the middle slot is
    clear, so the fix is the order of the creatives in ./data (see the note
-   above STRATEGIES), never the position of the chips. One card is clean
-   throughout; on the others a first word ("zero", "currently", "Honestly?",
-   "Bubbles,") stays under a chip, as it would in the app. */
+   above STRATEGIES), never the position of the chips. An outer thumbnail
+   keeps a chip over the top of its ad, headline or not, as it would in
+   the app. */
 export function StrategyCard({
   strategy = STRATEGIES[0],
   className,

@@ -1,68 +1,62 @@
-import Link from "next/link";
-import { Fragment, type ReactNode } from "react";
-import { Shot } from "@/components/product/frame";
+import { Fragment, type CSSProperties, type ReactNode } from "react";
 import { RANKED } from "@/components/product/agent/data";
 import { MiniMetric, RankedList, ScoreCircle, Turn } from "@/components/product/agent/parts";
 import { CardGrid, MCP_RANKED, ToolCall } from "@/components/product/mcp";
-import { AdThumb, Card, PlatformBadge, formatCurrency, formatCurrencyCompact, formatPercent, formatRoas } from "@/components/product/ui";
 import type { SampleCreative } from "@/components/product/sample";
+import { AdThumb, Card as AppCard, PlatformBadge, formatCurrency, formatCurrencyCompact, formatPercent, formatRoas } from "@/components/product/ui";
 import { AGENT_PEACH } from "./content";
-import { ClaudeMark, PeachblueTile } from "./Marks";
-import { Accent, BAND_X, Bullets, Fluid, INSET, More, PAPER, PeekBand, SECTION_END, SectionMarker, Sheet, T } from "./parts";
+import { ClaudeMark } from "./Marks";
+import { Block, Card, Cards, Dotted, Fluid, Keep, LogoTile, MEDIUM, More, Pill, Shot, SplitHead, T, TONE, Window, cx } from "@/components/site/parts";
+import "./Agent.css";
 
-/* 02 Agent Peach: two ways to chat. Either chat with Agent Peach in the
-   product, or connect Claude for the same data in the workflow you
-   already use. The band shows Claude's mark beside its name and says
-   nothing about the tool count or MCP.
+/* Agent Peach (#agent-peach): two ways to chat, shown side by
+   side at equal weight. Either chat with Agent Peach in the product, or
+   connect Claude and ask there, with the same data.
 
-   The two ways are the band's headline, first and biggest at every
-   width. Top to bottom:
-   1. The head (on paper): the h2, and under it the line that names the
-      two ways ("Chat with Agent Peach, or chat in Claude with the same
-      data.").
-   2. The band's lead: the pair of titles, the largest type in the band
-      (H2, 44px at 1440), each led by the mark of the place it names:
-      Peachblue's p beside "Chat with Agent Peach", Claude's mark beside
-      "Chat in Claude", with "or" between them. Under each title its one
-      line at Body large, its first phrase in full paper colour; under
-      that each half's one action, on one line across the band: the
-      section's trial link on the left, the band's own link to /mcp
-      ("Connect Claude") on the right with its plan gate, "Pro and up",
-      beside it as a label.
-   3. The question, once and small: "You asked / Show me my top five
-      creatives this week" on one ruled line directly over the mats
-      (from xl across both halves; stacked, between the left half's
-      action and its mat).
-   4. The two mats: Agent Peach's ranked answer on the left,
-      Peachblue's get_creatives card returned over MCP on the right. The
-      matching scores (94, 92, 91 on both mats at 1440) are the proof of
-      "the same data".
+   Top to bottom:
+   1. The split header: the eyebrow and the h2 on the left; on the right
+      the line that names the two ways, then bullets 1 and 2 as rows on
+      dotted separators and a "More" row holding bullets 4 and 5.
+   2. Two taupe cards, one per way. In each, from the top: the title (an
+      h3) led by the mark of the place it names, with the card's one
+      action as a small white pill at the row's right end; the card's one
+      line, its first phrase in ink and its second in the secondary tone,
+      the change falling on the line break; the question, the same in
+      both cards, as an outlined bubble on the right (decoration: it says
+      "one question, two places" without a label); and the answer in a
+      white window that the card's foot cuts.
+      Left: Agent Peach's turn, in its own words, over its ranked
+      creatives as rows; the foot cuts the third row in the white under
+      its name and over its figures.
+      Right: Peachblue's tool row and the creative card it returned, a
+      grid of the same five ads; the window also runs off the card's
+      right edge, which cuts the third ad after its pills, and the foot
+      cuts in the white under the names.
+      The matching names and scores (94, 92, 91, three on each side) are
+      the proof of "the same data".
+   3. The note row: bullet 3, the claim both pictures bear out (each
+      prints its window, "last 7 days").
 
-   Copy: the h2, bullets 1 and 2 (head), 4 and 5 (More), 3 (the caption
-   under the band) and the trial link (on the band) are content.ts's.
-   The section's own words are TWO_WAYS below: the subline, the two
-   titles (h3), their two lines, the link "Connect Claude" (to /mcp) and
-   the label "Pro and up" beside it. The MCP anchor ("Your data in
-   Claude", "The 23-tool MCP server, included on Pro and up.") is in the
-   toolkit, whole (Toolkit.tsx).
+   Copy: the eyebrow, the h2, the five bullets and the trial link are
+   content.ts's. The section's own words are TWO_WAYS below.
 
-   Truth: the right half's picture is drawn by us from Peachblue's own
-   parts (components/product/mcp): no window, no reply prose, only the
-   tool row and Peachblue's card. Claude is named as the place the data
-   goes (the title, its line, the link) and marked once, beside its name
-   in the title, outside the picture (Marks.tsx). It is never on a turn
-   and never Agent Peach. "Supercharge" and "next-level" are paid off
-   in the same line by what Claude receives: your scores, tags, and
-   rankings. "The same data" is the same data and tools, so the same
-   numbers; nothing promises the same words. "Pro and up" is the plan
-   the MCP server is on (the toolkit's published line, plans.ts); Agent
-   Peach is on every plan, so the left half carries no gate. Nothing
-   here acts on an account, and nothing generates an ad. */
+   Truth rules: Claude is
+   named only as the place the data goes (the title, its line, the link)
+   and marked once, beside its name, outside the picture. No host
+   interface is drawn: the right picture is Peachblue's own tool row and
+   card on a plain white surface. No tool count and no "MCP" in this
+   section. Nothing here acts on an account or generates an ad. "Pro and
+   up" is the plan the connection is on; Agent Peach is on every plan, so
+   the left card carries no gate.
+
+   Page.tsx draws the rule above this section and the rule under it. */
 
 const ID = "agent-peach";
 const MCP_HREF = "/mcp";
 
-/* The section's own words (the rest of its copy is in content.ts). */
+/* The section's own words: the ones that are not in content.ts. They
+   are published copy like the rest of the page: restyle freely, do not
+   reword. */
 const TWO_WAYS = {
   sub: "Chat with Agent Peach, or chat in Claude with the same data.",
   app: {
@@ -75,243 +69,30 @@ const TWO_WAYS = {
     /* One line: the claim, then what pays it off. */
     line: ["Supercharge Claude with next-level ad intelligence:", "your scores, tags, and rankings."],
     link: "Connect Claude",
-    /* The plan gate, said without the plumbing: a label beside the link,
-       outside its anchor. */
+    /* The plan gate: a label beside the link, outside its anchor. */
     gate: "Pro and up",
   },
 } as const;
 
 /* ── Text alternatives ──────────────────────────────────────────── */
 
-/* The list's four figures in its own order and formats (compact spend,
-   two decimals for CTR and ROAS, cents for CPA). */
-const figures = (c: SampleCreative) => [
-  { label: "Spend", value: formatCurrencyCompact(c.spend) },
-  { label: "CTR", value: formatPercent(c.ctr) },
-  { label: "CPA", value: formatCurrency(c.cpa) },
-  { label: "ROAS", value: formatRoas(c.roas) },
-];
-
-/* Each label says what every window of its picture shows, and no more:
-   the left shows rows 1 and 2 on a phone and all five from xl; the right
-   shows card 1 on a phone, cards 1 and 2 from 640 (card 3 too at 1440)
-   and never the figures under the names. Both say the question, which
-   the band prints once in a decorative layer. */
+/* One sentence for each picture, true of every layout of it: the left
+   shows all five rows where one card runs across the frame from about
+   820, the first three under that, the first four in a narrow card, and
+   the first two whole (with the head of the third) side by side from
+   about 1180 and on a phone, so the first two always; the right is the grid of five, of which the first ad with its
+   rank, score and name is always in view. Both say the question, which
+   the card prints in a decorative layer. */
 const WINDOW = /last \d+ days/.exec(RANKED.answer)?.[0] ?? "last 7 days";
 const [R1, R2] = RANKED.cards.map((c) => c.creative);
-const ANSWER_LABEL = `Agent Peach's answer in Peachblue for a sample account. The question: "${RANKED.question}" The answer is a ranked list of ${RANKED.cards.length} creatives over the ${WINDOW}, led by ${R1.name} (score ${R1.score}) and ${R2.name} (score ${R2.score}), each with its spend, CTR, CPA and ROAS.`;
-const MCP_LABEL = `The same question asked in Claude for the same sample account: a Peachblue tool call over MCP, get_creatives with limit ${MCP_RANKED.call.args.limit} over the ${WINDOW}, and Peachblue's creative card, a ranked grid of the same ${MCP_RANKED.creatives.length} creatives led by #1 ${R1.name} at score ${R1.score} and #2 ${R2.name} at ${R2.score}.`;
-
-/* ── The band's type on navy ────────────────────────────────────── */
-
-const ON_NAVY = "text-[color:var(--mn-on-navy)]";
-const ON_NAVY_BODY = "text-[color:var(--mn-on-navy-body)]";
-const ON_NAVY_LABEL = "text-[color:var(--mn-on-navy-label)]";
-const ON_NAVY_RULE = "border-[color:var(--mn-on-navy-rule)]";
-const ON_NAVY_RING = "focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[color:var(--mn-on-navy-accent)]";
-/* The page's text link (ArrowLink) in the navy's colours: its label and
-   its rule are paper colour; under the pointer and on focus both take
-   the accent on navy, and the ring is drawn in it. */
-const ON_NAVY_LINK = `inline-flex items-center gap-1.5 border-b border-[color:var(--mn-on-navy)] pb-1 font-semibold transition-colors duration-150 hover:border-[color:var(--mn-on-navy-accent)] hover:text-[color:var(--mn-on-navy-accent)] focus-visible:border-[color:var(--mn-on-navy-accent)] focus-visible:text-[color:var(--mn-on-navy-accent)] ${T.small} ${ON_NAVY} ${ON_NAVY_RING}`;
-
-/* ── "or" ───────────────────────────────────────────────────────── */
-
-/* The word the row hinges on, in the titles' own face and their paper
-   colour, about three quarters of their size (32px at 1440, 28.8 at
-   1280, 28 stacked), so the row reads as one sentence: "Chat with Agent
-   Peach or Chat in Claude". Decoration: the subline says "or" in words.
-   - From xl (`OrBetween`) it stands on the titles' line, in the middle
-     of the room between the end of the left title and the right title's
-     mark. It is the left title row's last cell and reaches through the
-     48px column between the halves. No rule beside it: a short hairline
-     either side of a word reads as a pair of dashes.
-   - Stacked (`OrRow`) it is a row of its own between the left mat and
-     the right title: "or", then a hairline in the navy's rule to the
-     band's inset. */
-const OR = `font-display text-[clamp(28px,2.25vw,32px)] font-semibold leading-none tracking-[-0.015em] ${ON_NAVY}`;
-
-function OrBetween() {
-  return (
-    <span aria-hidden="true" className={`-mr-12 flex-1 text-center max-xl:hidden ${OR}`}>
-      or
-    </span>
-  );
-}
-
-function OrRow() {
-  return (
-    <div aria-hidden="true" className="flex items-center gap-4 pt-8 xl:hidden">
-      <span className={OR}>or</span>
-      <span className={`flex-1 border-t ${ON_NAVY_RULE}`} />
-    </div>
-  );
-}
-
-/* ── The two titles ─────────────────────────────────────────────── */
-
-/* One form for both halves, and the band's largest type: the mark, then
-   the title (an h3) at H2 in paper colour (44px at 1440, 40 at 1280, 32
-   under 1032); 12px under it the half's one line at Body large (18px
-   from md); under that the half's one action (`children`). The mark is
-   32px (28 on a phone) and stands on the middle of the title's first
-   line, which for Fraunces at 1.08 is the middle of its capitals; where
-   a title takes two lines (a phone's "Chat with / Agent Peach") the
-   mark stays beside the first.
-
-   The line is set in its phrases (`line`: the left's two sentences, the
-   right's claim and what pays it off). The first phrase is in full
-   paper colour, the second in the band's body tone, so the sell reads
-   before its payoff: "Supercharge Claude with next-level ad
-   intelligence:" then "your scores, tags, and rankings."; "Built into
-   Peachblue." then "Every answer comes from your own ad data.". Each
-   phrase is a box of its own and keeps to its own line wherever the
-   measure (30em, 26em from xl) cannot hold both, which is every width
-   checked, so the change of tone falls on a line break; a phrase wider
-   than its column wraps inside itself, balanced.
-
-   The action is 16px under the line. From xl the two heads share one
-   grid row and each is a column whose action stands on its foot, so the
-   titles share a line and the two actions share a line whatever the
-   lines above them wrap to (at 1280 the right line takes three lines,
-   the left two). The marks stand on the mats' left edges. Paddings come
-   from each half (`className`). */
-/* A hyphenated word keeps to one line ("next-level" never ends a line on
-   its hyphen). The text is unchanged: the word is only wrapped. */
-function Whole({ text }: { text: string }) {
-  return (
-    <>
-      {text.split(/(\S+-\S+)/).map((part, i) =>
-        i % 2 ? (
-          <span key={i} className="whitespace-nowrap">
-            {part}
-          </span>
-        ) : (
-          part
-        ),
-      )}
-    </>
-  );
-}
-
-function Way({ mark, title, line, between, className = "", children }: { mark: ReactNode; title: string; line: readonly string[]; between?: ReactNode; className?: string; children?: ReactNode }) {
-  return (
-    <div className={`flex flex-col ${className}`}>
-      <div className="flex items-center">
-        <h3 className={`flex items-start gap-3 ${T.h2} ${ON_NAVY}`}>
-          <span aria-hidden="true" className="flex h-[1.08em] shrink-0 items-center">
-            {mark}
-          </span>
-          <span className="text-balance">{title}</span>
-        </h3>
-        {between}
-      </div>
-      <p className={`mt-3 max-w-[30em] text-balance xl:max-w-[26em] ${T.bodyLg} ${ON_NAVY_BODY}`}>
-        {line.map((part, i) => (
-          <Fragment key={part}>
-            {i > 0 && " "}
-            <span className={`inline-block ${i === 0 ? ON_NAVY : ""}`}>
-              <Whole text={part} />
-            </span>
-          </Fragment>
-        ))}
-      </p>
-      {children && <div className="mt-4 flex flex-wrap items-baseline gap-x-4 gap-y-2 xl:mt-auto xl:pt-4">{children}</div>}
-    </div>
-  );
-}
-
-const MARK_SIZE = "size-7 sm:size-8";
-
-function LinkArrow() {
-  return (
-    <>
-      {" "}
-      <span aria-hidden="true">&rarr;</span>
-    </>
-  );
-}
-
-/* The left half, the band's first thing at every width: 20px under the
-   band's labels on a phone, 24 from sm, 40 from xl. Its action is the
-   section's own trial link (content.ts's anchor text and href), so
-   the product's way ends on an action as the Claude way does. Stacked,
-   24px under it, the question's rule; from xl, 32px. */
-function AppWay() {
-  const cta = AGENT_PEACH.cta;
-  return (
-    <Way
-      mark={<PeachblueTile className={MARK_SIZE} />}
-      title={TWO_WAYS.app.title}
-      line={TWO_WAYS.app.line}
-      between={<OrBetween />}
-      className="pb-6 pt-5 sm:pt-6 xl:col-start-1 xl:row-start-1 xl:pb-8 xl:pt-10"
-    >
-      {cta && (
-        <a href={cta.href} className={ON_NAVY_LINK}>
-          {cta.label}
-          {cta.arrow && <LinkArrow />}
-        </a>
-      )}
-    </Way>
-  );
-}
-
-/* The right half. Its action is the band's own link to /mcp, and beside
-   it, on its baseline and outside the anchor, the plan gate in the
-   band's 10px label cut: the offer and its condition in one place, with
-   no tool count and no "MCP". Stacked it follows "or" and its own mat
-   follows it (16px on a phone, 24 from sm). From xl the grid has no
-   right inset (the mat under it runs off the band), so the head brings
-   its own 24px. */
-function McpWay() {
-  return (
-    <Way
-      mark={<ClaudeMark className={MARK_SIZE} />}
-      title={TWO_WAYS.mcp.title}
-      line={TWO_WAYS.mcp.line}
-      className="pb-4 pt-6 sm:pb-6 sm:pt-8 xl:col-start-3 xl:row-start-1 xl:pb-8 xl:pr-6 xl:pt-10"
-    >
-      <Link href={MCP_HREF} className={ON_NAVY_LINK}>
-        {TWO_WAYS.mcp.link}
-        <LinkArrow />
-      </Link>
-      <span className={`${T.labelFig} ${ON_NAVY_LABEL}`}>{TWO_WAYS.mcp.gate}</span>
-    </Way>
-  );
-}
-
-/* ── The question, once ─────────────────────────────────────────── */
-
-/* What both halves answer, said once and small: "You asked" in the
-   label's 10px cut, then the question at Body large (Inter 500) in paper
-   colour, on one line (on a phone the label stands over the question).
-   Neither mat draws its own "You" turn. Decoration: both pictures' text
-   alternatives say the question.
-   At every width it is one ruled row directly over a mat: a hairline in
-   the navy's rule on top, 16px over and under its line. From xl it is
-   the row between the two heads and the two mats, across both halves,
-   and its rule runs to the band's cut right edge with the right mat.
-   Stacked it stands between the left half's action and the left mat,
-   so the band opens on the first title, not on the question. */
-function Asked() {
-  return (
-    <div
-      aria-hidden="true"
-      className={`flex flex-wrap items-baseline gap-x-4 gap-y-2 border-t py-4 xl:col-span-3 xl:col-start-1 xl:row-start-2 ${ON_NAVY_RULE}`}
-    >
-      <p className={`${T.labelFig} ${ON_NAVY_LABEL}`}>You asked</p>
-      <p className={`text-balance font-medium ${T.bodyLg} ${ON_NAVY}`}>{RANKED.question}</p>
-    </div>
-  );
-}
+const ANSWER_LABEL = `Agent Peach's answer in Peachblue, for a sample account, to the question "${RANKED.question}": a ranked list of ${RANKED.cards.length} creatives over the ${WINDOW}, led by ${R1.name} (score ${R1.score}) and ${R2.name} (score ${R2.score}), each with its spend, CTR, CPA and ROAS.`;
+const MCP_LABEL = `The same question asked in Claude for the same sample account: a Peachblue tool call, get_creatives with limit ${MCP_RANKED.call.args.limit} over the ${WINDOW}, and Peachblue's creative card, a ranked grid of the same ${MCP_RANKED.creatives.length} creatives led by #1 ${R1.name} at score ${R1.score} and #2 ${R2.name} at ${R2.score}.`;
 
 /* ── Left: Agent Peach, in the app ──────────────────────────────── */
 
 /* The product's own turn: the role label, the answer, the ranked list of
-   five (RankedList, 672 wide at most). In the product's units the role
-   label takes 22px, a line of the answer 24.375px, then 12px; then the
-   list's 1px border and one 77px row a creative (76 and the divider),
-   its 44px thumbnail 16px into the row. */
+   five. Shown where one card runs across the frame and the list has its
+   own 672px. */
 function Answer() {
   return (
     <Turn role="Agent Peach" text={RANKED.answer}>
@@ -320,15 +101,24 @@ function Answer() {
   );
 }
 
-/* Under 605px of mat the list cannot be painted at nine tenths, and
-   under about 560 it cuts the names short, so a narrow mat holds the
-   ranked creatives as compact rows made of the product's own parts: the
-   thumbnail, the platform, the name, the score disc, and the list's four
-   figures on a line of their own. From 640 the answer's prose stands
-   over them (CompactAnswer); on a phone the rows stand alone. */
+/* The list's four figures in its own order and formats. */
+const figures = (c: SampleCreative) => [
+  { label: "Spend", value: formatCurrencyCompact(c.spend) },
+  { label: "CTR", value: formatPercent(c.ctr) },
+  { label: "CPA", value: formatCurrency(c.cpa) },
+  { label: "ROAS", value: formatRoas(c.roas) },
+];
+
+/* A window under about 630px cannot hold the list without cutting a name
+   short, and under 600 it has to be painted small, so there it holds the
+   same ranked creatives as compact rows made of the product's own parts:
+   the thumbnail, the platform, the name, the score disc, and the list's
+   four figures on a line of their own. It stands inside a picture and
+   is put together from the product's parts, so it is written in the
+   product's utility classes, not in the system's. */
 function CompactRanked() {
   return (
-    <Card className="divide-y divide-pb-border overflow-hidden">
+    <AppCard className="divide-y divide-pb-border overflow-hidden">
       {RANKED.cards.map(({ creative: c }) => (
         <div key={c.key} className="p-3">
           <div className="flex items-center gap-3">
@@ -348,10 +138,14 @@ function CompactRanked() {
           </div>
         </div>
       ))}
-    </Card>
+    </AppCard>
   );
 }
 
+/* Agent Peach's turn over the compact rows: the role label, the answer
+   in its own words (which is where the left picture prints its window,
+   "the last 7 days"), then the ranked creatives: the pairing for a
+   window too narrow for the list. */
 function CompactAnswer() {
   return (
     <Turn role="Agent Peach" text={RANKED.answer}>
@@ -360,238 +154,202 @@ function CompactAnswer() {
   );
 }
 
-/* ── Right: the same question, in Claude over MCP ───────────────── */
+/* ── Right: the same question, in Claude ────────────────────────── */
 
-/* The neutral turn around Peachblue's card, drawn from the product's own
-   parts: the tool row (Peachblue, get_creatives, limit 5 · last 7 days),
-   24px, then the card grid alone, with no frame ground (white with
-   hairline cards like the list beside it). The tool row is the right
-   half's "Agent Peach" line: who answered, and with which tool. Where it
-   wraps (a phone) its arguments hang under "Peachblue". Side by side the
-   gap is 48px, not 24 (see SIDE). */
+/* Peachblue's tool row (its own p, get_creatives, limit 5 · last 7 days)
+   over the card grid alone, with no frame ground: white with hairline
+   cards, like the list beside it. Where the row wraps (a phone) its
+   arguments hang under "Peachblue" (a utility string on the product's
+   own row, inside the picture). */
 const HANG = "pl-7 [&>:first-child]:-ml-7";
 
-function OverMcp({ width, gap = "gap-6" }: { width: number; gap?: string }) {
+function OverMcp({ host, hang = false }: { host: number; hang?: boolean }) {
   return (
-    <div className={`flex flex-col ${gap}`}>
-      <ToolCall call={MCP_RANKED.call} className={HANG} />
-      <CardGrid width={width} ground={false} />
+    <div className="el-agent-mcp">
+      <ToolCall call={MCP_RANKED.call} className={hang ? HANG : undefined} />
+      <CardGrid width={host} ground={false} className="el-agent-host" />
     </div>
   );
 }
 
 /* ── The windows, in each fragment's own units ──────────────────── */
 
-/* From xl the halves stand side by side: the left column 599px (the
-   left fragment's 630 layout at 0.90, plus the mat's 32px of margin), the
-   48px "or" column, and the rest for the right half, which runs off the
-   band's edge: 519px at 1440, 359 at 1280. 630 is the narrowest layout of
-   the list that cuts no name short (measured: at 620 "Post-workout,
-   pre-brunch, anytime." is cut; at 560 so is "Prospecting · Broad US"),
-   and 0.90 is the page's floor, so the left cannot be narrower; equal
-   columns would need the left painted at 0.84. The right is the visual
-   heavier half (five tall ads), so the two read as one weight.
-   Both mats are painted at 0.90 and both windows are SIDE.h (505) of
-   their fragment, so they are one height and stand on the band's foot
-   side by side. Measured in the fragments' units:
-   - Left, 630 wide: the answer on four lines, the list from 131.5, row 5
-     from 440.5 to 516.5 with its content to 500.5. The cut at 505 falls
-     in row 5's lower padding: all five rows whole.
-   - Right, the card grid at a 640 host (three columns of 205), 48px
-     under the tool row: the pictures from 81, the pills 454.5 to 474.4,
-     the names 482.4 to 500.6, SPEND from 510.6. The cut at 505 falls in
-     the white between the names and SPEND. The 48px (24 stacked) is what
-     puts that white on the left's: at 24 the names end 24px higher, in
-     row 5's thumbnail. At 1440 the band's edge cuts card 3 at 559 of its
-     host's 640, after its pills (to 551: "#3 Score 91" whole); at 1280
-     it cuts card 2 at 381, after its pills.
-   The left reuses the WIDE box, relaid at 630 by two overrides on its
-   custom properties (xl:[--fw:630]! xl:[--fh:505]!), which Tailwind has
-   to find as literals, so the server sends no extra copy of the answer. */
-const SIDE = { left: 630, right: 640, h: 505 };
+/* Each window is a box that lays its fragment out at `w` px and paints
+   it at the width of its slot, showing `h` px of it, so the card's foot
+   cuts the fragment on the same line at every width. Which layout a
+   card shows goes by the card's own width (Agent.css, by container
+   query), so no fragment is painted far from its own size:
+     wide     470 to 550px inside the card's padding: the two cards side
+              by side from about 1180 (507px at 1440)
+     narrow   380 to 470px: the two side by side from 1024 to 1180
+     mid      550 to 650px: one card across the frame, stacked, on a
+              screen from about 650 to 820
+     across   from 650px: one card across the frame, stacked, up to 1024
+     phone    under 380px: a screen under about 480
+   Every number below was measured on the built page, in the fragment's
+   own units.
 
-/* Under xl the mats stack. The left mat is as wide as its fragment and
-   margin (never over 716, the 684 list at one to one plus 32), with navy
-   beside it where the band is wider, and it chooses one of four layouts
-   by a container query on its own inside width, the one nearest its
-   size:
-   - WIDE, the list at 672 in the app's 684 turn: from 616px of mat
-     (0.90) to its own size (1.0, from lg). Rows 1 to 3 whole. From xl
-     the same box is relaid at 630 (see SIDE).
-   - MID, the list at 560: from 504 to 616 (0.90 to 1.10).
-   - NARROW, the answer and the compact rows at 424: from 382 to 504
-     (0.90 to 1.19; from 640, where the mat has 384).
-   The windows end in row 3's lower padding (the list) or in the white
-   over row 2's figures (the compact rows).
-   - PHONE, the compact rows alone at 282: under 640 (sm), painted at
-     the mat's width and never over one and a quarter. Rows 1 and 2
-     whole, the answer's prose left to the wider layouts.
-   Answer line counts are measured, not worked out: three at 684, four at
-   560, five at 424. */
-const WIDE = { w: 684, h: 330 };
-const MID = { w: 560, h: 355 };
-const NARROW = { w: 424, h: 328.6 };
-const PHONE = { w: 282, h: 222 };
+   Side by side both cards are one height, so the two cuts have to land
+   together: on screen a window is its slot's width times h / w, and the
+   left slot is 45px narrower than the right, which has no right inset.
+   Whatever is left over (a pixel or two; under three at the narrow end
+   of the wide range) is white over the shorter fragment, never taupe
+   under a window.
 
-/* The right mat under xl: the card at a 1104 host (five columns of 211),
-   painted at the left fragment's scale (container query units on the
-   band's grid, whose width is the left mat's inside plus its 32px of
-   margin), running off the band's right edge. On a phone the card as it
-   lays itself out at a 282 host, one column, the tool row on two lines,
-   painted at the mat's width up to one and a quarter; its window ends in
-   the white under card 1's name, so "#1", "Score 94" and "Little can.
-   Big mood." match row 1's 94 above. */
-const STACK_R = { w: 1104, h: 491 };
-const PHONE_R = { w: 282, h: 628 };
-const STACK_R_W =
-  "w-[calc((100cqw-32px)*1104/424)] @min-[33.5rem]:w-[calc((100cqw-32px)*1104/560)] @min-[40.5rem]:w-[calc(min(684px,100cqw-32px)*1104/684)]";
+   The left window, Agent Peach's answer.
+   - wide: the turn over the compact rows, laid out 462 wide and painted
+     at 1.02 at 1440 (1.00 at 1280, 0.95 at 1190): the role label, the
+     answer on five lines (to 143.9), then the rows from 156.9, one every
+     113.75. Rows 1 and 2 are whole with their four figures; row 3 shows
+     its head (the thumbnail, the platform, the name, the score, to
+     436.4) and the cut at 442 is in the 12px of white over its figures
+     (from 448.4), which is where the window beside it is cut too: under
+     the names, over the figures. So the left shows 94, 92 and 91 with
+     their names, the same three the right shows.
+     This replaced the product's five-column list laid out 568 wide and
+     painted at 0.83 (0.81 at 1280): its type was 7 to 11px, one name was
+     cut short by the list itself, and Peachblue's own agent was the
+     quiet half of the pair. The list needs about 630px to cut no name
+     and the card has 474.
+   - mid: the same turn over the compact rows, laid out 560 wide and
+     painted at 0.92 to 1.1 (1.01 at 768): the answer on four lines (to
+     119.5), the rows from 132.5, one every 113.75. Rows 1 to 3 are
+     whole; the cut at 467 is in the white under row 3's figures (to
+     460.7; the row ends at 473.7). The cards are stacked here, so this
+     cut does not have to meet the other card's.
+   - across: the turn with the list at the app's own 684 (the list at
+     its 672), the answer on three lines, the last row ending at 492.
+     Only from 650px of card, where it is painted at 0.9 or more: in a
+     564px slot (a 768 screen) it was painted at 0.82.
+   - narrow: the compact rows alone at 372, a row every 113.75; the cut
+     at 452 is in the white under row 4's figures (to 443; the row ends
+     at 456).
+   - phone: the compact rows at 282, rows 1 and 2 whole; the cut at 224
+     is in the white under row 2's figures (to 215.5; the row ends at
+     228.5).
 
-/* ── The band ───────────────────────────────────────────────────── */
+   The right window, Peachblue's card in Claude. `host` is the width the
+   card grid is given, `w` how much of it shows before the card's right
+   edge.
+   - wide: a 640 host (three columns of 205), 31px under the tool row
+     (Agent.css; 24 in every other layout), painted at 0.925 at 1440
+     (0.90 at 1280, 0.87 at 1190). The 31 is what puts the white under
+     the names level with the white over row 3's figures on the left.
+     The pictures from 63, the pills 437.8 to 457, the names 465.4 to
+     483.6, SPEND from 494.6. The cut at 489 is in the white between the
+     names and SPEND. The right edge at 560 cuts ad 3 (from 434.7) after
+     its pills (to 551.1).
+   - mid: the wide layout, unchanged, painted at 0.99 to 1.17.
+   - narrow: the same grid 24px under the tool row, shown as far as 446:
+     ads 1 and 2 whole and the edge of the third; the names 458.4 to
+     476.6, SPEND from 487.6, the cut at 483.
+   - across: a 1000 host (four columns of 241). The names 521.8 to 540,
+     SPEND from 550, the cut at 546; the right edge at 720 cuts ad 3
+     (from 506) after its pills (to 622.4).
+   - phone: the card as it lays itself out at a 282 host, one column,
+     the tool row on two lines; the cut at 628 is in the white under ad
+     1's name, so "#1", "Score 94" and "Zero sugar. All fizz." match row
+     1 of the list above. This window does not bleed. */
+const TALK = {
+  wide: { w: 462, h: 442 },
+  mid: { w: 560, h: 467 },
+};
+const LIST = {
+  across: { w: 684, h: 492 },
+};
+const ROWS = {
+  narrow: { w: 372, h: 452 },
+  phone: { w: 282, h: 224 },
+};
+const GRID = {
+  wide: { host: 640, w: 560, h: 489 },
+  narrow: { host: 640, w: 446, h: 483 },
+  across: { host: 1000, w: 720, h: 546 },
+  phone: { host: 282, w: 282, h: 628 },
+};
 
-/* A 4px corner on the product's cards and thumbnails at whatever scale
-   they are painted, set from outside the product by its class name. */
-const CORNERS = "[&_.rounded-lg]:rounded-[calc(4px/var(--pb-fluid-scale,1))]";
+/* The layouts a stylesheet has to switch to, handed to it as custom
+   properties on the card's answer (Agent.css reads them inside its
+   container queries; the layout each box is rendered with is the one in
+   its own markup). */
+type Box = { w: number; h: number; host?: number };
+function layouts({ narrow, mid, across }: { narrow: Box; mid?: Box; across?: Box }): CSSProperties {
+  return {
+    "--el-agent-narrow-w": narrow.w,
+    "--el-agent-narrow-h": narrow.h,
+    ...(mid ? { "--el-agent-mid-w": mid.w, "--el-agent-mid-h": mid.h } : null),
+    ...(across ? { "--el-agent-across-w": across.w, "--el-agent-across-h": across.h } : null),
+    ...(across?.host ? { "--el-agent-across-host": `${across.host}px` } : null),
+  } as CSSProperties;
+}
 
-/* The mats' white margin: 8px on a phone, 16px from sm. Both mats have
-   4px top corners and square feet: the window cuts them. The left mat's
-   inside is a size container, so it takes no width from what it holds;
-   from xl it fills its column. */
-function LeftMat() {
+/* ── A card: one way to chat ────────────────────────────────────── */
+
+/* The question both cards answer, as the user's turn: an outlined
+   bubble on the right. Decoration:
+   both pictures' text alternatives say the question. It is not a
+   control and does not look like one: no fill, no shadow. */
+function Asked() {
   return (
-    <div
-      className={`overflow-hidden rounded-t-[4px] bg-[var(--mn-white)] px-2 pt-2 max-sm:max-w-[368px] sm:max-w-[716px] sm:px-4 sm:pt-4 xl:col-start-1 xl:row-start-3 xl:max-w-none xl:self-end ${CORNERS}`}
-    >
-      <div className="@container">
-        <Shot label={ANSWER_LABEL} ground={false}>
-          <div className="max-w-[352px] sm:hidden">
-            <Fluid width={PHONE.w} height={PHONE.h}>
-              <CompactRanked />
-            </Fluid>
-          </div>
-          <Fluid width={NARROW.w} height={NARROW.h} className="max-sm:hidden @min-[31.5rem]:hidden xl:hidden">
-            <CompactAnswer />
-          </Fluid>
-          <Fluid width={MID.w} height={MID.h} className="@max-[31.5rem]:hidden @min-[38.5rem]:hidden xl:hidden">
-            <Answer />
-          </Fluid>
-          <div className="max-w-[684px] max-sm:hidden max-xl:@max-[38.5rem]:hidden">
-            <Fluid width={WIDE.w} height={WIDE.h} className="xl:[--fw:630]! xl:[--fh:505]!">
-              <Answer />
-            </Fluid>
-          </div>
-        </Shot>
-      </div>
+    <div aria-hidden="true" className="el-agent-asked">
+      <span className="el-body-sm el-agent-bubble">{RANKED.question}</span>
     </div>
   );
 }
 
-/* On a phone the right mat has the left mat's margin on all three sides.
-   From sm it runs off the band's right edge (a negative margin through
-   the band's inset; from xl the grid has no right inset), with its margin
-   on the top and left only. */
-function RightMat() {
+function Way({
+  mark,
+  title,
+  line,
+  action,
+  bleed = false,
+  label,
+  layout,
+  children,
+}: {
+  /** The 20px mark of the place the title names. */
+  mark: ReactNode;
+  title: string;
+  /** The card's line in its two phrases. */
+  line: readonly string[];
+  /** The card's one link, and anything that stands beside it. */
+  action: ReactNode;
+  /** The window also runs off the card's right edge. */
+  bleed?: boolean;
+  /** The picture's text alternative. */
+  label: string;
+  /** The picture's other layouts, for the stylesheet. */
+  layout: CSSProperties;
+  children: ReactNode;
+}) {
   return (
-    <div
-      className={`min-w-0 overflow-hidden rounded-t-[4px] bg-[var(--mn-white)] px-2 pt-2 max-sm:max-w-[368px] sm:-mr-12 sm:rounded-tr-none sm:pl-4 sm:pr-0 sm:pt-4 lg:max-xl:-mr-4 xl:col-start-3 xl:row-start-3 xl:mr-0 xl:self-end ${CORNERS}`}
-    >
-      <Shot label={MCP_LABEL} ground={false}>
-        <div className="max-w-[352px] sm:hidden">
-          <Fluid width={PHONE_R.w} height={PHONE_R.h}>
-            <OverMcp width={PHONE_R.w} />
-          </Fluid>
+    <Card className="el-agent-card">
+      <div className="el-agent-head">
+        <div className="el-agent-name">
+          {mark}
+          <h3 className={T.titleLg}>{title}</h3>
         </div>
-        <div className={`max-sm:hidden xl:hidden ${STACK_R_W}`}>
-          <Fluid width={STACK_R.w} height={STACK_R.h}>
-            <OverMcp width={STACK_R.w} />
-          </Fluid>
-        </div>
-        <div className="max-xl:hidden xl:w-[576px]">
-          <Fluid width={SIDE.right} height={SIDE.h}>
-            <OverMcp width={SIDE.right} gap="gap-12" />
-          </Fluid>
-        </div>
-      </Shot>
-    </div>
-  );
-}
-
-/* Its two labels, then one grid. From xl three columns (the left half's
-   599px, the 48px column between the halves, the right half) and three
-   rows: the two titles, the question across all three columns, the two
-   mats, tops on one line, both standing on the band's foot. The grid
-   drops the band's right inset, so the right mat runs to the band's edge,
-   which cuts it clean (PeekBand's bleed). Stacked, one column in reading
-   order, which is the DOM's: the left title with its line and action,
-   the question, the left mat, "or", the right title with its line and
-   action, the right mat. The grid is a size container for the right
-   mat's width. */
-function TwoWays() {
-  return (
-    <PeekBand bleed>
-      <div
-        className={`@container grid grid-cols-[minmax(0,1fr)] ${BAND_X} xl:grid-cols-[599px_48px_minmax(0,1fr)] xl:pr-0`}
-      >
-        <AppWay />
-        <Asked />
-        <LeftMat />
-        <OrRow />
-        <McpWay />
-        <RightMat />
+        <p className={cx(T.bodySm, TONE.earth, "el-agent-line")}>
+          {line.map((part, i) => (
+            <Fragment key={part}>
+              {i > 0 && " "}
+              <span className={cx("el-agent-phrase", i === 0 && TONE.ink)}>
+                <Keep text={part} words />
+              </span>
+            </Fragment>
+          ))}
+        </p>
+        <div className="el-agent-action">{action}</div>
       </div>
-    </PeekBand>
-  );
-}
-
-/* ── Under the band: the caption ────────────────────────────────── */
-
-/* 24px under the band, on the band's inset: bullet 3 in the bullets'
-   item style at Small. Both mats print the window, so the caption is the
-   picture's claim, for both halves. On a phone, on the page's column. */
-function Foot({ claim }: { claim: string }) {
-  return (
-    <div className="mt-6 sm:px-12 lg:max-xl:px-4">
-      <p className={`flex max-w-[640px] gap-4 ${T.small} ${PAPER.body}`}>
-        <span className="mt-[7.5px] size-1.5 shrink-0 bg-[var(--mn-peach)]" aria-hidden="true" />
-        <span className="flex-1 text-pretty">{claim}</span>
-      </p>
-    </div>
-  );
-}
-
-/* ── The head ───────────────────────────────────────────────────── */
-
-/* 48px under the strip: the h2 at Statement, "anything." on its own line
-   from lg; 24px under it the subline that names the two ways (Body
-   large). The section's trial link is not here: it is the left half's
-   action on the band (AppWay). Beside them, bullets 1 and 2 and More (4
-   and 5), the list's top rule on the heading's cap line. From lg to xl on the 12-column grid (the heading
-   on columns 1 to 7, the list on 8 to 12); from xl on the band's own
-   columns (its 48px inset, the left half, the 48px column between the
-   halves, the right half), so the list starts on the line the right
-   title's mark and the right mat start on. */
-/* The heading's cap line, measured: Fraunces 600 at Statement's 1.05
-   puts the capitals' top 0.175em under the line box's top (9.8px at
-   56px). */
-const CAP_LINE = "lg:pt-[calc(clamp(34px,3.9vw,56px)*0.175)]";
-
-function Head({ shown, more }: { shown: string[]; more: string[] }) {
-  return (
-    <div
-      className={`grid grid-cols-[minmax(0,1fr)] gap-x-16 pt-12 lg:grid-cols-12 xl:grid-cols-[48px_599px_48px_minmax(0,1fr)] xl:gap-x-0 ${INSET}`}
-    >
-      <div className="lg:col-span-7 xl:col-span-2 xl:col-start-1">
-        <h2 className={`${T.statement} ${PAPER.ink}`}>
-          <Accent text={AGENT_PEACH.headline} phrase="anything." className={`${PAPER.accentLg} lg:block`} />
-        </h2>
-        <p className={`mt-6 max-w-[36em] text-pretty ${T.bodyLg} ${PAPER.body}`}>{TWO_WAYS.sub}</p>
+      <Asked />
+      <div className={cx("el-agent-answer", bleed && "el-agent-answer--bleed")} style={layout}>
+        <Window bleed={bleed} className="el-agent-win">
+          <Shot label={label} ground={false}>
+            {children}
+          </Shot>
+        </Window>
       </div>
-      <div className={`mt-10 lg:col-span-5 lg:col-start-8 lg:mt-0 xl:col-span-1 xl:col-start-4 ${CAP_LINE}`}>
-        <Bullets items={shown} />
-        <More>
-          <Bullets items={more} open />
-        </More>
-      </div>
-    </div>
+    </Card>
   );
 }
 
@@ -599,16 +357,73 @@ function Head({ shown, more }: { shown: string[]; more: string[] }) {
 
 export function AgentPeach() {
   const [b1, b2, b3, b4, b5] = AGENT_PEACH.bullets;
+  const cta = AGENT_PEACH.cta;
   return (
-    <Sheet id={ID} className={SECTION_END}>
-      <SectionMarker n={2}>
-        <p>{AGENT_PEACH.eyebrow}</p>
-      </SectionMarker>
-      <Head shown={[b1, b2]} more={[b4, b5]} />
-      <div className={`pt-12 ${INSET}`}>
-        <TwoWays />
-        <Foot claim={b3} />
-      </div>
-    </Sheet>
+    <section id={ID} className="el-agent">
+      <Block top="top" bottom="gap">
+        <SplitHead eyebrow={AGENT_PEACH.eyebrow} title={AGENT_PEACH.headline}>
+          <p className={cx(T.body, "el-pretty")}>{TWO_WAYS.sub}</p>
+          <div className="el-dotted el-agent-points">
+            <Dotted items={[b1, b2]} />
+            <More items={[b4, b5]} />
+          </div>
+        </SplitHead>
+      </Block>
+
+      <Block inset="card">
+        <Cards>
+          <Way
+            mark={<LogoTile size={20} />}
+            title={TWO_WAYS.app.title}
+            line={TWO_WAYS.app.line}
+            label={ANSWER_LABEL}
+            layout={layouts({ narrow: ROWS.narrow, mid: TALK.mid })}
+            action={
+              <Pill href={cta.href} variant="outline" size="sm" arrow={cta.arrow}>
+                {cta.label}
+              </Pill>
+            }
+          >
+            <Fluid width={TALK.wide.w} height={TALK.wide.h} className="el-agent-talk">
+              <CompactAnswer />
+            </Fluid>
+            <Fluid width={LIST.across.w} height={LIST.across.h} className="el-agent-list">
+              <Answer />
+            </Fluid>
+            <Fluid width={ROWS.phone.w} height={ROWS.phone.h} className="el-agent-rows">
+              <CompactRanked />
+            </Fluid>
+          </Way>
+
+          <Way
+            mark={<ClaudeMark className="el-size-20" />}
+            title={TWO_WAYS.mcp.title}
+            line={TWO_WAYS.mcp.line}
+            label={MCP_LABEL}
+            layout={layouts({ narrow: GRID.narrow, across: GRID.across })}
+            bleed
+            action={
+              <>
+                <Pill href={MCP_HREF} variant="outline" size="sm" arrow>
+                  {TWO_WAYS.mcp.link}
+                </Pill>
+                <span className={cx("el-caption", MEDIUM, TONE.earth)}>{TWO_WAYS.mcp.gate}</span>
+              </>
+            }
+          >
+            <Fluid width={GRID.wide.w} height={GRID.wide.h} className="el-agent-grid">
+              <OverMcp host={GRID.wide.host} />
+            </Fluid>
+            <Fluid width={GRID.phone.w} height={GRID.phone.h} className="el-agent-one">
+              <OverMcp host={GRID.phone.host} hang />
+            </Fluid>
+          </Way>
+        </Cards>
+      </Block>
+
+      <Block top="gap" className="el-agent-note">
+        <p className={cx(T.bodySm, "el-pretty")}>{b3}</p>
+      </Block>
+    </section>
   );
 }

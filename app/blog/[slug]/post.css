@@ -1,0 +1,25 @@
+/* A post's own rules, on the system's tokens. The text itself is the
+   kit's running text (.el-prose); this only adjusts it for articles.
+   Classes are .el-post-...; to adjust a part on a post, the post's
+   class stands in front of it. */
+
+/* A post's tables are mostly words. Tabular figures widen every hyphen
+   to a figure's width ("self - serve"), so a post's tables keep the
+   proportional figures of the text round them. */
+.el-post-prose.el-prose table:where(:not([class], .pb-app *, .el-embed *)) {
+  font-variant-numeric: normal;
+}
+
+/* A three-column table on a phone. The system holds it at 440px and
+   lets it scroll, which suits short cells. Many of a post's tables are
+   three columns of phrases, and at 440 their rows run eight lines deep
+   beside two near-empty columns. So on a phone the table takes the
+   width its words ask for, between the system's 440px and 540px: a
+   table of figures stays at 440, a table of phrases gets room and its
+   rows stay short. */
+@media (max-width: 479.98px) {
+  .el-post-prose.el-prose table:where(:not([class], .pb-app *, .el-embed *)):has(th:nth-child(3)):not(:has(th:nth-child(4))) {
+    width: max-content;
+    max-width: 540px;
+  }
+}

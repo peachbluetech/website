@@ -104,7 +104,7 @@ export function McpRanked({ asked = true, you = false, width = 664, ground = tru
   );
 }
 
-/* McpCompare: "Compare Little can. Big mood. with Currently obsessed",
+/* McpCompare: "Compare Zero sugar. All fizz. with Currently obsessed",
    compare_ads (last 7 days), and the compare card: 94 against 58.
    Design width 642. */
 export function McpCompare({ asked = true, you = false, width = 642, ground = true }: TurnProps) {

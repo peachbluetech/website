@@ -13,9 +13,9 @@
 
    Brand Intel is market talk, not ad performance, but its advice should
    not argue with the account's own scores: the first action leads with
-   the little can (the account's top creative) and treats the afternoon
-   routine as a second hook to test, because the one afternoon creative in
-   the account scores average.
+   the little can (the line on the account's top creative by score) and
+   treats the afternoon routine as a second hook to test, because the one
+   afternoon creative in the account scores average.
 
    No directive and no JSX: server sections can import it anywhere. */
 

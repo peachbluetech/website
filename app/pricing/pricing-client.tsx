@@ -1,7 +1,8 @@
 "use client";
 
 import { createContext, useContext, useState, type ReactNode } from "react";
-import { OutlineLink, PrimaryLink } from "@/components/site/Button";
+import { Badge, Segmented, SegmentedButton } from "@/components/site/kit";
+import { Pill } from "@/components/site/parts";
 
 /* The pricing page's one piece of state: the billing period. The page
    itself is server-rendered; these four small pieces are the only client
@@ -23,51 +24,29 @@ export function BillingProvider({ children }: { children: ReactNode }) {
   return <BillingContext.Provider value={{ billing, setBilling }}>{children}</BillingContext.Provider>;
 }
 
-const FOCUS_RING =
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pb-peach-500 focus-visible:ring-offset-2";
-
 const PERIODS: { value: Billing; label: string }[] = [
   { value: "monthly", label: "Monthly" },
   { value: "annual", label: "Annual" },
 ];
 
-/* The Monthly / Annual control: the product's segmented toggle at a size a
-   thumb can hit. A white box with a control hairline; the active segment is
-   the dark inverted one. 44px tall, hairline and padding included. */
+/* The Monthly / Annual control: the system's segmented choice, 44px. The
+   period that is on is the white raised pill. The saving is a small
+   badge inside the Annual button: white while the button rests on the
+   taupe, taupe once the button itself is the white one. */
 export function BillingToggle() {
   const { billing, setBilling } = useContext(BillingContext);
   return (
-    <div
-      role="group"
-      aria-label="Billing period"
-      className="inline-flex items-center rounded-lg border border-pb-border-control bg-pb-card p-1"
-    >
+    <Segmented label="Billing period">
       {PERIODS.map((period) => {
         const active = billing === period.value;
         return (
-          <button
-            key={period.value}
-            type="button"
-            onClick={() => setBilling(period.value)}
-            aria-pressed={active}
-            className={`inline-flex h-[34px] items-center gap-2 rounded-[6px] px-3.5 text-[14px] font-medium whitespace-nowrap transition-colors ${FOCUS_RING} ${
-              active ? "bg-pb-fg text-pb-bg" : "text-pb-fg-secondary hover:text-pb-fg"
-            }`}
-          >
+          <SegmentedButton key={period.value} pressed={active} onClick={() => setBilling(period.value)}>
             {period.label}
-            {period.value === "annual" && (
-              <span
-                className={`rounded-[4px] border px-1.5 text-[11.5px] leading-[18px] font-medium ${
-                  active ? "border-white/30 text-pb-peach-300" : "border-pb-peach-300 text-pb-peach-700"
-                }`}
-              >
-                2 months free
-              </span>
-            )}
-          </button>
+            {period.value === "annual" && <Badge tone={active ? "taupe" : "white"}>2 months free</Badge>}
+          </SegmentedButton>
         );
       })}
-    </div>
+    </Segmented>
   );
 }
 
@@ -77,31 +56,24 @@ export function BillingText({ monthly, annual }: { monthly: string; annual: stri
   return billing === "annual" ? annual : monthly;
 }
 
-/* A plan's signup button. Both hrefs are worked out on the server from
-   lib/site.ts; this only picks the one for the chosen period. */
+/* A plan's signup pill, across its column. Both hrefs are worked out on
+   the server from lib/site.ts; this only picks the one for the chosen
+   period. `filled` is the page's one filled pill: the popular plan. */
 export function BillingLink({
   monthlyHref,
   annualHref,
   filled = false,
-  className,
   children,
 }: {
   monthlyHref: string;
   annualHref: string;
-  /** The flat peach primary. One per page: the popular plan. */
   filled?: boolean;
-  className?: string;
   children: ReactNode;
 }) {
   const { billing } = useContext(BillingContext);
-  const href = billing === "annual" ? annualHref : monthlyHref;
-  return filled ? (
-    <PrimaryLink href={href} className={className}>
+  return (
+    <Pill href={billing === "annual" ? annualHref : monthlyHref} variant={filled ? "filled" : "outline"} block>
       {children}
-    </PrimaryLink>
-  ) : (
-    <OutlineLink href={href} className={className}>
-      {children}
-    </OutlineLink>
+    </Pill>
   );
 }

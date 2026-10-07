@@ -1,63 +1,78 @@
-import { SiteFooter } from "@/components/site/SiteFooter";
-import { SiteNav } from "@/components/site/SiteNav";
+import { Frame, Rule } from "@/components/site/parts";
+import { SitePage } from "@/components/site/SitePage";
 import { AgentPeach } from "./Agent";
-import { CreativeTeams } from "./Creative";
+import { Close } from "./Close";
+import { Creative } from "./Creative";
+import { Essay } from "./Essay";
 import { Faq } from "./Faq";
 import { Hero } from "./Hero";
-import { PerformanceTeams } from "./Performance";
-import { PricingTeaser } from "./Pricing";
-import { Essay, FinalCta, FooterGround, HowItWorks, Manifesto } from "./Sections";
-import { themeStyle, type Tone } from "./theme";
+import { HowItWorks } from "./HowItWorks";
+import { Manifesto } from "./Manifesto";
+import { Performance } from "./Performance";
+import { Pricing } from "./Pricing";
 import { Toolkit } from "./Toolkit";
 
 /* The homepage, top to bottom:
 
      the site nav (components/site/SiteNav.tsx, the same on every page)
-     the hero (the page's one h1 is in it, visually hidden; the visible
-        headline is an h2)
-     01 How it works (#product)
-     02 Agent Peach (Agent.tsx, #agent-peach): two ways to chat, with
-        Agent Peach in Peachblue or in Claude over MCP, and one question
-        answered side by side in both
-     03 For creative teams (Creative.tsx, #creative-teams): Next Creative
-        Brief
-     04 Why Peachblue exists (the essay)
-     05 For performance teams (Performance.tsx, #performance-teams):
-        Creative Economics, the weekly report (Weekly.tsx), platforms
-        (Platforms.tsx, #platforms)
-     the manifesto
-     06 Also in Peachblue (Toolkit.tsx)
-     07 Pricing (Pricing.tsx, #pricing)
-     08 Questions (Faq.tsx, #faq)
-     09 Get started (#demo)
-     the site footer
+     the hero (the page's one h1 is in it, visually hidden)
+     ── the frame begins: rails, rules, a dot at every crossing ──
+     How it works (#product)                          HowItWorks.tsx
+     Agent Peach (#agent-peach)                       Agent.tsx
+     For creative teams (#creative-teams)             Creative.tsx
+     Why Peachblue exists                             Essay.tsx
+     For performance teams (#performance-teams)       Performance.tsx,
+        which also renders the weekly report (Weekly.tsx) and the
+        platforms row (Platforms.tsx, #platforms) inside its section
+     the manifesto                                    Manifesto.tsx
+     Also in Peachblue                                Toolkit.tsx
+     Pricing (#pricing)                               Pricing.tsx
+     Questions (#faq)                                 Faq.tsx
+     Get started (#demo)                              Close.tsx
+     ── the frame ends ──
+     the site footer (components/site/SiteFooter.tsx)
 
-   Copy comes from content.ts; the shared system (frame, type, rules,
-   actions, stages, bands) is parts.tsx; the page's colours are theme.ts.
-   `tone` picks the set of CSS variables the wrapper carries; light is the
-   tone that ships. The page's own CSS rules (.bp-*) are in
-   app/globals.css.
-   A server component: every word is in the HTML the server sends. */
-export function HomePage({ tone = "light" }: { tone?: Tone }) {
+   The rules between sections are drawn here and nowhere else, so no rule
+   is ever doubled and each carries the marks of the rails that meet it:
+   the rule under How it works closes three ruled cells ("thirds"), the
+   rule under the performance group closes a split row ("halves"). A
+   section draws only the rules inside it.
+
+   SitePage is the wrapper: the system's tokens, its two font variables,
+   the nav, main and the footer. Copy comes from content.ts; the parts
+   are components/site/parts.tsx; each section's own rules are in the
+   stylesheet beside it. A server component: every word is in the HTML
+   the server sends.
+
+   Keep the order of the section imports above: each brings its own
+   stylesheet, and the stylesheets are ordered as they are imported. */
+export function HomePage() {
   return (
-    <div data-tone={tone} style={themeStyle(tone)} className="min-h-screen overflow-x-clip bg-[var(--mn-paper)] text-pb-fg">
-      <SiteNav />
-      <main>
-        <Hero />
+    <SitePage>
+      <Hero />
+      <Frame>
+        <Rule />
         <HowItWorks />
+        <Rule marks="thirds" />
         <AgentPeach />
-        <CreativeTeams />
+        <Rule />
+        <Creative />
+        <Rule />
         <Essay />
-        <PerformanceTeams />
+        <Rule />
+        <Performance />
+        <Rule marks="halves" />
         <Manifesto />
+        <Rule />
         <Toolkit />
-        <PricingTeaser />
+        <Rule />
+        <Pricing />
+        <Rule />
         <Faq />
-        <FinalCta />
-      </main>
-      <FooterGround>
-        <SiteFooter />
-      </FooterGround>
-    </div>
+        <Rule />
+        <Close />
+        <Rule />
+      </Frame>
+    </SitePage>
   );
 }

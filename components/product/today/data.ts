@@ -4,7 +4,7 @@
    Sentences are built with the product's own templates, so a number changed
    in the sample account changes the sentence too. */
 
-import { ACCOUNT, CREATIVES, CREATIVE_LIST, type Platform, type SampleCreative } from "../sample";
+import { ACCOUNT, CREATIVES, CREATIVE_LIST, HERO_CREATIVE, type Platform, type SampleCreative } from "../sample";
 import {
   formatCurrency,
   formatInteger,
@@ -143,7 +143,7 @@ const fatigue: PulseEvent[] = ACCOUNT.fatigue.map((f, i) => {
 });
 
 /* First active day of the winner: seven days live as of the data date. */
-const winner = CREATIVES.bigMood;
+const winner = HERO_CREATIVE;
 const winnerLaunch = new Date(Date.UTC(2026, 8, 30 - winner.daysLive + 1)).toISOString().slice(0, 10);
 
 const newWinner: PulseEvent = {

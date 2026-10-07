@@ -1,0 +1,218 @@
+/* The pieces of the hero picture (hero/bits.tsx). Classes are .el-hs-*.
+   The picture's own rules live in ShowcaseA.css (.el-ha-*); to adjust a
+   piece inside the picture, put the picture's class in front of it
+   there, never here. Colours, radii and shadows are the system's tokens
+   (components/site/system.css), never literals.
+
+   Everything here is drawn inside a Shot, so it is a picture: nothing
+   is a link, nothing takes the keyboard. None of it has the form of a
+   control: no 9999px corner, no ink fill wider than a 2px tick or a
+   7px disc, and the whisper shadow only on a white card.
+
+   Unlayered, like system.css, so it outranks every Tailwind utility:
+   no rule here sets a background on an element that takes one of the
+   product's tier classes (the tier dot, the top tier's part of the
+   scale). */
+
+/* ── The head: "New winner" and "This week" on one line ─────────── */
+.el-hs-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  white-space: nowrap;
+}
+
+/* ── The verdict ──────────────────────────────────────────────────
+   "Score" at 12/16 in smoke, 2px, the figure at Inter 24/32 (the
+   largest Inter role) with the tier beside it at 15/22 medium, 10px,
+   the scale. */
+.el-hs-score {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-top: 2px;
+}
+.el-hs-tier {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+/* The tier dot: its colour is the product's own tier class. */
+.el-hs-tier-dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+/* The scale: the product's 0 to 100 line as four parts, one per tier,
+   2px apart, 6px tall. A part is stone unless it is the ad's own tier,
+   which takes the product's tier class. Under it, the ends and the
+   thresholds as figures: the two ends set inward, the three between
+   centred on their gap. The page's bar family (the manifesto's bar): a
+   quiet stone object, no axis, no legend.
+
+   The mark at the score is an ink tick, 2px wide and 14 tall, with 2px
+   of white either side of it: one more gap in a line that is already
+   cut by gaps, with a stroke in it. Not a disc: a 12px disc with a
+   white ring on a 6px track is a slider's thumb, and in this system a
+   control's form means a control; and on a narrow scale the last 6
+   points of the top tier's part showed past a disc as a 2px nub. Past
+   the tick they are a clear piece of the line at every width (6px of
+   it on a 150px scale). */
+.el-hs-scale {
+  position: relative;
+  margin-top: 10px;
+}
+.el-hs-track {
+  display: grid;
+  gap: 2px;
+  height: 6px;
+}
+.el-hs-seg {
+  display: block;
+}
+.el-hs-seg--rest {
+  background: var(--el-stone);
+}
+.el-hs-seg:first-child {
+  border-top-left-radius: var(--el-r-bar);
+  border-bottom-left-radius: var(--el-r-bar);
+}
+.el-hs-seg:last-child {
+  border-top-right-radius: var(--el-r-bar);
+  border-bottom-right-radius: var(--el-r-bar);
+}
+.el-hs-at {
+  position: absolute;
+  top: -4px;
+  left: var(--el-hs-x);
+  width: 2px;
+  height: 14px;
+  background: var(--el-ink);
+  box-shadow: 0 0 0 2px var(--el-white);
+  translate: -50% 0;
+}
+.el-hs-marks {
+  position: relative;
+  height: 16px;
+  margin-top: 6px;
+}
+.el-hs-marks .el-hs-mark {
+  position: absolute;
+  top: 0;
+  font-weight: 400;
+  translate: -50% 0;
+}
+.el-hs-marks .el-hs-mark:first-child {
+  translate: 0 0;
+}
+.el-hs-marks .el-hs-mark:last-child {
+  translate: -100% 0;
+}
+
+/* ── The reason: the ad's name over its one sentence ────────────── */
+.el-hs-sentence {
+  margin: 4px 0 0;
+}
+
+/* ── The foot: the dollars at the left, the verb at the right ─────
+   One stone hairline over them, 14px. The verb is a line of type and
+   its arrow: no ground, no edge, no shadow. */
+.el-hs-foot {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--el-stone);
+}
+.el-hs-verb {
+  white-space: nowrap;
+}
+
+/* ── The three things read from the ad ────────────────────────────
+   A tag is plain type on the white card: the key over its value. */
+.el-hs-tag {
+  display: grid;
+  white-space: nowrap;
+}
+
+/* ── The ad and the marks on it ───────────────────────────────────
+   The wrapper takes its width from the caller; the tile in it is 2:3,
+   the hero's own frame (the next rule but one). A mark is a 7px ink
+   disc with a white ring, on the thing a tag names. A lead is a
+   hairline from the mark to the ad's right edge (white on a dark edge,
+   so it holds on any photograph); past the edge the picture draws its
+   own piece of hairline to the tag.
+
+   Where a mark stands comes from bits.tsx as two numbers, --el-hs-x
+   and --el-hs-y, in percent of the ad's box. */
+.el-hs-ad {
+  position: relative;
+}
+/* The hero's own frame of the ad (FRAME in data.ts; bits.tsx hands its
+   two values over): the box is 2 by 3 and the creative is placed in it
+   so that the headline and the can are both whole. The box is a direct
+   child of the system's Tile, the one place the system's rules reach an
+   ad; --ad-focus is the property the ad's own image reads its place
+   from, and the image inherits it from the box. The creative's own
+   focus table is not involved. */
+.el-hs-ad--hero .el-tile > * {
+  aspect-ratio: var(--el-hs-frame);
+  --ad-focus: var(--el-hs-focus);
+}
+.el-hs-pin {
+  position: absolute;
+  z-index: 1;
+  top: var(--el-hs-y);
+  left: var(--el-hs-x);
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--el-ink);
+  box-shadow: 0 0 0 2px var(--el-white);
+  translate: -50% -50%;
+}
+.el-hs-lead {
+  position: absolute;
+  top: var(--el-hs-y);
+  height: 1px;
+  translate: 0 -50%;
+}
+.el-hs-lead--in {
+  background: var(--el-white);
+  box-shadow: 0 0 0 1px var(--el-halo);
+}
+.el-hs-lead--in.el-hs-lead--right {
+  left: var(--el-hs-x);
+  right: 0;
+}
+
+/* ── Whole pixels ─────────────────────────────────────────────────
+   A percentage of a 288px ad is a fraction of a pixel, and a 1px line
+   moved half its own height to centre it is drawn across two rows of
+   pixels: soft on an ordinary monitor. Where the browser can round a length (2024 browsers), the
+   hairline's top edge and the tick's left edge stand on a whole pixel
+   and nothing is moved by a fraction: the 7px disc is 3px either side
+   of the line through it, the 2px tick 1px either side of the score.
+   Elsewhere the rules above hold, centred as they were. */
+@supports (top: round(1%, 1px)) {
+  .el-hs-at {
+    left: calc(round(var(--el-hs-x), 1px) - 1px);
+    translate: none;
+  }
+  .el-hs-pin {
+    top: calc(round(var(--el-hs-y), 1px) - 3px);
+    left: calc(round(var(--el-hs-x), 1px) - 3px);
+    translate: none;
+  }
+  .el-hs-lead {
+    top: round(var(--el-hs-y), 1px);
+    translate: none;
+  }
+  .el-hs-lead--in.el-hs-lead--right {
+    left: round(var(--el-hs-x), 1px);
+  }
+}

@@ -1,0 +1,157 @@
+/* Manifesto.tsx's own rules. Classes are .el-* with this
+   section's name in them. The shared system is
+   components/site/system.css: do not restate its classes here; to
+   adjust a part inside this section, put this section's class in front
+   of it. Colours, radii, shadows and durations are the system's tokens,
+   never literals. */
+
+/* The statement: centred, at most 720px, one sentence to a line. Each
+   sentence is a block, so the change of tone always falls on a line
+   break; where a sentence needs two lines it is balanced on its own. */
+.el-manifesto-statement {
+  max-width: 720px;
+  margin-inline: auto;
+  text-align: center;
+}
+.el-manifesto-line {
+  display: block;
+}
+
+/* The bar. Two columns, the share and the rest, so each label stands at
+   the start (or the end) of its own part of the track whatever the fill
+   is doing. --el-share comes from the source sentence. */
+.el-manifesto-bar {
+  display: grid;
+  grid-template-columns: minmax(0, var(--el-share)) minmax(0, 1fr);
+  align-items: center;
+  max-width: 672px;
+  margin: 48px auto 0;
+}
+/* The track: 28px, a hairline ring, no ground. The ring is drawn over
+   the fill so it is one line from end to end. It clips with `clip`, not
+   `hidden`: a hidden box would be a scroll container, and the fill's
+   view timeline would then be measured inside the track, where it never
+   moves, not against the page. */
+.el-manifesto-track {
+  position: relative;
+  display: block;
+  grid-column: 1 / -1;
+  grid-row: 1;
+  height: 28px;
+  overflow: clip;
+  border-radius: var(--el-r-bar);
+}
+.el-manifesto-track::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 0.5px var(--el-ring-strong);
+  pointer-events: none;
+}
+/* The fill: navy, over exactly the share, with its two labels in white. Its resting width is plain
+   CSS: the share times --el-manifesto-in, which is 1 unless the motion
+   at the foot of this file is running. */
+.el-manifesto-fill {
+  display: block;
+  block-size: 100%;
+  inline-size: calc(var(--el-share) * var(--el-manifesto-in, 1));
+  border-radius: var(--el-r-bar);
+  background: var(--el-navy);
+}
+/* The labels sit over the track, placed by the grid, not by the fill. */
+.el-manifesto-label {
+  position: relative;
+  grid-row: 1;
+  padding-inline: 10px;
+  white-space: nowrap;
+}
+.el-manifesto-label--part {
+  grid-column: 1;
+  justify-self: start;
+  color: var(--el-white);
+}
+.el-manifesto-label--figure {
+  grid-column: 1;
+  justify-self: end;
+  color: var(--el-white);
+}
+.el-manifesto-label--rest {
+  grid-column: 2;
+  justify-self: start;
+  color: var(--el-smoke);
+}
+
+/* The source: a real paragraph, 20px under the bar, at most 560px. */
+.el-manifesto-source {
+  max-width: 560px;
+  margin: 20px auto 0;
+  text-align: center;
+}
+
+/* Under 768 the track is too short to hold both part labels: they move
+   under it, each starting where its part starts. The figure stays in
+   the fill. */
+@media (max-width: 767.98px) {
+  .el-manifesto-label--part,
+  .el-manifesto-label--rest {
+    grid-row: 2;
+    align-self: start;
+    margin-top: 8px;
+    padding-inline: 0 8px;
+    white-space: normal;
+  }
+  .el-manifesto-label--rest {
+    padding-inline: 0;
+  }
+}
+
+/* The page's one expressive motion: when the bar comes up over the foot
+   of the screen, its fill grows from nothing to its share, once, over
+   half a second.
+
+   The growth is started by scroll and then runs on the clock; it is not
+   tied to the scroll position. A bar tied to scroll stands wherever the
+   reader stops, so it could be read at 30% with "56%" printed beside it
+   (a long range reached the share only above mid-screen; a shorter
+   one still left a band at the foot of the screen where the bar stood
+   short). This one cannot rest at any width but its own: wherever the
+   reader stops with any of the bar in view, it is at its share half a
+   second later.
+
+   How: the bar carries one number, --el-manifesto-in, which a view
+   timeline takes from 0 to 1 over the first 2px of the bar's entry, so
+   it is 0 while the bar is under the screen and 1 from the moment its
+   top edge is in view. The fill's width is the share times that number,
+   and the fill has an ordinary transition on its width; the number
+   changing is what starts it. Scrolled back under the screen the bar
+   empties out of sight and fills again the next time it comes up.
+
+   Only where the browser can link an animation to the view, and never
+   under reduced motion. Everywhere else the number is 1 and the bar
+   simply stands at its share. */
+@property --el-manifesto-in {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 1;
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .el-manifesto-bar {
+      animation: el-manifesto-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 2px;
+    }
+    .el-manifesto-fill {
+      transition: inline-size var(--el-t-bar) var(--el-ease);
+    }
+    @keyframes el-manifesto-in {
+      from {
+        --el-manifesto-in: 0;
+      }
+      to {
+        --el-manifesto-in: 1;
+      }
+    }
+  }
+}

@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { SiteNav } from "@/components/site/SiteNav";
-import { SiteFooter } from "@/components/site/SiteFooter";
-import { PILLARS } from "@/content/blog/manifest";
+import { bylineName, formatPostDate } from "@/components/blog/PostMeta";
+import { EntryRow, PageHeader } from "@/components/site/kit";
+import { Block, Card, Dotted, Frame, MEDIUM, Rule, T, TONE, cx } from "@/components/site/parts";
+import { SitePage } from "@/components/site/SitePage";
+import { PILLARS, type Article } from "@/content/blog/manifest";
 import { publishedArticles } from "@/lib/blog";
-import { bylineName } from "@/components/blog/PostMeta";
+import "./blog.css";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -13,71 +14,77 @@ export const metadata: Metadata = {
   alternates: { canonical: "/blog" },
 };
 
-function formatDate(iso: string): string {
-  return new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-    timeZone: "UTC",
-  });
+/* One post as a row that is one link: the pillar and the date in the
+   narrow column, then the title (an h2), the description and the
+   byline. `first` is the newest post, which stands on a taupe card
+   with its title in the display face; on taupe the quiet lines are
+   earth, not smoke. The dot between the pillar and the date is
+   decoration: it shows on a phone, where the two share a line, and
+   not beside the columns of a wider screen (blog.css). */
+function PostRow({ article: a, first = false }: { article: Article; first?: boolean }) {
+  const quiet = first ? TONE.earth : TONE.smoke;
+  return (
+    <EntryRow
+      as="div"
+      href={`/blog/${a.slug}`}
+      lead={
+        <div className="el-blog-meta">
+          <div className={cx(T.bodySm, MEDIUM)}>{PILLARS[a.pillar].title}</div>
+          {a.datePublished && (
+            <div className={cx(T.bodySm, quiet, "el-tnum el-blog-when")}>
+              <span aria-hidden="true" className="el-blog-dot">
+                ·
+              </span>
+              <time dateTime={a.datePublished}>{formatPostDate(a.datePublished, "short")}</time>
+            </div>
+          )}
+        </div>
+      }
+    >
+      <h2 className={cx(first ? T.heading : T.titleLg, "el-balance")}>
+        {a.h1}
+        {a.h1Accent ? <span> {a.h1Accent}</span> : null}
+      </h2>
+      <p className={cx(first ? T.body : T.bodySm, quiet, "el-pretty el-blog-line")}>{a.description}</p>
+      <div className={cx(T.caption, quiet)}>{bylineName(a.byline)}</div>
+    </EntryRow>
+  );
 }
 
+/* The blog index, built in the design system from the inner-page kit:
+   the page header, then every published post inside the frame, newest
+   first. The newest stands on a taupe card; the rest are the rows of a
+   dotted list, on the same columns. A server component; the words, the
+   heading levels and the links are the published ones. */
 export default function BlogIndexPage() {
-  const articles = publishedArticles();
+  const [first, ...rest] = publishedArticles();
 
   return (
-    <div className="flex flex-col min-h-screen bg-pb-bg">
-      <SiteNav current="blog" />
-
-      <main className="flex-1 pt-12 md:pt-[72px] pb-24 px-6">
-        <div className="max-w-[760px] mx-auto">
-          <header className="mb-12 md:mb-16">
-            <div className="text-[13px] font-semibold text-pb-peach-700 mb-3">
-              Peachblue blog
-            </div>
-            <h1 className="font-display text-[clamp(30px,5vw,44px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-ink text-balance mb-4">
-              Notes from the creative trenches.
-            </h1>
-            <p className="text-[16px] text-pb-fg-secondary leading-relaxed max-w-[560px]">
-              Practitioner guides on creative analytics, Amazon DSP reporting,
-              and AI for media buying. No filler, verified numbers, honest
-              comparisons.
-            </p>
-          </header>
-
-          <div className="space-y-4">
-            {articles.map((a) => (
-              <Link
-                key={a.slug}
-                href={`/blog/${a.slug}`}
-                className="block rounded-[10px] border border-pb-border bg-pb-card p-6 md:p-7 hover:border-pb-border-control transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pb-peach-500 focus-visible:ring-offset-2"
-              >
-                <div className="flex items-center gap-2.5 text-[13px] font-semibold text-pb-fg-muted mb-2.5">
-                  <span className="text-pb-peach-700">{PILLARS[a.pillar].title}</span>
-                  {a.datePublished && (
-                    <>
-                      <span aria-hidden="true">·</span>
-                      <time dateTime={a.datePublished} className="font-normal">
-                        {formatDate(a.datePublished)}
-                      </time>
-                    </>
-                  )}
-                </div>
-                <h2 className="font-display text-[22px] md:text-[24px] leading-snug font-medium tracking-[-0.015em] text-pb-ink mb-2">
-                  {a.h1}
-                  {a.h1Accent ? <span> {a.h1Accent}</span> : null}
-                </h2>
-                <p className="text-[14.5px] text-pb-fg-secondary leading-relaxed mb-3">
-                  {a.description}
-                </p>
-                <div className="text-[12.5px] text-pb-fg-muted">{bylineName(a.byline)}</div>
-              </Link>
+    <SitePage current="blog">
+      <PageHeader
+        eyebrow="Peachblue blog"
+        title="Notes from the creative trenches."
+        lead="Practitioner guides on creative analytics, Amazon DSP reporting, and AI for media buying. No filler, verified numbers, honest comparisons."
+        bottom="gap"
+      />
+      <Frame>
+        <Rule />
+        {first && (
+          <Block inset="card" top="shelf">
+            <Card variant="bare" className="el-blog-first">
+              <PostRow article={first} first />
+            </Card>
+          </Block>
+        )}
+        <Block top="s" bottom="row">
+          <Dotted as="div" className="el-blog-list">
+            {rest.map((a) => (
+              <PostRow key={a.slug} article={a} />
             ))}
-          </div>
-        </div>
-      </main>
-
-      <SiteFooter />
-    </div>
+          </Dotted>
+        </Block>
+        <Rule />
+      </Frame>
+    </SitePage>
   );
 }

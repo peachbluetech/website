@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { SiteNav } from "@/components/site/SiteNav";
-import { SiteFooter } from "@/components/site/SiteFooter";
 import { DocsSidebar } from "@/components/docs/DocsSidebar";
-import { FaqBlock } from "@/components/blog/FaqBlock";
-import { TrialCta } from "@/components/blog/TrialCta";
+import { Article, Crumb, FaqBand, PageHeader, Prose, TrialBand } from "@/components/site/kit";
+import { Block, Frame, Rule } from "@/components/site/parts";
+import { SitePage } from "@/components/site/SitePage";
 import { DOC_SECTIONS } from "@/content/docs/manifest";
 import { assertDocsIntegrity, getDoc, publishedDocs } from "@/lib/docs";
 import { SITE_URL } from "@/lib/site";
+import "../docs.css";
 
 export const dynamicParams = false;
 
@@ -49,6 +48,22 @@ function formatDate(iso: string): string {
   });
 }
 
+/* A doc, built in the design system from the inner-page kit.
+
+   There is no header outside the frame: the frame starts a short step
+   under the site nav, so the docs navigation stands at the same place
+   on every doc. Inside it, on the side layout's two columns (354 and
+   724 at 1440): the docs navigation in the side column, resting under
+   the site nav while the doc scrolls (DocsSidebar, which brings its own
+   resting box, so the Article is told not to add one; under 1024 it is
+   a slim band that scrolls sideways under the first rule), and in the
+   wide column the doc's own header (the crumb, the h1, the date and the
+   link to the markdown) over its MDX as running text. Then the
+   questions band, where the doc has questions, on the same two columns,
+   and the trial band.
+
+   The words, the heading levels, the links and the JSON-LD are the
+   published ones: restyle freely, do not reword. */
 export default async function DocPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const doc = getDoc(slug);
@@ -102,58 +117,45 @@ export default async function DocPage({ params }: { params: Promise<{ slug: stri
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-pb-bg">
+    <SitePage current="docs">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <SiteNav current="docs" />
-      <main className="flex-1 pt-12 md:pt-16 pb-24 px-6">
-        <div className="max-w-[1060px] mx-auto lg:grid lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-14">
-          <aside className="hidden lg:block">
-            <DocsSidebar currentSlug={doc.slug} />
-          </aside>
-
-          <article>
-            <header className="mb-8">
-              <nav aria-label="Breadcrumb" className="text-[12.5px] text-pb-fg-muted mb-4">
-                <Link href="/docs" className="hover:text-pb-fg transition-colors">
-                  Docs
-                </Link>
-                <span aria-hidden="true" className="mx-2">
-                  /
-                </span>
-                <span className="text-pb-peach-700 font-medium">
-                  {DOC_SECTIONS[doc.section].title}
-                </span>
-              </nav>
-              <h1 className="font-display text-[clamp(26px,4vw,36px)] leading-[1.12] font-medium tracking-[-0.015em] text-pb-ink mb-3">
-                {doc.title}
-              </h1>
-              <p className="text-[12.5px] text-pb-fg-muted">
-                Last updated <time dateTime={doc.updated}>{formatDate(doc.updated)}</time>
-                {" · "}
-                <a
-                  href={`/docs/${doc.slug}.md`}
-                  className="underline underline-offset-2 decoration-pb-border-control hover:text-pb-peach-600 transition-colors"
-                >
-                  View as markdown
-                </a>
-              </p>
-            </header>
-
-            <div className="prose-pb-lg max-w-[680px]">
+      <div className="el-doc-top" />
+      <Frame>
+        <Rule />
+        <Block top="band" bottom="pad">
+          <Article sideAt="start" narrow="stack" sticky={false} side={<DocsSidebar currentSlug={doc.slug} />}>
+            <PageHeader
+              inline
+              layout="stack"
+              className="el-doc-head"
+              crumb={<Crumb items={[{ label: "Docs", href: "/docs" }, { label: DOC_SECTIONS[doc.section].title }]} />}
+              title={doc.title}
+              sub={
+                <>
+                  Last updated <time dateTime={doc.updated}>{formatDate(doc.updated)}</time>
+                  <span className="el-doc-dot">{" · "}</span>
+                  <a href={`/docs/${doc.slug}.md`}>View as markdown</a>
+                </>
+              }
+            />
+            <Prose className="el-doc-prose">
               <Body />
-            </div>
-
-            <div className="max-w-[680px]">
-              <FaqBlock faq={faq} />
-              <TrialCta agency={doc.slug === "connect-amazon-dsp" || doc.slug === "reports-and-pacing"} />
-            </div>
-          </article>
-        </div>
-      </main>
-      <SiteFooter />
-    </div>
+            </Prose>
+          </Article>
+        </Block>
+        <Rule />
+        {faq.length > 0 && (
+          <>
+            <FaqBand faq={faq} />
+            <Rule />
+          </>
+        )}
+        <TrialBand agency={doc.slug === "connect-amazon-dsp" || doc.slug === "reports-and-pacing"} />
+        <Rule />
+      </Frame>
+    </SitePage>
   );
 }

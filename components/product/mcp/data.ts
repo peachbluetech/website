@@ -12,7 +12,7 @@
    No JSX in this file. */
 
 import type { CSSProperties } from "react";
-import { CREATIVES, type Platform, type SampleCreative, type Tier } from "../sample";
+import type { Platform, SampleCreative, Tier } from "../sample";
 import { COMPARE, RANKED, SPOTLIGHT } from "../agent/data";
 
 /* ── The card's own register ──────────────────────────────────────── */
@@ -227,7 +227,7 @@ export const MCP_SINGLE = {
 /* ── Text alternatives ────────────────────────────────────────────── */
 
 const scores = (list: CardCreative[]) => list.map((c) => c.score).join(", ");
-const BIG = toCard(CREATIVES.bigMood);
+const BIG = toCard(SPOTLIGHT.card.creative);
 
 /** One sentence per picture, for Shot's label. */
 export const MCP_LABEL = {

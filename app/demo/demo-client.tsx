@@ -1,35 +1,58 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Cal, { getCalApi } from "@calcom/embed-react";
 import posthog from "posthog-js";
-import { SiteNav } from "@/components/site/SiteNav";
-import { SiteFooter } from "@/components/site/SiteFooter";
 import { DemoForm } from "@/components/site/DemoForm";
+import { PageHeader } from "@/components/site/kit";
+import { Block, Card, Frame, Inner, Rule, Shell, T, TONE, TextButton, TextLink, cx } from "@/components/site/parts";
 import { CAL_LINK } from "@/lib/site";
+import "./demo.css";
 
 const CAL_NAMESPACE = "demo";
 
+/* The demo page under the nav. Three things, in the order of the HTML:
+
+   1. The page header: the eyebrow, the h1 and the lead, split as every
+      inner page's header is.
+   2. The booking calendar, whole, in a white inner card on a taupe card
+      that runs the width of the shell, as the homepage's hero panel
+      does. It is the page's one object and stands outside the frame.
+   3. One slim band in the frame: the way to write to us instead (a
+      note, which opens the lead form in its place) and the address.
+
+   The calendar is the booking service's own embed: its link, its
+   namespace, what it is told about the visit and the event it reports
+   are unchanged. The service draws it inside a frame of its own, so the
+   system's tokens do not reach it. Two things are passed in when it
+   loads: the fill of a chosen day and of its own button, read from the
+   page's navy token (the filled pill's colour), and no outline of its
+   own, since the inner card is its edge. The service lays itself out by
+   the width it is given: three panes side by side from 960px, and one
+   tall column under that, so the inner card is either at least that
+   wide or held to a narrow column (demo.css).
+
+   `?intent=agency` switches the words to the agency variant. */
 export default function DemoClient() {
   const params = useSearchParams();
   const salesIntent = params?.get("intent") === "agency";
   const intent = salesIntent ? "agency" : "demo";
   const [showForm, setShowForm] = useState(false);
+  const card = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let cancelled = false;
     (async () => {
       const cal = await getCalApi({ namespace: CAL_NAMESPACE });
       if (cancelled) return;
+      const fill = card.current ? getComputedStyle(card.current).getPropertyValue("--el-navy").trim() : "";
+      const vars = { ...(fill ? { "cal-brand": fill } : {}), "cal-border-booker": "transparent" };
       cal("ui", {
         theme: "light",
         layout: "month_view",
         hideEventTypeDetails: false,
-        cssVarsPerTheme: {
-          light: { "cal-brand": "#F27749" },
-          dark: { "cal-brand": "#F27749" },
-        },
+        cssVarsPerTheme: { light: vars, dark: vars },
       });
       cal("on", {
         action: "bookingSuccessful",
@@ -44,58 +67,59 @@ export default function DemoClient() {
   }, [intent]);
 
   return (
-    <div className="flex flex-col min-h-screen bg-pb-bg">
-      <SiteNav current="demo" />
+    <>
+      <PageHeader
+        eyebrow={salesIntent ? "Agency plan" : "Get started"}
+        title={salesIntent ? "Built for agencies." : "See it on your ad data."}
+        lead={
+          salesIntent
+            ? "Multi-client workspaces, per-client reporting, and pricing shaped to your roster. Pick a time and we'll walk through it with your client list in mind."
+            : "Pick a time and we'll walk you through Peachblue live: your platforms connected, your creatives analyzed."
+        }
+        bottom="gap"
+      />
 
-      <main className="flex-1 pt-12 pb-20 md:pt-[72px] px-6">
-        <div className="max-w-[560px] mx-auto text-center">
-          <div className="text-[13px] font-semibold text-pb-peach-700 mb-3">
-            {salesIntent ? "Agency plan" : "Get started"}
+      <Shell>
+        <Block inset="none" bottom="band">
+          <div ref={card}>
+            <Card variant="bare" className="el-demo-card">
+              <Inner flush className="el-demo-window">
+                <Cal
+                  namespace={CAL_NAMESPACE}
+                  calLink={CAL_LINK}
+                  style={{ width: "100%", height: "100%", overflow: "scroll" }}
+                  config={{ layout: "month_view", theme: "light", "metadata[intent]": intent }}
+                />
+              </Inner>
+            </Card>
           </div>
-          <h1 className="font-display text-[clamp(30px,5vw,44px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-ink text-balance mb-4">
-            {salesIntent ? "Built for agencies." : "See it on your ad data."}
-          </h1>
-          <p className="text-[15px] text-pb-fg-secondary leading-relaxed mb-10 max-w-[440px] mx-auto">
-            {salesIntent
-              ? "Multi-client workspaces, per-client reporting, and pricing shaped to your roster. Pick a time and we'll walk through it with your client list in mind."
-              : "Pick a time and we'll walk you through Peachblue live: your platforms connected, your creatives analyzed."}
-          </p>
-        </div>
+        </Block>
+      </Shell>
 
-        <div className="max-w-[1000px] mx-auto">
-          <div className="rounded-[10px] border border-pb-border bg-pb-card overflow-hidden min-h-[560px]">
-            <Cal
-              namespace={CAL_NAMESPACE}
-              calLink={CAL_LINK}
-              style={{ width: "100%", height: "100%", overflow: "scroll" }}
-              config={{ layout: "month_view", theme: "light", "metadata[intent]": intent }}
-            />
+      <Frame>
+        <Rule />
+        <Block top="band" bottom="band">
+          <div className={cx("el-demo-alt", showForm && "el-demo-alt--form")}>
+            {showForm ? (
+              <DemoForm salesIntent={salesIntent} showIntro={false} />
+            ) : (
+              <p className={T.body}>
+                <TextButton className="el-body" onClick={() => setShowForm(true)}>
+                  {salesIntent ? "No time that works? Tell us about your agency instead" : "No time that works? Send us a note instead"}
+                </TextButton>
+              </p>
+            )}
+
+            <p className={cx(T.body, TONE.smoke)}>
+              Prefer email? Reach us at{" "}
+              <TextLink href="mailto:nick@peachblue.io" underline>
+                nick@peachblue.io
+              </TextLink>
+            </p>
           </div>
-        </div>
-
-        <div className="max-w-[560px] mx-auto text-center mt-10">
-          {showForm ? (
-            <DemoForm salesIntent={salesIntent} showIntro={false} />
-          ) : (
-            <button
-              type="button"
-              onClick={() => setShowForm(true)}
-              className="rounded-sm text-[14px] font-semibold text-pb-fg underline underline-offset-4 decoration-pb-border-control hover:text-pb-peach-600 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pb-peach-500 focus-visible:ring-offset-2"
-            >
-              {salesIntent ? "No time that works? Tell us about your agency instead" : "No time that works? Send us a note instead"}
-            </button>
-          )}
-
-          <p className="mt-6 text-[12.5px] text-pb-fg-muted">
-            Prefer email? Reach us at{" "}
-            <a href="mailto:nick@peachblue.io" className="underline underline-offset-2 decoration-pb-border-control hover:text-pb-peach-600 transition-colors">
-              nick@peachblue.io
-            </a>
-          </p>
-        </div>
-      </main>
-
-      <SiteFooter />
-    </div>
+        </Block>
+        <Rule />
+      </Frame>
+    </>
   );
 }

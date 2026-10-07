@@ -7,9 +7,9 @@
 
 @theme {
   /* Peach, sky, ground, text, status and score tokens carry the product
-     app's values, so the site and the product agree. The one deliberate
-     difference is the page ground: the site is cream, the app is stone
-     (see --color-pb-stone and the .pb-app scope below). */
+     app's values, for the product recreations (components/product). The
+     site's own look is the design system in components/site/system.css,
+     which has its own tokens (--el-*) and reads none of these. */
   --color-pb-peach-50: #FDEEE7;
   --color-pb-peach-100: #FBE2D6;
   --color-pb-peach-200: #F2C9B5;
@@ -28,13 +28,6 @@
   --color-pb-sky-600: #2F57C0;
   --color-pb-sky-700: #24439A;
 
-  /* Site-only cool accent, kept for the pages that still use it. */
-  --color-pb-blue-50: #F0F6FF;
-  --color-pb-blue-100: #E0EFFF;
-  --color-pb-blue-200: #BEDCFF;
-  --color-pb-blue-500: #4C8DFF;
-  --color-pb-blue-700: #2563EB;
-
   /* Ink: the navy. In the product it is the VoiceBar ground and the
      current-period line of a chart, nothing else. */
   --color-pb-ink: #13214B;
@@ -45,8 +38,8 @@
   --color-pb-ink-fg-faint: #7080AC;
   --color-pb-ink-border: rgba(255, 255, 255, 0.10);
 
-  /* Ground. The site page is cream; the product ground is stone and is
-     exposed here for marketing tiles and remapped onto pb-bg in .pb-app. */
+  /* Ground. Outside a picture pb-bg is this warm off-white; inside one
+     (.pb-app) it is the product's stone. */
   --color-pb-bg: #FBFAF7;
   --color-pb-stone: #F6F5F2;
   --color-pb-card: #FFFFFF;
@@ -55,14 +48,6 @@
   --color-pb-border: #E4E2DC;
   --color-pb-border-control: #CFCCC4;
   --color-pb-border-dash: #D8D6D0;
-
-  /* The homepage's drafting lines, in navy, and its pale paper. Shared so
-     the site nav draws with the same values on every page: the hairline
-     (navy at 15%), the outline of a control (navy at 46%), and the second
-     paper, a touch warmer than the page, for a pale ground or a hover. */
-  --color-pb-rule: rgba(19, 33, 75, 0.15);
-  --color-pb-line: rgba(19, 33, 75, 0.46);
-  --color-pb-paper-2: #F4F0E8;
 
   /* Text: warm near-black down to a non-text ghost. */
   --color-pb-fg: #1B1A17;
@@ -116,24 +101,12 @@
   --shadow-pb-lift: 0 1px 2px rgba(20, 20, 18, 0.06), 0 16px 40px -16px rgba(20, 20, 18, 0.22);
 }
 
-/* Peach is flat, as in the product. The name survives from the older
-   gradient so existing call sites keep working. */
-.pb-gradient-peach {
-  background: var(--color-pb-peach-500);
-}
-.pb-gradient-brand {
-  background: linear-gradient(100deg, #E0EBFF 0%, #F1E7FF 35%, #FFE8DC 70%, #FFD2BB 100%);
-}
-
-/* Ink hero surface: same recipe as the app's pb-gradient-ink. */
-.pb-gradient-ink {
-  background:
-    radial-gradient(120% 140% at 8% 0%, rgba(59, 111, 224, 0.38) 0%, transparent 55%),
-    linear-gradient(135deg, #1D306B 0%, #13214B 55%, #0C1430 100%);
-}
-
+/* Every page stands in the design system's wrapper (.el-page in
+   components/site/system.css), which sets its own ground, ink and face.
+   The body carries the same ground (the system's canvas), so nothing
+   else shows where a browser overscrolls. */
 body {
-  background: var(--color-pb-bg);
+  background: #FDFCFC;
   color: var(--color-pb-fg);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
@@ -275,9 +248,6 @@ body {
 .pb-app .shadow-pb-soft {
   --tw-shadow: 0 0 #0000;
 }
-.pb-app .pb-gradient-peach {
-  background: #E8724A;
-}
 
 /* Product utilities, copied from the app. */
 
@@ -302,139 +272,8 @@ body {
   background: linear-gradient(135deg, #FFB48C 0%, #F27749 100%);
 }
 
-/* Hide the scrollbar of a scrollable container. */
-.pb-scrollbar-none::-webkit-scrollbar { display: none; }
-.pb-scrollbar-none { scrollbar-width: none; }
-
-/* Editorial drop cap for journal-style passages. First letter set in the
-   display serif, peach, floated like a magazine opener. */
-.pb-dropcap::first-letter {
-  font-family: var(--font-display);
-  font-weight: 500;
-  font-size: 3.4em;
-  line-height: 0.82;
-  float: left;
-  padding-right: 0.12em;
-  padding-top: 0.04em;
-  color: var(--color-pb-peach-600);
-}
-
-/* Site prose and the product scope. These rules are unlayered, so they
-   outrank every Tailwind utility; left alone they would restyle the p, li,
-   ul, img, strong and table elements of a product recreation placed in a
-   blog post or a docs page. Every element rule below therefore carries
-   :where(:not(.pb-app *)): it skips anything inside a Shot, and :where()
-   keeps the specificity exactly what it was. Keep the suffix on new rules. */
-
-/* Editorial long-form typography for /blog. Larger than .prose-pb (which is
-   sized for legal fine print). Headings use the Fraunces display face to
-   match the site's hero pattern; body stays Inter. */
-.prose-pb-lg { font-size: 16.5px; }
-.prose-pb-lg h2:where(:not(.pb-app *)) {
-  font-family: var(--font-display);
-  font-size: 26px;
-  font-weight: 500;
-  letter-spacing: -0.015em;
-  line-height: 1.2;
-  color: var(--color-pb-ink);
-  margin-top: 52px;
-  margin-bottom: 16px;
-  scroll-margin-top: 16px;
-}
-.prose-pb-lg h3:where(:not(.pb-app *)) {
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: var(--color-pb-fg);
-  margin-top: 36px;
-  margin-bottom: 10px;
-  scroll-margin-top: 16px;
-}
-.prose-pb-lg p:where(:not(.pb-app *)), .prose-pb-lg li:where(:not(.pb-app *)) { font-size: 16.5px; color: var(--color-pb-fg); line-height: 1.8; }
-.prose-pb-lg p:where(:not(.pb-app *)) { margin-bottom: 18px; }
-.prose-pb-lg ul:where(:not(.pb-app *)), .prose-pb-lg ol:where(:not(.pb-app *)) { padding-left: 24px; margin-bottom: 18px; }
-.prose-pb-lg ul:where(:not(.pb-app *)) { list-style: disc; }
-.prose-pb-lg ol:where(:not(.pb-app *)) { list-style: decimal; }
-.prose-pb-lg li:where(:not(.pb-app *)) { margin-bottom: 8px; }
-.prose-pb-lg li:where(:not(.pb-app *))::marker { color: var(--color-pb-peach-500); }
-.prose-pb-lg strong:where(:not(.pb-app *)) { color: var(--color-pb-fg); font-weight: 600; }
-.prose-pb-lg a:where(:not(.pb-app *)) {
-  color: var(--color-pb-peach-600);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  text-decoration-color: var(--color-pb-peach-200);
-}
-.prose-pb-lg a:where(:not(.pb-app *)):hover { text-decoration-color: var(--color-pb-peach-500); }
-.prose-pb-lg blockquote:where(:not(.pb-app *)) {
-  border-left: 3px solid var(--color-pb-peach-300);
-  padding-left: 18px;
-  margin: 24px 0;
-  color: var(--color-pb-fg-muted);
-  font-style: normal;
-}
-.prose-pb-lg hr:where(:not(.pb-app *)) { border: 0; border-top: 1px solid var(--color-pb-border); margin: 40px 0; }
-.prose-pb-lg code:where(:not(.pb-app *)) {
-  font-family: var(--font-mono);
-  font-size: 14px;
-  background: var(--color-pb-muted);
-  border: 1px solid var(--color-pb-border);
-  border-radius: 6px;
-  padding: 1.5px 6px;
-}
-.prose-pb-lg pre:where(:not(.pb-app *)) {
-  background: var(--color-pb-muted);
-  border: 1px solid var(--color-pb-border);
-  border-radius: 10px;
-  padding: 16px 18px;
-  overflow-x: auto;
-  margin-bottom: 18px;
-}
-.prose-pb-lg pre code:where(:not(.pb-app *)) { background: none; border: 0; padding: 0; }
-.prose-pb-lg img:where(:not(.pb-app *)) { max-width: 100%; border-radius: 10px; }
-
-/* Comparison tables: real HTML tables, scrollable on narrow screens. The
-   wrapper carries the border + radius (radius on a border-collapse table
-   does not clip its rows). */
-.pb-table-scroll {
-  overflow-x: auto;
-  margin: 24px 0;
-  border: 1px solid var(--color-pb-border);
-  border-radius: 10px;
-}
-.prose-pb-lg table:where(:not(.pb-app *)) {
-  width: 100%;
-  min-width: 560px;
-  border-collapse: collapse;
-  font-size: 14.5px;
-  line-height: 1.55;
-}
-.prose-pb-lg th:where(:not(.pb-app *)) {
-  text-align: left;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--color-pb-fg-muted);
-  background: var(--color-pb-muted);
-  padding: 10px 14px;
-  border-bottom: 1px solid var(--color-pb-border);
-}
-.prose-pb-lg td:where(:not(.pb-app *)) {
-  padding: 12px 14px;
-  border-bottom: 1px solid var(--color-pb-border);
-  color: var(--color-pb-fg);
-  vertical-align: top;
-}
-.prose-pb-lg tr:last-child td:where(:not(.pb-app *)) { border-bottom: 0; }
-
-.prose-pb h2:where(:not(.pb-app *)) { font-size: 18px; font-weight: 700; margin-top: 40px; margin-bottom: 12px; letter-spacing: -0.3px; color: var(--color-pb-fg); }
-.prose-pb h3:where(:not(.pb-app *)) { font-size: 15px; font-weight: 600; margin-top: 24px; margin-bottom: 8px; color: var(--color-pb-fg); }
-.prose-pb p:where(:not(.pb-app *)), .prose-pb li:where(:not(.pb-app *)) { font-size: 14.5px; color: var(--color-pb-fg-muted); line-height: 1.75; margin-bottom: 12px; }
-.prose-pb ul:where(:not(.pb-app *)) { padding-left: 20px; margin-bottom: 12px; }
-.prose-pb li:where(:not(.pb-app *)) { margin-bottom: 6px; }
-.prose-pb strong:where(:not(.pb-app *)) { color: var(--color-pb-fg); font-weight: 600; }
-.prose-pb a:where(:not(.pb-app *)) { color: var(--color-pb-fg); }
-
 /* Anchored sections (#product, #platforms, #pricing, #faq, #demo) land
-   clear of the sticky nav (65px tall, 73px from lg). */
+   clear of the sticky nav (65px tall). */
 html {
   scroll-padding-top: 80px;
 }
@@ -478,33 +317,15 @@ html {
   }
 }
 
-/* ============================================================
-   The homepage's own rules (components/home). Unlayered, like
-   .pb-fluid above. Colours are the page's variables from
-   components/home/theme.ts.
-   ============================================================ */
-
-/* The major lines of a drafting grid, 128px apart, drawn once on the page,
-   in the hero rail. The rail's cards are set on it: the vertical lines fall
-   64, 192, 320, 448 and 576px either side of the centre line, so the 641px
-   lit card's two edges are on lines, and the horizontal lines fall 127, 255
-   and 383px under the rule, on the pale cards' top edge and on the foot of
-   all three cards. The layer is 384px tall, so that last line closes the
-   grid. */
-.bp-rail-grid {
-  background-image: linear-gradient(to right, var(--mn-grid) 1px, transparent 1px), linear-gradient(to bottom, var(--mn-grid) 1px, transparent 1px);
-  background-size: 128px 128px;
-  background-position: center -1px;
-}
-
-/* The box behind `Fit` in components/home/parts.tsx. A fragment laid out at
-   `--fw` px and painted at the width of its slot, like .pb-fluid, but never
-   over `--fk` times its size (one and a half by default): past that the
-   fragment is laid out wider instead of painted larger. The scale is the
-   ratio of two lengths, so the slot's width goes through a registered
-   length property first (the same device as .pb-fluid), and it is left on
-   `--bp-k` for anything inside that has to undo it (a 4px corner). `--fh`
-   is the fragment's height at its own size. */
+/* The box behind `Fit` in components/site/parts.tsx. Unlayered, like
+   .pb-fluid above. A fragment laid out at `--fw` px and painted at the
+   width of its slot, like .pb-fluid, but never over `--fk` times its size
+   (one and a half by default): past that the fragment is laid out wider
+   instead of painted larger. The scale is the ratio of two lengths, so
+   the slot's width goes through a registered length property first (the
+   same device as .pb-fluid), and it is left on `--bp-k` for anything
+   inside that has to undo it (a 4px corner). `--fh` is the fragment's
+   height at its own size. */
 @property --bp-fit-w {
   syntax: "<length>";
   inherits: false;
@@ -528,82 +349,4 @@ html {
   width: calc(100cqw / var(--bp-k));
   transform-origin: 0 0;
   transform: scale(var(--bp-k));
-}
-
-/* The window on the economics band's leak sheet (components/home/
-   Performance.tsx sets its numbers). Its first child is the sheet's layout
-   box, scaled by `--k`; its grandchild holds the sheet, anchored by its
-   foot so the window opens `--bar` px over the first of its `--n` rows of
-   `--row` px. Under lg it is .pb-fluid over again: laid out `--fw` wide,
-   `--fh` tall, painted at the width of its slot. From lg it is as tall as
-   its slot (a size container that takes what is left of the band's
-   height), and the scale is worked out from that height so the window's
-   foot falls at a chosen place in a row. `--kx` is the largest scale
-   allowed (the sheet is never laid out under `--fmin` wide). Two
-   candidates: `--kb` ends the window in the white under a whole row (up to
-   `--gap` px under its rule) and `--ka` ends it `--cut` px into the next
-   row; each with the fewest whole rows (`--mb`, `--ma`) that keep it at or
-   under `--kx`. The scale is `--kb` where that is `--kmin` or more, and
-   the larger of the two where it is not. Ratios of two lengths go through
-   tan(atan2()) on registered lengths, as in .pb-fluid. Where round() is
-   missing the window keeps its shape from under lg and the mat runs on in
-   white under it. Nothing on the page moves at rest, so there are no
-   keyframes here. */
-@property --bp-leak-w {
-  syntax: "<length>";
-  inherits: false;
-  initial-value: 0px;
-}
-@property --bp-leak-h {
-  syntax: "<length>";
-  inherits: false;
-  initial-value: 0px;
-}
-.bp-leak {
-  container-type: inline-size;
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  aspect-ratio: var(--fw) / var(--fh);
-}
-.bp-leak > div {
-  --bp-leak-w: 100cqw;
-  --k: tan(atan2(var(--bp-leak-w), calc(var(--fw) * 1px)));
-  --hd: calc(var(--fh) * 1px);
-  position: absolute;
-  top: 0;
-  left: 0;
-  overflow: hidden;
-  width: calc(var(--bp-leak-w) / var(--k));
-  height: var(--hd);
-  transform-origin: 0 0;
-  transform: scale(var(--k));
-}
-.bp-leak > div > div {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: calc(var(--hd) - (var(--bar) + var(--n) * var(--row)) * 1px);
-}
-@media (min-width: 64rem) {
-  @supports (width: round(up, 1px, 1px)) {
-    .bp-leak {
-      container-type: size;
-      aspect-ratio: auto;
-      flex: 1 1 0;
-      min-height: 15rem;
-    }
-    .bp-leak > div {
-      --bp-leak-h: 100cqh;
-      --r: tan(atan2(var(--bp-leak-h), var(--bp-leak-w)));
-      --kx: tan(atan2(var(--bp-leak-w), calc(var(--fmin) * 1px)));
-      --ma: clamp(1, round(up, (var(--fmin) * var(--r) - var(--bar) - var(--cut)) / var(--row), 1), var(--n) - 1);
-      --mb: clamp(1, round(up, (var(--fmin) * var(--r) - var(--bar) - var(--gap)) / var(--row), 1), var(--n));
-      --ka: min(var(--kx), tan(atan2(var(--bp-leak-h), calc((var(--bar) + var(--cut) + var(--ma) * var(--row)) * 1px))));
-      --kb: min(var(--kx), tan(atan2(var(--bp-leak-h), calc((var(--bar) + var(--mb) * var(--row)) * 1px))));
-      --t: clamp(0, (var(--kb) - var(--kmin)) * 1000000, 1);
-      --k: calc(var(--t) * var(--kb) + (1 - var(--t)) * max(var(--ka), var(--kb)));
-      --hd: calc(var(--bp-leak-h) / var(--k));
-    }
-  }
 }

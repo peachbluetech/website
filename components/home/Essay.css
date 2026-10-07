@@ -1,0 +1,115 @@
+/* Essay.tsx's own rules. Classes are .el-* with this
+   section's name in them. The shared system is
+   components/site/system.css: do not restate its classes here; to
+   adjust a part inside this section, put this section's class in front
+   of it. Colours, radii, shadows and durations are the system's tokens,
+   never literals. */
+
+/* Two halves on the split header's own grid: the words in the left
+   half, heading over paragraphs, and the loop in the right half, centred
+   in it and on the height of the words. */
+.el-essay-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: var(--el-gap-grid);
+  align-items: start;
+}
+.el-essay-head {
+  grid-column: 1;
+  grid-row: 1;
+}
+/* Eyebrow to heading, as in every split header. */
+.el-essay-pre {
+  margin-bottom: 28px;
+}
+.el-essay-title {
+  max-width: 515px;
+}
+.el-essay-body {
+  grid-column: 1;
+  grid-row: 2;
+  max-width: 516px;
+  margin-top: var(--el-head-gap);
+}
+.el-essay-fig {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: center;
+  justify-self: center;
+}
+
+/* The three paragraphs, 16px apart as paragraphs are counted: between
+   their line boxes. Every block here is trimmed to its cap top and its
+   baseline, and a 16/24 line is 12.5px from one baseline to the next
+   cap top, so 16px between trimmed edges would be 3.5px more than a
+   line break and the paragraphs would read as one. 28px between trimmed
+   edges is 16px between line boxes (16 plus the 6.5 and 6 the trim
+   takes off, to the nearest step of the system). */
+.el-essay-p + .el-essay-p {
+  margin-top: 28px;
+}
+
+/* The loop. Two sizes are in the markup, each drawn at its own pixel
+   size; one shows. */
+.el-essay-loop {
+  display: block;
+  overflow: visible;
+}
+.el-essay-loop--sm {
+  display: none;
+}
+/* What runs: a 1.5px navy line. The names stay ink. */
+.el-essay-loop-run {
+  stroke: var(--el-navy);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.el-essay-loop-stop {
+  fill: var(--el-navy);
+}
+/* What is missing, in the figure's one colour: Learn's open ring and
+   the trail of dots back to Make. */
+.el-essay-loop-open {
+  stroke: var(--el-peach);
+  stroke-width: 2;
+}
+.el-essay-loop-back {
+  fill: var(--el-peach);
+}
+.el-essay-loop-name {
+  fill: var(--el-ink);
+  font-family: var(--el-font-body);
+  font-size: 15px;
+  font-weight: 500;
+}
+.el-essay-loop--small .el-essay-loop-name {
+  font-size: 14px;
+}
+
+/* Under 1024 one column: heading, the loop, the paragraphs. */
+@media (max-width: 1023.98px) {
+  .el-essay-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .el-essay-title {
+    max-width: 640px;
+  }
+  .el-essay-fig {
+    grid-column: 1;
+    grid-row: 2;
+    align-self: start;
+    margin-top: var(--el-row);
+  }
+  .el-essay-body {
+    grid-row: 3;
+    max-width: 640px;
+    margin-top: var(--el-row);
+  }
+  .el-essay-loop--sm {
+    display: block;
+  }
+  .el-essay-loop--lg {
+    display: none;
+  }
+}

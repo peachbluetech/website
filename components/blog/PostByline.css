@@ -1,0 +1,26 @@
+/* A post's byline row. The kit's meta row with one addition: a row
+   that wraps never shows a dot at a line's end or start. Each date is
+   one piece with the dot before it; the row is pulled left by the
+   width of a dot and its gap (4 + 10) and the wrapper cuts that strip
+   off, so the dot of a date that begins a line is out of sight and
+   the date starts on the row's left edge. */
+.el-byline {
+  overflow: hidden;
+}
+.el-byline-row {
+  margin-left: -14px;
+}
+.el-byline-row > :first-child {
+  margin-left: 14px;
+}
+.el-byline-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+.el-byline-item > :first-child {
+  flex: none;
+  width: 4px;
+  text-align: center;
+}

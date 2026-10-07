@@ -2,9 +2,8 @@
    crop of a creative sits.
 
    Every original (/ads/<name>.jpg or .png) has three WebP siblings, so a
-   36px thumbnail does not download a full-size file. The originals are
-   1080 by 1920 for the account's eight top creatives, 640 by 1137 for the
-   other photo creatives and about 200px wide for the four small ones.
+   36px thumbnail does not download a full-size file. The sample account's
+   originals are 1080 by 1920; its one square cut is 1080 by 1080.
 
      sm    /ads/sm/<name>.webp   the square thumbnail, 128 by 128, already
                                  cut at the creative's "thumb" focus. For
@@ -16,22 +15,25 @@
                                  slots up to about 280px wide: tiles,
                                  previews, cards.
      wide  /ads/wide/<name>.webp the 16:9 band of the original at its full
-                                 width (1080 by 608, or 640 by 360), already
-                                 cut at the creative's "wide" focus. For 16:9
-                                 slots wider than 280px, which only ever
-                                 paint that band.
+                                 width (1080 by 608), already cut at the
+                                 creative's "wide" focus. For 16:9 slots
+                                 wider than 280px, which only ever paint
+                                 that band.
      full  the original file, untouched.
 
    Focus. A 9:16 creative carries its headline in the top or the bottom
-   third and its product in the middle, so a crop about the centre cuts the
-   headline in half. adFocus.json holds, per file name, where each shape of
-   box sits instead: a vertical object-position, in percent, on the ORIGINAL
-   image.
+   third and its product somewhere between, so a crop about the centre can
+   cut the headline in half or lose the can. adFocus.json holds, per file
+   name, where each shape of box sits instead: a vertical object-position,
+   in percent, on the ORIGINAL image. One rule for every shape: the can and
+   the person come first (the can whole or boldly cropped, a face never
+   sliced), and the headline is whole or left out, never cut through.
 
-     thumb   a square up to 64px: the product and its colour, no half-cut type
-     tile    a 4:5 box: the whole headline, clear of the chips a library
-             tile lays over its top corners, and as much product as fits
-     square  a large square: the whole headline and as much product as fits
+     thumb   a square up to 64px: the can, and the face if there is one,
+             with no half-cut type
+     tile    a 4:5 box: the same, with any headline it shows clear of the
+             chips a library tile lays over its top corners
+     square  a large square: the same
      wide    a 16:9 box: the headline with the top of the product where both
              fit, otherwise the product alone
 

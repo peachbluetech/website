@@ -1,0 +1,68 @@
+/* Pricing.tsx's own rules. Classes are .el-* with this section's name
+   in them. The shared system is components/site/system.css: do not
+   restate its classes here; to adjust a part inside this section, put
+   this section's class in front of it. Colours, radii, shadows and
+   durations are the system's tokens, never literals. */
+
+/* A plan's column: 16px all round from the part, and 32px from the
+   blurb's last baseline to the rule under the columns. */
+.el-pricing .el-cell-card {
+  padding-bottom: 32px;
+}
+
+/* The tile: 200px, the name at its top left, the price at its bottom
+   left, both 20px in (the tile part's own padding). */
+.el-pricing-tile {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 200px;
+}
+.el-pricing-name {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+/* The label of the popular plan, under its name. */
+.el-pricing-tag {
+  margin-top: 16px;
+}
+/* The cadence beside the figure, on its baseline. */
+.el-pricing-cadence {
+  margin-left: 3px;
+}
+/* 16px under the tile, the plan's link across the column; 20px under
+   it, the blurb. */
+.el-pricing-cta {
+  margin-top: 16px;
+}
+.el-pricing-blurb {
+  margin-top: 20px;
+}
+
+/* The closing row: the pill at the right, 40px under the rule above it
+   and 40px over the rule under it, the system's distance for a row
+   under cards or cells. On a phone both are 24. */
+.el-pricing-all {
+  display: flex;
+  justify-content: flex-end;
+  padding-block: var(--el-head-gap);
+}
+
+/* Under 1024 the columns are stacked and the closing pill starts on the
+   left. */
+@media (max-width: 1023.98px) {
+  .el-pricing-all {
+    justify-content: flex-start;
+  }
+}
+@media (max-width: 767.98px) {
+  .el-pricing-tile {
+    height: 160px;
+  }
+  /* The tile sits 8px from the rails here; the blurb keeps the page's
+     16px text inset. */
+  .el-pricing-blurb {
+    padding-inline: 8px;
+  }
+}

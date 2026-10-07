@@ -1,49 +1,19 @@
 import type { Article } from "@/content/blog/manifest";
 
+/* A post's byline and dates as they are printed. Plain helpers with no
+   component in them, so the feed route can use them too; the row that
+   shows them under a post's title is PostByline. */
+
 export function bylineName(byline: Article["byline"]): string {
   return byline === "nick" ? "Nick, founder of Peachblue" : "Peachblue";
 }
 
-function formatDate(iso: string): string {
+/* "August 20, 2026" under a post's title, "Aug 20, 2026" in the index. */
+export function formatPostDate(iso: string, month: "long" | "short" = "long"): string {
   return new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-US", {
     year: "numeric",
-    month: "long",
+    month,
     day: "numeric",
     timeZone: "UTC",
   });
-}
-
-/** Author + dates row shown under the post lede. */
-export function PostMeta({ article }: { article: Article }) {
-  const updated =
-    article.dateUpdated && article.dateUpdated !== article.datePublished
-      ? article.dateUpdated
-      : null;
-  return (
-    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[13px] text-pb-fg-muted">
-      <span className="inline-flex items-center gap-2">
-        <span
-          className="size-6 rounded-full bg-pb-peach-50 inline-flex items-center justify-center text-pb-peach-700 text-[11px] font-semibold"
-          aria-hidden="true"
-        >
-          {article.byline === "nick" ? "N" : "P"}
-        </span>
-        <span className="font-medium text-pb-fg">{bylineName(article.byline)}</span>
-      </span>
-      {article.datePublished && (
-        <>
-          <span aria-hidden="true">·</span>
-          <time dateTime={article.datePublished}>{formatDate(article.datePublished)}</time>
-        </>
-      )}
-      {updated && (
-        <>
-          <span aria-hidden="true">·</span>
-          <span>
-            Updated <time dateTime={updated}>{formatDate(updated)}</time>
-          </span>
-        </>
-      )}
-    </div>
-  );
 }

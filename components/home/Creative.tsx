@@ -1,112 +1,134 @@
-import { BriefView, type ReferenceAd } from "@/components/product/brief";
+import "./Creative.css";
+import { BriefView, RecipeLedger, type ReferenceAd } from "@/components/product/brief";
 import { CREATIVES } from "@/components/product/sample";
+import { Block, Card, Cards, Fluid, Inner, More, Pill, Shot, SplitHead, T, cx } from "@/components/site/parts";
 import { NEXT_CREATIVE_BRIEF } from "./content";
-import { Shot } from "@/components/product/frame";
-import { BAND_X, Bullets, FeatureRow, Fluid, More, PeekBand, SECTION_END, SectionMarker, Sheet } from "./parts";
 
-/* For creative teams (03): one row, the Next Creative Brief: a short
-   text column beside one navy band holding one product fragment: two of
-   the brief's reference ads on a white mat, large and whole, one of them
-   outlined. Agent Peach is its own section, 02 (Agent.tsx). */
+/* For creative teams: Next Creative Brief (#creative-teams). The
+   section opens as every section does (rule, 160px), the reader label
+   is an ink line over the eyebrow, and the section's trial link is the
+   one filled pill, 32px under the heading. Nothing stands in columns 7
+   to 12: a header cell.
 
-export const CREATIVE_READER = { id: "creative-teams", label: "For creative teams" };
+   40px lower, one row of two taupe cards, two thirds and one third. Each
+   holds one distilled piece of the brief in a white inner card floated in
+   its upper part, and one of the section's sentences pinned bottom left
+   as its caption:
+   - the brief's "winning recipe" ledger, five tag values with the lift
+     each carries;
+   - two of the brief's reference ads, each with its name and its
+     figures. No outline marks either as chosen.
+   The other three sentences wait in a "More" row under the cards.
 
-/* The two reference ads this picture shows, in this order: the winner
-   in its lifestyle cut (the mirror selfie; the hero
-   shows the same creative's studio cut) and "Your new little ritual.".
-   Names and figures are the sample account's own (sample.ts); the brief
-   is given the pair in place of its own four through its `referenceAds`
-   prop. How each picture is cropped is the creative's
-   own focus (ui/adFocus.json), so new art frames itself. */
-const ref = (c: { key: string; name: string; image: string; ctr: number; roas: number }, image = c.image): ReferenceAd => ({ key: c.key, name: c.name, image, ctr: c.ctr, roas: c.roas });
-const REFS: ReferenceAd[] = [ref(CREATIVES.bigMood, "/ads/fizzli-big-mood-selfie.jpg"), ref(CREATIVES.littleRitual)];
-const [CHOSEN, BESIDE] = REFS;
+   Page.tsx draws the rule above this section and the rule under it. */
 
-const REFS_LABEL = `Two of the reference ads in a creative brief for a sample account, each a picture with its name, click-through rate and return: "${CHOSEN.name}" at ${CHOSEN.ctr}% CTR and ${CHOSEN.roas}x, and "${BESIDE.name}" at ${BESIDE.ctr}% CTR and ${BESIDE.roas}x.`;
+/* The reader this section speaks to: its id (a link target) and the
+   label over its eyebrow. */
+const CREATIVE_READER = { id: "creative-teams", label: "For creative teams" };
 
-/* The end of the brief laid out `width` wide: its last `height` px.
-   `columns` is the brief's own grid of reference ads: four across (the
-   pair takes the first two columns), or its narrow two. */
-function BriefEnd({ width, height, columns = 4 }: { width: number; height: number; columns?: 2 | 4 }) {
+/* The recipe picture's text alternative. */
+const RECIPE_LABEL =
+  "The winning recipe from a creative brief for a sample account: playful tone, studio backdrop, benefit-led hook, minimal text and a vibrant palette, each with the lift in return it carries across the account.";
+
+/* Where the heading breaks, at every width: before this word, so the
+   second line is the whole question. The text is the headline,
+   unchanged; the break is only a line break. */
+const BREAK_BEFORE = " what ";
+const CUT = NEXT_CREATIVE_BRIEF.headline.indexOf(BREAK_BEFORE);
+const HEADLINE = CUT < 0 ? [NEXT_CREATIVE_BRIEF.headline] : [NEXT_CREATIVE_BRIEF.headline.slice(0, CUT), NEXT_CREATIVE_BRIEF.headline.slice(CUT + 1)];
+
+/* The two reference ads, in this order: "Honestly? So good." (a creator
+   talking to the camera, can in hand) and "Your new little ritual.".
+   The pair is chosen for the page and is not the head of the brief's own
+   four: the first of those, the mirror selfie, already leads the Agent
+   Peach section above, so this picture shows a different person.
+   Names, pictures and figures are the sample account's own (sample.ts);
+   the brief is given the pair in place of its own four through its
+   `referenceAds` prop. How each picture is cropped is the creative's own
+   focus (ui/adFocus.json). */
+const ref = (c: { key: string; name: string; image: string; ctr: number; roas: number }): ReferenceAd => ({ key: c.key, name: c.name, image: c.image, ctr: c.ctr, roas: c.roas });
+const REFS: ReferenceAd[] = [ref(CREATIVES.honestlySoGood), ref(CREATIVES.littleRitual)];
+
+const REFS_LABEL = `Two of the reference ads in a creative brief for a sample account, each a picture with its name, click-through rate and return: ${REFS.map((r) => `"${r.name}" at ${r.ctr}% CTR and ${r.roas.toFixed(1)}x`).join(", and ")}.`;
+
+/* The brief's last row, the reference ads, on its own: the brief laid
+   out REFS_W wide in its narrow grid (two ads across, 132px each) and
+   anchored by its foot, seen through a window REFS_H tall: the two tiles
+   and nothing over them. A 132px tile is too narrow for either name on
+   one line, so each name is given two lines (Creative.css), which is what
+   makes the row 205px: 132 of tile, 10, two lines of 17.25, 2, 16.5, 10.
+   The same layout at every width, painted at the width of its slot. */
+const REFS_W = 276;
+const REFS_H = 205;
+
+function BriefEnd() {
   return (
-    <div className="relative overflow-hidden" style={{ height }}>
-      <div className="absolute bottom-0 left-0" style={{ width }}>
-        <BriefView stopAfter="references" referenceColumns={columns} referenceAds={REFS} bare className="bg-transparent!" />
+    <div className="el-creative-end">
+      <div className="el-creative-end-in">
+        <BriefView stopAfter="references" referenceColumns={2} referenceAds={REFS} bare />
       </div>
     </div>
   );
 }
 
-/* The window is the brief's last row, the reference ads: the section's
-   own heading and helper line are left out. Both ads are whole at every
-   width, with their captions.
-
-   - From sm: the brief at its own 760, four columns, and the window is
-     the first two (374px: two 181px tiles and the 12px between them),
-     painted at the width the mat gives it: 1.0 at 1024, 1.19 at 1280,
-     1.44 from 1440 (a tile is 260px wide), never over 1.5 (the mat is
-     capped and centred where the band is wider than that). Both names
-     fit one line there, so the row is 236.75px tall.
-   - On a phone two tiles of that grid would have to be painted under
-     nine tenths, so the brief is laid out 276 wide in its narrow grid,
-     two ads across, 132px each. The mat's margin is 8px there, so the
-     row is painted at its own size at 390 and at nine tenths or more
-     down to 360. A 132px tile is too narrow for either name on one line,
-     so there a name is let onto a second line (the brief would cut it
-     short with an ellipsis) and each is given two lines, so the figures
-     under them share a line: the row is 205px.
-
-   A tile's corners are the page's 4px at whatever scale it is painted,
-   set from outside the brief by its class name.
-
-   The outline on the chosen ad: one 1.5px peach line on the tile's own
-   edge, with the tile's own corners. It is placed in the window's box in
-   percentages, so it holds at every scale.
-
-   The mat has 4px top corners and stands on the band's foot, like the
-   leak sheet's lower down. */
-const COLUMN = 193;
-const WIDE = { brief: 760, w: 2 * COLUMN - 12, tile: COLUMN - 12, h: 236.75 };
-const PHONE = { brief: 276, w: 276, tile: 132, h: 205 };
-const TILE = "[&_.rounded-xl]:rounded-[calc(4px/var(--pb-fluid-scale,1))] max-sm:[&_.truncate]:min-h-[2lh] max-sm:[&_.truncate]:whitespace-normal";
-
-function ReferencePeek() {
-  const outline = "pointer-events-none absolute inset-y-0 left-0 rounded-[4px] border-[1.5px] border-[color:var(--mn-peach)]";
+export function Creative() {
+  const [b1, b2, ...rest] = NEXT_CREATIVE_BRIEF.bullets;
   return (
-    <PeekBand>
-      <div className={`pt-5 sm:pt-8 ${BAND_X}`}>
-        <div className="mx-auto rounded-t-[4px] bg-[var(--mn-white)] p-2 sm:max-w-[609px] sm:p-6 lg:max-xl:p-4">
-          <div className={`relative ${TILE}`}>
-            <Shot label={REFS_LABEL} ground={false}>
-              <Fluid width={PHONE.w} height={PHONE.h} className="sm:hidden">
-                <BriefEnd width={PHONE.brief} height={PHONE.h} columns={2} />
-              </Fluid>
-              <Fluid width={WIDE.w} height={WIDE.h} className="max-sm:hidden">
-                <BriefEnd width={WIDE.brief} height={WIDE.h} />
-              </Fluid>
+    <section id={CREATIVE_READER.id} className="el-creative">
+      <Block top="top" bottom="gap">
+        <SplitHead
+          label={CREATIVE_READER.label}
+          eyebrow={NEXT_CREATIVE_BRIEF.eyebrow}
+          title={
+            <>
+              {HEADLINE[0]}
+              {HEADLINE[1] && (
+                <>
+                  {" "}
+                  <br />
+                  {HEADLINE[1]}
+                </>
+              )}
+            </>
+          }
+          action={<Pill href={NEXT_CREATIVE_BRIEF.cta.href}>{NEXT_CREATIVE_BRIEF.cta.label}</Pill>}
+        />
+      </Block>
+
+      <Block inset="card">
+        <Cards split>
+          <Card className="el-creative-card">
+            <Shot label={RECIPE_LABEL} ground={false}>
+              <Inner className="el-creative-recipe">
+                {/* A Fluid whose two numbers live in Creative.css, so the
+                    one ledger is laid out 560 wide from 768 and at a
+                    phone's width under it. */}
+                <div className="pb-fluid el-creative-ledger">
+                  <div className="pb-fluid-inner">
+                    <RecipeLedger />
+                  </div>
+                </div>
+              </Inner>
             </Shot>
-            <span aria-hidden="true" className={`${outline} sm:hidden`} style={{ width: `${(PHONE.tile / PHONE.w) * 100}%` }} />
-            <span aria-hidden="true" className={`${outline} max-sm:hidden`} style={{ width: `${(WIDE.tile / WIDE.w) * 100}%` }} />
-          </div>
-        </div>
-      </div>
-    </PeekBand>
-  );
-}
+            <p className={cx(T.bodySm, "el-pretty el-creative-caption")}>{b1}</p>
+          </Card>
 
-export function CreativeTeams() {
-  const [b1, b2, ...bRest] = NEXT_CREATIVE_BRIEF.bullets;
-  return (
-    <Sheet id={CREATIVE_READER.id} className={SECTION_END}>
-      <SectionMarker n={3}>
-        <p>{CREATIVE_READER.label}</p>
-      </SectionMarker>
-      <FeatureRow flip eyebrow={NEXT_CREATIVE_BRIEF.eyebrow} headline={NEXT_CREATIVE_BRIEF.headline} accent="what to make next." cta={NEXT_CREATIVE_BRIEF.cta} tile={<ReferencePeek />}>
-        <Bullets items={[b1, b2]} />
-        <More>
-          <Bullets items={bRest} open />
-        </More>
-      </FeatureRow>
-    </Sheet>
+          <Card className="el-creative-card">
+            <Shot label={REFS_LABEL} ground={false}>
+              <Inner className="el-creative-refs">
+                <Fluid width={REFS_W} height={REFS_H}>
+                  <BriefEnd />
+                </Fluid>
+              </Inner>
+            </Shot>
+            <p className={cx(T.bodySm, "el-pretty el-creative-caption")}>{b2}</p>
+          </Card>
+        </Cards>
+      </Block>
+
+      <Block top="s" bottom="shelf">
+        <More items={rest} />
+      </Block>
+    </section>
   );
 }

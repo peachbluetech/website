@@ -1,30 +1,21 @@
+import { SideNav } from "@/components/site/kit";
 import type { TocEntry } from "@/lib/blog";
 
-/**
- * Sticky table of contents for the post sidebar. Pure anchor links (ids are
- * assigned by rehype-slug and mirrored by lib/blog.extractToc), no client JS.
- */
+/* A post's table of contents, for the side column of its Article, which
+   holds it under the nav while the text scrolls. The kit's side nav:
+   plain anchor links (the ids are assigned by rehype-slug and mirrored
+   by lib/blog.extractToc), no script. A third-level heading is indented. */
 export function StickyToc({ entries }: { entries: TocEntry[] }) {
   if (entries.length === 0) return null;
   return (
-    <nav aria-label="Table of contents" className="sticky top-24">
-      <div className="text-[13px] font-semibold text-pb-fg mb-3">
-        On this page
-      </div>
-      <ul className="space-y-2 border-l border-pb-border">
-        {entries.map((e) => (
-          <li key={e.id}>
-            <a
-              href={`#${e.id}`}
-              className={`block text-[13px] leading-snug text-pb-fg-muted hover:text-pb-fg transition-colors -ml-px border-l border-transparent hover:border-pb-peach-500 ${
-                e.depth === 2 ? "pl-4" : "pl-7"
-              }`}
-            >
-              {e.text}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
+    <SideNav
+      label="Table of contents"
+      groups={[
+        {
+          title: "On this page",
+          items: entries.map((e) => ({ label: e.text, href: `#${e.id}`, sub: e.depth === 3 })),
+        },
+      ]}
+    />
   );
 }

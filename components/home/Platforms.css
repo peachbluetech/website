@@ -1,0 +1,111 @@
+/* Platforms.tsx's own rules. Classes are .el-* with this
+   section's name in them. The shared system is
+   components/site/system.css: do not restate its classes here; to
+   adjust a part inside this section, put this section's class in front
+   of it. Colours, radii, shadows and durations are the system's tokens,
+   never literals. */
+
+/* The statement: a 24/32 ink line over a 16/24 smoke line, in one p.
+   Each is a block so it can be trimmed like every other block of text. */
+.el-platforms-lead,
+.el-platforms-text {
+  display: block;
+}
+.el-platforms-text {
+  margin-top: 16px;
+}
+
+/* The four links: white pills two across and two down, 8px apart as
+   pills are in every group. The grid shrinks to its content and its two
+   columns share it, so all four pills are as wide as the widest and the
+   block is the same shape at every width, a phone included. */
+.el-platforms-links {
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 32px;
+}
+.el-platforms-links > li {
+  display: grid;
+  min-width: 0;
+}
+/* One pill: the mark or marks, 8px, the label at 15/22, from the left.
+   It is 4px tighter on the side of the mark, which carries its own air. */
+.el-platforms .el-platforms-link {
+  justify-content: flex-start;
+  gap: 8px;
+  padding-inline: 14px 18px;
+  font-size: 15px;
+  line-height: 22px;
+}
+/* The marks are ink and stay ink under the pointer. */
+.el-platforms-marks {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 6px;
+  color: var(--el-ink);
+}
+
+/* The pacing card: three rows on stone hairlines. */
+.el-platforms .el-platforms-card {
+  padding: 4px 20px;
+}
+.el-platforms-flight {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 150px;
+  grid-template-areas:
+    "order chip"
+    "spend bar";
+  align-items: center;
+  column-gap: 24px;
+  row-gap: 6px;
+  padding-block: 16px;
+}
+.el-platforms-flight + .el-platforms-flight {
+  border-top: 1px solid var(--el-stone);
+}
+.el-platforms-order {
+  grid-area: order;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+  white-space: nowrap;
+}
+.el-platforms-chip {
+  grid-area: chip;
+  display: flex;
+}
+.el-platforms-spend {
+  grid-area: spend;
+  white-space: nowrap;
+}
+.el-platforms-bar {
+  grid-area: bar;
+}
+@media (max-width: 767.98px) {
+  .el-platforms .el-platforms-card {
+    padding: 2px 16px;
+  }
+  .el-platforms-flight {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "order order"
+      "chip spend"
+      "bar bar";
+    row-gap: 8px;
+    padding-block: 14px;
+  }
+}
+
+/* The published caption: 12px under the card, at its left edge. */
+.el-platforms-caption {
+  margin-top: 12px;
+}
+/* Under 350 the two columns do not fit side by side at all. */
+@media (max-width: 349.98px) {
+  .el-platforms-links {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

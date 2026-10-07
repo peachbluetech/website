@@ -20,7 +20,8 @@ import { cx } from "./cx";
    creative's focus, so they are painted centred. "md" and "full" hold the
    whole creative, and a square, 4:5 or 16:9 box positions them at the
    creative's focus for that shape (adFocus, from adFocus.json) instead of
-   the centre, so the box shows the headline whole. The position reaches
+   the centre, so the box shows the can and the person, with the headline
+   whole or not at all. The position reaches
    the img as a custom property read by one class, not as an inline
    object-position, so a caller's own "[&>img]:object-[...]" on the box
    still wins. A portrait box shows the whole 9:16 creative, and a 4:3 box

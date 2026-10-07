@@ -1,8 +1,10 @@
+import { Fragment } from "react";
 import type { Metadata } from "next";
-import Link from "next/link";
-import { SiteNav } from "@/components/site/SiteNav";
-import { SiteFooter } from "@/components/site/SiteFooter";
+import { EntryRow, PageHeader } from "@/components/site/kit";
+import { Block, Dotted, Frame, Rule, Side, T, TONE, cx } from "@/components/site/parts";
+import { SitePage } from "@/components/site/SitePage";
 import { docsBySection } from "@/lib/docs";
+import "./docs.css";
 
 export const metadata: Metadata = {
   title: "Docs",
@@ -11,54 +13,54 @@ export const metadata: Metadata = {
   alternates: { canonical: "/docs" },
 };
 
+/* The docs index, built in the design system from the inner-page kit.
+
+   The page header (the eyebrow, the h1, the lead on the right half),
+   then one slim ruled band per section of the manifest, on the side
+   layout's two columns (354 and 724 at 1440): the section's h2 at Inter
+   24/32 on the left, its pages as rows on dotted separators on the
+   right. A row is one link: the page's short name at 16/24 in a 220px
+   column, its description at 15/22 in smoke beside it, and the arrow at
+   the row's end. Under 1024 the heading stands over its rows; under 768
+   a row is the name over the description.
+
+   The anchor text of a row is the name, then the description, as it
+   always was. The h2 ids (`section-<name>`) name each section for
+   assistive tech. A server component; every word is in the HTML the
+   server sends. */
 export default function DocsIndexPage() {
   const sections = docsBySection();
   return (
-    <div className="flex flex-col min-h-screen bg-pb-bg">
-      <SiteNav current="docs" />
-      <main className="flex-1 pt-12 md:pt-[72px] pb-24 px-6">
-        <div className="max-w-[860px] mx-auto">
-          <header className="mb-12">
-            <div className="text-[13px] font-semibold text-pb-peach-700 mb-3">
-              Documentation
-            </div>
-            <h1 className="font-display text-[clamp(30px,5vw,44px)] leading-[1.08] font-medium tracking-[-0.015em] text-pb-ink text-balance mb-4">
-              Everything, documented.
-            </h1>
-            <p className="text-[16px] text-pb-fg-secondary leading-relaxed max-w-[560px]">
-              Connect your platforms, understand the analysis, and get the most
-              out of Peachblue. Every page is also available as raw markdown by
-              appending .md to its URL.
-            </p>
-          </header>
-
-          <div className="space-y-10">
-            {sections.map(({ section, title, pages }) => (
-              <section key={section} aria-labelledby={`section-${section}`}>
-                <h2
-                  id={`section-${section}`}
-                  className="text-[13px] font-semibold text-pb-peach-700 mb-4"
-                >
-                  {title}
-                </h2>
-                <div className="grid sm:grid-cols-2 gap-4">
-                  {pages.map((p) => (
-                    <Link
-                      key={p.slug}
-                      href={`/docs/${p.slug}`}
-                      className="block rounded-[10px] border border-pb-border bg-pb-card p-5 hover:border-pb-border-control transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pb-peach-500 focus-visible:ring-offset-2"
-                    >
-                      <div className="text-[15px] font-semibold text-pb-fg mb-1.5">{p.navLabel}</div>
-                      <p className="text-[13.5px] text-pb-fg-secondary leading-relaxed">{p.description}</p>
-                    </Link>
-                  ))}
-                </div>
-              </section>
-            ))}
-          </div>
-        </div>
-      </main>
-      <SiteFooter />
-    </div>
+    <SitePage current="docs">
+      <PageHeader
+        eyebrow="Documentation"
+        title="Everything, documented."
+        lead="Connect your platforms, understand the analysis, and get the most out of Peachblue. Every page is also available as raw markdown by appending .md to its URL."
+      />
+      <Frame>
+        <Rule />
+        {sections.map(({ section, title, pages }) => (
+          <Fragment key={section}>
+            <section aria-labelledby={`section-${section}`}>
+              <Block top="band" bottom="band">
+                <Side>
+                  <h2 id={`section-${section}`} className={T.titleLg}>
+                    {title}
+                  </h2>
+                  <Dotted as="div" className="el-docs-index-list">
+                    {pages.map((p) => (
+                      <EntryRow key={p.slug} as="div" href={`/docs/${p.slug}`} lead={<div className={T.body}>{p.navLabel}</div>} tight>
+                        <p className={cx(T.bodySm, TONE.smoke, "el-pretty")}>{p.description}</p>
+                      </EntryRow>
+                    ))}
+                  </Dotted>
+                </Side>
+              </Block>
+            </section>
+            <Rule />
+          </Fragment>
+        ))}
+      </Frame>
+    </SitePage>
   );
 }

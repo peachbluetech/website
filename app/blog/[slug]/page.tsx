@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { SiteNav } from "@/components/site/SiteNav";
-import { SiteFooter } from "@/components/site/SiteFooter";
+import { PostByline } from "@/components/blog/PostByline";
+import { bylineName } from "@/components/blog/PostMeta";
 import { StickyToc } from "@/components/blog/StickyToc";
-import { FaqBlock } from "@/components/blog/FaqBlock";
-import { TrialCta } from "@/components/blog/TrialCta";
-import { PostMeta, bylineName } from "@/components/blog/PostMeta";
+import { Article, Crumb, FaqBand, LinkBand, PageHeader, Prose, TrialBand } from "@/components/site/kit";
+import { Block, Frame, Rule } from "@/components/site/parts";
+import { SitePage } from "@/components/site/SitePage";
 import { PILLARS } from "@/content/blog/manifest";
 import {
   assertManifestIntegrity,
@@ -16,6 +15,7 @@ import {
   relatedArticles,
 } from "@/lib/blog";
 import { SITE_URL } from "@/lib/site";
+import "./post.css";
 
 export const dynamicParams = false;
 
@@ -53,6 +53,14 @@ export async function generateMetadata({
   };
 }
 
+/* A post, built in the design system from the inner-page kit: the
+   stacked page header (the crumb, the h1, the description as the lead,
+   the byline row), then inside the frame the text as running text with
+   its table of contents in the side column, the questions, the trial
+   band and "Keep reading". One article element holds all of it, as it
+   always did, so the body column of the kit's Article is a div here.
+   A server component; the words, the heading levels, the links, the
+   ids and the JSON-LD are the published ones. */
 export default async function BlogPostPage({
   params,
 }: {
@@ -117,80 +125,50 @@ export default async function BlogPostPage({
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-pb-bg">
+    <SitePage current="blog">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <SiteNav current="blog" />
-
-      <main className="flex-1 pt-12 md:pt-[72px] pb-24 px-6">
-        <div className="max-w-[1060px] mx-auto">
-          <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_220px] lg:gap-14">
-            <article>
-              <header className="mb-10">
-                <nav aria-label="Breadcrumb" className="text-[12.5px] text-pb-fg-muted mb-5">
-                  <Link href="/blog" className="hover:text-pb-fg transition-colors">
-                    Blog
-                  </Link>
-                  <span aria-hidden="true" className="mx-2">
-                    /
-                  </span>
-                  <span className="text-pb-peach-700 font-medium">
-                    {PILLARS[article.pillar].title}
-                  </span>
-                </nav>
-                <h1 className="font-display text-[clamp(30px,4.6vw,42px)] leading-[1.1] font-medium tracking-[-0.015em] text-pb-ink mb-4">
-                  {article.h1}
-                  {article.h1Accent ? <span> {article.h1Accent}</span> : null}
-                </h1>
-                <p className="text-[16.5px] text-pb-fg-secondary leading-relaxed mb-5 max-w-[640px]">
-                  {article.description}
-                </p>
-                <PostMeta article={article} />
-              </header>
-
-              <div className="prose-pb-lg max-w-[680px]">
+      <article>
+        <PageHeader
+          layout="stack"
+          crumb={<Crumb items={[{ label: "Blog", href: "/blog" }, { label: PILLARS[article.pillar].title }]} />}
+          title={
+            <>
+              {article.h1}
+              {article.h1Accent ? <span> {article.h1Accent}</span> : null}
+            </>
+          }
+          lead={article.description}
+          meta={<PostByline article={article} />}
+        />
+        <Frame>
+          <Rule />
+          <Block top="band" bottom="pad">
+            <Article as="div" sideAt="end" side={<StickyToc entries={toc} />}>
+              <Prose className="el-post-prose">
                 <Body />
-              </div>
-
-              <div className="max-w-[680px]">
-                <FaqBlock faq={article.faq} />
-                <TrialCta agency={isAgencyPost} />
-
-                {related.length > 0 && (
-                  <section className="mt-14" aria-labelledby="related-heading">
-                    <h2
-                      id="related-heading"
-                      className="text-[13px] font-semibold text-pb-peach-700 mb-4"
-                    >
-                      Keep reading
-                    </h2>
-                    <ul className="space-y-3">
-                      {related.map((r) => (
-                        <li key={r.slug}>
-                          <Link
-                            href={`/blog/${r.slug}`}
-                            className="text-[15px] rounded-sm font-semibold text-pb-fg underline underline-offset-4 decoration-pb-border-control hover:text-pb-peach-600 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pb-peach-500 focus-visible:ring-offset-2"
-                          >
-                            {r.title}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </section>
-                )}
-              </div>
-            </article>
-
-            <aside className="hidden lg:block">
-              <StickyToc entries={toc} />
-            </aside>
-          </div>
-        </div>
-      </main>
-
-      <SiteFooter />
-    </div>
+              </Prose>
+            </Article>
+          </Block>
+          <Rule />
+          {article.faq.length > 0 && (
+            <>
+              <FaqBand faq={article.faq} />
+              <Rule />
+            </>
+          )}
+          <TrialBand agency={isAgencyPost} />
+          <Rule />
+          {related.length > 0 && (
+            <>
+              <LinkBand id="related-heading" title="Keep reading" links={related.map((r) => ({ href: `/blog/${r.slug}`, label: r.title }))} />
+              <Rule />
+            </>
+          )}
+        </Frame>
+      </article>
+    </SitePage>
   );
 }
