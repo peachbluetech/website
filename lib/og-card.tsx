@@ -6,11 +6,11 @@ import { ImageResponse } from "next/og";
  * 1200x630 is the Open Graph standard and what iMessage, Slack, LinkedIn and
  * X's large card all crop to. Square would get letterboxed in most of them.
  *
- * The card is the site in small: the eggshell page, the frame of hairline
- * rails and rules with a dot at each crossing, the logo, the headline in the
- * display face in black, and the site's one filled navy pill, here carrying
- * the address. Few words and high contrast, so it stays legible at thumbnail
- * size.
+ * The card is the site in small, on its navy: the frame of hairline rails
+ * and rules with a dot at each crossing, the logo, the headline in the
+ * display face in white, and a white pill carrying the address. Few words
+ * and high contrast, so it stays legible at thumbnail size and stands out
+ * in a message thread.
  *
  * Both faces are fetched from Google Fonts at render time (the
  * no-User-Agent request returns TTF, which satori can embed): the display
@@ -22,12 +22,12 @@ import { ImageResponse } from "next/og";
 export const OG_SIZE = { width: 1200, height: 630 };
 export const OG_ALT = "Peachblue · The intelligence layer for ad creative";
 
-/* The site's own values (components/site/system.css): the eggshell page,
-   black type, smoke for the quiet line, the hairline, and the navy of the
-   filled pill. */
+/* The site's own values (components/site/system.css). The card stands on
+   the navy of the site's filled pill and popular plan tile: white type,
+   a soft blue for the quiet line, faint white hairlines, and a white pill. */
 const NAVY = "#13214B";
 const LOGO = "linear-gradient(135deg, #FFB48C 0%, #F27749 100%)";
-const PALETTE = { ground: "#FDFCFC", ink: "#000000", soft: "#777169", line: "rgba(0,0,0,0.09)", pill: NAVY, pillInk: "#FFFFFF" } as const;
+const PALETTE = { ground: NAVY, ink: "#FFFFFF", soft: "#A9B7DD", line: "rgba(255,255,255,0.14)", pill: "#FFFFFF", pillInk: NAVY } as const;
 type Palette = typeof PALETTE;
 
 async function fetchTtf(family: string): Promise<ArrayBuffer | null> {
@@ -79,7 +79,7 @@ function headlineSize(line1: string, line2: string, compact: boolean): number {
   return 88;
 }
 
-/** The frame: two rails, two rules, and a dot in a disc of canvas at each crossing. */
+/** The frame: two rails, two rules, and a dot in a disc of the ground at each crossing. */
 function Frame({ inset, width, height, dot, c }: { inset: number; width: number; height: number; dot: number; c: Palette }) {
   const disc = dot * 4;
   const crossings: [number, number][] = [
