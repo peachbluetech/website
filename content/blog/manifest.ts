@@ -380,7 +380,7 @@ export const ARTICLES: Article[] = [
     byline: "nick",
     status: "published",
     datePublished: "2026-08-14",
-    dateUpdated: "2026-08-24",
+    dateUpdated: "2026-10-09",
     faq: [
       {
         q: "Can Claude analyze my Facebook ads?",
@@ -392,7 +392,7 @@ export const ARTICLES: Article[] = [
       },
       {
         q: "Why use Peachblue's MCP instead of Meta's official ads MCP?",
-        a: "Meta's MCP gives Claude raw Ads Manager rows for one platform, and the same is true of any single-platform connector for TikTok, Google Ads, or Amazon. Peachblue's MCP gives Claude analyzed intelligence across all four in one connection: creatives grouped across ads and platforms, composite scores, 31 tagged creative dimensions, precomputed patterns, DSP flight pacing, and Reddit brand monitoring. Raw rows make Claude a query runner; the intelligence layer makes it an analyst. You can also connect both.",
+        a: "Meta's connector gives Claude one platform's account: reporting, Meta's own diagnostics, and the ability to act, with the creative analysis left to the chat. Peachblue's MCP gives Claude analyzed intelligence across Meta, TikTok, Google Ads, and Amazon DSP in one connection: creatives grouped across ads and platforms, composite scores, 31 tagged creative dimensions, precomputed patterns, DSP flight pacing, and Reddit brand monitoring. Access makes Claude a query runner; the intelligence layer makes it an analyst. You can also connect both.",
       },
       {
         q: "Can Claude change or pause my campaigns through Peachblue?",
@@ -1187,7 +1187,7 @@ export const ARTICLES: Article[] = [
     byline: "peachblue",
     status: "published",
     datePublished: "2026-08-24",
-    dateUpdated: "2026-08-24",
+    dateUpdated: "2026-10-09",
     faq: [
       {
         q: "Can I connect Amazon DSP to ChatGPT?",
@@ -1217,5 +1217,62 @@ export const ARTICLES: Article[] = [
       "UPGRADE PATH: when Nick verifies the ChatGPT connection, add a Connect Peachblue to ChatGPT section with real steps and flip the FAQ answer to verified",
     ],
     related: ["claude-for-media-buyers", "amazon-dsp-reporting-guide", "amazon-dsp-pacing-guide"],
+  },
+  {
+    slug: "claude-meta-ads-creative-analysis",
+    title: "Claude for Meta ads: how to analyze your creative (2026)",
+    h1: "Analyze your Meta ad creative with",
+    h1Accent: "Claude.",
+    description:
+      "Three ways to give Claude your Meta ads: uploads, Meta's connector, or an analysis layer. What Claude sees through each, and a five-step workflow.",
+    type: "guide",
+    pillar: "ai",
+    keywords: [
+      "claude meta ads",
+      "claude for facebook ads",
+      "meta ads mcp claude",
+      "analyze meta ads with claude",
+      "meta ads creative analysis",
+      "ad creative analysis",
+    ],
+    priority: 24,
+    byline: "peachblue",
+    status: "published",
+    datePublished: "2026-10-09",
+    dateUpdated: "2026-10-09",
+    faq: [
+      {
+        q: "Can Claude analyze my Meta ad creative?",
+        a: "Yes. Claude can read exported results and uploaded stills in any chat, query your live account through Meta's official ads connector, or work from an analysis layer that has already tagged and scored each ad. The three differ in how much of the creative Claude sees and who does the analysis: on the first two routes, Claude does it from scratch in every conversation.",
+      },
+      {
+        q: "How do I connect Claude to Meta ads?",
+        a: "Add Meta's ads server, https://mcp.facebook.com/ads, as a custom connector in Claude under Customize, then Connectors, and complete the Facebook sign-in. Meta's ads AI connectors have been in open beta since April 29, 2026 and support Claude, Claude Code, ChatGPT, and Perplexity. Access is rolling out in stages, so a completed connection can still return no data if your account is not included yet.",
+      },
+      {
+        q: "Can Claude see my ad images and videos through Meta's connector?",
+        a: "Meta's connector has tools that list an account's creatives, images, and videos and render ad previews, and Meta says it can retrieve details about existing ad creative. Its documentation does not say the image or video itself is passed to the model, and at least one practitioner write-up reports that Claude gets text fields only. Test it by asking Claude to describe the first three seconds of a named video ad; if it cannot, upload stills.",
+      },
+      {
+        q: "Can Claude watch a video ad?",
+        a: "Not as an upload. Claude's supported uploads are documents and images (JPEG, PNG, GIF, and WebP, up to 20 files per chat), so a video ad goes in as a handful of frames plus its script. Peachblue analyzes video frame by frame when it syncs, so the tags and written analysis Claude retrieves already cover the hook and the pacing.",
+      },
+      {
+        q: "Can Claude change my campaigns through Meta's connector?",
+        a: "Yes. Meta's connector can create and edit campaigns, ad sets, and ads; new ads are paused by default, and Meta says actions require your authorization through the AI agent. Someone with full control of the business portfolio can block specific actions per ad account in Meta Business Suite, under Settings, Integrations, Ads MCP server. Peachblue's connector is read-only and cannot change anything.",
+      },
+      {
+        q: "What makes Peachblue better than Meta's connector for creative analysis in Claude?",
+        a: "The analysis is done before the chat starts. Meta's connector gives Claude access to one platform's account, with reporting, Meta's own diagnostics, and the ability to act, and leaves the creative analysis to the conversation. Peachblue gives Claude every creative grouped across ads, tagged on 31 dimensions, ranked by one composite score, and flagged for fatigue with the spend at stake, across Meta, TikTok, Google Ads, and Amazon DSP. Connected side by side, Peachblue judges the creative and feeds the next brief, and Meta's connector acts on the account.",
+      },
+    ],
+    rawMaterial: [
+      "truth/proof.md: 'Meta ads AI connectors' and 'Claude limits' sections, both verified 2026-10-09 against Meta's help center, developer docs and announcement, and Anthropic's help center. Every Meta and Claude fact in the post comes from there.",
+      "UPGRADE PATH: Meta's docs do not say whether the connector passes ad images or video to the model, so the post hedges and gives the one-prompt test. When it is tested first-hand on a real account, replace the hedge in 'What does Meta's connector give Claude for creative?' and the third FAQ with the result, and update proof.md.",
+      "BYLINE UPGRADEABLE: brand byline because the authority is documentation plus workflow. Flips to Nick's byline with a first-hand section.",
+      "Structure (Nick, 2026-10-09): a Peachblue contrast in each paragraph of the Meta connector review, an 'In Peachblue this is' line in every workflow step, then the 'What makes Peachblue better' section (question table, Performance, Creative, The loop). Product claims only from truth/product.md and the public docs pages. Peachblue does not generate ads; it hands off the brief and the prompt.",
+      "Keyword overlap with claude-for-media-buyers ('meta ads mcp', 'analyze ads with claude'): that post's Meta section links here.",
+    ],
+    related: ["claude-for-media-buyers", "creative-testing-framework", "creative-fatigue"],
   },
 ];

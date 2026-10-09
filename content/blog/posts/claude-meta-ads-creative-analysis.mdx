@@ -1,0 +1,127 @@
+Claude can analyze your Meta ad creative, and there are three ways to give it what it needs: upload exports and stills by hand, connect Meta's official ads connector, or connect an analysis layer that has already tagged and scored every ad. What decides between them is that creative analysis needs two things in the same place, the numbers and the creative itself, and each route hands Claude a different share of both. This guide covers the setup, a five-step workflow, and what changes when the analysis is done before the chat starts.
+
+Facts about Meta's connector and Claude's limits were checked against Meta's and Anthropic's documentation on October 9, 2026.
+
+## What can Claude see in your Meta ads?
+
+It depends on the route. Uploads show Claude what you hand it. Meta's connector shows it your live account. An analysis layer shows it the conclusions along with the data.
+
+| | Uploads | Meta's official connector | Analysis layer (Peachblue) |
+| --- | --- | --- | --- |
+| Numbers | A snapshot you exported | Live, at campaign, ad set, and ad level | Synced daily, grouped by creative |
+| The creative itself | Stills you upload | Creative details, asset lists, and previews | Every image and video already tagged and scored |
+| Who does the analysis | Claude, from scratch each chat | Claude, each chat, with Meta's diagnostics to help | Done at sync; Claude retrieves and reasons |
+| Can change your account | No | Yes (new ads start paused) | No, read-only |
+| Cost | Free | No fee listed (open beta) | From $199/mo (Pro and up) |
+
+## How do you connect Claude to Meta ads?
+
+Add Meta's ads server to Claude as a custom connector and sign in with Facebook. Meta opened its ads AI connectors in open beta on April 29, 2026, and its [help center](https://www.facebook.com/business/help/1456422242197840) lists Claude, Claude Code, ChatGPT, and Perplexity as supported.
+
+1. In Claude, open Customize, then Connectors.
+2. Click the plus, choose Add custom connector, name it, and paste `https://mcp.facebook.com/ads`.
+3. Click Connect and complete the Facebook sign-in, choosing which business portfolios Claude may reach.
+4. In a new chat, open the plus menu, go to Connectors, and switch the connector on.
+
+Custom connectors work on every Claude plan. The free plan allows one, and on Team and Enterprise an owner has to add it first ([Anthropic's help center](https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp)). Meta's rollout is staged, so if the connection completes and no data comes back, your account may not have access yet.
+
+Two cautions first. This connector can write: Meta says it can create and edit campaigns, ad sets, and ads, with new ads paused until you set them live. If you only want analysis and have full control of the business portfolio, block the rest in Meta Business Suite under Settings, Integrations, Ads MCP server. And choose portfolios deliberately at sign-in: the connection inherits your Facebook login's access, client accounts included, a risk [Jon Loomer flagged](https://www.jonloomer.com/meta-ads-ai-connectors-claude/) in his walkthrough.
+
+Peachblue's connector goes in the same way with a different address: copy the URL from Settings, MCP tab, add it as a custom connector, and approve the sign-in ([setup docs](/docs/mcp)). It is read-only by design, so there is nothing to lock down, and the one connection covers Meta, TikTok, Google Ads, and Amazon DSP.
+
+## What does Meta's connector give Claude for creative?
+
+Performance data for every ad plus details about its creative, with the judging left to Claude. Meta's [developer documentation](https://developers.facebook.com/documentation/ads-commerce/ads-ai-connectors/ads-mcp-server/ads-mcp-server-overview) groups the tools into seven areas, and two matter here.
+
+**Reporting.** One tool returns campaigns, ad sets, and ads with spend, impressions, CTR, CPC, CPM, and conversions, with filters, breakdowns, and date ranges. Others cover performance trends, anomaly detection, auction ranking, industry benchmarks, and an account opportunity score. That is more than raw rows: Meta's own diagnostics come along. What comes back is still a table of ads for Claude to interpret. Peachblue hands it the verdict instead: every creative already ranked on one score.
+
+**Creative.** Tools list the creatives, images, and videos in the account, list the ads that use a given creative, render a preview of an ad in a placement, and search the public Ad Library. No documented tool tags a creative by hook, format, or angle, or recognizes the same video uploaded twice. Peachblue does both when it syncs, which is why its answers are about creatives and not ad rows.
+
+What the documentation does not say is that the image or video itself is passed to the model. Meta's help page promises "details about existing or uploaded ad creative," and at least one [practitioner write-up](https://www.getpassionfruit.com/blog/meta-ads-claude-mcp-what-it-actually-does) reports that Claude cannot see ad images or videos through it, only text fields. One prompt settles it on your account: ask Claude to describe what happens in the first three seconds of a named video ad. If the answer is about the caption, it is not seeing the video. In Peachblue the video has already been read, frame by frame, before you ask.
+
+Ranking, looking, and tagging are the work Meta's connector leaves to the chat. The five steps below do it by hand; the section after them shows what changes when it is already done.
+
+## How do you analyze Meta ad creative in Claude, step by step?
+
+Five steps: rank, look, tag, check fatigue, brief. Each works by hand or through Meta's connector. An analysis layer changes how much of the work lands on the chat.
+
+### 1. Rank by creative, not by ad
+
+Find out which creatives carry the account. By hand, export the Ads Manager table at ad level with spend, impressions, results, and cost per result, plus 3-second video plays and ThruPlays for video so Claude can work out [hook and hold rate](/blog/hook-rate-hold-rate-thumbstop). Through the connector, ask:
+
+> Pull every ad with spend in the last 30 days. Keep the ones with at least 10 results. Group ads that use the same creative, then rank the groups by cost per result with spend beside each.
+
+Swap in your own floor (the [testing framework](/blog/creative-testing-framework) explains how to price one). The grouping line matters most: the same video in six ad sets arrives as six rows, each too small to read. Meta's connector can list the ads behind one creative ID, but a re-upload or a re-crop gets a new ID, so check the top of the list by eye.
+
+In Peachblue this is the default view: assets are matched by perceptual fingerprint, so a video re-cropped for Reels still counts once, and `get_creatives` returns the groups ranked by [composite score](/docs/scoring).
+
+### 2. Put the creative in front of Claude
+
+The numbers say which ad won. Why it won is in the picture, so confirm Claude is looking at the creative before you trust a sentence about it.
+
+By hand, upload stills of your top five and bottom five. Claude accepts JPEG, PNG, GIF, and WebP, up to 20 files per chat, and Anthropic recommends at least 1,000 pixels on each side ([upload limits](https://support.claude.com/en/articles/8241126-uploading-files-to-claude)). Video is not on the supported list, so a video ad goes in as four or five frames, the opening second included, with the script or captions pasted as text. Name each file after its ad so results and images line up.
+
+In Peachblue this happened at sync: every image and video is analyzed, video frame by frame, so `get_creative_detail` hands Claude the tags and a written read of each creative, and ranked answers can come back as cards with the thumbnail and score.
+
+### 3. Tag every ad on one fixed list
+
+A tag is only useful if the same ad would get the same tag next week. Give Claude a closed list and make it choose:
+
+> For each image, pick exactly one value per line. Format: static, video, carousel. Hook: question, bold claim, problem shown, product demo, testimonial. Tone: playful, urgent, calm, aspirational. Proof: none, review, statistic, creator. Return a table with the ad name first.
+
+Keep the list in a file and paste it into every session, because tags only compare when the list never changes. Then ask the question the tags exist for: which values show up among the winners and not among the losers?
+
+In Peachblue this is the 31 dimensions every creative is tagged on at sync, the same list for every ad, video included. `filter_by_tags` turns "which hook styles win for me" into a lookup.
+
+### 4. Read fatigue against the ad's own history
+
+Fatigue is an ad losing to its own past, so compare one creative week over week, never against the account average. This is where Meta's connector is strongest, because it has trend and anomaly tools:
+
+> For my five highest-spend creatives, show CTR, frequency, and cost per result by week for the last eight weeks. Flag any whose CTR sits more than 30 percent below its own best week while frequency is rising.
+
+That threshold is the example tripwire from our [fatigue guide](/blog/creative-fatigue). Set your own, and rule out the look-alikes it lists before you pause anything.
+
+In Peachblue this is the fatigue board: CTR decay measured against each creative's own best rolling week, grouped so a creative in five ads is judged once, with the dollars riding on each flag. `get_risk_summary` brings the same list into Claude.
+
+### 5. Turn the winners into the next brief
+
+The first four steps exist for the next batch. Claude drafts well when you fence it in with evidence:
+
+> Using only the tags and results above, list what my top five creatives share that my bottom five lack. Then write three concepts that keep those traits and change one variable each. Name the variable.
+
+One variable per concept keeps the next test readable, which is the gate in the [testing framework](/blog/creative-testing-framework).
+
+In Peachblue this is the Next Creative Brief: what your winners share, proven hooks from your own headlines, and do and don't rules with counts. In Claude, `get_patterns` returns your winning archetypes for the conversation to build on.
+
+Two guardrails on the manual routes: put your conversion floor in every prompt, and ask for the rows behind any number you plan to act on.
+
+## What makes Peachblue better than Meta's connector for creative?
+
+The analysis is finished before the conversation starts. Meta's connector gives Claude access to your account. Peachblue gives it a verdict on every creative: a score, 31 tags, a written read, and the dollars riding on it. Same Claude, same question, different answer:
+
+| You ask Claude | With Meta's connector | With Peachblue |
+| --- | --- | --- |
+| "What is my best creative right now?" | Ads sorted by a metric; one creative in six ad sets is six rows | Creatives grouped across ads, ranked by one composite score |
+| "Why is it winning?" | Claude's read of the numbers, the copy, and whatever creative details arrive | 31 tags and a written analysis per creative, video read frame by frame |
+| "What should I cut, and what is it costing me?" | Trend and anomaly tools show what changed; the dollar math happens in chat | Fatigue flagged against each creative's own best week, with the spend on each |
+| "What do my winners have in common?" | No documented tool; Claude has to label every ad first | Winning patterns and archetypes, already worked out |
+| "What should we make next?" | A draft from whatever is in the conversation | Concepts built on your winners' patterns and proven hooks, ready to brief or prompt |
+| "Is it working on TikTok or Google too?" | Meta only | The same creative matched across Meta, TikTok, Google Ads, and Amazon DSP |
+
+This is how Peachblue supercharges Claude: on performance, on creative, and on the loop that connects them.
+
+**Performance.** One composite score ranks every creative against the rest of your account, so "what gets the next dollar" has the same answer on Monday and Friday, in chat and on your team's dashboard. Fatigue flags arrive with the spend sitting on each tired ad, and `compare_periods` names the creatives behind last week's change. The math comes back computed, so Claude reasons over answers instead of adding up rows.
+
+**Creative.** Every creative carries the why along with the result: its tags and a written analysis, video included. What your winners share is already worked out, and your proven hooks come from your own headline results.
+
+**The loop.** The analysis does not end in a report. In the same chat, Claude turns your winners' patterns into the next batch: concepts, scripts, and headline variants built on what your account has already proven. The Next Creative Brief adds a prompt block that pastes into an image or video generator and a share link for your editor or creator. With Meta's connector alongside, Claude can stage the finished ads in your account, paused for review, and once they run they are scored on the same scale as the ads they came from. The result is a faster creative loop with less wasted spend: briefs start from proof instead of a blank page, losers are cut on evidence, and the Economics view tracks hit rate and wasted spend so you can check that it is working.
+
+Meta's connector keeps what is its alone: benchmarks against similar advertisers, the Ad Library search, and the ability to act. Connect both, one to judge the creative and one to act on the account.
+
+## Which route should you take?
+
+- **You want to try this today**: uploads. Ten ads, one export, the five steps above.
+- **You live in Ads Manager and want faster answers, diagnostics, or campaigns drafted by prompt**: Meta's connector. It is the only one of the three that can act, so set the rules first.
+- **You want Claude to know which creatives to scale, cut, and make next, week after week**: Peachblue. The connector is on [Pro and up](/pricing), and the same tools run inside the product as Agent Peach if you would rather ask there than in Claude.
+
+One boundary, stated plainly: Peachblue reads. It does not generate, launch, edit, or pause ads, and it analyzes your own ads, not competitors'. It hands the brief and the prompt to whatever makes them. The cross-platform version of this, with TikTok, Google Ads, and Amazon DSP in the same conversation, is in [Claude for media buyers](/blog/claude-for-media-buyers).

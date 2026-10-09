@@ -47,15 +47,99 @@ the other truth files.
 - Amazon: Amazon Ads MCP server in open beta since February 2, 2026
   (advertising.amazon.com library announcement). Practitioner writeups note
   visibility gaps in exposed data.
-- Meta: official ads MCP connectors launched spring 2026, open beta.
+- Meta: official ads AI connectors (ads MCP server plus ads CLI) announced
+  April 29, 2026, open beta. Full detail, re-verified 2026-10-09, in the
+  "Meta ads AI connectors" section below; use that section, not this line.
 - TikTok: TikTok for Business MCP server LIVE as of August 2026 (verified
   2026-08-14 against ads.tiktok.com help article). Zero-code hosted
   endpoints, ~400 tools full-disclosure / ~40 progressive, explicitly
   recommended for Claude, includes WRITE operations (campaign creation,
   bidding, budgets). Contrast honestly: it is a management surface handing
   Claude raw API tools, not an analysis layer.
-- All are single-platform and return raw account/API data: no cross-platform
-  creative identity, scoring, or tagging.
+- All are single-platform, with no cross-platform creative identity and no
+  creative tagging. "Raw account/API data" holds for Google, Amazon and
+  TikTok as verified in August; Meta's server also carries Meta's own
+  diagnostics and benchmarks (see below), so do not call it raw rows only.
+
+## Meta ads AI connectors (verified 2026-10-09)
+
+Sources, all read on 2026-10-09: Meta Business Help Center, "Manage ads from
+an AI agent with Meta ads AI connectors"
+(facebook.com/business/help/1456422242197840); Meta for Business
+announcement dated April 29, 2026
+(facebook.com/business/news/meta-ads-ai-connectors); Meta developer docs,
+Ads MCP server overview, get started, and the reporting and ad creation
+tool pages (developers.facebook.com/documentation/ads-commerce/
+ads-ai-connectors/ads-mcp-server/); News for Developers post dated July 16,
+2026 (developers.facebook.com/blog/post/2026/07/16/meta-ads-mcp-server/).
+
+- Announced April 29, 2026 in open beta. Server URL
+  https://mcp.facebook.com/ads. The help center lists ChatGPT, Claude,
+  Claude Code and Perplexity as supported AI agents, and says "You may not
+  have access to all of these tools and features yet" (staged rollout).
+- July 16, 2026: opened to any developer with their own Meta app, and rules
+  for what agents may do became manageable in bulk over the Marketing API.
+  Meta says it is "continuously adding new tools".
+- Meta states no price anywhere. Say "no fee listed (open beta)". Never say
+  it is free permanently.
+- Meta publishes NO tool count. "29 tools" is a third-party observation
+  (Jon Loomer saw 29 on 2026-05-05; a later write-up counts more than 80).
+  Do not print a count as current. If one is cited, attribute and date it.
+- Tool areas per Meta's docs (seven): comprehensive reporting; ad creation
+  and management; catalog creation and management; signals and datasets;
+  help and troubleshooting; A/B tests and conversion lift studies; activity
+  logs. The help center also lists custom audiences.
+- Reporting tools (docs): ads_get_ad_entities (campaigns, ad sets and ads
+  with spend, impressions, CTR, CPC, CPM, conversions; filtering,
+  breakdowns, sorting, date ranges), ads_insights_performance_trend,
+  ads_insights_anomaly_signal, ads_insights_auction_ranking_benchmarks,
+  ads_insights_industry_benchmark, ads_get_opportunity_score (0 to 100 with
+  recommendations), ads_insights_advertiser_context. Video metrics (3-second
+  plays, ThruPlays) are not named in the docs; do not promise them.
+- Creative-related tools (docs give one line each and no return fields):
+  ads_get_creatives, ads_get_creative_ads (ads that use one creative),
+  ads_get_ad_images, ads_get_ad_videos, ads_get_ad_preview (render a preview
+  in a placement), ads_library_search (public Ad Library). Help center: it
+  can "retrieve details about existing or uploaded ad creative".
+- NOT VERIFIED FIRST-HAND: whether the image or video itself reaches the
+  model. Meta's docs do not say. Passionfruit (agency write-up, updated
+  2026-10-09, getpassionfruit.com/blog/
+  meta-ads-claude-mcp-what-it-actually-does) states Claude cannot see ad
+  images or videos through it and that it exposes text fields only.
+  CLAIM RULE: never write "Meta's MCP cannot see the creative" as fact. Say
+  the documentation does not state it, attribute the practitioner report,
+  and give the one-prompt test. Safe from the docs: no documented tool tags
+  creative attributes (hook, format, angle) or matches the same asset across
+  uploads, and the server covers Meta only. Upgrade this entry when Nick
+  tests it on a real account.
+- Write access: it can create and edit campaigns, ad sets and ads, create
+  creatives, upload assets, and manage audiences and catalogs. Help center:
+  "All ads are paused by default until you set them live" and "Any actions
+  taken on your behalf require your authorization through the AI agent."
+  Docs: "Write tools create entities in a paused state; your AI client asks
+  for confirmation before activation." ads_update_entity and
+  ads_activate_entity exist, so changes to live entities are possible.
+- Rules: someone with full control of a business portfolio can allow or
+  block actions per ad account or catalog (Meta Business Suite, Settings,
+  Integrations, Ads MCP server), for example block campaign creation, or
+  block or cap budget changes. If the menu is missing, the feature is not
+  enabled for that business yet.
+- Jon Loomer (jonloomer.com/meta-ads-ai-connectors-claude/, 2026-05-05):
+  Claude setup walkthrough; notes the connector inherits the Facebook user's
+  account access, including client ad accounts in a portfolio.
+
+## Claude limits relevant to ad analysis (verified 2026-10-09, Anthropic help center)
+
+- Custom connectors (remote MCP) are available on Free, Pro, Max, Team and
+  Enterprise. Free is limited to one custom connector. On Team and
+  Enterprise an Owner adds the connector first, then members connect. Path:
+  Customize, Connectors, "+", "Add custom connector"
+  (support.claude.com/en/articles/11175166).
+- Uploads: up to 20 files per chat. Images: JPEG, PNG, GIF, WebP, at most
+  8000 by 8000 pixels, at least 1000 by 1000 recommended. Documents include
+  CSV. Video and audio are not on the supported list
+  (support.claude.com/en/articles/8241126, updated 2026-07-23). Do not quote
+  a per-file size limit; sources conflict.
 
 ## AI ad generation tools (verified August 2026)
 
