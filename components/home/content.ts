@@ -106,6 +106,30 @@ export const HERO: {
   riskReversal: RISK_REVERSAL,
 };
 
+/* ── Logo strip ─────────────────────────────────────────────────── */
+
+/* The brands and agencies named under the hero, by their own logos.
+   A name is here only with that company's say-so: this is the one place
+   the site names a customer.
+
+   `src` is a single-colour copy of the logo in public/logos; `width`
+   and `height` are the size it is drawn at from 768 up, set so every
+   logo covers about the same area and none outweighs its neighbours.
+   `name` is the image's text alternative. */
+export type LogoItem = { name: string; src: string; width: number; height: number };
+
+export const LOGO_STRIP: { label: string; logos: LogoItem[] } = {
+  label: "Trusted by brands and agencies",
+  logos: [
+    { name: "RARE Real Estate", src: "/logos/rare-real-estate.svg", width: 92, height: 31 },
+    { name: "HydroTech", src: "/logos/hydrotech.webp", width: 104, height: 22 },
+    { name: "Après Actif", src: "/logos/apres-actif.webp", width: 63, height: 31 },
+    { name: "Krinos", src: "/logos/krinos.webp", width: 101, height: 23 },
+    { name: "Rock Harbour", src: "/logos/rock-harbour.webp", width: 49, height: 40 },
+    { name: "Kingstar Media", src: "/logos/kingstar-media.webp", width: 88, height: 27 },
+  ],
+};
+
 /* ── Essay: the judgment gap ────────────────────────────────────── */
 
 export const ESSAY: {

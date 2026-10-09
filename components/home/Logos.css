@@ -1,0 +1,56 @@
+/* Logos.tsx's own rules. Classes are .el-logos-*. The shared system is
+   components/site/system.css: do not restate its classes here.
+
+   Outside the rails, under the hero. The hero's note ends a band under
+   its panel (Hero.css); this strip adds the band to the first rule. */
+.el-logos {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 32px;
+  padding-bottom: var(--el-band);
+}
+
+/* On a phone: three across, each logo at the start of its column and on
+   its row's centre line, a little smaller than from 768 up. */
+.el-logos-row {
+  --el-logo-scale: 0.85;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: center;
+  gap: 32px 24px;
+}
+.el-logos-item {
+  display: flex;
+  align-items: center;
+}
+/* One colour and quieter than the text: the copy is black, shown at the
+   strength of secondary text. Its height is its own (--el-logo-h, from
+   content.ts); its width follows. */
+.el-logos-img {
+  display: block;
+  width: auto;
+  height: calc(var(--el-logo-h) * var(--el-logo-scale));
+  max-width: 100%;
+  object-fit: contain;
+  opacity: 0.6;
+}
+
+/* From 768: one row across the shell, the first logo on its left edge
+   and the last on its right. */
+@media (min-width: 768px) {
+  .el-logos-row {
+    --el-logo-scale: 1;
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+  }
+}
+
+/* From 1024: the label in the row, on the logos' centre line. */
+@media (min-width: 1024px) {
+  .el-logos {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    column-gap: 72px;
+  }
+}

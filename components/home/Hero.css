@@ -44,11 +44,11 @@
 .el-hero-stage {
   margin-top: var(--el-head-gap);
 }
-/* The one visible mention of the sample account. Then the page's 120px
-   to the first rule, measured from the panel. */
+/* The one visible mention of the sample account. Then a band to the
+   logo strip (Logos.tsx), measured from the panel. */
 .el-hero-note {
   margin-top: 12px;
-  padding-bottom: calc(var(--el-pad) - 21.5px);
+  padding-bottom: calc(var(--el-band) - 21.5px);
 }
 @media (max-width: 1023.98px) {
   .el-hero-grid {

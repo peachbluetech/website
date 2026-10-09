@@ -7,6 +7,7 @@ import { Essay } from "./Essay";
 import { Faq } from "./Faq";
 import { Hero } from "./Hero";
 import { HowItWorks } from "./HowItWorks";
+import { Logos } from "./Logos";
 import { Manifesto } from "./Manifesto";
 import { Performance } from "./Performance";
 import { Pricing } from "./Pricing";
@@ -16,6 +17,7 @@ import { Toolkit } from "./Toolkit";
 
      the site nav (components/site/SiteNav.tsx, the same on every page)
      the hero (the page's one h1 is in it, visually hidden)
+     the logo strip                                   Logos.tsx
      ── the frame begins: rails, rules, a dot at every crossing ──
      How it works (#product)                          HowItWorks.tsx
      Agent Peach (#agent-peach)                       Agent.tsx
@@ -50,6 +52,7 @@ export function HomePage() {
   return (
     <SitePage>
       <Hero />
+      <Logos />
       <Frame>
         <Rule />
         <HowItWorks />
