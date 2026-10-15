@@ -23,6 +23,9 @@ the other truth files.
   integration experience; safe to state as practitioner fact.)
 - Amazon is unifying DSP + Ads Console into Campaign Manager; legacy
   reporting tools retire Dec 31, 2026 (Amazon Ads announcements).
+  UPDATED 2026-10-15: the unified platform is now called Amazon Ads Agent
+  (unBoxed 2026). See the "Amazon Ads MCP server" section below; use
+  "Amazon Ads Agent", not "Campaign Manager", in new copy.
 - Amazon shipped in-console pacing alerts with one-click fixes for
   underpacing orders (Amazon Ads release notes). Console alerts are
   per-advertiser; there is no cross-client portfolio view.
@@ -45,8 +48,9 @@ the other truth files.
 - Google: official Google Ads MCP server shipped April 2026
   (developers.google.com developer toolkit).
 - Amazon: Amazon Ads MCP server in open beta since February 2, 2026
-  (advertising.amazon.com library announcement). Practitioner writeups note
-  visibility gaps in exposed data.
+  (advertising.amazon.com library announcement). Full detail, re-verified
+  2026-10-15, in the "Amazon Ads MCP server" section below; use that
+  section, not this line.
 - Meta: official ads AI connectors (ads MCP server plus ads CLI) announced
   April 29, 2026, open beta. Full detail, re-verified 2026-10-09, in the
   "Meta ads AI connectors" section below; use that section, not this line.
@@ -140,6 +144,115 @@ ads-ai-connectors/ads-mcp-server/); News for Developers post dated July 16,
   CSV. Video and audio are not on the supported list
   (support.claude.com/en/articles/8241126, updated 2026-07-23). Do not quote
   a per-file size limit; sources conflict.
+- Re-read 2026-10-15 (same help article): adding a custom connector now
+  runs name, URL, Continue, then authentication settings. Under OAuth
+  client the choices are "Use Claude's published identity (Recommended)",
+  "Register automatically" and "Use your own OAuth client"; Request headers
+  can carry fixed credentials for servers without OAuth. Claude asks for
+  approval before tool calls ("Allow always" is the user's choice), tools
+  can be switched off per conversation in the "Search and tools" menu, and
+  during Research Claude can call connector tools without further approval.
+
+## Amazon Ads MCP server (verified 2026-10-15, Amazon Ads developer docs and announcements)
+
+Sources: announcement advertising.amazon.com/library/news/amazon-ads-mcp-server-open-beta;
+docs advertising.amazon.com/API/docs/en-us/mcp/ (mcp-overview, get-started,
+get-started-lite, oauth, campaign-management, reporting, skills/*); unBoxed
+2026 recap advertising.amazon.com/library/news/unboxed-2026-news-announcements
+(dated 2026-09-30). The docs render only in a browser (WebFetch sees an
+empty shell).
+
+- Status: open beta since 2026-02-02, "available globally in open beta to
+  Amazon Ads partners with active API credentials". The docs still file it
+  under "MCP Tools (beta)". No GA date and no price published; do not call
+  it free-forever, say "no fee listed". Secondary sources that say March 6
+  or "closed beta" are wrong or outdated; use Amazon's Feb 2 date.
+- Access prerequisites (oauth page): an Amazon Developer account, "an
+  approved application with access to the Amazon Ads API", and the Client
+  ID from that app's Login with Amazon (LwA) security profile (plus the
+  Client Secret for a private client). So it is NOT a plain "sign in with
+  your Amazon Ads login": the Amazon Ads sign-in comes after the developer
+  app exists. (Corrects the amazon-dsp-chatgpt line "authenticate with your
+  Amazon Ads login".)
+- Endpoints are region-specific: NA https://advertising-ai.amazon.com/mcp,
+  EU https://advertising-ai-eu.amazon.com/mcp, FE
+  https://advertising-ai-fe.amazon.com/mcp. Lite adds /lite to each.
+- Clients Amazon names: Claude, ChatGPT, Amazon Kiro, Amazon Bedrock,
+  Amazon AgentCore "and other MCP-compatible applications" (overview); the
+  announcement also names Gemini. The OAuth 2.1 guide has steps for Kiro
+  CLI, Claude Code, Claude Desktop and ChatGPT.
+- Claude Desktop per Amazon: first add https://claude.ai/api/mcp/auth_callback
+  to the LwA security profile's Allowed Return URLs (else "redirect URI
+  mismatch"); then Customize, Connectors, plus, Add custom connector, name,
+  URL, "Specify your Client ID and Client Secret under Advanced settings",
+  Add. Claude's own UI now labels this "Use your own OAuth client" (see the
+  Claude section above). NOT tested first-hand.
+- Claude Code per Amazon: `claude mcp add --transport http amzn-ads-mcp
+  https://advertising-ai.amazon.com/mcp --client-id <id> --callback-port
+  <port>` (public client; add `--client-secret` for private), callback
+  http://localhost:<PORT>/callback, then /mcp, Authenticate. Public client
+  tokens expire after 1 hour and prompt a re-login; private client
+  refreshes automatically.
+- Account context: Dynamic mode is the default; the model asks for the
+  account IDs and the account "may be reused for subsequent requests or
+  until new account identifiers are provided". The account query tool
+  lists every account the user can reach. Fixed mode pins one account via
+  headers (Amazon-Ads-AI-Account-Selection-Mode: FIXED plus a profile,
+  account or manager account ID); "all headers should correspond with a
+  single account". advertiserAccountId can be a DSP advertiser account, a
+  global account ID or an AMC instance ID. "Not all tools work on manager
+  account scope."
+- Tool groups in the docs: Account Management, Ads Account, Advertiser
+  Product Group Eligibility, Amazon Live, AMC, Billing, Campaign
+  Management, Eligibility, Manager Accounts, Reports, Terms Token, Test
+  Accounts, User Invitations, User Permissions, User Roles, Users. Amazon
+  publishes no tool count; do not print one.
+- Campaign Management: query, create, update and delete for campaigns, ad
+  groups, ads, ad associations and targets, plus portfolios and bid
+  updates. query_campaign "Supports Sponsored Products, Sponsored Brands,
+  Sponsored Display, Sponsored Television, and Amazon DSP campaigns".
+  create_campaign "supports Sponsored Products, Sponsored Brands and ADSP".
+  delete_campaign removes "campaigns and all associated ad groups, ads, and
+  targets". DSP-specific: create_bid_adjustment_rule (DSP ad group bid
+  rules by device, browser, geography and more) and
+  dsp_create_conversion_tracking_products. Sponsored Products shortcuts:
+  create_singleshot_sp_campaign (campaign, ad group and ads in one call)
+  and add_country_campaign (SP manual campaigns only).
+- Reports: create_campaign_report, create_report, retrieve_report,
+  create_inventory_report, create_product_report, delete_report.
+  Asynchronous: create, then poll and retrieve.
+- Not documented: any tool for flight pacing, creative tagging, grouping
+  the same creative across line items, or creative-level analysis. Pacing
+  has to be computed in the chat from budgets and report rows.
+- Skills (beta): downloadable skill definitions from
+  https://advertising-api.amazon.com/skills (same headers as the server),
+  loaded into Claude Code from .claude/skills; "supported in AI
+  applications that recognize Anthropic skill definitions". Named
+  examples: dsp-campaign-analysis (resolves a campaign name, runs a
+  ROAS/sales report and an audience segment report, polls, combines them)
+  and ads-reporting.
+- Expert tools: AMC SQL Generator, closed beta by application. (A search
+  summary of Amazon's What's New says US-only during beta, GA "early
+  2027"; not read first-hand, do not print the GA timing.)
+- Write safety: the server creates, updates and deletes. Amazon's own Kiro
+  example disables campaign_management-delete_campaign and
+  campaign_management-delete_ad. The Sponsored Products one-call campaign
+  is created for review and approval before launch.
+- Lite (unBoxed 2026): three meta-tools, amazon_ads_mcp-search_tools,
+  -describe_tools and -invoke_tool, that find and run any operation;
+  "functionally equivalent to the Regular version", "useful for
+  smaller-context models, cost-sensitive workloads". Amazon gives no
+  token-savings number; a 98,000 to 5,000 figure circulates in secondary
+  coverage only, do not print it.
+- Amazon Ads Agent (unBoxed 2026): "the unified buying experience that
+  brings together what was formerly the DSP and Ads Console"; sponsored
+  ads, Full-Funnel Campaigns and DVA+ in one platform; its conversational
+  AI is "in expanded closed beta"; "nearly 1,000 metrics" through natural
+  language, with peer benchmarks; generative creative tools inside the
+  conversation. The MCP tool docs still say "Amazon DSP"; keep "Amazon DSP"
+  in copy (agencies still use it).
+- Community-built Amazon Ads MCP servers exist (MarketplaceAdPros,
+  Openbridge); not reviewed, do not recommend.
 
 ## AI ad generation tools (verified August 2026)
 

@@ -1,6 +1,6 @@
 You can connect Amazon DSP data to ChatGPT today, and the free route is the official one: Amazon's own Ads MCP server, added through ChatGPT's Developer Mode on any paid plan. Third-party connector pipes market the same integration at $19 to enterprise-quote prices, with one catch worth reading the fine print on. This guide covers every real route, what each one costs, and the part the connector landing pages skip: what the data you get through the pipe can and cannot tell you once it arrives.
 
-Two scope notes before the routes. This guide covers Amazon DSP, the programmatic side; if you mean Sponsored Products or Sponsored Brands, Amazon's official MCP server covers the broader Amazon Ads surface, and the DSP-specific limits below will not all apply. And the timing is not an accident: Amazon is unifying DSP and the Ads Console into Campaign Manager, with legacy reporting tools retiring December 31, 2026 (Amazon Ads announcements), so reporting workflows built on the old tools are being sunset right now. The people searching this query are mostly rebuilding a workflow, not chasing a novelty.
+Two scope notes before the routes. This guide covers Amazon DSP, the programmatic side; if you mean Sponsored Products or Sponsored Brands, Amazon's official MCP server covers the broader Amazon Ads surface, and the DSP-specific limits below will not all apply. And the timing is not an accident: Amazon has merged DSP and the Ads Console into one platform, now called Amazon Ads Agent, with legacy reporting tools retiring December 31, 2026 (Amazon Ads announcements), so reporting workflows built on the old tools are being sunset right now. The people searching this query are mostly rebuilding a workflow, not chasing a novelty.
 
 The distinction that organizes everything below: connecting DSP data to an AI and getting DSP analysis from an AI are different products. The routes differ mainly in which of the two they deliver.
 
@@ -14,18 +14,18 @@ That is the whole mechanism. The question is what server you point it at.
 
 | | Route 1: Amazon's official MCP | Route 2: connector pipes | Route 3: analysis layer (Peachblue) |
 | --- | --- | --- | --- |
-| Cost | Free (open beta) | $19/mo to enterprise quotes | From $199/mo; DSP data on Scale and up |
+| Cost | No fee listed (open beta) | $19/mo to enterprise quotes | From $199/mo; DSP data on Scale and up |
 | What arrives | Raw account and report data | Raw rows in your chosen destination | Analyzed creatives, scores, computed pacing |
 | Platform coverage | Amazon only | Many sources, unstitched | Meta, TikTok, Google Ads, Amazon DSP together |
 | Creative identity | None | None | Grouped by perceptual fingerprint |
-| Access | Read | Read; some vendors offer write | Read-only by design |
+| Access | Read and write | Read; some vendors offer write | Read-only by design |
 | Analysis before the model sees it | No | No | Yes |
 
 The rest of this guide is the detail behind that table.
 
 ## Route 1: Amazon's official Ads MCP server (free)
 
-Amazon's Ads MCP server has been in open beta since February 2, 2026. It is official, free, and the right first thing to try: connect it in Developer Mode, authenticate with your Amazon Ads login, and ChatGPT can query your account conversationally.
+Amazon's Ads MCP server has been in open beta since February 2, 2026. It is official, with no fee listed, and the right first thing to try if you have Amazon Ads API access, because it needs an Amazon Ads API developer app that Amazon has approved. The app's Client ID and Client Secret go into the OAuth settings when you add the server to ChatGPT; sign in with Amazon, and ChatGPT can query your account conversationally. It can change it too: the server's tools create, update, and delete campaigns. Amazon's [OAuth guide](https://advertising.amazon.com/API/docs/en-us/mcp/oauth) has the ChatGPT steps, and the Claude version, with a weekly DSP workflow, is in [Amazon Ads MCP in Claude](/blog/amazon-ads-mcp-claude).
 
 Know what you are getting. The server covers Amazon's platform only and returns raw account and report data, and early practitioner writeups note real visibility gaps in what it exposes. The DSP data underneath carries DSP's structural limits: 14-day attribution only, no 1, 7, or 30-day windows, and roughly 60 days of report retention, so any question about last quarter is unanswerable regardless of what is asking it.
 
@@ -83,7 +83,7 @@ The dimension the connector landing pages skip entirely. Routing ad spend data t
 
 ## Which route should you take?
 
-- **You want to poke at your Amazon Ads data conversationally, for free**: Amazon's official MCP server in Developer Mode. Start here regardless; it costs nothing and you will learn what raw access feels like.
+- **You want to poke at your Amazon Ads data conversationally, for free, and you have Amazon Ads API access**: Amazon's official MCP server. Start here if you do; it costs nothing and you will learn what raw access feels like.
 - **You need raw multi-source rows in a warehouse or sheets, and AI chat is a bonus**: a connector pipe. Windsor.ai is the cheapest way in; verify destination support for DSP specifically before paying anyone.
 - **You want the AI to answer analysis questions (which creatives, why, what is pacing behind)**: an analysis layer. Raw rows do not become analysis by arriving in a chat window; the work has to happen before the model sees the data.
 - **You run DSP for clients at an agency**: the reporting layer matters more than the chat layer today. Start with [how DSP reporting actually works](/blog/amazon-dsp-reporting-guide) and the pacing discipline, and if you want the multi-client version of all of this (per-client workspaces, margin-aware reports, portfolio pacing), [talk to us about agency plans](/demo?intent=agency).

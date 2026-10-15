@@ -1,0 +1,135 @@
+The Amazon Ads MCP server is Amazon's official connector for AI assistants, and you can add it to Claude today: it lets Claude query and change your Amazon Ads account, Amazon DSP included, through plain-language requests. The catch is the door. Meta's connector takes a Facebook sign-in; Amazon's needs an approved Amazon Ads API developer app before Claude can sign in at all. This guide covers that setup, what the tools do for Amazon DSP, a five-step weekly workflow for DSP agencies, and what changes when the analysis is done before the chat starts.
+
+Facts about Amazon's server were checked against Amazon's developer documentation and unBoxed 2026 announcements on October 15, 2026.
+
+## What is the Amazon Ads MCP server?
+
+It is a Model Context Protocol server that Amazon builds and runs, turning the Amazon Ads API into tools an AI assistant can call. Amazon put it in open beta on February 2, 2026, "available globally in open beta to Amazon Ads partners with active API credentials" ([Amazon Ads](https://advertising.amazon.com/library/news/amazon-ads-mcp-server-open-beta)), and its [documentation](https://advertising.amazon.com/API/docs/en-us/mcp/mcp-overview) names Claude, ChatGPT, and Amazon's own Kiro and Bedrock among the clients that can connect.
+
+unBoxed 2026 in late September added two things. A Lite version of the server, covered in the setup section below. And a conversational layer inside Amazon's console: Amazon Ads Agent, the new name for the platform that brings together "what was formerly the DSP and Ads Console," with a chat experience in expanded closed beta ([unBoxed 2026 recap](https://advertising.amazon.com/library/news/unboxed-2026-news-announcements)). So there are now three ways to ask questions of your Amazon Ads data:
+
+| | Amazon Ads MCP server | Amazon Ads Agent chat | Peachblue |
+| --- | --- | --- | --- |
+| Where you ask | Claude, ChatGPT, or another MCP client | Inside Amazon's console | Claude, or Agent Peach inside Peachblue |
+| What it covers | Sponsored ads, Amazon DSP, AMC, billing, account admin | Your Amazon Ads account | Amazon DSP, plus Meta, TikTok, and Google Ads |
+| What comes back | API results and report rows for Claude to read | Answers across nearly 1,000 metrics, with peer benchmarks | Pacing, rankings, and creative analysis already computed |
+| Can change your account | Yes: create, update, delete | Yes | No, read-only |
+| What you need first | An approved Amazon Ads API app | A place in the closed beta | A Peachblue plan and one Amazon Ads sign-in |
+| Cost | No fee listed (open beta) | Part of Amazon Ads | Amazon DSP from $499/mo (Scale and up) |
+
+## How do you connect the Amazon Ads MCP server to Claude?
+
+Get an approved Amazon Ads API app, add Claude's callback address to it, then add Amazon's server to Claude as a custom connector using your app's Client ID and Client Secret. Amazon's [OAuth guide](https://advertising.amazon.com/API/docs/en-us/mcp/oauth) has steps for Claude Desktop and Claude Code.
+
+1. Have an Amazon Developer account with an application approved for the Amazon Ads API. If you do not have one, Amazon's API onboarding comes first, and nothing below works without it.
+2. In that app's Login with Amazon security profile, open Web Settings and add `https://claude.ai/api/mcp/auth_callback` to Allowed Return URLs. Skip this and the sign-in fails with a redirect mismatch.
+3. In Claude, open Customize, then Connectors, click the plus, and choose Add custom connector. Name it and paste the server address for your region: `https://advertising-ai.amazon.com/mcp` for North America, `https://advertising-ai-eu.amazon.com/mcp` for Europe, `https://advertising-ai-fe.amazon.com/mcp` for the Far East.
+4. In the authentication settings, choose your own OAuth client and enter the Client ID and Client Secret from the security profile. Add the connector.
+5. Sign in with Amazon when prompted, approve access, and ask "Show me my advertising accounts" to confirm.
+
+In Claude Code it is one command, `claude mcp add --transport http amzn-ads-mcp https://advertising-ai.amazon.com/mcp --client-id <id> --callback-port <port>`, then `/mcp` to authenticate. Add `--client-secret` so tokens refresh on their own; without it, Amazon's tokens expire after an hour and ask you to sign in again. Custom connectors work on every Claude plan. The free plan allows one, and on Team and Enterprise an owner has to add it first ([Anthropic's help center](https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp)).
+
+If the full tool list crowds Claude's context, use the Lite address instead: the same URL ending in `/mcp/lite`. It exposes three tools, one to search Amazon's tool catalog, one to describe a tool, and one to run it, and Amazon says it can do everything the regular server can ([Lite guide](https://advertising.amazon.com/API/docs/en-us/mcp/get-started-lite)).
+
+Two cautions. First, this server can write. Its documented tools create, update, and delete campaigns, ad groups, ads, and targets, change budgets and bids, and set DSP bid adjustment rules. Claude asks before it calls a tool, so read each request, and save "Allow always" for the tools that only read. Amazon's own example configuration switches the delete tools off entirely. Second, for agencies: by default the server asks which account to use, then reuses it "for subsequent requests or until new account identifiers are provided" ([setup guide](https://advertising.amazon.com/API/docs/en-us/mcp/get-started)). In a chat that has touched three clients, name the account in every request that changes anything, or use Amazon's fixed mode, which pins a connection to one account.
+
+Peachblue's connector goes in with no developer app: copy the URL from Settings, MCP tab, add it as a custom connector, and approve the sign-in ([setup docs](/docs/mcp)). Connecting Amazon DSP to Peachblue is a sign-in with your Amazon Ads account. The connector is read-only, so there is nothing to lock down, and in an agency workspace every call is scoped to the client you have selected.
+
+## What does the Amazon Ads MCP server give Claude for Amazon DSP?
+
+Access to your campaigns and reports and the power to change them, with the analysis left to Claude. Amazon groups the tools by area, and four matter for DSP work.
+
+**Campaigns.** `query_campaign` reads Sponsored Products, Sponsored Brands, Sponsored Display, Sponsored Television, and Amazon DSP campaigns, and `create_campaign` builds Sponsored Products, Sponsored Brands, and DSP campaigns. DSP gets two tools of its own: bid adjustment rules for an ad group by device, browser, or geography, and adding products for conversion tracking. No documented tool returns pacing, so Claude has to work it out from budgets, flight dates, and report rows. Peachblue's `get_pacing` returns it per order, already computed.
+
+**Reports.** Report tools run as jobs: Claude creates a campaign, product, or inventory report, waits, and retrieves the rows. It works, and it costs turns and context on every question. Peachblue syncs DSP daily and keeps what it syncs, so the answer is a lookup, and your history builds past the roughly 60 days of DSP report data Amazon retains.
+
+**Skills.** Amazon publishes downloadable skills that script common jobs for Claude Code. One, `dsp-campaign-analysis`, turns "How did my Holiday Promo Q4 campaign perform?" into two reports, one for ROAS and sales and one for audience segments, waits for both, and combines them ([skills overview](https://advertising.amazon.com/API/docs/en-us/mcp/skills/skills-overview)). It is the closest the server comes to analysis, one campaign at a time. Peachblue starts at the portfolio: `compare_clients` puts every client on one row, and `get_supplier_breakdown` shows where each client's DSP spend ran.
+
+**Creative.** Ad tools query, create, and update ads "across all Amazon advertising products." No documented tool tags a DSP creative, scores it, or recognizes the same asset running in five line items. Peachblue mirrors DSP creative assets when it syncs, counts each asset once however many line items carry it, and tags it on 31 dimensions, the same as your Meta and TikTok ads.
+
+Pulling reports, computing pace, and judging creative is the work Amazon's server leaves to the chat. The five steps below do it through the server; the section after them shows what changes when it is already done.
+
+## How do you analyze Amazon DSP in Claude, step by step?
+
+Five steps an agency runs every week: pin the account, pull performance, check pacing, read the creative, write the client update. Each works through Amazon's server. A layer that has already done the math changes how much of it lands on the chat.
+
+### 1. Pin the account first
+
+With several clients behind one login, start every session by naming the advertiser:
+
+> List my advertiser accounts. Use the DSP advertiser for [client] for everything in this chat, and ask me before you switch.
+
+This is the step that keeps a budget change from landing on the wrong client.
+
+In Peachblue this is the client switcher: pick a client and every tool call is scoped to it, with your agency margin applied to that client's numbers.
+
+### 2. Pull performance for the period
+
+Ask for one report that answers the week's questions, so you wait once:
+
+> Create a campaign report for the last 14 days covering every active DSP campaign: spend, impressions, CPM, clicks, purchases, and ROAS. Retrieve it when it is ready and rank campaigns by ROAS with spend beside each.
+
+Judge each line against its objective. Awareness and streaming TV lines live on CPM, reach, and completion, not ROAS, a split our [DSP reporting guide](/blog/amazon-dsp-reporting-guide) covers.
+
+In Peachblue this is `get_campaigns` and `get_performance_summary`, from data synced daily, so there is no report job to wait on.
+
+### 3. Check pacing against the flight
+
+Pacing is the daily question, and the server has no tool for it, so spell out the math:
+
+> For each active DSP campaign, give the budget, flight start and end dates, spend to date, and the spend expected by today at even delivery. Show pace as actual over expected, and flag anything under 90 percent or over 110 percent.
+
+Those thresholds come from our [pacing guide](/blog/amazon-dsp-pacing-guide). Check one campaign by hand before you trust the rest, because Claude is computing from rows. Amazon's tools say campaign and ad group for DSP; most pacing sheets still say order and line item.
+
+In Peachblue this is the pacing view and `get_pacing`: one row per order with budget, spend to date, pace status, days remaining, and blended CPM against the CPM goal you set.
+
+### 4. Read creative by creative, not by line item
+
+The same creative often runs in several line items, so a ranking by row splits its results. Ask Claude to put them back together:
+
+> List every DSP creative with spend in the last 30 days. Combine rows where the same creative runs in more than one ad group, then rank by CTR and video completion rate with spend beside each.
+
+Whether creative-level rows come back depends on the report Claude chooses, so check the columns before reading the ranking. For what to judge DSP creative on, see [Amazon DSP creative performance](/blog/amazon-dsp-creative-performance).
+
+In Peachblue this happened at sync: each DSP asset is mirrored, counted once across line items, and analyzed. `get_creatives` returns them ranked by [composite score](/docs/scoring), and `get_creative_detail` hands Claude the tags and a written read of each one.
+
+### 5. Write the client update
+
+The week ends in a note to the client. Fence Claude in with the numbers already in the chat:
+
+> Write a five-line update for [client]: spend against budget, pace, the best and worst creative and what separates them, and one recommendation. Use only numbers from this conversation.
+
+In Peachblue this is Reports: date-range reports with PDF and CSV export, supplier breakdowns, and your agency margin applied server-side, so client-facing numbers are billable spend while pace is still measured against the raw budget.
+
+Two guardrails on the server route: ask for the rows behind any number you plan to send a client, and approve changes one at a time.
+
+## What makes Peachblue better than the Amazon Ads MCP server for DSP?
+
+The analysis is finished before the conversation starts, and none of it can touch your campaigns. Amazon's server gives Claude the Amazon Ads API. Peachblue gives it an agency's answers: pace per order, creatives ranked and tagged, every client side by side, across Amazon DSP and the social platforms. Same Claude, same question, different answer:
+
+| You ask Claude | With Amazon's server | With Peachblue |
+| --- | --- | --- |
+| "How are my DSP flights pacing?" | Claude pulls budgets and report rows and does the math in chat | Pace, expected and actual spend, and blended CPM per order, computed |
+| "Which client needs attention this week?" | One account at a time; the chat carries the last one forward | Every client on one row, then scope the chat to one |
+| "Which DSP creative is winning, and why?" | Rows by ad group; no documented tool tags or scores creative | Creatives grouped across line items, ranked by one score, tagged on 31 dimensions |
+| "What happened last quarter?" | What Amazon still retains, about 60 days | History kept from the day you connect |
+| "What should we make next?" | A draft from whatever is in the conversation | Concepts built on your winners' patterns, ready to brief |
+| "How does DSP compare with Meta and TikTok?" | Amazon only | One connection across Amazon DSP, Meta, TikTok, and Google Ads |
+
+This is how Peachblue supercharges Claude for DSP: on performance, on creative, and on the loop that connects them.
+
+**Performance.** Pacing is the core of DSP agency work and the part a chat gets wrong quietly. Peachblue computes pace per order the way agencies report it, against the CPM goal you set, and marks up client-facing spend by your margin while keeping budgets raw. `compare_periods` names the creatives behind last week's change and `get_daily_spend` gives day-by-day totals for any window. Claude reasons over answers instead of adding up rows, and every answer matches what your team sees in the app.
+
+**Creative.** DSP creative is often the least analyzed in an agency, because the console reports it by line item. Peachblue counts each asset once and gives it the same 31-dimension analysis as your social ads, so "why is this one winning" has an answer on Amazon too, and your best DSP creative can be compared with your best Meta creative in the same chat.
+
+**The loop.** The analysis feeds the next move in the same conversation. Claude turns your winners' patterns into the next round of concepts and drafts the client update. The Next Creative Brief hands those concepts to your designer or video team, with a prompt block for an image or video generator. With Amazon's server connected alongside, Claude can make the change you decided on, a budget or a bid, after you approve it, and once new creative runs, Peachblue scores it on the same scale as the ads it came from. The result is a faster loop with less wasted spend: pacing problems caught daily instead of at month end, creative cut and briefed on evidence, and an Economics view that keeps DSP delivery spend apart from waste so awareness lines are never counted as failures.
+
+Amazon's server keeps what is its alone: Sponsored Products, Sponsored Brands, and Sponsored Display, Amazon Marketing Cloud with a SQL generator in closed beta, billing and user admin, and the ability to act. Connect both, one to judge and one to act.
+
+## Which route should you take?
+
+- **You have Amazon Ads API access and want Claude to act on the account**: Amazon's server. Budgets, bids, campaign builds, and Sponsored ads work all run through it. Decide your approvals before the first prompt.
+- **You want answers inside Amazon's console**: the Amazon Ads Agent chat, if your account is in the closed beta.
+- **You run DSP for clients and want pacing, creative, and client reporting in Claude every week, with no developer app**: Peachblue. Amazon DSP is on [Scale and up](/pricing), pacing and reports on Power, and multi-client workspaces on Agency, and the same tools run inside the product as Agent Peach.
+
+One boundary, stated plainly: Peachblue reads. It does not buy, launch, edit, or pause anything, and on Amazon it covers DSP, not Sponsored ads. The same question asked in ChatGPT is covered in [Amazon DSP in ChatGPT](/blog/amazon-dsp-chatgpt), and the four-platform version is [Claude for media buyers](/blog/claude-for-media-buyers).

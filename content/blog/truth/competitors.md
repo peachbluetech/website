@@ -159,6 +159,15 @@ reliability as pipes, which is genuinely good.
   platform, raw account/API data; practitioner writeups note visibility
   gaps in exposed data. The free-and-official baseline every
   "connect DSP to AI" post must cover fairly.
+- RE-VERIFIED 2026-10-15 against Amazon's developer docs (full facts in
+  proof.md, "Amazon Ads MCP server"). Changes since August: a Lite
+  endpoint (three meta-tools) shipped at unBoxed 2026; skills (beta) and
+  an AMC SQL expert tool (closed beta) added; OAuth 2.1 setup documented
+  for Claude Desktop and Claude Code. Needs an approved Amazon Ads API
+  developer app, so it is not a sign-in-and-go route. Covers sponsored ads
+  and Amazon DSP, reads and writes (create, update, delete). No fee listed.
+  Genuinely right for: teams with API access who want Claude to act on the
+  account (budgets, bids, campaign builds), Sponsored ads work, AMC.
 
 ## Atria re-verification 2026-09-28 (before peachblue-vs-atria; supersedes conflicting Atria figures above)
 

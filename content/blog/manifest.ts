@@ -370,7 +370,6 @@ export const ARTICLES: Article[] = [
       "claude for media buying",
       "meta ads mcp",
       "google ads mcp",
-      "amazon ads mcp",
       "tiktok ads mcp",
       "ads mcp server",
       "analyze ads with claude",
@@ -380,7 +379,7 @@ export const ARTICLES: Article[] = [
     byline: "nick",
     status: "published",
     datePublished: "2026-08-14",
-    dateUpdated: "2026-10-09",
+    dateUpdated: "2026-10-15",
     faq: [
       {
         q: "Can Claude analyze my Facebook ads?",
@@ -1187,7 +1186,7 @@ export const ARTICLES: Article[] = [
     byline: "peachblue",
     status: "published",
     datePublished: "2026-08-24",
-    dateUpdated: "2026-10-09",
+    dateUpdated: "2026-10-15",
     faq: [
       {
         q: "Can I connect Amazon DSP to ChatGPT?",
@@ -1195,7 +1194,7 @@ export const ARTICLES: Article[] = [
       },
       {
         q: "Does Amazon have an official MCP server?",
-        a: "Yes. The Amazon Ads MCP server has been in open beta since February 2, 2026, and connects Amazon Ads data to AI assistants including ChatGPT and Claude. It is free and official, covers only Amazon's platform, and returns raw account and report data; practitioner writeups note real visibility gaps in what it exposes.",
+        a: "Yes. The Amazon Ads MCP server has been in open beta since February 2, 2026, and connects Amazon Ads data to AI assistants including ChatGPT and Claude. It is official, with no fee listed during the beta, needs an approved Amazon Ads API developer app to connect, and can change campaigns as well as read them. It covers only Amazon's platform and returns raw account and report data.",
       },
       {
         q: "What do I need on the ChatGPT side?",
@@ -1274,5 +1273,62 @@ export const ARTICLES: Article[] = [
       "Keyword overlap with claude-for-media-buyers ('meta ads mcp', 'analyze ads with claude'): that post's Meta section links here.",
     ],
     related: ["claude-for-media-buyers", "creative-testing-framework", "creative-fatigue"],
+  },
+  {
+    slug: "amazon-ads-mcp-claude",
+    title: "Amazon Ads MCP in Claude: setup, tools, and limits (2026)",
+    h1: "Connect Claude to",
+    h1Accent: "Amazon Ads.",
+    description:
+      "How to connect Amazon's official Ads MCP server to Claude, what its tools do for Amazon DSP, where it stops, and a five-step weekly agency workflow.",
+    type: "guide",
+    pillar: "ai",
+    keywords: [
+      "amazon ads mcp",
+      "amazon ads mcp server",
+      "amazon ads mcp claude",
+      "amazon ads mcp lite",
+      "connect amazon ads to claude",
+      "amazon dsp claude",
+    ],
+    priority: 25,
+    byline: "peachblue",
+    status: "published",
+    datePublished: "2026-10-15",
+    dateUpdated: "2026-10-15",
+    faq: [
+      {
+        q: "What is the Amazon Ads MCP server?",
+        a: "It is Amazon's official Model Context Protocol server, which turns the Amazon Ads API into tools that AI assistants such as Claude and ChatGPT can call. Amazon opened it in beta on February 2, 2026 for Amazon Ads partners with active API credentials. It covers sponsored ads and Amazon DSP, can read and change campaigns, and Amazon lists no fee for it during the beta.",
+      },
+      {
+        q: "How do I connect the Amazon Ads MCP server to Claude?",
+        a: "You need an Amazon Developer account with an application approved for the Amazon Ads API. Add https://claude.ai/api/mcp/auth_callback to that app's Login with Amazon allowed return URLs, then in Claude add a custom connector with the server address for your region (https://advertising-ai.amazon.com/mcp for North America) and your app's Client ID and Client Secret. In Claude Code, the claude mcp add command takes the same address with --client-id and --callback-port.",
+      },
+      {
+        q: "Does the Amazon Ads MCP server work with Amazon DSP?",
+        a: "Yes. Its campaign tools read Amazon DSP campaigns alongside sponsored ads, can create DSP campaigns, and include DSP-specific tools for bid adjustment rules and conversion tracking products, and its report tools pull DSP performance. It has no documented tool for flight pacing or creative-level analysis, so Claude does that math in the conversation.",
+      },
+      {
+        q: "What is Amazon Ads MCP Lite?",
+        a: "Lite is a version of the server, announced at unBoxed 2026, that exposes three tools instead of one per operation: one to search Amazon's tool catalog, one to describe a tool's inputs, and one to run it. Amazon says it can do everything the regular server can while keeping the model's context small. Its address is the regular one with /lite added, for example https://advertising-ai.amazon.com/mcp/lite.",
+      },
+      {
+        q: "Can Claude change my Amazon campaigns through the MCP server?",
+        a: "Yes. The server's documented tools create, update, and delete campaigns, ad groups, ads, and targets, and change budgets and bids. Claude asks for approval before it calls a tool, and Amazon's own example configuration switches the delete tools off. Peachblue's connector is read-only and cannot change anything.",
+      },
+      {
+        q: "What makes Peachblue better than the Amazon Ads MCP server for DSP agencies?",
+        a: "The analysis is finished before the chat starts, and it needs no developer app. Amazon's server gives Claude API access to one platform and leaves pacing, creative analysis, and client comparison to the conversation. Peachblue gives Claude pacing per order, DSP creatives grouped across line items and tagged on 31 dimensions, every client side by side, and the same data for Meta, TikTok, and Google Ads, all read-only. Connected together, Peachblue judges and Amazon's server acts.",
+      },
+    ],
+    rawMaterial: [
+      "truth/proof.md: 'Amazon Ads MCP server' section, verified 2026-10-15 against Amazon's developer docs (mcp-overview, get-started, get-started-lite, oauth, campaign-management, reporting, skills), the Feb 2 announcement and the unBoxed 2026 recap; 'Claude limits' section re-read the same day. Every Amazon and Claude fact in the post comes from there. Amazon's docs render only in a browser.",
+      "UPGRADE PATH: Claude Desktop setup steps follow Amazon's OAuth guide; Claude's own dialog now says 'Use your own OAuth client'. Not tested first-hand (needs an approved Amazon Ads API app). Whether DSP report tools return creative-level rows is also untested; the post tells readers to check the columns. A first-hand run would let both be stated plainly.",
+      "BYLINE UPGRADEABLE: brand byline because the authority is documentation plus workflow. Flips to Nick's byline with a first-hand section.",
+      "Structure: a Peachblue contrast in each paragraph of the Amazon server review, an 'In Peachblue this is' line in every workflow step, then the 'What makes Peachblue better' section (question table, Performance, Creative, The loop), then a short close with the boundary (read-only, DSP only on Amazon, does not generate ads). Product claims only from truth/product.md and the public docs pages.",
+      "Keyword ownership: 'amazon ads mcp' moved here from claude-for-media-buyers, whose Amazon section links here; amazon-dsp-chatgpt (the ChatGPT route) links here too.",
+    ],
+    related: ["amazon-dsp-chatgpt", "claude-for-media-buyers", "amazon-dsp-pacing-guide"],
   },
 ];
