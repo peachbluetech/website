@@ -51,7 +51,7 @@ For a single order, pacing hygiene is simple: check pace % daily, react when it 
 The practice breaks at portfolio scale, and DSP reporting makes it worse in two specific ways:
 
 - **The console is per-advertiser.** An agency with 15 client seats checks 15 consoles. There is no cross-client view of every active flight, and the common agency staffing pattern, 30 to 50 accounts per strategist with roughly 30 minutes of senior attention per account per week (SellerApp), does not leave room for 15 daily console tours.
-- **Reporting is export-shaped.** DSP reporting lives in downloads and a Reports API with real constraints (14-day attribution only, roughly 60 days of retention). Most teams end up in a spreadsheet ritual: download, paste, rebuild formulas, repeat per client.
+- **Reporting is export-shaped.** DSP reporting lives in downloads and a Reports API with real constraints (Amazon's own attribution rules, 31-day requests and 95 days of history on the older v3 reports). Most teams end up in a spreadsheet ritual: download, paste, rebuild formulas, repeat per client.
 
 The fix at scale is a portfolio pacing view: every active order across every client in one table, sorted by risk, checked once a day in minutes. That is the shape of the [Reports and Pacing product in Peachblue](/pricing): per-order budget, spend to date, pace %, blended CPM, and CPM goals across all clients, with agency margin applied where it should be. But the principle matters more than the tool: if your pacing check takes longer than your coffee, you will stop doing it daily, and daily is the whole game.
 
@@ -75,6 +75,6 @@ Two reporting habits that build trust: report pace against the original budget e
 
 ## Where this is heading
 
-Amazon is clearly investing in single-account pacing hygiene: console alerts, one-click fixes, and a unified Campaign Manager arriving as legacy reporting retires at the end of 2026. Expect the basics to keep commoditizing. What Amazon has shown no interest in building is the agency layer: cross-client portfolio views, margin handling, and client-ready reporting. That layer is where pacing practice actually lives for anyone running more than one advertiser, and it is where we have focused [Peachblue's DSP tooling](/pricing).
+Amazon is clearly investing in single-account pacing hygiene: console alerts, one-click fixes, and a unified Amazon Ads Agent arriving as legacy reporting retires at the end of 2026. Expect the basics to keep commoditizing. What Amazon has shown no interest in building is the agency layer: cross-client portfolio views, margin handling, and client-ready reporting. That layer is where pacing practice actually lives for anyone running more than one advertiser, and it is where we have focused [Peachblue's DSP tooling](/pricing).
 
 If you run DSP for clients and want the portfolio version of everything above, [Peachblue's Reports and Pacing](/pricing) ships it today, alongside AI creative analysis across Meta, TikTok, Google Ads, and Amazon DSP. And if you are migrating off another analytics tool entirely, start with [our guide to the post-MagicBrief landscape](/blog/magicbrief-alternatives).

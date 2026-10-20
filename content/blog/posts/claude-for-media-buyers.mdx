@@ -40,7 +40,7 @@ Announced at TikTok World in May 2026, the [TikTok for Business MCP server](http
 
 ### What you end up with
 
-Wire up everything above and this is the stack: four separate connections, four auth flows, four different toolsets with four different vocabularies (one of them 400 tools deep), and each one seeing only its own silo. Claude has to stitch the platforms together by hand in every conversation, reconcile attribution windows that do not match (Amazon DSP reports 14-day only; social platforms differ), and reconstruct basic concepts like "this is the same creative running in nine ads" from scratch, every single time, because raw rows carry no creative identity, no scoring, and no tags. It works, in the way that four spreadsheets and a prayer work.
+Wire up everything above and this is the stack: four separate connections, four auth flows, four different toolsets with four different vocabularies (one of them 400 tools deep), and each one seeing only its own silo. Claude has to stitch the platforms together by hand in every conversation, reconcile attribution windows that do not match (Amazon DSP runs its own last-touch click and view model; social platforms differ), and reconstruct basic concepts like "this is the same creative running in nine ads" from scratch, every single time, because raw rows carry no creative identity, no scoring, and no tags. It works, in the way that four spreadsheets and a prayer work.
 
 ## Or: one connection, with the analysis already done
 
@@ -60,7 +60,7 @@ Peachblue's MCP sits on top of synced, analyzed data across all four platforms i
 
 The thread running through every row: answers stay grounded in your performance data *and* tied to the creative level, which is where scaling decisions actually live. The loop this enables is the one that matters: find the winners, understand why they win, make more of what wins, and verify the next batch against the same score.
 
-Two quieter advantages compound over time. **History**: Peachblue keeps what it syncs, so analysis is not capped by platform retention limits (Amazon DSP, for instance, only retains about 60 days of report data; your Peachblue history builds forward past it). **Context efficiency**: tools return ranked, aggregated payloads instead of raw row dumps, so Claude spends its context reasoning rather than arithmetic, which in practice means fewer wrong numbers.
+Two quieter advantages compound over time. **History**: Peachblue keeps what it syncs, so analysis is not capped by platform retention limits (Amazon's older DSP report API, for instance, keeps 95 days; your Peachblue history builds forward past it). **Context efficiency**: tools return ranked, aggregated payloads instead of raw row dumps, so Claude spends its context reasoning rather than arithmetic, which in practice means fewer wrong numbers.
 
 To be fair to the raw option: platform-native MCPs are the right tool for platform-native lookups, and nothing stops you from connecting them alongside Peachblue. The distinction is what you want Claude to be. Raw rows make it a query runner. An intelligence layer makes it an analyst.
 

@@ -1,4 +1,4 @@
-Amazon DSP reporting comes in two layers: downloadable reports from the per-advertiser console, and the same data pulled programmatically through the Reports API. Everything in both layers runs on a single 14-day attribution window, and API history only reaches back about 60 days, two constraints that shape every reporting workflow built on top.
+Amazon DSP reporting comes in two layers: downloadable reports from the per-advertiser console, and the same data pulled programmatically through the Reports API. Conversions in both layers are attributed on a 14-day click and view window by default, with two 2026 exceptions covered below, and how far back you can pull depends on the API: 95 days on the older v3 reports, 24 months on Amazon's new Reporting API. Those two facts shape every reporting workflow built on top.
 
 This guide explains what each layer gives you, which metrics are worth reading, and how to turn the exports into client-ready reporting. It is written for the wave of teams newly running DSP self-service: Amazon removed the self-service minimum spend at unBoxed in November 2025, practical entry budgets fell to around $5-10k per month (Marketplace Ad Pros), and DSP has grown from under 10% to roughly 20% of global programmatic spend in about 15 months (ppc.land). The reporting stack did not get simpler to match.
 
@@ -10,17 +10,17 @@ Three things about the console shape everything downstream:
 
 - **It is per-advertiser.** There is no cross-client view. An agency with 15 advertiser seats does 15 separate console tours, and G2 reviews of the console consistently cite slowness, a steep learning curve, and painful bulk operations (G2).
 - **Reports are export-shaped.** The console answers "download me a table," not "watch this number." Anything longitudinal, anything cross-advertiser, and anything a client sees ends up rebuilt outside the console.
-- **The console is mid-transition.** Amazon is unifying DSP and the Ads Console into a single Campaign Manager, and legacy reporting tools retire on December 31, 2026 (Amazon Ads announcements). Expect report surfaces to move; the underlying data model described here is the stable part.
+- **The console is mid-transition.** Amazon is unifying DSP and the Ads Console into Amazon Ads Agent, and legacy reporting tools retire on December 31, 2026 (Amazon Ads announcements). Expect report surfaces to move; the underlying data model described here is the stable part.
 
 The Reports API returns the same data as machine-readable files: you request a report type, a date range, and a metric set, then poll until the file is ready. That unlocks automation, with constraints covered below.
 
 ## How does Amazon DSP attribution work?
 
-Amazon DSP attributes conversions on a 14-day window, and that is the only window: there is no 1-day, 7-day, or 30-day alternative to select. Every conversion metric in every report (purchases, sales, detail page views, add to carts, new-to-brand) is a 14-day number.
+Amazon DSP credits a conversion to the most relevant click or viewable impression in the 14 days before it, with clicks ranked above views, and each conversion goes to one ad interaction only (Amazon Ads support center). Two 2026 changes mean that is no longer the whole story. Since January 1, 2026, view conversions from DSP ads served in Amazon's store use a shopping-signal model with a shorter window, whose length Amazon does not publish, while the old count lives on in "all views" metrics such as Purchases (all views). And Amazon's reporting docs note that DSP campaigns using flexible look-back windows report the click and view windows the advertiser selected. So a DSP purchase number is no longer automatically a 14-day number: check the campaign's window and whether you are reading the standard or the all-views metric. Both changes, and what every DSP metric now measures, are covered in [Amazon DSP attribution window and metrics explained](/blog/amazon-dsp-attribution-metrics).
 
-This matters most when DSP results sit next to other platforms in the same client deck. A Meta column on 7-day click attribution and a DSP column on 14-day attribution are answering different questions, and neither maps onto a last-click analytics view. The honest way to present it is to label the window on every platform column and compare each channel against its own history, not head-to-head on raw conversion counts.
+This matters most when DSP results sit next to other platforms in the same client deck. A Meta column on 7-day click attribution and a DSP column on Amazon's click-and-view model are answering different questions, and neither maps onto a last-click analytics view. The honest way to present it is to label the window on every platform column and compare each channel against its own history, not head-to-head on raw conversion counts.
 
-The window also sets a floor on patience. A creative or audience change made today keeps accruing attributed conversions for two more weeks, so judging a DSP change on three days of conversion data mostly measures noise.
+The window also sets a floor on patience. A creative or audience change made today keeps accruing attributed conversions for up to two more weeks, so judging a DSP change on three days of conversion data mostly measures noise.
 
 ## Which DSP metrics actually matter?
 
@@ -31,7 +31,7 @@ Read DSP metrics in four groups, top of funnel to bottom. The middle two are the
 | Delivery | Impressions, viewable impressions, CPM | Whether the flight is delivering, and what viewable reach actually costs |
 | Engagement | CTR, video completion rate | Weak signals on their own; CTR is near-meaningless on CTV, where there is often nothing to click |
 | Consideration | Detail page views, add to carts | The DSP-specific gold: on-Amazon shopping behavior caused by the media, visible long before purchases accumulate |
-| Outcome | Purchases, sales, ROAS, new-to-brand share | The business case, all on the 14-day window |
+| Outcome | Purchases, sales, ROAS, new-to-brand share | The business case, on the campaign's attribution window (standard or all views) |
 
 Two reading habits worth building:
 
@@ -40,13 +40,13 @@ Two reading habits worth building:
 
 ## What can the Reports API do that the console cannot?
 
-The API removes the manual download ritual and makes scheduled, repeatable reporting possible, which is the difference between reporting that happens and reporting that happened once. But it operates inside three hard constraints, all confirmed in production use:
+The API removes the manual download ritual and makes scheduled, repeatable reporting possible, which is the difference between reporting that happens and reporting that happened once. But it operates inside three constraints:
 
-1. **31 days maximum per request.** Longer ranges must be requested in chunks and stitched together.
-2. **Roughly 60 days of retention.** Requests for older windows fail. If you have not stored the data somewhere you control, it is gone.
-3. **Daily grain, 14-day attribution.** Daily rows are available, but every conversion column in them is still a 14-day number, so recent days' conversion figures will keep revising upward as the window completes.
+1. **Request ranges are capped.** The v3 DSP reports take at most 31 days per request; Amazon's new Reporting API, generally available since September 30, 2026, allows up to 120 days of daily rows.
+2. **History is finite.** The v3 DSP reports keep 95 days; the new Reporting API keeps 24 months of daily data. Anything older is gone unless you stored it.
+3. **Conversions keep landing after the fact.** The new Reporting API books every conversion on the date of the ad interaction, so recent days keep revising upward until their window closes; older DSP reports booked on the conversion date, so the same campaign can show different daily curves depending on the report.
 
-The retention limit is the one that bites teams silently. Quarterly business reviews, year-over-year comparisons, and "how did this creative do last flight" questions all need history that the API will no longer serve by the time anyone asks. The practical rule: whatever pulls your DSP reports must also warehouse them, from the first pull onward. A reporting workflow that re-queries Amazon each time has a 60-day memory.
+The retention limit is the one that bites teams silently on the older reports: quarterly reviews, year-over-year comparisons and "how did this creative do last flight" all need history a 95-day API no longer serves by the time anyone asks. The new API stretches daily history to 24 months, but last year's numbers were counted under different view rules anyway. The practical rule holds: whatever pulls your DSP reports should also store them, labeled with the window and model they were pulled under.
 
 ## How do you turn exports into client reporting?
 
@@ -58,10 +58,10 @@ This is the point where the workflow genuinely meets tooling: a portfolio view t
 
 ## Where does Peachblue fit in the DSP stack?
 
-Peachblue is the intelligence and reporting layer on top of Amazon DSP: it syncs delivery and conversion reporting continuously through the Reports API, warehouses the history past Amazon's roughly 60-day horizon, and turns it into client-ready reporting, pacing, and creative analysis. It sits strictly on the analytics side of the stack. It does not buy or activate media (nothing launches or edits campaigns) and it does not do attribution modeling; its job is making the delivery and creative data you already generate readable, portable, and connected.
+Peachblue is the intelligence and reporting layer on top of Amazon DSP: it syncs delivery and conversion reporting continuously through the Reports API, keeps the history it syncs, so your record does not depend on Amazon's retention limits, and turns it into client-ready reporting, pacing, and creative analysis. It sits strictly on the analytics side of the stack. It does not buy or activate media (nothing launches or edits campaigns) and it does not do attribution modeling; its job is making the delivery and creative data you already generate readable, portable, and connected.
 
 Concretely, for DSP that means date-range reports with supplier breakdowns and PDF and CSV export, per-order flight pacing (budget, spend to date, pace %, blended CPM, CPM goals), agency margin applied per client on spend and spend-derived metrics, and a client switcher that scopes the whole workspace to one advertiser at a time. The mirrored DSP creatives also run through the same AI analysis as Meta, TikTok, and Google Ads creatives, 31 tagged dimensions plus a written expert analysis per creative, so delivery numbers and the creative decisions behind them finally live in the same place. It is the only creative analytics platform for agencies at self-serve pricing that covers Amazon DSP. The [Amazon DSP integration page](/integrations/amazon-dsp) covers what syncs and how to connect, and [pricing](/pricing) shows which plans include DSP.
 
 ## Where DSP reporting is heading
 
-The console basics are commoditizing: Campaign Manager will keep absorbing the legacy tools through the December 31, 2026 retirement, and single-advertiser reporting inside Amazon's own surface should keep improving. What Amazon has shown no interest in building is the layer agencies actually operate in: cross-client views, history past 60 days, margin-aware client reporting, and any connection between delivery numbers and the creative decisions that drive them. Build that layer deliberately, whether in your own warehouse and sheets or in [tooling built for it](/pricing), because the teams that read their DSP data faster than their competitors are the ones that get to act on it.
+The console basics are commoditizing: Amazon Ads Agent will keep absorbing the legacy tools through the December 31, 2026 retirement, and single-advertiser reporting inside Amazon's own surface should keep improving. What Amazon has shown no interest in building is the layer agencies actually operate in: cross-client views, history you own, margin-aware client reporting, and any connection between delivery numbers and the creative decisions that drive them. Build that layer deliberately, whether in your own warehouse and sheets or in [tooling built for it](/pricing), because the teams that read their DSP data faster than their competitors are the ones that get to act on it.

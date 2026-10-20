@@ -18,9 +18,11 @@ the other truth files.
 - Prime Video: 315M average monthly ad-supported viewers across 16 countries
   (ppc.land). Netflix ad inventory available through Amazon DSP since Q4
   2025; Spotify since Oct 2025.
-- Amazon DSP attribution is 14-day only (no 1/7/30-day windows). Reports API:
-  max 31-day range per request, roughly 60 days of report retention. (Our own
-  integration experience; safe to state as practitioner fact.)
+- SUPERSEDED 2026-10-19, do not reuse: "Amazon DSP attribution is 14-day
+  only (no 1/7/30-day windows). Reports API: max 31-day range per request,
+  roughly 60 days of report retention." Amazon's own pages now say otherwise
+  on the window and document 95 days, not 60, for the v3 DSP reports. Use the
+  "Amazon DSP attribution and reporting" section below.
 - Amazon is unifying DSP + Ads Console into Campaign Manager; legacy
   reporting tools retire Dec 31, 2026 (Amazon Ads announcements).
   UPDATED 2026-10-15: the unified platform is now called Amazon Ads Agent
@@ -253,6 +255,118 @@ empty shell).
   in copy (agencies still use it).
 - Community-built Amazon Ads MCP servers exist (MarketplaceAdPros,
   Openbridge); not reviewed, do not recommend.
+
+## Amazon DSP attribution and reporting (verified 2026-10-19, Amazon's own pages)
+
+Sources, all read on 2026-10-19 (help pages and developer docs render only
+in a browser): launch announcement "View Attribution Updates for Amazon
+Store ads", dated 2026-01-01
+(advertising.amazon.com/resources/whats-new/view-attribution-updates-for-amazon-store-ads);
+Support center "Ad campaign attribution", updated 2026-08-27
+(advertising.amazon.com/help/GX7KDKHMWQYMJ385); Support center "Conversion
+attribution" for Display, Video, and Audio campaigns, updated 2026-10-05
+(advertising.amazon.com/help/GWB3ZSBQMFYSD2JZ); Amazon Ads API docs:
+Reporting v1 overview (guides/reporting/ads-v1/overview), "Dates and
+historical data retention" (guides/reporting/ads-v1/dates), metrics library
+(guides/reporting/ads-v1/metrics/...), v3 report types
+(guides/reporting/v3/report-types/campaign and others), advanced tools
+release notes (release-notes/index); AMC custom attribution announcement
+(2022-03-25); multi-touch attribution (beta) announcement (unBoxed 2024).
+
+- Standard rule: DSP credits a conversion to the most relevant click or
+  viewable impression in the 14 days before it ("Lookback window: 14 days",
+  "Clicks and views", last touch that "prioritizes product relevance and
+  clicks over views"). Ranking: promoted ASIN clicks, brand halo clicks,
+  promoted ASIN views, brand halo views. One ad interaction per conversion
+  "across all campaigns and all advertisers"; DSP competes with Sponsored
+  Brands, Display, Streaming TV and vendor Sponsored Products for credit.
+  A view counts only on a viewable impression (50% of pixels for 1 second
+  display, 2 seconds video; inferred where not measurable).
+- January 1, 2026 change: "a shopping-signal enhanced last-touch attribution
+  model" for view attribution that "applies a shorter attribution window".
+  Applies to "Amazon DSP campaigns that serve ads in the Store", plus
+  Sponsored Brands and vCPM Sponsored Display. "Click-based attribution
+  remains unchanged"; "Conversion reporting for all other campaign types and
+  inventory types remains unchanged." Amazon publishes NO length for the
+  shorter window; never print one. Standard Purchases, Sales and ROAS use
+  the new model; the original model ("includes all ad views for eligible
+  campaigns within a 14-day window") stays available as "all views"
+  metrics, e.g. Purchases (all views), Sales (all views), ROAS (all views),
+  in unified reporting, the report builder and the API. Amazon: "For ongoing
+  performance assessment, we recommend using the standard purchase metrics."
+  The change is "reflected across all reports, reporting APIs, and console
+  views". Help page wording: "view attribution for some placements will
+  incorporate additional signals, such as shopping behavior patterns".
+- Flexible look-back: Reporting v1 overview says the standard look-back is
+  14 days for most campaign types "except for DSP campaigns using flexible
+  look-back windows, where metrics reflect the advertiser-selected click and
+  view windows." No public Amazon page found that lists the selectable
+  windows or who has the option. Say it exists; do not list values.
+- So "14-day only, no other windows" is retired. Safe phrasing: "14 days for
+  clicks and views by default; since January 1, 2026 a shorter,
+  signal-based window for views on DSP ads served in Amazon's store; and
+  advertiser-selected windows on DSP campaigns using flexible look-back."
+- Reporting date: Reporting API v1 and unified reporting book every
+  conversion on the "traffic date" (the ad interaction date); "Previously,
+  DSP reported conversions on the conversion date." The DSP help page
+  (Oct 5, 2026) still describes DSP campaign reports booking on the
+  conversion date, so the curve depends on the surface. Conversions can
+  take up to 12 hours to appear; "Attribution metrics for a given report
+  date remain incomplete until the lookback window has ended"; payment
+  failures and orders cancelled within 72 hours are deducted, taking up to
+  7 days.
+- Reporting API v1 (new Amazon Ads reporting API) and Marketing Stream v2:
+  generally available 2026-09-30. Interval suffixes (1d, 7d, 14d, 30d)
+  removed from metric names. DSP entity names: order becomes campaign, line
+  item becomes ad group, creative becomes ad. metric.purchases now includes
+  promoted and halo (old DSP totalPurchases); purchasesPromoted is the
+  promoted-only figure.
+- Retention: v3 DSP reports (dspCampaign, dspInventory, dspProduct,
+  dspTech, dspGeo) have a 31-day maximum date range and 95 days of data
+  retention; dspAudioAndVideo 395 and 395. Reporting API v1: daily rows kept
+  24 months (extended from 15 months on 2026-08-26) with a 120-day maximum
+  range per request; weekly 24 months / 15 months; monthly 6 years / 25
+  months; hourly 14 days. Amazon's DSP metrics page banner: that DSP
+  reporting API "will be deprecated on June 30, 2027" in favor of the new
+  reporting API.
+- Metric definitions (Amazon Ads API metrics library): Impressions = gross
+  impressions minus invalid impressions. Viewable impressions: at least 50%
+  on screen for 1 second (display) or 2 seconds (video). Measurable rate =
+  measurable impressions / impressions. Viewable rate = viewable
+  impressions / measurable impressions. Viewable distribution = viewable
+  impressions / impressions. CPM = cost / impressions x 1,000. vCPM = cost /
+  viewable impressions x 1,000. Total cost "excludes the third-party fees
+  paid by the agency"; Supply cost = amount spent on media supply. Video:
+  starts, first quartile (25%), midpoint (50%), third quartile (75%),
+  complete views; completion rate = complete views / starts; cost per
+  completed view = total cost / complete views. Detail page views, add to
+  cart, branded searches ("searched for a brand promoted in the campaign"),
+  each with a rate per impression. ROAS = sales / total cost.
+- New to brand: purchases by shoppers "who had not purchased a product from
+  the brand in the last 12 months" (help page: previous 365 days). Percent
+  of purchases new to brand = NTB purchases / purchases. NTB ROAS = NTB
+  sales / total cost.
+- Long-term sales: "Attributed sales plus the estimated 365-day value of
+  new-to-brand shopper engagements attributed to the campaign, based on the
+  brand's historical shopping patterns." Long-term ROAS = long-term sales /
+  total cost. It is an estimate; say so.
+- Peer benchmarks in the API: 25th, 50th and 75th percentile values for
+  CPM, video completion rate and long-term ROAS ("peer brands"). Amazon
+  publishes these per account; do not print any as a general benchmark.
+- Halo: help page, "products within the same brand and subcategory as a
+  promoted ASIN"; API, "highly relevant (non-promoted) products" per each
+  campaign's expansion rules.
+- View-through share (Support center "Conversion attribution", GWB3ZSBQMFYSD2JZ, re-read 2026-10-19): view-through conversions are "Typically the majority of conversions for Display, Video, and Audio campaigns"; click-through "Provide stronger signals of an ad's impact". Safe to say views typically make up most DSP conversions, citing the help center.
+- Multi-touch attribution (beta, US, announced unBoxed 2024): divides credit
+  for Amazon purchases across Amazon Ads touchpoints; "multi-touch" metrics
+  sit beside last-touch ones in DSP reporting. Last touch stays standard.
+- AMC custom attribution (2022-03-25): look-back up to 28 days; first-touch,
+  last-touch, equal-weight and position-based models; calls the standard
+  "14-day last-touch attribution".
+- Secondary, context only: ppc.land (2026-01-14) also found no published
+  length for the new view window. Agency write-ups claim DSP windows are
+  configurable "up to 28 days" or "30-day view"; not on any Amazon page
+  found, do not repeat.
 
 ## AI ad generation tools (verified August 2026)
 

@@ -95,19 +95,19 @@ export const DOC_PAGES: DocPage[] = [
     title: "Connect Amazon DSP",
     navLabel: "Amazon DSP",
     description:
-      "Connect Amazon DSP to Peachblue: profile selection, what the DSP reporting data includes, 14-day attribution, and backfill limits.",
+      "Connect Amazon DSP to Peachblue: profile selection, what the DSP reporting data includes, how DSP attribution works, and backfill limits.",
     section: "integrations",
     order: 4,
     status: "published",
-    updated: "2026-08-13",
+    updated: "2026-10-19",
     faq: [
       {
-        q: "Why does my Amazon DSP backfill only go back about 60 days?",
-        a: "Amazon's DSP reporting retains roughly 60 days of report data. Peachblue backfills what Amazon makes available and then builds history forward from daily syncs, so your history grows the longer the connection runs.",
+        q: "How far back does the Amazon DSP backfill go?",
+        a: "Peachblue's backfill pulls up to the last 60 days of DSP report data (you choose 7, 30, or 60 days), then builds history forward from daily syncs, so your history grows the longer the connection runs.",
       },
       {
         q: "Why do Amazon DSP conversion metrics look different from Meta's?",
-        a: "Amazon DSP reports on a 14-day attribution window only; there are no 1-day or 7-day windows. Purchases, detail page views, and new-to-brand metrics are all 14-day. Peachblue labels these accordingly rather than mixing them with other platforms' windows.",
+        a: "Amazon DSP credits conversions on a last-touch click and view model, 14 days by default, and since January 1, 2026 a shorter, signal-based window applies to views on ads in Amazon's store. Peachblue labels these accordingly rather than mixing them with other platforms' windows.",
       },
     ],
   },

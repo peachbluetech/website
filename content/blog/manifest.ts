@@ -150,7 +150,7 @@ export const ARTICLES: Article[] = [
     byline: "peachblue",
     status: "published",
     datePublished: "2026-08-12",
-    dateUpdated: "2026-08-12",
+    dateUpdated: "2026-10-19",
     faq: [
       {
         q: "What is pacing in Amazon DSP?",
@@ -186,7 +186,7 @@ export const ARTICLES: Article[] = [
     h1: "The Amazon DSP report template agencies actually",
     h1Accent: "need.",
     description:
-      "A free client-ready Amazon DSP report template: the metrics that matter, 14-day attribution explained, supplier breakdowns, and pacing. Google Sheets format.",
+      "A free client-ready Amazon DSP report template: the metrics that matter, attribution windows explained, supplier breakdowns, and pacing. Google Sheets format.",
     type: "template",
     pillar: "dsp",
     keywords: [
@@ -201,7 +201,7 @@ export const ARTICLES: Article[] = [
     rawMaterial: [
       "Build the actual Sheets template first",
       "truth/product.md Reports feature",
-      "DSP metric definitions: 14d attribution, NTB, viewability",
+      "DSP metric definitions: attribution windows (see the attribution post and proof.md), NTB, viewability",
     ],
   },
   {
@@ -251,7 +251,7 @@ export const ARTICLES: Article[] = [
     h1: "Amazon DSP reports, finally",
     h1Accent: "readable.",
     description:
-      "Every Amazon DSP report type explained: what the console gives you, what the Reports API adds, 14-day attribution, and how to build client reporting on top.",
+      "Every Amazon DSP report type explained: what the console gives you, what the Reports API adds, how DSP attribution works after the 2026 changes, and how to build client reporting on top.",
     type: "guide",
     pillar: "dsp",
     keywords: [
@@ -264,7 +264,7 @@ export const ARTICLES: Article[] = [
     byline: "peachblue",
     status: "published",
     datePublished: "2026-08-18",
-    dateUpdated: "2026-08-18",
+    dateUpdated: "2026-10-19",
     faq: [
       {
         q: "What reports does Amazon DSP offer?",
@@ -272,27 +272,27 @@ export const ARTICLES: Article[] = [
       },
       {
         q: "What attribution window does Amazon DSP use?",
-        a: "Amazon DSP uses a 14-day attribution window, and it is the only window available: there is no 1-day, 7-day, or 30-day option. Every conversion metric in every DSP report, including purchases, sales, detail page views, add to carts, and new-to-brand, is a 14-day figure. This makes raw side-by-side comparison with platforms on other windows, like Meta on 7-day click, misleading unless each column is labeled with its window.",
+        a: "By default, 14 days for both clicks and views, on a last-touch model that ranks clicks above views. Since January 1, 2026, views on DSP ads served in Amazon's store use a shorter, signal-based window, and DSP campaigns using flexible look-back report the click and view windows the advertiser selected. Our guide, Amazon DSP attribution window and metrics explained, covers both changes and what each DSP metric measures.",
       },
       {
         q: "How long does Amazon keep DSP report data?",
-        a: "The Reports API retains roughly 60 days of history, and requests for older date ranges fail. Each request is also capped at a 31-day range, so longer windows are pulled in chunks. Any reporting workflow that needs quarterly reviews or year-over-year comparisons must warehouse the data outside Amazon from the first pull onward.",
+        a: "It depends on the API. Amazon's v3 DSP reports keep 95 days of data and cap each request at 31 days, so longer windows are pulled in chunks. Amazon's new Reporting API, generally available since September 30, 2026, keeps 24 months of daily data and allows up to 120 days of daily rows per request. Either way, store what you pull, labeled with the attribution rules it was counted under.",
       },
       {
         q: "Why do my DSP numbers not match Meta or Google?",
-        a: "Mostly because of attribution windows: DSP reports conversions on a fixed 14-day window while Meta and Google default to different windows, so the platforms are counting different things. DSP conversion figures for recent days also keep revising upward until the 14-day window completes. Compare each channel against its own history rather than head-to-head on raw conversion counts.",
+        a: "Mostly because of attribution rules: DSP credits clicks and views on its own last-touch model (14 days by default, shorter for store-served views since January 2026) while Meta and Google default to different windows, so the platforms are counting different things. In Amazon's newer reporting, DSP conversions are booked on the ad interaction date, so recent days keep revising upward until their window closes. Compare each channel against its own history rather than head-to-head on raw conversion counts.",
       },
       {
         q: "How does Peachblue work with Amazon DSP?",
-        a: "Peachblue connects to Amazon DSP and syncs delivery and conversion reporting continuously, storing the history beyond Amazon's roughly 60-day retention. On top of that data it provides date-range client reports with supplier breakdowns, per-order flight pacing with CPM goals, agency margin handling per client, and AI creative analysis of the DSP creatives themselves alongside Meta, TikTok, and Google Ads. It is an analytics layer only: it does not launch, edit, or bid on campaigns.",
+        a: "Peachblue connects to Amazon DSP and syncs delivery and conversion reporting continuously, storing the history it syncs, so your record does not depend on Amazon's retention. On top of that data it provides date-range client reports with supplier breakdowns, per-order flight pacing with CPM goals, agency margin handling per client, and AI creative analysis of the DSP creatives themselves alongside Meta, TikTok, and Google Ads. It is an analytics layer only: it does not launch, edit, or bid on campaigns.",
       },
       {
         q: "What happens to Amazon DSP reporting at the end of 2026?",
-        a: "Amazon is unifying the DSP and the Ads Console into a single Campaign Manager, and legacy reporting tools retire on December 31, 2026. Report surfaces and export paths will move as part of that transition. The underlying data model, including 14-day attribution and the buying hierarchy of orders, line items, and creatives, is expected to carry over.",
+        a: "Amazon has unified DSP and the Ads Console into Amazon Ads Agent, and its new Reporting API (generally available since September 30, 2026) renames DSP's orders, line items and creatives to campaigns, ad groups and ads, drops the 14d suffixes from metric names, and books conversions on the ad interaction date. Legacy reporting tools retire on December 31, 2026, so expect report surfaces and export paths to keep moving.",
       },
     ],
     rawMaterial: [
-      "truth/proof.md DSP facts (31-day chunks, 60-day retention, 14d attribution)",
+      "truth/proof.md DSP facts: use the 'Amazon DSP attribution and reporting' section (2026-10-19); the older 60-day and 14-day-only lines are superseded",
       "Our Reports API integration experience",
     ],
     related: ["amazon-dsp-pacing-guide", "claude-for-media-buyers"],
@@ -379,7 +379,7 @@ export const ARTICLES: Article[] = [
     byline: "nick",
     status: "published",
     datePublished: "2026-08-14",
-    dateUpdated: "2026-10-15",
+    dateUpdated: "2026-10-19",
     faq: [
       {
         q: "Can Claude analyze my Facebook ads?",
@@ -429,7 +429,7 @@ export const ARTICLES: Article[] = [
     byline: "peachblue",
     status: "published",
     datePublished: "2026-08-31",
-    dateUpdated: "2026-08-31",
+    dateUpdated: "2026-10-19",
     faq: [
       {
         q: "What is the minimum spend for Amazon DSP?",
@@ -445,7 +445,7 @@ export const ARTICLES: Article[] = [
       },
       {
         q: "Is Amazon DSP worth it for smaller advertisers now?",
-        a: "For many, yes, primarily because of the inventory: Prime Video's ad-supported audience of 315 million average monthly viewers, plus Netflix and Spotify inventory available through Amazon DSP since late 2025. That is streaming TV and audio reach that used to require enterprise commitments. The honest costs of entry are operational: a real console learning curve, 14-day-only attribution, and reporting discipline.",
+        a: "For many, yes, primarily because of the inventory: Prime Video's ad-supported audience of 315 million average monthly viewers, plus Netflix and Spotify inventory available through Amazon DSP since late 2025. That is streaming TV and audio reach that used to require enterprise commitments. The honest costs of entry are operational: a real console learning curve, attribution rules that differ from social platforms, and reporting discipline.",
       },
       {
         q: "Do I need to sell on Amazon to use Amazon DSP?",
@@ -576,19 +576,19 @@ export const ARTICLES: Article[] = [
     byline: "peachblue",
     status: "published",
     datePublished: "2026-09-02",
-    dateUpdated: "2026-09-02",
+    dateUpdated: "2026-10-19",
     faq: [
       {
         q: "Can you measure creative performance in Amazon DSP?",
-        a: "Yes. DSP reporting includes creative-level data: impressions, viewability, clicks, video behavior, and for retail-endemic conversion lines, 14-day attributed purchases, detail page views, add-to-carts, and new-to-brand outcomes. The catch is operational: reports pull in 31-day chunks against roughly 60 days of retention, and the same asset often reports under multiple creative IDs, so building a clean creative-level view takes real reconciliation work.",
+        a: "Yes. DSP reporting includes creative-level data: impressions, viewability, clicks, video behavior, and for retail-endemic conversion lines, attributed purchases, detail page views, add-to-carts, and new-to-brand outcomes. The catch is operational: the older v3 reports pull in 31-day chunks against 95 days of retention, and the same asset often reports under multiple creative IDs, so building a clean creative-level view takes real reconciliation work.",
       },
       {
         q: "What metrics matter for DSP creative performance?",
-        a: "It depends on what the line item is buying. For awareness and CTV, judge creatives on delivery quality: viewability rate, video completion behavior, CTR where applicable, and effective CPM. For conversion-oriented lines, use 14-day attributed outcomes, with new-to-brand share as DSP's most distinctive signal since it separates recruiting new customers from reconverting existing ones. Never compare creatives across objective buckets.",
+        a: "It depends on what the line item is buying. For awareness and CTV, judge creatives on delivery quality: viewability rate, video completion behavior, CTR where applicable, and effective CPM. For conversion-oriented lines, use attributed outcomes, with new-to-brand share as DSP's most distinctive signal since it separates recruiting new customers from reconverting existing ones. Never compare creatives across objective buckets.",
       },
       {
         q: "Does ROAS apply to Amazon DSP creatives?",
-        a: "Only for conversion-oriented retail lines, and only within DSP's 14-day attribution window. Most DSP spend, including CTV and streaming placements, is awareness buying where revenue-based judgment is a category error: a Prime Video spot has no add-to-cart button. Judging awareness creatives on delivery quality rather than ROAS is the difference between reading the data and misreading it.",
+        a: "Only for conversion-oriented retail lines, and only within the line's attribution window. Most DSP spend, including CTV and streaming placements, is awareness buying where revenue-based judgment is a category error: a Prime Video spot has no add-to-cart button. Judging awareness creatives on delivery quality rather than ROAS is the difference between reading the data and misreading it.",
       },
       {
         q: "How is DSP creative testing different from Meta creative testing?",
@@ -644,7 +644,7 @@ export const ARTICLES: Article[] = [
     h1: "Shipping against the DSP Reports API: what the docs",
     h1Accent: "don't say.",
     description:
-      "31-day chunks, 60-day retention, 14-day-only attribution, versioned Accept headers, and the other things you learn by actually building on the DSP Reports API.",
+      "31-day requests and 95-day retention on the v3 reports, the 2026 attribution changes, versioned Accept headers, and the other things you learn by actually building on the DSP Reports API.",
     type: "essay",
     pillar: "dsp",
     keywords: ["amazon dsp reporting api", "amazon dsp api"],
@@ -943,7 +943,7 @@ export const ARTICLES: Article[] = [
     byline: "peachblue",
     status: "published",
     datePublished: "2026-08-21",
-    dateUpdated: "2026-08-21",
+    dateUpdated: "2026-10-19",
     faq: [
       {
         q: "What is ROAS?",
@@ -1186,7 +1186,7 @@ export const ARTICLES: Article[] = [
     byline: "peachblue",
     status: "published",
     datePublished: "2026-08-24",
-    dateUpdated: "2026-10-15",
+    dateUpdated: "2026-10-19",
     faq: [
       {
         q: "Can I connect Amazon DSP to ChatGPT?",
@@ -1202,7 +1202,7 @@ export const ARTICLES: Article[] = [
       },
       {
         q: "What can raw DSP rows in a chat not tell you?",
-        a: "Anything that requires computation or identity the rows do not carry. Raw report rows have no creative identity (the same asset in six line items looks like six creatives), no flight pacing math, and no cross-platform view, and Amazon DSP reporting is 14-day attribution only with roughly 60 days of retention. An AI reading raw rows must do arithmetic in the chat, which is where wrong numbers come from.",
+        a: "Anything that requires computation or identity the rows do not carry. Raw report rows have no creative identity (the same asset in six line items looks like six creatives), no flight pacing math, and no cross-platform view, and Amazon DSP reporting carries its own attribution rules and finite report history. An AI reading raw rows must do arithmetic in the chat, which is where wrong numbers come from.",
       },
       {
         q: "Does Peachblue work with ChatGPT?",
@@ -1295,7 +1295,7 @@ export const ARTICLES: Article[] = [
     byline: "peachblue",
     status: "published",
     datePublished: "2026-10-15",
-    dateUpdated: "2026-10-15",
+    dateUpdated: "2026-10-19",
     faq: [
       {
         q: "What is the Amazon Ads MCP server?",
@@ -1330,5 +1330,63 @@ export const ARTICLES: Article[] = [
       "Keyword ownership: 'amazon ads mcp' moved here from claude-for-media-buyers, whose Amazon section links here; amazon-dsp-chatgpt (the ChatGPT route) links here too.",
     ],
     related: ["amazon-dsp-chatgpt", "claude-for-media-buyers", "amazon-dsp-pacing-guide"],
+  },
+  {
+    slug: "amazon-dsp-attribution-metrics",
+    title: "Amazon DSP attribution window and metrics explained (2026)",
+    h1: "What your Amazon DSP numbers",
+    h1Accent: "mean now.",
+    description:
+      "Amazon changed DSP view attribution on January 1, 2026. The window now, what every DSP metric measures, and how to read ROAS, NTB, and viewability.",
+    type: "guide",
+    pillar: "dsp",
+    keywords: [
+      "amazon dsp attribution window",
+      "amazon dsp attribution change",
+      "what is amazon dsp's attribution lookback window",
+      "amazon dsp attribution model",
+      "amazon dsp lookback window",
+      "amazon dsp reporting metrics",
+      "amazon dsp performance metrics",
+      "amazon dsp viewability",
+    ],
+    priority: 6,
+    byline: "peachblue",
+    status: "published",
+    datePublished: "2026-10-19",
+    dateUpdated: "2026-10-19",
+    faq: [
+      {
+        q: "What is Amazon DSP's attribution lookback window?",
+        a: "By default, 14 days for both clicks and views. Amazon credits the most relevant click or viewable impression in the 14 days before a conversion, ranks clicks above views, and credits each conversion once across all advertisers. Since January 1, 2026, views on DSP ads served in Amazon's store use a shopping-signal model with a shorter window, and DSP campaigns using flexible look-back report the click and view windows the advertiser selected.",
+      },
+      {
+        q: "What changed in Amazon DSP attribution in 2026?",
+        a: "On January 1, 2026, Amazon moved view attribution for DSP ads served in its store to a shopping-signal enhanced last-touch model with a shorter window, and it does not publish the new length. Standard purchases, sales, and ROAS use the new model. Click attribution and all other inventory did not change, and the old numbers remain available as \"all views\" metrics.",
+      },
+      {
+        q: "What are \"all views\" metrics in Amazon DSP?",
+        a: "They are conversion metrics calculated under Amazon's original model, which credits every eligible ad view within 14 days, for example Purchases (all views) and ROAS (all views). Amazon kept them for comparison after the January 2026 change and recommends the standard metrics for ongoing performance. Use them to compare 2026 with 2025 on the same rules.",
+      },
+      {
+        q: "Why did my Amazon DSP ROAS drop in 2026?",
+        a: "Often because of measurement, not performance. If a line serves ads in Amazon's store and leans on view conversions, the January 1, 2026 change credits fewer of those views in the standard metrics. Compare the line's 2026 ROAS (all views) with its 2025 ROAS before deciding the media got worse.",
+      },
+      {
+        q: "What does new-to-brand mean in Amazon DSP?",
+        a: "A new-to-brand purchase is one by a shopper who had not bought from the brand in the previous 12 months. Amazon reports new-to-brand purchases, sales, and ROAS, plus the percent of purchases that were new to brand. It is the clearest signal in DSP reporting of whether a campaign recruits customers or reconverts existing ones.",
+      },
+      {
+        q: "How does Peachblue help read Amazon DSP metrics?",
+        a: "Peachblue syncs Amazon DSP daily into the same account as Meta, TikTok, and Google Ads, counts each DSP creative once across line items, and scores and tags it on 31 dimensions. It computes per-order pacing with blended CPM against your CPM goal, and agencies get client reports with margin applied per client. It reads the conversions Amazon attributes and does not model attribution, buy media, or edit campaigns.",
+      },
+    ],
+    rawMaterial: [
+      "truth/proof.md section 'Amazon DSP attribution and reporting (verified 2026-10-19)': every Amazon fact in the post, with sources",
+      "Title from Google autocomplete 2026-10-19: 'amazon dsp attribution window', 'amazon dsp attribution change', 'amazon dsp attribution model' and 'what is amazon dsp's attribution lookback window' all autocomplete; bare 'amazon dsp metrics' and 'amazon dsp kpis' are polluted by delivery-driver scorecard terms",
+      "Ships together with the attribution and retention corrections to the eight older DSP posts (findings note 2026-10-19); the reporting guide's attribution FAQ should point here once both are live",
+      "Worked examples use illustrative numbers, labeled as such; no Peachblue data cited",
+    ],
+    related: ["amazon-dsp-reporting-guide", "amazon-dsp-creative-performance", "amazon-dsp-pacing-guide"],
   },
 ];

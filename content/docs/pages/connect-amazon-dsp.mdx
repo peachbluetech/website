@@ -17,8 +17,8 @@ Peachblue syncs Amazon DSP campaign performance, orders, line items, and creativ
 
 Amazon's DSP reporting behaves differently from social platforms, and Peachblue works within those rules rather than papering over them:
 
-- **14-day attribution only.** DSP reports conversions on a 14-day window; there are no 1-day or 7-day windows. Peachblue labels DSP conversion metrics accordingly instead of mixing windows across platforms.
-- **Roughly 60 days of history.** Amazon retains about 60 days of DSP report data, so the initial backfill covers what Amazon makes available and your history builds forward from daily syncs. Connect early; your history compounds.
+- **Amazon's attribution rules.** DSP credits conversions to clicks and views on a last-touch model, 14 days by default, with a shorter signal-based window for views on ads in Amazon's store since January 1, 2026. Peachblue labels DSP conversion metrics accordingly instead of mixing windows across platforms.
+- **Up to 60 days of backfill.** When you connect, you choose how far back to pull: 7, 30, or 60 days of DSP reporting. From then on your history builds forward from daily syncs. Connect early; your history compounds.
 - **Multiple line items per creative.** The same creative often runs through several line items on the same day. Peachblue aggregates these correctly so daily numbers match what you would compute from the console.
 
 ## Sync schedule

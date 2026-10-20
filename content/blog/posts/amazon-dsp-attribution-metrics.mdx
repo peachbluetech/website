@@ -1,0 +1,167 @@
+Amazon DSP still credits a conversion to the most relevant click or viewable impression in the 14 days before it, but since January 1, 2026 that rule no longer covers every number in your report. Views on DSP ads served in Amazon's store now go through a shopping-signal model with a shorter window, the old count moved to separate "all views" metrics, and Amazon's new reporting books conversions on a different date than it used to.
+
+So a DSP ROAS that fell in January may not mean the media got worse. Below: the window now, what each DSP metric measures, and a weekly way to read them, with definitions from Amazon's support center and Ads API documentation, read in October 2026.
+
+## What is the Amazon DSP attribution window now?
+
+By default, 14 days for both clicks and views, on a last-touch model that ranks clicks above views and promoted products above brand halo (Amazon Ads support center, "Ad campaign attribution"). Each conversion is credited once across all campaigns and all advertisers, so DSP competes with your Sponsored Brands and Display campaigns for the same sale. A view counts only if the impression was viewable: at least half the ad on screen for one second for display, two seconds for video.
+
+The default now has exceptions, so the window depends on where the ad ran and how the campaign is set up:
+
+| Conversion | Window and model | Where it shows up |
+| --- | --- | --- |
+| Click on any DSP ad | 14 days, last touch | Standard metrics |
+| View of a DSP ad served outside Amazon's store | 14 days, last touch | Standard metrics |
+| View of a DSP ad served in Amazon's store, since January 1, 2026 | Shopping-signal model, shorter window (Amazon publishes no length) | Standard metrics |
+| The same store views under the old rule | 14 days, every eligible view | "All views" metrics, such as Purchases (all views) |
+| Any interaction on a campaign using flexible look-back | The click and view windows the advertiser selected | Standard metrics |
+
+The last row is easy to miss. Amazon's reporting documentation says DSP campaigns using flexible look-back windows report the click and view windows the advertiser chose, and Amazon does not publish the list of choices, so check the campaign's settings before you treat a number as a 14-day number.
+
+Peachblue reads the conversions Amazon attributes and does not re-model them. What it adds is the view across platforms: Amazon DSP sits beside Meta, TikTok, and Google Ads in one account, so each channel is read against its own history instead of a window it never used.
+
+## What changed in Amazon DSP attribution on January 1, 2026?
+
+Amazon moved view attribution for store-served ads to what it calls a shopping-signal enhanced last-touch model. The model gives credit to ad views that reach shoppers in discovery moments, such as exploratory browsing or general category searches, and applies a shorter window. It covers DSP campaigns that serve ads in the Amazon store, plus Sponsored Brands and viewable-CPM Sponsored Display. Click attribution did not change, and neither did any other inventory (Amazon Ads launch announcement, January 1, 2026).
+
+Three things follow for anyone reading DSP reports:
+
+- **The standard metrics moved.** Purchases, sales, and ROAS use the new model for affected views, and Amazon recommends the standard metrics for ongoing performance.
+- **The old numbers did not disappear.** The original model, every eligible view in 14 days, lives on as "all views" metrics in Amazon's unified reporting, its report builder, and the API.
+- **Year over year needs care.** 2025 standard metrics were counted under the old rule. Compare them with 2026 all-views figures, never with 2026 standard figures.
+
+A worked example, with illustrative numbers. A remarketing line spends $10,000 in a month of 2026:
+
+| Metric | Standard | All views |
+| --- | --- | --- |
+| Purchases | 310 | 400 |
+| Sales | $18,600 | $24,000 |
+| ROAS | 1.86 | 2.40 |
+
+The view attribution gap is (400 minus 310) divided by 400, or 22.5 percent: almost a quarter of the purchases the old rule credited to this line no longer qualify. If the line showed a 2.40 ROAS in 2025, its performance did not change; the rule did. The gap is also information: lines that lose the most credit leaned hardest on passive views of shoppers already in the store, which makes them the first candidates for a holdout test.
+
+Peachblue's composite score is a percentile blend of CTR, ROAS, CPA, and spend, so it ranks creatives against each other rather than against a fixed number. A rule change that lowers every line together does not demote a creative on its own; where tiers do reshuffle, the change hit some lines harder than others, and that is worth a look.
+
+## Which Amazon DSP metrics measure delivery?
+
+Delivery metrics say whether the money bought ads that could be seen, and at what real price. Read them first, because every rate further down divides by them.
+
+| Metric | How Amazon calculates it | What it tells you |
+| --- | --- | --- |
+| Impressions | Gross impressions minus invalid impressions | What you paid for after traffic-quality filtering |
+| Invalid impression rate | Invalid impressions / gross impressions | How much was filtered out |
+| Measurable rate | Measurable impressions / impressions | How much could be checked for viewability at all |
+| Viewable rate | Viewable impressions / measurable impressions | Of what could be checked, how much was seen |
+| Viewable distribution | Viewable impressions / impressions | Of everything bought, how much was seen |
+| CPM | Total cost / impressions x 1,000 | Price per thousand impressions |
+| vCPM | Total cost / viewable impressions x 1,000 | Price per thousand impressions that were seen |
+
+A worked example. A line buys 1,000,000 impressions at an $8 CPM, so $8,000 of cost. 800,000 were measurable and 560,000 viewable: an 80 percent measurable rate, a 70 percent viewable rate, a 56 percent viewable distribution, and a vCPM of $14.29. If next month the CPM holds at $8 but viewable distribution falls to 45 percent, the vCPM rises to $17.78 while the invoice looks flat.
+
+One agency detail: in Amazon's new reporting, total cost excludes the third-party fees the agency pays, so check which cost column your invoice uses before you compute CPMs or margin. Peachblue applies your agency margin per client to spend and spend-derived metrics, so the client sees billable numbers while pace is still measured against the raw budget.
+
+## How do you read Amazon DSP video and streaming metrics?
+
+Video metrics measure attention, and on streaming TV they are most of what you have, because there is usually nothing to click. Amazon reports starts, the plays that reached 25, 50, and 75 percent (first quartile, midpoint, third quartile), and complete views. Completion rate is complete views divided by starts; cost per completed view is total cost divided by complete views.
+
+A worked example. 200,000 starts and 120,000 complete views is a 60 percent completion rate, and at $6,000 of cost that is $0.05 per completed view. Then read the shape: if 90 percent of starts reach the first quartile but only 60 percent finish, the opening holds and the back half loses people, which is an edit question, not a media question. Only compare completion between spots of the same length.
+
+Read these per creative, not per line item, because the same video usually runs in several line items and a ranking by row splits its results. Peachblue mirrors each DSP asset and counts it once across line items, then analyzes it on the same 31 dimensions as your social video, so a completion gap between two spots comes with a read on what differs between them.
+
+## Which Amazon DSP metrics show shopping behavior?
+
+On-Amazon conversion metrics are what make DSP different from other programmatic buying: you can watch shoppers move toward a product long before purchases pile up. All of them follow the attribution rules above.
+
+| Metric | What it counts | Read it as |
+| --- | --- | --- |
+| Detail page views | Product page visits attributed to the ad | Consideration |
+| Add to cart | Cart adds attributed to the ad | Purchase intent |
+| Branded searches | Searches for the promoted brand attributed to the ad | Awareness turning into intent |
+| Purchases and sales | Attributed orders and their value | The outcome |
+| ROAS | Sales / total cost | Efficiency, for lines meant to sell |
+
+Two definitions catch people out in 2026:
+
+- **Halo is in the base number.** In Amazon's new Reporting API, generally available since September 30, 2026, "purchases" includes both promoted and halo products, the figure DSP used to call total purchases. Halo means other products from the same brand, which the help center limits to the promoted product's subcategory. Use the promoted-only metric when a client asks what the advertised product sold.
+- **Views do most of the work.** Amazon's help center says view-through conversions are typically the majority for DSP campaigns, which is why the January change matters so much more here than on click-only ad types.
+
+For what ROAS can and cannot tell you, see [what ROAS is and where it misleads](/blog/what-is-roas). In Peachblue, ask Agent Peach, or Claude over the MCP server, to rank last month's DSP creatives and the answer comes back grouped by creative and scored, with spend beside each, not as rows by line item.
+
+## How do you read new-to-brand and long-term sales?
+
+New-to-brand (NTB) separates the customers a campaign recruited from the ones it reconverted. A purchase is new to brand when the shopper had not bought from the brand in the previous 12 months, and Amazon reports NTB purchases, NTB sales, NTB ROAS, and the percent of purchases new to brand (NTB purchases divided by purchases). Two lines with the same ROAS and different NTB shares are doing different jobs: one grows the customer base, the other harvests it.
+
+Long-term sales carries the same idea forward. Amazon defines it as attributed sales plus the estimated 365-day value of the new-to-brand shoppers a campaign brought in, based on the brand's historical shopping patterns, and divides it by cost for long-term ROAS. It is an estimate, not a count, so label it that way in a client deck and keep the attributed number beside it.
+
+Both matter most for upper-funnel lines, which is where a single ROAS figure misleads hardest. Peachblue's Creative Economics view keeps awareness and DSP delivery spend in its own bucket and never counts it as waste, so a streaming line judged on reach and NTB is not flagged as a failure for a low ROAS.
+
+## Why do Amazon DSP conversions keep changing after the fact?
+
+Because the window is still open. Amazon's new reporting books every conversion on the date of the ad interaction, so a sale on October 14 that followed a view on October 1 lands in the October 1 row, and a report date stays incomplete until its look-back ends. Conversions can take up to 12 hours to appear, and orders cancelled within 72 hours are deducted, which can take up to 7 days. Older DSP reports booked conversions on the purchase date instead, so the same campaign can show a different daily curve depending on which report you pulled.
+
+So treat the last two weeks of conversion data as still filling in, and never compare a closed week with an open one. Delivery-side signals do not wait: Peachblue's fatigue board flags CTR decay against each creative's own best rolling week, which needs no attribution window to settle and is most useful on display, where people click.
+
+## How should you compare Amazon DSP with Meta and Google?
+
+Label the window and model on every platform column, and compare each channel with its own history rather than head to head. A DSP column counts Amazon store activity on Amazon's last-touch click-and-view rules; Meta and Google default to different windows and count different events, so equal ROAS does not mean equal performance. For a fuller picture inside Amazon, multi-touch metrics (launched in beta for US advertisers) split credit across the Amazon ads a shopper saw, and Amazon Marketing Cloud allows custom look-backs up to 28 days with other attribution models. The [DSP reporting guide](/blog/amazon-dsp-reporting-guide) covers the report surfaces themselves.
+
+## A weekly Amazon DSP read in five steps
+
+Five steps an agency can run every Monday, for each client.
+
+### 1. Pull the right metric set
+
+Pull standard and all-views conversions side by side for any period that crosses January 2026, split promoted from halo, and keep purchases from clicks next to purchases from views. Note the look-back on any campaign that uses flexible windows.
+
+In Peachblue this is the daily DSP sync into the same account as Meta, TikTok, and Google Ads, so the standard metrics arrive without a report job, scoped to one advertiser at a time in agency mode. Keep the all-views comparison in Amazon's report builder for quarters that cross the change.
+
+### 2. Check delivery before outcomes
+
+Invalid rate, viewable distribution, CPM against vCPM, and pace against the flight. A line that is underdelivering or buying unviewable inventory will show weak outcomes for reasons no creative change can fix. Our [pacing guide](/blog/amazon-dsp-pacing-guide) has the math.
+
+In Peachblue this is the pacing view: one row per order with budget, spend to date, pace percent, and blended CPM against your CPM goal, with status filters to surface what is off track.
+
+### 3. Judge each line by its job
+
+Awareness and streaming lines on viewable reach, completion, and NTB; consideration lines on detail page views and add to cart; conversion lines on attributed purchases, ROAS, and NTB share. Never rank a streaming spot against a remarketing banner on ROAS.
+
+In Peachblue this is the Today view's week-over-week deltas plus Creative Economics, which reports hit rate and wasted spend on the conversion side while delivery spend stays in its own bucket.
+
+### 4. Read creatives as creatives
+
+Combine every line item a creative runs in, then compare creatives on rates (viewable rate, completion rate, detail page view rate, cost per purchase) rather than totals, which reward whichever creative got the most budget. [Amazon DSP creative performance](/blog/amazon-dsp-creative-performance) covers what to judge each format on.
+
+In Peachblue this happened at sync: each DSP creative is counted once, placed in a tier (Top Performer, Above Average, Average, Underperformer) by [composite score](/docs/scoring), and tagged on 31 dimensions with a written analysis, so "why is this one winning" has an answer on Amazon too.
+
+### 5. Report with the rules on the page
+
+Every client deck gets one line on attribution: the window, standard or all views, and which days are still filling in. That line prevents most of the "why did DSP drop" conversations before they start.
+
+In Peachblue this is Reports: date-range reports with supplier breakdowns, PDF and CSV export, and your agency margin applied per client.
+
+## What makes Peachblue better than reading DSP metrics in Amazon's console?
+
+Amazon's console tells you what each line did under Amazon's rules, one advertiser at a time. Peachblue tells you which creative earned it, which flight needs attention, and what to make next, across your clients and platforms. Same question, different answer:
+
+| You ask | Amazon's console and reports | Peachblue |
+| --- | --- | --- |
+| "Which creative is actually working?" | Rows per creative per line item | Each creative counted once across line items, scored and tiered |
+| "Why is it working?" | Metrics only | 31 tagged dimensions and a written analysis per creative |
+| "Which client needs attention this week?" | One advertiser at a time | Clients compared side by side, then pacing per order for the one you pick |
+| "How does DSP compare with Meta and TikTok?" | Amazon only | Amazon DSP, Meta, TikTok, and Google Ads in one account |
+| "What should we make next?" | Nothing | A Next Creative Brief built from your own winners |
+| "Can I just ask?" | Amazon Ads Agent's chat, in expanded closed beta | Agent Peach in the app, or your own data in Claude over MCP |
+
+This is how Peachblue supercharges your DSP reporting: on performance, on creative, and on the loop between them.
+
+**Performance.** The money questions on DSP are pace and placement: which orders will miss their flight, which suppliers are earning their CPM, which lines deserve next week's budget. Peachblue answers them daily for each client, with pace per order against your CPM goal and margin applied the way you bill, so a pacing miss is caught in the first week of a flight, not in the month-end report.
+
+**Creative.** DSP creative is the least analyzed in most agencies, because the console reports it by line item and nobody has time to stitch it back together. Peachblue counts each asset once and gives it the same 31-dimension analysis as your social ads, so a finding such as "spots that show the product early complete better" comes from your own data, and your best DSP creative sits next to your best Meta creative.
+
+**The loop.** The read feeds the next move. Intelligence finds the patterns your winners share, and the Next Creative Brief turns them into concepts, proven hooks, and a prompt block your designer, video team, or image and video generator can work from. Peachblue does not make the ads; it makes sure the next batch is built on what is already winning, then scores it on the same scale when it runs. The result is a faster loop with less wasted spend: weak lines cut on evidence, strong creative briefed while it is still fresh, and an Economics view that never mistakes awareness spend for waste.
+
+Amazon keeps what is its alone: the attribution itself, all-views and multi-touch metrics, Amazon Marketing Cloud, and peer benchmarks for CPM, video completion, and long-term ROAS. Use both: Amazon for the source numbers, Peachblue for the judgment.
+
+## The short version
+
+DSP's window is 14 days for clicks and views by default, shorter and signal-based for store-served views since January 2026, and whatever the advertiser picked on flexible look-back campaigns. Read delivery first, judge each line by its job, read creatives as creatives, and put the rules on every client report. Amazon DSP is on Peachblue's [Scale plan and up](/pricing), pacing and reports on Power, and multi-client workspaces on Agency. One boundary: Peachblue reads the conversions Amazon attributes. It does not model attribution, buy media, or edit campaigns. To ask these questions in Claude directly, see [Amazon Ads MCP in Claude](/blog/amazon-ads-mcp-claude).

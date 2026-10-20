@@ -77,7 +77,7 @@ export const INTEGRATION_PAGES: IntegrationPage[] = [
     ],
     steps: [
       "Connect with your Amazon Ads sign-in and pick the advertising profile to sync.",
-      "Peachblue backfills the report history Amazon retains (about 60 days) and syncs daily from then on.",
+      "Peachblue backfills up to the last 60 days of DSP report history and syncs daily from then on.",
       "Pacing, reports, and creative analysis populate automatically. Set CPM goals and margin per client.",
     ],
     docsSlug: "connect-amazon-dsp",
@@ -88,7 +88,7 @@ export const INTEGRATION_PAGES: IntegrationPage[] = [
     faq: [
       {
         q: "What does Peachblue report from Amazon DSP?",
-        a: "Daily creative-level performance including spend, impressions, clicks, viewability, video metrics, purchases, detail page views, add-to-carts, and new-to-brand metrics, plus orders and line items with budgets and flight dates. Amazon DSP reports on a 14-day attribution window, and Peachblue labels metrics accordingly.",
+        a: "Daily creative-level performance including spend, impressions, clicks, viewability, video metrics, purchases, detail page views, add-to-carts, and new-to-brand metrics, plus orders and line items with budgets and flight dates. Amazon DSP conversions follow Amazon's last-touch click and view rules (14 days by default), and Peachblue labels metrics accordingly.",
       },
       {
         q: "Does Peachblue handle DSP pacing?",

@@ -41,7 +41,7 @@ Access to your campaigns and reports and the power to change them, with the anal
 
 **Campaigns.** `query_campaign` reads Sponsored Products, Sponsored Brands, Sponsored Display, Sponsored Television, and Amazon DSP campaigns, and `create_campaign` builds Sponsored Products, Sponsored Brands, and DSP campaigns. DSP gets two tools of its own: bid adjustment rules for an ad group by device, browser, or geography, and adding products for conversion tracking. No documented tool returns pacing, so Claude has to work it out from budgets, flight dates, and report rows. Peachblue's `get_pacing` returns it per order, already computed.
 
-**Reports.** Report tools run as jobs: Claude creates a campaign, product, or inventory report, waits, and retrieves the rows. It works, and it costs turns and context on every question. Peachblue syncs DSP daily and keeps what it syncs, so the answer is a lookup, and your history builds past the roughly 60 days of DSP report data Amazon retains.
+**Reports.** Report tools run as jobs: Claude creates a campaign, product, or inventory report, waits, and retrieves the rows. It works, and it costs turns and context on every question. Peachblue syncs DSP daily and keeps what it syncs, so the answer is a lookup instead of a report job.
 
 **Skills.** Amazon publishes downloadable skills that script common jobs for Claude Code. One, `dsp-campaign-analysis`, turns "How did my Holiday Promo Q4 campaign perform?" into two reports, one for ROAS and sales and one for audience segments, waits for both, and combines them ([skills overview](https://advertising.amazon.com/API/docs/en-us/mcp/skills/skills-overview)). It is the closest the server comes to analysis, one campaign at a time. Peachblue starts at the portfolio: `compare_clients` puts every client on one row, and `get_supplier_breakdown` shows where each client's DSP spend ran.
 
@@ -112,7 +112,6 @@ The analysis is finished before the conversation starts, and none of it can touc
 | "How are my DSP flights pacing?" | Claude pulls budgets and report rows and does the math in chat | Pace, expected and actual spend, and blended CPM per order, computed |
 | "Which client needs attention this week?" | One account at a time; the chat carries the last one forward | Every client on one row, then scope the chat to one |
 | "Which DSP creative is winning, and why?" | Rows by ad group; no documented tool tags or scores creative | Creatives grouped across line items, ranked by one score, tagged on 31 dimensions |
-| "What happened last quarter?" | What Amazon still retains, about 60 days | History kept from the day you connect |
 | "What should we make next?" | A draft from whatever is in the conversation | Concepts built on your winners' patterns, ready to brief |
 | "How does DSP compare with Meta and TikTok?" | Amazon only | One connection across Amazon DSP, Meta, TikTok, and Google Ads |
 
