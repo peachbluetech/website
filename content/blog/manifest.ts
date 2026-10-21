@@ -534,7 +534,7 @@ export const ARTICLES: Article[] = [
     byline: "nick",
     status: "published",
     datePublished: "2026-09-03",
-    dateUpdated: "2026-09-28",
+    dateUpdated: "2026-10-21",
     faq: [
       {
         q: "What is a creative analytics tool?",
@@ -546,7 +546,7 @@ export const ARTICLES: Article[] = [
       },
       {
         q: "How much do creative analytics tools cost?",
-        a: "As of September 3, 2026: entries range from $59 per month (Foreplay) and $79 (Peachblue Starter) through $129 (Atria Core), $249 (uplifted), $499 (Segwise Growth), and $750 (Motion Starter), with agency and enterprise tiers running $459 to $1,699 or custom. rule1 sells an MCP-only plan for 20 euros. Most tools discount annual billing 10 to 20 percent.",
+        a: "As of September 3, 2026, with Motion and Segwise re-checked October 21: entries range from $59 per month (Foreplay) and $79 (Peachblue Starter) through $129 (Atria Core), $249 (uplifted), $499 (Segwise Growth), and $999 (Motion Starter), with agency and enterprise tiers running $459 to $1,199 or custom. rule1 sells an MCP-only plan for 20 euros. Most tools discount annual billing 10 to 20 percent.",
       },
       {
         q: "Which creative analytics tools support Amazon DSP?",
@@ -1388,5 +1388,59 @@ export const ARTICLES: Article[] = [
       "Worked examples use illustrative numbers, labeled as such; no Peachblue data cited",
     ],
     related: ["amazon-dsp-reporting-guide", "amazon-dsp-creative-performance", "amazon-dsp-pacing-guide"],
+  },
+  {
+    slug: "best-creative-analytics-tools-for-agencies",
+    title: "Best creative analytics tools for agencies (2026)",
+    h1: "The best creative analytics tools for",
+    h1Accent: "agencies.",
+    description:
+      "Ten creative analytics tools compared for agencies: client separation, platforms including Amazon DSP, client reports, and prices verified October 21, 2026.",
+    type: "alternatives",
+    pillar: "comparisons",
+    keywords: [
+      "best creative analytics tools for agencies",
+      "creative analytics tools for agencies",
+      "creative analytics for agencies",
+      "creative analytics software for agencies",
+      "creative analytics tools amazon dsp",
+      "agency creative reporting tools",
+    ],
+    competitors: ["Motion", "Superads", "Segwise", "Atria", "Foreplay", "Madgicx", "Hawky", "Triple Whale", "Vidmob", "Peachblue"],
+    priority: 27,
+    byline: "nick",
+    status: "published",
+    datePublished: "2026-10-21",
+    dateUpdated: "2026-10-21",
+    faq: [
+      {
+        q: "What are the best creative analytics tools for agencies in 2026?",
+        a: "Peachblue, Motion, Superads, Segwise, Atria, Foreplay, Madgicx, Hawky, Triple Whale, and Vidmob. Peachblue fits agencies whose clients buy beyond Meta, including Amazon DSP; Motion fits social-first teams that want unlimited seats; Superads is the lowest-priced reporting option; and Segwise is built for app and game advertisers. The right pick depends on which platforms your clients buy on and how the price scales with your roster.",
+      },
+      {
+        q: "Which creative analytics tools support Amazon DSP?",
+        a: "Of the ten tools in this comparison, two do: Peachblue and Vidmob. Peachblue covers Amazon DSP from its Scale plan at $499 a month, with flight pacing and supplier breakdowns, and Vidmob covers Amazon DSP and Sponsored Ads among 13 channels at quote-only enterprise pricing. The others focus on social, search, or mobile app networks.",
+      },
+      {
+        q: "How much do creative analytics tools cost for agencies?",
+        a: "Published entry prices run from $45 a month (Madgicx, priced by ad spend) and $59 (Foreplay) to $999 (Motion's Starter, for up to $50k of monthly ad spend), with Superads at $150, Atria at $159, and Segwise at $499. Peachblue runs from $79 to an Agency plan priced to your client roster, while Hawky, Triple Whale's paid tiers, and Vidmob are on request. Several tools scale with your clients' combined ad spend, so price them at your roster's size, not the entry tier.",
+      },
+      {
+        q: "What should an agency look for in a creative analytics tool?",
+        a: "Five things: separation between clients' data, reports, and AI answers; coverage of every platform your clients buy on; client-facing output such as live links, PDF reports, view-only guests, and margin on reported spend; a pricing model that scales sensibly with the roster; and AI access that only sees the client you ask about. Ask each vendor to demo one client's report with every other client hidden and your margin applied.",
+      },
+      {
+        q: "Which creative analytics tools work with Claude?",
+        a: "Several offer MCP access to Claude: Peachblue (Pro and up), Motion (from Starter), Atria (every plan, capped at 600 calls a month on Core), Foreplay (Workflow and Agency plans), and Madgicx, whose Facebook MCP can also change budgets and bids. Peachblue's connection is read-only and, in agency workspaces, scopes every call to the client you have selected.",
+      },
+    ],
+    rawMaterial: [
+      "truth/competitors.md section 'Agency roundup re-verification 2026-10-21': every price and competitor fact, read on the vendors' live pages with billing toggles clicked.",
+      "Why this post (2026-10-21): Google page one and Perplexity for 'best creative analytics tools for agencies' are rival-written lists (Hawky, Segwise, Madgicx, Superads) plus Improvado; none covers Amazon DSP or names Peachblue. Built for answer engines: answer-first list, at-a-glance table with Best for and Price, one 'best for' heading per tool, dated prices, FAQ schema.",
+      "Agency price: 'priced to your client roster', matching the live pricing page. Agency clients are Amazon DSP advertisers or Meta ad accounts; never claim one client workspace spanning all four platforms.",
+      "Re-verify every price after 30 days; Motion's Starter went from $750 to $999 between 2026-09-03 and 2026-10-21.",
+      "Companion: best-creative-analytics-tools (the brand-team list) should be rebuilt on the same verified facts and link here.",
+    ],
+    related: ["best-creative-analytics-tools", "peachblue-vs-motion", "amazon-dsp-pacing-guide"],
   },
 ];

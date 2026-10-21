@@ -276,3 +276,94 @@ included seats Core 5 / Plus 8 / Business 15, extra seats $20/mo; MCP is
   Air/Frame.io/Drive angle). Ships MCP per earlier verification.
 - Genuinely right for: creative teams whose pain is asset chaos first,
   performance questions second.
+
+## Agency roundup re-verification 2026-10-21 (live pages, supersedes conflicting figures above)
+
+Checked for best-creative-analytics-tools-for-agencies. Prices read in the
+browser pane on each vendor's live pricing page, with the monthly/annual
+toggle clicked where one exists. Feature notes from the same pages unless a
+source is named.
+
+### Motion (motionapp.com/pricing, homepage)
+- CHANGED: Starter is now $999/mo (was $750 on 2026-09-03), "Up to $50k
+  monthly ad spend", "Unlimited seats & unlimited ad accounts". Pro (over
+  $50k spend) and Growth (over $125k) are "Let's chat". No annual price or
+  toggle shown. Free trial link in header, no length stated.
+- Starter includes AI tags, ad leaderboard, creative analytics, benchmarks,
+  "full data & MCP access", Slack, a "Runneth AI brain". Pro adds unlimited
+  view-only guests and Northbeam/GA attribution integrations.
+- Platforms (homepage): Meta, TikTok, YouTube, LinkedIn. "Share reports with
+  live data with your team or clients."
+- Agency: no agency plan or multi-client workspace on the site; a partner
+  program pays revenue share for referred clients (motionapp.com/partner-program).
+
+### Superads (superads.ai/pricing, /llm-info)
+- Professional: $150/mo billed monthly, $125/mo billed yearly ($1,500/yr),
+  "Up to $100k in monthly ad spend +$100/mo per extra 100k ad spend".
+  Enterprise custom. 14-day free trial. Free plan discontinued for new
+  signups (llm-info).
+- Unlimited users, no per-seat pricing; multi-account reports; boards by
+  client; view-only guests; scheduled reports to Slack or email; AI tagging,
+  Superads Scores, Ask AI (llm-info). Platforms: Meta, TikTok, Google Ads,
+  LinkedIn (llm-info; its agency page says YouTube). No MCP mentioned.
+
+### Segwise (segwise.ai/pricing; blocks plain fetches, read in browser)
+- Startup $250/mo (under $50K spend, "Limited eligibility", monthly only).
+  Growth $499/mo monthly or $449/mo billed annually, up to $250K spend.
+  CHANGED: Pro is now custom ($250K to $500K spend; was $1,699). Enterprise
+  custom, "For agencies and large organizations", $500K+.
+- "Every feature on every plan": AI tagging, Creative Strategy Agent,
+  generation (incl. playables, CTV), pre-flight testing, competitor
+  insights, fatigue tracking, "Studio View For Multiple Brands", "Unlimited
+  Seats and view only users", 15+ network connections, MMP integrations.
+  Its own agency blog (2026-10-06) says a read-only "Ask Segwise" MCP is
+  switched on per account; attribute it to Segwise if used.
+
+### Atria (tryatria.com/pricing, monthly toggle clicked)
+- Unchanged since 2026-09-28: Core $159/mo monthly ($129 annual), Plus $599
+  ($479), Business $1,199 ($959), Enterprise custom. Ad accounts 5 / 10 /
+  unlimited; Business adds "Invite guests" and custom metrics. MCP 600
+  calls/mo on Core, unlimited from Plus. Agency page headline names Meta,
+  TikTok, YouTube; performance analytics verified as Meta + TikTok earlier.
+
+### Foreplay (foreplay.co/pricing, both toggles clicked)
+- Unchanged: Basic $59 / Workflow $175 / Agency $459 monthly; $49 / $149 /
+  $389 billed annually (page defaults to annual). Agency plan: 10 users,
+  Lens on 10 brands (Meta and TikTok own-ad analytics), competitor tracking
+  50 brands (unlimited on annual). MCP from Workflow. 7-day trial, card
+  required.
+
+### Madgicx (madgicx.com/pricing, /llm-info updated 2026-10-06)
+- Pricing page shows "See price inside the app"; its llm-info page: "priced
+  by monthly ad spend and start at $45 per month". 7-day free trial.
+- Optimizes Meta only; reporting also covers Google Ads, TikTok, Shopify,
+  Klaviyo; One-Click Report shareable with clients by link or PDF; Facebook
+  MCP can change status, budgets, bids. Official Meta Business Partner.
+
+### Hawky (hawky.ai/pricing)
+- No prices: three tiers (Dashboards, Ask, Auto-pilot), all "Talk to sales",
+  "per brand", unlimited users. Platforms Meta, Google, TikTok. Competitor
+  tracking, Copilot, shareable reports (Ask tier); Auto-pilot adds agents
+  that move bids and budgets. Location not stated.
+
+### Triple Whale (triplewhale.com/pricing; blocks plain fetches)
+- Free plan; Foundation, Automate, Enterprise all "Book a walkthrough" or
+  "Contact sales", no prices shown. Attribution-first (Triple Pixel, MTA;
+  MMM and incrementality on Enterprise), Moby AI on every plan; creative
+  analysis and generation ("Turn winning creative into more winners") on
+  Automate.
+
+### Vidmob (vidmob.com/pricing)
+- Quote only, "priced per brand" by annual impressions (Slate up to 1B,
+  Portfolio 1B to 10B, Premier 10B+). 13 channels including Amazon
+  Sponsored Ads and Amazon DSP, DV360, The Trade Desk. Pre-flight and
+  in-flight scoring, element-level reports, Maddie AI assistant. So Amazon
+  DSP creative analytics exists at enterprise, quote-only pricing; the
+  voice.md DSP claim ("self-serve pricing") still holds.
+
+### Peachblue (peachblue.io/pricing, live)
+- Starter $79 (Meta + TikTok), Pro $199 (Google Ads, MCP), Scale $499
+  (Amazon DSP), Power $799 (client-ready reports + pacing), Agency "Custom,
+  tailored to your client roster" (multi-client workspaces, per-client
+  reports, Intelligence and Brand Intel, agency margin on reports, 25 seats,
+  15,000 credits). Annual = 2 months free. 7-day trial on Starter and Pro.
