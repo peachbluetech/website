@@ -106,7 +106,7 @@ export const ARTICLES: Article[] = [
     byline: "nick",
     status: "published",
     datePublished: "2026-08-12",
-    dateUpdated: "2026-09-03",
+    dateUpdated: "2026-10-21",
     faq: [
       {
         q: "Why did MagicBrief shut down?",
@@ -122,7 +122,7 @@ export const ARTICLES: Article[] = [
       },
       {
         q: "What should I use if I mainly need creative performance analytics?",
-        a: "Motion is the incumbent at $750 per month and up, strongest for Meta-centric teams who want its community and services layer. Peachblue covers Meta, TikTok, Google Ads, and Amazon DSP with AI analysis of your own creatives, from $79 self-serve plans up to a $1,499 Agency tier with multi-client workspaces and per-client DSP reporting.",
+        a: "Motion is the incumbent at $999 per month and up, strongest for Meta-centric teams who want its community and services layer. Peachblue covers Meta, TikTok, Google Ads, and Amazon DSP with AI analysis of your own creatives, from $79 self-serve plans up to an Agency tier, priced to your client roster, with multi-client workspaces and per-client DSP reporting.",
       },
     ],
     rawMaterial: [
@@ -206,11 +206,11 @@ export const ARTICLES: Article[] = [
   },
   {
     slug: "motion-alternatives",
-    title: "Motion alternatives now that Starter is $750/mo (2026)",
+    title: "Motion alternatives now that Starter is $999/mo (2026)",
     h1: "Motion moved upmarket. Your alternatives,",
     h1Accent: "honestly.",
     description:
-      "Motion's entry price tripled to $750/mo in 2026. Honest alternatives at every spend level, from solo advertisers to agencies, with verified pricing.",
+      "Motion's entry price rose from $250 to $999/mo in 2026. Honest alternatives at every spend level, from solo advertisers to agencies, with verified pricing.",
     type: "alternatives",
     pillar: "comparisons",
     keywords: [
@@ -224,11 +224,11 @@ export const ARTICLES: Article[] = [
     byline: "nick",
     status: "published",
     datePublished: "2026-08-14",
-    dateUpdated: "2026-09-28",
+    dateUpdated: "2026-10-21",
     faq: [
       {
         q: "How much does Motion cost now?",
-        a: "As of August 2026, Motion's Starter tier is $750 per month for accounts up to $50k in monthly ad spend, Pro is $1,050 per month, and the Growth tier above that is custom-priced. A limited free plan exists. Most comparison articles still cite the old $250 entry price, which was retired during 2026.",
+        a: "As of October 2026, Motion's Starter tier is $999 per month for accounts up to $50k in monthly ad spend, with unlimited seats and ad accounts. Pro (over $50k) and Growth (over $125k) are priced on request, and no annual price is published. Starter was $250 earlier in 2026 and $750 as recently as September, so many comparison articles still cite an outdated price.",
       },
       {
         q: "What is the best Motion alternative for creative analytics?",
@@ -323,7 +323,7 @@ export const ARTICLES: Article[] = [
     h1: "Motion vs Atria, without the",
     h1Accent: "spin.",
     description:
-      "Motion ($750+) vs Atria ($129-$1,199): platforms, AI depth, pricing, and who each one actually fits, from someone who competes with both.",
+      "Motion ($999+) vs Atria ($129-$1,199): platforms, AI depth, pricing, and who each one actually fits, from someone who competes with both.",
     type: "vs",
     pillar: "comparisons",
     keywords: ["motion vs atria", "atria vs motion", "motion app review", "atria review"],
@@ -332,7 +332,7 @@ export const ARTICLES: Article[] = [
     byline: "nick",
     status: "published",
     datePublished: "2026-09-10",
-    dateUpdated: "2026-09-28",
+    dateUpdated: "2026-10-21",
     faq: [
       {
         q: "Is Motion or Atria better for creative analytics?",
@@ -340,7 +340,7 @@ export const ARTICLES: Article[] = [
       },
       {
         q: "How much do Motion and Atria cost in 2026?",
-        a: "Motion starts at $750 per month for up to $50k in monthly ad spend, $1,200 above that, and custom pricing over $125k, all demo-gated with unlimited seats. Atria runs $129, $479, and $959 per month billed annually, gated by AI credits, ad accounts, and analyzed spend, with extra seats at $20. Both repriced within the last year; prices verified September 10, 2026.",
+        a: "Motion starts at $999 per month for up to $50k in monthly ad spend, with Pro (over $50k) and Growth (over $125k) priced on request, all demo-gated with unlimited seats. Atria runs $129, $479, and $959 per month billed annually, gated by AI credits, ad accounts, and analyzed spend, with extra seats at $20. Both repriced within the last year; prices verified October 21, 2026.",
       },
       {
         q: "Do Motion or Atria support Google Ads or Amazon DSP?",
@@ -352,7 +352,7 @@ export const ARTICLES: Article[] = [
       },
       {
         q: "Is there an alternative to both Motion and Atria?",
-        a: "Yes. If the constraint is platform coverage, pricing, or agency workflows, Peachblue covers Meta, TikTok, Google Ads, and Amazon DSP with 31-dimension creative analysis, pattern detection that produces generation-ready briefs, and agency infrastructure, from $79 self-serve through a $1,499 Agency tier. Full disclosure: Peachblue is our product; the complete eight-tool comparison with verified pricing is linked in the article.",
+        a: "Yes. If the constraint is platform coverage, pricing, or agency workflows, Peachblue covers Meta, TikTok, Google Ads, and Amazon DSP with 31-dimension creative analysis, pattern detection that produces generation-ready briefs, and agency infrastructure, from $79 self-serve up to an Agency tier priced to your client roster. Full disclosure: Peachblue is our product; the complete eight-tool comparison with verified pricing is linked in the article.",
       },
     ],
     rawMaterial: ["truth/competitors.md; disclose we compete with both, concessions mandatory"],
@@ -763,7 +763,7 @@ export const ARTICLES: Article[] = [
     byline: "nick",
     status: "published",
     datePublished: "2026-09-19",
-    dateUpdated: "2026-09-28",
+    dateUpdated: "2026-10-21",
     faq: [
       {
         q: "What is the difference between Peachblue and Motion?",
@@ -771,7 +771,7 @@ export const ARTICLES: Article[] = [
       },
       {
         q: "How much do Peachblue and Motion cost?",
-        a: "Motion starts at $750 per month for up to $50k in monthly ad spend analyzed, $1,200 above that, and custom pricing over $125k, demo-gated with unlimited seats. Peachblue runs $79 to $1,499 per month self-serve with a 7-day trial on the first two tiers, metered by monthly analysis credits rather than ad spend. Prices verified September 19, 2026.",
+        a: "Motion starts at $999 per month for up to $50k in monthly ad spend analyzed, with Pro (over $50k) and Growth (over $125k) priced on request, demo-gated with unlimited seats. Peachblue runs $79 to $799 per month self-serve with a 7-day trial on the first two tiers, plus an Agency tier priced to your client roster, all metered by monthly analysis credits rather than ad spend. Prices verified October 21, 2026.",
       },
       {
         q: "Does Motion support Amazon DSP or Google Ads?",
