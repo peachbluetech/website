@@ -367,3 +367,66 @@ source is named.
   tailored to your client roster" (multi-client workspaces, per-client
   reports, Intelligence and Brand Intel, agency margin on reports, 25 seats,
   15,000 credits). Annual = 2 months free. 7-day trial on Starter and Pro.
+
+## Amazon DSP creative analytics re-verification 2026-10-23 (for amazon-dsp-creative-analytics-tools)
+
+Vendors AI answers name for "creative analytics for Amazon DSP" (Perplexity, ChatGPT and Google, 2026-10-22/23 sweep). Read on each vendor's own pages; prices checked in the browser pane where published.
+
+### Amazon Marketing Cloud (advertising.amazon.com/solutions/products/amazon-marketing-cloud)
+- "available at no cost to eligible advertisers via web-based UI and API";
+  eligibility not defined; sponsored ads advertisers get self-service
+  access, DVA+ advanced-settings advertisers request it from their Ad Tech
+  account executive, others go through Amazon Ads partners. Paid Features
+  (beta) from Amazon and third parties (Experian, NCS), no prices.
+- Clean room on AWS Clean Rooms; event-level queries with aggregated,
+  anonymous outputs only; custom audiences; "no SQL needed" templates and
+  Ads Agent in AMC that writes SQL from natural language.
+- Amazon's AMC and DSP pages describe NO creative-level report; creative
+  questions mean writing (or generating) queries. Do not claim AMC has a
+  creative report.
+- Amazon's DSP page now says "Amazon DSP has evolved into Amazon Ads Agent"
+  and asks "What was Amazon DSP?" (past tense). Keep "Amazon DSP" in our
+  copy (agencies still say it) but note the change once.
+
+### Smartly (docs.smartly.io/docs/smartly-for-amazon, smartly.io/product/amazon)
+- Amazon DSP integration labelled "Beta functionality" (docs updated
+  2026-09-29): creative production (templates, creative AI, Video Ad
+  Assembly), trafficking via Producer, "Creative Predictive Potential"
+  pre-launch attention testing, "Creative Insights" (which creatives
+  performed best), reporting. Media: streaming TV, online video, display.
+- No published price (pricing URL 404; demo only).
+
+### Pacvue (pacvue.com/amazon-demand-side-platform)
+- Commerce media platform: AMC-powered measurement, rules that "Pause DSP
+  creatives automatically when ASINs go out of stock or lose the Buy Box",
+  Pacvue Agent (conversational insights, recommendations), rules-based
+  automation, multi-channel reporting (search and DSP) with multi-touch
+  attribution, "no SQL required". No published price (book a demo).
+
+### Nova (novadata.io/pricing, /features/amazon-dsp-analytics)
+- For Amazon sellers, brands and agencies; Amazon only (Seller Central,
+  Vendor Central, Amazon Ads). DSP reporting: orders, line items, pacing,
+  spend, reach, frequency, supply source, device, country, audiences, DSP
+  as a P&L cost line; page mentions creative but shows no creative-level
+  metrics. MCP read access ("never edits your DSP").
+- From $49/mo "per Seller or Vendor Central account" (checked in browser),
+  14-day trial, no card; Enterprise & Agency custom. Whether DSP reporting
+  is in the $49 plan is not stated.
+
+### Improvado (improvado.io/pricing, /integrations/amazon-dsp)
+- Data platform. DSP connector schema includes a creative object
+  (creative_type, impressions, clicks, CTR, video_completion_rate); agents
+  can write (pause or activate line items, change budgets and bids).
+- Prices (checked in browser): MCP Only $100/mo; Starter from $20,000/yr;
+  Growth from $50,000/yr; Enterprise by sales; Creative Analytics add-on
+  from $4,000, works with Growth and Enterprise only.
+
+### Vidmob
+- See "Agency roundup re-verification 2026-10-21": quote only, per brand,
+  13 channels incl. Amazon DSP and Amazon Sponsored Ads, pre-flight scoring.
+
+### Left out (could not verify DSP creative analytics)
+- TrackIQ (the trackiq.ai site is a freight-tracking company; Perplexity's
+  "TrackIQ" could not be identified), Skai (no Amazon DSP support found on
+  its pages; plans $114k to $756k/yr), Dataslayer (Amazon Ads connector
+  covers sponsored ads; DSP fields could not be read).

@@ -3,7 +3,7 @@ import { Inter, Fraunces, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import "@/components/site/system.css";
 import "@/components/site/kit.css";
-import { SITE_URL } from "@/lib/site";
+import { PROFILE_URLS, SITE_URL } from "@/lib/site";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const fraunces = Fraunces({
@@ -135,8 +135,20 @@ const jsonLd = {
           height: 630,
         },
       ],
+      description:
+        "Peachblue is a creative analytics platform for advertisers and agencies. It analyzes ad creative across Meta, TikTok, Google Ads, and Amazon DSP, and adds Amazon DSP flight pacing and client reporting for agencies.",
+      knowsAbout: [
+        "Creative analytics",
+        "Ad creative analysis",
+        "Amazon DSP reporting",
+        "Amazon DSP pacing",
+        "Meta ads",
+        "TikTok ads",
+        "Google Ads",
+        "Model Context Protocol",
+      ],
       email: "nick@peachblue.io",
-      sameAs: [],
+      sameAs: PROFILE_URLS,
     },
     {
       "@type": "WebSite",
@@ -167,8 +179,9 @@ const jsonLd = {
       name: "Peachblue",
       applicationCategory: "BusinessApplication",
       operatingSystem: "Web",
+      applicationSubCategory: "Creative analytics",
       description:
-        "AI-powered creative intelligence platform for ad creative analysis across Meta, TikTok, Amazon, and Google Ads.",
+        "Creative analytics platform that analyzes ad creative across Meta, TikTok, Google Ads, and Amazon DSP, with Amazon DSP flight pacing and client reporting for agencies.",
       url: SITE_URL,
       publisher: { "@id": `${SITE_URL}/#organization` },
       offers: {

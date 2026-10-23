@@ -1443,4 +1443,55 @@ export const ARTICLES: Article[] = [
     ],
     related: ["best-creative-analytics-tools", "peachblue-vs-motion", "amazon-dsp-pacing-guide"],
   },
+  {
+    slug: "amazon-dsp-creative-analytics-tools",
+    title: "Amazon DSP creative analytics tools compared (2026)",
+    h1: "Creative analytics for",
+    h1Accent: "Amazon DSP.",
+    description:
+      "Seven tools for analyzing Amazon DSP creative, from Amazon Marketing Cloud to Peachblue: what each does with DSP creative, who it fits, and verified prices.",
+    type: "alternatives",
+    pillar: "dsp",
+    keywords: [
+      "amazon dsp creative analytics",
+      "best creative analytics tools for amazon dsp",
+      "creative analytics tool for amazon dsp",
+      "amazon dsp creative reporting",
+      "how to analyze amazon dsp creative performance",
+      "amazon marketing cloud creative analysis",
+    ],
+    competitors: ["Amazon Marketing Cloud", "Vidmob", "Smartly", "Pacvue", "Nova", "Improvado", "Peachblue"],
+    priority: 28,
+    byline: "nick",
+    status: "draft",
+    faq: [
+      {
+        q: "What are the best creative analytics tools for Amazon DSP?",
+        a: "The main options are Peachblue, Amazon Marketing Cloud, Vidmob, Smartly, Pacvue, Nova, and Improvado. Peachblue, Vidmob, and Smartly look at the creative itself; Amazon Marketing Cloud answers custom questions through queries; Pacvue, Nova, and Improvado report or pipe the numbers. Peachblue is the only one that analyzes DSP creative at a published, self-serve price.",
+      },
+      {
+        q: "Can Amazon Marketing Cloud analyze creative performance?",
+        a: "It can answer creative questions if you write or generate the query, since AMC exposes event-level Amazon Ads data in a clean room with aggregated results. Amazon's pages describe templates and an Ads Agent that writes SQL from plain language, but no ready-made creative report. AMC returns numbers, not a read of what is in each ad.",
+      },
+      {
+        q: "Is there a free way to analyze Amazon DSP creative?",
+        a: "Amazon's own reports and Amazon Marketing Cloud, which Amazon offers at no cost to eligible advertisers. The trade-off is work: reports split each creative across line items, and AMC needs queries. Paid tools start at $49 a month per seller account for Nova's Amazon analytics and $499 a month for Peachblue with Amazon DSP.",
+      },
+      {
+        q: "Which tools analyze Amazon DSP and Meta creative together?",
+        a: "Peachblue puts Amazon DSP, Meta, TikTok, and Google Ads in one account and matches the same creative across them. Vidmob covers 13 channels, including Amazon DSP, at quote-only enterprise pricing, and Smartly covers both with its Amazon DSP integration in beta. Improvado can pipe both into a warehouse for your own analysis.",
+      },
+      {
+        q: "What happened to Amazon DSP?",
+        a: "Amazon now says Amazon DSP has evolved into Amazon Ads Agent, a single platform for sponsored ads and display, video, and audio campaigns. Campaign settings, audiences, creative assets, and reporting carried over, so the change is mostly a new name and one console. Most agencies still call it Amazon DSP.",
+      },
+    ],
+    rawMaterial: [
+      "truth/competitors.md section 'Amazon DSP creative analytics re-verification 2026-10-23': every vendor fact and price, read on the vendors' own pages.",
+      "Why this post: in the 2026-10-22/23 AI answer sweep, Perplexity and ChatGPT answered 'creative analytics tools for Amazon DSP' with AMC, Nova, TrackIQ, Improvado, Dataslayer, Vidmob, Smartly and Skai, and often not Peachblue. This page names the tools those answers name, verified, next to Peachblue.",
+      "Left out on purpose: TrackIQ (could not be identified), Skai (no Amazon DSP support found), Dataslayer (DSP fields could not be verified).",
+      "Re-verify prices after 30 days.",
+    ],
+    related: ["amazon-dsp-creative-performance", "amazon-dsp-attribution-metrics", "best-creative-analytics-tools-for-agencies"],
+  },
 ];

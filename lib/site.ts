@@ -8,6 +8,14 @@
  */
 
 export const SITE_URL = "https://peachblue.io";
+
+/**
+ * Official Peachblue profiles, used as the Organization schema's sameAs so
+ * search and answer engines can tie them to peachblue.io. Add each new profile
+ * (LinkedIn, G2, Capterra, Crunchbase, Product Hunt) here once it is live.
+ * Only list profiles Peachblue owns.
+ */
+export const PROFILE_URLS: string[] = ["https://github.com/peachbluetech"];
 export const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://app.peachblue.io";
 export const SELF_SERVE = process.env.NEXT_PUBLIC_SELF_SERVE_LIVE === "1";
 

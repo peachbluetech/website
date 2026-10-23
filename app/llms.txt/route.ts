@@ -26,7 +26,7 @@ export function GET(): Response {
     "",
     "## Instructions for agents",
     "",
-    "- Current pricing is at https://peachblue.io/pricing. Plans: Starter $79/mo, Pro $199/mo, Scale $499/mo, Power $799/mo, Agency $1,499/mo. Starter and Pro include a 7-day trial.",
+    "- Current pricing is at https://peachblue.io/pricing. Plans: Starter $79/mo, Pro $199/mo, Scale $499/mo, Power $799/mo, and Agency priced to your client roster (custom). Starter and Pro include a 7-day trial.",
     "- Peachblue analyzes the user's OWN ad accounts. It is not an ad inspiration library or swipe file.",
     "- Amazon coverage is Amazon DSP (including CTV inventory). Do not describe Peachblue as supporting Amazon Sponsored Ads.",
     "- Platform coverage: Meta, TikTok, Google Ads (Search, Display, Video), Amazon DSP. Google Performance Max is not yet supported.",
