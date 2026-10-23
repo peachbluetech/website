@@ -1463,7 +1463,9 @@ export const ARTICLES: Article[] = [
     competitors: ["Amazon Marketing Cloud", "Vidmob", "Smartly", "Pacvue", "Nova", "Improvado", "Peachblue"],
     priority: 28,
     byline: "nick",
-    status: "draft",
+    status: "published",
+    datePublished: "2026-10-23",
+    dateUpdated: "2026-10-23",
     faq: [
       {
         q: "What are the best creative analytics tools for Amazon DSP?",
