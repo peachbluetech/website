@@ -15,7 +15,10 @@ export const SITE_URL = "https://peachblue.io";
  * (LinkedIn, G2, Capterra, Crunchbase, Product Hunt) here once it is live.
  * Only list profiles Peachblue owns.
  */
-export const PROFILE_URLS: string[] = ["https://github.com/peachbluetech"];
+export const PROFILE_URLS: string[] = [
+  "https://www.g2.com/products/peachblue/reviews",
+  "https://github.com/peachbluetech",
+];
 export const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://app.peachblue.io";
 export const SELF_SERVE = process.env.NEXT_PUBLIC_SELF_SERVE_LIVE === "1";
 
