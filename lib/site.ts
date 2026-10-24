@@ -22,6 +22,13 @@ export const PROFILE_URLS: string[] = [
 export const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://app.peachblue.io";
 export const SELF_SERVE = process.env.NEXT_PUBLIC_SELF_SERVE_LIVE === "1";
 
+/**
+ * Same-origin path that relays web analytics to PostHog (the rewrites in
+ * next.config.ts; instrumentation-client.ts sends to it). Neutral on purpose:
+ * blocklists match paths with analytics words in them.
+ */
+export const ANALYTICS_RELAY = "/pb-relay";
+
 export const DEMO_HREF = "/demo";
 export const SALES_HREF = "/demo?intent=agency";
 

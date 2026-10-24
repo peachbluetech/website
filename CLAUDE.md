@@ -281,7 +281,9 @@ Every page, what it is made of, and where its own rules are. All of them are ser
 
 ## Environment
 
-`NEXT_PUBLIC_APP_URL` (defaults to the production app), `NEXT_PUBLIC_SELF_SERVE_LIVE` (`1` in production), `RESEND_API_KEY`, `RESEND_FROM`, `NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN` and `NEXT_PUBLIC_POSTHOG_HOST` (cookieless web analytics, initialized in `instrumentation-client.ts`; no-ops when the token is unset). Values live in Vercel and a local `.env.local`; only names are recorded here.
+`NEXT_PUBLIC_APP_URL` (defaults to the production app), `NEXT_PUBLIC_SELF_SERVE_LIVE` (`1` in production), `RESEND_API_KEY`, `RESEND_FROM`, `NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN` (cookieless web analytics, initialized in `instrumentation-client.ts`; no-ops when the token is unset). Values live in Vercel and a local `.env.local`; only names are recorded here.
+
+Web analytics go through the site's own origin: `ANALYTICS_RELAY` (`/pb-relay`, in `lib/site.ts`) is rewritten to PostHog's US hosts in `next.config.ts`, so ad blockers do not drop them. `NEXT_PUBLIC_POSTHOG_HOST` is no longer read. Because PostHog's endpoints end in a slash, `skipTrailingSlashRedirect` is on and a redirect in `next.config.ts` strips the trailing slash from every other URL; keep the two together. The same file adds the visit's source (`landing`, `referrer`, `utm_*`, held in memory, never stored) to app signup links when they are followed and records `signup_clicked`. The other custom events are `demo_booked` and `demo_form_submitted`.
 
 ## Local development
 
