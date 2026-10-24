@@ -56,7 +56,10 @@ the other truth files.
 - Meta: official ads AI connectors (ads MCP server plus ads CLI) announced
   April 29, 2026, open beta. Full detail, re-verified 2026-10-09, in the
   "Meta ads AI connectors" section below; use that section, not this line.
-- TikTok: TikTok for Business MCP server LIVE as of August 2026 (verified
+- TikTok: UNVERIFIED as of 2026-10-24: the help article below now says it
+  "no longer exists" and the Agentic Hub lists only third-party MCP servers
+  (see competitors.md, MCP servers re-verification 2026-10-24). Earlier note:
+  TikTok for Business MCP server LIVE as of August 2026 (verified
   2026-08-14 against ads.tiktok.com help article). Zero-code hosted
   endpoints, ~400 tools full-disclosure / ~40 progressive, explicitly
   recommended for Claude, includes WRITE operations (campaign creation,

@@ -570,6 +570,49 @@ export const ARTICLES: Article[] = [
     rawMaterial: ["truth/competitors.md: Agency roundup re-verification 2026-10-21 (Superads), Main roundup 2026-10-23"],
   },
   {
+    slug: "best-mcp-servers-for-ad-data",
+    title: "Best MCP servers for ad performance data in 2026: 12 compared",
+    h1: "The best MCP servers for",
+    h1Accent: "ad data.",
+    description:
+      "Twelve MCP servers that put ad performance data in Claude and ChatGPT: platforms, whether they change campaigns, setup, and prices verified October 2026.",
+    type: "alternatives",
+    pillar: "ai",
+    keywords: [
+      "best mcp server for ad performance data",
+      "ad data mcp server",
+      "mcp server for ads",
+      "marketing mcp servers",
+      "meta ads mcp",
+      "google ads mcp",
+      "amazon ads mcp",
+    ],
+    competitors: ["Peachblue", "Motion", "Atria", "rule1", "Foreplay", "Meta", "Amazon Ads", "Google Ads", "Pipeboard", "Windsor.ai", "Supermetrics", "Improvado"],
+    priority: 30,
+    byline: "peachblue",
+    status: "published",
+    datePublished: "2026-10-24",
+    faq: [
+      {
+        q: "What is the best MCP server for ad performance data?",
+        a: "It depends on whether you want raw data or analysis, and on which platforms you buy. For your own creative performance across Meta, TikTok, Google Ads, and Amazon DSP, already grouped, scored, and tagged, Peachblue, from $199 per month. For free single-platform access, the platforms' own servers from Meta, Amazon, and Google; for cheap hosted access with write actions on several platforms, Pipeboard or Windsor.ai.",
+      },
+      {
+        q: "Do Meta, Google, Amazon, and TikTok have official MCP servers?",
+        a: "Meta's hosted ads MCP server has been in open beta since April 29, 2026, and Amazon's Ads MCP server since February 2, 2026; neither lists a fee. Google publishes an open-source Google Ads MCP server on GitHub that you run yourself. On October 24, 2026, TikTok's help article for its own MCP server was no longer available, and its Agentic Hub listed only third-party MCP servers.",
+      },
+      {
+        q: "Can I connect Amazon DSP data to Claude?",
+        a: "Yes. Amazon's Ads MCP server covers DSP if you have an approved Amazon Ads API app; Peachblue serves DSP alongside Meta, TikTok, and Google Ads, already analyzed, from its Scale plan at $499 per month; and Windsor.ai lists Amazon DSP among its 350+ connectors. Supermetrics' MCP source list includes Amazon DSP, but its DSP connection guide limits DSP data to Excel, data warehouse, and API destinations.",
+      },
+      {
+        q: "Are ad data MCP servers safe to connect?",
+        a: "It depends on whether they can change campaigns. The servers from Meta, Amazon, Windsor.ai, Pipeboard, and Supermetrics can make changes, with safeguards such as campaigns created paused and permission-scoped tokens. Google's open-source server lists only query tools, and Peachblue's 23 tools are all read-only, so they can report on an account but cannot change it.",
+      },
+    ],
+    rawMaterial: ["truth/competitors.md: MCP servers for ad data re-verification 2026-10-24; proof.md: Meta ads AI connectors (2026-10-09), Amazon Ads MCP server (2026-10-15)"],
+  },
+  {
     slug: "best-creative-analytics-tools",
     title: "Best creative analytics tools in 2026: 14 compared",
     h1: "The best creative analytics tools of",

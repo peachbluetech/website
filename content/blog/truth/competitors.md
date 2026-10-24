@@ -469,3 +469,82 @@ Tools not covered by the 2026-10-21 agency check. Prices read in the browser pan
 - Lens (analytics on your own ads) is NOT on Basic any more: the pricing
   table shows Lens as "1 Brand" on Workflow ($175/mo), "10 Brands" on Agency
   ($459), unlimited on Enterprise. Basic ($59) is research and swipe files.
+
+## MCP servers for ad data re-verification 2026-10-24 (for best-mcp-servers-for-ad-data)
+
+Servers AI answers name for "best mcp server for ad performance data" and
+"connect amazon dsp to chatgpt" (Oct 23 sweep: Improvado, Pipeboard,
+Supermetrics, Windsor; Motion for "creative analytics mcp for claude").
+Read on each vendor's own pages; Pipeboard and Supermetrics checked in the
+browser pane. Supersedes the 2026-08-24 "AI data connectors" entries above.
+
+### Pipeboard (pipeboard.co, /pricing, github.com/pipeboard-co/meta-ads-mcp)
+- Hosted remote MCP servers for Meta (42 tools), Google Ads (59), TikTok
+  (59), Snap (37), Reddit (33) per its README (Pipeboard's own counts);
+  other platforms listed as previews. Local install needs your own Meta
+  developer app. Clients: Claude, ChatGPT, Claude Code, Cursor, n8n.
+- Reads and writes: with permissions it can "create campaigns, upload
+  creatives, update budgets". Read-only (permission-scoped) tokens are on
+  Pro and above, not Free.
+- Prices (monthly, read in the pane): Free $0 (30 weekly AI tool
+  executions, 2 ad account slots), Pro US$29.90 (3 slots), Premium US$99
+  (10 slots, bulk operations), Agency US$199 (25 slots); extra slots $10/mo.
+  Annual = ten months of the monthly price (FAQ). 7-day trial on monthly
+  Pro and Premium; Agency has a 7-day money-back guarantee.
+- License: Business Source License 1.1 (source-available; becomes Apache
+  2.0 on 2029-01-01). Do not call it open source without that caveat.
+
+### Supermetrics (supermetrics.com/products/supermetrics-mcp, docs, /pricing)
+- Hosted MCP endpoint (mcp.supermetrics.com), OAuth. "175 data sources
+  available via the Supermetrics MCP server", list includes Amazon DSP,
+  Amazon Ads, Google Ads, Facebook Ads, TikTok Ads, LinkedIn, The Trade Desk.
+- Writes: "Create or modify campaigns. New campaigns start in a paused
+  state." Claude page: "Create, start, stop, or modify existing campaigns".
+- Plan: product page says "Unlock MCP access with any subscription"; its
+  docs say MCP needs a subscription with Data API access, and that Claude,
+  ChatGPT and Copilot use the separate "AI chats" destination. Quote the
+  product page and note the docs add conditions.
+- Pricing: Starter $55/mo monthly or $44/mo billed yearly, Growth $222 or
+  $177, Enterprise quote. 14-day free trial, no card.
+- Amazon DSP connection guide (re-read): "Amazon DSP is available only in
+  Excel, data warehouse, and API data destinations." Print side by side with
+  the MCP source list, no editorializing.
+
+### Windsor.ai (windsor.ai/pricing, /mcp, Claude guide)
+- "Windsor MCP connects 350+ data sources" into Claude, ChatGPT, Copilot,
+  Perplexity, Gemini, Cursor; added in Claude from the connector list.
+- Writes: "Read and write functions, including actions like pausing
+  campaigns or adjusting budgets, are available on every Windsor.ai plan."
+- "All plans include ... Access to Windsor MCP"; every connector on every
+  plan; Amazon DSP is a listed connector.
+- Prices (monthly / billed annually): Basic $23 / $19 (3 sources), Standard
+  $118 / $99 (7), Plus $299 / $249 (10), Professional $598 / $499 (14),
+  Enterprise quote. 30-day trial, then a Forever Free plan (1 source).
+
+### Improvado (improvado.io/mcp, /pricing)
+- "AI agent access to 187+ data sources"; "Your agent reads, writes, and
+  monitors". MCP Only $100/mo: 2M rows/yr, daily sync, 300 MCP actions/wk,
+  1 workspace. Next tier Starter from $20,000/yr. Hosting not stated.
+
+### Google Ads MCP server (github.com/googleads/google-ads-mcp)
+- Google's open-source server (Apache-2.0). Tools: search,
+  get_resource_metadata, list_accessible_customers; no tool that creates or
+  changes campaigns. Runs locally (pipx) or self-hosted (Cloud Run); no
+  Google-hosted endpoint described. Needs a Google Cloud project with the
+  Ads API enabled, OAuth credentials, and a developer token with at least
+  Explorer access. No launch date found on the repo (proof.md says April
+  2026 from August reading).
+
+### TikTok
+- The TikTok for Business MCP help article cited in proof.md (2026-08-14)
+  now says it "no longer exists". TikTok's Agentic Hub (ads.tiktok.com/
+  apps_and_agents/agentic-hub, MCP tab) lists two third-party servers
+  (AdsAgent, Kochava), no first-party one. Do not claim an official TikTok
+  MCP server until re-verified.
+
+### Creative analytics MCPs (from the 2026-10-21/23 checks above)
+- Motion: MCP access from Starter ($999/mo). Atria: every plan, 600 calls/mo
+  on Core. Foreplay: from Workflow ($175), serves its ad library and Lens.
+  rule1: MCP-only plan EUR 20/mo (Meta + Triple Whale data). GetCrux: from
+  Professional. Segwise: read-only "Ask Segwise" MCP per account (its blog).
+  Madgicx: Facebook MCP that can change status, budgets, bids.

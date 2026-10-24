@@ -1,0 +1,149 @@
+The best MCP servers for ad performance data in 2026 fall into three groups. Creative analytics servers (Peachblue, Motion, Atria, rule1, Foreplay) hand Claude data that is already analyzed: creatives grouped, scored, and tagged. The ad platforms' own servers (Meta, Amazon Ads, Google Ads) cost nothing to use but cover one platform each. Data connectors (Pipeboard, Windsor.ai, Supermetrics, Improvado) pipe raw rows from many platforms, and most of them can change your campaigns.
+
+We make Peachblue, one of the servers below. Prices were checked on each vendor's own pages between October 21 and 24, 2026, and Meta's and Amazon's servers were re-read on October 9 and 15. Every entry says who it is genuinely right for.
+
+## What is an MCP server for ad data?
+
+MCP (Model Context Protocol) is the open standard Claude, ChatGPT, and other AI assistants use to call outside tools. An ad data MCP server turns your ad accounts into tools the assistant can call, so you ask "which creatives drove last week's CPA spike" in chat instead of exporting a report. What the assistant can answer depends on what the server returns: raw platform rows, or data that has already been analyzed.
+
+## How do you choose an ad data MCP server?
+
+Four questions decide it:
+
+1. **Which platforms?** The official servers cover one platform each. If you buy on Meta, Google Ads, and Amazon DSP, one connection or three is a real difference.
+2. **Can it change campaigns?** Some servers only read; others pause ads, change budgets, and create campaigns. Decide how much an assistant should be allowed to do before you connect one.
+3. **Raw rows or analysis?** Ask a raw-data server for your best creative and it ranks ads, so one video running in twelve ads looks like twelve mediocre ads. An analysis server groups the creative first.
+4. **What does setup take?** Some need only a sign-in. Others need a developer token, an approved API app, or a local install.
+
+## The 12 servers at a glance
+
+| Server | Platforms | Changes campaigns? | Setup | Price from |
+| --- | --- | --- | --- | --- |
+| Peachblue | Meta, TikTok, Google Ads, Amazon DSP | No, read-only | Hosted, OAuth sign-in | $199/mo (Pro); Amazon DSP from $499 |
+| Motion | Meta, TikTok, YouTube, LinkedIn | Not stated | Included in plan | $999/mo |
+| Atria | Meta, TikTok | Not stated | Included in plan | $159/mo (600 MCP calls/mo on Core) |
+| rule1 | Meta, plus Triple Whale data | Not stated | MCP-only plan | EUR 20/mo |
+| Foreplay | Its ad library and research | Not stated | Included from Workflow | $175/mo |
+| Meta Ads MCP | Meta | Yes; new ads start paused | Hosted by Meta | No fee listed (open beta) |
+| Amazon Ads MCP | Sponsored ads and Amazon DSP | Yes | Hosted; needs an approved Ads API app | No fee listed (open beta) |
+| Google Ads MCP | Google Ads | No tool to change campaigns | Local or self-hosted, developer token | Free, open source |
+| Pipeboard | Meta, Google Ads, TikTok, Snap, Reddit | Yes; read-only tokens from Pro | Hosted | Free plan; Pro $29.90/mo |
+| Windsor.ai | 350+ sources, Amazon DSP among them | Yes, on every plan | Claude connector | Free plan; Basic $23/mo |
+| Supermetrics | 175 sources | Yes; new campaigns start paused | Hosted, OAuth | $55/mo |
+| Improvado | 187+ sources | Yes | Not stated | $100/mo (MCP Only) |
+
+Prices monthly, verified October 21 to 24, 2026.
+
+## Creative analytics servers: analyzed data
+
+### 1. Peachblue: your own creative performance, analyzed, across four platforms
+
+Peachblue's [MCP server](/docs/mcp) gives Claude 23 read-only tools over your own Meta, TikTok, Google Ads, and Amazon DSP data, the same tools its in-app agent uses. Every creative is grouped by fingerprint, so one asset running in ten ads counts once, then scored and tagged across 31 dimensions (format, hook style, emotional tone, CTA, and more). Claude can rank creatives, compare two head to head, pull the patterns your winners share, check Google responsive search ad assets, explain period-over-period changes, flag fatigue and spend risk, report Amazon DSP flight pacing and supplier spend, and read Brand Intel's Reddit monitoring. Agencies get a roster view, with every call scoped per client. Sign-in is OAuth with your Peachblue login; there are no API keys to manage.
+
+It is the only creative analytics MCP that serves your own cross-platform performance data, Amazon DSP included.
+
+**Pricing:** MCP access from Pro at $199 a month (Meta, TikTok, Google Ads); Scale at $499 adds Amazon DSP, Power at $799 adds client-ready reports and pacing, and Agency is priced to your client roster. Pro has a 7-day trial. [See plans](/pricing).
+
+**Choose Peachblue if** you want Claude to answer which creatives work and why across every platform you buy, including Amazon DSP.
+
+### 2. Motion: MCP inside the social-first incumbent
+
+Motion includes "full data & MCP access" from its Starter plan, alongside unlimited seats and ad accounts and an AI layer in Slack. It covers Meta, TikTok, YouTube, and LinkedIn.
+
+**Pricing:** Starter $999 a month for up to $50k of monthly ad spend; Pro and Growth on request.
+
+**Choose Motion if** you already run Motion and want its data in your assistant.
+
+### 3. Atria: MCP on every plan, for Meta and TikTok
+
+Atria includes MCP on every plan: 600 calls a month on Core and unlimited from Plus. It covers Meta and TikTok, with research and ad generation in the same tool.
+
+**Pricing:** Core $159 a month ($129 billed annually), Plus $599, Business $1,199.
+
+**Choose Atria if** you run Meta and TikTok only and want research and generation beside analytics.
+
+### 4. rule1: MCP on its own, for Meta
+
+rule1 sells an MCP-only plan that brings Meta and Triple Whale data into Claude and ChatGPT, with 5 seats. Its full Growth plan adds AI creative analysis across 20 dimensions.
+
+**Pricing:** EUR 20 a month for MCP only; Growth EUR 149. 7-day trial.
+
+**Choose rule1 if** you want Meta data in your assistant for the lowest price here.
+
+### 5. Foreplay: competitor research in your assistant
+
+Foreplay's MCP, from the Workflow plan, brings its ad library and research into your assistant: what competitors run, not how your own ads perform. Lens, its analytics on your own Meta and TikTok ads, starts on the same plan.
+
+**Pricing:** Workflow $175 a month ($149 billed annually); Agency $459.
+
+**Choose Foreplay if** competitor research is the job.
+
+## Official platform servers: one platform each
+
+### 6. Meta Ads MCP: Meta's own, with writes
+
+Meta opened its ads MCP server in beta on April 29, 2026, hosted at mcp.facebook.com/ads, and opened it to any developer with a Meta app on July 16. It reports performance with Meta's own diagnostics, benchmarks, and an opportunity score, and it can create and edit campaigns, ad sets, ads, and audiences. New ads start paused, your assistant asks before activating them, and business portfolio admins can block or cap actions per ad account. Meta lists no fee. Its documentation describes no tool that tags creative attributes or matches the same asset across uploads. More in [Claude for Meta ads creative analysis](/blog/claude-meta-ads-creative-analysis).
+
+**Choose Meta Ads MCP if** you work on Meta only and want Claude to manage ads, not just read them.
+
+### 7. Amazon Ads MCP: sponsored ads and DSP, for API teams
+
+Amazon's server has been in open beta since February 2, 2026 and covers sponsored ads and Amazon DSP, with tools that create, update, and delete. It is not a sign-in-and-go route: you need an Amazon developer account and an approved Amazon Ads API app first. Endpoints are regional, and a Lite endpoint narrows it to three meta-tools. No fee is listed. Setup and limits are in our [Amazon Ads MCP in Claude](/blog/amazon-ads-mcp-claude) guide.
+
+**Choose Amazon Ads MCP if** you have Ads API access and want Claude to act on Amazon accounts.
+
+### 8. Google Ads MCP: open source and query-only
+
+Google's open-source server (Apache-2.0, on GitHub) exposes three tools: a search that runs Google Ads queries, resource metadata, and the list of accounts you can reach. None of them changes a campaign. You run it yourself, locally or on your own cloud, with a Google Cloud project, OAuth credentials, and a developer token with at least Explorer access.
+
+**Choose Google Ads MCP if** you are comfortable with the Google Ads API and want free, read-only query access.
+
+## Data connectors: many sources, raw rows
+
+### 9. Pipeboard: hosted servers for five ad platforms
+
+Pipeboard runs hosted MCP servers for Meta, Google Ads, TikTok, Snap, and Reddit. With the right permissions your assistant can create campaigns, upload creatives, and update budgets; read-only tokens are available from Pro. Its Meta server's code is public under a source-available license that converts to Apache 2.0 in 2029.
+
+**Pricing:** Free (30 tool runs a week, 2 ad accounts), Pro $29.90 a month (3 accounts), Premium $99 (10), Agency $199 (25). Annual billing costs ten months. 7-day trial on Pro and Premium.
+
+**Choose Pipeboard if** you want cheap hosted access, with actions, on several social and search platforms.
+
+### 10. Windsor.ai: 350+ sources on every plan
+
+Windsor connects 350+ sources, Amazon DSP among them, and adds to Claude from Claude's own connector list. Read and write functions, "including actions like pausing campaigns or adjusting budgets", are on every plan.
+
+**Pricing:** Basic $23 a month ($19 billed annually), Standard $118 ($99), Plus $299 ($249), Professional $598 ($499). A 30-day trial, then a free plan with one source.
+
+**Choose Windsor.ai if** you want the most sources for the least money.
+
+### 11. Supermetrics: 175 sources, enterprise data roots
+
+Supermetrics' hosted server lists 175 sources and can create or modify campaigns, with new campaigns starting paused. Its product page says MCP access unlocks "with any subscription"; its docs tie the server to Data API access and put Claude and ChatGPT use under a separate AI chats destination, so confirm with sales. Amazon DSP appears in its MCP source list, while its Amazon DSP connection guide says DSP data is "available only in Excel, data warehouse, and API data destinations."
+
+**Pricing:** Starter $55 a month ($44 billed yearly), Growth $222 ($177), Enterprise on request. 14-day trial.
+
+**Choose Supermetrics if** you already pipe marketing data into a warehouse and want the same sources in your assistant.
+
+### 12. Improvado: an MCP tier of an enterprise platform
+
+Improvado's MCP gives agents access to 187+ sources and "reads, writes, and monitors". The MCP Only plan includes 2 million rows a year, a daily sync, and 300 MCP actions a week; the full platform starts at $20,000 a year.
+
+**Pricing:** MCP Only $100 a month.
+
+**Choose Improvado if** you want an entry point into an enterprise data platform.
+
+## Can an MCP server change your campaigns?
+
+Several can. Meta's server creates ads paused and asks before activating them, and portfolio admins can block actions per ad account. Amazon's can create, update, and delete. Windsor's write functions, including pausing campaigns and adjusting budgets, are on every plan; Supermetrics creates campaigns paused; Pipeboard offers read-only tokens from Pro. Google's open-source server lists only query tools, and all 23 of Peachblue's tools are read-only. If an assistant will run on a schedule or for a team, start with read access and add writes deliberately.
+
+## How do you decide?
+
+- **Your own creative performance across Meta, TikTok, Google Ads, and Amazon DSP, already analyzed:** Peachblue. [See plans](/pricing).
+- **One platform, free, and you have API access:** that platform's own server (Meta, Amazon Ads, or Google Ads).
+- **Cheap hosted access with actions on several platforms:** Pipeboard, or Windsor.ai for the widest source list.
+- **Many sources at enterprise scale:** Supermetrics or Improvado.
+- **Already on Motion or Atria:** use the MCP your plan includes.
+- **Meta in your assistant on the smallest budget:** rule1.
+- **Competitor research in your assistant:** Foreplay.
+
+For what an analysis layer adds over raw rows, see [Claude for media buyers](/blog/claude-for-media-buyers), and for creative analytics tools in general, the [2026 roundup](/blog/best-creative-analytics-tools). Whichever server you connect, ask it one question you already know the answer to before you trust it with the ones you don't.
