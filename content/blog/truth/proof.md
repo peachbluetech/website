@@ -479,6 +479,68 @@ Supersedes the August figures above where they conflict:
   researching on Reddit (n=1,004 US monthly users, Attest, Feb 2026; Q1'26
   letter).
 
+## YouTube view metrics (verified 2026-10-24, Google Ads help)
+
+Sources: support.google.com/google-ads/answer/2375431 ("About YouTube ads
+and view metrics"), /answer/38679 (play rate). Meta and TikTok help pages
+could not be read on 2026-10-24; keep the existing Meta and TikTok
+definitions in posts unchanged and do not add new claims about them.
+- Skippable in-stream view: "A viewer watches 30 seconds or until the end of
+  the video, whichever comes first" (or clicks an ad element). Shorts view:
+  10 seconds or the end. In-feed: thumbnail click or 10 seconds of inline
+  autoplay. Bumper and non-skippable: views are not counted.
+- View rate = views / impressions ("previously known as View-through rate").
+  Google: "About 10-15% is considered average for the In-stream format
+  across all industries."
+- Play rate: "the number of plays your video ad receives divided by its
+  impressions" (Click-to-Play image or thumbnail). The closest Google analog
+  to hook rate (our reading, say so).
+- "Video played to" 25/50/75/100% counts viewers who reached each quartile
+  out of viewers who started the player.
+
+## Amazon DSP and other DSPs: access and minimums (verified 2026-10-24)
+
+Amazon's own pages (advertising.amazon.com/solutions/products/amazon-dsp,
+/adtech-solutions/amazon-ads-agent, /library/guides/dsp-performance-plus):
+- "Amazon DSP has evolved into Amazon Ads Agent, one omnichannel ad platform
+  with AI". Existing campaigns "continue to run without disruption" and
+  settings, audiences, creative, deals and history carry forward. Existing
+  Amazon DSP certifications "remain valid"; the certification is now named
+  Amazon Ads Programmatic Solutions.
+- Programmatic buying in the US now runs as DVA+ (display, video, audio),
+  "a unified campaign type bringing together what was previously created
+  through Amazon DSP, Sponsored Display and Sponsored TV". DVA+ advanced
+  settings are "currently available to limited advertisers in the US";
+  advertisers in Canada, Mexico, Brazil, Germany, the UK, Japan, Australia
+  and other listed countries who used Amazon DSP "will continue to see the
+  Amazon DSP experience".
+- Managed service "typically requires a minimum spend that varies by
+  country" (no figure). Amazon's "no minimum spend" line is about Sponsored
+  ads (CPC), NOT DSP: never attribute it to DSP. The Nov 2025 self-service
+  floor removal stays sourced to Marketplace Ad Pros (above).
+- Access: Register at advertising.amazon.com/register; the Ads Agent FAQ also
+  says "Contact an Amazon Ads account executive to get started".
+- Performance+: "New campaigns typically require up to four weeks for the
+  system to learn and optimize"; reporting includes "Domain delivery, to see
+  which websites are showing your ads and which ones work best".
+- Amazon Ads Agent conversational recommendations are "in closed beta";
+  changes are summarized and approved before they apply.
+- NOT found on Amazon's public pages: guidance on splitting line items by
+  device or supply source, an "automated budget optimization" feature, or
+  in-console wording like "increase max average CPM". Do not attribute any
+  of these to Amazon.
+Other DSPs (vendors' own pages):
+- StackAdapt: self-serve after "an application and approval process"; "No
+  minimum spend required to get started"; "Most teams hit their stride
+  around $5k a month" (a recommendation, not a minimum). CTV offered.
+- MNTN (CTV): "No upfront commitments. No minimums." Self-serve.
+- The Trade Desk: contact form to start; minimum not published; CTV yes.
+- Google Display & Video 360: "Talk to our sales team to get started";
+  minimum not published.
+- Simpli.fi and Basis: sales or service-led; minimum not published; CTV yes.
+- Not verified (blocked or empty): AdRoll, Viant, Roku Ads Manager, Yahoo
+  DSP. Do not list them.
+
 ## Test spend (framing rule, not a statistic)
 
 The media spend required to reach a verdict on a creative is set by the

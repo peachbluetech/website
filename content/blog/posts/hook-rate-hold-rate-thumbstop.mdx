@@ -1,6 +1,15 @@
-Hook rate is the share of people who stop for the opening seconds of your video ad: on Meta, 3-second video plays divided by impressions. Hold rate measures how many of those stoppers keep watching, most commonly ThruPlays divided by 3-second plays. Thumbstop ratio is, in most working usage, the same metric as hook rate under an agency-coined name. This page defines all three precisely, works one example, and explains why the published benchmarks for them disagree so badly that citing any single number is a mistake.
+Hook rate is the share of impressions where someone watched the opening of your video ad. On Meta the formula is **3-second video plays / impressions**. Hold rate is the share of those viewers who kept watching: **ThruPlays / 3-second video plays**. Thumbstop ratio is, in most working usage, hook rate under an agency-coined name. This page gives the formulas, works one example, covers the TikTok and YouTube equivalents, and explains why the published benchmarks disagree so badly that citing any single number is a mistake.
 
 These three metrics matter because they are the earliest creative signals you get. CTR and conversion data need clicks and purchases to accumulate; hook and hold data accumulate with impressions, so they tell you within days whether a new video earns attention at all. They diagnose the creative itself, which makes them the natural companions to the supply metrics in [the creative economics essay](/blog/creative-economics).
+
+## Hook rate and hold rate formulas at a glance
+
+| Metric | Formula on Meta | What it answers |
+| --- | --- | --- |
+| Hook rate | 3-second video plays / impressions | Does the opening stop the scroll? |
+| Thumbstop ratio | 3-second video plays / impressions | The same as hook rate, under another name |
+| Hold rate | ThruPlays / 3-second video plays | Do the people you hooked keep watching? |
+| ThruPlay rate | ThruPlays / impressions | Hook and hold blended into one number |
 
 ## What is hook rate?
 
@@ -16,7 +25,7 @@ On TikTok the analogous calculation uses 2-second video views over impressions, 
 
 ## What is thumbstop ratio?
 
-Thumbstop ratio (or thumbstop rate) is the same calculation as hook rate: 3-second plays divided by impressions. The term came out of the agency world as a more vivid name for the same behavior, the thumb stopping mid-scroll. Some teams use "thumbstop" for the 3-second metric and reserve "hook rate" for a stricter cut such as 25 percent video completion; that is a house convention, not a standard. If your team uses both words, write down which formula each one means. Most disagreements about "our thumbstop is fine but our hook rate is bad" turn out to be two names for one number, pulled from two different reports.
+Thumbstop ratio (or thumbstop rate) is the same calculation as hook rate. The thumbstop formula is 3-second video plays divided by impressions. The term came out of the agency world as a more vivid name for the same behavior, the thumb stopping mid-scroll. Some teams use "thumbstop" for the 3-second metric and reserve "hook rate" for a stricter cut such as 25 percent video completion; that is a house convention, not a standard. If your team uses both words, write down which formula each one means. Most disagreements about "our thumbstop is fine but our hook rate is bad" turn out to be two names for one number, pulled from two different reports.
 
 ## What is hold rate?
 
@@ -29,6 +38,16 @@ hold rate = ThruPlays / 3-second video plays
 A ThruPlay on Meta counts a view of 15 seconds, or completion for videos shorter than that. Dividing by 3-second plays isolates the middle of the video: it scores what the creative does with attention it already captured, independent of how good the hook was.
 
 Here the definition disagreement is real, not just naming. A significant share of published articles compute hold rate as ThruPlays divided by impressions instead, which blends hook and hold into one number and always produces a much smaller figure. Neither is wrong, but they are different metrics. Pick the ratio-of-plays version if you want hook and hold to diagnose different parts of the video, and whichever you pick, apply it identically across every report.
+
+## Hook rate vs hold rate: what is the difference?
+
+Hook rate scores the opening of a video; hold rate scores what comes after it. Hook rate divides by impressions, so it measures whether anyone stopped at all. Hold rate divides by the people who already stopped, so it measures the body of the video on its own, unaffected by how strong the hook was. That is why the two can move in opposite directions, and why reading them together tells you which part of a video to fix.
+
+## What are the equivalents on TikTok and YouTube?
+
+On TikTok, use 2-second video views over impressions for hook rate, as above, and never compare that figure directly with a Meta hook rate.
+
+YouTube's metrics are built differently. The closest match to hook rate is play rate, which Google defines as the number of plays a video ad receives divided by its impressions. View rate (views divided by impressions) is stricter: a skippable in-stream view only counts at 30 seconds or the end of the video, whichever comes first, and a Shorts view at 10 seconds, so it behaves more like a hold metric. Google's own guide puts an average in-stream view rate at about 10 to 15 percent across industries, one of the few benchmarks a platform publishes itself. For drop-off inside the video, the "video played to" 25, 50, 75 and 100 percent columns show how far viewers got.
 
 ## A worked example
 
@@ -56,4 +75,4 @@ Watching these rates over time also catches decay: a winner whose hook rate slid
 
 ## Related metrics
 
-Hook and hold rate sit at the top of a funnel of creative diagnostics. CTR measures whether attention converts to action, and stays the better metric for static images, where 3-second plays do not exist. Creative hit rate measures whether your production system turns launches into winners. Frequency and CTR decay measure whether a winner is wearing out. A team that reads hook rate for the opening, hold rate for the body, CTR for the close, and hit rate for the pipeline has creative measurement covered end to end.
+Hook and hold rate sit at the top of a funnel of creative diagnostics. CTR measures whether attention converts to action, and stays the better metric for static images, where 3-second plays do not exist. Creative hit rate measures whether your production system turns launches into winners, and a [creative testing framework](/blog/creative-testing-framework) uses hook rate as its earliest kill signal. Frequency and CTR decay measure whether a winner is wearing out. A team that reads hook rate for the opening, hold rate for the body, CTR for the close, and hit rate for the pipeline has creative measurement covered end to end.

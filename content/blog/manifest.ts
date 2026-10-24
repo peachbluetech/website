@@ -137,7 +137,7 @@ export const ARTICLES: Article[] = [
     h1: "Amazon DSP pacing, explained",
     h1Accent: "properly.",
     description:
-      "How DSP pacing actually works: the flight math, why orders underdeliver, how to catch it early, and how to report pacing to clients. With a free template.",
+      "How DSP pacing actually works: the flight math, why orders underdeliver and what to do in the first days, line item structure, catching weak inventory, and client reporting.",
     type: "guide",
     pillar: "dsp",
     keywords: [
@@ -145,12 +145,14 @@ export const ARTICLES: Article[] = [
       "amazon dsp pacing report",
       "amazon dsp underdelivery",
       "dsp flight pacing",
+      "amazon dsp line items by device or supply source",
+      "amazon dsp supply source report",
     ],
     priority: 2,
     byline: "peachblue",
     status: "published",
     datePublished: "2026-08-12",
-    dateUpdated: "2026-10-19",
+    dateUpdated: "2026-10-24",
     faq: [
       {
         q: "What is pacing in Amazon DSP?",
@@ -162,7 +164,11 @@ export const ARTICLES: Article[] = [
       },
       {
         q: "Why is my Amazon DSP order underdelivering?",
-        a: "The usual causes are audience pools that are too narrow, bids below the winning range for the inventory, frequency caps set too tight, creative approvals or rejections eating flight days, and supply constraints on specific deals or inventory types. Diagnose in that order; bids and audience are the most common.",
+        a: "The usual causes are bids below the winning range for the inventory, audience pools that are too narrow, frequency caps set too tight, creative approvals or rejections eating flight days, and supply constraints on specific deals or inventory types. Diagnose in that order; bids and audience are the most common.",
+      },
+      {
+        q: "What should I do if a DSP order underdelivers early in the flight?",
+        a: "Act within the first few days, because the catch-up rate rises every day you wait: a 14-day order pacing at 60% on day 3 needs about 11% more daily spend to recover, and about 40% more if left until day 7. Raise the maximum average CPM or widen the audience first, one change at a time, then recheck pace the next day before moving on to frequency caps, creative approvals and supply.",
       },
       {
         q: "Does Amazon DSP have built-in pacing alerts?",
@@ -413,15 +419,18 @@ export const ARTICLES: Article[] = [
   },
   {
     slug: "amazon-dsp-minimum-spend",
-    title: "Amazon DSP minimum spend in 2026: the floor is gone",
+    title: "Amazon DSP minimum spend in 2026 (and which DSPs have none)",
     h1: "The DSP minimum spend is",
     h1Accent: "gone.",
     description:
-      "Amazon removed the DSP self-service minimum in Nov 2025. What it costs to start now, self-service vs managed, and what smaller advertisers should know.",
+      "Amazon DSP has no self-service minimum since Nov 2025 and now runs inside Amazon Ads Agent. What it costs to start, how to get access, and which other DSPs publish no minimum.",
     type: "guide",
     pillar: "dsp",
     keywords: [
       "amazon dsp minimum spend",
+      "which dsps have no minimum spend",
+      "no minimum dsp",
+      "how to access amazon dsp without minimum spend",
       "amazon dsp cost",
       "amazon dsp self service",
     ],
@@ -429,11 +438,15 @@ export const ARTICLES: Article[] = [
     byline: "peachblue",
     status: "published",
     datePublished: "2026-08-31",
-    dateUpdated: "2026-10-19",
+    dateUpdated: "2026-10-24",
     faq: [
       {
         q: "What is the minimum spend for Amazon DSP?",
-        a: "There is no official minimum for self-service Amazon DSP accounts since November 2025, when Amazon removed the floor at unBoxed. The practical working entry for a meaningful program is $5,000 to $10,000 per month, and Amazon's managed service still expects roughly $35,000 to $50,000 per month. Any page citing a $50,000 minimum is describing the pre-November-2025 rules.",
+        a: "There is no official minimum for self-service Amazon DSP since November 2025, when Amazon removed the floor at unBoxed. The practical working entry for a meaningful program is $5,000 to $10,000 per month, and managed service still expects roughly $35,000 to $50,000 per month; Amazon's own page says managed service minimums vary by country. Any page citing a $50,000 minimum is describing the pre-November-2025 rules.",
+      },
+      {
+        q: "Which DSPs have no minimum spend?",
+        a: "On their own pages, StackAdapt states no minimum spend (self-serve access needs an application and approval) and MNTN, a CTV platform, says no minimums. Amazon has had no self-service DSP minimum since November 2025. The Trade Desk, Google's Display & Video 360, Simpli.fi and Basis do not publish a minimum and start through their sales teams. Terms checked October 24, 2026.",
       },
       {
         q: "What is the difference between self-service and managed Amazon DSP?",
@@ -452,7 +465,10 @@ export const ARTICLES: Article[] = [
         a: "No. Non-endemic advertisers, brands that do not sell on Amazon, made up 23.8 percent of Amazon ad spend in 2026, up from 9.1 percent in 2023. The DSP buys audiences and inventory, including CTV and streaming audio, not just placements pointing at Amazon listings.",
       },
     ],
-    rawMaterial: ["truth/proof.md Nov 2025 floor removal; most ranked content is stale pre-Nov-2025"],
+    rawMaterial: [
+      "truth/proof.md Nov 2025 floor removal; most ranked content is stale pre-Nov-2025",
+      "truth/proof.md Amazon DSP and other DSPs: access and minimums (verified 2026-10-24)",
+    ],
   },
   {
     slug: "creative-testing-framework",
@@ -702,23 +718,35 @@ export const ARTICLES: Article[] = [
   },
   {
     slug: "hook-rate-hold-rate-thumbstop",
-    title: "Hook rate, hold rate, thumbstop: definitions and benchmarks",
+    title: "Hook rate and hold rate formulas, and thumbstop ratio (2026)",
     h1: "Hook rate, hold rate, thumbstop,",
     h1Accent: "defined.",
     description:
-      "What hook rate, hold rate, and thumbstop ratio actually measure, how to calculate them, and why published benchmarks disagree with each other.",
+      "Hook rate is 3-second video plays / impressions; hold rate is ThruPlays / 3-second plays. The formulas, a worked example, TikTok and YouTube equivalents, and why benchmarks disagree.",
     type: "glossary",
     pillar: "creative",
-    keywords: ["hook rate", "hold rate", "thumb stop ratio", "thumbstop rate"],
+    keywords: [
+      "hook rate",
+      "hook rate formula",
+      "hold rate",
+      "hold rate formula",
+      "hook rate vs hold rate",
+      "thumb stop ratio",
+      "thumbstop rate",
+    ],
     priority: 14,
     byline: "peachblue",
     status: "published",
     datePublished: "2026-08-20",
-    dateUpdated: "2026-08-20",
+    dateUpdated: "2026-10-24",
     faq: [
       {
-        q: "What is hook rate?",
-        a: "Hook rate is the share of impressions where the viewer watched at least the opening of your video ad. On Meta it is calculated as 3-second video plays divided by impressions; on TikTok the analogous calculation uses 2-second video views. It measures whether the first moments of the creative stop the scroll, which gates every downstream metric.",
+        q: "What is the hook rate formula?",
+        a: "Hook rate = 3-second video plays / impressions on Meta. On TikTok the analogous calculation uses 2-second video views over impressions, and on YouTube the closest match is play rate, plays divided by impressions. It measures whether the first moments of a video ad stop the scroll, which gates every downstream metric.",
+      },
+      {
+        q: "What is the difference between hook rate and hold rate?",
+        a: "Hook rate scores the opening of a video and divides by impressions; hold rate scores what comes after and divides by the people the hook already caught. Because they measure different parts of the video, they can move in opposite directions. A strong hook with a weak hold points to the body of the video; a weak hook with a strong hold points to the first seconds.",
       },
       {
         q: "Are thumbstop ratio and hook rate the same thing?",

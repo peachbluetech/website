@@ -1,6 +1,6 @@
-Pacing is the discipline that separates a DSP operation that hits its numbers from one that explains itself at the end of the month. It is also, strangely, almost undocumented: Amazon's own material covers the console alerts and little else. This guide covers the full practice: the math, the diagnosis, the daily workflow, and the client report.
+Pacing in Amazon DSP is how an order's actual spend tracks against what it should have spent by now: pace % is actual spend to date divided by expected spend, and expected spend is the budget divided by flight days, times days elapsed. It is the discipline that separates a DSP operation that hits its numbers from one that explains itself at the end of the month, and it is strangely underdocumented: Amazon's own material covers the console alerts and little else. This guide covers the full practice: the math, the diagnosis, the daily workflow, and the client report.
 
-It is written for the people newly running Amazon DSP self-service. There are a lot of you: Amazon removed the DSP self-service minimum spend at unBoxed in November 2025, practical entry budgets dropped to around $5-10k per month (Marketplace Ad Pros), and DSP has grown from under 10% to roughly 20% of global programmatic spend in about 15 months (ppc.land). Most of the tooling assumes you have either an Amazon account team or a $3-5k per month enterprise platform. This guide assumes you have neither.
+It is written for the people newly running Amazon DSP self-service. There are a lot of you: Amazon removed the DSP self-service minimum spend at unBoxed in November 2025, practical entry budgets dropped to around $5-10k per month (Marketplace Ad Pros), and DSP has grown from under 10% to roughly 20% of global programmatic spend in about 15 months (ppc.land). Amazon has since folded the DSP into Amazon Ads Agent: in the US, programmatic campaigns now run as DVA+, while advertisers in most other markets still see the DSP console. The pacing math is the same in both. Most of the tooling assumes you have either an Amazon account team or a $3-5k per month enterprise platform. This guide assumes you have neither.
 
 ## What is pacing in Amazon DSP?
 
@@ -44,6 +44,24 @@ Underdelivery has a short list of causes. Diagnose in this order, because the ea
 
 The reverse problem, pacing far over 100%, is usually a bid well above the winning range or an audience much larger than planned, and it deserves the same-day attention underdelivery gets: budget that exhausts on day 22 of a 30-day flight is a client conversation nobody enjoys.
 
+## What should you do when an order underdelivers in the first days?
+
+Act on day 3, not day 10. Take a 14-day order with a $14,000 budget and even pacing: by the end of day 3 it should have spent $3,000. If it has spent $1,800, it is pacing at 60%, and the remaining 11 days now need $1,109 a day against a plan of $1,000. Wait until day 7 at the same run rate and the remaining 7 days need $1,400 a day, which few line items can absorb without overpaying for the extra delivery.
+
+Raising the maximum average CPM and widening the audience are the right first moves when the diagnosis points to the two most common causes above: bids below the winning range and an audience too narrow. Make one change at a time, give it a day, and check pace again. If delivery does not respond, work down the rest of the list: frequency caps, creative approvals, then supply.
+
+## Should you split line items by device or supply source?
+
+Split where the inventory behaves differently; combine where it does not. Streaming TV, mobile, desktop display and individual deals clear at very different prices, so one line item with one bid either overpays for cheap supply or loses the expensive auctions, and its pacing hides which part is failing. Separate line items give each its own bid, budget and frequency cap, and make pacing and supply reports readable.
+
+The cost is fragmentation. Many small line items each have less budget and data to learn from, and each one can underdeliver on its own. A practical rule: split inventory that has a materially different price or goal, and keep together line items that share both.
+
+## How do you catch overspend on weak inventory before the flight ends?
+
+Break spend down by supply source every week, not at the end of the flight. A line item can pace at exactly 100% while most of its money goes to inventory that delivers impressions and little else. For each source, compare its share of spend with its CPM and the outcome the line item is bought for (clicks, detail page views, purchases). A source taking a growing share of spend at a worse cost per outcome is the one to cap or exclude while there is still budget left to move.
+
+Amazon's Performance+ reporting includes domain delivery, "to see which websites are showing your ads and which ones work best." Across many advertisers, a supplier view that shows spend, impressions, CTR, CPM and share of spend by supplier for every client, like [Peachblue's](/pricing), turns the weekly check into one table.
+
 ## The daily workflow (and why it breaks at agency scale)
 
 For a single order, pacing hygiene is simple: check pace % daily, react when it drifts outside roughly 90-110%, and diagnose against the list above. Amazon has made the single-order case easier: the console now shows in-line pacing alerts with one-click fixes for underpacing orders (Amazon Ads release notes).
@@ -75,6 +93,6 @@ Two reporting habits that build trust: report pace against the original budget e
 
 ## Where this is heading
 
-Amazon is clearly investing in single-account pacing hygiene: console alerts, one-click fixes, and a unified Amazon Ads Agent arriving as legacy reporting retires at the end of 2026. Expect the basics to keep commoditizing. What Amazon has shown no interest in building is the agency layer: cross-client portfolio views, margin handling, and client-ready reporting. That layer is where pacing practice actually lives for anyone running more than one advertiser, and it is where we have focused [Peachblue's DSP tooling](/pricing).
+Amazon is clearly investing in single-account pacing hygiene: console alerts, one-click fixes, and Amazon Ads Agent, which the DSP has now evolved into, with conversational recommendations in closed beta that summarize proposed changes for your approval before they apply. Legacy reporting retires at the end of 2026, and existing Amazon DSP certifications remain valid, Amazon says, with the course now named Amazon Ads Programmatic Solutions. Expect the basics to keep commoditizing. What Amazon has shown no interest in building is the agency layer: cross-client portfolio views, margin handling, and client-ready reporting. That layer is where pacing practice actually lives for anyone running more than one advertiser, and it is where we have focused [Peachblue's DSP tooling](/pricing).
 
 If you run DSP for clients and want the portfolio version of everything above, [Peachblue's Reports and Pacing](/pricing) ships it today, alongside AI creative analysis across Meta, TikTok, Google Ads, and Amazon DSP. And if you are migrating off another analytics tool entirely, start with [our guide to the post-MagicBrief landscape](/blog/magicbrief-alternatives).
