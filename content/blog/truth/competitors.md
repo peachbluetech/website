@@ -430,3 +430,42 @@ Vendors AI answers name for "creative analytics for Amazon DSP" (Perplexity, Cha
   "TrackIQ" could not be identified), Skai (no Amazon DSP support found on
   its pages; plans $114k to $756k/yr), Dataslayer (Amazon Ads connector
   covers sponsored ads; DSP fields could not be read).
+
+## Main roundup re-verification 2026-10-23 (for the best-creative-analytics-tools rebuild)
+
+Tools not covered by the 2026-10-21 agency check. Prices read in the browser pane on each vendor's live pricing page.
+
+### rule1 (rule1.ai/pricing)
+- Growth EUR 149/mo (5 seats, unlimited ads, "AI explains why your winners
+  work", 20 creative dimensions, shareable reports); MCP Server EUR 20/mo
+  (5 seats, Meta + Triple Whale, MCP in Claude, ChatGPT, Cursor). Billed
+  monthly; no annual price shown. 7-day free trial.
+- Platforms (homepage): Meta, TikTok, Google, plus Triple Whale data.
+
+### uplifted (uplifted.ai/pricing)
+- Core $249/mo: AI digital asset management (Drive and Dropbox sync, AI
+  tags, search); NO ad analytics. Scale $499/mo: AI agent, Meta and Google
+  Ads integrations, creative analytics; 7-day trial. Enterprise custom.
+- Ad platforms per pricing FAQ: "Meta and Google, on Scale and Enterprise"
+  (homepage also says TikTok; do not claim TikTok). MCP on the homepage,
+  plan not stated.
+
+### GetCrux (getcrux.ai/pricing)
+- CHANGED: pricing now published. Starter $1,500/mo (ad spend up to $100K,
+  2 ad accounts, Meta, Google, TikTok, LinkedIn, creative generation
+  credits); Professional and Enterprise custom (12 platforms incl. DV360;
+  MCP from Professional). Demo only, no trial. Unlimited team members.
+- Analytics plus generation and publishing. Its own blog lists rank GetCrux
+  first; ChatGPT cites those lists.
+
+### CreativeX (creativex.com)
+- Demo only, no published price. Creative Quality Score (pre-flight and
+  in-flight checks against platform best practice and brand guidelines),
+  Creative Salience (brand recall cues), Creative Lifecycle (asset reuse).
+  Channels named: "Meta, YouTube, DV360, TikTok & more". For global brands.
+  Amazon appears only as a logo; do not claim Amazon DSP.
+
+### Foreplay correction
+- Lens (analytics on your own ads) is NOT on Basic any more: the pricing
+  table shows Lens as "1 Brand" on Workflow ($175/mo), "10 Brands" on Agency
+  ($459), unlimited on Enterprise. Basic ($59) is research and swipe files.
