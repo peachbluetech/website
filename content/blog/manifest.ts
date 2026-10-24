@@ -224,7 +224,7 @@ export const ARTICLES: Article[] = [
     byline: "nick",
     status: "published",
     datePublished: "2026-08-14",
-    dateUpdated: "2026-10-21",
+    dateUpdated: "2026-10-23",
     faq: [
       {
         q: "How much does Motion cost now?",
@@ -501,19 +501,73 @@ export const ARTICLES: Article[] = [
   // Wave two (weeks 8-16). Keep priorities sequential.
   {
     slug: "atria-alternatives",
-    title: "Atria alternatives after the price hike (2026)",
+    title: "Atria alternatives in 2026: 7 tools compared",
     h1: "Atria alternatives, priced",
     h1Accent: "honestly.",
     description:
-      "Atria's Plus tier jumped to $479/mo and the platform still covers only Meta and TikTok. The alternatives, with verified pricing.",
+      "Atria covers Meta and TikTok, and its Plus tier is $599/mo. Seven alternatives with prices verified October 2026, and who each one fits.",
     type: "alternatives",
     pillar: "comparisons",
-    keywords: ["atria alternatives", "tryatria alternatives", "atria pricing"],
-    competitors: ["Atria", "Motion", "Foreplay", "Segwise", "rule1", "Peachblue"],
+    keywords: ["atria alternatives", "tryatria alternatives", "atria pricing", "atria competitors"],
+    competitors: ["Atria", "Peachblue", "Motion", "Foreplay", "Superads", "Segwise", "GetCrux", "rule1"],
     priority: 11,
     byline: "nick",
-    status: "planned",
-    faq: [],
+    status: "published",
+    datePublished: "2026-10-23",
+    faq: [
+      {
+        q: "How much does Atria cost in 2026?",
+        a: "As of October 2026, Atria's Core plan is $159 per month, Plus $599, and Business $1,199, or $129, $479, and $959 billed annually; Enterprise is priced on request. Core connects 5 ad accounts and Plus 10, and Business is unlimited. You can start free with 1,000 credits and no card.",
+      },
+      {
+        q: "What is the best Atria alternative?",
+        a: "It depends on the job you used Atria for. For analysis of your own ads across Meta, TikTok, Google Ads, and Amazon DSP, Peachblue, from $79 per month; for competitor research, Foreplay; for analysis and ad generation at high spend, GetCrux. If you run Meta and TikTok only and want research, generation, and analytics in one tool, Atria itself remains a strong fit.",
+      },
+      {
+        q: "Does Atria support Google Ads or Amazon?",
+        a: "Atria's performance analytics covers Meta and TikTok. Peachblue covers Google Ads and Amazon DSP alongside Meta and TikTok, Superads and GetCrux add Google Ads and LinkedIn, and Motion adds YouTube and LinkedIn.",
+      },
+      {
+        q: "Which Atria alternatives offer MCP?",
+        a: "Peachblue (Pro and up) puts your own cross-platform performance data, Amazon DSP included, into Claude. Motion includes MCP from Starter, Foreplay from Workflow, GetCrux from Professional, and rule1 sells MCP access alone for EUR 20 per month. Atria includes MCP on every plan, capped at 600 calls a month on Core.",
+      },
+    ],
+    rawMaterial: ["truth/competitors.md: Atria re-verification 2026-09-28, Agency roundup 2026-10-21, Main roundup 2026-10-23"],
+  },
+  {
+    slug: "superads-alternatives",
+    title: "Superads alternatives in 2026: 7 tools compared",
+    h1: "Superads alternatives, compared",
+    h1Accent: "honestly.",
+    description:
+      "Superads' price climbs with ad spend and its free plan is closed to new signups. Seven alternatives with prices verified October 2026, and who each one fits.",
+    type: "alternatives",
+    pillar: "comparisons",
+    keywords: ["superads alternatives", "superads.ai alternatives", "superads pricing", "superads competitors"],
+    competitors: ["Superads", "Peachblue", "Motion", "Atria", "Segwise", "Madgicx", "rule1", "Foreplay"],
+    priority: 29,
+    byline: "nick",
+    status: "published",
+    datePublished: "2026-10-23",
+    faq: [
+      {
+        q: "How much does Superads cost in 2026?",
+        a: "As of October 2026, Superads has one plan, Professional, at $150 per month or $125 per month billed yearly, for up to $100k of monthly ad spend, plus $100 per month for each extra $100k. Users are unlimited, Enterprise is priced on request, and a 14-day trial has replaced the free plan for new signups.",
+      },
+      {
+        q: "Does Superads still have a free plan?",
+        a: "Not for new signups: Superads discontinued its free plan for new accounts and offers a 14-day free trial instead. Among the alternatives, Atria lets you start free with 1,000 credits and no card, and Peachblue, Foreplay, Madgicx, and rule1 offer 7-day trials.",
+      },
+      {
+        q: "What is the best Superads alternative?",
+        a: "For a written analysis of why each creative won and what to make next, across Meta, TikTok, Google Ads, and Amazon DSP, Peachblue, from $79 per month. For Meta automation, Madgicx; for low-cost AI analysis on Meta, rule1; for competitor research, Foreplay. If shareable reporting at the lowest published price is what you need, Superads itself remains a good fit.",
+      },
+      {
+        q: "Which Superads alternatives work for agencies?",
+        a: "Peachblue's Agency plan, priced to your client roster, adds multi-client workspaces, per-client reports with agency margin, and Amazon DSP pacing. Motion includes unlimited seats and ad accounts on every plan, and Segwise has a studio view for multiple brands. Superads itself offers boards by client and view-only guests.",
+      },
+    ],
+    rawMaterial: ["truth/competitors.md: Agency roundup re-verification 2026-10-21 (Superads), Main roundup 2026-10-23"],
   },
   {
     slug: "best-creative-analytics-tools",
