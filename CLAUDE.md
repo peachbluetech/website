@@ -285,6 +285,8 @@ Every page, what it is made of, and where its own rules are. All of them are ser
 
 Web analytics go through the site's own origin: `ANALYTICS_RELAY` (`/pb-relay`, in `lib/site.ts`) is rewritten to PostHog's US hosts in `next.config.ts`, so ad blockers do not drop them. `NEXT_PUBLIC_POSTHOG_HOST` is no longer read. Because PostHog's endpoints end in a slash, `skipTrailingSlashRedirect` is on and a redirect in `next.config.ts` strips the trailing slash from every other URL; keep the two together. The same file adds the visit's source (`landing`, `referrer`, `utm_*`, held in memory, never stored) to app signup links when they are followed and records `signup_clicked`. The other custom events are `demo_booked` and `demo_form_submitted`.
 
+Search engines: after a deploy that adds or changes pages, run `node scripts/indexnow.mjs <paths>` (or `--all` for the whole sitemap) so Bing and the other IndexNow engines recrawl within minutes. The IndexNow key file is `public/ea2ee720a74db67f17c3d2bf55a048ca.txt`; it is public by design, keep it in place.
+
 ## Local development
 
 `npm run dev`. The `.claude/launch.json` entry `peachblue-website` runs it on port 4100. Running `npm run build` while the dev server is up clobbers its `.next` cache; clear it and restart if pages start returning 500.
