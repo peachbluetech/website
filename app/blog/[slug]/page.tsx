@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PostByline } from "@/components/blog/PostByline";
-import { bylineName } from "@/components/blog/PostMeta";
+import { BYLINE } from "@/components/blog/PostMeta";
 import { StickyToc } from "@/components/blog/StickyToc";
 import { Article, Crumb, FaqBand, LinkBand, PageHeader, Prose, TrialBand } from "@/components/site/kit";
 import { Block, Frame, Rule } from "@/components/site/parts";
@@ -43,7 +43,7 @@ export async function generateMetadata({
       description: article.description,
       publishedTime: article.datePublished,
       modifiedTime: article.dateUpdated ?? article.datePublished,
-      authors: [bylineName(article.byline)],
+      authors: [BYLINE],
     },
     twitter: {
       card: "summary_large_image",
@@ -86,10 +86,7 @@ export default async function BlogPostPage({
         url: `${SITE_URL}/blog/${article.slug}`,
         datePublished: article.datePublished,
         dateModified: article.dateUpdated ?? article.datePublished,
-        author:
-          article.byline === "nick"
-            ? { "@type": "Person", name: "Nick", jobTitle: "Founder, Peachblue" }
-            : { "@id": `${SITE_URL}/#organization` },
+        author: { "@id": `${SITE_URL}/#organization` },
         publisher: { "@id": `${SITE_URL}/#organization` },
         mainEntityOfPage: `${SITE_URL}/blog/${article.slug}`,
         keywords: article.keywords.join(", "),

@@ -1,6 +1,6 @@
 import { SITE_URL } from "@/lib/site";
 import { publishedArticles } from "@/lib/blog";
-import { bylineName } from "@/components/blog/PostMeta";
+import { BYLINE } from "@/components/blog/PostMeta";
 
 function escapeXml(s: string): string {
   return s
@@ -22,7 +22,7 @@ export function GET(): Response {
       <guid isPermaLink="true">${url}</guid>
       <pubDate>${pubDate}</pubDate>
       <description>${escapeXml(a.description)}</description>
-      <author>hello@peachblue.io (${escapeXml(bylineName(a.byline))})</author>
+      <author>hello@peachblue.io (${BYLINE})</author>
     </item>`;
     })
     .join("\n");

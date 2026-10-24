@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { bylineName, formatPostDate } from "@/components/blog/PostMeta";
+import { BYLINE, formatPostDate } from "@/components/blog/PostMeta";
 import { EntryRow, PageHeader } from "@/components/site/kit";
 import { Block, Card, Dotted, Frame, MEDIUM, Rule, T, TONE, cx } from "@/components/site/parts";
 import { SitePage } from "@/components/site/SitePage";
@@ -46,7 +46,7 @@ function PostRow({ article: a, first = false }: { article: Article; first?: bool
         {a.h1Accent ? <span> {a.h1Accent}</span> : null}
       </h2>
       <p className={cx(first ? T.body : T.bodySm, quiet, "el-pretty el-blog-line")}>{a.description}</p>
-      <div className={cx(T.caption, quiet)}>{bylineName(a.byline)}</div>
+      <div className={cx(T.caption, quiet)}>{BYLINE}</div>
     </EntryRow>
   );
 }

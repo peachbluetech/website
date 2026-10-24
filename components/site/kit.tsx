@@ -179,8 +179,8 @@ export function Crumb({ items, label = "Breadcrumb" }: { items: readonly { label
 }
 
 /* The meta row: who and when, 14/21 in smoke, on one line that wraps.
-   Put a MetaName first (the name in ink, with an Avatar or the logo
-   tile before it), then a Dot before each further item. */
+   Put a MetaName first (the name in ink, with the logo tile before
+   it), then a Dot before each further item. */
 export function Meta({ className, children }: { className?: string; children: ReactNode }) {
   return <div className={cx("el-meta", className)}>{children}</div>;
 }
@@ -190,16 +190,6 @@ export function MetaName({ avatar, children }: { avatar?: ReactNode; children: R
     <span className="el-meta-name">
       {avatar}
       <span>{children}</span>
-    </span>
-  );
-}
-
-/* A person's initial in a 24px taupe disc. Decoration: the name is
-   printed beside it. For the company's own byline use LogoTile at 20. */
-export function Avatar({ children }: { children: ReactNode }) {
-  return (
-    <span aria-hidden="true" className="el-avatar">
-      {children}
     </span>
   );
 }

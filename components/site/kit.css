@@ -191,21 +191,6 @@
     color: var(--el-ink);
   }
 }
-/* The initial of a person beside their name: a 24px taupe disc. */
-.el-avatar {
-  display: inline-flex;
-  flex: none;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: var(--el-taupe);
-  box-shadow: var(--el-card-ring);
-  font: 500 12px/16px var(--el-font-body);
-  color: var(--el-ink);
-}
-
 /* ── 2. Article ───────────────────────────────────────────────────
    A long page inside the frame: the body in the wide column of the
    side layout (724 of 1078) and a side column beside it (a table of

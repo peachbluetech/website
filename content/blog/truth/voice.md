@@ -11,8 +11,10 @@ draft.
   with the final word or two italicized.
 - Concrete over hypey. Numbers over adjectives. Short sentences.
 - American English.
-- Bylines: opinion and strategy posts are by Nick (founder). Reference,
-  glossary, and guide posts are by Peachblue.
+- Bylines: every post is credited to Peachblue on the page, in schema and
+  in the feed (Nick, 2026-10-24). The manifest's byline field still records
+  who wrote it. Disclosure lines say "we make Peachblue", never "I am the
+  founder".
 - Write for a practitioner who runs ads for a living. No fluff intros that
   restate the title. Get to the answer in the first two sentences of every
   section.
